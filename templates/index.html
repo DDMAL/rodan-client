@@ -14,15 +14,17 @@
 
     {templates}
 
+    <div id="app"></div>
+
     <!--<script src="scripts/app.js" type="text/javascript"></script>-->
     <script type="text/javascript" src="libs/system.js"></script>
     <script type="text/javascript" src="config.js"></script>
     <script>
         System.import('twbs/bootstrap');
-        System.import('app/Application').then(function(application)
+        System.import('js/Application').then(function(application)
         {{
-            var VISRodanClient = application.default;
-            var app = new VISRodanClient();
+            var VISRCApplication = application.default;
+            var app = new VISRCApplication();
             app.start();
         }});
     </script>

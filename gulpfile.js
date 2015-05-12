@@ -63,7 +63,7 @@ gulp.task('develop', ['develop:server'], function() {
     gulp.watch([
         'web/app/**/*.js',
         'web/index.html',
-        'web/styles/vis-client.css'
+        'web/styles/default.css'
     ]).on('change', $.livereload.changed);
 
     gulp.watch('web/templates/**/*.html', ['develop:templates']);
