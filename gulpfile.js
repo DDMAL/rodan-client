@@ -66,9 +66,9 @@ gulp.task('develop', ['develop:server'], function() {
         'web/styles/default.css'
     ]).on('change', $.livereload.changed);
 
-    gulp.watch('web/templates/**/*.html', ['develop:templates']);
-    gulp.watch('web/app/**/*.js', ['develop:jshint']);
-    gulp.watch('web/styles/default.scss', ['develop:styles']);
+    gulp.watch('templates/**/*.html', ['develop:templates']);
+    gulp.watch('app/**/*.js', ['develop:jshint']);
+    gulp.watch('styles/default.scss', ['develop:styles']);
 });
 
 /*
