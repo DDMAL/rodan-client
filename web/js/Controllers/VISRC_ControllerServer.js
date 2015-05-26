@@ -30,14 +30,29 @@ class VISRC_ControllerServer extends Marionette.Object
     /**
      * TODO docs
      */
+    routeForRouteName(aName)
+    {
+        if (this.routes.has(aName))
+        {
+            return this.routes.get(aName);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /**
+     * TODO remove
+     */
     get authenticationRoute()
     {
         switch (this.configuration.authenticationType)
         {
             case 'session':
-                return this._routeForRouteName('session-auth');
+                return this.routeForRouteName('session-auth');
             case 'token':
-                return this._routeForRouteName('token-auth');
+                return this.routeForRouteName('token-auth');
             default:
                 console.error('An acceptable Authentication Type was not provided');
                 break;
@@ -45,19 +60,19 @@ class VISRC_ControllerServer extends Marionette.Object
     }
 
     /**
-     * TODO docs
+     * TODO remove
      */
     get statusRoute()
     {
-        return this._routeForRouteName('session-status');
+        return this.routeForRouteName('session-status');
     }
 
     /**
-     * TODO docs
+     * TODO remove
      */
     get logoutRoute()
     {
-        return this._routeForRouteName('session-close');
+        return this.routeForRouteName('session-close');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -101,21 +116,6 @@ class VISRC_ControllerServer extends Marionette.Object
         routeRequest.open('GET', this.configuration.server, true);
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
-    }
-
-    /**
-     * TODO docs
-     */
-    _routeForRouteName(aName)
-    {
-        if (this.routes.has(aName))
-        {
-            return this.routes.get(aName);
-        }
-        else
-        {
-            return null;
-        }
     }
 }
 

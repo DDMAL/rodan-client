@@ -4,11 +4,13 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_ProjectCollection from './VISRC_ProjectCollection'
+import VISRC_ViewProjectItemList from './VISRC_ViewProjectListItem'
 
 /**
- * This class represents the view (and controller) for the status bar - login info.
+ * This class represents the view (and controller) for the project list.
  */
-class VISRC_ViewStatusUser extends Marionette.CompositeView
+class VISRC_ViewProjectList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,26 +20,15 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.model = null;
+        this._initializeRadio();
+        
         this.modelEvents = {
             "all": "render"
         };
-        this._initializeRadio();
-    }
-
-    /**
-     * TODO
-     */
-    getTemplate()
-    {
-        if (this.model != null)
-        {
-            return "#template-status_user";
-        }
-        else
-        {
-            return "#template-status_user_none";
-        }
+        this.childViewContainer = 'tbody';
+        this.template = "#template-main_project_list";
+        this.childView = VISRC_ViewProjectItemList;
+        this.collection = new VISRC_ProjectCollection();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,24 +56,7 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     _handleAuthenticationSuccess(aUser)
     {
-        this._updateLoginStatus(aUser);
-    }
-
-    /**
-     * Updates status bar to reflect current user.
-     */
-    _updateLoginStatus(aUser)
-    {
-        if (aUser != null)
-        {
-            this.model = aUser;
-        }
-        else
-        {
-            console.log("no user");
-        }
-        this.render();
     }
 }
 
-export default VISRC_ViewStatusUser;
+export default VISRC_ViewProjectList;

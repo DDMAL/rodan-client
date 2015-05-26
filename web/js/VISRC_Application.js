@@ -25,6 +25,16 @@ class VISRC_Application extends Marionette.Application
     initialize(aOptions)
     {
         this.configuration = VISRC_Configuration;
+
+        // TODO - what does this do?
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR)
+        {
+            console.log('ajax prefilter');
+            options.xhrFields = {
+                withCredentials: true
+            };
+        });
+
         this.addRegions({
             regionStatusUser: "#region-status_user"
         });

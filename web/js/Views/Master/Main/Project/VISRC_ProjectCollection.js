@@ -4,11 +4,9 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_Project from './VISRC_Project'
 
-/**
- * This class represents the view (and controller) for the status bar - login info.
- */
-class VISRC_ViewStatusUser extends Marionette.CompositeView
+class VISRC_ProjectCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,26 +16,16 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.model = null;
-        this.modelEvents = {
-            "all": "render"
-        };
+        this.model = VISRC_Project;
         this._initializeRadio();
     }
 
     /**
-     * TODO
+     * TODO docs
      */
-    getTemplate()
+    parse(resp, options)
     {
-        if (this.model != null)
-        {
-            return "#template-status_user";
-        }
-        else
-        {
-            return "#template-status_user_none";
-        }
+        return resp.results;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -54,10 +42,20 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
     }
 
     /**
+     * Retrieves list of projects for user.
+     */
+    _retrieveProjectList()
+    {
+        this.fetch();
+    }
+
+    /**
      * TODO docs
      */
     _handleEventApplicationReady()
     {
+        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
+        this.url = appInstance.controllerServer.routeForRouteName('projects');
     }
 
     /**
@@ -65,24 +63,8 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     _handleAuthenticationSuccess(aUser)
     {
-        this._updateLoginStatus(aUser);
-    }
-
-    /**
-     * Updates status bar to reflect current user.
-     */
-    _updateLoginStatus(aUser)
-    {
-        if (aUser != null)
-        {
-            this.model = aUser;
-        }
-        else
-        {
-            console.log("no user");
-        }
-        this.render();
+        this._retrieveProjectList();
     }
 }
 
-export default VISRC_ViewStatusUser;
+export default VISRC_ProjectCollection;

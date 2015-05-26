@@ -5,7 +5,7 @@ import Marionette from 'backbone.marionette';
 /**
  * TODO docs.
  */
-class VISRC_User extends Backbone.Model
+class VISRC_Project extends Backbone.Model
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -15,7 +15,6 @@ class VISRC_User extends Backbone.Model
      */
     constructor(data)
     {
-        
         this.idAttribute = 'uuid';
         super(data);
     }
@@ -25,4 +24,4 @@ class VISRC_User extends Backbone.Model
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_User;
+export default VISRC_Project;

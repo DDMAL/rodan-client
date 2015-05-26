@@ -6,9 +6,9 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view (and controller) for the status bar - login info.
+ * This class represents the view (and controller) for the project summary.
  */
-class VISRC_ViewStatusUser extends Marionette.CompositeView
+class VISRC_ViewProjectListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,28 +16,17 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    constructor(aParameters)
     {
-        this.model = null;
+        this._initializeRadio();
+
         this.modelEvents = {
             "all": "render"
         };
-        this._initializeRadio();
-    }
+        this.template = "#template-main_project_list_item";
+        this.tagName = 'tr';
 
-    /**
-     * TODO
-     */
-    getTemplate()
-    {
-        if (this.model != null)
-        {
-            return "#template-status_user";
-        }
-        else
-        {
-            return "#template-status_user_none";
-        }
+        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,24 +54,7 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     _handleAuthenticationSuccess(aUser)
     {
-        this._updateLoginStatus(aUser);
-    }
-
-    /**
-     * Updates status bar to reflect current user.
-     */
-    _updateLoginStatus(aUser)
-    {
-        if (aUser != null)
-        {
-            this.model = aUser;
-        }
-        else
-        {
-            console.log("no user");
-        }
-        this.render();
     }
 }
 
-export default VISRC_ViewStatusUser;
+export default VISRC_ViewProjectListItem;
