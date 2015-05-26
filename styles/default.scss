@@ -1,0 +1,46 @@
+/**
+ * TODO docs
+ */
+
+
+/**************************************************************************************
+ * Parameters
+ *************************************************************************************/
+$height-bottom: 5; // % of vertical space in viewport
+$height-top: 95; // % of vertical space in viewport
+
+
+$background-color-main: #00ff00;
+$background-color-navigation: #aaaaff;
+$background-color-status: #ff0000;
+
+
+
+
+div.top {
+    height: $height-top + %; //fallback
+    height: $height-top + vh;
+}
+
+div.bottom {
+    height: $height-bottom + %; //fallback
+    height: $height-bottom + vh;
+}
+
+
+
+
+div#region-navigation {
+    background-color: $background-color-navigation;
+    height: 100%;
+}
+
+div#region-main {
+    background-color: $background-color-main;
+    height: 100%;
+}
+
+div#region-status_user {
+    background-color: $background-color-status;
+    height: 100%;
+}

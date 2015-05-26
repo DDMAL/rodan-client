@@ -11,7 +11,19 @@
 </head>
 <body>
 
-    <div id="app"></div>
+    <div id="app">
+        <div class="container">
+            <div class="row top">
+                <div id="region-navigation" class="col-lg-2"></div>
+                <div id="region-main" class="col-lg-10"></div>
+            </div>
+            <div class="row bottom">
+                <div id="region-status_user" class="col-lg-3"></div>
+                <div id="region-status_messages" class="col-lg-6"></div>
+                <div id="region-status_server" class="col-lg-3"></div>
+            </div>
+        </div>
+    </div>
 
     {templates}
 
@@ -20,7 +32,7 @@
     <script type="text/javascript" src="config.js"></script>
     <script>
         System.import('twbs/bootstrap');
-        System.import('js/Application').then(function(application)
+        System.import('js/VISRC_Application').then(function(application)
         {{
             var VISRC_Application = application.default;
             var app = new VISRC_Application();
