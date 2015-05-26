@@ -1,2 +1,7 @@
 ._.DS_Store
 .DS_Store
+node_modules/
+web/libs/
+web/index.html
+web/config.js
+web/styles/
