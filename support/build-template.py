@@ -24,7 +24,7 @@ def assemble_templates(base_template_file, template_dir):
     for directory, subdir, files in os.walk(template_dir):
         for f in files:
             if f.endswith(".html"):
-                name = f.rstrip(".html")
+                name = os.path.splitext(f)[0]
                 content = open(os.path.join(directory, f), "r").read()
                 # It is a template, so add it
                 templates += format_underscore_template(name, content)
