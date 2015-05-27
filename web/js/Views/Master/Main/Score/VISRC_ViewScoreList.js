@@ -3,14 +3,14 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_ProjectCollection from './VISRC_ProjectCollection'
-import VISRC_ViewProjectListItem from './VISRC_ViewProjectListItem'
+import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_ScoreCollection from './VISRC_ScoreCollection'
+import VISRC_ViewScoreListItem from './VISRC_ViewScoreListItem'
 
 /**
- * This class represents the view (and controller) for the project list.
+ * This class represents the view (and controller) for the score list.
  */
-class VISRC_ViewProjectList extends Marionette.CompositeView
+class VISRC_ViewScoreList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -26,9 +26,9 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
             "all": "render"
         };
         this.childViewContainer = 'tbody';
-        this.template = "#template-main_project_list";
-        this.childView = VISRC_ViewProjectListItem;
-        this.collection = new VISRC_ProjectCollection();
+        this.template = "#template-main_project_score_list";
+        this.childView = VISRC_ViewScoreListItem;
+        this.collection = new VISRC_ScoreCollection();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,4 +43,4 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     }
 }
 
-export default VISRC_ViewProjectList;
+export default VISRC_ViewScoreList;

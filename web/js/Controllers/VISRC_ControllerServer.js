@@ -28,7 +28,7 @@ class VISRC_ControllerServer extends Marionette.Object
     }
 
     /**
-     * TODO docs
+     * Return URL for specified route.
      */
     routeForRouteName(aName)
     {

@@ -3,10 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_Project from '../VISRC_Project'
+import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_Score from './VISRC_Score'
 
-class VISRC_ProjectCollection extends Backbone.Collection
+class VISRC_ScoreCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     initialize(aParameters)
     {
-        this.model = VISRC_Project;
+        this.model = VISRC_Score;
         this._initializeRadio();
     }
 
@@ -38,15 +38,15 @@ class VISRC_ProjectCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+        this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProjectid => this._handleEventScoresSelected(aProjectid));
     }
 
     /**
-     * Retrieves list of projects for user.
+     * Retrieves list of scores for the Project.
      */
-    _retrieveProjectList()
+    _retrieveScoreList(aQueryParameters)
     {
-        this.fetch();
+        this.fetch({ data: $.param(aQueryParameters) });
     }
 
     /**
@@ -55,16 +55,16 @@ class VISRC_ProjectCollection extends Backbone.Collection
     _handleEventApplicationReady()
     {
         var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('projects');
+        this.url = appInstance.controllerServer.routeForRouteName('resources');
     }
 
     /**
-     * Handle authentication notification.
+     * Handle project scores selection.
      */
-    _handleAuthenticationSuccess(aUser)
+    _handleEventScoresSelected(aQueryParameters)
     {
-        this._retrieveProjectList();
+        this._retrieveScoreList(aQueryParameters);
     }
 }
 
-export default VISRC_ProjectCollection;
+export default VISRC_ScoreCollection;
