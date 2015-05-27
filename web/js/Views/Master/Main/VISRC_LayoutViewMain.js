@@ -4,6 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events'
+import VISRC_ViewAnalysisController from './Analysis/VISRC_ViewAnalysisController'
 import VISRC_ViewProjectController from './Project/VISRC_ViewProjectController'
 import VISRC_ViewScoreList from './Score/VISRC_ViewScoreList'
 
@@ -45,6 +46,7 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _initializeViews()
     {
+        this.viewAnalysisController = new VISRC_ViewAnalysisController();
         this.viewProjectController = new VISRC_ViewProjectController();
         this.viewScoreList = new VISRC_ViewScoreList();
     }
