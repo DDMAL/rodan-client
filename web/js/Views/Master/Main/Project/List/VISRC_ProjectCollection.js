@@ -3,13 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_Project from './VISRC_Project'
+import VISRC_Events from '../../../../../Shared/VISRC_Events'
+import VISRC_Project from '../VISRC_Project'
 
-/**
- * This class represents the view (and controller) for the project summary.
- */
-class VISRC_ViewProjectSummary extends Marionette.ItemView
+class VISRC_ProjectCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,19 +16,16 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.model = null;
-        this.modelEvents = {
-            "all": "render"
-        };
+        this.model = VISRC_Project;
         this._initializeRadio();
     }
 
     /**
-     * TODO
+     * TODO docs
      */
-    getTemplate()
+    parse(resp, options)
     {
-        return "#template-main_project_summary";
+        return resp.results;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +39,14 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventProjectSelected(aProject));
+    }
+
+    /**
+     * Retrieves list of projects for user.
+     */
+    _retrieveProjectList()
+    {
+        this.fetch();
     }
 
     /**
@@ -53,6 +54,8 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
      */
     _handleEventApplicationReady()
     {
+        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
+        this.url = appInstance.controllerServer.routeForRouteName('projects');
     }
 
     /**
@@ -60,15 +63,8 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
      */
     _handleAuthenticationSuccess(aUser)
     {
-    }
-
-    /**
-     * Handle project selection.
-     */
-    _handleEventProjectSelected(aProject)
-    {
-        this.model = aProject;
+        this._retrieveProjectList();
     }
 }
 
-export default VISRC_ViewProjectSummary;
+export default VISRC_ProjectCollection;

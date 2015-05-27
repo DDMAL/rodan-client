@@ -4,8 +4,8 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_ViewProjectList from './VISRC_ViewProjectList'
-import VISRC_ViewProjectSummary from './VISRC_ViewProjectSummary'
+import VISRC_ViewProjectList from './List/VISRC_ViewProjectList'
+import VISRC_ViewProjectSummary from './Summary/VISRC_ViewProjectSummary'
 
 /**
  * 'Controller' for all Project views.

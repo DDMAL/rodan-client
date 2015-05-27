@@ -3,10 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_Project from './VISRC_Project'
+import VISRC_Events from '../../../../../Shared/VISRC_Events'
 
-class VISRC_ProjectCollection extends Backbone.Collection
+/**
+ * This class represents the view (and controller) for the project summary.
+ */
+class VISRC_ViewProjectListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -14,18 +16,20 @@ class VISRC_ProjectCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    constructor(aParameters)
     {
-        this.model = VISRC_Project;
         this._initializeRadio();
-    }
 
-    /**
-     * TODO docs
-     */
-    parse(resp, options)
-    {
-        return resp.results;
+        this.modelEvents = {
+            "all": "render"
+        };
+        this.template = "#template-main_project_list_item";
+        this.tagName = 'tr';
+        this.events = {
+            'click': '_handleClick'
+        };
+
+        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,11 +46,11 @@ class VISRC_ProjectCollection extends Backbone.Collection
     }
 
     /**
-     * Retrieves list of projects for user.
+     * Handles click.
      */
-    _retrieveProjectList()
+    _handleClick()
     {
-        this.fetch();
+        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
     }
 
     /**
@@ -54,8 +58,6 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _handleEventApplicationReady()
     {
-        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('projects');
     }
 
     /**
@@ -63,8 +65,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _handleAuthenticationSuccess(aUser)
     {
-        this._retrieveProjectList();
     }
 }
 
-export default VISRC_ProjectCollection;
+export default VISRC_ViewProjectListItem;
