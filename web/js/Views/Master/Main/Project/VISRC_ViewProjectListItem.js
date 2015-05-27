@@ -25,6 +25,9 @@ class VISRC_ViewProjectListItem extends Marionette.ItemView
         };
         this.template = "#template-main_project_list_item";
         this.tagName = 'tr';
+        this.events = {
+            'click': '_handleClick'
+        };
 
         super(aParameters);
     }
@@ -40,6 +43,14 @@ class VISRC_ViewProjectListItem extends Marionette.ItemView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+    }
+
+    /**
+     * Handles click.
+     */
+    _handleClick()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
     }
 
     /**

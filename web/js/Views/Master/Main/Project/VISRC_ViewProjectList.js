@@ -44,11 +44,6 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
     }
 
-    _test()
-    {
-        console.log("blah");
-    }
-
     /**
      * TODO docs
      */

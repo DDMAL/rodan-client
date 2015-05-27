@@ -4,11 +4,12 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_Project from './VISRC_Project'
 
 /**
  * This class represents the view (and controller) for the project summary.
  */
-class VISRC_ViewProjectSummary extends Marionette.CompositeView
+class VISRC_ViewProjectSummary extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -29,7 +30,7 @@ class VISRC_ViewProjectSummary extends Marionette.CompositeView
      * TODO
      */
     getTemplate()
-    {console.log("asdf");
+    {
         return "#template-main_project_summary";
     }
 
@@ -44,6 +45,7 @@ class VISRC_ViewProjectSummary extends Marionette.CompositeView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventProjectSelected(aProject));
     }
 
     /**
@@ -58,6 +60,14 @@ class VISRC_ViewProjectSummary extends Marionette.CompositeView
      */
     _handleAuthenticationSuccess(aUser)
     {
+    }
+
+    /**
+     * Handle project selection.
+     */
+    _handleEventProjectSelected(aProject)
+    {
+        this.model = aProject;
     }
 }
 

@@ -1,7 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
+import VISRC_Events from '../../../../Shared/VISRC_Events'
 import VISRC_ViewProjectList from './VISRC_ViewProjectList'
 import VISRC_ViewProjectSummary from './VISRC_ViewProjectSummary'
 
@@ -22,6 +24,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
             regionMainProject: "#region-main_project"
         });
         this._initializeViews();
+        this._initializeRadio();
     }
 
     /**
@@ -29,7 +32,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     getTemplate()
     {
-        return "#template-project";
+        return "#template-main_project";
     }
 
     /**
@@ -44,12 +47,29 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProjectid => this._handleEventProjectSelected(aProjectid));
+    }
+
+    /**
      * Initialize views.
      */
     _initializeViews()
     {
         this.viewProjectList = new VISRC_ViewProjectList();
         this.viewProjectSummary = new VISRC_ViewProjectSummary();
+    }
+
+    /**
+     * Handle project selection.
+     */
+    _handleEventProjectSelected()
+    {
+        this.regionMainProject.show(this.viewProjectSummary);
     }
 }
 
