@@ -2,12 +2,13 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
-import VISRC_ViewProjectController from './Project/VISRC_ViewProjectController'
+import VISRC_ViewProjectList from './VISRC_ViewProjectList'
+import VISRC_ViewProjectSummary from './VISRC_ViewProjectSummary'
 
 /**
- * Layout view for main work area. This is responsible for loading views within the main region.
+ * 'Controller' for all Project views.
  */
-class VISRC_LayoutViewMain extends Marionette.LayoutView
+class VISRC_ViewProjectController extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -17,17 +18,26 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
-        this.el = "#app";
-        this.template = "#template-empty";
         this.addRegions({
-            regionMain: "#region-main"
+            regionMainProject: "#region-main_project"
         });
         this._initializeViews();
     }
 
-    onRender()
+    /**
+     * Return the appropriate template based on state.
+     */
+    getTemplate()
     {
-        this.regionMain.show(this.viewProjectController);
+        return "#template-project";
+    }
+
+    /**
+     * Show the appropriate view based on state.
+     */
+    onDomRefresh()
+    {
+        this.regionMainProject.show(this.viewProjectList);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +48,9 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewProjectController = new VISRC_ViewProjectController();
+        this.viewProjectList = new VISRC_ViewProjectList();
+        this.viewProjectSummary = new VISRC_ViewProjectSummary();
     }
 }
 
-export default VISRC_LayoutViewMain;
+export default VISRC_ViewProjectController;

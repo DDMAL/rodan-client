@@ -21,7 +21,7 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this._initializeRadio();
-        
+
         this.modelEvents = {
             "all": "render"
         };
@@ -42,6 +42,11 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+    }
+
+    _test()
+    {
+        console.log("blah");
     }
 
     /**
