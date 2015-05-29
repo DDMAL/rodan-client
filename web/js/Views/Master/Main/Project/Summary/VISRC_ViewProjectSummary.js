@@ -25,10 +25,12 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
         };
         this._initializeRadio();
         this.ui = {
-            scoreCount: '#score_count'
+            scoreCount: '#score_count',
+            workflowCount: '#workflow_count'
         }
         this.events = {
-            'click @ui.scoreCount': '_handleClickScoreCount'
+            'click @ui.scoreCount': '_handleClickScoreCount',
+            'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
     }
 
@@ -66,6 +68,14 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
     _handleClickScoreCount()
     {
         this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED, {project: this.model.id});
+    }
+
+    /**
+     * TODO docs
+     */
+    _handleClickWorkflowCount()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.id});
     }
 }
 

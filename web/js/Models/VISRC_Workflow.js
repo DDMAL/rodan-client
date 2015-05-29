@@ -3,9 +3,9 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
 /**
- * Represents a VIS Analysis model (i.e. a Rodan Workflow).
+ * Represents a VIS Workflow model (i.e. a Rodan Workflow).
  */
-class VISRC_Analysis extends Backbone.Model
+class VISRC_Workflow extends Backbone.Model
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -24,4 +24,4 @@ class VISRC_Analysis extends Backbone.Model
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_Analysis;
+export default VISRC_Workflow;

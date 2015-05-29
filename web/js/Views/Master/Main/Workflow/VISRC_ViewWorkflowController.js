@@ -5,12 +5,12 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
 //import VISRC_ViewAnalysis from './Builder/VISRC_ViewAnalysis'
-//import VISRC_ViewAnalysisList from './List/VISRC_ViewAnalysisList'
+import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList'
 
 /**
- * Controller for all Analysis-based views.
+ * Controller for all Workflow-based views.
  */
-class VISRC_ViewAnalysisController extends Marionette.LayoutView
+class VISRC_ViewWorkflowController extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,7 +21,7 @@ class VISRC_ViewAnalysisController extends Marionette.LayoutView
     initialize(aOptions)
     {
         this.addRegions({
-            regionMainAnalysis: "#region-main_analysis"
+            regionMainWorkflow: "#region-main_workflow"
         });
         this._initializeViews();
         this._initializeRadio();
@@ -32,7 +32,7 @@ class VISRC_ViewAnalysisController extends Marionette.LayoutView
      */
     getTemplate()
     {
-        return "#template-main_analysis";
+        return "#template-main_workflow";
     }
 
     /**
@@ -40,7 +40,7 @@ class VISRC_ViewAnalysisController extends Marionette.LayoutView
      */
     onDomRefresh()
     {
-        this.regionMainAnalysis.show(this.viewAnalysisList);
+        this.regionMainWorkflow.show(this.viewWorkflowList);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ class VISRC_ViewAnalysisController extends Marionette.LayoutView
     _initializeViews()
     {
        // this.viewAnalysis = new VISRC_ViewAnalysis();
-       // this.viewAnalysisList = new VISRC_ViewAnalysisList();
+        this.viewWorkflowList = new VISRC_ViewWorkflowList();
     }
 
     /**
@@ -72,4 +72,4 @@ class VISRC_ViewAnalysisController extends Marionette.LayoutView
     }
 }
 
-export default VISRC_ViewAnalysisController;
+export default VISRC_ViewWorkflowController;

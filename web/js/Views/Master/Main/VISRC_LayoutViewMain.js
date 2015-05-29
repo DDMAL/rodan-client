@@ -4,8 +4,8 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events'
-import VISRC_ViewAnalysisController from './Analysis/VISRC_ViewAnalysisController'
 import VISRC_ViewProjectController from './Project/VISRC_ViewProjectController'
+import VISRC_ViewWorkflowController from './Workflow/VISRC_ViewWorkflowController'
 import VISRC_ViewScoreList from './Score/VISRC_ViewScoreList'
 
 /**
@@ -46,9 +46,9 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewAnalysisController = new VISRC_ViewAnalysisController();
         this.viewProjectController = new VISRC_ViewProjectController();
         this.viewScoreList = new VISRC_ViewScoreList();
+        this.viewWorkflowController = new VISRC_ViewWorkflowController();
     }
 
     /**
@@ -58,6 +58,7 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProject => this._handleEventScoresSelected(aProject));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, aProject => this._handleEventWorkflowsSelected(aProject));
     }
 
     /**
@@ -66,6 +67,14 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
     _handleEventScoresSelected(aProject)
     {
         this.regionMain.show(this.viewScoreList);
+    }
+
+    /**
+     * Handle workflows selection.
+     */
+    _handleEventWorkflowsSelected(aProject)
+    {
+        this.regionMain.show(this.viewWorkflowController);
     }
 }
 

@@ -44,7 +44,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
     /**
      * Retrieves list of projects for user.
      */
-    _retrieveProjectList()
+    _retrieveList()
     {
         this.fetch();
     }
@@ -63,7 +63,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _handleAuthenticationSuccess(aUser)
     {
-        this._retrieveProjectList();
+        this._retrieveList();
     }
 }
 
