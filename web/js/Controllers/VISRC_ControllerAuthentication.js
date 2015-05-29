@@ -3,7 +3,7 @@ import Radio from 'backbone.radio';
 
 import VISRC_Cookie from '../Shared/VISRC_Cookie'
 import VISRC_Events from '../Shared/VISRC_Events'
-import VISRC_User from '../VISRC_User'
+import VISRC_User from '../Models/VISRC_User'
 
 /**
  * TODO docs

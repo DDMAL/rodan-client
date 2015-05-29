@@ -4,7 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_Score from './VISRC_Score'
+import VISRC_Score from '../../../../Models/VISRC_Score'
 
 class VISRC_ScoreCollection extends Backbone.Collection
 {
