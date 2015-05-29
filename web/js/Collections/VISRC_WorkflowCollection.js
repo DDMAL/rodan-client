@@ -3,10 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_Score from '../../../../Models/VISRC_Score'
+import VISRC_Events from '../Shared/VISRC_Events';
+import VISRC_Workflow from '../Models/VISRC_Workflow';
 
-class VISRC_ScoreCollection extends Backbone.Collection
+class VISRC_WorkflowCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class VISRC_ScoreCollection extends Backbone.Collection
      */
     initialize(aParameters)
     {
-        this.model = VISRC_Score;
+        this.model = VISRC_Workflow;
         this._initializeRadio();
     }
 
@@ -38,7 +38,8 @@ class VISRC_ScoreCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProjectid => this._handleEventItemSelected(aProjectid));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, aProjectid => this._handleEventItemSelected(aProjectid));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOW, () => this._handleRequestInstance());
     }
 
     /**
@@ -50,16 +51,24 @@ class VISRC_ScoreCollection extends Backbone.Collection
     }
 
     /**
+     * Returns this instance.
+     */
+    _handleRequestInstance()
+    {
+        return this;
+    }
+
+    /**
      * Handles application ready notification.
      */
     _handleEventApplicationReady()
     {
         var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('resources');
+        this.url = appInstance.controllerServer.routeForRouteName('workflows');
     }
 
     /**
-     * Handle item selection.
+     * Handle item selection
      */
     _handleEventItemSelected(aQueryParameters)
     {
@@ -67,4 +76,4 @@ class VISRC_ScoreCollection extends Backbone.Collection
     }
 }
 
-export default VISRC_ScoreCollection;
+export default VISRC_WorkflowCollection;

@@ -3,10 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_Workflow from '../../../../../Models/VISRC_Workflow'
+import VISRC_Events from '../Shared/VISRC_Events';
+import VISRC_WorkflowRun from '../Models/VISRC_Score';
 
-class VISRC_WorkflowCollection extends Backbone.Collection
+class VISRC_WorkflowRunCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class VISRC_WorkflowCollection extends Backbone.Collection
      */
     initialize(aParameters)
     {
-        this.model = VISRC_Workflow;
+        this.model = VISRC_WorkflowRun;
         this._initializeRadio();
     }
 
@@ -38,7 +38,7 @@ class VISRC_WorkflowCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProjectid => this._handleEventWorkflowsSelected(aProjectid));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, () => this._handleRequestInstance());
     }
 
     /**
@@ -50,21 +50,37 @@ class VISRC_WorkflowCollection extends Backbone.Collection
     }
 
     /**
+     * Returns this instance.
+     */
+    _handleRequestInstance()
+    {
+        return this;
+    }
+
+    /**
      * Handles application ready notification.
      */
     _handleEventApplicationReady()
     {
         var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('workflows');
+        this.url = appInstance.controllerServer.routeForRouteName('workflowruns');
     }
 
     /**
-     * Handle item selection
+     * Handle item selection.
      */
     _handleEventItemSelected(aQueryParameters)
     {
         this._retrieveList(aQueryParameters);
     }
+
+    /**
+     * Handle item selection.
+     */
+    _handleRequestWorkflowRuns(aQueryParameters)
+    {debugger;
+        this._retrieveList(aQueryParameters);
+    }
 }
 
-export default VISRC_WorkflowCollection;
+export default VISRC_WorkflowRunCollection;

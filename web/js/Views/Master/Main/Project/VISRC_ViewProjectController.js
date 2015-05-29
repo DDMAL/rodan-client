@@ -52,7 +52,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProjectid => this._handleEventProjectSelected(aProjectid));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -65,9 +65,9 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     }
 
     /**
-     * Handle project selection.
+     * Handle item selection.
      */
-    _handleEventProjectSelected()
+    _handleEventItemSelected()
     {
         this.regionMainProject.show(this.viewProjectSummary);
     }

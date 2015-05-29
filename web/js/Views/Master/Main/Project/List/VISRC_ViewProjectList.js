@@ -4,7 +4,6 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_ProjectCollection from './VISRC_ProjectCollection'
 import VISRC_ViewProjectListItem from './VISRC_ViewProjectListItem'
 
 /**
@@ -28,7 +27,7 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         this.childViewContainer = 'tbody';
         this.template = "#template-main_project_list";
         this.childView = VISRC_ViewProjectListItem;
-        this.collection = new VISRC_ProjectCollection();
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

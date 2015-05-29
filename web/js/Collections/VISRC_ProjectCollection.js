@@ -3,8 +3,8 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_Project from '../../../../../Models/VISRC_Project'
+import VISRC_Events from '../Shared/VISRC_Events'
+import VISRC_Project from '../Models/VISRC_Project'
 
 class VISRC_ProjectCollection extends Backbone.Collection
 {
@@ -39,6 +39,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_PROJECT, () => this._handleRequestInstance());
     }
 
     /**
@@ -47,6 +48,14 @@ class VISRC_ProjectCollection extends Backbone.Collection
     _retrieveList()
     {
         this.fetch();
+    }
+
+    /**
+     * Returns this instance.
+     */
+    _handleRequestInstance()
+    {
+        return this;
     }
 
     /**

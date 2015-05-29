@@ -3,8 +3,8 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_Project from '../../../../../Models/VISRC_Project'
+import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_Project from '../../../../../Models/VISRC_Project';
 
 /**
  * This class represents the view (and controller) for the project summary.
@@ -51,13 +51,13 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventProjectSelected(aProject));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventItemSelected(aProject));
     }
 
     /**
-     * Handle project selection.
+     * Handle item selection.
      */
-    _handleEventProjectSelected(aProject)
+    _handleEventItemSelected(aProject)
     {
         this.model = aProject;
     }

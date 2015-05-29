@@ -48,7 +48,7 @@ class VISRC_ViewWorkflowListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        //this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOW_SELECTED, this.model);
     }
 }
 

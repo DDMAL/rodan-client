@@ -4,7 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
-//import VISRC_ViewAnalysis from './Builder/VISRC_ViewAnalysis'
+import VISRC_ViewWorkflowBuilder from './Builder/VISRC_ViewWorkflowBuilder'
 import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList'
 
 /**
@@ -52,6 +52,7 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -59,16 +60,16 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-       // this.viewAnalysis = new VISRC_ViewAnalysis();
+        this.viewWorkflow = new VISRC_ViewWorkflowBuilder();
         this.viewWorkflowList = new VISRC_ViewWorkflowList();
     }
 
     /**
-     * Handle analysis selection.
+     * Handle item selection.
      */
-    _handleEventProjectSelected()
+    _handleEventItemSelected()
     {
-      //  this.regionMainAnalysis.show(this.viewAnalysis);
+        this.regionMainWorkflow.show(this.viewWorkflow);
     }
 }
 

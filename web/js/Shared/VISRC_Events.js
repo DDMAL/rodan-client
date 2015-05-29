@@ -39,6 +39,13 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // REQUESTS
 ///////////////////////////////////////////////////////////////////////////////////////
+
+    // Collection request.
+    REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
+    REQUEST__COLLECTION_SCORE: 'REQUEST__COLLECTION_SCORE',
+    REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
+    REQUEST__COLLECTION_WORKFLOWRUNS: 'REQUEST__COLLECTION_WORKFLOWRUNS',
+
     REQUEST__APPLICATION: 'REQUEST_APPLICATION',
     REQUEST__USER: 'REQUEST__USER'
 };
