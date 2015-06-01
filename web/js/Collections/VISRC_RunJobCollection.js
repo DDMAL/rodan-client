@@ -3,10 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../Shared/VISRC_Events';
-import VISRC_WorkflowRun from '../Models/VISRC_WorkflowRun';
+import VISRC_Events from '../Shared/VISRC_Events'
+import VISRC_RunJob from '../Models/VISRC_RunJob'
 
-class VISRC_WorkflowRunCollection extends Backbone.Collection
+class VISRC_RunJobCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
      */
     initialize(aParameters)
     {
-        this.model = VISRC_WorkflowRun;
+        this.model = VISRC_RunJob;
         this._initializeRadio();
     }
 
@@ -37,9 +37,9 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, () => this._handleRequestInstance());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_RUNJOBS, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_RUNJOB, () => this._handleRequestInstance());
     }
 
     /**
@@ -64,8 +64,8 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     _handleEventApplicationReady()
     {
         var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('workflowruns');
+        this.url = appInstance.controllerServer.routeForRouteName('runjobs');
     }
 }
 
-export default VISRC_WorkflowRunCollection;
+export default VISRC_RunJobCollection;

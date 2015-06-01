@@ -4,12 +4,13 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../Shared/VISRC_Events';
-import VISRC_Project from '../../../../../Models/VISRC_WorkflowRun';
+import VISRC_WorkflowRun from '../../../../../Models/VISRC_WorkflowRun';
+import VISRC_ViewRunJobListItem from './VISRC_ViewRunJobListItem';
 
 /**
  * This class represents the view for an individual WorkflowRun.
  */
-class VISRC_ViewWorkflowRun extends Marionette.ItemView
+class VISRC_ViewWorkflowRun extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,6 +24,8 @@ class VISRC_ViewWorkflowRun extends Marionette.ItemView
             "all": "render"
         };
         this._initializeRadio();
+        this.childView = VISRC_ViewRunJobListItem;
+        this.childViewContainer = 'tbody';
     }
 
     /**
@@ -31,6 +34,14 @@ class VISRC_ViewWorkflowRun extends Marionette.ItemView
     getTemplate()
     {
         return "#template-main_workflowrun_individual";
+    }
+
+    /**
+     * Returns the associated collection item to the template.
+     */
+    templateHelpers() 
+    {
+        return { items: this.collection.toJSON() };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -51,6 +62,8 @@ class VISRC_ViewWorkflowRun extends Marionette.ItemView
     _handleEventItemSelected(aModelInstance)
     {
         this.model = aModelInstance;
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RUNJOB);
+        this.rodanChannel.command(VISRC_Events.COMMAND__GET_RUNJOBS, {workflow_run: this.model.id});
     }
 }
 
