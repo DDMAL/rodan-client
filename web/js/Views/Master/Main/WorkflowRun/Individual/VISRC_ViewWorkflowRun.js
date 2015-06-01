@@ -3,13 +3,13 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_Workflow from '../../../../../Models/VISRC_Workflow'
+import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_Project from '../../../../../Models/VISRC_WorkflowRun';
 
 /**
- * This class represents the view for a Workflow in the builder.
+ * This class represents the view for an individual WorkflowRun.
  */
-class VISRC_ViewWorkflowBuilder extends Marionette.ItemView
+class VISRC_ViewWorkflowRun extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,19 +19,10 @@ class VISRC_ViewWorkflowBuilder extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.model = null;
         this.modelEvents = {
             "all": "render"
         };
         this._initializeRadio();
-        this.ui = {
-          //  scoreCount: '#score_count',
-          //  workflowCount: '#workflow_count'
-        }
-        this.events = {
-          //  'click @ui.scoreCount': '_handleClickScoreCount',
-          //  'click @ui.workflowCount': '_handleClickWorkflowCount'
-        };
     }
 
     /**
@@ -39,7 +30,7 @@ class VISRC_ViewWorkflowBuilder extends Marionette.ItemView
      */
     getTemplate()
     {
-        return "#template-main_workflow_builder";
+        return "#template-main_workflowrun_individual";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -51,16 +42,16 @@ class VISRC_ViewWorkflowBuilder extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aWorkflow => this._handleEventWorkflowSelected(aWorkflow));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, aModelInstance => this._handleEventItemSelected(aModelInstance));
     }
 
     /**
-     * Handle project selection.
+     * Handle item selection.
      */
-    _handleEventWorkflowSelected(aWorkflow)
+    _handleEventItemSelected(aModelInstance)
     {
-        this.model = aWorkflow;
+        this.model = aModelInstance;
     }
 }
 
-export default VISRC_ViewWorkflowBuilder;
+export default VISRC_ViewWorkflowRun;

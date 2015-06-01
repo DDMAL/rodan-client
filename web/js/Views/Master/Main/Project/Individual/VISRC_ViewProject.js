@@ -8,9 +8,9 @@ import VISRC_Project from '../../../../../Models/VISRC_Project';
 import VISRC_ViewWorkflowRunListItem from './VISRC_ViewWorkflowRunListItem';
 
 /**
- * This class represents the view (and controller) for the project summary.
+ * This class represents the view (and controller) for a project
  */
-class VISRC_ViewProjectSummary extends Marionette.CompositeView
+class VISRC_ViewProject extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -41,7 +41,7 @@ class VISRC_ViewProjectSummary extends Marionette.CompositeView
      */
     getTemplate()
     {
-        return "#template-main_project_summary";
+        return "#template-main_project_individual";
     }
 
     /**
@@ -91,4 +91,4 @@ class VISRC_ViewProjectSummary extends Marionette.CompositeView
     }
 }
 
-export default VISRC_ViewProjectSummary;
+export default VISRC_ViewProject;

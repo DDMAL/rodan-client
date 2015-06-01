@@ -3,12 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../Shared/VISRC_Events'
+import VISRC_Events from '../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view (and controller) for a score item.
+ * This class represents the view (and controller) for the workflowrun item.
  */
-class VISRC_ViewScoreListItem extends Marionette.ItemView
+class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,8 +23,11 @@ class VISRC_ViewScoreListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_project_score_list_item";
+        this.template = "#template-main_workflowrun_list_item";
         this.tagName = 'tr';
+        this.events = {
+            'click': '_handleClick'
+        };
 
         super(aParameters);
     }
@@ -38,6 +41,8 @@ class VISRC_ViewScoreListItem extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
+        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
     }
 
     /**
@@ -45,8 +50,22 @@ class VISRC_ViewScoreListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        //this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, this.model);
+    }
+
+    /**
+     * TODO docs
+     */
+    _handleEventApplicationReady()
+    {
+    }
+
+    /**
+     * Handle authentication notification.
+     */
+    _handleAuthenticationSuccess(aUser)
+    {
     }
 }
 
-export default VISRC_ViewScoreListItem;
+export default VISRC_ViewWorkflowRunListItem;

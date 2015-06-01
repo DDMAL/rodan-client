@@ -6,7 +6,7 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view (and controller) for the project summary.
+ * This class represents the view (and controller) for a project item in a list.
  */
 class VISRC_ViewProjectListItem extends Marionette.ItemView
 {

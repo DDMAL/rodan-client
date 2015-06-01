@@ -6,6 +6,7 @@ var VISRC_Events = {
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
     COMMAND__GET_WORKFLOWRUNS: 'COMMAND__GET_WORKFLOWRUNS',
     COMMAND__AUTHENTICATION_LOGIN: 'COMMAND__AUTHENTICATION_LOGIN',
+    COMMAND__SHOW_PROJECTS: 'COMMAND__SHOW_PROJECTS',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // EVENTS
@@ -37,6 +38,9 @@ var VISRC_Events = {
     // Workflows events.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED',
 
+    // WorkflowRun events,
+    EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // REQUESTS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +49,7 @@ var VISRC_Events = {
     REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_SCORE: 'REQUEST__COLLECTION_SCORE',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
-    REQUEST__COLLECTION_WORKFLOWRUNS: 'REQUEST__COLLECTION_WORKFLOWRUNS',
+    REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
 
     REQUEST__APPLICATION: 'REQUEST_APPLICATION',
     REQUEST__USER: 'REQUEST__USER'

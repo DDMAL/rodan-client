@@ -23,7 +23,7 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_project_summary_workflow_list_item";
+        this.template = "#template-main_project_individual_workflow_list_item";
         this.tagName = 'tr';
         this.events = {
             'click': '_handleClick'
@@ -50,7 +50,7 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, this.model);
     }
 
     /**

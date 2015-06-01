@@ -4,18 +4,19 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList'
+import VISRC_ViewWorkflowRun from './Individual/VISRC_ViewWorkflowRun'
+import VISRC_ViewWorkflowRunList from './List/VISRC_ViewWorkflowRunList'
 
 /**
- * Controller for all Workflow-based views.
+ * 'Controller' for WorkflowRun views.
  */
-class VISRC_ViewWorkflowController extends Marionette.LayoutView
+class VISRC_ViewWorkflowRunController extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initializer.
+     * TODO docs
      */
     initialize(aOptions)
     {
@@ -36,8 +37,7 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, () => this._handleEventListSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -45,7 +45,8 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewList = new VISRC_ViewWorkflowList();
+        this.viewList = new VISRC_ViewWorkflowRunList();
+        this.viewItem = new VISRC_ViewWorkflowRun();
     }
 
     /**
@@ -55,14 +56,6 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     {
         this.region.show(this.viewItem);
     }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected()
-    {
-        this.region.show(this.viewList);
-    }
 }
 
-export default VISRC_ViewWorkflowController;
+export default VISRC_ViewWorkflowRunController;

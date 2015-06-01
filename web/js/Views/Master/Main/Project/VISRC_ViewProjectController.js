@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
 import VISRC_ViewProjectList from './List/VISRC_ViewProjectList'
-import VISRC_ViewProjectSummary from './Summary/VISRC_ViewProjectSummary'
+import VISRC_ViewProject from './Individual/VISRC_ViewProject'
 
 /**
  * 'Controller' for all Project views.
@@ -20,27 +20,12 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
+        this.el = "#app";
         this.addRegions({
-            regionMainProject: "#region-main_project"
+            region: "#region-main"
         });
         this._initializeViews();
         this._initializeRadio();
-    }
-
-    /**
-     * Return the appropriate template based on state.
-     */
-    getTemplate()
-    {
-        return "#template-main_project";
-    }
-
-    /**
-     * Show the appropriate view based on state.
-     */
-    onDomRefresh()
-    {
-        this.regionMainProject.show(this.viewProjectList);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +38,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, () => this._handleEventItemSelected());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__SHOW_PROJECTS, () => this._handleEventListSelected());
     }
 
     /**
@@ -60,8 +46,8 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewProjectList = new VISRC_ViewProjectList();
-        this.viewProjectSummary = new VISRC_ViewProjectSummary();
+        this.viewList = new VISRC_ViewProjectList();
+        this.viewItem = new VISRC_ViewProject();
     }
 
     /**
@@ -69,7 +55,15 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleEventItemSelected()
     {
-        this.regionMainProject.show(this.viewProjectSummary);
+        this.region.show(this.viewItem);
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected()
+    {
+        this.region.show(this.viewList);
     }
 }
 
