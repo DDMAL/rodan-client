@@ -5,11 +5,12 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../Shared/VISRC_Events';
 import VISRC_Project from '../../../../../Models/VISRC_Project';
+import VISRC_ViewWorkflowRunListItem from './VISRC_ViewWorkflowRunListItem';
 
 /**
  * This class represents the view (and controller) for the project summary.
  */
-class VISRC_ViewProjectSummary extends Marionette.ItemView
+class VISRC_ViewProjectSummary extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,7 +20,6 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.model = null;
         this.modelEvents = {
             "all": "render"
         };
@@ -32,6 +32,8 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
             'click @ui.scoreCount': '_handleClickScoreCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
+        this.childView = VISRC_ViewWorkflowRunListItem;
+        this.childViewContainer = 'tbody';
     }
 
     /**
@@ -40,6 +42,14 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
     getTemplate()
     {
         return "#template-main_project_summary";
+    }
+
+    /**
+     * Returns the associated WorkflowRun collection to the template.
+     */
+    templateHelpers() 
+    {
+        return { items: this.collection.toJSON() };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +70,8 @@ class VISRC_ViewProjectSummary extends Marionette.ItemView
     _handleEventItemSelected(aProject)
     {
         this.model = aProject;
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, {project: this.model.id});
+        this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {project: this.model.id});
     }
 
     /**

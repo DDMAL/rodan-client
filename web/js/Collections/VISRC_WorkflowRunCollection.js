@@ -4,7 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../Shared/VISRC_Events';
-import VISRC_WorkflowRun from '../Models/VISRC_Score';
+import VISRC_WorkflowRun from '../Models/VISRC_WorkflowRun';
 
 class VISRC_WorkflowRunCollection extends Backbone.Collection
 {
@@ -37,6 +37,7 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, aQueryParameters => this._handleCommandGetWorkflowRuns(aQueryParameters));
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, () => this._handleRequestInstance());
     }
@@ -75,10 +76,10 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     }
 
     /**
-     * Handle item selection.
+     * Handle load command.
      */
-    _handleRequestWorkflowRuns(aQueryParameters)
-    {debugger;
+    _handleCommandGetWorkflowRuns(aQueryParameters)
+    {
         this._retrieveList(aQueryParameters);
     }
 }
