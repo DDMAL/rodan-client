@@ -19,15 +19,13 @@ class VISRC_ViewScoreList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };
-        this.childViewContainer = 'tbody';
-        this.template = "#template-main_project_score_list";
+        this._initializeRadio();
+        this.template = "#template-main_score_list";
         this.childView = VISRC_ViewScoreListItem;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_SCORE);
+        this.childViewContainer = 'tbody';
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +37,15 @@ class VISRC_ViewScoreList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProjectId => this._handleEventListSelected(aProjectId));
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected(aProjectId)
+    {
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_SCORE);
     }
 }
 

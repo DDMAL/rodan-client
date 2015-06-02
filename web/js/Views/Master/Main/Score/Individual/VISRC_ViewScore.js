@@ -7,9 +7,9 @@ import VISRC_Events from '../../../../../Shared/VISRC_Events';
 import VISRC_ViewWorkflowRunListItem from './VISRC_ViewWorkflowRunListItem';
 
 /**
- * This class represents the view for a single Workflow summary.
+ * This class represents the view for a single Score summary.
  */
-class VISRC_ViewWorkflow extends Marionette.CompositeView
+class VISRC_ViewScore extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,18 +23,18 @@ class VISRC_ViewWorkflow extends Marionette.CompositeView
             "all": "render"
         };
         this._initializeRadio();
-        this.template = "#template-main_workflow_individual";
-        this.childView = VISRC_ViewWorkflowRunListItem;
-        this.childViewContainer = 'tbody';
+        this.template = "#template-main_score_individual";
+     //   this.childView = VISRC_ViewWorkflowRunListItem;
+      //  this.childViewContainer = 'tbody';
     }
 
     /**
      * Returns the associated WorkflowRun collection to the template.
      */
-    templateHelpers() 
+  /*  templateHelpers() 
     {
         return { items: this.collection.toJSON() };
-    }
+    }*/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -45,18 +45,18 @@ class VISRC_ViewWorkflow extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, aModel => this._handleEventItemSelected(aModel));
+        this.rodanChannel.on(VISRC_Events.EVENT__SCORE_SELECTED, aModel => this._handleEventItemSelected(aModel));
     }
 
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected(aWorkflow)
+    _handleEventItemSelected(aScore)
     {
-        this.model = aWorkflow;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {workflow: this.model.id});
+        this.model = aScore;
+     //   this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
+      //  this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {resource: this.model.id});
     }
 }
 
-export default VISRC_ViewWorkflow;
+export default VISRC_ViewScore;

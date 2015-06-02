@@ -4,8 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
-//import VISRC_ViewScore from './VISRC_ViewScore'
-import VISRC_ViewScoreList from './List/VISRC_ViewScoreList'
+import VISRC_LayoutViewScore from './VISRC_LayoutViewScore';
 
 /**
  * Controller for Score views.
@@ -37,7 +36,6 @@ class VISRC_ViewScoreController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__SHOW_SCORES, () => this._handleEventListSelected());
         this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, () => this._handleEventListSelected());
     }
 
@@ -46,16 +44,7 @@ class VISRC_ViewScoreController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewList = new VISRC_ViewScoreList();
-       // this.viewItem = new VISRC_ViewScore();
-    }
-
-    /**
-     * Handle item selection.
-     */
-    _handleEventItemSelected()
-    {
-        this.region.show(this.viewItem);
+        this.layoutView = new VISRC_LayoutViewScore();
     }
 
     /**
@@ -63,7 +52,7 @@ class VISRC_ViewScoreController extends Marionette.LayoutView
      */
     _handleEventListSelected()
     {
-        this.region.show(this.viewList);
+        this.region.show(this.layoutView);
     }
 }
 

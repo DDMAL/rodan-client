@@ -4,8 +4,8 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
-import VISRC_ViewWorkflow from './Individual/VISRC_ViewWorkflow';
-import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList';
+import VISRC_ViewScore from './Individual/VISRC_ViewScore';
+import VISRC_ViewScoreList from './List/VISRC_ViewScoreList';
 
 /**
  * This is a layout to help render a Collection and a single item.
@@ -13,7 +13,7 @@ import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList';
  * that would be associated with the CompositveView is not initially known, so it can't
  * rerender.
  */
-class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
+class VISRC_LayoutViewScore extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -24,10 +24,10 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
     initialize(aOptions)
     {
         this.addRegions({
-            regionWorkflowList: "#region-main_workflow_list",
-            regionWorkflowItem: "#region-main_workflow_item"
+            regionScoreList: "#region-main_score_list",
+            regionScoreItem: "#region-main_score_item"
         });
-        this.template = "#template-main_workflow";
+        this.template = "#template-main_score";
         this._initializeViews();
         this._initializeRadio();
     }
@@ -38,7 +38,7 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
      */
     onShow()
     {
-        this.regionWorkflowList.show(this.viewList);
+        this.regionScoreList.show(this.viewList);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__SCORE_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -58,8 +58,8 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewList = new VISRC_ViewWorkflowList();
-        this.viewItem = new VISRC_ViewWorkflow();
+        this.viewList = new VISRC_ViewScoreList();
+        this.viewItem = new VISRC_ViewScore();
     }
 
     /**
@@ -67,8 +67,8 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
      */
     _handleEventItemSelected()
     {
-        this.regionWorkflowItem.show(this.viewItem);
+        this.regionScoreItem.show(this.viewItem);
     }
 }
 
-export default VISRC_LayoutViewWorkflow;
+export default VISRC_LayoutViewScore;
