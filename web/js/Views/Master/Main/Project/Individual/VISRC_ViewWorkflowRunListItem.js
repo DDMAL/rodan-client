@@ -23,7 +23,7 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_project_individual_workflow_list_item";
+        this.template = "#template-main_project_individual_workflowrun_list_item";
         this.tagName = 'tr';
         this.events = {
             'click': '_handleClick'

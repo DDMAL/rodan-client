@@ -10,7 +10,7 @@ import VISRC_ViewWorkflowRunListItem from './VISRC_ViewWorkflowRunListItem';
 /**
  * This class represents the view for a single Workflow summary.
  */
-class VISRC_ViewWorkflow extends Marionette.ItemView
+class VISRC_ViewWorkflow extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -32,10 +32,10 @@ class VISRC_ViewWorkflow extends Marionette.ItemView
     /**
      * Returns the associated WorkflowRun collection to the template.
      */
-   /* templateHelpers() 
+    templateHelpers() 
     {
         return { items: this.collection.toJSON() };
-    }*/
+    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -55,8 +55,8 @@ class VISRC_ViewWorkflow extends Marionette.ItemView
     _handleEventItemSelected(aWorkflow)
     {
         this.model = aWorkflow;
-      //  this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, {project: this.model.id});
-       // this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {project: this.model.id});
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
+        this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {workflow: this.model.id});
     }
 }
 

@@ -70,7 +70,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
     _handleEventItemSelected(aProject)
     {
         this.model = aProject;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, {project: this.model.id});
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
         this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {project: this.model.id});
     }
 
