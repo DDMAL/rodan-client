@@ -3,11 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_ViewWorkflowListItem from './VISRC_ViewWorkflowListItem'
+import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_Project from '../../../../../Models/VISRC_Project';
+import VISRC_ViewWorkflowListItem from './VISRC_ViewWorkflowListItem';
 
 /**
- * This class represents the view (and controller) for the workflow list.
+ * This class represents a list view of workflows
  */
 class VISRC_ViewWorkflowList extends Marionette.CompositeView
 {
@@ -19,15 +20,13 @@ class VISRC_ViewWorkflowList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };
-        this.childViewContainer = 'tbody';
+        this._initializeRadio();
         this.template = "#template-main_workflow_list";
         this.childView = VISRC_ViewWorkflowListItem;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOW);
+        this.childViewContainer = 'tbody';
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +38,15 @@ class VISRC_ViewWorkflowList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, aProjectId => this._handleEventListSelected(aProjectId));
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected(aProjectId)
+    {
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOW, {project: aProjectId});
     }
 }
 

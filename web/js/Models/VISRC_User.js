@@ -15,7 +15,6 @@ class VISRC_User extends Backbone.Model
      */
     constructor(data)
     {
-        
         this.idAttribute = 'uuid';
         super(data);
     }

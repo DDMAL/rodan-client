@@ -36,7 +36,8 @@ var VISRC_Events = {
     // Scores events.
     EVENT__SCORES_SELECTED: 'EVENT__SCORES_SELECTED',
 
-    // Workflows events.
+    // Workflow events.
+    EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED',
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED',
 
     // WorkflowRun events,
