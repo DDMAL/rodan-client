@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
-import NavTestView from './NavTestView'
+import VISRC_ViewNavigationNodeRoot from './VISRC_ViewNavigationNodeRoot'
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
@@ -19,7 +19,7 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
         this.addRegions({
             regionNavigation: "#region-navigation"
         });
-        this.testView = new NavTestView();
+        this.viewNavigationNodeRoote = new VISRC_ViewNavigationNodeRoot();
     }
 
     /**
@@ -27,7 +27,7 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
      */
     onRender()
     {
-        this.regionNavigation.show(this.testView);
+        this.regionNavigation.show(this.viewNavigationNodeRoote);
     }
 }
 

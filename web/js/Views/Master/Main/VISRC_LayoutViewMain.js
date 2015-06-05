@@ -60,6 +60,15 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
+    }
+
+    /**
+     * Handle show.
+     */
+    _handleCommandShow(aView)
+    {
+        this.region.show(aView, {preventDestroy: true});
     }
 }
 

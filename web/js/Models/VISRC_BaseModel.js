@@ -2,28 +2,26 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
-import VISRC_BaseModel from './VISRC_BaseModel';
-
 /**
- * Score model.
+ * Base VISRC model
  */
-class VISRC_Score extends VISRC_BaseModel
+class VISRC_BaseModel extends Backbone.Model
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor.
+     * Constructor.
      */
-    constructor(data)
+    constructor(aParameters)
     {
-        this.idAttribute = 'uuid';
-        super(data);
+        super(aParameters);
     }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_Score;
+export default VISRC_BaseModel;

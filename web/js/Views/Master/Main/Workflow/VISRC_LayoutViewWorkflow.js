@@ -4,8 +4,6 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
-import VISRC_ViewWorkflow from './Individual/VISRC_ViewWorkflow';
-import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList';
 
 /**
  * This is a layout to help render a Collection and a single item.
@@ -24,21 +22,27 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
     initialize(aOptions)
     {
         this.addRegions({
-            regionWorkflowList: "#region-main_workflow_list",
-            regionWorkflowItem: "#region-main_workflow_item"
+            regionList: "#region-main_workflow_list",
+            regionItem: "#region-main_workflow_item"
         });
         this.template = "#template-main_workflow";
-        this._initializeViews();
         this._initializeRadio();
     }
 
     /**
-     * Show the views when WE are shown. Usually, we'd wait for a message,
-     * but we have to explicitly wait for our parent to render us.
+     * TODO docs
      */
-    onShow()
+    showList(aView)
     {
-        this.regionWorkflowList.show(this.viewList);
+        this.regionList.show(aView, {preventDestroy: true});
+    }
+
+    /**
+     * TODO docs
+     */
+    showItem(aView)
+    {
+        this.regionItem.show(aView, {preventDestroy: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -50,24 +54,6 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
-    }
-
-    /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
-        this.viewList = new VISRC_ViewWorkflowList();
-        this.viewItem = new VISRC_ViewWorkflow();
-    }
-
-    /**
-     * Handle item selection.
-     */
-    _handleEventItemSelected()
-    {
-        this.regionWorkflowItem.show(this.viewItem);
     }
 }
 

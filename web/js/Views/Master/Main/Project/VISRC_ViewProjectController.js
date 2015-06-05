@@ -20,10 +20,6 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
-        this.el = "#app";
-        this.addRegions({
-            region: "#region-main"
-        });
         this._initializeViews();
         this._initializeRadio();
     }
@@ -55,7 +51,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleEventItemSelected()
     {
-        this.region.show(this.viewItem);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewItem);
     }
 
     /**
@@ -63,7 +59,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleEventListSelected()
     {
-        this.region.show(this.viewList);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewList);
     }
 }
 

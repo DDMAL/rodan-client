@@ -2,10 +2,12 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
+import VISRC_BaseModel from './VISRC_BaseModel';
+
 /**
  * WorkflowRun model.
  */
-class VISRC_WorkflowRun extends Backbone.Model
+class VISRC_WorkflowRun extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

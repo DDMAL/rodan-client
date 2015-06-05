@@ -5,6 +5,8 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflow from './VISRC_LayoutViewWorkflow';
+import VISRC_ViewWorkflow from './Individual/VISRC_ViewWorkflow';
+import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList';
 
 /**
  * Controller for all Workflow-based views.
@@ -19,10 +21,6 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
-        this.el = "#app";
-        this.addRegions({
-            region: "#region-main"
-        });
         this._initializeViews();
         this._initializeRadio();
     }
@@ -37,6 +35,7 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, () => this._handleEventListSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -45,6 +44,8 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     _initializeViews()
     {
         this.layoutView = new VISRC_LayoutViewWorkflow();
+        this.viewList = new VISRC_ViewWorkflowList();
+        this.viewItem = new VISRC_ViewWorkflow();
     }
 
     /**
@@ -52,7 +53,29 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     _handleEventListSelected()
     {
-        this.region.show(this.layoutView);
+        // Send the layout view to the main region.
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.viewList.isDestroyed = false;
+        this.layoutView.showList(this.viewList);
+    }
+
+    /**
+     * Handle item selection.
+     */
+    _handleEventItemSelected()
+    {
+        // Send the layout view to the main region.
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.viewItem.isDestroyed = false;
+        this.layoutView.showItem(this.viewItem);
     }
 }
 

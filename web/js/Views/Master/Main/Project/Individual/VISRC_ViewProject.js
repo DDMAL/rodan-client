@@ -32,16 +32,9 @@ class VISRC_ViewProject extends Marionette.CompositeView
             'click @ui.scoreCount': '_handleClickScoreCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
+        this.template = "#template-main_project_individual";
         this.childView = VISRC_ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
-    }
-
-    /**
-     * TODO
-     */
-    getTemplate()
-    {
-        return "#template-main_project_individual";
     }
 
     /**

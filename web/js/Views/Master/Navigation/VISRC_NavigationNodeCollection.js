@@ -1,12 +1,10 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 
-/**
- * This class represents the view (and controller) for the status bar - login info.
- */
-class NavTestView extends Marionette.ItemView
+import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
+
+class VISRC_NavigationNodeCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,18 +14,7 @@ class NavTestView extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.model = null;
-        this.modelEvents = {
-            "all": "render"
-        };
-    }
-
-    /**
-     * TODO
-     */
-    getTemplate()
-    {
-        return "#template-dummy";
+        this.model = VISRC_ViewNavigationNode;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,4 +22,4 @@ class NavTestView extends Marionette.ItemView
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default NavTestView;
+export default VISRC_NavigationNodeCollection;

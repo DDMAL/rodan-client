@@ -1,13 +1,14 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
-import VISRC_BaseModel from './VISRC_BaseModel';
+import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
 
 /**
- * Represents a VIS Workflow model (i.e. a Rodan Workflow).
+ * This class represents a navigation menu node for scores view.
  */
-class VISRC_Workflow extends VISRC_BaseModel
+class VISRC_ViewNavigationNodeScore extends VISRC_ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -15,15 +16,22 @@ class VISRC_Workflow extends VISRC_BaseModel
     /**
      * TODO docs
      */
-    constructor(data)
+    initialize(aParameters)
     {
-        this.idAttribute = 'uuid';
-        super(data);
+        this.template = "#template-navigation_node_scores";
+        this._initializeRadio();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel("rodan");
+    }
 }
 
-export default VISRC_Workflow;
+export default VISRC_ViewNavigationNodeScore;

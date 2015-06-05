@@ -2,10 +2,12 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
+import VISRC_BaseModel from './VISRC_BaseModel';
+
 /**
  * TODO docs.
  */
-class VISRC_Project extends Backbone.Model
+class VISRC_Project extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
