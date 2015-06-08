@@ -1,16 +1,16 @@
-<div> THIS WILL ALL BE FORMATTED LATER</div>
+<h1>Project <%= name%></h1>
 <hr>
-<div>Basic info goes here: <%= name%> <%= creator.username%> <%= created%> <%= workflow_count%></div>
+<div>Basic info goes here: <%= creator.username%> <%= created%> <%= workflow_count%></div>
 <hr>
 Resource count is SPECIAL:  <div id="score_count"><%= resource_count%></div>
 Workflow count is SPECIAL:  <div id="workflow_count"><%= workflow_count%></div>
-<div>Also need an area for analysis runs here...</div>
-
+<hr>
+<h3>WorkflowRuns</h3>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Project</th>
+            <th>Created</th>
         </tr>
     </thead>
     <tbody>
