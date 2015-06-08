@@ -19,7 +19,7 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
         this.addRegions({
             regionNavigation: "#region-navigation"
         });
-        this.viewNavigationNodeRoote = new VISRC_ViewNavigationNodeRoot();
+        this.viewNavigationNodeRoot = new VISRC_ViewNavigationNodeRoot();
     }
 
     /**
@@ -27,7 +27,7 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
      */
     onRender()
     {
-        this.regionNavigation.show(this.viewNavigationNodeRoote);
+        this.regionNavigation.show(this.viewNavigationNodeRoot);
     }
 }
 

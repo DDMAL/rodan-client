@@ -10,9 +10,6 @@ $height-bottom: 5; // % of vertical space in viewport
 $height-top: 95; // % of vertical space in viewport
 
 
-$background-color-main: #00ff00;
-$background-color-navigation: #aaaaff;
-$background-color-status: #ff0000;
 
 
 
@@ -30,6 +27,16 @@ div.bottom {
 
 
 
+
+/**************************************************************************************
+ * DEBUGGING STUFF...USELESS FOR PROD!!!
+ *************************************************************************************/
+$background-color-main: #00ff00;
+$background-color-navigation: #aaaaff;
+$background-color-status: #ff0000;
+$background-color-workflowbuilder-workspace: #ffffff;
+$background-color-workflowbuilder-control: #aaaaaa;
+
 div#region-navigation {
     background-color: $background-color-navigation;
     height: 100%;
@@ -42,5 +49,15 @@ div#region-main {
 
 div#region-status_user {
     background-color: $background-color-status;
+    height: 100%;
+}
+
+div#region-main_workflowbuilder_workspace {
+    background-color: $background-color-workflowbuilder-workspace;
+    height: 100%;
+}
+
+div#region-main_workflowbuilder_control {
+    background-color: $background-color-workflowbuilder-control;
     height: 100%;
 }
