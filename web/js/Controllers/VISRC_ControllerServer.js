@@ -45,7 +45,7 @@ class VISRC_ControllerServer extends Marionette.Object
     /**
      * TODO remove
      */
-    get authenticationRoute()
+    getAuthenticationRoute()
     {
         switch (this.configuration.authenticationType)
         {
@@ -57,22 +57,6 @@ class VISRC_ControllerServer extends Marionette.Object
                 console.error('An acceptable Authentication Type was not provided');
                 break;
         }
-    }
-
-    /**
-     * TODO remove
-     */
-    get statusRoute()
-    {
-        return this.routeForRouteName('session-status');
-    }
-
-    /**
-     * TODO remove
-     */
-    get logoutRoute()
-    {
-        return this.routeForRouteName('session-close');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

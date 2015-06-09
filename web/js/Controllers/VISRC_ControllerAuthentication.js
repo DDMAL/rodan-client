@@ -46,7 +46,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _checkAuthenticationStatus()
     {
-        var authStatusRoute = this.controllerServer.statusRoute;
+        var authStatusRoute = this.controllerServer.routeForRouteName('session-status');
         var authRequest = new XMLHttpRequest();
 
         authRequest.onload = (event) =>
@@ -117,7 +117,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         var password = aData.password;
 
         // request from the server and set the authentication tokens
-        var authRoute = this.controllerServer.authenticationRoute;
+        var authRoute = this.controllerServer.getAuthenticationRoute();
         var authType = this.controllerServer.authenticationType;
         var loginRequest = new XMLHttpRequest();
         var requestBody;
@@ -188,7 +188,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     logout()
     {
         // request from the server and set the authentication tokens
-        var logoutRoute = this.serverController.logoutRoute;
+        var logoutRoute = this.serverController.routeForRouteName('session-close');
         var authType = this.serverController.authenticationType;
         var logoutRequest = new XMLHttpRequest();
 
