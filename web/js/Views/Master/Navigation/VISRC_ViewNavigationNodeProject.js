@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
 import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
-import VISRC_ViewNavigationNodeScore from './VISRC_ViewNavigationNodeScore';
+import VISRC_ViewNavigationNodeResource from './VISRC_ViewNavigationNodeResource';
 
 /**
  * This class represents a navigation menu node for a project.
@@ -25,13 +25,13 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
         this.childViewContainer = "ul";
         this.ui = {
             navigationProject: '#navigation-project',
-            navigationScores: '#navigation-scores',
+            navigationResources: '#navigation-resources',
             navigationBuilder: '#navigation-builder',
             navigationAnalysisRuns: '#navigation-analysis_runs'
         }
         this.events = {
             'click @ui.navigationProject': '_handleClickNavigationProject',
-            'click @ui.navigationScores': '_handleClickNavigationScores',
+            'click @ui.navigationResources': '_handleClickNavigationResources',
             'click @ui.navigationBuilder': '_handleClickNavigationBuilder',
             'click @ui.navigationAnalysisRuns': '_handleClickNavigationAnalysisRuns'
         };
@@ -58,11 +58,11 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
     }
 
     /**
-     * Handle click on nav scores.
+     * Handle click on nav resources.
      */
-    _handleClickNavigationScores()
+    _handleClickNavigationResources()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED);
     }
 
     /**

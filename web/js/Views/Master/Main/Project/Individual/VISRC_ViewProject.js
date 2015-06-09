@@ -25,11 +25,11 @@ class VISRC_ViewProject extends Marionette.CompositeView
         };
         this._initializeRadio();
         this.ui = {
-            scoreCount: '#score_count',
+            resourceCount: '#resource_count',
             workflowCount: '#workflow_count'
         }
         this.events = {
-            'click @ui.scoreCount': '_handleClickScoreCount',
+            'click @ui.resourceCount': '_handleClickResourceCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
         this.template = "#template-main_project_individual";
@@ -70,9 +70,9 @@ class VISRC_ViewProject extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    _handleClickScoreCount()
+    _handleClickResourceCount()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED);
     }
 
     /**

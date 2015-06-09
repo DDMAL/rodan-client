@@ -249,7 +249,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      * Send out active user.
      */
     _handleRequestUser()
-    {debugger;
+    {
         return this.user;
     }
 }

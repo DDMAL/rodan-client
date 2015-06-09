@@ -7,7 +7,7 @@ var VISRC_Events = {
 
 
     COMMAND__LOAD_PROJECTS: 'COMMAND__LOAD_PROJECTS', // Instructs loading of projects. Takes object containing various query IDs.
-    COMMAND__LOAD_SCORES: 'COMMAND__LOAD_SCORES', // Instructs loading of resources. Takes object containing various query IDs.
+    COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
@@ -41,8 +41,8 @@ var VISRC_Events = {
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED', // Called on project selection. No return.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED', // Called on project selection. Returns {project: VISRC_Project}.
 
-    // Scores events.
-    EVENT__SCORES_SELECTED: 'EVENT__SCORES_SELECTED', // Called on project selection. No return.
+    // Resource events.
+    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. No return.
 
     // Workflow events.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Returns {workflow: VISRC_Workflow}.
@@ -61,7 +61,7 @@ var VISRC_Events = {
     // Collection request.
     REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
-    REQUEST__COLLECTION_SCORE: 'REQUEST__COLLECTION_SCORE',
+    REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
     REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
 

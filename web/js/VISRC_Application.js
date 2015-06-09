@@ -11,7 +11,7 @@ import VISRC_LayoutViewMain from './Views/Master/Main/VISRC_LayoutViewMain';
 import VISRC_LayoutViewNavigation from './Views/Master/Navigation/VISRC_LayoutViewNavigation';
 import VISRC_ProjectCollection from './Collections/VISRC_ProjectCollection';
 import VISRC_RunJobCollection from './Collections/VISRC_RunJobCollection';
-import VISRC_ScoreCollection from './Collections/VISRC_ScoreCollection';
+import VISRC_ResourceCollection from './Collections/VISRC_ResourceCollection';
 import VISRC_ViewStatusUser from './Views/Master/Status/User/VISRC_ViewStatusUser';
 import VISRC_WorkflowCollection from './Collections/VISRC_WorkflowCollection';
 import VISRC_WorkflowRunCollection from './Collections/VISRC_WorkflowRunCollection';
@@ -75,7 +75,7 @@ class VISRC_Application extends Marionette.Application
     _initializeCollections()
     {
         this.projectCollection = new VISRC_ProjectCollection();
-        this.scoreCollection = new VISRC_ScoreCollection();
+        this.resourceCollection = new VISRC_ResourceCollection();
         this.runJobCollection = new VISRC_RunJobCollection();
         this.workflowCollection = new VISRC_WorkflowCollection();
         this.workflowRunCollection = new VISRC_WorkflowRunCollection();
