@@ -32,7 +32,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, () => this._handleEventSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventSelected(aReturn));
        // this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
     }
 
@@ -49,7 +49,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     /**
      * Handle selection.
      */
-    _handleEventSelected()
+    _handleEventSelected(aReturn)
     {
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);

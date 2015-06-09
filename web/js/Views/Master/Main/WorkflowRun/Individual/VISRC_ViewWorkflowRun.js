@@ -53,17 +53,17 @@ class VISRC_ViewWorkflowRun extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, aModelInstance => this._handleEventItemSelected(aModelInstance));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
     }
 
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected(aModelInstance)
+    _handleEventItemSelected(aReturn)
     {
-        this.model = aModelInstance;
+        this.model = aReturn.workflowRun;
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RUNJOB);
-        this.rodanChannel.command(VISRC_Events.COMMAND__GET_RUNJOBS, {workflow_run: this.model.id});
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RUNJOBS, {workflow_run: this.model.id});
     }
 }
 

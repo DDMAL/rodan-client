@@ -37,8 +37,8 @@ class VISRC_ScoreCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_SCORES, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__SCORES_SELECTED, aProjectid => this._handleEventItemSelected(aProjectid));
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_SCORE, () => this._handleRequestInstance());
     }
 
@@ -68,9 +68,9 @@ class VISRC_ScoreCollection extends Backbone.Collection
     }
 
     /**
-     * Handle item selection.
+     * Handle selection.
      */
-    _handleEventItemSelected(aQueryParameters)
+    _handleEventItemScoresSelected(aQueryParameters)
     {
         this._retrieveList(aQueryParameters);
     }

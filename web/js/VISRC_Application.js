@@ -89,6 +89,7 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.reply(VISRC_Events.REQUEST__APPLICATION, this);
         this.rodanChannel.on(VISRC_Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
+        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._dummy());
     }
 
     /**
@@ -121,6 +122,12 @@ class VISRC_Application extends Marionette.Application
         
         // DUMMY!!!!!
         this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, {username: "dummy", password: "dafdaedf2345"});
+    }
+
+    // dummy to load projects after dummy login
+    _dummy()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
     }
 }
 

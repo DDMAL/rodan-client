@@ -48,7 +48,7 @@ class VISRC_ViewScoreListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORE_SELECTED, this.model);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORE_SELECTED, {resource: this.model});
     }
 }
 

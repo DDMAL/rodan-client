@@ -54,17 +54,17 @@ class VISRC_ViewProject extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventItemSelected(aProject));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
     }
 
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected(aProject)
+    _handleEventItemSelected(aReturn)
     {
-        this.model = aProject;
+        this.model = aReturn.project;
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.command(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, {project: this.model.id});
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {project: this.model.id});
     }
 
     /**
@@ -72,7 +72,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
      */
     _handleClickScoreCount()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED, {project: this.model.id});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED);
     }
 
     /**
@@ -80,7 +80,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.id});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED);
     }
 }
 

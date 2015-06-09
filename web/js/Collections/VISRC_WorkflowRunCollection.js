@@ -37,7 +37,7 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_WORKFLOWRUNS, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, () => this._handleRequestInstance());
     }

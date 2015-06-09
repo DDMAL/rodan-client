@@ -62,7 +62,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
                 case 200:
                     var parsed = JSON.parse(authRequest.responseText);
                     this.user = new VISRC_User(parsed);
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__SUCCESS_AUTHENTICATION, this.user);
+                    this.rodanChannel.trigger(VISRC_Events.EVENT__SUCCESS_AUTHENTICATION, {user: this.user});
                     break;
                 case 400:
                     this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
@@ -249,7 +249,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      * Send out active user.
      */
     _handleRequestUser()
-    {
+    {debugger;
         return this.user;
     }
 }

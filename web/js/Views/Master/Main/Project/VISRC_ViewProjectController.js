@@ -22,6 +22,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     {
         this._initializeViews();
         this._initializeRadio();
+        this.activeProject = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -33,8 +34,9 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, () => this._handleEventItemSelected());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__SHOW_PROJECTS, () => this._handleEventListSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+        this.rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
     }
 
     /**
@@ -49,8 +51,9 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected()
+    _handleEventItemSelected(aReturn)
     {
+        this.activeProject = aReturn.project;
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewItem);
     }
 
@@ -60,6 +63,14 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     _handleEventListSelected()
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewList);
+    }
+
+    /**
+     * Handle request for current active project. Returns null.
+     */
+    _handleRequestProjectActive()
+    {
+        return this.activeProject != null ? this.activeProject : null;
     }
 }
 

@@ -38,7 +38,7 @@ class VISRC_RunJobCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_RUNJOBS, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_RUNJOBS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_RUNJOB, () => this._handleRequestInstance());
     }
 

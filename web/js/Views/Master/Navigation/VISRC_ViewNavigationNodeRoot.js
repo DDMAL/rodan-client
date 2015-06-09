@@ -37,7 +37,7 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleEventSuccessAuthentication(aUser));
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aProject => this._handleEventProjectSelected(aProject));
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventProjectSelected(aReturn));
     }
 
     /**
@@ -51,9 +51,9 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
     /**
      * Handle event project selected.
      */
-    _handleEventProjectSelected(aProject)
+    _handleEventProjectSelected(aReturn)
     {
-        this.collection.add(aProject);
+        this.collection.add(aReturn.project);
     }
 }
 

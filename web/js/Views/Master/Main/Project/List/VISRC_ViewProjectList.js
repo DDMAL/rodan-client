@@ -39,6 +39,18 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected()
+    {
+        debugger;
+        var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.id});
     }
 }
 

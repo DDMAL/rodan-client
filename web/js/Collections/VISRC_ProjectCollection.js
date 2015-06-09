@@ -38,16 +38,16 @@ class VISRC_ProjectCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_PROJECTS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_PROJECT, () => this._handleRequestInstance());
     }
 
     /**
-     * Retrieves list of projects for user.
+     * Retrieves list.
      */
-    _retrieveList()
+    _retrieveList(aQueryParameters)
     {
-        this.fetch();
+        this.fetch({ data: $.param(aQueryParameters) });
     }
 
     /**
@@ -65,14 +65,6 @@ class VISRC_ProjectCollection extends Backbone.Collection
     {
         var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
         this.url = appInstance.controllerServer.routeForRouteName('projects');
-    }
-
-    /**
-     * Handle authentication notification.
-     */
-    _handleAuthenticationSuccess(aUser)
-    {
-        this._retrieveList();
     }
 }
 

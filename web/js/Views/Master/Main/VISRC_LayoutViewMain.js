@@ -32,15 +32,6 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
         this._initializeRadio();
     }
 
-    /**
-     * Show the appropriate view.
-     */
-    onRender()
-    {
-        // Initial show. We need to force a particular view.
-        this.rodanChannel.command(VISRC_Events.COMMAND__SHOW_PROJECTS);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

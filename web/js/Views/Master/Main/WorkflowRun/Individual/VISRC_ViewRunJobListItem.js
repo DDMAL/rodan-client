@@ -50,7 +50,7 @@ class VISRC_ViewRunJobListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-       // this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, this.model);
+       // this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
     }
 
     /**

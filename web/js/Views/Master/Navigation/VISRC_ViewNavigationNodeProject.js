@@ -54,7 +54,7 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationProject()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, this.model);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 
     /**
@@ -62,7 +62,7 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationScores()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED, {project: this.model.id});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__SCORES_SELECTED);
     }
 
     /**
@@ -70,7 +70,7 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationBuilder()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {project: this.model.id});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflowId: -1});
     }
 
     /**
