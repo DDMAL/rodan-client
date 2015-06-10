@@ -8,6 +8,8 @@ import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
 import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
 import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
 
+import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace'
+
 /**
  * Controller for the Workflow Builder.
  */
@@ -23,6 +25,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     {
         this._initializeViews();
         this._initializeRadio();
+        this._workspace = new VISRC_Workspace();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +63,10 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         // the containing region is destroyed!
         this.jobListView.isDestroyed = false;
         this.layoutView.showControlJobList(this.jobListView);
+
+        // Finally, initialize the workspace.
+        this._workspace.initialize("canvas-workspace");
+        this._workspace.activate();
     }
 
     /**

@@ -24,6 +24,12 @@ class VISRC_ViewJob extends Marionette.ItemView
         this._initializeRadio();
         this.template = "#template-main_workflowbuilder_control_job_individual";
         this.model = aParameters.job;
+        this.ui = {
+            buttonAdd: '#button-main_workflowbuilder_control_job_individual_button_add'
+        }
+        this.events = {
+            'click @ui.buttonAdd': '_handleClickButtonAdd'
+        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,16 +41,15 @@ class VISRC_ViewJob extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        //this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
     }
 
     /**
-     * Handle item selection.
+     * Handle add button.
      */
-   /* _handleEventItemSelected(aReturn)
-    {debugger;
-        this.model = aReturn.job;
-    }*/
+    _handleClickButtonAdd()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKSPACE_ADD_JOB, {job: this.model});
+    }
 }
 
 export default VISRC_ViewJob;
