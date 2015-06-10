@@ -5,6 +5,8 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
+import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
+import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
 
 /**
  * Controller for the Workflow Builder.
@@ -32,8 +34,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventSelected(aReturn));
-       // this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
+        this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
     }
 
     /**
@@ -42,14 +44,13 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeViews()
     {
         this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
-       // this.viewList = new VISRC_ViewWorkflowList();
-       // this.viewItem = new VISRC_ViewWorkflow();
+        this.jobListView = new VISRC_ViewJobList();
     }
 
     /**
      * Handle selection.
      */
-    _handleEventSelected(aReturn)
+    _handleEventBuilderSelected(aReturn)
     {
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
@@ -57,8 +58,19 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         // Tell the layout view what to render.
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
-     //   this.viewList.isDestroyed = false;
-      //  this.layoutView.showList(this.viewList);
+        this.jobListView.isDestroyed = false;
+        this.layoutView.showControlJobList(this.jobListView);
+    }
+
+    /**
+     * Handle selection.
+     */
+    _handleEventJobSelected(aReturn)
+    {
+        // TODO - I don't want to instantiate a view every time, but Marionette doesn't rerender a view if the ENTIRE model
+        // is replaced. I should find a better way to do this so I can reuse the same ItemView again and again.
+        this.jobView = new VISRC_ViewJob(aReturn);
+        this.layoutView.showControlJob(this.jobView);
     }
 }
 

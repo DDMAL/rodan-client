@@ -20,7 +20,8 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this.addRegions({
             regionWorkspace: "#region-main_workflowbuilder_workspace",
-            regionControl: "#region-main_workflowbuilder_control"
+            regionControlJobList: "#region-main_workflowbuilder_control_job_list",
+            regionControlJob: "#region-main_workflowbuilder_control_job"
         });
         this.template = "#template-main_workflowbuilder";
         this._initializeRadio();
@@ -29,17 +30,25 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    showList(aView)
+    showControlJobList(aView)
     {
-        this.regionList.show(aView, {preventDestroy: true});
+        this.regionControlJobList.show(aView, {preventDestroy: true});
     }
 
     /**
      * TODO docs
      */
-    showItem(aView)
+    showWorkspace(aView)
     {
-        this.regionItem.show(aView, {preventDestroy: true});
+        this.regionWorkspace.show(aView, {preventDestroy: true});
+    }
+
+    /**
+     * TODO docs
+     */
+    showControlJob(aView)
+    {
+        this.regionControlJob.show(aView, {preventDestroy: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

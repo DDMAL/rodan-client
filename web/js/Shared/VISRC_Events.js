@@ -6,6 +6,7 @@ var VISRC_Events = {
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
 
 
+    COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
     COMMAND__LOAD_PROJECTS: 'COMMAND__LOAD_PROJECTS', // Instructs loading of projects. Takes object containing various query IDs.
     COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
@@ -37,6 +38,9 @@ var VISRC_Events = {
     // Connection events.
     EVENT__SERVER_WENT_AWAY: 'EVENT__SERVER_WENT_AWAY', // Called on server disconnect. No return.
 
+    // Job events.
+    EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on job selection. No return.
+
     // Project events.
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED', // Called on project selection. No return.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED', // Called on project selection. Returns {project: VISRC_Project}.
@@ -59,6 +63,7 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
 
     // Collection request.
+    REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
     REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
     REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',
