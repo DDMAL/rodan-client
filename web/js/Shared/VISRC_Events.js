@@ -18,6 +18,7 @@ var VISRC_Events = {
     // Workflow builder commands. These are sent to the workflow builder controller. They will (most often) trigger a command to the workspace.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW: 'EVENT__WORKFLOWBUILDER_ADD_WORKFLOW',  // Called when Workflow needs to be created. No pass.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'EVENT__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: VISRC_Job}.
+    COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'EVENT__WORKFLOWBUILDER_EDIT_WORKFLOWJOB',   // Called when WorkflowJob needs editing. Passes {workflowjob: VISRC_WorkflowJob}.
 
     // Workspace commands. These events tell the workspace what needs to be done. The WorkflowBuilder sends these commands.
     COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW: 'COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.

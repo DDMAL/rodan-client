@@ -71,7 +71,7 @@ class VISRC_Workspace
     _handleCommandAddWorkflowJobItem(aReturn)
     {
         // TODO - refactor all ofo this
-        var test = new VISRC_WorkflowJobItem({model: aReturn.job});
+        var workflowJob = new VISRC_WorkflowJobItem({model: aReturn.model});
         paper.view.draw();
     }
 }

@@ -6,6 +6,7 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
 import VISRC_ViewEditWorkflow from './Control/VISRC_ViewEditWorkflow';
+import VISRC_ViewEditWorkflowJob from './Control/VISRC_ViewEditWorkflowJob';
 import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
 import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
@@ -49,6 +50,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_EDIT_WORKFLOWJOB, aReturn => this._handleCommandEditWorkflowJob(aReturn));
     }
 
     /**
@@ -59,6 +61,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
         this.jobListView = new VISRC_ViewJobList();
         this.editWorkflowView = new VISRC_ViewEditWorkflow();
+        this.editWorkflowJobView = new VISRC_ViewEditWorkflowJob();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -117,6 +120,14 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {model: workflowJob});
     }
 
+    /**
+     * Handle command edit workflow job.
+     */
+    _handleCommandEditWorkflowJob(aReturn)
+    {
+        this._loadWorkflowJob(aReturn.workflowjob);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -128,6 +139,15 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.editWorkflowView.model = aWorkflow;
         this._showJobListView();
         this._showEditWorkflowView();
+    }
+
+    /**
+     * Loads workflowjob to builder.
+     */
+    _loadWorkflowJob(aWorkflowJob)
+    {
+        this.editWorkflowJobView.model = aWorkflowJob;
+        this._showEditWorkflowJobView();
     }
 
     /**
@@ -148,6 +168,15 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     {
         this.editWorkflowView.isDestroyed = false;
         this.layoutView.showControlEditWorkflow(this.editWorkflowView);
+    }
+
+    /**
+     * Shows edit workflowjob view.
+     */
+    _showEditWorkflowJobView()
+    {
+        this.editWorkflowJobView.isDestroyed = false;
+        this.layoutView.showControlEditWorkflowJob(this.editWorkflowJobView);
     }
 
     /**

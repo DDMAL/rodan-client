@@ -37,11 +37,19 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this._paperItem.onMouseDown = aEvent => this._handleMouseDown(aEvent);
         this._paperItem.onMouseUp = aEvent => this._handleMouseUp(aEvent);
         this._paperItem.onMouseMove = aEvent => this._handleMouseMove(aEvent);
+        this._paperItem.onClick = aEvent => this._handleMouseClick(aEvent);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handles mouse cick.
+     */
+    _handleMouseClick(aEvent)
+    {
+        this.rodanChannel.command(VISRC_Events.EVENT__WORKFLOWBUILDER_EDIT_WORKFLOWJOB, {workflowjob: this._associatedModel});
+    }
 }
 
 export default VISRC_WorkflowJobItem;

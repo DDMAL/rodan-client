@@ -21,7 +21,8 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
         this.addRegions({
             regionControlEditWorkflow: "#region-main_workflowbuilder_control_editworkflow",
             regionControlJobList: "#region-main_workflowbuilder_control_job_list",
-            regionControlJob: "#region-main_workflowbuilder_control_job"
+            regionControlJob: "#region-main_workflowbuilder_control_job",
+            regionControlEditWorkflowJob: "#region-main_workflowbuilder_control_editworkflowjob"
         });
         this.template = "#template-main_workflowbuilder";
         this.ui = {
@@ -39,6 +40,14 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
     showControlEditWorkflow(aView)
     {
         this.regionControlEditWorkflow.show(aView, {preventDestroy: true});
+    }
+
+    /**
+     * Show the edit workflowjob control view.
+     */
+    showControlEditWorkflowJob(aView)
+    {
+        this.regionControlEditWorkflowJob.show(aView, {preventDestroy: true});
     }
 
     /**
