@@ -19,11 +19,26 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
     initialize(aOptions)
     {
         this.addRegions({
+            regionControlEditWorkflow: "#region-main_workflowbuilder_control_editworkflow",
             regionControlJobList: "#region-main_workflowbuilder_control_job_list",
             regionControlJob: "#region-main_workflowbuilder_control_job"
         });
         this.template = "#template-main_workflowbuilder";
+        this.ui = {
+            newWorkflowButton: '#button-new_workflow'
+        }
+        this.events = {
+            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+        };
         this._initializeRadio();
+    }
+
+    /**
+     * Show the edit workflow control view.
+     */
+    showControlEditWorkflow(aView)
+    {
+        this.regionControlEditWorkflow.show(aView, {preventDestroy: true});
     }
 
     /**
@@ -51,6 +66,14 @@ class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle button new workflow.
+     */
+    _handleButtonNewWorkflow()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW);
     }
 }
 

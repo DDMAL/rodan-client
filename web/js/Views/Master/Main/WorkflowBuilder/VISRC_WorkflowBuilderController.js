@@ -5,12 +5,13 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
+import VISRC_ViewEditWorkflow from './Control/VISRC_ViewEditWorkflow';
 import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
 import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
 import VISRC_WorkflowJob from '../../../../Models/VISRC_WorkflowJob';
 
-import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace'
+import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace';
 
 /**
  * Controller for the Workflow Builder.
@@ -45,8 +46,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
 
-
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
     }
 
@@ -57,6 +58,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     {
         this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
         this.jobListView = new VISRC_ViewJobList();
+        this.editWorkflowView = new VISRC_ViewEditWorkflow();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -70,24 +72,17 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         // Inform that we need jobs loaded.
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
 
-        // Get the workflow. If null, request a new one.
-        this._workflow = aReturn.workflow;
-        if (this._workflow == null)
-        {
-            var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-            this._workflow = this._createWorkflow(project);
-        }
-
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
 
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.jobListView.isDestroyed = false;
-        this.layoutView.showControlJobList(this.jobListView);
+        // Get the workflow. If not null, we can show the job views.
+        this._workflow = aReturn.workflow;
+        if (this._workflow != null)
+        {
+            this._loadWorkflow(this._workflow);
+        }
 
-        // Finally, initialize the workspace.
+        // Initialize the workspace.
         this._workspace.initialize("canvas-workspace");
         this._workspace.activate();
     }
@@ -104,11 +99,20 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     }
 
     /**
+     * Handle command add workflow.
+     */
+    _handleCommandAddWorkflow()
+    {
+        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+        this._workflow = this._createWorkflow(project);
+        this._loadWorkflow(this._workflow);
+    }
+
+    /**
      * Handle command add workflow job.
      */
     _handleCommandAddWorkflowJob(aReturn)
     {
-        // TODO - pass workflow
         var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {model: workflowJob});
     }
@@ -116,6 +120,36 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Loads workflow to builder.
+     */
+    _loadWorkflow(aWorkflow)
+    {
+        this.editWorkflowView.model = aWorkflow;
+        this._showJobListView();
+        this._showEditWorkflowView();
+    }
+
+    /**
+     * Shows the job list view.
+     */
+    _showJobListView()
+    {
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.jobListView.isDestroyed = false;
+        this.layoutView.showControlJobList(this.jobListView);
+    }
+
+    /**
+     * Shows edit workflow view.
+     */
+    _showEditWorkflowView()
+    {
+        this.editWorkflowView.isDestroyed = false;
+        this.layoutView.showControlEditWorkflow(this.editWorkflowView);
+    }
+
     /**
      * Create workflow.
      */
