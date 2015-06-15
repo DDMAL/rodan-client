@@ -47,7 +47,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
-        this.fetch({ data: $.param(aQueryParameters) });
+        this.fetch();//{ data: $.param(aQueryParameters) });
     }
 
     /**

@@ -7,11 +7,16 @@ import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
 import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
 import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
+import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
+import VISRC_WorkflowJob from '../../../../Models/VISRC_WorkflowJob';
 
 import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace'
 
 /**
  * Controller for the Workflow Builder.
+ *
+ * Aside from controlling the views, it also caches all requests meant for the server.
+ * When the user requests a save, this class flushes the requests to the server.
  */
 class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 {
@@ -25,6 +30,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     {
         this._initializeViews();
         this._initializeRadio();
+        this._workflow = null;
         this._workspace = new VISRC_Workspace();
     }
 
@@ -37,8 +43,11 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
+
+
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
     }
 
     /**
@@ -50,11 +59,25 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.jobListView = new VISRC_ViewJobList();
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - view controls
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle selection.
      */
     _handleEventBuilderSelected(aReturn)
     {
+        // Inform that we need jobs loaded.
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
+
+        // Get the workflow. If null, request a new one.
+        this._workflow = aReturn.workflow;
+        if (this._workflow == null)
+        {
+            var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+            this._workflow = this._createWorkflow(project);
+        }
+
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
 
@@ -78,6 +101,39 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         // is replaced. I should find a better way to do this so I can reuse the same ItemView again and again.
         this.jobView = new VISRC_ViewJob(aReturn);
         this.layoutView.showControlJob(this.jobView);
+    }
+
+    /**
+     * Handle command add workflow job.
+     */
+    _handleCommandAddWorkflowJob(aReturn)
+    {
+        // TODO - pass workflow
+        var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {model: workflowJob});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - workflow object controls
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Create workflow.
+     */
+    _createWorkflow(aProject)
+    {
+        var workflow =  new VISRC_Workflow({project: aProject.attributes.url, name: "untitled"});
+        workflow.save();
+        return workflow;
+    }
+
+    /**
+     * Create workflow job.
+     */
+    _createWorkflowJob(aJob, aWorkflow)
+    {
+        var workflowJob = new VISRC_WorkflowJob({job: aJob.attributes.url, workflow: this._workflow.attributes.url});
+        workflowJob.save();
+        return workflowJob;
     }
 }
 

@@ -39,15 +39,6 @@ class VISRC_ViewJobList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventSelected(aReturn));
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventSelected()
-    {
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
     }
 }
 

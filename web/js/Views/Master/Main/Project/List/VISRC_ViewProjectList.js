@@ -49,7 +49,7 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     {
         var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.id});
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.uuid});
     }
 }
 

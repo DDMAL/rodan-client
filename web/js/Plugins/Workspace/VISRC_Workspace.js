@@ -50,13 +50,25 @@ class VISRC_Workspace
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKSPACE_ADD_JOB, aReturn => this._handleEventAddJob(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW, aReturn => this._handleCommandAddWorkflowItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
     }
 
     /**
-     * Handle job add.
+     * Handle add.
      */
-    _handleEventAddJob(aReturn)
+    _handleEventAddWorkflowItem(aReturn)
+    {
+        console.log("workspace - added workflow");
+        // TODO - refactor all ofo this
+     //   var test = new VISRC_WorkflowJobItem({model: aReturn.job});
+       // paper.view.draw();
+    }
+
+    /**
+     * Handle add.
+     */
+    _handleCommandAddWorkflowJobItem(aReturn)
     {
         // TODO - refactor all ofo this
         var test = new VISRC_WorkflowJobItem({model: aReturn.job});

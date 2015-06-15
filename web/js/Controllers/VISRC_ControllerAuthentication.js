@@ -89,7 +89,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 
         if (this.controllerServer.authenticationType === 'token')
         {
-            var authToken = this.controllerServer.authenticationToken;
+            var authToken = this.controllerServer.configuration.authenticationToken;
             authRequest.setRequestHeader('Authorization', 'Token ' + authToken);
         }
         else if (this.controllerServer.authenticationType === 'session')
@@ -98,7 +98,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
             // if the server controller doesn't have the CSRF Token, set it now
             if (!this.controllerServer.CSRFToken.value)
             {
-                this.controllerServer.CSRFToken = new Cookie('csrftoken');//reads cookie from browser
+                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');//reads cookie from browser
             }
 
             authRequest.withCredentials = true;
@@ -118,7 +118,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 
         // request from the server and set the authentication tokens
         var authRoute = this.controllerServer.getAuthenticationRoute();
-        var authType = this.controllerServer.authenticationType;
+        var authType = this.controllerServer.configuration.authenticationType;
         var loginRequest = new XMLHttpRequest();
         var requestBody;
 
@@ -138,12 +138,12 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 
                     if (authType === 'token')
                     {
-                        this.controllerServer.authenticationToken = this.user.attributes.token;
+                        this.controllerServer.configuration.authenticationToken = this.user.attributes.token;
                     }
-                    //else
-                    //{
-                    //    this.controllerServer.CSRFToken = new Cookie('csrftoken');
-                    //}
+                    else
+                    {
+                        this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');
+                    }
 
                     this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, this.user);
                     break;
@@ -167,11 +167,11 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 
         if (authType === 'session')
         {
-            //if (!this.serverController.CSRFToken)
-            //    this.serverController.CSRFToken = new Cookie('csrftoken');//@TODO does this do what we want it to?
+            if (!this.controllerServer.CSRFToken)
+                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');//@TODO does this do what we want it to?
 
             loginRequest.withCredentials = true;
-            loginRequest.setRequestHeader('X-CSRFToken', this.serverController.CSRFToken.value);
+            loginRequest.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
 
         loginRequest.setRequestHeader('Accept', 'application/json');
@@ -188,8 +188,8 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     logout()
     {
         // request from the server and set the authentication tokens
-        var logoutRoute = this.serverController.routeForRouteName('session-close');
-        var authType = this.serverController.authenticationType;
+        var logoutRoute = this.controllerServer.routeForRouteName('session-close');
+        var authType = this.controllerServer.authenticationType;
         var logoutRequest = new XMLHttpRequest();
 
         logoutRequest.onload = (event) => {
@@ -230,15 +230,15 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 
         if (authType === 'session')
         {
-            //if (!this.serverController.CSRFToken) @TODO necessary?
-            //    this.serverController.CSRFToken = new Cookie();
+            //if (!this.controllerServer.CSRFToken) @TODO necessary?
+            //    this.controllerServer.CSRFToken = new Cookie();
 
             logoutRequest.withCredentials = true;
-            logoutRequest.setRequestHeader('X-CSRFToken', this.serverController.CSRFToken.value);
+            logoutRequest.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
         else
         {
-            var authToken = this.serverController.authenticationToken;
+            var authToken = this.controllerServer.authenticationToken;
             logoutRequest.setRequestHeader('Authorization', 'Token ' + authToken);
         }
 

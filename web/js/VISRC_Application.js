@@ -31,14 +31,23 @@ class VISRC_Application extends Marionette.Application
     initialize(aOptions)
     {
         this.configuration = VISRC_Configuration;
+        var that = this;
 
         // TODO - what does this do?
         $.ajaxPrefilter(function(options, originalOptions, jqXHR)
         {
             console.log('ajax prefilter');
             options.xhrFields = {
-                withCredentials: true
+                withCredentials: true,
             };
+
+            if (that.configuration.authenticationType == "session" && !options.beforeSend) 
+            {
+                options.beforeSend = function (xhr) 
+                { 
+                    xhr.setRequestHeader('X-CSRFToken', that.controllerServer.CSRFToken.value);
+                }
+            }
         });
 
         this.addRegions({

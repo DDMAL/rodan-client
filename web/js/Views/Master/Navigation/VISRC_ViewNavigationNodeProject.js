@@ -70,7 +70,7 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationBuilder()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflowId: -1});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
     }
 
     /**

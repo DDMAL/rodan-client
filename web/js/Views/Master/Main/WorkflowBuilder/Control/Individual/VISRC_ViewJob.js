@@ -48,7 +48,7 @@ class VISRC_ViewJob extends Marionette.ItemView
      */
     _handleClickButtonAdd()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKSPACE_ADD_JOB, {job: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
     }
 }
 

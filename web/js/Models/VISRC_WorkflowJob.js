@@ -5,9 +5,9 @@ import Marionette from 'backbone.marionette';
 import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
- * Represents a VIS Workflow model (i.e. a Rodan Workflow).
+ * Represents a VIS WorkflowJob model.
  */
-class VISRC_Workflow extends VISRC_BaseModel
+class VISRC_WorkflowJob extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,7 +18,7 @@ class VISRC_Workflow extends VISRC_BaseModel
     constructor(aParameters)
     {
         this.idAttribute = 'uuid';
-        this.url = "http://132.206.14.136/workflows/";
+        this.url = "http://132.206.14.136/workflowjobs/";
         super(aParameters);
     }
 
@@ -27,4 +27,4 @@ class VISRC_Workflow extends VISRC_BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_Workflow;
+export default VISRC_WorkflowJob;
