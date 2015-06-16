@@ -48,7 +48,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
      */
     _handleMouseClick(aEvent)
     {
-        this.rodanChannel.command(VISRC_Events.EVENT__WORKFLOWBUILDER_EDIT_WORKFLOWJOB, {workflowjob: this._associatedModel});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: this._associatedModel});
     }
 }
 

@@ -5,7 +5,9 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
 
+    COMMAND__LOAD_INPUTPORTTYPES: 'COMMAND__LOAD_INPUTPORTTYPES',  // Instructs loading of inputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
+    COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_PROJECTS: 'COMMAND__LOAD_PROJECTS', // Instructs loading of projects. Takes object containing various query IDs.
     COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
@@ -18,7 +20,6 @@ var VISRC_Events = {
     // Workflow builder commands. These are sent to the workflow builder controller. They will (most often) trigger a command to the workspace.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW: 'EVENT__WORKFLOWBUILDER_ADD_WORKFLOW',  // Called when Workflow needs to be created. No pass.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'EVENT__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: VISRC_Job}.
-    COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'EVENT__WORKFLOWBUILDER_EDIT_WORKFLOWJOB',   // Called when WorkflowJob needs editing. Passes {workflowjob: VISRC_WorkflowJob}.
 
     // Workspace commands. These events tell the workspace what needs to be done. The WorkflowBuilder sends these commands.
     COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW: 'COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
@@ -56,6 +57,7 @@ var VISRC_Events = {
 
     // WorkflowBuilder events.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.
+    EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED', // Called when WorkflowJob selected for editing. Passes {workflowjob: VISRC_WorkflowJob}.
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -63,7 +65,9 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
 
     // Collection request.
+    REQUEST__COLLECTION_INPUTPORTTYPE: 'REQUEST__COLLECTION_INPUTPORTTYPE',
     REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
+    REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',
     REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
     REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',

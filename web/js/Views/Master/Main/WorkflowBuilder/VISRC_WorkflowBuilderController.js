@@ -5,10 +5,9 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
-import VISRC_ViewEditWorkflow from './Control/VISRC_ViewEditWorkflow';
-import VISRC_ViewEditWorkflowJob from './Control/VISRC_ViewEditWorkflowJob';
-import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
-import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
+import VISRC_ViewControlWorkflow from './Control/VISRC_ViewControlWorkflow';
+import VISRC_LayoutViewControlJob from './Control/VISRC_LayoutViewControlJob';
+import VISRC_LayoutViewControlWorkflowJob from './Control/VISRC_LayoutViewControlWorkflowJob';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
 import VISRC_WorkflowJob from '../../../../Models/VISRC_WorkflowJob';
 
@@ -16,9 +15,6 @@ import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace';
 
 /**
  * Controller for the Workflow Builder.
- *
- * Aside from controlling the views, it also caches all requests meant for the server.
- * When the user requests a save, this class flushes the requests to the server.
  */
 class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 {
@@ -45,12 +41,11 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
 
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_EDIT_WORKFLOWJOB, aReturn => this._handleCommandEditWorkflowJob(aReturn));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
 
     /**
@@ -59,9 +54,9 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeViews()
     {
         this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
-        this.jobListView = new VISRC_ViewJobList();
-        this.editWorkflowView = new VISRC_ViewEditWorkflow();
-        this.editWorkflowJobView = new VISRC_ViewEditWorkflowJob();
+        this.controlWorkflowView = new VISRC_ViewControlWorkflow();
+        this.controlJobView = new VISRC_LayoutViewControlJob();
+        this.controlWorkflowJobView = new VISRC_LayoutViewControlWorkflowJob();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -78,29 +73,21 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
 
-        // Get the workflow. If not null, we can show the job views.
+        // Get the workflow.
         this._workflow = aReturn.workflow;
         if (this._workflow != null)
         {
-            this._loadWorkflow(this._workflow);
+            this._showJobControlView();
+        }
+        else
+        {
+            this._showWorkflowControlView();
         }
 
         // Initialize the workspace.
         this._workspace.initialize("canvas-workspace");
-        this._workspace.activate();
     }
-
-    /**
-     * Handle selection.
-     */
-    _handleEventJobSelected(aReturn)
-    {
-        // TODO - I don't want to instantiate a view every time, but Marionette doesn't rerender a view if the ENTIRE model
-        // is replaced. I should find a better way to do this so I can reuse the same ItemView again and again.
-        this.jobView = new VISRC_ViewJob(aReturn);
-        this.layoutView.showControlJob(this.jobView);
-    }
-
+    
     /**
      * Handle command add workflow.
      */
@@ -108,7 +95,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     {
         var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
         this._workflow = this._createWorkflow(project);
-        this._loadWorkflow(this._workflow);
+
+        this._showJobControlView();
     }
 
     /**
@@ -121,62 +109,50 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     }
 
     /**
-     * Handle command edit workflow job.
+     * Handle event edit workflow job.
      */
-    _handleCommandEditWorkflowJob(aReturn)
+    _handleEventEditWorkflowJob(aReturn)
     {
-        this._loadWorkflowJob(aReturn.workflowjob);
+        this._showWorkflowJobControlView();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Loads workflow to builder.
+     * Show workflow control view.
      */
-    _loadWorkflow(aWorkflow)
+    _showWorkflowControlView()
     {
-        this.editWorkflowView.model = aWorkflow;
-        this._showJobListView();
-        this._showEditWorkflowView();
-    }
-
-    /**
-     * Loads workflowjob to builder.
-     */
-    _loadWorkflowJob(aWorkflowJob)
-    {
-        this.editWorkflowJobView.model = aWorkflowJob;
-        this._showEditWorkflowJobView();
-    }
-
-    /**
-     * Shows the job list view.
-     */
-    _showJobListView()
-    {
+        // Tell the layout view what to render.
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
-        this.jobListView.isDestroyed = false;
-        this.layoutView.showControlJobList(this.jobListView);
+        this.controlWorkflowView.isDestroyed = false;
+        this.layoutView.showView(this.controlWorkflowView);
     }
 
     /**
-     * Shows edit workflow view.
+     * Show job control view.
      */
-    _showEditWorkflowView()
+    _showJobControlView()
     {
-        this.editWorkflowView.isDestroyed = false;
-        this.layoutView.showControlEditWorkflow(this.editWorkflowView);
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.controlJobView.isDestroyed = false;
+        this.layoutView.showView(this.controlJobView);
     }
 
     /**
-     * Shows edit workflowjob view.
+     * Show workflow job control view.
      */
-    _showEditWorkflowJobView()
+    _showWorkflowJobControlView()
     {
-        this.editWorkflowJobView.isDestroyed = false;
-        this.layoutView.showControlEditWorkflowJob(this.editWorkflowJobView);
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.controlWorkflowJobView.isDestroyed = false;
+        this.layoutView.showView(this.controlWorkflowJobView);
     }
 
     /**

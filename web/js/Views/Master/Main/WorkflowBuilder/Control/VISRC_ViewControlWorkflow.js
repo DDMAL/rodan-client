@@ -6,9 +6,9 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../../Shared/VISRC_Events';
 
 /**
- * This class represents the view for editing a workflow job.
+ * This class represents the view for editing a workflow.
  */
-class VISRC_ViewEditWorkflowJob extends Marionette.ItemView
+class VISRC_ViewControlWorkflow extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,8 +21,14 @@ class VISRC_ViewEditWorkflowJob extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            newWorkflowButton: '#button-new_workflow'
+        }
+        this.events = {
+            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+        };
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_editworkflowjob";
+        this.template = "#template-main_workflowbuilder_control_workflow";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +41,14 @@ class VISRC_ViewEditWorkflowJob extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel("rodan");
     }
+
+    /**
+     * Handle button new workflow.
+     */
+    _handleButtonNewWorkflow()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW);
+    }
 }
 
-export default VISRC_ViewEditWorkflowJob;
+export default VISRC_ViewControlWorkflow;

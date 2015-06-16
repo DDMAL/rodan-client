@@ -25,22 +25,6 @@ class VISRC_Workspace
         this._initializeRadio();
     }
 
-    /**
-     * Call this to activate the workspace.
-     */
-    activate()
-    {
-        console.log("activate");
-    }
-
-    /**
-     * Call this to deactivate the workspace.
-     */
-    deactivate()
-    {
-        console.log("here again");
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
