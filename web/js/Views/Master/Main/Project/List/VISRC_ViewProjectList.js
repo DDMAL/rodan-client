@@ -24,6 +24,12 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            buttonNewProject: '#button-new_project'
+        }
+        this.events = {
+            'click @ui.buttonNewProject': '_handleButtonNewProject'
+        };
         this.childViewContainer = 'tbody';
         this.template = "#template-main_project_list";
         this.childView = VISRC_ViewProjectListItem;
@@ -50,6 +56,15 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.uuid});
+    }
+
+    /**
+     * Handle button new project.
+     */
+    _handleButtonNewProject()
+    {
+        var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
+        this.rodanChannel.command(VISRC_Events.COMMAND__NEW_PROJECT, {name: "untitled"});
     }
 }
 

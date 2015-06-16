@@ -6,6 +6,7 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../Shared/VISRC_Events'
 import VISRC_ViewProjectList from './List/VISRC_ViewProjectList'
 import VISRC_ViewProject from './Individual/VISRC_ViewProject'
+import VISRC_Project from '../../../../Models/VISRC_Project';
 
 /**
  * 'Controller' for all Project views.
@@ -37,6 +38,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
         this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
         this.rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
         this.rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
     }
 
     /**
@@ -71,6 +73,17 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     _handleRequestProjectActive()
     {
         return this.activeProject != null ? this.activeProject : null;
+    }
+
+    /**
+     * Handle command for new project
+     */
+    _handleCommandNewProject(aReturn)
+    {
+        // Note - we have to create this way since a collection add requires some attributes to be set
+        // that aren't set until the instance is created on the database.
+        var project = new VISRC_Project(aReturn);
+        project.save();
     }
 }
 

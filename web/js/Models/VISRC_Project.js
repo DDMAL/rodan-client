@@ -18,6 +18,7 @@ class VISRC_Project extends VISRC_BaseModel
     constructor(data)
     {
         this.idAttribute = 'uuid';
+        this.url = "http://132.206.14.136/projects/";
         super(data);
     }
 
