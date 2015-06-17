@@ -78,8 +78,9 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
     {
         this._workflowJob = aReturn.workflowjob;
         this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aReturn);
+        this._inputPortListView.collection = this._workflowJob.get("input_ports");
+        this._outputPortListView.collection = this._workflowJob.get("output_ports");
     }
-
 }
 
 export default VISRC_LayoutViewControlWorkflowJob;

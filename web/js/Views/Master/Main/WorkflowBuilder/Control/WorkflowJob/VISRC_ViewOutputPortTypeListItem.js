@@ -23,11 +23,14 @@ class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            buttonNewOutputPort: '#button-new_outputport'
+        }
+        this.events = {
+            'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
+        };
         this.template = "#template-main_workflowbuilder_control_outputporttype_list_item";
         this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
 
         super(aParameters);
     }
@@ -44,11 +47,11 @@ class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles click.
+     * Handles output port add.
      */
-    _handleClick()
+    _handleButtonNewOutputPort()
     {
-        console.log("click");
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model});
     }
 }
 

@@ -25,9 +25,6 @@ class VISRC_ViewOutputPortListItem extends Marionette.ItemView
         };
         this.template = "#template-main_workflowbuilder_control_outputport_list_item";
         this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
 
         super(aParameters);
     }
@@ -41,15 +38,6 @@ class VISRC_ViewOutputPortListItem extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-    }
-
-    /**
-     * Handles click.
-     */
-    _handleClick()
-    {
-        console.log("click");
-        //this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
     }
 }
 

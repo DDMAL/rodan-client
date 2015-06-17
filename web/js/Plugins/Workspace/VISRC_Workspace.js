@@ -21,7 +21,7 @@ class VISRC_Workspace
     initialize(aCanvasElementId)
     {
         paper.setup(aCanvasElementId);
-
+        this._workflowJobMap = {};
         this._initializeRadio();
     }
 
@@ -34,19 +34,8 @@ class VISRC_Workspace
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW, aReturn => this._handleCommandAddWorkflowItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
-    }
-
-    /**
-     * Handle add.
-     */
-    _handleEventAddWorkflowItem(aReturn)
-    {
-        console.log("workspace - added workflow");
-        // TODO - refactor all ofo this
-     //   var test = new VISRC_WorkflowJobItem({model: aReturn.job});
-       // paper.view.draw();
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, aReturn => this._handleCommandUpdateWorkflowJobItem(aReturn));
     }
 
     /**
@@ -54,9 +43,47 @@ class VISRC_Workspace
      */
     _handleCommandAddWorkflowJobItem(aReturn)
     {
-        // TODO - refactor all ofo this
-        var workflowJob = new VISRC_WorkflowJobItem({model: aReturn.model});
+        this._createWorkflowJobItem(aReturn.model);
         paper.view.draw();
+    }
+
+    /**
+     * Handle workflow job update.
+     */
+    _handleCommandUpdateWorkflowJobItem(aReturn)
+    {
+        this._updateWorkflowJobItem(aReturn.workflowjob);
+    }
+
+    /**
+     * Creates a workflow job item and adds it to the map.
+     */
+    _createWorkflowJobItem(aModel)
+    {
+        var workflowJobItem = new VISRC_WorkflowJobItem({model: aModel});
+        this._workflowJobMap[aModel.cid] = workflowJobItem;
+    }
+
+    /**
+     * Updates an individual workflow job item. Passes associated workflow job.
+     */
+    _updateWorkflowJobItem(aWorkflowJob)
+    {
+        if (aWorkflowJob.cid in this._workflowJobMap)
+        {
+            this._workflowJobMap[aWorkflowJob.cid].update();
+        }
+    }
+
+    /**
+     * Updates all workflow jobs.
+     */
+    _updateWorkflowJobItems()
+    {
+        for (var key in this._workflowJobMap)
+        {
+            this._workflowJobMap[key].update();
+        } 
     }
 }
 

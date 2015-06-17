@@ -160,7 +160,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _createWorkflow(aProject)
     {
-        var workflow =  new VISRC_Workflow({project: aProject.attributes.url, name: "untitled"});
+        var workflow =  new VISRC_Workflow({project: aProject.get("url"), name: "untitled"});
         workflow.save();
         return workflow;
     }
@@ -170,7 +170,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _createWorkflowJob(aJob, aWorkflow)
     {
-        var workflowJob = new VISRC_WorkflowJob({job: aJob.attributes.url, workflow: this._workflow.attributes.url});
+        var workflowJob = new VISRC_WorkflowJob({job: aJob.get("url"), workflow: this._workflow.get("url")});
         workflowJob.save();
         return workflowJob;
     }

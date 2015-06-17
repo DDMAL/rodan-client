@@ -38,6 +38,18 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this._paperItem.onMouseUp = aEvent => this._handleMouseUp(aEvent);
         this._paperItem.onMouseMove = aEvent => this._handleMouseMove(aEvent);
         this._paperItem.onClick = aEvent => this._handleMouseClick(aEvent);
+
+        this._inputPortMap = {};
+
+        this._updateInputPorts();
+    }
+
+    /**
+     * Update.
+     */
+    update()
+    {
+        this._updateInputPorts();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -50,6 +62,48 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     {
         this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: this._associatedModel});
     }
+
+    /**
+     * Updates the input ports.
+     */
+    _updateInputPorts()
+    {
+        // Check for input ports.
+        var inputPorts = this._associatedModel.get("input_ports");
+        if (inputPorts == null)
+        {
+            return;
+        }
+
+        // Check if we've drawn for each.
+        for (var i = 0; i < inputPorts.length; i++)
+        {
+            var inputPort = inputPorts.at(i);
+            if (!(inputPort.cid in this._inputPortMap))
+            {
+                console.log("NEED TO START DRAWING HERE!!! TODO");
+            }
+        }
+    }
+
+    /**
+     * Draws input ports.
+     */
+  /*  _drawInputPorts()
+    {
+        var canvasWidth = paper.view.viewSize.width;
+        var canvasHeight = paper.view.viewSize.height;
+        var width = canvasWidth * 0.01;
+        var height = canvasHeight * 0.007;
+        var size = new paper.Size(width, height).floor();
+        var point = new paper.Point(10, 10);
+        var test = new paper.Path.Rectangle(point, size);
+        test.strokeColor = 'black';
+        test.strokeWidth = 2;
+        test.strokeJoin = 'round';
+        test.fillColor = '#ff0000';
+        this._paperItem.addChild(test);
+    }*/
 }
 
 export default VISRC_WorkflowJobItem;

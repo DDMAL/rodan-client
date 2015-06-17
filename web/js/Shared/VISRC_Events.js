@@ -23,10 +23,12 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW',  // Called when Workflow needs to be created. No pass.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: VISRC_Job}.
     COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT: 'COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT',   // Called when input port needs to be added to workflow job. Passes {job: VISRC_InputPortType}.
+    COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT',   // Called when output port needs to be added to workflow job. Passes {job: VISRC_OutputPortType}.
 
     // Workspace commands. These events tell the workspace what needs to be done. The WorkflowBuilder sends these commands.
     COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW: 'COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
     COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: VISRC_WorkflowJob}.
+    COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB: 'COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be updated. Passes {workflowJob: VISRC_WorkflowJob}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // EVENTS

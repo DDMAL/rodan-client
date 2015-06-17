@@ -8,7 +8,7 @@ import VISRC_BaseModel from './VISRC_BaseModel';
 /**
  * InputPort.
  */
-class VISRC_InputPort extends VISRC_BaseModel
+class VISRC_OutputPort extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,7 +19,7 @@ class VISRC_InputPort extends VISRC_BaseModel
     constructor(data)
     {
         this.idAttribute = 'uuid';
-        this.url = VISRC_Configuration.server + "/inputports/";
+        this.url = VISRC_Configuration.server + "/outputports/";
         super(data);
     }
 
@@ -33,4 +33,4 @@ class VISRC_InputPort extends VISRC_BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_InputPort;
+export default VISRC_OutputPort;

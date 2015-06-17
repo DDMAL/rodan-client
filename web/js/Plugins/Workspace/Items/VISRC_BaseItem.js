@@ -35,6 +35,15 @@ class VISRC_BaseItem
         console.log("This must be defined in sub-class.");
     }
 
+    /**
+     * Abstract method. Update.
+     */
+    update()
+    {
+        // TODO - better way to do abstract methods
+        console.log("This must be defined in sub-class.");
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
