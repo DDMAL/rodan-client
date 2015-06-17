@@ -4,12 +4,12 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../../Shared/VISRC_Events';
-import VISRC_InputPort from '../../../../../../Models/VISRC_InputPort';
+import VISRC_ViewOutputPortTypeListItem from './VISRC_ViewOutputPortTypeListItem';
 
 /**
- * This class represents the view for editing a workflow job.
+ * This class represents a list of output port types.
  */
-class VISRC_ViewWorkflowJob extends Marionette.ItemView
+class VISRC_ViewOutputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -22,9 +22,11 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.model = aParameters.workflowjob;
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflowjob_individual";
+        this.template = "#template-main_workflowbuilder_control_outputporttype_list";
+        this.childView = VISRC_ViewOutputPortTypeListItem;
+        this.childViewContainer = 'tbody';
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_OUTPUTPORTTYPE);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -36,26 +38,16 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventWorkflowJobSelected(aReturn));
     }
 
     /**
-     * Create input port
+     * Handle workflow job selection.
      */
-    _handleCommandAddInputPort(aPass)
+    _handleEventWorkflowJobSelected(aReturn)
     {
-        var inputPort = this._createInputPort(aPass.inputporttype, this.model);
-    }
-
-    /**
-     * Create workflow job.
-     */
-    _createInputPort(aInputPortType, aWorkflowJob)
-    {
-        var inputPort = new VISRC_InputPort({input_port_type: aInputPortType.attributes.url, workflow_job: aWorkflowJob.attributes.url});
-        inputPort.save();
-        return inputPort;
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_OUTPUTPORTTYPES, {job: aReturn.workflowjob.getJobUuid()});
     }
 }
 
-export default VISRC_ViewWorkflowJob;
+export default VISRC_ViewOutputPortTypeList;

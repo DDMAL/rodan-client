@@ -7,7 +7,9 @@ import VISRC_Configuration from './VISRC_Configuration';
 import VISRC_ControllerAuthentication from './Controllers/VISRC_ControllerAuthentication';
 import VISRC_ControllerServer from './Controllers/VISRC_ControllerServer';
 import VISRC_Events from './Shared/VISRC_Events';
+import VISRC_InputPortTypeCollection from './Collections/VISRC_InputPortTypeCollection';
 import VISRC_JobCollection from './Collections/VISRC_JobCollection';
+import VISRC_OutputPortTypeCollection from './Collections/VISRC_OutputPortTypeCollection';
 import VISRC_LayoutViewMain from './Views/Master/Main/VISRC_LayoutViewMain';
 import VISRC_LayoutViewNavigation from './Views/Master/Navigation/VISRC_LayoutViewNavigation';
 import VISRC_ProjectCollection from './Collections/VISRC_ProjectCollection';
@@ -84,7 +86,9 @@ class VISRC_Application extends Marionette.Application
      */
     _initializeCollections()
     {
+        this.inputPortTypeCollection = new VISRC_InputPortTypeCollection();
         this.jobCollection = new VISRC_JobCollection();
+        this.outputPortTypeCollection = new VISRC_OutputPortTypeCollection();
         this.projectCollection = new VISRC_ProjectCollection();
         this.resourceCollection = new VISRC_ResourceCollection();
         this.runJobCollection = new VISRC_RunJobCollection();

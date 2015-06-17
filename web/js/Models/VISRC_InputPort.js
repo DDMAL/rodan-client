@@ -6,9 +6,9 @@ import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
- * TODO docs.
+ * InputPort.
  */
-class VISRC_Project extends VISRC_BaseModel
+class VISRC_InputPort extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,7 +19,7 @@ class VISRC_Project extends VISRC_BaseModel
     constructor(data)
     {
         this.idAttribute = 'uuid';
-        this.url = VISRC_Configuration.server + "/projects/";
+        this.url = VISRC_Configuration.server + "/inputports/";
         super(data);
     }
 
@@ -28,4 +28,4 @@ class VISRC_Project extends VISRC_BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_Project;
+export default VISRC_InputPort;

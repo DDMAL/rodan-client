@@ -2,6 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 
+import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
@@ -18,7 +19,7 @@ class VISRC_Workflow extends VISRC_BaseModel
     constructor(aParameters)
     {
         this.idAttribute = 'uuid';
-        this.url = "http://132.206.14.136/workflows/";
+        this.url = VISRC_Configuration.server + "/workflows/";
         super(aParameters);
     }
 

@@ -5,6 +5,11 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../Shared/VISRC_Events';
 import VISRC_ViewWorkflowJob from './WorkflowJob/VISRC_ViewWorkflowJob';
+import VISRC_ViewInputPortList from './WorkflowJob/VISRC_ViewInputPortList';
+import VISRC_ViewInputPortTypeList from './WorkflowJob/VISRC_ViewInputPortTypeList';
+import VISRC_ViewOutputPortList from './WorkflowJob/VISRC_ViewOutputPortList';
+import VISRC_ViewOutputPortTypeList from './WorkflowJob/VISRC_ViewOutputPortTypeList';
+
 /**
  * This class represents the view for editing workflowjobs.
  */
@@ -37,7 +42,10 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
     onShow()
     {
         this.regionControlWorkflowJob.show(this._viewWorkflowJob, {preventDestroy: true});
-        // show other stuff...
+        this.regionControlInputPortTypes.show(this._inputPortTypeListView, {preventDestroy: true});
+        this.regionControlInputPorts.show(this._inputPortListView, {preventDestroy: true});
+        this.regionControlOutputPortTypes.show(this._outputPortTypeListView, {preventDestroy: true});
+        this.regionControlOutputPorts.show(this._outputPortListView, {preventDestroy: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +65,10 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _initializeViews()
     {
+        this._inputPortTypeListView = new VISRC_ViewInputPortTypeList();
+        this._inputPortListView = new VISRC_ViewInputPortList();
+        this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList();
+        this._outputPortListView = new VISRC_ViewOutputPortList();
     }
 
     /**
@@ -64,7 +76,7 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleEventWorkflowJobSelected(aReturn)
     {
-        this._workflowJob = aReturn.workflowJob;
+        this._workflowJob = aReturn.workflowjob;
         this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aReturn);
     }
 
