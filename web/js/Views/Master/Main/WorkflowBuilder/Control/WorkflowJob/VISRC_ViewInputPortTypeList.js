@@ -26,7 +26,9 @@ class VISRC_ViewInputPortTypeList extends Marionette.CompositeView
         this.template = "#template-main_workflowbuilder_control_inputporttype_list";
         this.childView = VISRC_ViewInputPortTypeListItem;
         this.childViewContainer = 'tbody';
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_INPUTPORTTYPE);
+        var jobCollection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
+        this.collection = job.get("input_port_types");
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,17 +40,6 @@ class VISRC_ViewInputPortTypeList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventWorkflowJobSelected(aReturn));
-    }
-
-    /**
-     * Handle workflow job selection.
-     */
-    _handleEventWorkflowJobSelected(aReturn)
-    {
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_INPUTPORTTYPES, {job: aReturn.workflowjob.getJobUuid()});
-      //  var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-      //  this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWS, {project: project.id});
     }
 }
 

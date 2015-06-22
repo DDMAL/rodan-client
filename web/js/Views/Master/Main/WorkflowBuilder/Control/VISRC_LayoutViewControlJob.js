@@ -34,6 +34,9 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
      */
     onShow()
     {
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        this.viewJobList.isDestroyed = false;
         this.regionControlJobList.show(this.viewJobList, {preventDestroy: true});
     }
 

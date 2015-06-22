@@ -23,9 +23,25 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            buttonShowWorkflow: '#button-show_workflow'
+        }
+        this.events = {
+            'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow'
+        };
         this.model = aParameters.workflowjob;
         this._initializeRadio();
         this.template = "#template-main_workflowbuilder_control_workflowjob_individual";
+    }
+
+    /**
+     * Before destroy, detatch from radio.
+     */
+    onBeforeDestroy(aParameters)
+    {
+        this.rodanChannel.stopComplying(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT);
+        this.rodanChannel.stopComplying(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT);
+        this.rodanChannel.stopComplying(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +55,15 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
+    }
+
+    /**
+     * Handle button show workflow.
+     */
+    _handleButtonShowWorkflow()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_SHOW_JOBCONTROLVIEW, {});
     }
 
     /**
@@ -60,6 +85,15 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
     }
 
     /**
+     * Delete input port
+     */
+    _handleCommandDeleteInputPort(aPass)
+    {
+        // TODO - need to check if too many input ports
+        this._deleteInputPort(aPass.inputport);
+    }
+
+    /**
      * Create input port.
      */
     _createInputPort(aInputPortType)
@@ -78,6 +112,16 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         var port = new VISRC_OutputPort({output_port_type: aOutputPortType.get("url"), workflow_job: this.model.get("url")});
         port.save();
         this.model.get("output_ports").add(port);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
+    }
+
+    /**
+     * Delete input port.
+     */
+    _deleteInputPort(aInputPort)
+    {
+        aInputPort.destroy();
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
     }
 }
 

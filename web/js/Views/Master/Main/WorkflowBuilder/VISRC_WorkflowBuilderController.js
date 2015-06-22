@@ -26,6 +26,11 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
+        this.addRegions({
+            regionControl: "#region-main_workflowbuilder_control"
+        });
+        this.template = "#template-main_workflowbuilder";
+
         this._initializeViews();
         this._initializeRadio();
         this._workflow = null;
@@ -44,6 +49,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SHOW_JOBCONTROLVIEW, () => this._handleCommandShowControlJobView());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
@@ -53,7 +59,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
+        //this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
         this.controlWorkflowView = new VISRC_ViewControlWorkflow();
         this.controlJobView = new VISRC_LayoutViewControlJob();
         this.controlWorkflowJobView = new VISRC_LayoutViewControlWorkflowJob();
@@ -63,6 +69,18 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 // PRIVATE METHODS - view controls
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
+     * TODO
+     */
+    _showView(aView)
+    {
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        aView.isDestroyed = false;
+        this.regionControl.show(aView, {preventDestroy: true});
+    }
+
+    /**
      * Handle selection.
      */
     _handleEventBuilderSelected(aReturn)
@@ -71,17 +89,17 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
 
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
 
         // Get the workflow.
         this._workflow = aReturn.workflow;
         if (this._workflow != null)
         {
-            this._showJobControlView();
+            this._showView(this.controlJobView);
         }
         else
         {
-            this._showWorkflowControlView();
+            this._showView(this.controlWorkflowView);
         }
 
         // Initialize the workspace.
@@ -89,14 +107,21 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     }
     
     /**
-     * Handle command add workflow.
+     * Handle command show workflow.
      */
     _handleCommandAddWorkflow()
     {
         var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
         this._workflow = this._createWorkflow(project);
-
-        this._showJobControlView();
+        this._showView(this.controlJobView);
+    }
+    
+    /**
+     * Handle command show job control view.
+     */
+    _handleCommandShowControlJobView()
+    {
+        this._showView(this.controlJobView);
     }
 
     /**
@@ -113,48 +138,12 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleEventEditWorkflowJob(aReturn)
     {
-        this._showWorkflowJobControlView();
+        this._showView(this.controlWorkflowJobView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Show workflow control view.
-     */
-    _showWorkflowControlView()
-    {
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.controlWorkflowView.isDestroyed = false;
-        this.layoutView.showView(this.controlWorkflowView);
-    }
-
-    /**
-     * Show job control view.
-     */
-    _showJobControlView()
-    {
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.controlJobView.isDestroyed = false;
-        this.layoutView.showView(this.controlJobView);
-    }
-
-    /**
-     * Show workflow job control view.
-     */
-    _showWorkflowJobControlView()
-    {
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.controlWorkflowJobView.isDestroyed = false;
-        this.layoutView.showView(this.controlWorkflowJobView);
-    }
-
     /**
      * Create workflow.
      */

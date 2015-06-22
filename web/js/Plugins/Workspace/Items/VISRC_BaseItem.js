@@ -70,19 +70,6 @@ class VISRC_BaseItem
     {
         this._selected = false;
     }
-
-    /**
-     * Handles mouse move.
-     * TODO - should probably be redone...mouse can escape
-     */
-    _handleMouseMove(aEvent)
-    {
-        if (this._selected)
-        {
-            this._paperItem.position.x += aEvent.delta.x;
-            this._paperItem.position.y += aEvent.delta.y;
-        }
-    }
 }
 
 export default VISRC_BaseItem;

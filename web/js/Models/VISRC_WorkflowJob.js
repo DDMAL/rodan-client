@@ -23,6 +23,8 @@ class VISRC_WorkflowJob extends VISRC_BaseModel
         this.idAttribute = 'uuid';
         this.url = VISRC_Configuration.server + "/workflowjobs/";
         super(aParameters);
+        this.set("input_ports", new VISRC_InputPortCollection(aParameters.input_ports));
+        this.set("output_ports", new VISRC_OutputPortCollection(aParameters.output_ports));
     }
 
     defaults()

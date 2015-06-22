@@ -31,7 +31,6 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlOutputPorts: "#region-main_workflowbuilder_control_workflowjob_outputports"
         });
         this._initializeRadio();
-        this._initializeViews();
         this._workflowJob = null;
         this.template = "#template-main_workflowbuilder_control_workflowjob";
     }
@@ -41,11 +40,11 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     onShow()
     {
-        this.regionControlWorkflowJob.show(this._viewWorkflowJob, {preventDestroy: true});
-        this.regionControlInputPortTypes.show(this._inputPortTypeListView, {preventDestroy: true});
-        this.regionControlInputPorts.show(this._inputPortListView, {preventDestroy: true});
-        this.regionControlOutputPortTypes.show(this._outputPortTypeListView, {preventDestroy: true});
-        this.regionControlOutputPorts.show(this._outputPortListView, {preventDestroy: true});
+        this.regionControlWorkflowJob.show(this._viewWorkflowJob);
+        this.regionControlInputPortTypes.show(this._inputPortTypeListView);
+        this.regionControlInputPorts.show(this._inputPortListView);
+        this.regionControlOutputPortTypes.show(this._outputPortTypeListView);
+        this.regionControlOutputPorts.show(this._outputPortListView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -61,25 +60,23 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
     }
 
     /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
-        this._inputPortTypeListView = new VISRC_ViewInputPortTypeList();
-        this._inputPortListView = new VISRC_ViewInputPortList();
-        this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList();
-        this._outputPortListView = new VISRC_ViewOutputPortList();
-    }
-
-    /**
      * Handle workflowjob selection.
      */
     _handleEventWorkflowJobSelected(aReturn)
     {
+        // Create new workflow job view.
         this._workflowJob = aReturn.workflowjob;
         this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aReturn);
-        this._inputPortListView.collection = this._workflowJob.get("input_ports");
-        this._outputPortListView.collection = this._workflowJob.get("output_ports");
+
+        // Create new input port and output port views.
+        // We pass the workflow job so the views' initializers can setup their collections.
+        this._inputPortListView = new VISRC_ViewInputPortList(aReturn);
+        this._outputPortListView = new VISRC_ViewOutputPortList(aReturn);
+
+        // Create new port type lists. We pass the workflow job, which has info on the associated job.
+        // The list views will do the rest.
+        this._inputPortTypeListView = new VISRC_ViewInputPortTypeList(aReturn);
+        this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList(aReturn);
     }
 }
 

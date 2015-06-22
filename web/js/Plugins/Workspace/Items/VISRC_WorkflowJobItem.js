@@ -21,18 +21,19 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     {
         super(aParameters);
 
-        // TODO - refactor all ofo this
+        // Set paper paremeters.
+        // TODO no magic numbers
         var canvasWidth = paper.view.viewSize.width;
         var canvasHeight = paper.view.viewSize.height;
-        var width = canvasWidth * 0.1;
-        var height = canvasHeight * 0.07;
+        var width = canvasWidth * 0.2;
+        var height = canvasHeight * 0.1;
         var size = new paper.Size(width, height).floor();
         var point = new paper.Point(10, 10);
         this._paperItem = new paper.Path.Rectangle(point, size);
         this._paperItem.strokeColor = 'black';
         this._paperItem.strokeWidth = 2;
         this._paperItem.strokeJoin = 'round';
-        this._paperItem.fillColor = '#4444ff';
+        this._paperItem.fillColor = '#ff0000';
 
         this._paperItem.onMouseDown = aEvent => this._handleMouseDown(aEvent);
         this._paperItem.onMouseUp = aEvent => this._handleMouseUp(aEvent);
@@ -40,8 +41,14 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this._paperItem.onClick = aEvent => this._handleMouseClick(aEvent);
 
         this._inputPortMap = {};
+        this._paperGroupInputPorts = new paper.Group();
+        this._paperItem.addChild(this._paperGroupInputPorts);
 
-        this._updateInputPorts();
+        this._outputPortMap = {};
+        this._paperGroupOutputPorts = new paper.Group();
+        this._paperItem.addChild(this._paperGroupOutputPorts);
+
+        this.update();
     }
 
     /**
@@ -50,6 +57,8 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     update()
     {
         this._updateInputPorts();
+        this._updateOutputPorts();
+        paper.view.draw();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -64,46 +73,140 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     }
 
     /**
+     * Handles mouse move.
+     * TODO - should probably be redone...mouse can escape
+     */
+    _handleMouseMove(aEvent)
+    {
+        if (this._selected)
+        {
+            this._paperItem.position.x += aEvent.delta.x;
+            this._paperItem.position.y += aEvent.delta.y;
+            this._paperGroupInputPorts.position.x += aEvent.delta.x;
+            this._paperGroupInputPorts.position.y += aEvent.delta.y;
+            this._paperGroupOutputPorts.position.x += aEvent.delta.x;
+            this._paperGroupOutputPorts.position.y += aEvent.delta.y;
+        }
+    }
+
+    /**
      * Updates the input ports.
      */
     _updateInputPorts()
     {
         // Check for input ports.
-        var inputPorts = this._associatedModel.get("input_ports");
-        if (inputPorts == null)
+        var ports = this._associatedModel.get("input_ports");
+        if (ports == null)
         {
             return;
         }
 
         // Check if we've drawn for each.
-        for (var i = 0; i < inputPorts.length; i++)
+        for (var i = 0; i < ports.length; i++)
         {
-            var inputPort = inputPorts.at(i);
+            var inputPort = ports.at(i);
             if (!(inputPort.cid in this._inputPortMap))
             {
-                console.log("NEED TO START DRAWING HERE!!! TODO");
+                // Create and then add to map.
+                var port = this._createPortItem(this._paperGroupInputPorts, inputPort);
+                this._inputPortMap[inputPort.cid] = port;
             }
         }
+
+        // Update positions.
+        this._positionPortItems(this._paperGroupInputPorts, this._paperItem.bounds.top);
     }
 
     /**
-     * Draws input ports.
+     * Updates the output ports.
      */
-  /*  _drawInputPorts()
+    _updateOutputPorts()
     {
-        var canvasWidth = paper.view.viewSize.width;
-        var canvasHeight = paper.view.viewSize.height;
-        var width = canvasWidth * 0.01;
-        var height = canvasHeight * 0.007;
+        // Check for input ports.
+        var ports = this._associatedModel.get("output_ports");
+        if (ports == null)
+        {
+            return;
+        }
+
+        // Check if we've drawn for each.
+        for (var i = 0; i < ports.length; i++)
+        {
+            var outputPort = ports.at(i);
+            if (!(outputPort.cid in this._outputPortMap))
+            {
+                // Create and then add to map.
+                var port = this._createPortItem(this._paperGroupOutputPorts, outputPort);
+                this._outputPortMap[outputPort.cid] = port;
+            }
+        }
+
+        // Update positions.
+        this._positionPortItems(this._paperGroupOutputPorts, this._paperItem.bounds.bottom);
+    }
+
+    /**
+     * Creates port item and adds it to associated group.
+     */
+    _createPortItem(aGroup, aModel)
+    {
+        var width = this._paperItem.bounds.width * 0.1;
+        var height = this._paperItem.bounds.height * 0.3;
         var size = new paper.Size(width, height).floor();
-        var point = new paper.Point(10, 10);
-        var test = new paper.Path.Rectangle(point, size);
-        test.strokeColor = 'black';
-        test.strokeWidth = 2;
-        test.strokeJoin = 'round';
-        test.fillColor = '#ff0000';
-        this._paperItem.addChild(test);
-    }*/
+        var point = new paper.Point(0, 0);
+        var port = new paper.Path.Rectangle(point, size);
+        port.strokeColor = 'black';
+        port.strokeWidth = 2;
+        port.strokeJoin = 'round';
+        port.fillColor = '#ff0000';
+        port._associatedModel = aModel;
+        aGroup.addChild(port);
+        return port;
+    }
+
+    /**
+     * Creates a simple input port paper item.
+     */
+    _createInputPortItem(aInputPort)
+    {
+        var width = this._paperItem.bounds.width * 0.1;
+        var height = this._paperItem.bounds.height * 0.3;
+        var size = new paper.Size(width, height).floor();
+        var point = new paper.Point(0, 0);
+        var port = new paper.Path.Rectangle(point, size);
+        port.strokeColor = 'black';
+        port.strokeWidth = 2;
+        port.strokeJoin = 'round';
+        port.fillColor = '#ff0000';
+        port._associatedModel = aInputPort;
+        this._paperGroupInputPorts.addChild(port);
+        return port;
+    }
+
+    /**
+     * Positions ports.
+     */
+    _positionPortItems(aGroup, aPositionY)
+    {
+        if (aGroup.isEmpty())
+        {
+            return;
+        }
+
+        // Get position parameters.
+        var offsetX = aGroup.children[0].bounds.width;
+        var portsWidth = aGroup.children.length * aGroup.children[0].bounds.width;
+        var farLeft = this._paperItem.position.x - (portsWidth / 2);
+
+        for (var i = 0; i < aGroup.children.length; i++)
+        {
+            var port = aGroup.children[i];
+            var positionX = (farLeft + (offsetX * (i + 1))) - (aGroup.children[i].bounds.width / 2);
+            var positionY = aPositionY;
+            var newPosition = new paper.Point(positionX, positionY);
+            port.position = newPosition;
+        }
+    }
 }
 
 export default VISRC_WorkflowJobItem;

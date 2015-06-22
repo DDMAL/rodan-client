@@ -23,6 +23,12 @@ class VISRC_ViewOutputPortListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            buttonDelete: '#button-delete'
+        }
+        this.events = {
+            'click @ui.buttonDelete': '_handleButtonDelete'
+        };
         this.template = "#template-main_workflowbuilder_control_outputport_list_item";
         this.tagName = 'tr';
 
@@ -38,6 +44,14 @@ class VISRC_ViewOutputPortListItem extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle delete.
+     */
+    _handleButtonDelete()
+    {
+        
     }
 }
 
