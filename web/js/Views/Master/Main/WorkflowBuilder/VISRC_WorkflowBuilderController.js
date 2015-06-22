@@ -4,7 +4,6 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
-import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
 import VISRC_ViewControlWorkflow from './Control/VISRC_ViewControlWorkflow';
 import VISRC_LayoutViewControlJob from './Control/VISRC_LayoutViewControlJob';
 import VISRC_LayoutViewControlWorkflowJob from './Control/VISRC_LayoutViewControlWorkflowJob';
