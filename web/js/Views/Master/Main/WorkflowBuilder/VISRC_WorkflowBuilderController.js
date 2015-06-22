@@ -58,10 +58,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        //this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
         this.controlWorkflowView = new VISRC_ViewControlWorkflow();
         this.controlJobView = new VISRC_LayoutViewControlJob();
-        this.controlWorkflowJobView = new VISRC_LayoutViewControlWorkflowJob();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -137,6 +135,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleEventEditWorkflowJob(aReturn)
     {
+        // TODO - not reusing this view...should find more efficient way
+        this.controlWorkflowJobView = new VISRC_LayoutViewControlWorkflowJob(aReturn);
         this._showView(this.controlWorkflowJobView);
     }
 

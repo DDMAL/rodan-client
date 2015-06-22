@@ -3,7 +3,6 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events';
 import VISRC_ViewWorkflowJob from './WorkflowJob/VISRC_ViewWorkflowJob';
 import VISRC_ViewInputPortList from './WorkflowJob/VISRC_ViewInputPortList';
 import VISRC_ViewInputPortTypeList from './WorkflowJob/VISRC_ViewInputPortTypeList';
@@ -12,6 +11,7 @@ import VISRC_ViewOutputPortTypeList from './WorkflowJob/VISRC_ViewOutputPortType
 
 /**
  * This class represents the view for editing workflowjobs.
+ * It just holds a bunch of views and doesn't do much than that.
  */
 class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
 {
@@ -30,8 +30,8 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlOutputPortTypes: "#region-main_workflowbuilder_control_workflowjob_outputporttypes",
             regionControlOutputPorts: "#region-main_workflowbuilder_control_workflowjob_outputports"
         });
-        this._initializeRadio();
-        this._workflowJob = null;
+        this._workflowJob = aParameters.workflowjob;
+        this._initializeViews(aParameters);
         this.template = "#template-main_workflowbuilder_control_workflowjob";
     }
 
@@ -51,32 +51,22 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventWorkflowJobSelected(aReturn));
-    }
-
-    /**
      * Handle workflowjob selection.
      */
-    _handleEventWorkflowJobSelected(aReturn)
+    _initializeViews(aParameters)
     {
         // Create new workflow job view.
-        this._workflowJob = aReturn.workflowjob;
-        this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aReturn);
+        this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aParameters);
 
         // Create new input port and output port views.
         // We pass the workflow job so the views' initializers can setup their collections.
-        this._inputPortListView = new VISRC_ViewInputPortList(aReturn);
-        this._outputPortListView = new VISRC_ViewOutputPortList(aReturn);
+        this._inputPortListView = new VISRC_ViewInputPortList(aParameters);
+        this._outputPortListView = new VISRC_ViewOutputPortList(aParameters);
 
         // Create new port type lists. We pass the workflow job, which has info on the associated job.
         // The list views will do the rest.
-        this._inputPortTypeListView = new VISRC_ViewInputPortTypeList(aReturn);
-        this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList(aReturn);
+        this._inputPortTypeListView = new VISRC_ViewInputPortTypeList(aParameters);
+        this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList(aParameters);
     }
 }
 
