@@ -40,11 +40,9 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this._paperItem.onMouseMove = aEvent => this._handleMouseMove(aEvent);
         this._paperItem.onClick = aEvent => this._handleMouseClick(aEvent);
 
-        this._inputPortMap = {};
         this._paperGroupInputPorts = new paper.Group();
         this._paperItem.addChild(this._paperGroupInputPorts);
 
-        this._outputPortMap = {};
         this._paperGroupOutputPorts = new paper.Group();
         this._paperItem.addChild(this._paperGroupOutputPorts);
 
@@ -94,6 +92,11 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
      */
     _updateInputPorts()
     {
+        // Empty.
+        // TODO - not efficient...rethink
+        this._paperGroupInputPorts.removeChildren();
+        this._inputPortMap = {};
+
         // Check for input ports.
         var ports = this._associatedModel.get("input_ports");
         if (ports == null)
@@ -122,6 +125,11 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
      */
     _updateOutputPorts()
     {
+        // Empty.
+        // TODO - not efficient...rethink
+        this._paperGroupOutputPorts.removeChildren();
+        this._outputPortMap = {};
+
         // Check for input ports.
         var ports = this._associatedModel.get("output_ports");
         if (ports == null)
@@ -161,25 +169,6 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         port.fillColor = '#ff0000';
         port._associatedModel = aModel;
         aGroup.addChild(port);
-        return port;
-    }
-
-    /**
-     * Creates a simple input port paper item.
-     */
-    _createInputPortItem(aInputPort)
-    {
-        var width = this._paperItem.bounds.width * 0.1;
-        var height = this._paperItem.bounds.height * 0.3;
-        var size = new paper.Size(width, height).floor();
-        var point = new paper.Point(0, 0);
-        var port = new paper.Path.Rectangle(point, size);
-        port.strokeColor = 'black';
-        port.strokeWidth = 2;
-        port.strokeJoin = 'round';
-        port.fillColor = '#ff0000';
-        port._associatedModel = aInputPort;
-        this._paperGroupInputPorts.addChild(port);
         return port;
     }
 

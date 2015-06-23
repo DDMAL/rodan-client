@@ -127,7 +127,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _handleCommandAddWorkflowJob(aReturn)
     {
         var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {model: workflowJob});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
     }
 
     /**

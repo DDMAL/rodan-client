@@ -51,7 +51,7 @@ class VISRC_ViewOutputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
     }
 }
 

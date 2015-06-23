@@ -56,6 +56,7 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass));
     }
 
     /**
@@ -89,8 +90,15 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
      */
     _handleCommandDeleteInputPort(aPass)
     {
-        // TODO - need to check if too many input ports
         this._deleteInputPort(aPass.inputport);
+    }
+
+    /**
+     * Delete output port
+     */
+    _handleCommandDeleteOutputPort(aPass)
+    {
+        this._deleteOutputPort(aPass.outputport);
     }
 
     /**
@@ -120,7 +128,30 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
      */
     _deleteInputPort(aInputPort)
     {
-        aInputPort.destroy();
+        try
+        {
+            aInputPort.destroy();
+        }
+        catch (aError)
+        {
+            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
+        }
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
+    }
+
+    /**
+     * Delete output port.
+     */
+    _deleteOutputPort(aPort)
+    {
+        try
+        {
+            aPort.destroy();
+        }
+        catch (aError)
+        {
+            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
+        }
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
     }
 }

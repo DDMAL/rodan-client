@@ -43,7 +43,7 @@ class VISRC_Workspace
      */
     _handleCommandAddWorkflowJobItem(aReturn)
     {
-        this._createWorkflowJobItem(aReturn.model);
+        this._createWorkflowJobItem(aReturn.workflowjob);
         paper.view.draw();
     }
 
