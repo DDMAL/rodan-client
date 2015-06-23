@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
-import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
@@ -16,11 +16,9 @@ class VISRC_Workflow extends VISRC_BaseModel
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize(aParameters)
     {
-        this.idAttribute = 'uuid';
-        this.url = VISRC_Configuration.server + "/workflows/";
-        super(aParameters);
+        this.routeName = "workflows";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

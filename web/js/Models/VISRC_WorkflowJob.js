@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
-import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_BaseModel from './VISRC_BaseModel';
 import VISRC_InputPortCollection from '../Collections/VISRC_InputPortCollection';
 import VISRC_OutputPortCollection from '../Collections/VISRC_OutputPortCollection';
@@ -18,13 +18,11 @@ class VISRC_WorkflowJob extends VISRC_BaseModel
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize(aParameters)
     {
-        this.idAttribute = 'uuid';
-        this.url = VISRC_Configuration.server + "/workflowjobs/";
-        super(aParameters);
         this.set("input_ports", new VISRC_InputPortCollection(aParameters.input_ports));
         this.set("output_ports", new VISRC_OutputPortCollection(aParameters.output_ports));
+        this.routeName = "workflowjobs";
     }
 
     defaults()

@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
-import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
@@ -16,11 +16,9 @@ class VISRC_Project extends VISRC_BaseModel
     /**
      * TODO docs
      */
-    constructor(data)
+    initialize(aParameters)
     {
-        this.idAttribute = 'uuid';
-        this.url = VISRC_Configuration.server + "/projects/";
-        super(data);
+        this.routeName = "projects";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

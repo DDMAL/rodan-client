@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_Events from '../Shared/VISRC_Events';
 import VISRC_InputPort from '../Models/VISRC_InputPort';
 
