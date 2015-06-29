@@ -21,30 +21,12 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     {
         super(aParameters);
 
-        // Set paper paremeters.
-        // TODO no magic numbers
-        var canvasWidth = paper.view.viewSize.width;
-        var canvasHeight = paper.view.viewSize.height;
-        var width = canvasWidth * 0.2;
-        var height = canvasHeight * 0.1;
-        var size = new paper.Size(width, height).floor();
-        var point = new paper.Point(10, 10);
-        this._paperItem = new paper.Path.Rectangle(point, size);
-        this._paperItem.strokeColor = 'black';
-        this._paperItem.strokeWidth = 2;
-        this._paperItem.strokeJoin = 'round';
-        this._paperItem.fillColor = '#ff0000';
-
-        this._paperItem.onMouseDown = aEvent => this._handleMouseDown(aEvent);
-        this._paperItem.onMouseUp = aEvent => this._handleMouseUp(aEvent);
-        this._paperItem.onMouseMove = aEvent => this._handleMouseMove(aEvent);
-        this._paperItem.onClick = aEvent => this._handleMouseClick(aEvent);
-
         this._paperGroupInputPorts = new paper.Group();
-        this._paperItem.addChild(this._paperGroupInputPorts);
-
+        this.addChild(this._paperGroupInputPorts);
         this._paperGroupOutputPorts = new paper.Group();
-        this._paperItem.addChild(this._paperGroupOutputPorts);
+        this.addChild(this._paperGroupOutputPorts);
+
+        this.onClick = aEvent => this._handleMouseClick(aEvent); // let it handle its own clicks
 
         this.update();
     }
@@ -54,9 +36,63 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
      */
     update()
     {
-        this._updateInputPorts();
-        this._updateOutputPorts();
-        paper.view.draw();
+        // TODO - magic number
+        this.fillColor = '#5555ff';
+        this._updatePortItems(this._paperGroupInputPorts);
+        this._updatePortItems(this._paperGroupOutputPorts);
+    }
+
+    /**
+     * Adds input port item.
+     */
+    addInputPortItem(aInputPortItem)
+    {
+        this._paperGroupInputPorts.addChild(aInputPortItem);
+        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+    }
+
+    /**
+     * Adds output port item.
+     */
+    addOutputPortItem(aOutputPortItem)
+    {
+        this._paperGroupOutputPorts.addChild(aOutputPortItem);
+        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
+    }
+
+    /**
+     * Deletes input port item.
+     */
+    deleteInputPortItem(aInputPortItem)
+    {
+        this._deletePortItem(this._paperGroupInputPorts, aInputPortItem);
+        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+    }
+
+    /**
+     * Deletes output port item.
+     */
+    deleteOutputPortItem(aOutputPortItem)
+    {
+        this._deletePortItem(this._paperGroupOutputPorts, aOutputPortItem);
+        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
+    }
+
+    /**
+     * Moves the item.
+     */
+    move(aDelta)
+    {
+        this.position.x += aDelta.x;
+        this.position.y += aDelta.y;
+        this._paperGroupInputPorts.position.x += aDelta.x;
+        this._paperGroupInputPorts.position.y += aDelta.y;
+        this._paperGroupOutputPorts.position.x += aDelta.x;
+        this._paperGroupOutputPorts.position.y += aDelta.y;
+
+        // We have to update the input ports.
+        this._updatePortItems(this._paperGroupInputPorts);
+        this._updatePortItems(this._paperGroupOutputPorts);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -68,108 +104,6 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     _handleMouseClick(aEvent)
     {
         this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: this._associatedModel});
-    }
-
-    /**
-     * Handles mouse move.
-     * TODO - should probably be redone...mouse can escape
-     */
-    _handleMouseMove(aEvent)
-    {
-        if (this._selected)
-        {
-            this._paperItem.position.x += aEvent.delta.x;
-            this._paperItem.position.y += aEvent.delta.y;
-            this._paperGroupInputPorts.position.x += aEvent.delta.x;
-            this._paperGroupInputPorts.position.y += aEvent.delta.y;
-            this._paperGroupOutputPorts.position.x += aEvent.delta.x;
-            this._paperGroupOutputPorts.position.y += aEvent.delta.y;
-        }
-    }
-
-    /**
-     * Updates the input ports.
-     */
-    _updateInputPorts()
-    {
-        // Empty.
-        // TODO - not efficient...rethink
-        this._paperGroupInputPorts.removeChildren();
-        this._inputPortMap = {};
-
-        // Check for input ports.
-        var ports = this._associatedModel.get("input_ports");
-        if (ports == null)
-        {
-            return;
-        }
-
-        // Check if we've drawn for each.
-        for (var i = 0; i < ports.length; i++)
-        {
-            var inputPort = ports.at(i);
-            if (!(inputPort.cid in this._inputPortMap))
-            {
-                // Create and then add to map.
-                var port = this._createPortItem(this._paperGroupInputPorts, inputPort);
-                this._inputPortMap[inputPort.cid] = port;
-            }
-        }
-
-        // Update positions.
-        this._positionPortItems(this._paperGroupInputPorts, this._paperItem.bounds.top);
-    }
-
-    /**
-     * Updates the output ports.
-     */
-    _updateOutputPorts()
-    {
-        // Empty.
-        // TODO - not efficient...rethink
-        this._paperGroupOutputPorts.removeChildren();
-        this._outputPortMap = {};
-
-        // Check for input ports.
-        var ports = this._associatedModel.get("output_ports");
-        if (ports == null)
-        {
-            return;
-        }
-
-        // Check if we've drawn for each.
-        for (var i = 0; i < ports.length; i++)
-        {
-            var outputPort = ports.at(i);
-            if (!(outputPort.cid in this._outputPortMap))
-            {
-                // Create and then add to map.
-                var port = this._createPortItem(this._paperGroupOutputPorts, outputPort);
-                this._outputPortMap[outputPort.cid] = port;
-            }
-        }
-
-        // Update positions.
-        this._positionPortItems(this._paperGroupOutputPorts, this._paperItem.bounds.bottom);
-    }
-
-    /**
-     * Creates port item and adds it to associated group.
-     */
-    _createPortItem(aGroup, aModel)
-    {
-        var width = this._paperItem.bounds.width * 0.1;
-        var height = this._paperItem.bounds.height * 0.3;
-        var size = new paper.Size(width, height).floor();
-        var point = new paper.Point(0, 0);
-        var port = new paper.Path.Rectangle(point, size);
-        port.strokeColor = 'black';
-        port.strokeWidth = 2;
-        port.strokeJoin = 'round';
-        port.fillColor = '#ff0000';
-        port._associatedModel = aModel;
-        aGroup.addChild(port);
-        return port;
     }
 
     /**
@@ -185,7 +119,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         // Get position parameters.
         var offsetX = aGroup.children[0].bounds.width;
         var portsWidth = aGroup.children.length * aGroup.children[0].bounds.width;
-        var farLeft = this._paperItem.position.x - (portsWidth / 2);
+        var farLeft = this.position.x - (portsWidth / 2);
 
         for (var i = 0; i < aGroup.children.length; i++)
         {
@@ -195,6 +129,33 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
             var newPosition = new paper.Point(positionX, positionY);
             port.position = newPosition;
         }
+    }
+
+    /**
+     * Updates port items.
+     */
+    _updatePortItems(aGroup)
+    {
+        for (var i = 0; i < aGroup.children.length; i++)
+        {
+            aGroup.children[i].update();
+        }
+    }
+
+    /**
+     * Deletes a port item.
+     */
+    _deletePortItem(aGroup, aPortItem)
+    {
+        for (var i = 0; i < aGroup.children.length; i++)
+        {
+            if (aPortItem == aGroup.children[i])
+            {
+                aGroup.removeChildren(i, i + 1);
+                return;
+            }
+        }
+        console.log("TODO - ERROR HERE!!!!!");
     }
 }
 

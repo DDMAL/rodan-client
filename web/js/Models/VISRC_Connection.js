@@ -4,12 +4,11 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_BaseModel from './VISRC_BaseModel';
-import VISRC_ConnectionCollection from '../Collections/VISRC_ConnectionCollection';
 
 /**
- * Represents a VIS Workflow model (i.e. a Rodan Workflow).
+ * Connection.
  */
-class VISRC_Workflow extends VISRC_BaseModel
+class VISRC_Connection extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,8 +18,7 @@ class VISRC_Workflow extends VISRC_BaseModel
      */
     initialize(aParameters)
     {
-        this.routeName = "workflows";
-        this.set("connections", new VISRC_ConnectionCollection());
+        this.routeName = "connections";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -28,4 +26,4 @@ class VISRC_Workflow extends VISRC_BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_Workflow;
+export default VISRC_Connection;

@@ -4,6 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
+import VISRC_Connection from '../../../../Models/VISRC_Connection';
 import VISRC_ViewControlWorkflow from './Control/VISRC_ViewControlWorkflow';
 import VISRC_LayoutViewControlJob from './Control/VISRC_LayoutViewControlJob';
 import VISRC_LayoutViewControlWorkflowJob from './Control/VISRC_LayoutViewControlWorkflowJob';
@@ -51,6 +52,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SHOW_JOBCONTROLVIEW, () => this._handleCommandShowControlJobView());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass));
     }
 
     /**
@@ -140,6 +142,14 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this._showView(this.controlWorkflowJobView);
     }
 
+    /**
+     * Handle add connection.
+     */
+    _handleCommandAddConnection(aPass)
+    {
+        this._createConnection(aPass.outputport, aPass.inputport);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +171,17 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         var workflowJob = new VISRC_WorkflowJob({job: aJob.get("url"), workflow: this._workflow.get("url")});
         workflowJob.save();
         return workflowJob;
+    }
+
+    /**
+     * Create connection.
+     */
+    _createConnection(aOutputPort, aInputPort)
+    {
+        var connection = new VISRC_Connection({input_port: aInputPort.get("url"), output_port: aOutputPort.get("url")});
+        connection.save();
+        this._workflow.get("connections").add(connection);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
     }
 }
 

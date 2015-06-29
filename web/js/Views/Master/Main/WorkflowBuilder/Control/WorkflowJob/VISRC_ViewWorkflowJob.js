@@ -109,7 +109,7 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         var port = new VISRC_InputPort({input_port_type: aInputPortType.get("url"), workflow_job: this.model.get("url")});
         port.save();
         this.model.get("input_ports").add(port);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_INPUTPORT, {workflowjob: this.model, inputport: port});
     }
 
     /**
@@ -120,30 +120,15 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         var port = new VISRC_OutputPort({output_port_type: aOutputPortType.get("url"), workflow_job: this.model.get("url")});
         port.save();
         this.model.get("output_ports").add(port);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT, {workflowjob: this.model, outputport: port});
     }
 
     /**
      * Delete input port.
      */
-    _deleteInputPort(aInputPort)
+    _deleteInputPort(aPort)
     {
-        try
-        {
-            aInputPort.destroy();
-        }
-        catch (aError)
-        {
-            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
-        }
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
-    }
-
-    /**
-     * Delete output port.
-     */
-    _deleteOutputPort(aPort)
-    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT, {workflowjob: this.model, inputport: aPort});
         try
         {
             aPort.destroy();
@@ -152,7 +137,22 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         {
             console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
         }
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_UPDATE_ITEM_WORKFLOWJOB, {workflowjob: this.model});
+    }
+
+    /**
+     * Delete output port.
+     */
+    _deleteOutputPort(aPort)
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT, {workflowjob: this.model, outputport: aPort});
+        try
+        {
+            aPort.destroy();
+        }
+        catch (aError)
+        {
+            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
+        }
     }
 }
 
