@@ -38,6 +38,8 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     {
         // TODO - magic number
         this.fillColor = '#5555ff';
+        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
         this._updatePortItems(this._paperGroupInputPorts);
         this._updatePortItems(this._paperGroupOutputPorts);
     }
@@ -48,7 +50,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     addInputPortItem(aInputPortItem)
     {
         this._paperGroupInputPorts.addChild(aInputPortItem);
-        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+        this.update();
     }
 
     /**
@@ -57,7 +59,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     addOutputPortItem(aOutputPortItem)
     {
         this._paperGroupOutputPorts.addChild(aOutputPortItem);
-        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
+        this.update();
     }
 
     /**
@@ -66,7 +68,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     deleteInputPortItem(aInputPortItem)
     {
         this._deletePortItem(this._paperGroupInputPorts, aInputPortItem);
-        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+        this.update();
     }
 
     /**
@@ -75,7 +77,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     deleteOutputPortItem(aOutputPortItem)
     {
         this._deletePortItem(this._paperGroupOutputPorts, aOutputPortItem);
-        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
+        this.update();
     }
 
     /**

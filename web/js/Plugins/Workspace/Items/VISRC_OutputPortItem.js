@@ -77,9 +77,9 @@ class VISRC_OutputPortItem extends VISRC_BaseItem
      */
     _destroyConnections()
     {
-        for (var i = 0; i < this._connectionItems.length; i++)
+        while (this._connectionItems.length > 0)
         {
-            this._connectionItems[i].destroy();
+            this._connectionItems[0].destroy();
         } 
         this._connectionItems = [];
     }
