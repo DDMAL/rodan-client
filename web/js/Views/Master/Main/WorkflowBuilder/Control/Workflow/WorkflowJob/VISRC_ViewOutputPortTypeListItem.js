@@ -3,32 +3,36 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view for editing a workflow.
+ * This class represents the view of an individual output port type list item.
  */
-class VISRC_ViewControlWorkflow extends Marionette.ItemView
+class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Basic constructor. ("initialize" doesn't seem to work.)
      */
-    initialize(aParameters)
+    constructor(aParameters)
     {
+        this._initializeRadio();
+
         this.modelEvents = {
             "all": "render"
         };
         this.ui = {
-            newWorkflowButton: '#button-new_workflow'
+            buttonNewOutputPort: '#button-new_outputport'
         }
         this.events = {
-            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+            'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
         };
-        this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflow";
+        this.template = "#template-main_workflowbuilder_control_outputporttype_list_item";
+        this.tagName = 'tr';
+
+        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,12 +47,12 @@ class VISRC_ViewControlWorkflow extends Marionette.ItemView
     }
 
     /**
-     * Handle button new workflow.
+     * Handles output port add.
      */
-    _handleButtonNewWorkflow()
+    _handleButtonNewOutputPort()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model});
     }
 }
 
-export default VISRC_ViewControlWorkflow;
+export default VISRC_ViewOutputPortTypeListItem;

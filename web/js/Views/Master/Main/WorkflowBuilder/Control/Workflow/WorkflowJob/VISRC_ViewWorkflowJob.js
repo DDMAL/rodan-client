@@ -3,9 +3,9 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events';
-import VISRC_InputPort from '../../../../../../Models/VISRC_InputPort';
-import VISRC_OutputPort from '../../../../../../Models/VISRC_OutputPort';
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events';
+import VISRC_InputPort from '../../../../../../../Models/VISRC_InputPort';
+import VISRC_OutputPort from '../../../../../../../Models/VISRC_OutputPort';
 
 /**
  * This class represents the view for editing a workflow job.

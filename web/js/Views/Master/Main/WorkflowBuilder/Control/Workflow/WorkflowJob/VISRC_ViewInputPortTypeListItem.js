@@ -3,12 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events'
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view of an individual output port type list item.
+ * This class represents the view of an individual input port type list item.
  */
-class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
+class VISRC_ViewInputPortTypeListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -24,12 +24,12 @@ class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
             "all": "render"
         };
         this.ui = {
-            buttonNewOutputPort: '#button-new_outputport'
+            buttonNewInputPort: '#button-new_inputport'
         }
         this.events = {
-            'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
+            'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
         };
-        this.template = "#template-main_workflowbuilder_control_outputporttype_list_item";
+        this.template = "#template-main_workflowbuilder_control_inputporttype_list_item";
         this.tagName = 'tr';
 
         super(aParameters);
@@ -47,12 +47,12 @@ class VISRC_ViewOutputPortTypeListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles output port add.
+     * Handles input port add.
      */
-    _handleButtonNewOutputPort()
+    _handleButtonNewInputPort()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model});
     }
 }
 
-export default VISRC_ViewOutputPortTypeListItem;
+export default VISRC_ViewInputPortTypeListItem;

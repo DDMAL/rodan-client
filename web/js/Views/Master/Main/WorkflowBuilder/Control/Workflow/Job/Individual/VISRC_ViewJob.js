@@ -3,36 +3,33 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events'
+import VISRC_Events from '../../../../../../../../Shared/VISRC_Events';
 
 /**
- * This class represents the view of an individual input port type list item.
+ * This class represents the view for a single Job.
  */
-class VISRC_ViewInputPortTypeListItem extends Marionette.ItemView
+class VISRC_ViewJob extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ("initialize" doesn't seem to work.)
+     * TODO docs
      */
-    constructor(aParameters)
+    initialize(aParameters)
     {
-        this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };
+        this._initializeRadio();
+        this.template = "#template-main_workflowbuilder_control_job_individual";
+        this.model = aParameters.job;
         this.ui = {
-            buttonNewInputPort: '#button-new_inputport'
+            buttonAdd: '#button-main_workflowbuilder_control_job_individual_button_add'
         }
         this.events = {
-            'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
+            'click @ui.buttonAdd': '_handleClickButtonAdd'
         };
-        this.template = "#template-main_workflowbuilder_control_inputporttype_list_item";
-        this.tagName = 'tr';
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -47,12 +44,12 @@ class VISRC_ViewInputPortTypeListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles input port add.
+     * Handle add button.
      */
-    _handleButtonNewInputPort()
+    _handleClickButtonAdd()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
     }
 }
 
-export default VISRC_ViewInputPortTypeListItem;
+export default VISRC_ViewJob;

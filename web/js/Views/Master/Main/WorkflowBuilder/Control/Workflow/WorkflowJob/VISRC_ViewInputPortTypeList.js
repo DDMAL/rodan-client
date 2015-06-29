@@ -3,13 +3,13 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../../Shared/VISRC_Events'
-import VISRC_ViewJobListItem from './VISRC_ViewJobListItem'
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events';
+import VISRC_ViewInputPortTypeListItem from './VISRC_ViewInputPortTypeListItem';
 
 /**
- * This class represents the view (and controller) for the job list.
+ * This class represents a list of input port types.
  */
-class VISRC_ViewJobList extends Marionette.CompositeView
+class VISRC_ViewInputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,15 +19,16 @@ class VISRC_ViewJobList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };
+        this._initializeRadio();
+        this.template = "#template-main_workflowbuilder_control_inputporttype_list";
+        this.childView = VISRC_ViewInputPortTypeListItem;
         this.childViewContainer = 'tbody';
-        this.template = "#template-main_workflowbuilder_control_job_list";
-        this.childView = VISRC_ViewJobListItem;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_JOB);
+        var jobCollection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
+        this.collection = job.get("input_port_types");
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,4 +43,4 @@ class VISRC_ViewJobList extends Marionette.CompositeView
     }
 }
 
-export default VISRC_ViewJobList;
+export default VISRC_ViewInputPortTypeList;

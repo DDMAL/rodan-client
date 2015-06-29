@@ -3,12 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events';
-import VISRC_ViewJob from './Job/Individual/VISRC_ViewJob';
-import VISRC_ViewJobList from './Job/List/VISRC_ViewJobList';
+import VISRC_ViewJob from './Individual/VISRC_ViewJob';
+import VISRC_ViewJobList from './List/VISRC_ViewJobList';
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events';
 
 /**
- * This class represents the view for choosing jobs for a workflow
+ * This class represents the layout view for Jobs.
  */
 class VISRC_LayoutViewControlJob extends Marionette.LayoutView
 {
@@ -18,14 +18,14 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.addRegions({
             regionControlJobList: "#region-main_workflowbuilder_control_job_list",
             regionControlJobIndividual: "#region-main_workflowbuilder_control_job_individual"
         });
-        this._initializeRadio();
         this._initializeViews();
+        this._initializeRadio();
         this.template = "#template-main_workflowbuilder_control_job";
     }
 
@@ -53,7 +53,7 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
     }
 
     /**
-     * Initialize views.
+     * Handle workflowjob selection.
      */
     _initializeViews()
     {
@@ -65,10 +65,13 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
      */
     _handleEventJobSelected(aReturn)
     {
-        var viewJob = new VISRC_ViewJob(aReturn);
-        this.regionControlJobIndividual.show(viewJob, {preventDestroy: true});
+        // TODO - temporarily not using the individual view because...something is seriously screwing up!
+        // Marionette can't find the region element!
+    /*
+        this.regionControlJobIndividual.reset();
+        this.viewJob = new VISRC_ViewJob(aReturn);
+        this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});*/
     }
-
 }
 
 export default VISRC_LayoutViewControlJob;

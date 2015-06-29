@@ -3,12 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events'
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view of an individual input port list item.
+ * This class represents the view of an individual output port list item.
  */
-class VISRC_ViewInputPortListItem extends Marionette.ItemView
+class VISRC_ViewOutputPortListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -29,7 +29,7 @@ class VISRC_ViewInputPortListItem extends Marionette.ItemView
         this.events = {
             'click @ui.buttonDelete': '_handleButtonDelete'
         };
-        this.template = "#template-main_workflowbuilder_control_inputport_list_item";
+        this.template = "#template-main_workflowbuilder_control_outputport_list_item";
         this.tagName = 'tr';
 
         super(aParameters);
@@ -51,8 +51,8 @@ class VISRC_ViewInputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
     }
 }
 
-export default VISRC_ViewInputPortListItem;
+export default VISRC_ViewOutputPortListItem;

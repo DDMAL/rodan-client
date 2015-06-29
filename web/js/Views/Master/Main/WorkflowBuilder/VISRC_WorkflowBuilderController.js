@@ -5,11 +5,10 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_Connection from '../../../../Models/VISRC_Connection';
-import VISRC_ViewControlWorkflow from './Control/VISRC_ViewControlWorkflow';
-import VISRC_LayoutViewControlJob from './Control/VISRC_LayoutViewControlJob';
-import VISRC_LayoutViewControlWorkflowJob from './Control/VISRC_LayoutViewControlWorkflowJob';
+import VISRC_ViewControlWorkflowList from './Control/WorkflowList/VISRC_ViewControlWorkflowList';
+import VISRC_LayoutViewControlWorkflow from './Control/Workflow/VISRC_LayoutViewControlWorkflow';
+//import VISRC_LayoutViewControlWorkflowJob from './Control/Workflow/VISRC_LayoutViewControlWorkflowJob';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
-import VISRC_WorkflowJob from '../../../../Models/VISRC_WorkflowJob';
 
 import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace';
 
@@ -33,7 +32,6 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 
         this._initializeViews();
         this._initializeRadio();
-        this._workflow = null;
         this._workspace = new VISRC_Workspace();
     }
 
@@ -49,10 +47,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SHOW_JOBCONTROLVIEW, () => this._handleCommandShowControlJobView());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass));
+       // this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SHOW_JOBCONTROLVIEW, () => this._handleCommandShowControlJobView());
+      //  this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
 
     /**
@@ -60,8 +56,8 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.controlWorkflowView = new VISRC_ViewControlWorkflow();
-        this.controlJobView = new VISRC_LayoutViewControlJob();
+        this.controlWorkflowListView = new VISRC_ViewControlWorkflowList();
+        this.controlWorkflowView = new VISRC_LayoutViewControlWorkflow();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -91,14 +87,14 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
 
         // Get the workflow.
-        this._workflow = aReturn.workflow;
-        if (this._workflow != null)
+        if (aReturn.workflow != null)
         {
-            this._showView(this.controlJobView);
+            this.controlWorkflowView = new VISRC_LayoutViewControlWorkflow({workflow: aReturn.workflow});
+            this._showView(this.controlWorkflowView);
         }
         else
         {
-            this._showView(this.controlWorkflowView);
+            this._showView(this.controlWorkflowListView);
         }
 
         // Initialize the workspace.
@@ -111,44 +107,28 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _handleCommandAddWorkflow()
     {
         var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this._workflow = this._createWorkflow(project);
-        this._showView(this.controlJobView);
+        var workflow = this._createWorkflow(project);
+        this.controlWorkflowView = new VISRC_LayoutViewControlWorkflow({workflow: workflow});
+        this._showView(this.controlWorkflowView);
     }
     
     /**
      * Handle command show job control view.
      */
-    _handleCommandShowControlJobView()
+  /*  _handleCommandShowControlJobView()
     {
-        this._showView(this.controlJobView);
-    }
-
-    /**
-     * Handle command add workflow job.
-     */
-    _handleCommandAddWorkflowJob(aReturn)
-    {
-        var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
-    }
+        this._showView(this.controlWorkflowView);
+    }*/
 
     /**
      * Handle event edit workflow job.
      */
-    _handleEventEditWorkflowJob(aReturn)
+ /*   _handleEventEditWorkflowJob(aReturn)
     {
         // TODO - not reusing this view...should find more efficient way
         this.controlWorkflowJobView = new VISRC_LayoutViewControlWorkflowJob(aReturn);
         this._showView(this.controlWorkflowJobView);
-    }
-
-    /**
-     * Handle add connection.
-     */
-    _handleCommandAddConnection(aPass)
-    {
-        this._createConnection(aPass.outputport, aPass.inputport);
-    }
+    }*/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls
@@ -161,27 +141,6 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         var workflow =  new VISRC_Workflow({project: aProject.get("url"), name: "untitled"});
         workflow.save();
         return workflow;
-    }
-
-    /**
-     * Create workflow job.
-     */
-    _createWorkflowJob(aJob, aWorkflow)
-    {
-        var workflowJob = new VISRC_WorkflowJob({job: aJob.get("url"), workflow: this._workflow.get("url")});
-        workflowJob.save();
-        return workflowJob;
-    }
-
-    /**
-     * Create connection.
-     */
-    _createConnection(aOutputPort, aInputPort)
-    {
-        var connection = new VISRC_Connection({input_port: aInputPort.get("url"), output_port: aOutputPort.get("url")});
-        connection.save();
-        this._workflow.get("connections").add(connection);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
     }
 }
 

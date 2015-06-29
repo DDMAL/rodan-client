@@ -6,15 +6,15 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view (and controller) for the job item.
+ * This class represents the view of an individual input port list item.
  */
-class VISRC_ViewJobListItem extends Marionette.ItemView
+class VISRC_ViewInputPortListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Basic constructor. ("initialize" doesn't seem to work.)
      */
     constructor(aParameters)
     {
@@ -23,11 +23,14 @@ class VISRC_ViewJobListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_workflowbuilder_control_job_list_item";
-        this.tagName = 'tr';
+        this.ui = {
+            buttonDelete: '#button-delete'
+        }
         this.events = {
-            'click': '_handleClick'
+            'click @ui.buttonDelete': '_handleButtonDelete'
         };
+        this.template = "#template-main_workflowbuilder_control_inputport_list_item";
+        this.tagName = 'tr';
 
         super(aParameters);
     }
@@ -44,12 +47,12 @@ class VISRC_ViewJobListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles click.
+     * Handle delete.
      */
-    _handleClick()
+    _handleButtonDelete()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__JOB_SELECTED, {job: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
     }
 }
 
-export default VISRC_ViewJobListItem;
+export default VISRC_ViewInputPortListItem;
