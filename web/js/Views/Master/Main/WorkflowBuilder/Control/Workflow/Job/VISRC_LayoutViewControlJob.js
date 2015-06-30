@@ -32,12 +32,16 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
     /**
      * Initially show the list.
      */
-    onShow()
+    onBeforeShow()
     {
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
         this.viewJobList.isDestroyed = false;
         this.regionControlJobList.show(this.viewJobList, {preventDestroy: true});
+     /*   if (this.viewJob != null)
+        {
+            this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});
+        }*/
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,12 +69,16 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
      */
     _handleEventJobSelected(aReturn)
     {
-        // TODO - temporarily not using the individual view because...something is seriously screwing up!
-        // Marionette can't find the region element!
-    /*
-        this.regionControlJobIndividual.reset();
         this.viewJob = new VISRC_ViewJob(aReturn);
-        this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});*/
+        try
+        {
+            this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});
+        }
+        catch (exception)
+        {
+            this.viewJob.destroy();
+            console.log("TODO - not sure why error is being thrown, https://github.com/ELVIS-Project/vis-client/issues/6");
+        }
     }
 }
 

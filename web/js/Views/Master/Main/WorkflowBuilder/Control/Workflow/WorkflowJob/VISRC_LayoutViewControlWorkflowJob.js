@@ -3,11 +3,11 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_ViewWorkflowJob from './WorkflowJob/VISRC_ViewWorkflowJob';
-import VISRC_ViewInputPortList from './WorkflowJob/VISRC_ViewInputPortList';
-import VISRC_ViewInputPortTypeList from './WorkflowJob/VISRC_ViewInputPortTypeList';
-import VISRC_ViewOutputPortList from './WorkflowJob/VISRC_ViewOutputPortList';
-import VISRC_ViewOutputPortTypeList from './WorkflowJob/VISRC_ViewOutputPortTypeList';
+import VISRC_ViewWorkflowJob from './VISRC_ViewWorkflowJob';
+import VISRC_ViewInputPortList from './VISRC_ViewInputPortList';
+import VISRC_ViewInputPortTypeList from './VISRC_ViewInputPortTypeList';
+import VISRC_ViewOutputPortList from './VISRC_ViewOutputPortList';
+import VISRC_ViewOutputPortTypeList from './VISRC_ViewOutputPortTypeList';
 
 /**
  * This class represents the view for editing workflowjobs.
@@ -38,12 +38,17 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
     /**
      * Initially show the list.
      */
-    onShow()
+    onBeforeShow()
     {
+        this.regionControlWorkflowJob.reset();
         this.regionControlWorkflowJob.show(this._viewWorkflowJob);
+        this.regionControlInputPortTypes.reset();
         this.regionControlInputPortTypes.show(this._inputPortTypeListView);
+        this.regionControlInputPorts.reset();
         this.regionControlInputPorts.show(this._inputPortListView);
+        this.regionControlOutputPortTypes.reset();
         this.regionControlOutputPortTypes.show(this._outputPortTypeListView);
+        this.regionControlOutputPorts.reset();
         this.regionControlOutputPorts.show(this._outputPortListView);
     }
 
@@ -55,7 +60,6 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _initializeViews(aParameters)
     {
-        // Create new workflow job view.
         this._viewWorkflowJob = new VISRC_ViewWorkflowJob(aParameters);
 
         // Create new input port and output port views.

@@ -48,9 +48,7 @@ class VISRC_ViewJobListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        // TODO - for some reason, the individual job view isn't working, so I'm adding jobs directly from the list
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
-        //this.rodanChannel.trigger(VISRC_Events.EVENT__JOB_SELECTED, {job: this.model});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__JOB_SELECTED, {job: this.model});
     }
 }
 
