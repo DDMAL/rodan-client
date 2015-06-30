@@ -27,11 +27,13 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
         this.template = "#template-main_workflowbuilder_control_workflow_data";
         this.ui = {
             buttonSave: '#button-save_workflow_data',
+            buttonValidate: '#button-validate_workflow',
             textName: '#text-workflow_name',
             textDescription: '#text-workflow_description'
         }
         this.events = {
-            'click @ui.buttonSave': '_handleButtonSave'
+            'click @ui.buttonSave': '_handleButtonSave',
+            'click @ui.buttonValidate': '_handleButtonValidate'
         };
     }
 
@@ -50,8 +52,16 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
      * Handle save button.
      */
     _handleButtonSave()
-    {debugger;
+    {
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+    }
+
+    /**
+     * Handle validate button.
+     */
+    _handleButtonValidate()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 }
 

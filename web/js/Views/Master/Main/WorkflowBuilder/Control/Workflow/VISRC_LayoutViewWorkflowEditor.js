@@ -60,6 +60,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow());
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
 
@@ -158,6 +159,32 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandSaveWorkflow(aPass)
     {
         this._workflow.save(aPass, {patch: true});
+    }
+
+    /**
+     * Handle validate workflow.
+     */
+    _handleCommandValidateWorkflow()
+    {
+        this._workflow.save({valid: true}, {patch: true, error: this._handleResponseValidateError, success: this._handleResponseValidateSuccess});
+    }
+
+    /**
+     * Handle validate error response.
+     */
+    _handleResponseValidateError(aModel, aResponse, aOptions)
+    {
+        // TODO - put this in some kind of handler outside of this class
+        alert(aResponse.responseJSON.detail);
+    }
+
+    /**
+     * Handle validate response.
+     */
+    _handleResponseValidateSuccess(aModel, aResponse, aOptions)
+    {
+        // TODO - put this in some kind of handler outside of this class
+        alert("The workflow is valid.");
     }
 
     /**
