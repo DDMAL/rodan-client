@@ -28,6 +28,7 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT',   // Called when output port needs to be deleted from workflow job. Passes {outputport: VISRC_OutputPort}.
     COMMAND__WORKFLOWBUILDER_ADD_CONNECTION: 'COMMAND__WORKFLOWBUILDER_ADD_CONNECTION',   // Called when Connection should be created. Passes {inputport: VISRC_InputPort, outputport: VISRC_OutputPort}.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when job control view needs to be shown. No pass.
+    COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW',  // Called when Workflow needs to be saved.
 
     // Workspace commands. These events tell the workspace what needs to be done. The WorkflowBuilder sends these commands.
     COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW: 'COMMAND__WORKSPACE_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
@@ -38,6 +39,7 @@ var VISRC_Events = {
     COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT: 'COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT', // Called when output port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
     COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT: 'COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT', // Called when input port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
     COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT: 'COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // EVENTS

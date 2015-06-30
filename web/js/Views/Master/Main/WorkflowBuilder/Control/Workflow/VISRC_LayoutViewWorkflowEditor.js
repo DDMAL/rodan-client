@@ -54,11 +54,12 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
 
@@ -149,6 +150,14 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandDeleteOutputPort(aPass)
     {
         this._deleteOutputPort(aPass.outputport, this._workflowJob);
+    }
+
+    /**
+     * Handle save workflow.
+     */
+    _handleCommandSaveWorkflow(aPass)
+    {
+        this._workflow.save(aPass, {patch: true});
     }
 
     /**
