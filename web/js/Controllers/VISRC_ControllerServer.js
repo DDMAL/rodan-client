@@ -98,6 +98,7 @@ class VISRC_ControllerServer extends Marionette.Object
 
                 this.routes = mapFromJsonObject(resp.routes);
                 this.serverConfiguration = mapFromJsonObject(resp.configuration);
+                this.version = resp.version;
                 this.rodanChannel.trigger(VISRC_Events.EVENT__ROUTESLOADED);
             }
             else
