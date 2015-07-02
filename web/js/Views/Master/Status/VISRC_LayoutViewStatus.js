@@ -4,6 +4,8 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
+import VISRC_ViewStatusMessage from './Message/VISRC_ViewStatusMessage';
+import VISRC_ViewStatusServer from './Server/VISRC_ViewStatusServer';
 import VISRC_ViewStatusUser from './User/VISRC_ViewStatusUser';
 
 /**
@@ -34,6 +36,8 @@ class VISRC_LayoutViewStatus extends Marionette.LayoutView
      */
     onBeforeShow()
     {
+        this.regionStatusMessage.show(this.viewStatusMessage);
+        this.regionStatusServer.show(this.viewStatusServer);
         this.regionStatusUser.show(this.viewStatusUser);
     }
 
@@ -45,6 +49,8 @@ class VISRC_LayoutViewStatus extends Marionette.LayoutView
      */
     _initializeViews()
     {
+        this.viewStatusMessage = new VISRC_ViewStatusMessage();
+        this.viewStatusServer = new VISRC_ViewStatusServer();
         this.viewStatusUser = new VISRC_ViewStatusUser();
     }
 
