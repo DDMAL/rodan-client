@@ -2,6 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events'
 
@@ -22,8 +23,16 @@ class VISRC_ViewStatusMessage extends Marionette.CompositeView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-status_message";
         this._initializeRadio();
+        this.template = () => this._template();
+    }
+
+    /**
+     * TODO docs
+     */
+    _template()
+    {
+        return _.template($("#template-status_message").html())({test: "messages should go here!"});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
