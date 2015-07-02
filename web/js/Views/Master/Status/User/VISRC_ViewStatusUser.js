@@ -49,15 +49,7 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
-    }
-
-    /**
-     * TODO docs
-     */
-    _handleEventApplicationReady()
-    {
     }
 
     /**
@@ -79,7 +71,7 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
         }
         else
         {
-            console.log("no user");
+            console.log("TODO - no user");
         }
         this.render();
     }

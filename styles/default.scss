@@ -33,7 +33,9 @@ div.bottom {
  *************************************************************************************/
 $background-color-main: #00ff00;
 $background-color-navigation: #aaaaff;
-$background-color-status: #ff0000;
+$background-color-status_user: #ff0000;
+$background-color-status_message: #ffff00;
+$background-color-status_server: #6666ff;
 $background-color-workflowbuilder-workspace: #ffffff;
 $background-color-workflowbuilder-control: #aaaaaa;
 
@@ -48,7 +50,17 @@ div#region-main {
 }
 
 div#region-status_user {
-    background-color: $background-color-status;
+    background-color: $background-color-status_user;
+    height: 100%;
+}
+
+div#region-status_message {
+    background-color: $background-color-status_message;
+    height: 100%;
+}
+
+div#region-status_server {
+    background-color: $background-color-status_server;
     height: 100%;
 }
 

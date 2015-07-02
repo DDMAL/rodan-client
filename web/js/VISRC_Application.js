@@ -12,6 +12,7 @@ import VISRC_JobCollection from './Collections/VISRC_JobCollection';
 import VISRC_OutputPortTypeCollection from './Collections/VISRC_OutputPortTypeCollection';
 import VISRC_LayoutViewMain from './Views/Master/Main/VISRC_LayoutViewMain';
 import VISRC_LayoutViewNavigation from './Views/Master/Navigation/VISRC_LayoutViewNavigation';
+import VISRC_LayoutViewStatus from './Views/Master/Status/VISRC_LayoutViewStatus';
 import VISRC_ProjectCollection from './Collections/VISRC_ProjectCollection';
 import VISRC_RunJobCollection from './Collections/VISRC_RunJobCollection';
 import VISRC_ResourceCollection from './Collections/VISRC_ResourceCollection';
@@ -53,7 +54,7 @@ class VISRC_Application extends Marionette.Application
         });
 
         this.addRegions({
-            regionStatusUser: "#region-status_user"
+            regionStatus: "#region-status"
         });
         this._initializeRadio();
         this._initializeControllers();
@@ -115,9 +116,7 @@ class VISRC_Application extends Marionette.Application
         // Layout views.
         this.layoutViewNavigation = new VISRC_LayoutViewNavigation();
         this.layoutViewMain = new VISRC_LayoutViewMain();
-
-        // Compositve views (won't change).
-        this.viewStatusUser = new VISRC_ViewStatusUser();
+        this.layoutViewStatus = new VISRC_LayoutViewStatus();
     }
 
     /**
@@ -128,9 +127,7 @@ class VISRC_Application extends Marionette.Application
         // Render layout views.
         this.layoutViewNavigation.render();
         this.layoutViewMain.render();
-
-        // Render other views.
-        this.getRegion('regionStatusUser').show(this.viewStatusUser);
+        this.regionStatus.show(this.layoutViewStatus);
 
         // Send event that the app has started.
         this.rodanChannel.trigger(VISRC_Events.EVENT__APPLICATION_READY);
