@@ -28,12 +28,14 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
         this.ui = {
             buttonSave: '#button-save_workflow_data',
             buttonValidate: '#button-validate_workflow',
+            buttonRun: '#button-run_workflow',
             textName: '#text-workflow_name',
             textDescription: '#text-workflow_description'
         }
         this.events = {
             'click @ui.buttonSave': '_handleButtonSave',
-            'click @ui.buttonValidate': '_handleButtonValidate'
+            'click @ui.buttonValidate': '_handleButtonValidate',
+            'click @ui.buttonRun': '_handleButtonRun'
         };
     }
 
@@ -62,6 +64,21 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
     _handleButtonValidate()
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+    }
+
+    /**
+     * Handle run button.
+     */
+    _handleButtonRun()
+    {
+        if (!this.model.get("valid"))
+        {
+            alert("The workflow must be valid prior to run.");
+        }
+        else
+        {
+            this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW);
+        }
     }
 }
 

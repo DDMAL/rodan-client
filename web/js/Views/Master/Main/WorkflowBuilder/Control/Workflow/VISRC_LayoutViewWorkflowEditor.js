@@ -62,6 +62,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow());
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW, () => this._handleCommandRunWorkflow());
     }
 
     /**
@@ -167,6 +168,14 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandValidateWorkflow()
     {
         this._workflow.save({valid: true}, {patch: true, error: this._handleResponseValidateError, success: this._handleResponseValidateSuccess});
+    }
+
+    /**
+     * Handle run workflow.
+     */
+    _handleCommandRunWorkflow()
+    {
+        console.log("run");
     }
 
     /**
