@@ -63,8 +63,7 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _handleEventApplicationReady()
     {
-        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('projects');
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'projects');
     }
 }
 

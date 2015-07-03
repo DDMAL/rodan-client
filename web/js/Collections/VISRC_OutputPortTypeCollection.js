@@ -63,8 +63,7 @@ class VISRC_OutputPortTypeCollection extends Backbone.Collection
      */
     _handleEventApplicationReady()
     {
-        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('outputporttypes');
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'outputporttypes');
     }
 }
 

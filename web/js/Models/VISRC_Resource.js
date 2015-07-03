@@ -5,6 +5,7 @@ import Radio from 'backbone.radio';
 import _ from 'underscore';
 
 import VISRC_BaseModel from './VISRC_BaseModel';
+import VISRC_ResourceType from './VISRC_ResourceType';
 
 /**
  * Resource model.
@@ -20,6 +21,14 @@ class VISRC_Resource extends VISRC_BaseModel
     initialize(aParameters)
     {
         this.routeName = "resources";
+    }
+
+    /**
+     * Set the resource type.
+     */
+    parse(resp, options)
+    {
+        return resp;
     }
 
     /**
@@ -42,6 +51,17 @@ class VISRC_Resource extends VISRC_BaseModel
             });
         }
         Backbone.sync.call(this, aMethod, aModel, aOptions);
+    }
+
+    /**
+     * Returns UUID of associated ResourceType.
+     */
+    getResourceTypeUuid()
+    {
+        var lastSlash = this.get("resource_type").lastIndexOf('/');
+        var subString = this.get("resource_type").substring(0, lastSlash);
+        var secondLastSlash = subString.lastIndexOf('/');
+        return this.get("resource_type").substring(secondLastSlash + 1, lastSlash);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

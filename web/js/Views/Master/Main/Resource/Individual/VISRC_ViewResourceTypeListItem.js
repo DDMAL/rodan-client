@@ -6,9 +6,9 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../../Shared/VISRC_Events'
 
 /**
- * This class represents the view of a workflow run.
+ * This class represents the view (and controller) for a resource type item.
  */
-class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
+class VISRC_ViewResourceTypeListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,13 +23,18 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_workflow_individual_workflowrun_list_item";
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
+        this.template = "#template-main_resource_individual_resourcetype_list_item";
+        this.tagName = 'option';
 
         super(aParameters);
+    }
+
+    /**
+     * Set the value of the "option.value".
+     */
+    onRender()
+    {
+        this.$el.attr('value', this.model.get('url'));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,14 +47,6 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel("rodan");
     }
-
-    /**
-     * Handles click.
-     */
-    _handleClick()
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
-    }
 }
 
-export default VISRC_ViewWorkflowRunListItem;
+export default VISRC_ViewResourceTypeListItem;

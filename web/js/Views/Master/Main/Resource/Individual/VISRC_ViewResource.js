@@ -4,6 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_ViewResourceTypeListItem from './VISRC_ViewResourceTypeListItem';
 import VISRC_ViewWorkflowRunListItem from './VISRC_ViewWorkflowRunListItem';
 
 /**
@@ -24,17 +25,25 @@ class VISRC_ViewResource extends Marionette.CompositeView
         };
         this._initializeRadio();
         this.template = "#template-main_resource_individual";
-     //   this.childView = VISRC_ViewWorkflowRunListItem;
-      //  this.childViewContainer = 'tbody';
+        this.ui = {
+            buttonSave: '#button-main_resource_individual_save',
+            selectResourceType: '#select-resourcetype'
+        }
+        this.events = {
+            'click @ui.buttonSave': '_handleClickButtonSave'
+        };
+        this.childView = VISRC_ViewResourceTypeListItem;
+        this.childViewContainer = '#select-resourcetype';
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RESOURCETYPE);
     }
 
     /**
-     * Returns the associated WorkflowRun collection to the template.
+     * Returns ResourceTypes.
      */
-  /*  templateHelpers() 
+    templateHelpers() 
     {
         return { items: this.collection.toJSON() };
-    }*/
+    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -54,8 +63,15 @@ class VISRC_ViewResource extends Marionette.CompositeView
     _handleEventItemSelected(aReturn)
     {
         this.model = aReturn.resource;
-     //   this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
-      //  this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {resource: this.model.id});
+    }
+
+    /**
+     * Handle save.
+     */
+    _handleClickButtonSave()
+    {
+        var resourceTypeUrl = this.ui.selectResourceType.val();
+        this.model.save({resource_type: resourceTypeUrl}, {patch: true});
     }
 }
 

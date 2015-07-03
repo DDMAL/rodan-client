@@ -76,9 +76,6 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleEventBuilderSelected(aReturn)
     {
-        // Inform that we need jobs loaded.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
-
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
 

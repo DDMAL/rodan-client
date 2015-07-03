@@ -10,6 +10,7 @@ var VISRC_Events = {
     COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_PROJECTS: 'COMMAND__LOAD_PROJECTS', // Instructs loading of projects. Takes object containing various query IDs.
     COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
+    COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES', // Instructs loading of resource types. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
@@ -88,6 +89,7 @@ var VISRC_Events = {
     REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
     REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',
+    REQUEST__COLLECTION_RESOURCETYPE: 'REQUEST__COLLECTION_RESOURCETYPE',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
     REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
 

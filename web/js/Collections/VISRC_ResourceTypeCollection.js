@@ -3,10 +3,10 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../Shared/VISRC_Events';
-import VISRC_InputPortType from '../Models/VISRC_InputPortType';
+import VISRC_Events from '../Shared/VISRC_Events'
+import VISRC_ResourceType from '../Models/VISRC_ResourceType'
 
-class VISRC_InputPortTypeCollection extends Backbone.Collection
+class VISRC_ResourceTypeCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class VISRC_InputPortTypeCollection extends Backbone.Collection
      */
     initialize(aParameters)
     {
-        this.model = VISRC_InputPortType;
+        this.model = VISRC_ResourceType;
         this._initializeRadio();
     }
 
@@ -38,8 +38,8 @@ class VISRC_InputPortTypeCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_INPUTPORTTYPES, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_INPUTPORTTYPE, () => this._handleRequestInstance());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_RESOURCETYPE, () => this._handleRequestInstance());
     }
 
     /**
@@ -63,8 +63,9 @@ class VISRC_InputPortTypeCollection extends Backbone.Collection
      */
     _handleEventApplicationReady()
     {
-        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'inputporttypes');
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'resourcetypes');
+        this._retrieveList({});
     }
 }
 
-export default VISRC_InputPortTypeCollection;
+export default VISRC_ResourceTypeCollection;
