@@ -23,6 +23,7 @@ class VISRC_ViewResource extends Marionette.CompositeView
         this.modelEvents = {
             "all": "render"
         };
+        this.model = aParameters.resource;
         this._initializeRadio();
         this.template = "#template-main_resource_individual";
         this.ui = {
@@ -54,15 +55,6 @@ class VISRC_ViewResource extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
-    }
-
-    /**
-     * Handle item selection.
-     */
-    _handleEventItemSelected(aReturn)
-    {
-        this.model = aReturn.resource;
     }
 
     /**

@@ -35,7 +35,7 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, () => this._handleEventListSelected());
-        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, () => this._handleEventItemSelected());
+        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, aPass => this._handleEventItemSelected(aPass));
     }
 
     /**
@@ -45,7 +45,6 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
     {
         this.layoutView = new VISRC_LayoutViewResource();
         this.viewList = new VISRC_ViewResourceList();
-        this.viewItem = new VISRC_ViewResource();
     }
 
     /**
@@ -66,15 +65,14 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected()
+    _handleEventItemSelected(aPass)
     {
         // Send the layout view to the main region.
         this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
 
         // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.viewItem.isDestroyed = false;
+        // TODO - don't want to do this...
+        this.viewItem = new VISRC_ViewResource(aPass);
         this.layoutView.showItem(this.viewItem);
     }
 }
