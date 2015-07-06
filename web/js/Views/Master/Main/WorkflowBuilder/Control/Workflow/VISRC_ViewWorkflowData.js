@@ -28,6 +28,7 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
         this.ui = {
             buttonSave: '#button-save_workflow_data',
             buttonValidate: '#button-validate_workflow',
+            buttonAssignResources: '#button-assignresources_workflow',
             buttonRun: '#button-run_workflow',
             textName: '#text-workflow_name',
             textDescription: '#text-workflow_description'
@@ -35,6 +36,7 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
         this.events = {
             'click @ui.buttonSave': '_handleButtonSave',
             'click @ui.buttonValidate': '_handleButtonValidate',
+            'click @ui.buttonAssignResources': '_handleButtonAssignResources',
             'click @ui.buttonRun': '_handleButtonRun'
         };
     }
@@ -64,6 +66,14 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
     _handleButtonValidate()
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+    }
+
+    /**
+     * Handle assign resources button.
+     */
+    _handleButtonAssignResources()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT);
     }
 
     /**
