@@ -6,7 +6,7 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../Shared/VISRC_Events';
 
 /**
- * Base Item in Workspace
+ * Base Item in WorkflowBuilder
  */
 class VISRC_BaseItem extends paper.Path
 {

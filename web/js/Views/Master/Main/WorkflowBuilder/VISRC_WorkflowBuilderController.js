@@ -8,7 +8,7 @@ import VISRC_ViewControlWorkflowList from './Control/WorkflowList/VISRC_ViewCont
 import VISRC_LayoutViewWorkflowEditor from './Control/Workflow/VISRC_LayoutViewWorkflowEditor';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
 
-import VISRC_Workspace from '../../../../Plugins/Workspace/VISRC_Workspace';
+import VISRC_WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/VISRC_WorkflowBuilder';
 
 /**
  * Controller for the Workflow Builder.
@@ -39,7 +39,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         };
         this._initializeViews();
         this._initializeRadio();
-        this._workspace = new VISRC_Workspace();
+        this._workspace = new VISRC_WorkflowBuilder();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomIn()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_IN);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_IN);
     }
     
     /**
@@ -127,7 +127,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomOut()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_OUT);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_OUT);
     }
     
     /**
@@ -135,7 +135,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomReset()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_RESET);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_RESET);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

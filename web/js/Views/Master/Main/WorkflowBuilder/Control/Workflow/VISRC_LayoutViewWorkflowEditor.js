@@ -86,7 +86,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandAddWorkflowJob(aReturn)
     {
         var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
     }
 
     /**
@@ -226,7 +226,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         var port = new VISRC_InputPort({input_port_type: aInputPortType.get("url"), workflow_job: aWorkflowJob.get("url")});
         port.save();
         aWorkflowJob.get("input_ports").add(port);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: port});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: port});
     }
 
     /**
@@ -237,7 +237,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         var port = new VISRC_OutputPort({output_port_type: aOutputPortType.get("url"), workflow_job: aWorkflowJob.get("url")});
         port.save();
         aWorkflowJob.get("output_ports").add(port);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
     }
 
     /**
@@ -245,7 +245,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
      */
     _deleteInputPort(aPort, aWorkflowJob)
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: aPort});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_DELETE_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: aPort});
         try
         {
             aPort.destroy();
@@ -261,7 +261,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
      */
     _deleteOutputPort(aPort, aWorkflowJob)
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: aPort});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_DELETE_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: aPort});
         try
         {
             aPort.destroy();
@@ -290,7 +290,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         var connection = new VISRC_Connection({input_port: aInputPort.get("url"), output_port: aOutputPort.get("url")});
         connection.save();
         this._workflow.get("connections").add(connection);
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
     }
 
     /**
@@ -300,7 +300,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     {
         var resourceAssignment = new VISRC_ResourceAssignment();
         // todo
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT, {resourceassignment: resourceAssignment, resource: aResource, inputport: aInputPort});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCEASSIGNMENT, {resourceassignment: resourceAssignment, resource: aResource, inputport: aInputPort});
     }
 }
 

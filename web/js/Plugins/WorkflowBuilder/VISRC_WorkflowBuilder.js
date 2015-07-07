@@ -12,9 +12,9 @@ import VISRC_ResourceItem from './Items/VISRC_ResourceItem';
 import VISRC_ResourceAssignmentItem from './Items/VISRC_ResourceAssignmentItem';
 
 /**
- * Main Workspace class.
+ * Main WorkflowBuilder class.
  */
-class VISRC_Workspace
+class VISRC_WorkflowBuilder
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -244,18 +244,18 @@ class VISRC_Workspace
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT, aReturn => this._handleCommandAddResourceAssignment(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCE, aReturn => this._handleCommandAddResourceItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCEASSIGNMENT, aReturn => this._handleCommandAddResourceAssignment(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCE, aReturn => this._handleCommandAddResourceItem(aReturn));
 
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_IN, () => this._handleCommandZoomIn());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_OUT, () => this._handleCommandZoomOut());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_RESET, () => this._handleCommandZoomReset());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_IN, () => this._handleCommandZoomIn());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_OUT, () => this._handleCommandZoomOut());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_RESET, () => this._handleCommandZoomReset());
     }
 
     /**
@@ -426,4 +426,4 @@ class VISRC_Workspace
     }
 }
 
-export default VISRC_Workspace;
+export default VISRC_WorkflowBuilder;
