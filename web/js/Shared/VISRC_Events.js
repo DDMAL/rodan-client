@@ -49,6 +49,9 @@ var VISRC_Events = {
     COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT: 'COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
     COMMAND__WORKSPACE_ADD_ITEM_RESOURCE: 'COMMAND__WORKSPACE_ADD_ITEM_RESOURCE', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resource: VISRC__Resource}.
     COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT: 'COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resourceassignment: VISRC_ResourceAssignment, resource: VISRC_Resource, inputport: VISRC_InputPort}.
+    COMMAND__WORKSPACE_ZOOM_IN: 'COMMAND__WORKSPACE_ZOOM_IN', // Called when request workspace zoom in. No pass.
+    COMMAND__WORKSPACE_ZOOM_OUT: 'COMMAND__WORKSPACE_ZOOM_OUT', // Called when request workspace zoom out. No pass.
+    COMMAND__WORKSPACE_ZOOM_RESET: 'COMMAND__WORKSPACE_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
 
 
 ///////////////////////////////////////////////////////////////////////////////////////

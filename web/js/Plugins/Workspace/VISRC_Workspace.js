@@ -27,15 +27,18 @@ class VISRC_Workspace
     {
         this._STATES = {
             IDLE: 0,
-            BUSY: 1,
-            GRABBED_WORKFLOWJOBITEM: 2,
-            CREATING_CONNECTION: 3,
-            GRABBED_RESOURCEITEM: 4,
-            CREATING_RESOURCEASSIGNMENT: 5
+            GRABBED_WORKFLOWJOBITEM: 1,
+            CREATING_CONNECTION: 2,
+            GRABBED_RESOURCEITEM: 3,
+            CREATING_RESOURCEASSIGNMENT: 4
         };
         this._state = this._STATES.IDLE;
         this._selectedOutputPortItem = null;
         this._selectedResourceItem = null;
+
+        this._zoomMin = 0.1;
+        this._zoomMax = 2;
+        this._zoomRate = 0.1;
 
         paper.setup(aCanvasElementId);
         paper.handleMouseEvent = aData => this._handleMouseEvent(aData);
@@ -92,12 +95,6 @@ class VISRC_Workspace
             case this._STATES.IDLE:
             {
                 this._handleStateIdle(aData);
-                break;
-            }
-
-            case this._STATES.BUSY:
-            {
-                this._handleStateBusy(aData);
                 break;
             }
 
@@ -166,14 +163,6 @@ class VISRC_Workspace
                 this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: aData.item._associatedModel});
             }
         }
-    }
-
-    /**
-     * Handle busy state.
-     */
-    _handleStateBusy(aData)
-    {
-        
     }
 
     /**
@@ -263,6 +252,10 @@ class VISRC_Workspace
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCE, aReturn => this._handleCommandAddResourceItem(aReturn));
+
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_IN, () => this._handleCommandZoomIn());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_OUT, () => this._handleCommandZoomOut());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ZOOM_RESET, () => this._handleCommandZoomReset());
     }
 
     /**
@@ -338,6 +331,33 @@ class VISRC_Workspace
     _handleCommandAddResourceAssignment(aReturn)
     {
         this._createResourceAssignmentItem(aReturn.resourceassignment, aReturn.resource, aReturn.inputport);
+        paper.view.draw();
+    }
+
+    /**
+     * Handle zoom in.
+     */
+    _handleCommandZoomIn(aReturn)
+    {
+        paper.view.zoom = paper.view.zoom + this._zoomRate < this._zoomMax ? paper.view.zoom + this._zoomRate : this._zoomMax;
+        paper.view.draw();
+    }
+
+    /**
+     * Handle zoom out.
+     */
+    _handleCommandZoomOut(aReturn)
+    {
+        paper.view.zoom = paper.view.zoom - this._zoomRate > this._zoomMin ? paper.view.zoom - this._zoomRate : this._zoomMin;
+        paper.view.draw();
+    }
+
+    /**
+     * Handle zoom reset.
+     */
+    _handleCommandZoomReset(aReturn)
+    {
+        paper.view.zoom = 1;
         paper.view.draw();
     }
 

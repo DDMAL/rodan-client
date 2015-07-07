@@ -27,7 +27,16 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
             regionControl: "#region-main_workflowbuilder_control"
         });
         this.template = "#template-main_workflowbuilder";
-
+        this.ui = {
+            buttonZoomIn: '#button-zoom_in',
+            buttonZoomOut: '#button-zoom_out',
+            buttonZoomReset: '#button-zoom_reset'
+        }
+        this.events = {
+            'click @ui.buttonZoomIn': '_handleButtonZoomIn',
+            'click @ui.buttonZoomOut': '_handleButtonZoomOut',
+            'click @ui.buttonZoomReset': '_handleButtonZoomReset'
+        };
         this._initializeViews();
         this._initializeRadio();
         this._workspace = new VISRC_Workspace();
@@ -103,6 +112,30 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
         var workflow = this._createWorkflow(project);
         this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: workflow});
         this._showView(this.controlWorkflowView);
+    }
+    
+    /**
+     * Handle button zoom in.
+     */
+    _handleButtonZoomIn()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_IN);
+    }
+    
+    /**
+     * Handle button zoom out.
+     */
+    _handleButtonZoomOut()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_OUT);
+    }
+    
+    /**
+     * Handle button zoom reset.
+     */
+    _handleButtonZoomReset()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ZOOM_RESET);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
