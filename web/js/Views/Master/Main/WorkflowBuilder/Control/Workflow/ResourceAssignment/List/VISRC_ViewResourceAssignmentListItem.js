@@ -25,8 +25,12 @@ class VISRC_ViewResourceAssignmentListItem extends Marionette.ItemView
         };
         this.template = "#template-main_workflowbuilder_control_resourceassignment_list_item";
         this.tagName = 'tr';
+        this.ui = {
+            buttonAddResource: '#button-add_resource'
+        }
         this.events = {
-            'click': '_handleClick'
+            'click': '_handleClick',
+            'click @ui.buttonAddResource': '_handleButtonAddResource'
         };
 
         super(aParameters);
@@ -49,6 +53,14 @@ class VISRC_ViewResourceAssignmentListItem extends Marionette.ItemView
     _handleClick()
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE, {resource: this.model});
+    }
+
+    /**
+     * Handles add resource button.
+     */
+    _handleButtonAddResource()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCE, {resource: this.model});
     }
 }
 

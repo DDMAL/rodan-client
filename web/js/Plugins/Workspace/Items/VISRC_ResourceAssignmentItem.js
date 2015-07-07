@@ -7,9 +7,9 @@ import VISRC_BaseItem from './VISRC_BaseItem';
 import VISRC_Events from '../../../Shared/VISRC_Events';
 
 /**
- * InputPort item.
+ * Resource assignment item.
  */
-class VISRC_InputPortItem extends VISRC_BaseItem
+class VISRC_ResourceAssignmentItem extends VISRC_BaseItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -20,25 +20,9 @@ class VISRC_InputPortItem extends VISRC_BaseItem
     constructor(aParameters)
     {
         super(aParameters);
-        this._connectionItem = null;
+        this._associatedInputPort = aParameters.inputPort;
+        this._associatedResource = aParameters.resource;
         this.update();
-    }
-
-    /**
-     * Sets associated connection item.
-     */
-    setConnectionItem(aItem)
-    {
-        this._connectionItem = aItem;
-        this.update();
-    }
-
-    /**
-     * Return true iff has connection item.
-     */
-    hasConnectionItem()
-    {
-        return this._connectionItem !== null;
     }
 
     /**
@@ -46,11 +30,10 @@ class VISRC_InputPortItem extends VISRC_BaseItem
      */
     update()
     {
-        this.fillColor = this.hasConnectionItem() ? "#00ff00" : "#ff0000";
-        if (this._connectionItem != null)
-        {
-            this._connectionItem.update();
-        }
+        this.firstSegment.point.x = this._associatedResource.paperItem.position.x;
+        this.firstSegment.point.y = this._associatedResource.paperItem.bounds.bottom;
+        this.lastSegment.point.x = this._associatedInputPort.paperItem.position.x;
+        this.lastSegment.point.y = this._associatedInputPort.paperItem.bounds.top;
     }
 
     /**
@@ -58,13 +41,10 @@ class VISRC_InputPortItem extends VISRC_BaseItem
      */
     destroy()
     {
-        if (this.hasConnectionItem())
-        {
-            this._connectionItem.destroy();
-            this._connectionItem = null;
-        }
-        this._associatedModel.paperItem = null;
-        this._associatedModel = null;
+        this._associatedInputPort.paperItem.setConnectionItem(null);
+        this._associatedInputPort = null;
+        this._associatedResource.paperItem.removeConnectionItem(this);
+        this._associatedResource = null;
         this.remove();
     }
 
@@ -73,4 +53,4 @@ class VISRC_InputPortItem extends VISRC_BaseItem
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default VISRC_InputPortItem;
+export default VISRC_ResourceAssignmentItem;

@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import VISRC_Events from '../../../../../../../Shared/VISRC_Events';
 import VISRC_ViewWorkflowJob from './VISRC_ViewWorkflowJob';
 import VISRC_ViewInputPortList from './VISRC_ViewInputPortList';
 import VISRC_ViewInputPortTypeList from './VISRC_ViewInputPortTypeList';
@@ -23,6 +24,7 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     initialize(aParameters)
     {
+        this._initializeRadio();
         this.addRegions({
             regionControlWorkflowJob: "#region-main_workflowbuilder_control_workflowjob",
             regionControlInputPortTypes: "#region-main_workflowbuilder_control_workflowjob_inputporttypes",
@@ -33,6 +35,12 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
         this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
         this.template = "#template-main_workflowbuilder_control_workflowjob";
+        this.ui = {
+            buttonShowWorkflow: '#button-show_workflow'
+        }
+        this.events = {
+            'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow'
+        };
     }
 
     /**
@@ -71,6 +79,22 @@ class VISRC_LayoutViewControlWorkflowJob extends Marionette.LayoutView
         // The list views will do the rest.
         this._inputPortTypeListView = new VISRC_ViewInputPortTypeList(aParameters);
         this._outputPortTypeListView = new VISRC_ViewOutputPortTypeList(aParameters);
+    }
+    
+    /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle button show workflow.
+     */
+    _handleButtonShowWorkflow()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 }
 

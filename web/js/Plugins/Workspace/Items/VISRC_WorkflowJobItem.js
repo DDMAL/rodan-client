@@ -25,9 +25,6 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this.addChild(this._paperGroupInputPorts);
         this._paperGroupOutputPorts = new paper.Group();
         this.addChild(this._paperGroupOutputPorts);
-
-        this.onClick = aEvent => this._handleMouseClick(aEvent); // let it handle its own clicks
-
         this.update();
     }
 
@@ -100,14 +97,6 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handles mouse cick.
-     */
-    _handleMouseClick(aEvent)
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: this._associatedModel});
-    }
-
     /**
      * Positions ports.
      */

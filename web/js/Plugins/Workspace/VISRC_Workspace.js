@@ -8,6 +8,8 @@ import VISRC_ConnectionItem from './Items/VISRC_ConnectionItem';
 import VISRC_InputPortItem from './Items/VISRC_InputPortItem';
 import VISRC_OutputPortItem from './Items/VISRC_OutputPortItem';
 import VISRC_WorkflowJobItem from './Items/VISRC_WorkflowJobItem';
+import VISRC_ResourceItem from './Items/VISRC_ResourceItem';
+import VISRC_ResourceAssignmentItem from './Items/VISRC_ResourceAssignmentItem';
 
 /**
  * Main Workspace class.
@@ -27,10 +29,13 @@ class VISRC_Workspace
             IDLE: 0,
             BUSY: 1,
             GRABBED_WORKFLOWJOBITEM: 2,
-            CREATING_CONNECTION: 3
+            CREATING_CONNECTION: 3,
+            GRABBED_RESOURCEITEM: 4,
+            CREATING_RESOURCEASSIGNMENT: 5
         };
         this._state = this._STATES.IDLE;
         this._selectedOutputPortItem = null;
+        this._selectedResourceItem = null;
 
         paper.setup(aCanvasElementId);
         paper.handleMouseEvent = aData => this._handleMouseEvent(aData);
@@ -44,6 +49,7 @@ class VISRC_Workspace
         var workflowJobItemHeight = canvasHeight * 0.1;
         var inputPortItemWidth = workflowJobItemHeight * 0.2;
         var inputPortItemHeight = workflowJobItemWidth * 0.1;
+        var resourceItemDimension = workflowJobItemWidth * 0.5;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 
@@ -59,7 +65,14 @@ class VISRC_Workspace
                 new paper.Point(0, inputPortItemHeight), 
                 new paper.Point(0, 0)
             ],
-            connection: [new paper.Point(0, 0), new paper.Point(1, 0)]
+            connection: [new paper.Point(0, 0), new paper.Point(1, 0)],
+            resourceItem: [
+                new paper.Point(resourceItemDimension * 0.5, 0),
+                new paper.Point(resourceItemDimension, resourceItemDimension * 0.5),
+                new paper.Point(resourceItemDimension * 0.5, resourceItemDimension),
+                new paper.Point(0, resourceItemDimension * 0.5),
+                new paper.Point(resourceItemDimension * 0.5, 0)
+            ]
         };
     }
 
@@ -71,6 +84,9 @@ class VISRC_Workspace
      */
     _handleMouseEvent(aData)
     {
+        // todo debug
+        console.log(aData.event.type);
+        console.log(this._state);
         switch (this._state)
         {
             case this._STATES.IDLE:
@@ -91,9 +107,21 @@ class VISRC_Workspace
                 break;
             }
 
+            case this._STATES.GRABBED_RESOURCEITEM:
+            {
+                this._handleStateGrabbedResourceItem(aData);
+                break;
+            }
+
             case this._STATES.CREATING_CONNECTION:
             {
                 this._handleStateCreatingConnection(aData);
+                break;
+            }
+
+            case this._STATES.CREATING_RESOURCEASSIGNMENT:
+            {
+                this._handleStateCreatingResourceAssignment(aData);
                 break;
             }
 
@@ -110,9 +138,16 @@ class VISRC_Workspace
      */
     _handleStateIdle(aData)
     {
-        if (aData.event.type == "mousedown" && aData.item instanceof VISRC_WorkflowJobItem)
+        if (aData.event.type == "mousedown")
         {
-            this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;
+            if (aData.item instanceof VISRC_WorkflowJobItem)
+            {
+                this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;  
+            }
+            else if (aData.item instanceof VISRC_ResourceItem)
+            {
+                this._state = this._STATES.GRABBED_RESOURCEITEM;  
+            }
         }
         else if (aData.event.type == "click")
         {
@@ -120,6 +155,15 @@ class VISRC_Workspace
             {
                 this._selectedOutputPortItem = aData.item;
                 this._state = this._STATES.CREATING_CONNECTION; 
+            }
+            else if (aData.item instanceof VISRC_ResourceItem)
+            {
+                this._selectedResourceItem = aData.item;
+                this._state = this._STATES.CREATING_RESOURCEASSIGNMENT; 
+            }
+            else if (aData.item instanceof VISRC_WorkflowJobItem)
+            {
+                this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: aData.item._associatedModel});
             }
         }
     }
@@ -143,7 +187,25 @@ class VISRC_Workspace
             {
                 aData.item.move(aData.event.delta);
             }
-            else if (aData.event.type == "mouseup")
+            else
+            {
+                this._state = this._STATES.IDLE;
+            }
+        }
+    }
+
+    /**
+     * Handle grabbed resourceitem state.
+     */
+    _handleStateGrabbedResourceItem(aData)
+    {
+        if (aData.item instanceof VISRC_ResourceItem)
+        {
+            if (aData.event.type == "mousemove")
+            {
+                aData.item.move(aData.event.delta);
+            }
+            else
             {
                 this._state = this._STATES.IDLE;
             }
@@ -157,13 +219,30 @@ class VISRC_Workspace
     {
         if (aData.event.type == "click")
         {
-            if (aData.item instanceof VISRC_InputPortItem)
+            if (aData.item instanceof VISRC_InputPortItem && !aData.item.hasConnectionItem())
             {
                 this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: aData.item._associatedModel, 
                                                                                                  outputport: this._selectedOutputPortItem._associatedModel});
-                this._selectedOutputPortItem = null;
-                this._state = this._STATES.IDLE;
             }
+            this._selectedOutputPortItem = null;
+            this._state = this._STATES.IDLE;
+        }
+    }
+
+    /**
+     * Handle creating resource assignment state.
+     */
+    _handleStateCreatingResourceAssignment(aData)
+    {
+        if (aData.event.type == "click")
+        {
+            if (aData.item instanceof VISRC_InputPortItem && !aData.item.hasConnectionItem())
+            {
+                this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_RESOURCEASSIGNMENT, {inputport: aData.item._associatedModel, 
+                                                                                                         resource: this._selectedResourceItem._associatedModel});
+            }
+            this._selectedResourceItem = null;
+            this._state = this._STATES.IDLE;
         }
     }
 
@@ -178,10 +257,12 @@ class VISRC_Workspace
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT, aReturn => this._handleCommandAddResourceAssignment(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCE, aReturn => this._handleCommandAddResourceItem(aReturn));
     }
 
     /**
@@ -239,6 +320,25 @@ class VISRC_Workspace
     _handleCommandAddConnection(aReturn)
     {
         this._createConnectionItem(aReturn.connection, aReturn.inputport, aReturn.outputport);
+        paper.view.draw();
+    }
+
+    /**
+     * Handle resource add.
+     */
+    _handleCommandAddResourceItem(aReturn)
+    {
+        this._createResourceItem(aReturn.resource);
+        paper.view.draw();
+    }
+
+    /**
+     * Handle resource assignment add.
+     */
+    _handleCommandAddResourceAssignment(aReturn)
+    {
+        this._createResourceAssignmentItem(aReturn.resourceassignment, aReturn.resource, aReturn.inputport);
+        paper.view.draw();
     }
 
     /**
@@ -280,6 +380,29 @@ class VISRC_Workspace
         // Associate the ports with the connection.
         aInputPort.paperItem.setConnectionItem(aModel.paperItem);
         aOutputPort.paperItem.addConnectionItem(aModel.paperItem);
+    }
+
+    /**
+     * Creates a resource item.
+     */
+    _createResourceItem(aModel)
+    {
+        aModel.paperItem = new VISRC_ResourceItem({segments: this._segments.resourceItem,
+                                                     model: aModel});
+    }
+
+    /**
+     * Creates a resource assignment.
+     */
+    _createResourceAssignmentItem(aModel, aResource, aInputPort)
+    {
+        aModel.paperItem = new VISRC_ResourceAssignmentItem({segments: this._segments.connection,
+                                                             resource: aResource, 
+                                                             inputPort: aInputPort});
+
+        // Associate the ports with the connection.
+        aResource.paperItem.addConnectionItem(aModel.paperItem);
+        aInputPort.paperItem.setConnectionItem(aModel.paperItem);
     }
 }
 

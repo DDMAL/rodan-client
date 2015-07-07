@@ -3,12 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../../Shared/VISRC_Events';
+import VISRC_BaseModel from './VISRC_BaseModel';
 
 /**
- * This class represents the view for editing a workflow job.
+ * Resource assignment.
  */
-class VISRC_ViewWorkflowJob extends Marionette.ItemView
+class VISRC_ResourceAssignment extends VISRC_BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,24 +18,12 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            "all": "render"
-        };
-        this.model = aParameters.workflowjob;
-        this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflowjob_individual";
+        //this.routeName = "connections";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel("rodan");
-    }
 }
 
-export default VISRC_ViewWorkflowJob;
+export default VISRC_ResourceAssignment;

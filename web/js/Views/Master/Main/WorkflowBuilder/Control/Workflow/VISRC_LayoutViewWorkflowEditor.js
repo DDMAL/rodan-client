@@ -13,6 +13,7 @@ import VISRC_LayoutViewControlWorkflowJob from './WorkflowJob/VISRC_LayoutViewCo
 import VISRC_WorkflowJob from '../../../../../../Models/VISRC_WorkflowJob';
 import VISRC_InputPort from '../../../../../../Models/VISRC_InputPort';
 import VISRC_OutputPort from '../../../../../../Models/VISRC_OutputPort';
+import VISRC_ResourceAssignment from '../../../../../../Models/VISRC_ResourceAssignment';
 
 /**
  * This class represents the controller for editing a Workflow.
@@ -62,6 +63,7 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW, () => this._handleCommandRunWorkflow());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddResourceAssignment(aPass));
 
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT, () => this._handleCommandShowControlResourceAssignmentView());
@@ -139,7 +141,6 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddInputPort(aPass)
     {
-        // TODO - need to check if too many input ports
         var port = this._createInputPort(aPass.inputporttype, this._workflowJob);
     }
 
@@ -148,7 +149,6 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddOutputPort(aPass)
     {
-        // TODO - need to check if too many input ports
         var port = this._createOutputPort(aPass.outputporttype, this._workflowJob);
     }
 
@@ -182,6 +182,14 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandValidateWorkflow()
     {
         this._workflow.save({valid: true}, {patch: true, error: this._handleResponseValidateError, success: this._handleResponseValidateSuccess});
+    }
+
+    /**
+     * Handle add resource assignment.
+     */
+    _handleCommandAddResourceAssignment(aPass)
+    {
+        this._createResourceAssignment(aPass.resource, aPass.inputport);
     }
 
     /**
@@ -283,6 +291,16 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         connection.save();
         this._workflow.get("connections").add(connection);
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
+    }
+
+    /**
+     * Create resource assignment.
+     */
+    _createResourceAssignment(aResource, aInputPort)
+    {
+        var resourceAssignment = new VISRC_ResourceAssignment();
+        // todo
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKSPACE_ADD_ITEM_RESOURCEASSIGNMENT, {resourceassignment: resourceAssignment, resource: aResource, inputport: aInputPort});
     }
 }
 
