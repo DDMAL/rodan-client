@@ -1,0 +1,44 @@
+import $ from 'jquery';
+import Backbone from 'backbone';
+import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
+
+/**
+ * Base controller.
+ */
+class VISRC_BaseController
+{
+///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Constructor.
+     */
+    constructor(aOptions)
+    {
+        this._rodanChannel = Radio.channel("rodan");
+        this._initializeViews();
+        this._initializeRadio();
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        console.log("TODO - this must be implemented in the inheriting class");
+    }
+
+    /**
+     * Initialize views.
+     */
+    _initializeViews()
+    {
+        console.log("TODO - this must be implemented in the inheriting class");
+    }
+}
+
+export default VISRC_BaseController;

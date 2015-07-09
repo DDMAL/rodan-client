@@ -7,22 +7,22 @@ import VISRC_Events from '../../../../Shared/VISRC_Events'
 import VISRC_LayoutViewResource from './VISRC_LayoutViewResource';
 import VISRC_ViewResource from './Individual/VISRC_ViewResource';
 import VISRC_ViewResourceList from './List/VISRC_ViewResourceList';
+import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
 /**
  * Controller for Resource views.
  */
-class VISRC_ViewResourceController extends Marionette.LayoutView
+class VISRC_ResourceController extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initializer.
+     * Basic constructor.
      */
-    initialize(aOptions)
+    constructor(aOptions)
     {
-        this._initializeViews();
-        this._initializeRadio();
+        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -33,9 +33,8 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, () => this._handleEventListSelected());
-        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, aPass => this._handleEventItemSelected(aPass));
+        this._rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, aPass => this._handleEventItemSelected(aPass));
     }
 
     /**
@@ -43,8 +42,8 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.layoutView = new VISRC_LayoutViewResource();
-        this.viewList = new VISRC_ViewResourceList();
+        this._layoutView = new VISRC_LayoutViewResource();
+        this._viewList = new VISRC_ViewResourceList();
     }
 
     /**
@@ -53,13 +52,13 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
     _handleEventListSelected()
     {
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
 
         // Tell the layout view what to render.
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
-        this.viewList.isDestroyed = false;
-        this.layoutView.showList(this.viewList);
+        this._viewList.isDestroyed = false;
+        this._layoutView.showList(this._viewList);
     }
 
     /**
@@ -68,13 +67,13 @@ class VISRC_ViewResourceController extends Marionette.LayoutView
     _handleEventItemSelected(aPass)
     {
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
 
         // Tell the layout view what to render.
         // TODO - don't want to do this...
-        this.viewItem = new VISRC_ViewResource(aPass);
-        this.layoutView.showItem(this.viewItem);
+        this._viewItem = new VISRC_ViewResource(aPass);
+        this._layoutView.showItem(this._viewItem);
     }
 }
 
-export default VISRC_ViewResourceController;
+export default VISRC_ResourceController;

@@ -38,20 +38,20 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCES: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT',   // Called when resource assignment control view needs to be shown. No pass.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE', // Called on resource selection. Passes {resource: VISRC_Resource}.
 
-    // WorkflowBuilder commands. These events tell the workspace what needs to be done. The WorkflowBuilder sends these commands.
-    COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOW: 'COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WorkflowBuilder_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: VISRC_WorkflowJob}.
-    COMMAND__WorkflowBuilder_UPDATE_ITEM_WORKFLOWJOB: 'COMMAND__WorkflowBuilder_UPDATE_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be updated. Passes {workflowJob: VISRC_WorkflowJob}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_CONNECTION: 'COMMAND__WorkflowBuilder_ADD_ITEM_CONNECTION', // Called when connection needs to be added to workflow. Passed {connection: VISRC_Connection, inputport: VISRC_InputPort, outputport: VISRC_OutputPort}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_INPUTPORT: 'COMMAND__WorkflowBuilder_ADD_ITEM_INPUTPORT', // Called when input port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_OUTPUTPORT: 'COMMAND__WorkflowBuilder_ADD_ITEM_OUTPUTPORT', // Called when output port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
-    COMMAND__WorkflowBuilder_DELETE_ITEM_INPUTPORT: 'COMMAND__WorkflowBuilder_DELETE_ITEM_INPUTPORT', // Called when input port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
-    COMMAND__WorkflowBuilder_DELETE_ITEM_OUTPUTPORT: 'COMMAND__WorkflowBuilder_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCE: 'COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCE', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resource: VISRC__Resource}.
-    COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCEASSIGNMENT: 'COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCEASSIGNMENT', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resourceassignment: VISRC_ResourceAssignment, resource: VISRC_Resource, inputport: VISRC_InputPort}.
-    COMMAND__WorkflowBuilder_ZOOM_IN: 'COMMAND__WorkflowBuilder_ZOOM_IN', // Called when request workspace zoom in. No pass.
-    COMMAND__WorkflowBuilder_ZOOM_OUT: 'COMMAND__WorkflowBuilder_ZOOM_OUT', // Called when request workspace zoom out. No pass.
-    COMMAND__WorkflowBuilder_ZOOM_RESET: 'COMMAND__WorkflowBuilder_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
+    // WORKFLOWBUILDER commands. These events tell the workspace what needs to be done. The WORKFLOWBUILDER sends these commands.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: VISRC_WorkflowJob}.
+    COMMAND__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be updated. Passes {workflowJob: VISRC_WorkflowJob}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION', // Called when connection needs to be added to workflow. Passed {connection: VISRC_Connection, inputport: VISRC_InputPort, outputport: VISRC_OutputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT', // Called when input port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT', // Called when output port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT', // Called when input port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resource: VISRC__Resource}.
+    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCEASSIGNMENT: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCEASSIGNMENT', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resourceassignment: VISRC_ResourceAssignment, resource: VISRC_Resource, inputport: VISRC_InputPort}.
+    COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN', // Called when request workspace zoom in. No pass.
+    COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT', // Called when request workspace zoom out. No pass.
+    COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -84,13 +84,11 @@ var VISRC_Events = {
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: VISRC_Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED', // Called on workflows selection. No pass.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED', // Called on workflow run selection. Passes {project: VISRC_WorkflowRun}.
+    EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED', // Called on workflow runs selection. No pass.
 
-    // WorkflowBuilder events.
+    // WORKFLOWBUILDER events.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED', // Called when WorkflowJob selected for editing. Passes {workflowjob: VISRC_WorkflowJob}.
-
-    // WorkflowRunner events.
-    EVENT__WORKFLOWRUNNER_SELECTED: '', // Called on workflow runner opening. Passes {workflowrun: VISRC_WorkflowRun}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // REQUESTS

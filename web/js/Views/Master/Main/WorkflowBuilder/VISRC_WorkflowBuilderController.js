@@ -119,7 +119,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomIn()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_IN);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
     }
     
     /**
@@ -127,7 +127,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomOut()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_OUT);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
     }
     
     /**
@@ -135,7 +135,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomReset()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ZOOM_RESET);
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

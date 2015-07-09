@@ -60,7 +60,7 @@ class VISRC_ViewResourceAssignmentListItem extends Marionette.ItemView
      */
     _handleButtonAddResource()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WorkflowBuilder_ADD_ITEM_RESOURCE, {resource: this.model});
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE, {resource: this.model});
     }
 }
 

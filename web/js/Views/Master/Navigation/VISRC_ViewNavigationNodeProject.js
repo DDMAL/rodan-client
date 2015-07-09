@@ -78,7 +78,7 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationWorkflowRuns()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUNNER_SELECTED, {workflow: null});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUNS_SELECTED);
     }
 }
 

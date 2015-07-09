@@ -3,27 +3,27 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../Shared/VISRC_Events'
-import VISRC_ViewProjectList from './List/VISRC_ViewProjectList'
-import VISRC_ViewProject from './Individual/VISRC_ViewProject'
+import VISRC_Events from '../../../../Shared/VISRC_Events';
+import VISRC_ViewProjectList from './List/VISRC_ViewProjectList';
+import VISRC_ViewProject from './Individual/VISRC_ViewProject';
 import VISRC_Project from '../../../../Models/VISRC_Project';
+import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
 /**
- * 'Controller' for all Project views.
+ * Controller for all Project views.
  */
-class VISRC_ViewProjectController extends Marionette.LayoutView
+class VISRC_ProjectController extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Basic constructor.
      */
-    initialize(aOptions)
+    constructor(aOptions)
     {
-        this._initializeViews();
-        this._initializeRadio();
-        this.activeProject = null;
+        super(aOptions);
+        this._activeProject = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -34,11 +34,10 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
-        this.rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
+        this._rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
+        this._rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
+        this._rodanChannel.comply(VISRC_Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
     }
 
     /**
@@ -46,8 +45,8 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewList = new VISRC_ViewProjectList();
-        this.viewItem = new VISRC_ViewProject();
+        this._viewList = new VISRC_ViewProjectList();
+        this._viewItem = new VISRC_ViewProject();
     }
 
     /**
@@ -55,8 +54,8 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleEventItemSelected(aReturn)
     {
-        this.activeProject = aReturn.project;
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewItem);
+        this._activeProject = aReturn.project;
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
     }
 
     /**
@@ -64,7 +63,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleEventListSelected()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.viewList);
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
     }
 
     /**
@@ -72,7 +71,7 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
      */
     _handleRequestProjectActive()
     {
-        return this.activeProject != null ? this.activeProject : null;
+        return this._activeProject != null ? this._activeProject : null;
     }
 
     /**
@@ -87,4 +86,4 @@ class VISRC_ViewProjectController extends Marionette.LayoutView
     }
 }
 
-export default VISRC_ViewProjectController;
+export default VISRC_ProjectController;

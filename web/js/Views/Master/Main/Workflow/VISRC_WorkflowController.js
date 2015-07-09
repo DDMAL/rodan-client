@@ -7,22 +7,22 @@ import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_LayoutViewWorkflow from './VISRC_LayoutViewWorkflow';
 import VISRC_ViewWorkflow from './Individual/VISRC_ViewWorkflow';
 import VISRC_ViewWorkflowList from './List/VISRC_ViewWorkflowList';
+import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
 /**
- * Controller for all Workflow-based views.
+ * Controller for all Workflow views.
  */
-class VISRC_ViewWorkflowController extends Marionette.LayoutView
+class VISRC_WorkflowController extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initializer.
+     * Basic constructor.
      */
-    initialize(aOptions)
+    constructor(aOptions)
     {
-        this._initializeViews();
-        this._initializeRadio();
+        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -33,9 +33,8 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, () => this._handleEventListSelected());
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
+        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
@@ -43,9 +42,9 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.layoutView = new VISRC_LayoutViewWorkflow();
-        this.viewList = new VISRC_ViewWorkflowList();
-        this.viewItem = new VISRC_ViewWorkflow();
+        this._layoutView = new VISRC_LayoutViewWorkflow();
+        this._viewList = new VISRC_ViewWorkflowList();
+        this._viewItem = new VISRC_ViewWorkflow();
     }
 
     /**
@@ -54,13 +53,13 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     _handleEventListSelected()
     {
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
 
         // Tell the layout view what to render.
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
-        this.viewList.isDestroyed = false;
-        this.layoutView.showList(this.viewList);
+        this._viewList.isDestroyed = false;
+        this._layoutView.showList(this._viewList);
     }
 
     /**
@@ -69,14 +68,14 @@ class VISRC_ViewWorkflowController extends Marionette.LayoutView
     _handleEventItemSelected()
     {
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
 
         // Tell the layout view what to render.
         // TODO - don't want to do this, but for some reason my views get destroyed when
         // the containing region is destroyed!
-        this.viewItem.isDestroyed = false;
-        this.layoutView.showItem(this.viewItem);
+        this._viewItem.isDestroyed = false;
+        this._layoutView.showItem(this._viewItem);
     }
 }
 
-export default VISRC_ViewWorkflowController;
+export default VISRC_WorkflowController;

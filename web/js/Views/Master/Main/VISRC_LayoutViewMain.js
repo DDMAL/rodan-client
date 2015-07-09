@@ -4,10 +4,10 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
-import VISRC_ViewProjectController from './Project/VISRC_ViewProjectController';
-import VISRC_ViewResourceController from './Resource/VISRC_ViewResourceController';
-import VISRC_ViewWorkflowController from './Workflow/VISRC_ViewWorkflowController';
-import VISRC_ViewWorkflowRunController from './WorkflowRun/VISRC_ViewWorkflowRunController';
+import VISRC_ProjectController from './Project/VISRC_ProjectController';
+import VISRC_ResourceController from './Resource/VISRC_ResourceController';
+import VISRC_WorkflowController from './Workflow/VISRC_WorkflowController';
+import VISRC_WorkflowRunController from './WorkflowRun/VISRC_WorkflowRunController';
 import VISRC_WorkflowBuilderController from './WorkflowBuilder/VISRC_WorkflowBuilderController';
 
 /**
@@ -40,10 +40,10 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.viewProjectController = new VISRC_ViewProjectController();
-        this.viewResourceController = new VISRC_ViewResourceController();
-        this.viewWorkflowController = new VISRC_ViewWorkflowController();
-        this.viewWorkflowRunController = new VISRC_ViewWorkflowRunController();
+        this.projectController = new VISRC_ProjectController();
+        this.resourceController = new VISRC_ResourceController();
+        this.workflowController = new VISRC_WorkflowController();
+        this.workflowRunController = new VISRC_WorkflowRunController();
         this.workflowBuilderController = new VISRC_WorkflowBuilderController();
     }
 
