@@ -15,8 +15,6 @@ var VISRC_Events = {
     COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
 
-    COMMAND__NEW_PROJECT: 'COMMAND__NEW_PROJECT', // Requests new project. Takes nothing.
-
     COMMAND__AUTHENTICATION_LOGIN: 'COMMAND__AUTHENTICATION_LOGIN',
     COMMAND__LAYOUTVIEW_SHOW: 'COMMAND__LAYOUTVIEW_SHOW',
 
@@ -38,7 +36,7 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCES: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT',   // Called when resource assignment control view needs to be shown. No pass.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE', // Called on resource selection. Passes {resource: VISRC_Resource}.
 
-    // WORKFLOWBUILDER commands. These events tell the workspace what needs to be done. The WORKFLOWBUILDER sends these commands.
+    // Workflow builder GUI commands. These events tell the workspace what needs to be done. The GUI sends these commands.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: VISRC_WorkflowJob}.
     COMMAND__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be updated. Passes {workflowJob: VISRC_WorkflowJob}.

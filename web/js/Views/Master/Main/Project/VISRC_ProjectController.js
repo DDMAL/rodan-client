@@ -6,7 +6,6 @@ import Radio from 'backbone.radio';
 import VISRC_Events from '../../../../Shared/VISRC_Events';
 import VISRC_ViewProjectList from './List/VISRC_ViewProjectList';
 import VISRC_ViewProject from './Individual/VISRC_ViewProject';
-import VISRC_Project from '../../../../Models/VISRC_Project';
 import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
 /**
@@ -72,17 +71,6 @@ class VISRC_ProjectController extends VISRC_BaseController
     _handleRequestProjectActive()
     {
         return this._activeProject != null ? this._activeProject : null;
-    }
-
-    /**
-     * Handle command for new project
-     */
-    _handleCommandNewProject(aReturn)
-    {
-        // Note - we have to create this way since a collection add requires some attributes to be set
-        // that aren't set until the instance is created on the database.
-        var project = new VISRC_Project(aReturn);
-        project.save();
     }
 }
 

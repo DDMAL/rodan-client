@@ -21,6 +21,14 @@ class VISRC_Project extends VISRC_BaseModel
         this.routeName = "projects";
     }
 
+    defaults()
+    {
+        return {creator: {username: null},
+                created: null,
+                workflow_count: null,
+                resource_count: null};
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

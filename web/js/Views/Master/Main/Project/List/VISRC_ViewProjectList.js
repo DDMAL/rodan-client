@@ -3,8 +3,9 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
-import VISRC_ViewProjectListItem from './VISRC_ViewProjectListItem'
+import VISRC_Events from '../../../../../Shared/VISRC_Events';
+import VISRC_ViewProjectListItem from './VISRC_ViewProjectListItem';
+import VISRC_Project from '../../../../../Models/VISRC_Project';
 
 /**
  * This class represents the view (and controller) for the project list.
@@ -63,7 +64,9 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     _handleButtonNewProject()
     {
         var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
-        this.rodanChannel.command(VISRC_Events.COMMAND__NEW_PROJECT, {name: "untitled"});
+        var project = new VISRC_Project({name: "untitled", creator: user});
+        project.save();
+        this.collection.add(project);
     }
 }
 

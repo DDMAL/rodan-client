@@ -23,6 +23,11 @@ class VISRC_Resource extends VISRC_BaseModel
         this.routeName = "resources";
     }
 
+    defaults()
+    {
+        return {resource_type: null};
+    }
+
     /**
      * Set the resource type.
      */
