@@ -37,7 +37,7 @@ class VISRC_WorkflowRunController extends VISRC_BaseController
     {
         this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUNS_SELECTED, () => this._handleEventListSelected());
         this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, aPass => this._handleEventItemSelected(aPass));
-        this._rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, aPass => this._handleCommandCreateWorkflowRun(aPass));
+        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, aPass => this._handleCommandCreateWorkflowRun(aPass));
     }
 
     /**

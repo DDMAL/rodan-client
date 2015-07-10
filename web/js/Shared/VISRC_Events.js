@@ -52,8 +52,10 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT', // Called when request workspace zoom out. No pass.
     COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
 
-    // WorkflowRun instantiator commands.
-    COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN: 'COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN', // Called when workflow run requested. Passes {workflow: VISRC_Workflow}.
+    // WorkflowRun creator commands.
+    COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN: 'COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN', // Called when workflow run requested. Passes object containing various data for WorkflowRun (name, description, etc).
+    COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT: 'COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT', // Called when resource assignment add requested. Passes {inputport: VISRC_InputPort, resource: VISRC_Resource}.
+    COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT: 'COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT', // Called when resource assignment remove requested. Passes {inputport: VISRC_InputPort, resource: VISRC_Resource}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // EVENTS
@@ -89,6 +91,11 @@ var VISRC_Events = {
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED', // Called when WorkflowJob selected for editing. Passes {workflowjob: VISRC_WorkflowJob}.
 
+    // WorkflowRun Creator events.
+    EVENT__WORKFLOWRUNCREATOR_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_SELECTED', // Called on workflowrun creator opening. Passes {workflow: VISRC_Workflow}.
+    EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED', // Called when an InputPort has been selected. Passes {inputport: VISRC_InputPort}.
+    EVENT__WORKFLOWRUNCREATOR_RESOURCE_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_RESOURCE_SELECTED', // Called when an Resource has been selected. Passes {resource: VISRC_Resource}.
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // REQUESTS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +121,10 @@ var VISRC_Events = {
 
     REQUEST__APPLICATION: 'REQUEST_APPLICATION',
     REQUEST__USER: 'REQUEST__USER',
-    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE'
+    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',
+
+    // WorkflowRun Creator requests.
+    REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT' // Returns true iff RA exists for provided inputport and resource.
 };
 
 export default VISRC_Events;

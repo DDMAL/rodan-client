@@ -3,13 +3,12 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events';
-import VISRC_ViewResourceListItem from './VISRC_ViewResourceListItem';
+import VISRC_Events from '../../../../../Shared/VISRC_Events';
 
 /**
- * This class represents the view (and controller) for the resource list.
+ * This class represents the basic data for a Workflow.
  */
-class VISRC_ViewResourceList extends Marionette.CompositeView
+class VISRC_ViewWorkflowRunData extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,13 +22,17 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
             "all": "render"
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowrun_newworkflowrun_resource_list";
-        this.childView = VISRC_ViewResourceListItem;
-        this.childViewContainer = 'tbody';
         this._workflow = aParameters.workflow;
-        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RESOURCE);
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCES, {project: project.id});
+        this._initializeRadio();
+        this.template = "#template-main_workflowrun_newworkflowrun_data";
+        this.ui = {
+            buttonRun: '#button-workflowrun_run',
+            textName: '#text-workflowrun_name',
+            textDescription: '#text-workflowrun_description'
+        }
+        this.events = {
+            'click @ui.buttonRun': '_handleButtonRun'
+        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +45,14 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
     {
         this.rodanChannel = Radio.channel("rodan");
     }
+
+    /**
+     * Handle run button.
+     */
+    _handleButtonRun()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+    }
 }
 
-export default VISRC_ViewResourceList;
+export default VISRC_ViewWorkflowRunData;
