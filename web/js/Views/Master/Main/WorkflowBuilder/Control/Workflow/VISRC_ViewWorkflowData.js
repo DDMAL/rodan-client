@@ -77,8 +77,7 @@ class VISRC_ViewWorkflowData extends Marionette.ItemView
         }
         else
         {
-            this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT);
-            //this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW);
+            this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, {workflow: this.model});
         }
     }
 }

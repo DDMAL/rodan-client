@@ -38,6 +38,8 @@ class VISRC_InputPortCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_INPUTPORTS, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_INPUTPORT, () => this._handleRequestInstance());
     }
 
     /**

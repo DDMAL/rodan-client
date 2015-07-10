@@ -5,6 +5,7 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
 
+    COMMAND__LOAD_INPUTPORTS: 'COMMAND__LOAD_INPUTPORTS',  // Instructs loading of inputports. Takes object containing various query IDs.
     COMMAND__LOAD_INPUTPORTTYPES: 'COMMAND__LOAD_INPUTPORTTYPES',  // Instructs loading of inputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
     COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
@@ -93,6 +94,7 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
 
     // Collection request.
+    REQUEST__COLLECTION_INPUTPORT: 'REQUEST__COLLECTION_INPUTPORT',
     REQUEST__COLLECTION_INPUTPORTTYPE: 'REQUEST__COLLECTION_INPUTPORTTYPE',
     REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
     REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',

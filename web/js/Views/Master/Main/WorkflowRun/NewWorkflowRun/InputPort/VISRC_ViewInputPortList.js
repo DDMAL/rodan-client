@@ -3,12 +3,13 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../Shared/VISRC_Events'
+import VISRC_Events from '../../../../../../Shared/VISRC_Events';
+import VISRC_ViewInputPortListItem from './VISRC_ViewInputPortListItem';
 
 /**
- * This class represents the view (and controller) for the workflowrun item.
+ * This class represents a list of input ports.
  */
-class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
+class VISRC_ViewInputPortList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,20 +17,17 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize(aParameters)
     {
         this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };
-        this.template = "#template-main_workflowrun_list_item";
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aParameters);
+        this.template = "#template-main_workflowrun_newworkflowrun_inputport_list";
+        this.childView = VISRC_ViewInputPortListItem;
+        this.childViewContainer = 'tbody';
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_INPUTPORT);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_INPUTPORTS, {workflow: aParameters.workflow.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,14 +40,6 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel("rodan");
     }
-
-    /**
-     * Handles click.
-     */
-    _handleClick()
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
-    }
 }
 
-export default VISRC_ViewWorkflowRunListItem;
+export default VISRC_ViewInputPortList;
