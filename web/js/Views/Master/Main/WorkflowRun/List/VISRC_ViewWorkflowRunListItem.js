@@ -41,8 +41,6 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
     }
 
     /**
@@ -50,21 +48,7 @@ class VISRC_ViewWorkflowRunListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
-    }
-
-    /**
-     * TODO docs
-     */
-    _handleEventApplicationReady()
-    {
-    }
-
-    /**
-     * Handle authentication notification.
-     */
-    _handleAuthenticationSuccess(aUser)
-    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
 }
 

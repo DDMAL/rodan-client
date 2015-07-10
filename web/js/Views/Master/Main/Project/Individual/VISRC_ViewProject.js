@@ -35,6 +35,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
         this.template = "#template-main_project_individual";
         this.childView = VISRC_ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
     }
 
     /**
@@ -63,7 +64,6 @@ class VISRC_ViewProject extends Marionette.CompositeView
     _handleEventItemSelected(aReturn)
     {
         this.model = aReturn.project;
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {project: this.model.id});
     }
 

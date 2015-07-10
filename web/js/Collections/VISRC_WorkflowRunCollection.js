@@ -38,7 +38,6 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN, () => this._handleRequestInstance());
     }
 
@@ -47,6 +46,7 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'workflowruns');
         this.fetch({ data: $.param(aQueryParameters) });
     }
 
@@ -56,15 +56,6 @@ class VISRC_WorkflowRunCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Handles application ready notification.
-     */
-    _handleEventApplicationReady()
-    {
-        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('workflowruns');
     }
 }
 

@@ -4,9 +4,11 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
-import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
-import VISRC_ViewJob from './Control/Individual/VISRC_ViewJob';
-import VISRC_ViewJobList from './Control/List/VISRC_ViewJobList';
+import VISRC_ViewControlWorkflowList from './Control/WorkflowList/VISRC_ViewControlWorkflowList';
+import VISRC_LayoutViewWorkflowEditor from './Control/Workflow/VISRC_LayoutViewWorkflowEditor';
+import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
+
+import VISRC_WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/VISRC_WorkflowBuilder';
 
 /**
  * Controller for the Workflow Builder.
@@ -21,8 +23,23 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
+        this.addRegions({
+            regionControl: "#region-main_workflowbuilder_control"
+        });
+        this.template = "#template-main_workflowbuilder";
+        this.ui = {
+            buttonZoomIn: '#button-zoom_in',
+            buttonZoomOut: '#button-zoom_out',
+            buttonZoomReset: '#button-zoom_reset'
+        }
+        this.events = {
+            'click @ui.buttonZoomIn': '_handleButtonZoomIn',
+            'click @ui.buttonZoomOut': '_handleButtonZoomOut',
+            'click @ui.buttonZoomReset': '_handleButtonZoomReset'
+        };
         this._initializeViews();
         this._initializeRadio();
+        this._workspace = new VISRC_WorkflowBuilder();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -34,8 +51,9 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
-        this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
     }
 
     /**
@@ -43,8 +61,23 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.layoutView = new VISRC_LayoutViewWorkflowBuilder();
-        this.jobListView = new VISRC_ViewJobList();
+        this.controlWorkflowListView = new VISRC_ViewControlWorkflowList();
+        this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor();
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - view controls
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * TODO
+     */
+    _showView(aView)
+    {
+        // Tell the layout view what to render.
+        // TODO - don't want to do this, but for some reason my views get destroyed when
+        // the containing region is destroyed!
+        aView.isDestroyed = false;
+        this.regionControl.show(aView, {preventDestroy: true});
     }
 
     /**
@@ -53,24 +86,69 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _handleEventBuilderSelected(aReturn)
     {
         // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.layoutView);
+        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
 
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.jobListView.isDestroyed = false;
-        this.layoutView.showControlJobList(this.jobListView);
+        // Get the workflow.
+        if (aReturn.workflow != null)
+        {
+            this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: aReturn.workflow});
+            this._showView(this.controlWorkflowView);
+        }
+        else
+        {
+            this._showView(this.controlWorkflowListView);
+        }
+
+        // Initialize the workspace.
+        this._workspace.initialize("canvas-workspace");
+    }
+    
+    /**
+     * Handle command show workflow.
+     */
+    _handleCommandAddWorkflow()
+    {
+        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+        var workflow = this._createWorkflow(project);
+        this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: workflow});
+        this._showView(this.controlWorkflowView);
+    }
+    
+    /**
+     * Handle button zoom in.
+     */
+    _handleButtonZoomIn()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
+    }
+    
+    /**
+     * Handle button zoom out.
+     */
+    _handleButtonZoomOut()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
+    }
+    
+    /**
+     * Handle button zoom reset.
+     */
+    _handleButtonZoomReset()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - workflow object controls
+///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle selection.
+     * Create workflow.
      */
-    _handleEventJobSelected(aReturn)
+    _createWorkflow(aProject)
     {
-        // TODO - I don't want to instantiate a view every time, but Marionette doesn't rerender a view if the ENTIRE model
-        // is replaced. I should find a better way to do this so I can reuse the same ItemView again and again.
-        this.jobView = new VISRC_ViewJob(aReturn);
-        this.layoutView.showControlJob(this.jobView);
+        var workflow =  new VISRC_Workflow({project: aProject.get("url"), name: "untitled"});
+        workflow.save();
+        return workflow;
     }
 }
 

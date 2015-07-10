@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 
 import VISRC_BaseModel from './VISRC_BaseModel';
 
@@ -15,10 +16,9 @@ class VISRC_User extends VISRC_BaseModel
     /**
      * TODO docs
      */
-    constructor(data)
+    initialize(aParameters)
     {
-        this.idAttribute = 'uuid';
-        super(data);
+        this.routeName = "users";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

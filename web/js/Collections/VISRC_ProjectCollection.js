@@ -37,7 +37,6 @@ class VISRC_ProjectCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_PROJECTS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_PROJECT, () => this._handleRequestInstance());
     }
@@ -47,7 +46,8 @@ class VISRC_ProjectCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
-        this.fetch({ data: $.param(aQueryParameters) });
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'projects');
+        this.fetch();//{ data: $.param(aQueryParameters) });
     }
 
     /**
@@ -56,15 +56,6 @@ class VISRC_ProjectCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Handles application ready notification.
-     */
-    _handleEventApplicationReady()
-    {
-        var appInstance = this.rodanChannel.request(VISRC_Events.REQUEST__APPLICATION);
-        this.url = appInstance.controllerServer.routeForRouteName('projects');
     }
 }
 

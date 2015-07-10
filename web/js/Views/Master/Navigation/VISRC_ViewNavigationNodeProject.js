@@ -27,13 +27,13 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
             navigationProject: '#navigation-project',
             navigationResources: '#navigation-resources',
             navigationBuilder: '#navigation-builder',
-            navigationAnalysisRuns: '#navigation-analysis_runs'
+            navigationWorkflowRuns: '#navigation-workflowruns'
         }
         this.events = {
             'click @ui.navigationProject': '_handleClickNavigationProject',
             'click @ui.navigationResources': '_handleClickNavigationResources',
             'click @ui.navigationBuilder': '_handleClickNavigationBuilder',
-            'click @ui.navigationAnalysisRuns': '_handleClickNavigationAnalysisRuns'
+            'click @ui.navigationWorkflowRuns': '_handleClickNavigationWorkflowRuns'
         };
         this._initializeRadio();
     }
@@ -70,15 +70,15 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _handleClickNavigationBuilder()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflowId: -1});
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
     }
 
     /**
-     * Handle click on nav analysis runs.
+     * Handle click on nav workflow runs.
      */
-    _handleClickNavigationAnalysisRuns()
+    _handleClickNavigationWorkflowRuns()
     {
-        alert('not yet implemented');
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUNS_SELECTED);
     }
 }
 

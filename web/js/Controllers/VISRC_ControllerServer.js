@@ -69,6 +69,33 @@ class VISRC_ControllerServer extends Marionette.Object
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(VISRC_Events.COMMAND__GET_ROUTES, () => this._getRoutes());
+        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_ROUTE, aString => this._handleRequestServerRoute(aString));
+        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
+        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
+    }
+
+    /**
+     * Returns associated route.
+     */
+    _handleRequestServerRoute(aString)
+    {
+        return this.routeForRouteName(aString);
+    }
+
+    /**
+     * Returns server hostname.
+     */
+    _handleRequestServerHostname()
+    {
+        return this.configuration.server;
+    }
+
+    /**
+     * Returns server version - Rodan.
+     */
+    _handleRequestServerVersionRodan()
+    {
+        return this.version;
     }
 
     /*
@@ -89,6 +116,7 @@ class VISRC_ControllerServer extends Marionette.Object
 
                 this.routes = mapFromJsonObject(resp.routes);
                 this.serverConfiguration = mapFromJsonObject(resp.configuration);
+                this.version = resp.version;
                 this.rodanChannel.trigger(VISRC_Events.EVENT__ROUTESLOADED);
             }
             else

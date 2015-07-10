@@ -22,6 +22,17 @@ class VISRC_ViewWorkflow extends Marionette.CompositeView
         this.modelEvents = {
             "all": "render"
         };
+        this.ui = {
+            workflowDuplicate: '#workflow-duplicate',
+            workflowEdit: '#workflow-edit',
+            workflowDelete: '#workflow-delete'
+
+        }
+        this.events = {
+            'click @ui.workflowDuplicate': '_handleButtonWorkflowDuplicate',
+            'click @ui.workflowEdit': '_handleButtonWorkflowEdit',
+            'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
+        };
         this._initializeRadio();
         this.template = "#template-main_workflow_individual";
         this.childView = VISRC_ViewWorkflowRunListItem;
@@ -56,6 +67,34 @@ class VISRC_ViewWorkflow extends Marionette.CompositeView
         this.model = aReturn.workflow;
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {workflow: this.model.id});
+    }
+
+    /**
+     * Handle button workflow duplicate.
+     */
+    _handleButtonWorkflowDuplicate()
+    {
+        alert("not implemented");
+    }
+
+    /**
+     * Handle button workflow edit.
+     */
+    _handleButtonWorkflowEdit()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
+    }
+
+    /**
+     * Handle button workflow delete.
+     */
+    _handleButtonWorkflowDelete()
+    {// TODO fix
+        var confirmation = confirm("Are you sure you want to delete workflow '" + this.model.attributes.name + "'?");
+        if (confirmation)
+        {
+            this.model.destroy();
+        }
     }
 }
 

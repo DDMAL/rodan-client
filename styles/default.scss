@@ -33,9 +33,12 @@ div.bottom {
  *************************************************************************************/
 $background-color-main: #00ff00;
 $background-color-navigation: #aaaaff;
-$background-color-status: #ff0000;
+$background-color-status_user: #ff0000;
+$background-color-status_message: #ffff00;
+$background-color-status_server: #6666ff;
 $background-color-workflowbuilder-workspace: #ffffff;
 $background-color-workflowbuilder-control: #aaaaaa;
+$background-color-row_selected: #ffff00;
 
 div#region-navigation {
     background-color: $background-color-navigation;
@@ -48,11 +51,21 @@ div#region-main {
 }
 
 div#region-status_user {
-    background-color: $background-color-status;
+    background-color: $background-color-status_user;
     height: 100%;
 }
 
-div#region-main_workflowbuilder_workspace {
+div#region-status_message {
+    background-color: $background-color-status_message;
+    height: 100%;
+}
+
+div#region-status_server {
+    background-color: $background-color-status_server;
+    height: 100%;
+}
+
+canvas#canvas-workspace {
     background-color: $background-color-workflowbuilder-workspace;
     height: 100%;
 }
@@ -60,4 +73,8 @@ div#region-main_workflowbuilder_workspace {
 div#region-main_workflowbuilder_control {
     background-color: $background-color-workflowbuilder-control;
     height: 100%;
+}
+
+tr.highlight {
+    background-color: $background-color-row_selected;
 }
