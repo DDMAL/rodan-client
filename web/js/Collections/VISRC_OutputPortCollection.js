@@ -44,6 +44,7 @@ class VISRC_OutputPortCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'outputporttypes');
         this.fetch({ data: $.param(aQueryParameters) });
     }
 
@@ -53,14 +54,6 @@ class VISRC_OutputPortCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Handles application ready notification.
-     */
-    _handleEventApplicationReady()
-    {
-        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'outputporttypes');
     }
 }
 

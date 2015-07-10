@@ -37,7 +37,6 @@ class VISRC_ResourceTypeCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
         this.rodanChannel.comply(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(VISRC_Events.REQUEST__COLLECTION_RESOURCETYPE, () => this._handleRequestInstance());
     }
@@ -47,6 +46,7 @@ class VISRC_ResourceTypeCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'resourcetypes');
         this.fetch({ data: $.param(aQueryParameters) });
     }
 
@@ -56,15 +56,6 @@ class VISRC_ResourceTypeCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Handles application ready notification.
-     */
-    _handleEventApplicationReady()
-    {
-        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'resourcetypes');
-        this._retrieveList({});
     }
 }
 

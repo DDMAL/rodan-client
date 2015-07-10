@@ -7,6 +7,7 @@ import VISRC_Configuration from './VISRC_Configuration';
 import VISRC_ControllerAuthentication from './Controllers/VISRC_ControllerAuthentication';
 import VISRC_ControllerServer from './Controllers/VISRC_ControllerServer';
 import VISRC_Events from './Shared/VISRC_Events';
+import VISRC_InputPortCollection from './Collections/VISRC_InputPortCollection';
 import VISRC_InputPortTypeCollection from './Collections/VISRC_InputPortTypeCollection';
 import VISRC_JobCollection from './Collections/VISRC_JobCollection';
 import VISRC_OutputPortTypeCollection from './Collections/VISRC_OutputPortTypeCollection';
@@ -99,6 +100,7 @@ class VISRC_Application extends Marionette.Application
      */
     _initializeCollections()
     {
+        this.inputPortCollection = new VISRC_InputPortCollection();
         this.inputPortTypeCollection = new VISRC_InputPortTypeCollection();
         this.jobCollection = new VISRC_JobCollection();
         this.outputPortTypeCollection = new VISRC_OutputPortTypeCollection();
@@ -125,6 +127,10 @@ class VISRC_Application extends Marionette.Application
      */
     _handleEventRoutesLoaded()
     {
+        // Do some initial loading.
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
+
         // Render layout views.
         this.layoutViewNavigation.render();
         this.layoutViewMain.render();
@@ -135,13 +141,6 @@ class VISRC_Application extends Marionette.Application
         
         // DUMMY!!!!!
         this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, {username: "dummy", password: "dafdaedf2345"}); 
-    }
-
-    /**
-     * Starts the application
-     */
-    _startApplication()
-    {
     }
 
     // dummy to load projects after dummy login

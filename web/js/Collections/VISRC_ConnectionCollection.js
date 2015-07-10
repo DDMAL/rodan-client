@@ -38,7 +38,6 @@ class VISRC_ConnectionCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__APPLICATION_READY, () => this._handleEventApplicationReady());
     }
 
     /**
@@ -46,6 +45,7 @@ class VISRC_ConnectionCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'connections');
         this.fetch({ data: $.param(aQueryParameters) });
     }
 
@@ -55,14 +55,6 @@ class VISRC_ConnectionCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Handles application ready notification.
-     */
-    _handleEventApplicationReady()
-    {
-        this.url = this.rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'connections');
     }
 }
 
