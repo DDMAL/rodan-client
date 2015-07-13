@@ -35,7 +35,6 @@ class VISRC_Application extends Marionette.Application
      */
     initialize(aOptions)
     {
-        this.configuration = VISRC_Configuration;
         var that = this;
 
         // TODO - what does this do?
@@ -46,7 +45,7 @@ class VISRC_Application extends Marionette.Application
                 withCredentials: true,
             };
 
-            if (that.configuration.authenticationType == "session" && !options.beforeSend) 
+            if (VISRC_Configuration.authenticationType == "session" && !options.beforeSend) 
             {
                 options.beforeSend = function (xhr) 
                 { 
@@ -83,7 +82,8 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel = Radio.channel("rodan");
         this.rodanChannel.reply(VISRC_Events.REQUEST__APPLICATION, this);
         this.rodanChannel.on(VISRC_Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._dummy());
+        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
+        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
     }
 
     /**
@@ -91,7 +91,7 @@ class VISRC_Application extends Marionette.Application
      */
     _initializeControllers(aOptions)
     {
-        this.controllerServer = new VISRC_ControllerServer(this.configuration);
+        this.controllerServer = new VISRC_ControllerServer();
         this.controllerAuthentication = new VISRC_ControllerAuthentication(this.controllerServer);
     }
 
@@ -123,14 +123,19 @@ class VISRC_Application extends Marionette.Application
     }
 
     /**
+     * Handles failed authentication check.
+     */
+    _handleAuthentication401()
+    {
+        // TODO - need login form
+        this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, {username: "dummy", password: "dafdaedf2345"}); 
+    }
+
+    /**
      * Handle EVENT__ROUTESLOADED.
      */
     _handleEventRoutesLoaded()
     {
-        // Do some initial loading.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
-
         // Render layout views.
         this.layoutViewNavigation.render();
         this.layoutViewMain.render();
@@ -138,14 +143,18 @@ class VISRC_Application extends Marionette.Application
 
         // Send event that the app has started.
         this.rodanChannel.trigger(VISRC_Events.EVENT__APPLICATION_READY);
-        
-        // DUMMY!!!!!
-        this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, {username: "dummy", password: "dafdaedf2345"}); 
+
+        // Check authentication.
+        this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_CHECK); 
     }
 
-    // dummy to load projects after dummy login
-    _dummy()
+    /**
+     * Handle authentication success.
+     */
+    _handleAuthenticationSuccess()
     {
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
         this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
     }
 }

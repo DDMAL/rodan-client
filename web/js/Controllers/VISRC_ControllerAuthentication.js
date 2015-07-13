@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import VISRC_Configuration from '../VISRC_Configuration';
 import VISRC_Cookie from '../Shared/VISRC_Cookie'
 import VISRC_Events from '../Shared/VISRC_Events'
 import VISRC_User from '../Models/VISRC_User'
@@ -19,9 +20,6 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     initialize(aControllerServer)
     {
         this.user = null;
-
-        // TODO - couldn't we just have a master radio channel that is passed to all objects?
-        // or perhaps a base class controller...
         this.controllerServer = aControllerServer;
         this._initializeRadio();
     }
@@ -30,219 +28,164 @@ class VISRC_ControllerAuthentication extends Marionette.Object
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize radio.
      */
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-
-        // Requests
         this.rodanChannel.reply(VISRC_Events.REQUEST__USER, () => this._handleRequestUser());
         this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
     }
 
     /**
-     * TODO docs
+     * Handle authentication response.
+     */
+    _handleAuthenticationResponse(aEvent)
+    {
+        var request = aEvent.currentTarget;
+        if (request.responseText === null)
+        {
+            this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
+        }
+
+        switch (request.status)
+        {
+            case 200:
+                var parsed = JSON.parse(request.responseText);
+                this.user = new VISRC_User(parsed);
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, {user: this.user});
+                break;
+            case 400:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
+                break;
+            case 401:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
+                break;
+            case 403:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
+                break;
+            default:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                break;
+        }
+    }
+
+    /**
+     * Handle deauthentication response.
+     */
+    _handleDeauthenticationResponse(aEvent)
+    {
+        var request = aEvent.currentTarget;
+        if (request.responseText === null)
+        {
+            this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
+        }
+
+        switch (request.status)
+        {
+            case 200:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS);
+                break;
+            case 400:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
+                break;
+            case 401:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
+                break;
+            case 403:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
+                break;
+            default:
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                break;
+        }
+    }
+
+    /**
+     * Handle timeout.
+     */
+    _handleTimeout(aEvent)
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__SERVER_WENT_AWAY);
+    }
+
+    /**
+     * Sends request to check authentication.
      */
     _checkAuthenticationStatus()
     {
         var authStatusRoute = this.controllerServer.routeForRouteName('session-status');
-        var authRequest = new XMLHttpRequest();
-
-        authRequest.onload = (event) =>
+        var request = new XMLHttpRequest();
+        request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
+        request.ontimeout = (event) => this._handleTimeout(aEvent);
+        request.open('GET', authStatusRoute, true);
+        request.setRequestHeader('Accept', 'application/json');
+        if (VISRC_Configuration.authenticationType === 'token')
         {
-            // stuff
-            if (authRequest.responseText === null)
-            {
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
-            }
-
-            switch (authRequest.status)
-            {
-                case 200:
-                    var parsed = JSON.parse(authRequest.responseText);
-                    this.user = new VISRC_User(parsed);
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__SUCCESS_AUTHENTICATION, {user: this.user});
-                    break;
-                case 400:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
-                    break;
-                case 401:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
-                    break;
-                case 403:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
-                    break;
-                default:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
-                    break;
-            }
-        };
-
-        authRequest.ontimeout = (event) =>
-        {
-            this.rodanChannel.trigger(VISRC_Events.EVENT__SERVER_WENT_AWAY);
-        };
-
-        authRequest.open('GET', authStatusRoute, true);
-        authRequest.setRequestHeader('Accept', 'application/json');
-
-        if (this.controllerServer.authenticationType === 'token')
-        {
-            var authToken = this.controllerServer.configuration.authenticationToken;
-            authRequest.setRequestHeader('Authorization', 'Token ' + authToken);
+            var authToken = VISRC_Configuration.authenticationToken;
+            request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
-        else if (this.controllerServer.authenticationType === 'session')
+        else if (VISRC_Configuration.authenticationType === 'session')
         {
             console.log('Injecting the cookie for session authentication');
-            // if the server controller doesn't have the CSRF Token, set it now
             if (!this.controllerServer.CSRFToken.value)
             {
-                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');//reads cookie from browser
+                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');
             }
-
-            authRequest.withCredentials = true;
-            authRequest.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
+            request.withCredentials = true;
+            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
-
-        authRequest.send();
+        request.send();
     }
 
     /**
-     * TODO docs
+     * Login.
      */
     _login(aData)
     {
-        var username = aData.username;
-        var password = aData.password;
-
-        // request from the server and set the authentication tokens
         var authRoute = this.controllerServer.getAuthenticationRoute();
-        var authType = this.controllerServer.configuration.authenticationType;
-        var loginRequest = new XMLHttpRequest();
-        var requestBody;
-
-        loginRequest.onload = (event) =>
-        {
-            if (loginRequest.statusText === null)
-            {
-                console.log('null resp');
-            }
-            
-            switch (loginRequest.status)
-            {
-                case 200:
-                    var parsed = JSON.parse(loginRequest.responseText);
-                    this.user = new VISRC_User(parsed);
-                    console.log('Success', this.user);
-
-                    if (authType === 'token')
-                    {
-                        this.controllerServer.configuration.authenticationToken = this.user.attributes.token;
-                    }
-                    else
-                    {
-                        this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');
-                    }
-
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, this.user);
-                    break;
-                case 400:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
-                    break;
-                case 401:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401); //@TODO AuthenticationFailed?
-                    //this.rodanChannel.trigger(Events.UserMustAuthenticate); @TODO re-enable, this is a loop right now
-                    break;
-                case 403:
-                    this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
-                    break;
-                default:
-                    console.log('Error: ', loginRequest.status);
-                    break;
-            }
-        };
-
-        loginRequest.open('POST', authRoute, true);
-
+        var authType = VISRC_Configuration.authenticationType;
+        var request = new XMLHttpRequest();
+        request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
+        request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
+        request.open('POST', authRoute, true);
         if (authType === 'session')
         {
             if (!this.controllerServer.CSRFToken)
                 this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');//@TODO does this do what we want it to?
 
-            loginRequest.withCredentials = true;
-            loginRequest.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
+            request.withCredentials = true;
+            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
-
-        loginRequest.setRequestHeader('Accept', 'application/json');
-        loginRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        requestBody = 'username=' + username + '&password=' + password;
-
-        loginRequest.send(requestBody);
+        request.setRequestHeader('Accept', 'application/json');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send('username=' + aData.username + '&password=' + aData.password);
     }
 
     /**
-     * TODO docs
+     * Logout.
      */
-    logout()
+    _logout()
     {
-        // request from the server and set the authentication tokens
         var logoutRoute = this.controllerServer.routeForRouteName('session-close');
-        var authType = this.controllerServer.authenticationType;
-        var logoutRequest = new XMLHttpRequest();
-
-        logoutRequest.onload = (event) => {
-            if (logoutRequest.statusText === null) {
-                console.log('null resp');
-            }
-
-            switch (logoutRequest.status) {
-                case 200:
-                    var parsed = JSON.parse(logoutRequest.responseText);
-                    console.log('Logout success');
-                    //remove cookies here
-
-                    this.rodanChannel.trigger(Events.DeauthenticationSuccess);
-                    //this.rodanChannel.trigger(Events.UserMustAuthenticate); @TODO trigger this to show login again
-                    break;
-                case 400:
-                    console.log('Bad request');
-                    this.rodanChannel.trigger(Events.AuthenticationError);
-                    break;
-                case 401:
-                    console.log('Deauthentication failed');
-                    this.rodanChannel.trigger(Events.AuthenticationError);
-                    //this.rodanChannel.trigger(Events.UserMustAuthenticate); @TODO trigger this to show login again
-                    break;
-                case 403:
-                    console.log('Forbidden');
-                    this.rodanChannel.trigger(Events.UserCannotAuthenticate);
-                    break;
-                default:
-                    console.log('Error: ', logoutRequest.status);
-                    break;
-            }
-        }
-
-        logoutRequest.open('POST', logoutRoute, true);
-        logoutRequest.setRequestHeader('Accept', 'application/json');
-
+        var authType = VISRC_Configuration.authenticationType;
+        var request = new XMLHttpRequest();
+        request.onload = (aEvent) => this._handleDeauthenticationResponse(aEvent);
+        request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
+        request.open('POST', logoutRoute, true);
+        request.setRequestHeader('Accept', 'application/json');
         if (authType === 'session')
         {
-            //if (!this.controllerServer.CSRFToken) @TODO necessary?
-            //    this.controllerServer.CSRFToken = new Cookie();
-
-            logoutRequest.withCredentials = true;
-            logoutRequest.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
+            request.withCredentials = true;
+            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
         else
         {
             var authToken = this.controllerServer.authenticationToken;
-            logoutRequest.setRequestHeader('Authorization', 'Token ' + authToken);
+            request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
-
-        logoutRequest.send();
+        request.send();
     }
 
     /**

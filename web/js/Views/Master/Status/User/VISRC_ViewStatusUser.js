@@ -8,7 +8,7 @@ import VISRC_Events from '../../../../Shared/VISRC_Events'
 /**
  * This class represents the view (and controller) for the status bar - login info.
  */
-class VISRC_ViewStatusUser extends Marionette.CompositeView
+class VISRC_ViewStatusUser extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,7 +18,7 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.model = null;
+        this.model = aParameters.user;
         this.modelEvents = {
             "all": "render"
         };
@@ -49,31 +49,6 @@ class VISRC_ViewStatusUser extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleAuthenticationSuccess(aUser));
-    }
-
-    /**
-     * Handle authentication notification.
-     */
-    _handleAuthenticationSuccess(aUser)
-    {
-        this._updateLoginStatus(aUser);
-    }
-
-    /**
-     * Updates status bar to reflect current user.
-     */
-    _updateLoginStatus(aUser)
-    {
-        if (aUser != null)
-        {
-            this.model = aUser;
-        }
-        else
-        {
-            console.log("TODO - no user");
-        }
-        this.render();
     }
 }
 

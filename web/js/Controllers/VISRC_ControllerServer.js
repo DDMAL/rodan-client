@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import VISRC_Configuration from '../VISRC_Configuration';
 import { mapFromJsonObject } from '../Helpers/VISRC_Utilities';
 import VISRC_Cookie from '../Shared/VISRC_Cookie';
 import VISRC_Events from '../Shared/VISRC_Events';
@@ -16,14 +17,12 @@ class VISRC_ControllerServer extends Marionette.Object
     /**
      * TODO docs
      */
-    initialize(aConfiguration)
+    initialize()
     {
-        this.configuration = aConfiguration;
         this.routes = null;
         this.serverConfiguration = null;
         this.activeUser = null;
         this.CSRFToken = new VISRC_Cookie('csrftoken');
-
         this._initializeRadio();
     }
 
@@ -47,7 +46,7 @@ class VISRC_ControllerServer extends Marionette.Object
      */
     getAuthenticationRoute()
     {
-        switch (this.configuration.authenticationType)
+        switch (VISRC_Configuration.authenticationType)
         {
             case 'session':
                 return this.routeForRouteName('session-auth');
@@ -87,7 +86,7 @@ class VISRC_ControllerServer extends Marionette.Object
      */
     _handleRequestServerHostname()
     {
-        return this.configuration.server;
+        return VISRC_Configuration.server;
     }
 
     /**
@@ -125,7 +124,7 @@ class VISRC_ControllerServer extends Marionette.Object
             }
         };
 
-        routeRequest.open('GET', this.configuration.server, true);
+        routeRequest.open('GET', VISRC_Configuration.server, true);
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
     }
