@@ -61,7 +61,7 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _handleCommandShow(aView)
     {
-        this.region.show(aView, {preventDestroy: true});
+        this.region.show(aView);
     }
 }
 

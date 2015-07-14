@@ -24,37 +24,12 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
         this.template = "#template-navigation_node_root";
         this.childViewContainer = "ul";
         this.childView = VISRC_ViewNavigationNodeProject;
-        this._initializeRadio();
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aUser => this._handleEventSuccessAuthentication(aUser));
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventProjectSelected(aReturn));
-    }
-
-    /**
-     * Handle event success authentication
-     */
-    _handleEventSuccessAuthentication(aUser)
-    {
-        // Nothing to load here...?
-    }
-
-    /**
-     * Handle event project selected.
-     */
-    _handleEventProjectSelected(aReturn)
-    {
-        this.collection.add(aReturn.project);
-    }
 }
 
 export default VISRC_ViewNavigationNodeRoot;

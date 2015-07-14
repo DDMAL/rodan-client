@@ -45,7 +45,6 @@ class VISRC_ProjectController extends VISRC_BaseController
     _initializeViews()
     {
         this._viewList = new VISRC_ViewProjectList();
-        this._viewItem = new VISRC_ViewProject();
     }
 
     /**
@@ -54,6 +53,7 @@ class VISRC_ProjectController extends VISRC_BaseController
     _handleEventItemSelected(aReturn)
     {
         this._activeProject = aReturn.project;
+        this._viewItem = new VISRC_ViewProject({project: this._activeProject});
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
     }
 

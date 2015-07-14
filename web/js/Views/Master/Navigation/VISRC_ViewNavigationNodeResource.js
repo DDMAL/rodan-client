@@ -25,13 +25,6 @@ class VISRC_ViewNavigationNodeResource extends VISRC_ViewNavigationNode
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel("rodan");
-    }
 }
 
 export default VISRC_ViewNavigationNodeResource;

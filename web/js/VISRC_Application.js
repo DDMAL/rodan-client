@@ -45,7 +45,7 @@ class VISRC_Application extends Marionette.Application
                 withCredentials: true,
             };
 
-            if (VISRC_Configuration.authenticationType == "session" && !options.beforeSend) 
+            if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE == "session" && !options.beforeSend) 
             {
                 options.beforeSend = function (xhr) 
                 { 

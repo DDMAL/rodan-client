@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import VISRC_Events from '../../../Shared/VISRC_Events';
 import VISRC_NavigationNodeCollection from './VISRC_NavigationNodeCollection';
 
 /**
@@ -23,19 +24,13 @@ class VISRC_ViewNavigationNode extends Marionette.CompositeView
         };
         this.collection = new VISRC_NavigationNodeCollection();
         this.childView = VISRC_ViewNavigationNode;
+        this.rodanChannel = Radio.channel("rodan");
         super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel("rodan");
-    }
 }
 
 export default VISRC_ViewNavigationNode;

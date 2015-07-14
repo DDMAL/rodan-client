@@ -46,7 +46,7 @@ class VISRC_ControllerServer extends Marionette.Object
      */
     getAuthenticationRoute()
     {
-        switch (VISRC_Configuration.authenticationType)
+        switch (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE)
         {
             case 'session':
                 return this.routeForRouteName('session-auth');
@@ -86,7 +86,7 @@ class VISRC_ControllerServer extends Marionette.Object
      */
     _handleRequestServerHostname()
     {
-        return VISRC_Configuration.server;
+        return VISRC_Configuration.SERVER_URL;
     }
 
     /**
@@ -124,7 +124,7 @@ class VISRC_ControllerServer extends Marionette.Object
             }
         };
 
-        routeRequest.open('GET', VISRC_Configuration.server, true);
+        routeRequest.open('GET', VISRC_Configuration.SERVER_URL, true);
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
     }

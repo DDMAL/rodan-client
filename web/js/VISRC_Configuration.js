@@ -1,6 +1,6 @@
 var VISRC_Configuration = {
-    server: 'http://132.206.14.136',
-    authenticationType: 'session',               // 'session' or 'token'
+    SERVER_URL: 'http://132.206.14.136',
+    SERVER_AUTHENTICATION_TYPE: 'session', // 'session' or 'token'
     authenticationToken: null
 };
 

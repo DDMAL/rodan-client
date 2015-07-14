@@ -1,19 +1,43 @@
 /**
- * TODO docs
+ * Styles for Rodan-VIS client.
  */
 
+/**************************************************************************************
+ * General parameters
+ *************************************************************************************/
+/* Navigation area */
+$background-color-navigation-gradient_left: #000000;
+$background-color-navigation-gradient_right: #333333;
+$text-color-navigation: #cccccc;
+
+/* Status area - User */
+$background-color-status-user-gradient_left: #000000;
+$background-color-status-user-gradient_right: #333333;
+$text-color-status-user: #cccccc;
+
+/* Status area - Messages */
+$background-color-status_message: #333333;
+$text-color-status-user: #cccccc;
+
+/* Status area - Server */
+$background-color-status-server-gradient_left: #333333;
+$background-color-status-server-gradient_right: #555555;
+$text-color-status-server: #cccccc;
+
+/* Main area */
+$background-color-main: #ffffff;
+
+/* WorkflowBuilder area */
+$background-color-workflowbuilder-workspace: #dddddd;
+
+/* WorkflowBuilder control area */
+$background-color-workflowbuilder-control: #bbbbbb;
 
 /**************************************************************************************
- * Parameters
+ * DIVs - DO NOT TOUCH unless you know what you're doing.
  *************************************************************************************/
 $height-bottom: 5; // % of vertical space in viewport
 $height-top: 95; // % of vertical space in viewport
-
-
-
-
-
-
 div.top {
     height: $height-top + %; //fallback
     height: $height-top + vh;
@@ -24,57 +48,61 @@ div.bottom {
     height: $height-bottom + vh;
 }
 
-
-
-
-
-/**************************************************************************************
- * DEBUGGING STUFF...USELESS FOR PROD!!!
- *************************************************************************************/
-$background-color-main: #00ff00;
-$background-color-navigation: #aaaaff;
-$background-color-status_user: #ff0000;
-$background-color-status_message: #ffff00;
-$background-color-status_server: #6666ff;
-$background-color-workflowbuilder-workspace: #ffffff;
-$background-color-workflowbuilder-control: #aaaaaa;
-$background-color-row_selected: #ffff00;
-
-div#region-navigation {
-    background-color: $background-color-navigation;
+div#region-navigation 
+{
+    background: linear-gradient(to right, 
+                                $background-color-navigation-gradient_left,
+                                $background-color-navigation-gradient_right);
     height: 100%;
+    color: $text-color-navigation;
 }
 
-div#region-main {
+div#region-navigation ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 10px;
+}
+
+div#region-status_user 
+{
+    background: linear-gradient(to right, 
+                                $background-color-status-user-gradient_left,
+                                $background-color-status-user-gradient_right);
+    height: 100%;
+    color: $text-color-status-user;
+}
+
+div#region-status_message 
+{
+    background-color: $background-color-status_message;
+    height: 100%;
+    color: $text-color-status-user;
+}
+
+div#region-status_server
+{
+    background: linear-gradient(to right, 
+                                $background-color-status-server-gradient_left,
+                                $background-color-status-server-gradient_right);
+    height: 100%;
+    color: $text-color-status-server;
+}
+
+div#region-main
+{
     background-color: $background-color-main;
     height: 100%;
 }
 
-div#region-status_user {
-    background-color: $background-color-status_user;
-    height: 100%;
-}
-
-div#region-status_message {
-    background-color: $background-color-status_message;
-    height: 100%;
-}
-
-div#region-status_server {
-    background-color: $background-color-status_server;
-    height: 100%;
-}
-
-canvas#canvas-workspace {
+canvas#canvas-workspace 
+{
     background-color: $background-color-workflowbuilder-workspace;
     height: 100%;
 }
 
-div#region-main_workflowbuilder_control {
+div#region-main_workflowbuilder_control
+{
     background-color: $background-color-workflowbuilder-control;
     height: 100%;
-}
-
-tr.highlight {
-    background-color: $background-color-row_selected;
 }

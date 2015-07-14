@@ -121,12 +121,12 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         request.ontimeout = (event) => this._handleTimeout(aEvent);
         request.open('GET', authStatusRoute, true);
         request.setRequestHeader('Accept', 'application/json');
-        if (VISRC_Configuration.authenticationType === 'token')
+        if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
             var authToken = VISRC_Configuration.authenticationToken;
             request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
-        else if (VISRC_Configuration.authenticationType === 'session')
+        else if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
         {
             console.log('Injecting the cookie for session authentication');
             if (!this.controllerServer.CSRFToken.value)
@@ -145,7 +145,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     _login(aData)
     {
         var authRoute = this.controllerServer.getAuthenticationRoute();
-        var authType = VISRC_Configuration.authenticationType;
+        var authType = VISRC_Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
         request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
@@ -169,7 +169,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     _logout()
     {
         var logoutRoute = this.controllerServer.routeForRouteName('session-close');
-        var authType = VISRC_Configuration.authenticationType;
+        var authType = VISRC_Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleDeauthenticationResponse(aEvent);
         request.ontimeout = (aEvent) => this._handleTimeout(aEvent);

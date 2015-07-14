@@ -101,7 +101,6 @@ class VISRC_LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCommandCreate(aPass)
     {
-        debugger;
         var workflowRun = new VISRC_WorkflowRun(aPass);
         workflowRun.set("resource_assignments", this._resourceAssignments);
         workflowRun.set("workflow", this._workflow.get("url"));
