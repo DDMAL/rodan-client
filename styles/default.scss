@@ -31,13 +31,19 @@ $background-color-main: #ffffff;
 $background-color-workflowbuilder-workspace: #dddddd;
 
 /* WorkflowBuilder control area */
-$background-color-workflowbuilder-control: #bbbbbb;
+$background-color-workflowbuilder-control: #ffffff;
 
 /**************************************************************************************
- * DIVs - DO NOT TOUCH unless you know what you're doing.
+ * DO NOT TOUCH unless you know what you're doing.
  *************************************************************************************/
 $height-bottom: 5; // % of vertical space in viewport
 $height-top: 95; // % of vertical space in viewport
+
+body
+{
+    overflow: hidden;
+}
+
 div.top {
     height: $height-top + %; //fallback
     height: $height-top + vh;

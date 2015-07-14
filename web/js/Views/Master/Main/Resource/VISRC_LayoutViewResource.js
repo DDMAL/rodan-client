@@ -34,7 +34,7 @@ class VISRC_LayoutViewResource extends Marionette.LayoutView
      */
     showList(aView)
     {
-        this.regionList.show(aView, {preventDestroy: true});
+        this.regionList.show(aView);
     }
 
     /**
@@ -42,7 +42,7 @@ class VISRC_LayoutViewResource extends Marionette.LayoutView
      */
     showItem(aView)
     {
-        this.regionItem.show(aView, {preventDestroy: true});
+        this.regionItem.show(aView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -24,6 +24,7 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
             "all": "render"
         };
         this._initializeRadio();
+        this._project = aParameters.project;
         this.template = "#template-main_resource_list";
         this.childView = VISRC_ViewResourceListItem;
         this.childViewContainer = 'tbody';
@@ -34,6 +35,9 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
         this.events = {
             'click @ui.buttonAdd': '_handleClickButtonAdd'
         };
+        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RESOURCE);
+        this.collection.reset();
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCES, {project: this._project.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -45,17 +49,6 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, () => this._handleEventListSelected());
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected()
-    {
-        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RESOURCE);
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCES, {project: project.id});
     }
 
     /**

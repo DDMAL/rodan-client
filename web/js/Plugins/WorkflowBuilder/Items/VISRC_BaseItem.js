@@ -26,10 +26,17 @@ class VISRC_BaseItem extends paper.Path
         this.strokeWidth = 2;
         this.fillColor = '#5555ff';
 
-        this.onMouseDown = aEvent => paper.handleMouseEvent({item: this, event: aEvent});
-        this.onMouseUp = aEvent => paper.handleMouseEvent({item: this, event: aEvent});
-        this.onMouseMove = aEvent => paper.handleMouseEvent({item: this, event: aEvent});
-        this.onClick = aEvent => paper.handleMouseEvent({item: this, event: aEvent});
+        // magic numbers
+        this._HOVERTIME = 1000;
+
+        this._timerEvent = null;
+
+        this.onMouseDown = aEvent => this._handleMouseEvent(aEvent);
+        this.onMouseUp = aEvent => this._handleMouseEvent(aEvent);
+        this.onMouseMove = aEvent => this._handleMouseEvent(aEvent);
+        this.onClick = aEvent => this._handleMouseEvent(aEvent);
+        this.onMouseEnter = aEvent => this._handleMouseEvent(aEvent);
+        this.onMouseLeave = aEvent => this._handleMouseEvent(aEvent);
 
         this._initializeRadio();
         this._associatedModel = aParameters.model;
@@ -42,6 +49,8 @@ class VISRC_BaseItem extends paper.Path
         this._text.position = this.bounds.center;
         this.addChild(this._text);
         this._text.visible = (aParameters.hasOwnProperty("text") && aParameters.text === true);
+
+        this._popup = new paper.PointText(new paper.Point(0, 0));
     }
 
     /**
@@ -83,6 +92,22 @@ class VISRC_BaseItem extends paper.Path
     }
 
     /**
+     * Shows popup.
+     */
+    _showPopup()
+    {
+        console.log("todo - popup");
+    }
+
+    /**
+     * Hide popup.
+     */
+    _hidePopup()
+    {
+        console.log("todo - hide");
+    }
+
+    /**
      * Handle model update event.
      */
     _handleEventModelUpdated(aPass)
@@ -92,7 +117,42 @@ class VISRC_BaseItem extends paper.Path
             return;
         }
         this._text.content = aPass.model.get("name");
-        update();
+        this.update();
+    }
+
+    /**
+     * Handle mouse event.
+     */
+    _handleMouseEvent(aEvent)
+    {
+        switch (aEvent.type)
+        {
+            case "mouseenter":
+            {
+                this._timerEvent = setTimeout(this._showPopup, this._HOVERTIME);
+                break;
+            }
+
+            case "mouseleave":
+            {
+                this._hidePopup();
+                clearTimeout(this._timerEvent);
+                break;
+            }
+
+            case "mousemove":
+            {
+                // do nothing
+                break;
+            }
+
+            default:
+            {
+                this._hidePopup();
+                clearTimeout(this._timerEvent);
+            }
+        }
+        paper.handleMouseEvent({item: this, event: aEvent});
     }
 }
 

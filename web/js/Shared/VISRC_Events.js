@@ -79,7 +79,7 @@ var VISRC_Events = {
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on job selection. No pass.
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED', // Called on project selection. No pass.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED', // Called on project selection. Passes {project: VISRC_Project}.
-    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resource selection. Passes {resource: VISRC_Resource}.
+    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED', // Called on resource selection. Passes {resource: VISRC_Resource}.
     EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. No pass.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: VISRC_Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED', // Called on workflows selection. No pass.

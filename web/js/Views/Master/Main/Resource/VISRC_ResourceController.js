@@ -38,26 +38,14 @@ class VISRC_ResourceController extends VISRC_BaseController
     }
 
     /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
-        this._layoutView = new VISRC_LayoutViewResource();
-        this._viewList = new VISRC_ViewResourceList();
-    }
-
-    /**
      * Handle list selection.
      */
     _handleEventListSelected()
     {
-        // Send the layout view to the main region.
+        this._layoutView = new VISRC_LayoutViewResource();
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this._viewList.isDestroyed = false;
+        var project = this._rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+        this._viewList = new VISRC_ViewResourceList({project: project});
         this._layoutView.showList(this._viewList);
     }
 
@@ -66,11 +54,6 @@ class VISRC_ResourceController extends VISRC_BaseController
      */
     _handleEventItemSelected(aPass)
     {
-        // Send the layout view to the main region.
-        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-
-        // Tell the layout view what to render.
-        // TODO - don't want to do this...
         this._viewItem = new VISRC_ViewResource(aPass);
         this._layoutView.showItem(this._viewItem);
     }

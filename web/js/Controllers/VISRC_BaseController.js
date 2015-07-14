@@ -37,7 +37,6 @@ class VISRC_BaseController
      */
     _initializeViews()
     {
-        console.log("TODO - this must be implemented in the inheriting class");
     }
 }
 
