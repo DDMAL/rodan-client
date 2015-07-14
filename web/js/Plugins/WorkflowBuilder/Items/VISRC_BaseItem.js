@@ -19,8 +19,6 @@ class VISRC_BaseItem extends paper.Path
     constructor(aParameters)
     {
         super(aParameters.segments);
-
-        this._showText = (aParameters.hasOwnProperty("text") && aParameters.text === true);
         
         // TODO - MAGIC NUMBERS
         this.strokeColor = 'black';
@@ -36,16 +34,14 @@ class VISRC_BaseItem extends paper.Path
         this._initializeRadio();
         this._associatedModel = aParameters.model;
 
-        this._text = null;
-        if (this._showText)
-        {
-            this._text = new paper.PointText(new paper.Point(0, 0));
-            this._text.justification = 'center';
-            this._text.fillColor = '#000000';
-            this._text.content = '';
-            this._text.position = this.bounds.center;
-            this.addChild(this._text);
-        }
+        this._text = new paper.PointText(new paper.Point(0, 0));
+        this._text.justification = 'center';
+        this._text.fillColor = '#000000';
+        this._text.fontSize = 20;
+        this._text.content = '';
+        this._text.position = this.bounds.center;
+        this.addChild(this._text);
+        this._text.visible = (aParameters.hasOwnProperty("text") && aParameters.text === true);
     }
 
     /**
@@ -96,6 +92,7 @@ class VISRC_BaseItem extends paper.Path
             return;
         }
         this._text.content = aPass.model.get("name");
+        update();
     }
 }
 
