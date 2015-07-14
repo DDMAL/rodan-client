@@ -20,6 +20,7 @@ class VISRC_BaseModel extends Backbone.Model
     {
         this.idAttribute = 'uuid';
         this._initializeRadio();
+        this.on("change", aEvent => this._onChange(aEvent));
         super(aParameters);
     }
 
@@ -51,6 +52,14 @@ class VISRC_BaseModel extends Backbone.Model
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * On change handler.
+     */
+    _onChange(aEvent)
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__MODEL_HASCHANGED, {model: this});
     }
 }
 

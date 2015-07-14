@@ -173,13 +173,14 @@ class VISRC_WorkflowBuilder
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+
+        // GUI commands.
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
-
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
@@ -275,7 +276,8 @@ class VISRC_WorkflowBuilder
      */
     _createWorkflowJobItem(aModel)
     {
-        aModel.paperItem = new VISRC_WorkflowJobItem({segments: this._segments.workflowJobItem, model: aModel});
+        aModel.paperItem = new VISRC_WorkflowJobItem({segments: this._segments.workflowJobItem, model: aModel, text: true});
+        aModel.paperItem.update();
     }
 
     /**

@@ -86,6 +86,9 @@ var VISRC_Events = {
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED', // Called on workflow run selection. Passes {project: VISRC_WorkflowRun}.
     EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED', // Called on workflow runs selection. No pass.
 
+    // General model events.
+    EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Passes {model: VISRC_BaseModel};
+
     // WORKFLOWBUILDER events.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED', // Called when WorkflowJob selected for editing. Passes {workflowjob: VISRC_WorkflowJob}.
@@ -93,7 +96,6 @@ var VISRC_Events = {
     // WorkflowRun Creator events.
     EVENT__WORKFLOWRUNCREATOR_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_SELECTED', // Called on workflowrun creator opening. Passes {workflow: VISRC_Workflow}.
     EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED', // Called when an InputPort has been selected. Passes {inputport: VISRC_InputPort}.
-    EVENT__WORKFLOWRUNCREATOR_RESOURCE_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_RESOURCE_SELECTED', // Called when an Resource has been selected. Passes {resource: VISRC_Resource}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // REQUESTS

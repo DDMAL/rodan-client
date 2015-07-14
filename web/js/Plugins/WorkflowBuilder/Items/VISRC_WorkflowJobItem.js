@@ -25,6 +25,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
         this.addChild(this._paperGroupInputPorts);
         this._paperGroupOutputPorts = new paper.Group();
         this.addChild(this._paperGroupOutputPorts);
+
         this.update();
     }
 
@@ -33,8 +34,8 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
      */
     update()
     {
-        // TODO - magic number
-        this.fillColor = '#5555ff';
+        this._paperGroupInputPorts.position = this.bounds.topCenter;
+        this._paperGroupOutputPorts.position = this.bounds.bottomCenter;
         this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
         this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
         this._updatePortItems(this._paperGroupInputPorts);
@@ -75,23 +76,6 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
     {
         this._deletePortItem(this._paperGroupOutputPorts, aOutputPortItem);
         this.update();
-    }
-
-    /**
-     * Moves the item.
-     */
-    move(aDelta)
-    {
-        this.position.x += aDelta.x;
-        this.position.y += aDelta.y;
-        this._paperGroupInputPorts.position.x += aDelta.x;
-        this._paperGroupInputPorts.position.y += aDelta.y;
-        this._paperGroupOutputPorts.position.x += aDelta.x;
-        this._paperGroupOutputPorts.position.y += aDelta.y;
-
-        // We have to update the input ports.
-        this._updatePortItems(this._paperGroupInputPorts);
-        this._updatePortItems(this._paperGroupOutputPorts);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +130,7 @@ class VISRC_WorkflowJobItem extends VISRC_BaseItem
                 return;
             }
         }
-        console.log("TODO - ERROR HERE!!!!!");
+        console.error("TODO - ERROR HERE!!!!!");
     }
 }
 
