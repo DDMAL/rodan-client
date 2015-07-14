@@ -27,7 +27,7 @@ class VISRC_WorkflowJob extends VISRC_BaseModel
 
     defaults()
     {
-        return {input_ports: null, output_ports: null};
+        return {input_ports: null, output_ports: null, name: "untitled"};
     }
 
     /**

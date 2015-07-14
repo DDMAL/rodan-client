@@ -24,6 +24,13 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
         this.model = aParameters.workflowjob;
         this._initializeRadio();
         this.template = "#template-main_workflowbuilder_control_workflowjob_individual";
+        this.ui = {
+            buttonSave: '#button-save_workflowjob_data',
+            textName: '#text-workflowjob_name'
+        }
+        this.events = {
+            'click @ui.buttonSave': '_handleButtonSave'
+        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +42,14 @@ class VISRC_ViewWorkflowJob extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle save button.
+     */
+    _handleButtonSave()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {name: this.ui.textName.val()});
     }
 }
 

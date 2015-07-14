@@ -61,12 +61,12 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, aPass => this._handleCommandSaveWorkflowJob(aPass));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW, () => this._handleCommandRunWorkflow());
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddResourceAssignment(aPass));
 
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT, () => this._handleCommandShowControlResourceAssignmentView());
 
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
     }
@@ -127,16 +127,6 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     }
 
     /**
-     * Handle command show resource assignment control view.
-     */
-    _handleCommandShowControlResourceAssignmentView()
-    {
-        // TODO - not reusing this view...should find more efficient way
-        this.viewControlResourceAssignment = new VISRC_LayoutViewControlResourceAssignment();
-        this.regionControlWorkflowParts.show(this.viewControlResourceAssignment);
-    }
-
-    /**
      * Create input port
      */
     _handleCommandAddInputPort(aPass)
@@ -174,6 +164,14 @@ class VISRC_WorkflowEditorController extends Marionette.LayoutView
     _handleCommandSaveWorkflow(aPass)
     {
         this._workflow.save(aPass, {patch: true});
+    }
+
+    /**
+     * Handle save workflowjob.
+     */
+    _handleCommandSaveWorkflowJob(aPass)
+    {
+        this._workflowJob.save(aPass, {patch: true});
     }
 
     /**

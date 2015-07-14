@@ -30,15 +30,13 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT',   // Called when output port needs to be deleted from workflow job. Passes {outputport: VISRC_OutputPort}.
     COMMAND__WORKFLOWBUILDER_ADD_CONNECTION: 'COMMAND__WORKFLOWBUILDER_ADD_CONNECTION',   // Called when Connection should be created. Passes {inputport: VISRC_InputPort, outputport: VISRC_OutputPort}.
     COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW',  // Called when Workflow needs to be saved. Passes object with attributes to change.
+    COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB',  // Called when WorkflowJob needs to be saved. Passes object with attributes to change.
     COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW',  // Called when Workflow needs to be saved. No pass.
     COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW', // Called when Workflow needs to be run. No pass.
-    COMMAND__WORKFLOWBUILDER_ADD_RESOURCEASSIGNMENT: 'COMMAND__WORKFLOWBUILDER_ADD_RESOURCEASSIGNMENT', // Called when resource assignment should be created. Passes {resource: VISRC_Resource, inputport: VISRC_InputPort}.
 
     // Workflow builder commands that control the view.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when job control view needs to be shown. No pass.
-    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCES: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCEASSIGNMENT',   // Called when resource assignment control view needs to be shown. No pass.
-    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE', // Called on resource selection. Passes {resource: VISRC_Resource}.
-
+ 
     // Workflow builder GUI commands. These events tell the workspace what needs to be done. The GUI sends these commands.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: VISRC_Workflow}.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: VISRC_WorkflowJob}.
@@ -48,8 +46,6 @@ var VISRC_Events = {
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT', // Called when output port needs to be added to workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
     COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT', // Called when input port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, inputport: VISRC_InputPort}.
     COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: VISRC_WorkflowJob, outputport: VISRC_OutputPort}.
-    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resource: VISRC__Resource}.
-    COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCEASSIGNMENT: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCEASSIGNMENT', // Called when resource needs to be added to canvas (prior to running workflow). Passes {resourceassignment: VISRC_ResourceAssignment, resource: VISRC_Resource, inputport: VISRC_InputPort}.
     COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN', // Called when request workspace zoom in. No pass.
     COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT', // Called when request workspace zoom out. No pass.
     COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
