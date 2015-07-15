@@ -27,11 +27,13 @@ class VISRC_ViewProject extends Marionette.CompositeView
         this._initializeRadio();
         this.ui = {
             resourceCount: '#resource_count',
-            workflowCount: '#workflow_count'
+            workflowCount: '#workflow_count',
+            buttonNewWorkflow: '#button-project_workflow_new'
         }
         this.events = {
             'click @ui.resourceCount': '_handleClickResourceCount',
-            'click @ui.workflowCount': '_handleClickWorkflowCount'
+            'click @ui.workflowCount': '_handleClickWorkflowCount',
+            'click @ui.buttonNewWorkflow': '_handleButtonNewWorkflow'
         };
         this.template = "#template-main_project_individual";
         this.childView = VISRC_ViewWorkflowRunListItem;
@@ -82,6 +84,14 @@ class VISRC_ViewProject extends Marionette.CompositeView
     _handleClickWorkflowCount()
     {
         this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED);
+    }
+
+    /**
+     * Handle button new Workflow.
+     */
+    _handleButtonNewWorkflow()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
     }
 }
 
