@@ -55,6 +55,7 @@ class VISRC_Application extends Marionette.Application
         });
 
         this.addRegions({
+            regionNavigation: "#region-navigation",
             regionStatus: "#region-status"
         });
         this._initializeRadio();
@@ -137,8 +138,8 @@ class VISRC_Application extends Marionette.Application
     _handleEventRoutesLoaded()
     {
         // Render layout views.
-        this.layoutViewNavigation.render();
         this.layoutViewMain.render();
+        this.regionNavigation.show(this.layoutViewNavigation);
         this.regionStatus.show(this.layoutViewStatus);
 
         // Send event that the app has started.
@@ -155,7 +156,7 @@ class VISRC_Application extends Marionette.Application
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
-        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
+       // this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
     }
 }
 

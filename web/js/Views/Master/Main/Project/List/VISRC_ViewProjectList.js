@@ -34,7 +34,10 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
         this.childViewContainer = 'tbody';
         this.template = "#template-main_project_list";
         this.childView = VISRC_ViewProjectListItem;
+        var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT);
+        this.collection.reset();
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.uuid});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -46,16 +49,6 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected()
-    {
-        var user = this.rodanChannel.request(VISRC_Events.REQUEST__USER);
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_PROJECTS, {user: user.uuid});
     }
 
     /**

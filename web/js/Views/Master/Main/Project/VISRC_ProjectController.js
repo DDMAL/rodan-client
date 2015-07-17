@@ -37,6 +37,7 @@ class VISRC_ProjectController extends VISRC_BaseController
         this._rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
         this._rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
         this._rodanChannel.comply(VISRC_Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
+        this._rodanChannel.comply(VISRC_Events.COMMAND__SET_ACTIVE_PROJECT, aReturn => this._handleCommandSetActiveProject(aReturn));
     }
 
     /**
@@ -44,7 +45,14 @@ class VISRC_ProjectController extends VISRC_BaseController
      */
     _initializeViews()
     {
-        this._viewList = new VISRC_ViewProjectList();
+    }
+
+    /**
+     * Handle command set active project.
+     */
+    _handleCommandSetActiveProject(aReturn)
+    {
+        this._activeProject = aReturn.project;
     }
 
     /**
@@ -62,6 +70,7 @@ class VISRC_ProjectController extends VISRC_BaseController
      */
     _handleEventListSelected()
     {
+        this._viewList = new VISRC_ViewProjectList();
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
     }
 

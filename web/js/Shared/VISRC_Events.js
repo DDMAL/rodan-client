@@ -5,6 +5,8 @@ var VISRC_Events = {
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
 
+    COMMAND__SET_ACTIVE_PROJECT: 'COMMAND__SET_ACTIVE_PROJECT', // Sets the active project. Takes {project: VISRC_Project}.
+
     COMMAND__LOAD_INPUTPORTS: 'COMMAND__LOAD_INPUTPORTS',  // Instructs loading of inputports. Takes object containing various query IDs.
     COMMAND__LOAD_INPUTPORTTYPES: 'COMMAND__LOAD_INPUTPORTTYPES',  // Instructs loading of inputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
@@ -88,6 +90,9 @@ var VISRC_Events = {
 
     // General model events.
     EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Passes {model: VISRC_BaseModel};
+
+    // Navigation events.
+    EVENT_NAVIGATION_HIGHLIGHTNODE: 'EVENT_NAVIGATION_HIGHLIGHTNODE', // Informs of node selection. Takes {node: VISRC_ViewNavigationNode}.
 
     // WORKFLOWBUILDER events.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.

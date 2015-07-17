@@ -4,8 +4,8 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
+import VISRC_ViewNavigationNodeResources from './VISRC_ViewNavigationNodeResources';
 import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
-import VISRC_ViewNavigationNodeResource from './VISRC_ViewNavigationNodeResource';
 
 /**
  * This class represents a navigation menu node for a project.
@@ -20,32 +20,42 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     initialize(aParameters)
     {
-        this._initializeRadio();
-        this.model = aParameters.model;
-        this._selected = false;
-        this.template = "#template-navigation_node_project_empty";
-        this.childViewContainer = "ul";
-        this.ui = {
-            navigationProject: '#navigation-project',
-            navigationResources: '#navigation-resources',
-            navigationBuilder: '#navigation-builder',
-            navigationWorkflowRuns: '#navigation-workflowruns'
-        }
-        this.events = {
-            'click @ui.navigationProject': '_handleClickNavigationProject',
-            'click @ui.navigationResources': '_handleClickNavigationResources',
-            'click @ui.navigationBuilder': '_handleClickNavigationBuilder',
-            'click @ui.navigationWorkflowRuns': '_handleClickNavigationWorkflowRuns',
-            'dblclick @ui.navigationProject': '_handleDoubleClickNavigationProject',
-        };
+        this.collection = new Backbone.Collection();
+        var resourcesNodeModel = new Backbone.Model({name: "Resources", project: this.model});
+        var workflowBuilderNodeModel = new Backbone.Model({name: "Workflow Builder", project: this.model});
+        var workflowRunnerNodeModel = new Backbone.Model({name: "Workflow Runner", project: this.model});
+        this.collection.add(resourcesNodeModel);
+      //  this.collection.add(workflowBuilderNodeModel);
+      //  this.collection.add(workflowRunnerNodeModel);
     }
 
     /**
-     * Post-render.
+     * Determine child view based on name.
      */
-    onRender()
+    getChildView(aModel)
     {
-        this._setHighlighted(this._selected);
+        switch (aModel.get("name"))
+        {
+            case "Resources":
+            {
+                return VISRC_ViewNavigationNodeResources;
+            }
+
+            case "Workflow Builder":
+            {
+                return VISRC_ViewNavigationNode;
+            }
+
+            case "Workflow Runner":
+            {
+                return VISRC_ViewNavigationNode;
+            }
+
+            default:
+            {
+                return VISRC_ViewNavigationNode;
+            }
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -56,81 +66,25 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
      */
     _initializeRadio()
     {
-        this.rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aPass => this._handleSelect(aPass));
+        this._rodanChannel.on(VISRC_Events.EVENT__PROJECT_SELECTED, aEvent => this._handleEventProjectSelected(aEvent));
     }
 
     /**
-     * Handle select event.
+     * Send click events.
      */
-    _handleSelect(aPass)
+    _sendClickEvents()
     {
-        this._selected = aPass.hasOwnProperty('project') && aPass.project === this.model;
-        this._setHighlighted(this._selected);
+        this._rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 
     /**
-     * Handle click on nav project.
+     * Handle highlighting.
      */
-    _handleClickNavigationProject()
+    _handleEventProjectSelected(aEvent)
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECT_SELECTED, {project: this.model});
-    }
-
-    /**
-     * Handle double-click on nav project.
-     */
-    _handleDoubleClickNavigationProject()
-    {
-        this._switchTemplate();
-        this.render();
-    }
-
-    /**
-     * Handle click on nav resources.
-     */
-    _handleClickNavigationResources()
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED);
-    }
-
-    /**
-     * Handle click on nav builder.
-     */
-    _handleClickNavigationBuilder()
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
-    }
-
-    /**
-     * Handle click on nav workflow runs.
-     */
-    _handleClickNavigationWorkflowRuns()
-    {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWRUNS_SELECTED);
-    }
-
-    /**
-     * Set highlighted.
-     */
-    _setHighlighted(aHighlighted)
-    {
-        // todo - magic number
-        var backgroundColor = (this._selected ? '#5555ff' : '');
-        this.$el.find('div#navigation-project').css('background-color', backgroundColor);
-    }
-
-    /**
-     * Switches templates.
-     */
-    _switchTemplate()
-    {
-        if (this.template === "#template-navigation_node_project")
+        if (aEvent.project === this.model)
         {
-            this.template = "#template-navigation_node_project_empty";
-        }
-        else
-        {
-            this.template = "#template-navigation_node_project";
+            this._rodanChannel.trigger(VISRC_Events.EVENT_NAVIGATION_NODE_SELECTED, {node: this});
         }
     }
 }

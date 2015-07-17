@@ -5,12 +5,11 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
 import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
-import VISRC_ViewNavigationNodeProject from './VISRC_ViewNavigationNodeProject';
 
 /**
- * This class represents a navigation menu node.
+ * This class represents a navigation menu node for a project.
  */
-class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
+class VISRC_ViewNavigationNodeResources extends VISRC_ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -20,7 +19,6 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
      */
     initialize(aParameters)
     {
-        this.childView = VISRC_ViewNavigationNodeProject;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +29,7 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
      */
     _initializeRadio()
     {
+        this._rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, aEvent => this._handleEventResourcesSelected(aEvent));
     }
 
     /**
@@ -38,8 +37,20 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED);
+        this._rodanChannel.command(VISRC_Events.COMMAND__SET_ACTIVE_PROJECT, {project: this.model.get("project")});
+        this._rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED, {project: this.model.get("project")});
+    }
+
+    /**
+     * Handle highlighting.
+     */
+    _handleEventResourcesSelected(aEvent)
+    {
+        if (aEvent.project === this.model.get("project"))
+        {
+            this._rodanChannel.trigger(VISRC_Events.EVENT_NAVIGATION_NODE_SELECTED, {node: this});
+        }
     }
 }
 
-export default VISRC_ViewNavigationNodeRoot;
+export default VISRC_ViewNavigationNodeResources;
