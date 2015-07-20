@@ -96,11 +96,47 @@ class VISRC_ViewNavigationNode extends Marionette.CompositeView
     }
 
     /**
+     * Show subviews.
+     */
+    _showSubviews()
+    {
+        // Show subviews.
+        var firstUl = $(this.$el.find(this.childViewContainer)[0]);
+        if (firstUl !== undefined)
+        {
+            firstUl.show();
+        }  
+    }
+
+    /**
+     * Expand parent.
+     */
+     _expandParent()
+     {
+        // Show parents.
+        if (this._parent !== null 
+            && this._parent !== undefined
+            && this._parent instanceof VISRC_ViewNavigationNode)
+        {
+            this._parent._showSubviews();
+            this._parent._expandParent();
+        }
+    }
+
+    /**
      * Does highlighting.
      */
     _handleEventNodeSelected(aEvent)
     {
-        this._setHighlight(this === aEvent.node);
+        if (this === aEvent.node)
+        {
+            this._setHighlight(true);
+            this._expandParent();
+        }
+        else
+        {
+            this._setHighlight(false);
+        }
     }
 
     /**

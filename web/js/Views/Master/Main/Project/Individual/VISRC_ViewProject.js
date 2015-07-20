@@ -75,7 +75,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
      */
     _handleClickResourceCount()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__RESOURCES_SELECTED, {project: this.model});
     }
 
     /**
@@ -83,7 +83,7 @@ class VISRC_ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED);
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
     }
 
     /**

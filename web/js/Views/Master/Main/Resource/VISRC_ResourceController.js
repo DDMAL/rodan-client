@@ -33,19 +33,18 @@ class VISRC_ResourceController extends VISRC_BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.on(VISRC_Events.EVENT__RESOURCES_SELECTED, aPass => this._handleEventListSelected(aPass));
         this._rodanChannel.on(VISRC_Events.EVENT__RESOURCE_SELECTED, aPass => this._handleEventItemSelected(aPass));
     }
 
     /**
      * Handle list selection.
      */
-    _handleEventListSelected()
+    _handleEventListSelected(aPass)
     {
         this._layoutView = new VISRC_LayoutViewResource();
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        var project = this._rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this._viewList = new VISRC_ViewResourceList({project: project});
+        this._viewList = new VISRC_ViewResourceList({project: aPass.project});
         this._layoutView.showList(this._viewList);
     }
 

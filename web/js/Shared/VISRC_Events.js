@@ -82,7 +82,7 @@ var VISRC_Events = {
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED', // Called on project selection. No pass.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED', // Called on project selection. Passes {project: VISRC_Project}.
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED', // Called on resource selection. Passes {resource: VISRC_Resource}.
-    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. No pass.
+    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. Passes (project: VISRC_Project}.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: VISRC_Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED', // Called on workflows selection. No pass.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED', // Called on workflow run selection. Passes {project: VISRC_WorkflowRun}.
@@ -92,7 +92,7 @@ var VISRC_Events = {
     EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Passes {model: VISRC_BaseModel};
 
     // Navigation events.
-    EVENT_NAVIGATION_HIGHLIGHTNODE: 'EVENT_NAVIGATION_HIGHLIGHTNODE', // Informs of node selection. Takes {node: VISRC_ViewNavigationNode}.
+    EVENT_NAVIGATION_NODE_SELECTED: 'EVENT_NAVIGATION_NODE_SELECTED', // Informs of node selection. Takes {node: VISRC_ViewNavigationNode}.
 
     // WORKFLOWBUILDER events.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED', // Called on workflow builder opening. Passes {workflow: VISRC_Workflow}. May be null if new workflow needed.

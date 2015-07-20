@@ -51,7 +51,6 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-
         this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
         this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
     }
@@ -73,11 +72,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _showView(aView)
     {
-        // Tell the layout view what to render.
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        aView.isDestroyed = false;
-        this.regionControl.show(aView, {preventDestroy: true});
+        this.regionControl.show(aView);
     }
 
     /**

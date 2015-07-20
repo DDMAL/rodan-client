@@ -33,19 +33,18 @@ class VISRC_WorkflowController extends VISRC_BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWS_SELECTED, aPass => this._handleEventListSelected(aPass));
         this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
     }
 
     /**
      * Handle list selection.
      */
-    _handleEventListSelected()
+    _handleEventListSelected(aPass)
     {
         this._layoutView = new VISRC_LayoutViewWorkflow();
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        var project = this._rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this._viewList = new VISRC_ViewWorkflowList({project: project});
+        this._viewList = new VISRC_ViewWorkflowList({project: aPass.project});
         this._layoutView.showList(this._viewList);
     }
 
