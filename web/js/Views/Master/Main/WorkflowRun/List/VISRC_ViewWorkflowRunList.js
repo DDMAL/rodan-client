@@ -28,6 +28,9 @@ class VISRC_ViewWorkflowRunList extends Marionette.CompositeView
         this.template = "#template-main_workflowrun_list";
         this.childView = VISRC_ViewWorkflowRunListItem;
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_WORKFLOWRUN);
+        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+        this.collection.reset();
+        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {project: project.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,16 +42,6 @@ class VISRC_ViewWorkflowRunList extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUNS_SELECTED, () => this._handleEventListSelected());
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected()
-    {
-        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_WORKFLOWRUNS, {project: project.id});
     }
 }
 

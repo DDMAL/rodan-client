@@ -9,8 +9,6 @@ import VISRC_ViewWorkflowRunList from './List/VISRC_ViewWorkflowRunList';
 import VISRC_LayoutViewNewWorkflowRun from './NewWorkflowRun/VISRC_LayoutViewNewWorkflowRun';
 import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
-var instance = null;
-
 /**
  * Controller for WorkflowRun views.
  */
@@ -41,14 +39,6 @@ class VISRC_WorkflowRunController extends VISRC_BaseController
     }
 
     /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
-        this._viewList = new VISRC_ViewWorkflowRunList();
-    }
-
-    /**
      * Handle item selection.
      */
     _handleEventItemSelected(aPass)
@@ -62,6 +52,7 @@ class VISRC_WorkflowRunController extends VISRC_BaseController
      */
     _handleEventListSelected()
     {
+        this._viewList = new VISRC_ViewWorkflowRunList();
         this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
     }
 
