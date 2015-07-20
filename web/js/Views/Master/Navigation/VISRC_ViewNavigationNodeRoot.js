@@ -19,7 +19,7 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
      * TODO docs
      */
     initialize(aParameters)
-    {debugger;
+    {
         this.childView = VISRC_ViewNavigationNodeProject;
     }
 

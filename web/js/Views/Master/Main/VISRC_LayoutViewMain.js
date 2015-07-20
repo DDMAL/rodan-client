@@ -4,6 +4,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
+import VISRC_ViewLogin from './Login/VISRC_ViewLogin';
 import VISRC_ProjectController from './Project/VISRC_ProjectController';
 import VISRC_ResourceController from './Resource/VISRC_ResourceController';
 import VISRC_WorkflowController from './Workflow/VISRC_WorkflowController';
@@ -45,6 +46,7 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
         this.workflowController = new VISRC_WorkflowController();
         this.workflowRunController = new VISRC_WorkflowRunController();
         this.workflowBuilderController = new VISRC_WorkflowBuilderController();
+        this.loginView = new VISRC_ViewLogin();
     }
 
     /**

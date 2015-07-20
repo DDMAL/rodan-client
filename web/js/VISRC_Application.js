@@ -84,7 +84,6 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel.reply(VISRC_Events.REQUEST__APPLICATION, this);
         this.rodanChannel.on(VISRC_Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
     }
 
     /**
@@ -121,15 +120,6 @@ class VISRC_Application extends Marionette.Application
         this.layoutViewNavigation = new VISRC_LayoutViewNavigation();
         this.layoutViewMain = new VISRC_LayoutViewMain();
         this.layoutViewStatus = new VISRC_LayoutViewStatus();
-    }
-
-    /**
-     * Handles failed authentication check.
-     */
-    _handleAuthentication401()
-    {
-        // TODO - need login form
-        this.rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, {username: "dummy", password: "dafdaedf2345"}); 
     }
 
     /**
