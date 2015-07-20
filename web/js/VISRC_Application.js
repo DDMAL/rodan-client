@@ -156,7 +156,7 @@ class VISRC_Application extends Marionette.Application
     {
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
-       // this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
+        this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
     }
 }
 

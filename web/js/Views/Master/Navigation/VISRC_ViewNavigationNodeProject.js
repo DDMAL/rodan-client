@@ -5,6 +5,8 @@ import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../Shared/VISRC_Events';
 import VISRC_ViewNavigationNodeResources from './VISRC_ViewNavigationNodeResources';
+import VISRC_ViewNavigationNodeWorkflowRuns from './VISRC_ViewNavigationNodeWorkflowRuns';
+import VISRC_ViewNavigationNodeWorkflows from './VISRC_ViewNavigationNodeWorkflows';
 import VISRC_ViewNavigationNode from './VISRC_ViewNavigationNode';
 
 /**
@@ -22,11 +24,11 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
     {
         this.collection = new Backbone.Collection();
         var resourcesNodeModel = new Backbone.Model({name: "Resources", project: this.model});
-        var workflowBuilderNodeModel = new Backbone.Model({name: "Workflow Builder", project: this.model});
-        var workflowRunnerNodeModel = new Backbone.Model({name: "Workflow Runner", project: this.model});
+        var workflowBuilderNodeModel = new Backbone.Model({name: "Workflows", project: this.model});
+        var workflowRunnerNodeModel = new Backbone.Model({name: "Workflow Runs", project: this.model});
         this.collection.add(resourcesNodeModel);
-      //  this.collection.add(workflowBuilderNodeModel);
-      //  this.collection.add(workflowRunnerNodeModel);
+        this.collection.add(workflowBuilderNodeModel);
+        this.collection.add(workflowRunnerNodeModel);
     }
 
     /**
@@ -41,14 +43,14 @@ class VISRC_ViewNavigationNodeProject extends VISRC_ViewNavigationNode
                 return VISRC_ViewNavigationNodeResources;
             }
 
-            case "Workflow Builder":
+            case "Workflows":
             {
-                return VISRC_ViewNavigationNode;
+                return VISRC_ViewNavigationNodeWorkflows;
             }
 
-            case "Workflow Runner":
+            case "Workflow Runs":
             {
-                return VISRC_ViewNavigationNode;
+                return VISRC_ViewNavigationNodeWorkflowRuns;
             }
 
             default:

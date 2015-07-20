@@ -77,7 +77,7 @@ class VISRC_ViewNavigationNode extends Marionette.CompositeView
     _toggleSubviews()
     {
         var firstUl = $(this.$el.find(this.childViewContainer)[0]);
-        if (firstUl !== undefined && firstUl.find("li").length > 0)
+        if (firstUl !== undefined && firstUl.find("div").length > 0)
         {
             firstUl.toggle("fast");
         }
