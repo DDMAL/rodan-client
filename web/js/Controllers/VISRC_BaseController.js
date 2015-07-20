@@ -6,7 +6,7 @@ import Radio from 'backbone.radio';
 /**
  * Base controller.
  */
-class VISRC_BaseController
+class VISRC_BaseController extends Marionette.Object
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -19,6 +19,7 @@ class VISRC_BaseController
         this._rodanChannel = Radio.channel("rodan");
         this._initializeViews();
         this._initializeRadio();
+        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -4,16 +4,16 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Events from '../../../../Shared/VISRC_Events';
-import VISRC_ViewControlWorkflowList from './Control/WorkflowList/VISRC_ViewControlWorkflowList';
+import VISRC_LayoutViewWorkflowBuilder from './VISRC_LayoutViewWorkflowBuilder';
 import VISRC_LayoutViewWorkflowEditor from './Control/Workflow/VISRC_LayoutViewWorkflowEditor';
 import VISRC_Workflow from '../../../../Models/VISRC_Workflow';
-
 import VISRC_WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/VISRC_WorkflowBuilder';
+import VISRC_BaseController from '../../../../Controllers/VISRC_BaseController';
 
 /**
  * Controller for the Workflow Builder.
  */
-class VISRC_WorkflowBuilderController extends Marionette.LayoutView
+class VISRC_WorkflowBuilderController extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -23,22 +23,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
-        this.addRegions({
-            regionControl: "#region-main_workflowbuilder_control"
-        });
-        this.template = "#template-main_workflowbuilder";
-        this.ui = {
-            buttonZoomIn: '#button-zoom_in',
-            buttonZoomOut: '#button-zoom_out',
-            buttonZoomReset: '#button-zoom_reset'
-        }
-        this.events = {
-            'click @ui.buttonZoomIn': '_handleButtonZoomIn',
-            'click @ui.buttonZoomOut': '_handleButtonZoomOut',
-            'click @ui.buttonZoomReset': '_handleButtonZoomReset'
-        };
         this._initializeViews();
-        this._initializeRadio();
         this._workspace = new VISRC_WorkflowBuilder();
     }
 
@@ -50,9 +35,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW, () => this._handleCommandAddWorkflow());
+        this._rodanChannel.on(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
     }
 
     /**
@@ -60,7 +43,6 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.controlWorkflowListView = new VISRC_ViewControlWorkflowList();
         this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor();
     }
 
@@ -68,45 +50,28 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
 // PRIVATE METHODS - view controls
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO
-     */
-    _showView(aView)
-    {
-        this.regionControl.show(aView);
-    }
-
-    /**
      * Handle selection.
      */
     _handleEventBuilderSelected(aReturn)
     {
-        // Send the layout view to the main region.
-        this.rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
+        this._layoutView = new VISRC_LayoutViewWorkflowBuilder();
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
 
         // Get the workflow.
         if (aReturn.workflow != null)
         {
             this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: aReturn.workflow});
-            this._showView(this.controlWorkflowView);
         }
         else
         {
-            this._showView(this.controlWorkflowListView);
+            var project = this._rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
+            var workflow = this._createWorkflow(project);
+            this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: workflow});
         }
+        this._layoutView.showView(this.controlWorkflowView);
 
         // Initialize the workspace.
         this._workspace.initialize("canvas-workspace");
-    }
-    
-    /**
-     * Handle command show workflow.
-     */
-    _handleCommandAddWorkflow()
-    {
-        var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
-        var workflow = this._createWorkflow(project);
-        this.controlWorkflowView = new VISRC_LayoutViewWorkflowEditor({workflow: workflow});
-        this._showView(this.controlWorkflowView);
     }
     
     /**
@@ -114,7 +79,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomIn()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
+        this._rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
     }
     
     /**
@@ -122,7 +87,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomOut()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
+        this._rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
     }
     
     /**
@@ -130,7 +95,7 @@ class VISRC_WorkflowBuilderController extends Marionette.LayoutView
      */
     _handleButtonZoomReset()
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
+        this._rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

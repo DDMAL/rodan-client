@@ -25,7 +25,6 @@ var VISRC_Events = {
     COMMAND__LAYOUTVIEW_SHOW: 'COMMAND__LAYOUTVIEW_SHOW',
 
     // Workflow builder commands. These are sent to the workflow builder controller. They will (most often) trigger a command to the workspace.
-    COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW',  // Called when Workflow needs to be created. No pass.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: VISRC_Job}.
     COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT: 'COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT',   // Called when input port needs to be added to workflow job. Passes {inputportype: VISRC_InputPortType}.
     COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT',   // Called when output port needs to be added to workflow job. Passes {outputporttype: VISRC_OutputPortType}.

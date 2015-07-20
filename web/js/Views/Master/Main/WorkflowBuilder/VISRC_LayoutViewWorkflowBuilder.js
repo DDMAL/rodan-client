@@ -3,32 +3,36 @@ import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import VISRC_Events from '../../../../../../Shared/VISRC_Events';
+import VISRC_Events from '../../../../Shared/VISRC_Events';
 
 /**
- * This class represents the view for a list of workflows.
+ * Controller for the Workflow Builder.
  */
-class VISRC_ViewControlWorkflowList extends Marionette.ItemView
+class VISRC_LayoutViewWorkflowBuilder extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initializer.
      */
-    initialize(aParameters)
+    initialize(aOptions)
     {
-        this.modelEvents = {
-            "all": "render"
-        };
+        this.addRegions({
+            regionControl: "#region-main_workflowbuilder_control"
+        });
+        this.template = "#template-main_workflowbuilder";
         this.ui = {
-            newWorkflowButton: '#button-new_workflow'
+            buttonZoomIn: '#button-zoom_in',
+            buttonZoomOut: '#button-zoom_out',
+            buttonZoomReset: '#button-zoom_reset'
         }
         this.events = {
-            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+            'click @ui.buttonZoomIn': '_handleButtonZoomIn',
+            'click @ui.buttonZoomOut': '_handleButtonZoomOut',
+            'click @ui.buttonZoomReset': '_handleButtonZoomReset'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflow_list";
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,13 +46,14 @@ class VISRC_ViewControlWorkflowList extends Marionette.ItemView
         this.rodanChannel = Radio.channel("rodan");
     }
 
+
     /**
-     * Handle button new workflow.
+     * TODO
      */
-    _handleButtonNewWorkflow()
+    showView(aView)
     {
-        this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOW);
+        this.regionControl.show(aView);
     }
 }
 
-export default VISRC_ViewControlWorkflowList;
+export default VISRC_LayoutViewWorkflowBuilder;

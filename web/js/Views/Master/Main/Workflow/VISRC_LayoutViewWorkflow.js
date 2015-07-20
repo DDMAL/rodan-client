@@ -26,6 +26,12 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
             regionItem: "#region-main_workflow_item"
         });
         this.template = "#template-main_workflow";
+        this.ui = {
+            newWorkflowButton: '#button-new_workflow'
+        }
+        this.events = {
+            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+        };
         this._initializeRadio();
     }
 
@@ -54,6 +60,14 @@ class VISRC_LayoutViewWorkflow extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle button new workflow.
+     */
+    _handleButtonNewWorkflow()
+    {
+        this.rodanChannel.trigger(VISRC_Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
     }
 }
 
