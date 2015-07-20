@@ -20,7 +20,14 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
      */
     initialize(aParameters)
     {
+        this.template = "#template-navigation_root";
         this.childView = VISRC_ViewNavigationNodeProject;
+        this.ui = {
+            buttonLogout: '#button-navigation_logout'
+        }
+        this.events = {
+            'click @ui.buttonLogout': '_handleButton'
+        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +46,14 @@ class VISRC_ViewNavigationNodeRoot extends VISRC_ViewNavigationNode
     _sendClickEvents()
     {
         this._rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED);
+    }
+
+    /**
+     * Handle button.
+     */
+    _handleButton()
+    {
+        this._rodanChannel.command(VISRC_Events.COMMAND__AUTHENTICATION_LOGOUT);
     }
 }
 

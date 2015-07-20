@@ -21,8 +21,6 @@ class VISRC_ControllerServer extends Marionette.Object
     {
         this.routes = null;
         this.serverConfiguration = null;
-        this.activeUser = null;
-        this.CSRFToken = new VISRC_Cookie('csrftoken');
         this._initializeRadio();
     }
 

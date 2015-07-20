@@ -19,7 +19,8 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     initialize(aControllerServer)
     {
-        this.user = null;
+        this._user = null;
+        this._CSRFToken = new VISRC_Cookie('csrftoken');
         this.controllerServer = aControllerServer;
         this._initializeRadio();
     }
@@ -36,6 +37,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         this.rodanChannel.reply(VISRC_Events.REQUEST__USER, () => this._handleRequestUser());
         this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
         this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**
@@ -52,9 +54,10 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         switch (request.status)
         {
             case 200:
+                this._CSRFToken = new VISRC_Cookie('csrftoken');
                 var parsed = JSON.parse(request.responseText);
-                this.user = new VISRC_User(parsed);
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, {user: this.user});
+                this._user = new VISRC_User(parsed);
+                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
                 break;
             case 400:
                 this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
@@ -128,13 +131,12 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         }
         else if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
         {
-            console.log('Injecting the cookie for session authentication');
-            if (!this.controllerServer.CSRFToken.value)
+            if (!this._CSRFToken.value)
             {
-                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');
+                this._CSRFToken = new VISRC_Cookie('csrftoken');
             }
             request.withCredentials = true;
-            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
+            request.setRequestHeader('X-CSRFToken', this._CSRFToken.value);
         }
         request.send();
     }
@@ -152,11 +154,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         request.open('POST', authRoute, true);
         if (authType === 'session')
         {
-            if (!this.controllerServer.CSRFToken)
-                this.controllerServer.CSRFToken = new VISRC_Cookie('csrftoken');//@TODO does this do what we want it to?
-
             request.withCredentials = true;
-            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
         }
         request.setRequestHeader('Accept', 'application/json');
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -168,17 +166,17 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _logout()
     {
-        var logoutRoute = this.controllerServer.routeForRouteName('session-close');
+        var authRoute = this.controllerServer.routeForRouteName('session-close');
         var authType = VISRC_Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleDeauthenticationResponse(aEvent);
         request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
-        request.open('POST', logoutRoute, true);
+        request.open('POST', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
         if (authType === 'session')
         {
             request.withCredentials = true;
-            request.setRequestHeader('X-CSRFToken', this.controllerServer.CSRFToken.value);
+            request.setRequestHeader('X-CSRFToken', this._CSRFToken.value);
         }
         else
         {
@@ -186,6 +184,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
             request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
         request.send();
+        this._user = null;
     }
 
     /**
@@ -193,7 +192,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _handleRequestUser()
     {
-        return this.user;
+        return this._user;
     }
 }
 

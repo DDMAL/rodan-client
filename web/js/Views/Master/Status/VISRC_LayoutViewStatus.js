@@ -59,8 +59,9 @@ class VISRC_LayoutViewStatus extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aPass => this._handleAuthenticationSuccess(aPass));
+        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, aPass => this._handleAuthenticationSuccess(aPass));
+        this._rodanChannel.on(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
@@ -69,6 +70,15 @@ class VISRC_LayoutViewStatus extends Marionette.LayoutView
     _handleAuthenticationSuccess(aPass)
     {
         this.viewStatusUser = new VISRC_ViewStatusUser({user: aPass.user});
+        this.regionStatusUser.show(this.viewStatusUser);
+    }
+
+    /**
+     * Handle deauthentication notification.
+     */
+    _handleDeauthenticationSuccess(aPass)
+    {
+        this.viewStatusUser = new VISRC_ViewStatusUser({user: null});
         this.regionStatusUser.show(this.viewStatusUser);
     }
 }

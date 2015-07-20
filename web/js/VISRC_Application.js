@@ -49,7 +49,7 @@ class VISRC_Application extends Marionette.Application
             {
                 options.beforeSend = function (xhr) 
                 { 
-                    xhr.setRequestHeader('X-CSRFToken', that.controllerServer.CSRFToken.value);
+                    xhr.setRequestHeader('X-CSRFToken', that.controllerAuthentication._CSRFToken.value);
                 }
             }
         });
@@ -84,6 +84,7 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel.reply(VISRC_Events.REQUEST__APPLICATION, this);
         this.rodanChannel.on(VISRC_Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
+        this.rodanChannel.on(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
@@ -147,6 +148,13 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
         this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
+    }
+
+    /**
+     * Handle deauthentication success.
+     */
+    _handleDeauthenticationSuccess()
+    {
     }
 }
 

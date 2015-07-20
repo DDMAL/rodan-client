@@ -9,6 +9,7 @@
 $background-color-navigation-gradient_left: #000000;
 $background-color-navigation-gradient_right: #333333;
 $text-color-navigation: #cccccc;
+$text-color-navigation-logout: #000000;
 
 /* Status area - User */
 $background-color-status-user-gradient_left: #000000;
@@ -68,6 +69,11 @@ div#region-navigation ul
     list-style-type: none;
     margin: 0;
     padding-left: 10px;
+}
+
+button#button-navigation_logout
+{
+    color: $text-color-navigation-logout;
 }
 
 div#region-status_user 

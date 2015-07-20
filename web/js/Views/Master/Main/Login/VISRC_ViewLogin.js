@@ -44,15 +44,6 @@ class VISRC_ViewLogin extends Marionette.ItemView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel("rodan");
-        this._rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
-    }
-
-    /**
-     * Handles failed authentication check.
-     */
-    _handleAuthentication401()
-    {
-        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this);
     }
 
     /**

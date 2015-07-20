@@ -36,6 +36,7 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
     {
         this._rodanChannel = Radio.channel("rodan");
         this._rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
+        this._rodanChannel.on(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
@@ -46,6 +47,16 @@ class VISRC_LayoutViewNavigation extends Marionette.LayoutView
         var model = new Backbone.Model({name: "Projects"});
         var object = {model: model, collection: this._rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT)};
         this.regionNavigationTree.show(new VISRC_ViewNavigationNodeRoot(object)); 
+    }
+
+    /**
+     * Handle authentication.
+     */
+    _handleDeauthenticationSuccess()
+    {
+        var model = new Backbone.Model({name: "Projects"});
+        var object = {model: model, collection: this._rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_PROJECT)};
+        this.regionNavigationTree.reset(); 
     }
 }
 

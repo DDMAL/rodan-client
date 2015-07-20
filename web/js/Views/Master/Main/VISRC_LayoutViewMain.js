@@ -46,7 +46,6 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
         this.workflowController = new VISRC_WorkflowController();
         this.workflowRunController = new VISRC_WorkflowRunController();
         this.workflowBuilderController = new VISRC_WorkflowBuilderController();
-        this.loginView = new VISRC_ViewLogin();
     }
 
     /**
@@ -54,8 +53,19 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
+        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel.comply(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
+        this._rodanChannel.on(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
+        this._rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
+    }
+
+    /**
+     * Handles failed authentication check.
+     */
+    _handleAuthentication401()
+    {
+        this.loginView = new VISRC_ViewLogin();
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
     }
 
     /**
@@ -64,6 +74,15 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
     _handleCommandShow(aView)
     {
         this.region.show(aView);
+    }
+
+    /**
+     * Handle deauthentication success.
+     */
+    _handleDeauthenticationSuccess()
+    {
+        this.loginView = new VISRC_ViewLogin();
+        this._rodanChannel.command(VISRC_Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
     }
 }
 
