@@ -37,7 +37,9 @@ class VISRC_ProjectController extends VISRC_BaseController
         this._rodanChannel.on(VISRC_Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
         this._rodanChannel.reply(VISRC_Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
         this._rodanChannel.comply(VISRC_Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
-        this._rodanChannel.comply(VISRC_Events.COMMAND__SET_ACTIVE_PROJECT, aReturn => this._handleCommandSetActiveProject(aReturn));
+        this._rodanChannel.comply(VISRC_Events.COMMAND__SET_ACTIVE_PROJECT, aReturn => this._handleCommandProjectSave(aReturn));
+        this._rodanChannel.comply(VISRC_Events.COMMAND__PROJECT_SAVE, aReturn => this._handleCommandProjectSave(aReturn));
+        this._rodanChannel.comply(VISRC_Events.COMMAND__PROJECT_DELETE, aReturn => this._handleCommandProjectDelete(aReturn));
     }
 
     /**
@@ -45,6 +47,23 @@ class VISRC_ProjectController extends VISRC_BaseController
      */
     _initializeViews()
     {
+    }
+
+    /**
+     * Save changes to project.
+     */
+    _handleCommandProjectSave(aReturn)
+    {
+        aReturn.project.save(aReturn.fields, {patch: true});
+    }
+
+    /**
+     * Delete project.
+     */
+    _handleCommandProjectDelete(aReturn)
+    {
+        console.log("todo");
+        //aReturn.project.destroy();
     }
 
     /**

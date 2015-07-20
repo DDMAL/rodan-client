@@ -26,10 +26,16 @@ class VISRC_ViewProject extends Marionette.CompositeView
         this.model = aParameters.project;
         this._initializeRadio();
         this.ui = {
+            buttonSave: '#button-save_project',
+            buttonDelete: '#button-delete_project',
             resourceCount: '#resource_count',
-            workflowCount: '#workflow_count'
+            workflowCount: '#workflow_count',
+            textName: '#text-project_name',
+            textDescription: '#text-project_description'
         }
         this.events = {
+            'click @ui.buttonSave': '_handleButtonSave',
+            'click @ui.buttonDelete': '_handleButtonDelete',
             'click @ui.resourceCount': '_handleClickResourceCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
@@ -66,6 +72,24 @@ class VISRC_ViewProject extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
+    }
+
+    /**
+     * Handle save button.
+     */
+    _handleButtonSave()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__PROJECT_SAVE, 
+                                  {project: this.model,
+                                   fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
+    }
+
+    /**
+     * Handle delete button.
+     */
+    _handleButtonDelete()
+    {
+        this.rodanChannel.command(VISRC_Events.COMMAND__PROJECT_DELETE, {project: this.model});
     }
 
     /**

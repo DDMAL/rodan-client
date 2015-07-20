@@ -1,11 +1,15 @@
 <h1>Project <%= name%></h1>
 <hr>
-<div>Basic info goes here: <%= creator.username%> <%= created%> <%= workflow_count%></div>
+Name: <input type="text" id="text-project_name" value="<%= name %>"><br>
+Description: <input type="text" id="text-project_description" value="<%= description %>"><br>
+Created by: <%= creator.username %> <br>
+Created on: <%= created %><br>
+Resources:  <span id="resource_count"><%= resource_count%></span><br>
+Workflows:  <span id="workflow_count"><%= workflow_count%></span><br>
+<button id="button-save_project">Save</button>
+<button id="button-delete_project">Delete</button>
 <hr>
-Resource count is SPECIAL:  <div id="resource_count"><%= resource_count%></div>
-Workflow count is SPECIAL:  <div id="workflow_count"><%= workflow_count%></div>
-<hr>
-<h3>WorkflowRuns</h3>
+<h2>Workflow Runs</h2>
 <table class="table table-striped">
     <thead>
         <tr>
