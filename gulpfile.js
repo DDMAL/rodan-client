@@ -6,6 +6,10 @@ var $ = require('gulp-load-plugins')();
 var shell = require('gulp-shell');
 var karma = require('karma').server;
 
+gulp.task('develop:javascript', shell.task([
+    'cd web; ln -sf ../js .'
+]));
+
 gulp.task('develop:templates', shell.task([
     'python support/build-template.py -b templates/index.html -t templates/views web'
 ]));
@@ -16,7 +20,7 @@ gulp.task('develop:styles', shell.task([
 
 gulp.task('develop:jshint', function (callback)
 {
-    return gulp.src(['web/app/**/*.js'])
+    return gulp.src(['web/js/**/*.js'])
         .pipe($.jshint({lookup: true, devel: true}))
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe($.jshint.reporter('fail'));
@@ -44,6 +48,7 @@ gulp.task('develop:clean', function(callback)
     var del = require('del');
     del(['web/styles/default.css',
         'web/styles/default.css.map',
+        'web/js',
         'web/index.html'], function () {
     });
 });
@@ -58,16 +63,17 @@ gulp.task('develop:test', function(callback)
 gulp.task('develop', ['develop:server'], function() {
     gulp.start('develop:templates');
     gulp.start('develop:styles');
+    gulp.start('develop:javascript');
     $.livereload.listen();
 
     gulp.watch([
-        'web/app/**/*.js',
+        'web/js/**/*.js',
         'web/index.html',
         'web/styles/default.css'
     ]).on('change', $.livereload.changed);
 
     gulp.watch('templates/**/*.html', ['develop:templates']);
-    gulp.watch('app/**/*.js', ['develop:jshint']);
+    gulp.watch('web/js/**/*.js', ['develop:jshint']);
     gulp.watch('styles/default.scss', ['develop:styles']);
 });
 
@@ -78,9 +84,13 @@ gulp.task('production:templates', shell.task([
     'python support/build-template.py -b templates/index.html -t templates/views web'
 ]));
 
+gulp.task('production:javascript', shell.task([
+    'mkdir web/js; cp -rf js web/'
+]));
+
 gulp.task('production:jshint', function (callback)
 {
-    return gulp.src(['web/app/**/*.js'])
+    return gulp.src(['web/js/**/*.js'])
         .pipe($.jshint({lookup: true}))
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe($.jshint.reporter('fail'));
