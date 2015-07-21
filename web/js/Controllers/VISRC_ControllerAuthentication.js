@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,6 +20,21 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     initialize(aControllerServer)
     {
+        // AJAX prefilter.
+        var that = this;
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR)
+        {
+            console.log('ajax prefilter');
+            options.xhrFields = { withCredentials: true, };
+            if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE == "session" && !options.beforeSend) 
+            {
+                options.beforeSend = function (xhr) 
+                { 
+                    xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
+                }
+            }
+        });
+
         this._user = null;
         this._CSRFToken = new VISRC_Cookie('csrftoken');
         this.controllerServer = aControllerServer;
