@@ -21,7 +21,6 @@ class VISRC_ViewProjectList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this._initializeRadio();
-
         this.modelEvents = {
             "all": "render"
         };

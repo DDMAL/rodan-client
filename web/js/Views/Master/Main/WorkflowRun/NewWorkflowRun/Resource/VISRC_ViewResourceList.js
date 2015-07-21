@@ -29,6 +29,7 @@ class VISRC_ViewResourceList extends Marionette.CompositeView
         this._workflow = aParameters.workflow;
         var project = this.rodanChannel.request(VISRC_Events.REQUEST__PROJECT_ACTIVE);
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_RESOURCE);
+        this.collection.reset();
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCES, {project: project.id});
     }
 

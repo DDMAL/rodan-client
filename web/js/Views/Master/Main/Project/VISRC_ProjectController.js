@@ -62,8 +62,7 @@ class VISRC_ProjectController extends VISRC_BaseController
      */
     _handleCommandProjectDelete(aReturn)
     {
-        console.log("todo");
-        //aReturn.project.destroy();
+        alert("Not yet implemented");
     }
 
     /**

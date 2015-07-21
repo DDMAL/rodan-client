@@ -27,6 +27,7 @@ class VISRC_ViewInputPortList extends Marionette.CompositeView
         this.childView = VISRC_ViewInputPortListItem;
         this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(VISRC_Events.REQUEST__COLLECTION_INPUTPORT);
+        this.collection.reset();
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_INPUTPORTS, {workflow: aParameters.workflow.id});
     }
 

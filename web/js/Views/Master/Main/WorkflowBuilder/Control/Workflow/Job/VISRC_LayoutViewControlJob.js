@@ -30,18 +30,21 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
     }
 
     /**
+     * Unbind from events.
+     */
+    onDestroy()
+    {
+        this.rodanChannel.off(null, null, this);
+        this.rodanChannel.stopComplying(null, null, this);
+        this.rodanChannel.stopReplying(null, null, this);
+    }
+
+    /**
      * Initially show the list.
      */
     onBeforeShow()
     {
-        // TODO - don't want to do this, but for some reason my views get destroyed when
-        // the containing region is destroyed!
-        this.viewJobList.isDestroyed = false;
-        this.regionControlJobList.show(this.viewJobList, {preventDestroy: true});
-     /*   if (this.viewJob != null)
-        {
-            this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});
-        }*/
+        this.regionControlJobList.show(this.viewJobList);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +56,7 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn));
+        this.rodanChannel.on(VISRC_Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn), this);
     }
 
     /**
@@ -72,7 +75,7 @@ class VISRC_LayoutViewControlJob extends Marionette.LayoutView
         this.viewJob = new VISRC_ViewJob(aReturn);
         try
         {
-            this.regionControlJobIndividual.show(this.viewJob, {preventDestroy: true});
+            this.regionControlJobIndividual.show(this.viewJob);
         }
         catch (exception)
         {

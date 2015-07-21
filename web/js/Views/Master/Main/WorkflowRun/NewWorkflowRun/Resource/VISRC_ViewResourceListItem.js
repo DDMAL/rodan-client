@@ -32,6 +32,14 @@ class VISRC_ViewResourceListItem extends Marionette.ItemView
         super(aParameters);
     }
 
+    /**
+     * Unbind from events.
+     */
+    onDestroy()
+    {
+        this.rodanChannel.off(null, null, this);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +49,7 @@ class VISRC_ViewResourceListItem extends Marionette.ItemView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED, aPass => this._handleEventInputPortSelected(aPass));
+        this.rodanChannel.on(VISRC_Events.EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED, aPass => this._handleEventInputPortSelected(aPass), this);
     }
 
     /**

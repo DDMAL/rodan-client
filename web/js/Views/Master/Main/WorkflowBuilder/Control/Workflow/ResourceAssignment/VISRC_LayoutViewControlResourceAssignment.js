@@ -36,6 +36,16 @@ class VISRC_LayoutViewControlResourceAssignment extends Marionette.LayoutView
     }
 
     /**
+     * Unbind from events.
+     */
+    onDestroy()
+    {
+        this.rodanChannel.off(null, null, this);
+        this.rodanChannel.stopComplying(null, null, this);
+        this.rodanChannel.stopReplying(null, null, this);
+    }
+
+    /**
      * Initially show the list.
      */
     onBeforeShow()
@@ -55,7 +65,7 @@ class VISRC_LayoutViewControlResourceAssignment extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE, aReturn => this._handleEventResourceSelected(aReturn));
+        this.rodanChannel.comply(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE, aReturn => this._handleEventResourceSelected(aReturn), this);
         this.rodanChannel.command(VISRC_Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 

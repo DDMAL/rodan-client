@@ -40,6 +40,12 @@ class VISRC_LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     onBeforeShow()
     {
+        this.regionData.empty();
+        this.regionInputPortList.empty();
+        this.regionResourceList.empty();
+        this._viewInputPortList = new VISRC_ViewInputPortList({workflow: this._workflow});
+        this._viewResourceList = new VISRC_ViewResourceList({workflow: this._workflow});
+        this._viewData = new VISRC_ViewWorkflowRunData({workflow: this._workflow});
         this.regionData.show(this._viewData);
         this.regionInputPortList.show(this._viewInputPortList);
         this.regionResourceList.show(this._viewResourceList);
@@ -65,9 +71,6 @@ class VISRC_LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this._viewInputPortList = new VISRC_ViewInputPortList({workflow: this._workflow});
-        this._viewResourceList = new VISRC_ViewResourceList({workflow: this._workflow});
-        this._viewData = new VISRC_ViewWorkflowRunData({workflow: this._workflow});
     }
 
     /**
@@ -83,7 +86,6 @@ class VISRC_LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCommandAddRequest(aPass)
     {
-        // todo - error checking?
         this._addResourceAssignment(aPass.inputport.get("url"), aPass.resource.get("url"));
     }
 
@@ -92,7 +94,6 @@ class VISRC_LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCommandRemoveRequest(aPass)
     {
-        // todo - error checking?
         this._removeResourceAssignment(aPass.inputport.get("url"), aPass.resource.get("url"));
     }
 

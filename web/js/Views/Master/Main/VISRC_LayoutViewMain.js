@@ -29,18 +29,9 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
         this.addRegions({
             region: "#region-main"
         });
-        this._initializeViews();
         this._initializeRadio();
-    }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
+        // Create controllers.
         this.projectController = new VISRC_ProjectController();
         this.resourceController = new VISRC_ResourceController();
         this.workflowController = new VISRC_WorkflowController();
@@ -48,6 +39,9 @@ class VISRC_LayoutViewMain extends Marionette.LayoutView
         this.workflowBuilderController = new VISRC_WorkflowBuilderController();
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize Radio.
      */
