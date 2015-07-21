@@ -3,20 +3,21 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import VISRC_Configuration from '../VISRC_Configuration';
-import VISRC_Cookie from '../Shared/VISRC_Cookie'
-import VISRC_Events from '../Shared/VISRC_Events'
-import VISRC_User from '../Models/VISRC_User'
+import VISRC_Cookie from '../Shared/VISRC_Cookie';
+import VISRC_Events from '../Shared/VISRC_Events';
+import VISRC_User from '../Models/VISRC_User';
+import VISRC_BaseController from '../Controllers/VISRC_BaseController';
 
 /**
- * TODO docs
+ * Controls authentication.
  */
-class VISRC_ControllerAuthentication extends Marionette.Object
+class VISRC_ControllerAuthentication extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize(aControllerServer)
     {
@@ -38,7 +39,6 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         this._user = null;
         this._CSRFToken = new VISRC_Cookie('csrftoken');
         this.controllerServer = aControllerServer;
-        this._initializeRadio();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,11 +49,10 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.reply(VISRC_Events.REQUEST__USER, () => this._handleRequestUser());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
-        this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
-        this.rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
+        this._rodanChannel.reply(VISRC_Events.REQUEST__USER, () => this._handleRequestUser());
+        this._rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
+        this._rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        this._rodanChannel.comply(VISRC_Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**
@@ -64,7 +63,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         var request = aEvent.currentTarget;
         if (request.responseText === null)
         {
-            this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
         }
 
         switch (request.status)
@@ -73,19 +72,19 @@ class VISRC_ControllerAuthentication extends Marionette.Object
                 this._CSRFToken = new VISRC_Cookie('csrftoken');
                 var parsed = JSON.parse(request.responseText);
                 this._user = new VISRC_User(parsed);
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
                 break;
             case 400:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
                 break;
             case 401:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
                 break;
             case 403:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
                 break;
             default:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
                 break;
         }
     }
@@ -98,25 +97,25 @@ class VISRC_ControllerAuthentication extends Marionette.Object
         var request = aEvent.currentTarget;
         if (request.responseText === null)
         {
-            this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_NULL);
         }
 
         switch (request.status)
         {
             case 200:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS);
                 break;
             case 400:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_400);
                 break;
             case 401:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_401);
                 break;
             case 403:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_403);
                 break;
             default:
-                this.rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
                 break;
         }
     }
@@ -126,7 +125,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _handleTimeout(aEvent)
     {
-        this.rodanChannel.trigger(VISRC_Events.EVENT__SERVER_WENT_AWAY);
+        this._rodanChannel.trigger(VISRC_Events.EVENT__SERVER_WENT_AWAY);
     }
 
     /**
@@ -134,11 +133,11 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _checkAuthenticationStatus()
     {
-        var authStatusRoute = this.controllerServer.routeForRouteName('session-status');
+        var authRoute = this._rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'session-status');
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
         request.ontimeout = (event) => this._handleTimeout(aEvent);
-        request.open('GET', authStatusRoute, true);
+        request.open('GET', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
         if (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
@@ -162,7 +161,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _login(aData)
     {
-        var authRoute = this.controllerServer.getAuthenticationRoute();
+        var authRoute = this._getAuthenticationRoute();
         var authType = VISRC_Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
@@ -182,7 +181,7 @@ class VISRC_ControllerAuthentication extends Marionette.Object
      */
     _logout()
     {
-        var authRoute = this.controllerServer.routeForRouteName('session-close');
+        var authRoute = this._rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'session-close');
         var authType = VISRC_Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleDeauthenticationResponse(aEvent);
@@ -209,6 +208,31 @@ class VISRC_ControllerAuthentication extends Marionette.Object
     _handleRequestUser()
     {
         return this._user;
+    }
+
+    /**
+     * Returns authentication route.
+     */
+    _getAuthenticationRoute()
+    {
+        switch (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE)
+        {
+            case 'session':
+            {
+                return this._rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'session-auth');
+            }
+
+            case 'token':
+            {
+                return this._rodanChannel.request(VISRC_Events.REQUEST__SERVER_ROUTE, 'token-auth');
+            }
+
+            default:
+            {
+                console.error('An acceptable Authentication Type was not provided');
+                break;
+            }
+        }
     }
 }
 

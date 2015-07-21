@@ -5,70 +5,37 @@ import VISRC_Configuration from '../VISRC_Configuration';
 import { mapFromJsonObject } from '../Helpers/VISRC_Utilities';
 import VISRC_Cookie from '../Shared/VISRC_Cookie';
 import VISRC_Events from '../Shared/VISRC_Events';
+import VISRC_BaseController from '../Controllers/VISRC_BaseController';
 
 /**
- * TODO docs
+ * Server controller.
  */
-class VISRC_ControllerServer extends Marionette.Object
+class VISRC_ControllerServer extends VISRC_BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.routes = null;
         this.serverConfiguration = null;
-        this._initializeRadio();
-    }
-
-    /**
-     * Return URL for specified route.
-     */
-    routeForRouteName(aName)
-    {
-        if (this.routes.has(aName))
-        {
-            return this.routes.get(aName);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    /**
-     * TODO remove
-     */
-    getAuthenticationRoute()
-    {
-        switch (VISRC_Configuration.SERVER_AUTHENTICATION_TYPE)
-        {
-            case 'session':
-                return this.routeForRouteName('session-auth');
-            case 'token':
-                return this.routeForRouteName('token-auth');
-            default:
-                console.error('An acceptable Authentication Type was not provided');
-                break;
-        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Event bindings.
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(VISRC_Events.COMMAND__GET_ROUTES, () => this._getRoutes());
-        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_ROUTE, aString => this._handleRequestServerRoute(aString));
-        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
-        this.rodanChannel.reply(VISRC_Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
+        this._rodanChannel.comply(VISRC_Events.COMMAND__GET_ROUTES, () => this._getRoutes());
+        this._rodanChannel.reply(VISRC_Events.REQUEST__SERVER_ROUTE, aString => this._handleRequestServerRoute(aString));
+        this._rodanChannel.reply(VISRC_Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
+        this._rodanChannel.reply(VISRC_Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
     }
 
     /**
@@ -76,7 +43,7 @@ class VISRC_ControllerServer extends Marionette.Object
      */
     _handleRequestServerRoute(aString)
     {
-        return this.routeForRouteName(aString);
+        return this._routeForRouteName(aString);
     }
 
     /**
@@ -114,7 +81,7 @@ class VISRC_ControllerServer extends Marionette.Object
                 this.routes = mapFromJsonObject(resp.routes);
                 this.serverConfiguration = mapFromJsonObject(resp.configuration);
                 this.version = resp.version;
-                this.rodanChannel.trigger(VISRC_Events.EVENT__ROUTESLOADED);
+                this._rodanChannel.trigger(VISRC_Events.EVENT__ROUTESLOADED);
             }
             else
             {
@@ -125,6 +92,21 @@ class VISRC_ControllerServer extends Marionette.Object
         routeRequest.open('GET', VISRC_Configuration.SERVER_URL, true);
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
+    }
+
+    /**
+     * Return URL for specified route.
+     */
+    _routeForRouteName(aName)
+    {
+        if (this.routes.has(aName))
+        {
+            return this.routes.get(aName);
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 

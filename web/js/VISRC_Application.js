@@ -23,7 +23,7 @@ import VISRC_WorkflowCollection from './Collections/VISRC_WorkflowCollection';
 import VISRC_WorkflowRunCollection from './Collections/VISRC_WorkflowRunCollection';
 
 /**
- * TODO docs
+ * Main app class.
  */
 class VISRC_Application extends Marionette.Application
 {
@@ -31,7 +31,7 @@ class VISRC_Application extends Marionette.Application
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize the app.
      */
     initialize(aOptions)
     {
@@ -46,7 +46,7 @@ class VISRC_Application extends Marionette.Application
     }
 
     /**
-     * Ready
+     * When app is ready, start communicating.
      */
     onStart(aOptions)
     {
@@ -57,19 +57,17 @@ class VISRC_Application extends Marionette.Application
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Set event binding.
      */
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel("rodan");
-        this.rodanChannel.reply(VISRC_Events.REQUEST__APPLICATION, this);
         this.rodanChannel.on(VISRC_Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
         this.rodanChannel.on(VISRC_Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
-        this.rodanChannel.on(VISRC_Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
-     * TODO docs
+     * Initialize controllers. These are not used for viewing; rather, they are server/auth control.
      */
     _initializeControllers(aOptions)
     {
@@ -129,13 +127,6 @@ class VISRC_Application extends Marionette.Application
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_RESOURCETYPES, {});
         this.rodanChannel.command(VISRC_Events.COMMAND__LOAD_JOBS, {});
         this.rodanChannel.trigger(VISRC_Events.EVENT__PROJECTS_SELECTED); 
-    }
-
-    /**
-     * Handle deauthentication success.
-     */
-    _handleDeauthenticationSuccess()
-    {
     }
 }
 

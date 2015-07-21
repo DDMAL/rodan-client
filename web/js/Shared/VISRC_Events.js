@@ -128,7 +128,6 @@ var VISRC_Events = {
     REQUEST__WORKFLOW_NEW: 'REQUEST__WORKFLOW_NEW', // Returns new workflow not yet saved to server.
     REQUEST__WORKFLOWJOB_NEW: 'REQUEST__WORKFLOWJOB_NEW', // Returns new WorkflowJob not yet saved to server.
 
-    REQUEST__APPLICATION: 'REQUEST_APPLICATION',
     REQUEST__USER: 'REQUEST__USER',
     REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',
 
