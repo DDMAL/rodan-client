@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -26,18 +24,18 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.addRegions({
-            regionControlWorkflowJob: "#region-main_workflowbuilder_control_workflowjob",
-            regionControlInputPortTypes: "#region-main_workflowbuilder_control_workflowjob_inputporttypes",
-            regionControlInputPorts: "#region-main_workflowbuilder_control_workflowjob_inputports",
-            regionControlOutputPortTypes: "#region-main_workflowbuilder_control_workflowjob_outputporttypes",
-            regionControlOutputPorts: "#region-main_workflowbuilder_control_workflowjob_outputports"
+            regionControlWorkflowJob: '#region-main_workflowbuilder_control_workflowjob',
+            regionControlInputPortTypes: '#region-main_workflowbuilder_control_workflowjob_inputporttypes',
+            regionControlInputPorts: '#region-main_workflowbuilder_control_workflowjob_inputports',
+            regionControlOutputPortTypes: '#region-main_workflowbuilder_control_workflowjob_outputporttypes',
+            regionControlOutputPorts: '#region-main_workflowbuilder_control_workflowjob_outputports'
         });
         this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
-        this.template = "#template-main_workflowbuilder_control_workflowjob";
+        this.template = '#template-main_workflowbuilder_control_workflowjob';
         this.ui = {
             buttonShowWorkflow: '#button-show_workflow'
-        }
+        };
         this.events = {
             'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow'
         };
@@ -86,7 +84,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../Shared/Events';
@@ -14,7 +13,7 @@ class WorkflowCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = Workflow;
         this._initializeRadio();
@@ -23,7 +22,7 @@ class WorkflowCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp.results;
     }
@@ -36,7 +35,7 @@ class WorkflowCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__LOAD_WORKFLOWS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(Events.REQUEST__COLLECTION_WORKFLOW, () => this._handleRequestInstance());
     }

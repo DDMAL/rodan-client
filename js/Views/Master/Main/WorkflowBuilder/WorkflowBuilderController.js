@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../../Shared/Events';
 import LayoutViewWorkflowBuilder from './LayoutViewWorkflowBuilder';
 import LayoutViewWorkflowEditor from './Control/Workflow/LayoutViewWorkflowEditor';
@@ -21,7 +16,7 @@ class WorkflowBuilderController extends BaseController
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize()
     {
         this._initializeViews();
         this._workspace = new WorkflowBuilder();
@@ -58,7 +53,7 @@ class WorkflowBuilderController extends BaseController
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
 
         // Get the workflow.
-        if (aReturn.workflow != null)
+        if (aReturn.workflow !== null)
         {
             this.controlWorkflowView = new LayoutViewWorkflowEditor({workflow: aReturn.workflow});
         }
@@ -71,7 +66,7 @@ class WorkflowBuilderController extends BaseController
         this._layoutView.showView(this.controlWorkflowView);
 
         // Initialize the workspace.
-        this._workspace.initialize("canvas-workspace");
+        this._workspace.initialize('canvas-workspace');
     }
     
     /**
@@ -106,7 +101,7 @@ class WorkflowBuilderController extends BaseController
      */
     _createWorkflow(aProject)
     {
-        var workflow =  new Workflow({project: aProject.get("url"), name: "untitled"});
+        var workflow =  new Workflow({project: aProject.get('url'), name: 'untitled'});
         workflow.save();
         return workflow;
     }

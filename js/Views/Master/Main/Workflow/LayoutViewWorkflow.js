@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,16 +17,16 @@ class LayoutViewWorkflow extends Marionette.LayoutView
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize()
     {
         this.addRegions({
-            regionList: "#region-main_workflow_list",
-            regionItem: "#region-main_workflow_item"
+            regionList: '#region-main_workflow_list',
+            regionItem: '#region-main_workflow_item'
         });
-        this.template = "#template-main_workflow";
+        this.template = '#template-main_workflow';
         this.ui = {
             newWorkflowButton: '#button-new_workflow'
-        }
+        };
         this.events = {
             'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
         };
@@ -59,7 +57,7 @@ class LayoutViewWorkflow extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

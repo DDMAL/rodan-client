@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -16,20 +14,19 @@ class ViewLogin extends Marionette.ItemView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.model = null;
         this._initializeRadio();
-        this.template = "#template-main_login";
+        this.template = '#template-main_login';
         this.ui = {
             textUsername: '#text-login_username',
             textPassword: '#text-login_password',
             buttonLogin: '#button-login'
-
-        }
+        };
         this.events = {
             'click @ui.buttonLogin': '_handleButton'
         };
@@ -43,7 +40,7 @@ class ViewLogin extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**

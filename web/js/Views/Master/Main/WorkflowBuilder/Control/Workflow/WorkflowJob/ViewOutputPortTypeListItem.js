@@ -1,9 +1,7 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events'
+import Events from '../../../../../../../Shared/Events';
 
 /**
  * This class represents the view of an individual output port type list item.
@@ -14,22 +12,22 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ("initialize" doesn't seem to work.)
+     * Basic constructor. ('initialize' doesn't seem to work.)
      */
     constructor(aParameters)
     {
         this._initializeRadio();
 
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.ui = {
             buttonNewOutputPort: '#button-new_outputport'
-        }
+        };
         this.events = {
             'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
         };
-        this.template = "#template-main_workflowbuilder_control_outputporttype_list_item";
+        this.template = '#template-main_workflowbuilder_control_outputporttype_list_item';
         this.tagName = 'tr';
 
         super(aParameters);
@@ -43,7 +41,7 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

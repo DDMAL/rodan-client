@@ -1,9 +1,7 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../Shared/Events'
+import Events from '../../../../../../Shared/Events';
 
 /**
  * This class represents the view of an individual input port list item.
@@ -14,16 +12,16 @@ class ViewInputPortListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ("initialize" doesn't seem to work.)
+     * Basic constructor. ('initialize' doesn't seem to work.)
      */
     constructor(aParameters)
     {
         this._initializeRadio();
 
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
-        this.template = "#template-main_workflowrun_newworkflowrun_inputport_list_item";
+        this.template = '#template-main_workflowrun_newworkflowrun_inputport_list_item';
         this.tagName = 'tr';
         this.events = {
             'click': '_handleClick'
@@ -50,7 +48,7 @@ class ViewInputPortListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED, aPass => this._handleEventInputPortSelected(aPass), this);
     }
 

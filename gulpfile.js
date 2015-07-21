@@ -67,13 +67,13 @@ gulp.task('develop', ['develop:server'], function() {
     $.livereload.listen();
 
     gulp.watch([
-        'web/js/**/*.js',
+        'web/js//**/*.js',
         'web/index.html',
         'web/styles/default.css'
     ]).on('change', $.livereload.changed);
 
     gulp.watch('templates/**/*.html', ['develop:templates']);
-    gulp.watch('web/js/**/*.js', ['develop:jshint']);
+    gulp.watch('web/js//**/*.js', ['develop:jshint']);
     gulp.watch('styles/default.scss', ['develop:styles']);
 });
 

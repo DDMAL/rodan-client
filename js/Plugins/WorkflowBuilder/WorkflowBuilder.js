@@ -1,6 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../Shared/Events';
@@ -47,7 +44,6 @@ class WorkflowBuilder
         var workflowJobItemHeight = canvasHeight * 0.1;
         var inputPortItemWidth = workflowJobItemHeight * 0.2;
         var inputPortItemHeight = workflowJobItemWidth * 0.1;
-        var resourceItemDimension = workflowJobItemWidth * 0.5;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 
@@ -97,7 +93,7 @@ class WorkflowBuilder
 
             default:
             {
-                console.log("TODO - ERROR");
+                console.log('TODO - ERROR');
                 break;
             }
         }
@@ -108,14 +104,14 @@ class WorkflowBuilder
      */
     _handleStateIdle(aData)
     {
-        if (aData.event.type == "mousedown")
+        if (aData.event.type === 'mousedown')
         {
             if (aData.item instanceof WorkflowJobItem)
             {
                 this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;  
             }
         }
-        else if (aData.event.type == "click")
+        else if (aData.event.type === 'click')
         {
             if (aData.item instanceof OutputPortItem)
             {
@@ -136,7 +132,7 @@ class WorkflowBuilder
     {
         if (aData.item instanceof WorkflowJobItem)
         {
-            if (aData.event.type == "mousemove")
+            if (aData.event.type === 'mousemove')
             {
                 aData.item.move(aData.event.delta);
             }
@@ -152,7 +148,7 @@ class WorkflowBuilder
      */
     _handleStateCreatingConnection(aData)
     {
-        if (aData.event.type == "click")
+        if (aData.event.type === 'click')
         {
             if (aData.item instanceof InputPortItem && !aData.item.hasConnectionItem())
             {
@@ -172,7 +168,7 @@ class WorkflowBuilder
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
 
         // GUI commands.
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
@@ -247,7 +243,7 @@ class WorkflowBuilder
     /**
      * Handle zoom in.
      */
-    _handleCommandZoomIn(aReturn)
+    _handleCommandZoomIn()
     {
         paper.view.zoom = paper.view.zoom + this._zoomRate < this._zoomMax ? paper.view.zoom + this._zoomRate : this._zoomMax;
         paper.view.draw();
@@ -256,7 +252,7 @@ class WorkflowBuilder
     /**
      * Handle zoom out.
      */
-    _handleCommandZoomOut(aReturn)
+    _handleCommandZoomOut()
     {
         paper.view.zoom = paper.view.zoom - this._zoomRate > this._zoomMin ? paper.view.zoom - this._zoomRate : this._zoomMin;
         paper.view.draw();
@@ -265,7 +261,7 @@ class WorkflowBuilder
     /**
      * Handle zoom reset.
      */
-    _handleCommandZoomReset(aReturn)
+    _handleCommandZoomReset()
     {
         paper.view.zoom = 1;
         paper.view.draw();

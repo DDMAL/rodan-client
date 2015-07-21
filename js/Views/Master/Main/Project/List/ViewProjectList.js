@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -18,20 +16,20 @@ class ViewProjectList extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this._initializeRadio();
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.ui = {
             buttonNewProject: '#button-new_project'
-        }
+        };
         this.events = {
             'click @ui.buttonNewProject': '_handleButtonNewProject'
         };
         this.childViewContainer = 'tbody';
-        this.template = "#template-main_project_list";
+        this.template = '#template-main_project_list';
         this.childView = ViewProjectListItem;
         var user = this.rodanChannel.request(Events.REQUEST__USER);
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT);
@@ -47,7 +45,7 @@ class ViewProjectList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -56,7 +54,7 @@ class ViewProjectList extends Marionette.CompositeView
     _handleButtonNewProject()
     {
         var user = this.rodanChannel.request(Events.REQUEST__USER);
-        var project = new Project({name: "untitled", creator: user});
+        var project = new Project({name: 'untitled', creator: user});
         project.save();
         this.collection.add(project);
     }

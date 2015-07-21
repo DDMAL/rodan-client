@@ -1,10 +1,7 @@
 import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import _ from 'underscore';
-
-import Events from '../../../../Shared/Events'
 
 /**
  * This class represents the view (and controller) for the status bar - messages.
@@ -17,11 +14,11 @@ class ViewStatusMessage extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = null;
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this.template = () => this._template();
@@ -32,7 +29,7 @@ class ViewStatusMessage extends Marionette.CompositeView
      */
     _template()
     {
-        return _.template($("#template-status_message").html())({test: "messages should go here!"});
+        return _.template($('#template-status_message').html())({test: 'messages should go here!'});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +40,7 @@ class ViewStatusMessage extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

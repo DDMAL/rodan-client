@@ -1,14 +1,10 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Connection from '../../../../../../Models/Connection';
 import Events from '../../../../../../Shared/Events';
 import ViewWorkflowData from './ViewWorkflowData';
-import LayoutViewWorkflowEditor from './ViewWorkflowData';
 import LayoutViewControlJob from './Job/LayoutViewControlJob';
-import LayoutViewControlResourceAssignment from './ResourceAssignment/LayoutViewControlResourceAssignment';
 import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflowJob';
 import WorkflowJob from '../../../../../../Models/WorkflowJob';
 import InputPort from '../../../../../../Models/InputPort';
@@ -29,13 +25,13 @@ class WorkflowEditorController extends Marionette.LayoutView
     initialize(aParameters)
     {
         this.addRegions({
-            regionControlWorkflowData: "#region-main_workflowbuilder_control_workflow_data",
-            regionControlWorkflowParts: "#region-main_workflowbuilder_control_workflow_parts"
+            regionControlWorkflowData: '#region-main_workflowbuilder_control_workflow_data',
+            regionControlWorkflowParts: '#region-main_workflowbuilder_control_workflow_parts'
         });
         this._workflow = aParameters.workflow;
         this._workflowJob = null;
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflow";
+        this.template = '#template-main_workflowbuilder_control_workflow';
         this._initializeViews(aParameters);
     }
 
@@ -63,7 +59,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJob(aReturn), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass), this);
@@ -71,7 +67,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, aPass => this._handleCommandSaveWorkflowJob(aPass)), this;
+        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, aPass => this._handleCommandSaveWorkflowJob(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW, () => this._handleCommandRunWorkflow(), this);
 
@@ -121,7 +117,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         }
         catch (exception)
         {
-            console.log("TODO - not sure why error is being thrown: https://github.com/ELVIS-Project/vis-client/issues/6");
+            console.log('TODO - not sure why error is being thrown: https://github.com/ELVIS-Project/vis-client/issues/6');
         }
     }
     
@@ -140,7 +136,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddInputPort(aPass)
     {
-        var port = this._createInputPort(aPass.inputporttype, this._workflowJob);
+        this._createInputPort(aPass.inputporttype, this._workflowJob);
     }
 
     /**
@@ -148,7 +144,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddOutputPort(aPass)
     {
-        var port = this._createOutputPort(aPass.outputporttype, this._workflowJob);
+        this._createOutputPort(aPass.outputporttype, this._workflowJob);
     }
 
     /**
@@ -204,7 +200,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandRunWorkflow()
     {
-        console.log("run");
+        console.log('run');
     }
 
     /**
@@ -214,6 +210,9 @@ class WorkflowEditorController extends Marionette.LayoutView
     {
         // TODO - put this in some kind of handler outside of this class
         alert(aResponse.responseJSON.detail);
+        console.log(aModel);
+        console.log(aResponse);
+        console.log(aOptions);
     }
 
     /**
@@ -222,7 +221,10 @@ class WorkflowEditorController extends Marionette.LayoutView
     _handleResponseValidateSuccess(aModel, aResponse, aOptions)
     {
         // TODO - put this in some kind of handler outside of this class
-        alert("The workflow is valid.");
+        alert('The workflow is valid.');
+        console.log(aModel);
+        console.log(aResponse);
+        console.log(aOptions);
     }
 
     /**
@@ -230,9 +232,9 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _createInputPort(aInputPortType, aWorkflowJob)
     {
-        var port = new InputPort({input_port_type: aInputPortType.get("url"), workflow_job: aWorkflowJob.get("url")});
+        var port = new InputPort({input_port_type: aInputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
-        aWorkflowJob.get("input_ports").add(port);
+        aWorkflowJob.get('input_ports').add(port);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: port});
     }
 
@@ -241,9 +243,9 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _createOutputPort(aOutputPortType, aWorkflowJob)
     {
-        var port = new OutputPort({output_port_type: aOutputPortType.get("url"), workflow_job: aWorkflowJob.get("url")});
+        var port = new OutputPort({output_port_type: aOutputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
-        aWorkflowJob.get("output_ports").add(port);
+        aWorkflowJob.get('output_ports').add(port);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
     }
 
@@ -259,7 +261,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         }
         catch (aError)
         {
-            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
+            console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
         }
     }
 
@@ -275,7 +277,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         }
         catch (aError)
         {
-            console.log("TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5");
+            console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
         }
     }
 
@@ -284,7 +286,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _createWorkflowJob(aJob, aWorkflow)
     {
-        var workflowJob = new WorkflowJob({job: aJob.get("url"), workflow: this._workflow.get("url")});
+        var workflowJob = new WorkflowJob({job: aJob.get('url'), workflow: aWorkflow.get('url')});
         workflowJob.save();
         return workflowJob;
     }
@@ -294,9 +296,9 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _createConnection(aOutputPort, aInputPort)
     {
-        var connection = new Connection({input_port: aInputPort.get("url"), output_port: aOutputPort.get("url")});
+        var connection = new Connection({input_port: aInputPort.get('url'), output_port: aOutputPort.get('url')});
         connection.save();
-        this._workflow.get("connections").add(connection);
+        this._workflow.get('connections').add(connection);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
     }
 

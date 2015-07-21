@@ -1,10 +1,8 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../Shared/Events'
-import Project from '../Models/Project'
+import Events from '../Shared/Events';
+import Project from '../Models/Project';
 
 class ProjectCollection extends Backbone.Collection
 {
@@ -14,7 +12,7 @@ class ProjectCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = Project;
         this._initializeRadio();
@@ -23,7 +21,7 @@ class ProjectCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp.results;
     }
@@ -36,7 +34,7 @@ class ProjectCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__LOAD_PROJECTS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(Events.REQUEST__COLLECTION_PROJECT, () => this._handleRequestInstance());
     }
@@ -44,7 +42,7 @@ class ProjectCollection extends Backbone.Collection
     /**
      * Retrieves list.
      */
-    _retrieveList(aQueryParameters)
+    _retrieveList(/*aQueryParameters*/)
     {
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'projects');
         this.fetch();//{ data: $.param(aQueryParameters) });

@@ -1,9 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events'
+import Events from '../../../../Shared/Events';
 import LayoutViewResource from './LayoutViewResource';
 import ViewResource from './Individual/ViewResource';
 import ViewResourceList from './List/ViewResourceList';

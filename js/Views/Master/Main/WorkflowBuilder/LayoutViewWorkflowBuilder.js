@@ -1,9 +1,5 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events';
 
 /**
  * Controller for the Workflow Builder.
@@ -16,17 +12,17 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize()
     {
         this.addRegions({
-            regionControl: "#region-main_workflowbuilder_control"
+            regionControl: '#region-main_workflowbuilder_control'
         });
-        this.template = "#template-main_workflowbuilder";
+        this.template = '#template-main_workflowbuilder';
         this.ui = {
             buttonZoomIn: '#button-zoom_in',
             buttonZoomOut: '#button-zoom_out',
             buttonZoomReset: '#button-zoom_reset'
-        }
+        };
         this.events = {
             'click @ui.buttonZoomIn': '_handleButtonZoomIn',
             'click @ui.buttonZoomOut': '_handleButtonZoomOut',
@@ -43,7 +39,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
 

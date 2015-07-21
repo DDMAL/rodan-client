@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -20,15 +18,15 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_outputporttype_list";
+        this.template = '#template-main_workflowbuilder_control_outputporttype_list';
         this.childView = ViewOutputPortTypeListItem;
         this.childViewContainer = 'tbody';
         var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
         var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
-        this.collection = job.get("output_port_types");
+        this.collection = job.get('output_port_types');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +37,7 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

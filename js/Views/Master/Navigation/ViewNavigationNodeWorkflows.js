@@ -1,10 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../Shared/Events';
-import ViewNavigationNodeResources from './ViewNavigationNodeResources';
 import ViewNavigationNode from './ViewNavigationNode';
 
 /**
@@ -18,7 +12,7 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
     }
 
@@ -38,8 +32,8 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.command(Events.COMMAND__SET_ACTIVE_PROJECT, {project: this.model.get("project")});
-        this._rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.get("project")});
+        this._rodanChannel.command(Events.COMMAND__SET_ACTIVE_PROJECT, {project: this.model.get('project')});
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.get('project')});
     }
 
     /**
@@ -47,7 +41,7 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
      */
     _handleEventWorkflowsSelected(aEvent)
     {
-        if (aEvent.project === this.model.get("project"))
+        if (aEvent.project === this.model.get('project'))
         {
             this._rodanChannel.trigger(Events.EVENT_NAVIGATION_NODE_SELECTED, {node: this});
         }

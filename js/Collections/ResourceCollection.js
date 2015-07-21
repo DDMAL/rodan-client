@@ -1,10 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../Shared/Events'
-import Resource from '../Models/Resource'
+import Events from '../Shared/Events';
+import Resource from '../Models/Resource';
 
 class ResourceCollection extends Backbone.Collection
 {
@@ -14,7 +13,7 @@ class ResourceCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = Resource;
         this._initializeRadio();
@@ -23,7 +22,7 @@ class ResourceCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp.results;
     }
@@ -36,7 +35,7 @@ class ResourceCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__LOAD_RESOURCES, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(Events.REQUEST__COLLECTION_RESOURCE, () => this._handleRequestInstance());
     }

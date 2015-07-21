@@ -1,11 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
-import InputPortTypeCollection from '../Collections/InputPortTypeCollection';
-import OutputPortTypeCollection from '../Collections/OutputPortTypeCollection';
 
 /**
  * ResourceType
@@ -18,15 +11,15 @@ class ResourceType extends BaseModel
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.routeName = "resourcetypes";
+        this.routeName = 'resourcetypes';
     }
 
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp;
     }

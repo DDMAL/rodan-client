@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -17,15 +16,15 @@ class ViewNavigationNode extends Marionette.CompositeView
     constructor(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
-        this.childViewContainer = "ul";
-        this.template = "#template-navigation_node";
-        this._rodanChannel = Radio.channel("rodan");
+        this.childViewContainer = 'ul';
+        this.template = '#template-navigation_node';
+        this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.on(Events.EVENT_NAVIGATION_NODE_SELECTED, aEvent => this._handleEventNodeSelected(aEvent));
         this.ui = {
             text: '#node_text'
-        }
+        };
         this.events = {
             'click @ui.text': '_handleClick'
         };
@@ -77,9 +76,9 @@ class ViewNavigationNode extends Marionette.CompositeView
     _toggleSubviews()
     {
         var firstUl = $(this.$el.find(this.childViewContainer)[0]);
-        if (firstUl !== undefined && firstUl.find("div").length > 0)
+        if (firstUl !== undefined && firstUl.find('div').length > 0)
         {
-            firstUl.toggle("fast");
+            firstUl.toggle('fast');
         }
     }
 
@@ -114,9 +113,7 @@ class ViewNavigationNode extends Marionette.CompositeView
      _expandParent()
      {
         // Show parents.
-        if (this._parent !== null 
-            && this._parent !== undefined
-            && this._parent instanceof ViewNavigationNode)
+        if (this._parent !== null && this._parent !== undefined && this._parent instanceof ViewNavigationNode)
         {
             this._parent._showSubviews();
             this._parent._expandParent();

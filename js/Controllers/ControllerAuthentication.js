@@ -1,6 +1,4 @@
 import $ from 'jquery';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 
 import Configuration from '../Configuration';
 import Cookie from '../Shared/Cookie';
@@ -23,16 +21,16 @@ class ControllerAuthentication extends BaseController
     {
         // AJAX prefilter.
         var that = this;
-        $.ajaxPrefilter(function(options, originalOptions, jqXHR)
+        $.ajaxPrefilter(function(options)
         {
             console.log('ajax prefilter');
             options.xhrFields = { withCredentials: true, };
-            if (Configuration.SERVER_AUTHENTICATION_TYPE == "session" && !options.beforeSend) 
+            if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
             {
                 options.beforeSend = function (xhr) 
                 { 
                     xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
-                }
+                };
             }
         });
 
@@ -125,7 +123,7 @@ class ControllerAuthentication extends BaseController
      */
     _handleTimeout(aEvent)
     {
-        this._rodanChannel.trigger(Events.EVENT__SERVER_WENT_AWAY);
+        this._rodanChannel.trigger(Events.EVENT__SERVER_WENT_AWAY, {event: aEvent});
     }
 
     /**
@@ -136,7 +134,7 @@ class ControllerAuthentication extends BaseController
         var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-status');
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
-        request.ontimeout = (event) => this._handleTimeout(aEvent);
+        request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
         request.open('GET', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')

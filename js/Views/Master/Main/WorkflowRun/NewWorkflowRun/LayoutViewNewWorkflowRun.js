@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import _ from 'underscore';
@@ -25,11 +23,11 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
     {
         this._workflow = aOptions.workflow;
         this.addRegions({
-            regionData: "#region-main_workflowrun_newworkflowrun_data",
-            regionInputPortList: "#region-main_workflowrun_newworkflowrun_inputport_list",
-            regionResourceList: "#region-main_workflowrun_newworkflowrun_resource_list"
+            regionData: '#region-main_workflowrun_newworkflowrun_data',
+            regionInputPortList: '#region-main_workflowrun_newworkflowrun_inputport_list',
+            regionResourceList: '#region-main_workflowrun_newworkflowrun_resource_list'
         });
-        this.template = "#template-main_workflowrun_newworkflowrun";
+        this.template = '#template-main_workflowrun_newworkflowrun';
         this._initializeRadio();
         this._initializeViews();
         this._resourceAssignments = {};
@@ -59,7 +57,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, aPass => this._handleRequestIsResourceAssignment(aPass));
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
@@ -78,7 +76,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleRequestIsResourceAssignment(aPass)
     {
-        return this._isResourceAssignment(aPass.inputport.get("url"), aPass.resource.get("url"));
+        return this._isResourceAssignment(aPass.inputport.get('url'), aPass.resource.get('url'));
     }
 
     /**
@@ -86,7 +84,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCommandAddRequest(aPass)
     {
-        this._addResourceAssignment(aPass.inputport.get("url"), aPass.resource.get("url"));
+        this._addResourceAssignment(aPass.inputport.get('url'), aPass.resource.get('url'));
     }
 
     /**
@@ -94,7 +92,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCommandRemoveRequest(aPass)
     {
-        this._removeResourceAssignment(aPass.inputport.get("url"), aPass.resource.get("url"));
+        this._removeResourceAssignment(aPass.inputport.get('url'), aPass.resource.get('url'));
     }
 
     /**
@@ -103,8 +101,8 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
     _handleCommandCreate(aPass)
     {
         var workflowRun = new WorkflowRun(aPass);
-        workflowRun.set("resource_assignments", this._resourceAssignments);
-        workflowRun.set("workflow", this._workflow.get("url"));
+        workflowRun.set('resource_assignments', this._resourceAssignments);
+        workflowRun.set('workflow', this._workflow.get('url'));
         workflowRun.save();
     }
 

@@ -1,10 +1,7 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
-import Project from '../../../../../Models/Project';
 import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
 
 /**
@@ -21,7 +18,7 @@ class ViewProject extends Marionette.CompositeView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.model = aParameters.project;
         this._initializeRadio();
@@ -32,14 +29,14 @@ class ViewProject extends Marionette.CompositeView
             workflowCount: '#workflow_count',
             textName: '#text-project_name',
             textDescription: '#text-project_description'
-        }
+        };
         this.events = {
             'click @ui.buttonSave': '_handleButtonSave',
             'click @ui.buttonDelete': '_handleButtonDelete',
             'click @ui.resourceCount': '_handleClickResourceCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
-        this.template = "#template-main_project_individual";
+        this.template = '#template-main_project_individual';
         this.childView = ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
@@ -71,7 +68,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

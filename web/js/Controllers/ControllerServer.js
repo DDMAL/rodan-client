@@ -1,9 +1,5 @@
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Configuration from '../Configuration';
 import { mapFromJsonObject } from '../Helpers/Utilities';
-import Cookie from '../Shared/Cookie';
 import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
 
@@ -86,6 +82,7 @@ class ControllerServer extends BaseController
             else
             {
                 console.error('Routes could not be loaded from the server.');
+                console.error(event);
             }
         };
 

@@ -1,10 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseItem from './BaseItem';
-import Events from '../../../Shared/Events';
 
 /**
  * OutputPort item.
@@ -20,7 +14,7 @@ class OutputPortItem extends BaseItem
     constructor(aParameters)
     {
         super(aParameters);
-        this.fillColor = "#00ff00";
+        this.fillColor = '#00ff00';
         this._connectionItems = [];
         this.update();
     }

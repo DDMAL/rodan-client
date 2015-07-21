@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,13 +17,13 @@ class LayoutViewStatus extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aOptions)
+    initialize()
     {
-        this.template = "#template-status";
+        this.template = '#template-status';
         this.addRegions({
-            regionStatusUser: "#region-status_user",
-            regionStatusMessage: "#region-status_message",
-            regionStatusServer: "#region-status_server"
+            regionStatusUser: '#region-status_user',
+            regionStatusMessage: '#region-status_message',
+            regionStatusServer: '#region-status_server'
         });
         this._initializeViews();
         this._initializeRadio();
@@ -59,7 +57,7 @@ class LayoutViewStatus extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, aPass => this._handleAuthenticationSuccess(aPass));
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
@@ -76,7 +74,7 @@ class LayoutViewStatus extends Marionette.LayoutView
     /**
      * Handle deauthentication notification.
      */
-    _handleDeauthenticationSuccess(aPass)
+    _handleDeauthenticationSuccess()
     {
         this.viewStatusUser = new ViewStatusUser({user: null});
         this.regionStatusUser.show(this.viewStatusUser);

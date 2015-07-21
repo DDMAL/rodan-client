@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../../Shared/Events';
 import LayoutViewWorkflow from './LayoutViewWorkflow';
 import ViewWorkflow from './Individual/ViewWorkflow';

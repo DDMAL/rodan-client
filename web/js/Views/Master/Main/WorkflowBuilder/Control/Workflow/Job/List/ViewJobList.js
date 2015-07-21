@@ -1,10 +1,8 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../../Shared/Events'
-import ViewJobListItem from './ViewJobListItem'
+import Events from '../../../../../../../../Shared/Events';
+import ViewJobListItem from './ViewJobListItem';
 
 /**
  * This class represents the view (and controller) for the job list.
@@ -17,15 +15,15 @@ class ViewJobList extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this._initializeRadio();
 
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.childViewContainer = 'tbody';
-        this.template = "#template-main_workflowbuilder_control_job_list";
+        this.template = '#template-main_workflowbuilder_control_job_list';
         this.childView = ViewJobListItem;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
     }
@@ -38,7 +36,7 @@ class ViewJobList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

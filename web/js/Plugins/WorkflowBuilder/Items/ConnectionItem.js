@@ -1,10 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseItem from './BaseItem';
-import Events from '../../../Shared/Events';
 
 /**
  * Connection item.

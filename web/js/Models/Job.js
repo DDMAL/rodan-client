@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
 import InputPortTypeCollection from '../Collections/InputPortTypeCollection';
 import OutputPortTypeCollection from '../Collections/OutputPortTypeCollection';
@@ -20,9 +15,9 @@ class Job extends BaseModel
      */
     initialize(aParameters)
     {
-        this.routeName = "jobs";
-        this.set("input_port_types", new InputPortTypeCollection(aParameters.input_port_types));
-        this.set("output_port_types", new OutputPortTypeCollection(aParameters.output_port_types));
+        this.routeName = 'jobs';
+        this.set('input_port_types', new InputPortTypeCollection(aParameters.input_port_types));
+        this.set('output_port_types', new OutputPortTypeCollection(aParameters.output_port_types));
     }
 
     defaults()
@@ -33,7 +28,7 @@ class Job extends BaseModel
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         resp.input_port_types = new InputPortTypeCollection(resp.input_port_types);
         resp.output_port_types = new OutputPortTypeCollection(resp.output_port_types);

@@ -1,10 +1,7 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
-import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewRunJobListItem from './ViewRunJobListItem';
 
 /**
@@ -18,10 +15,10 @@ class ViewWorkflowRun extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this.childView = ViewRunJobListItem;
@@ -33,7 +30,7 @@ class ViewWorkflowRun extends Marionette.CompositeView
      */
     getTemplate()
     {
-        return "#template-main_workflowrun_individual";
+        return '#template-main_workflowrun_individual';
     }
 
     /**
@@ -52,7 +49,7 @@ class ViewWorkflowRun extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
     }
 

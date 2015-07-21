@@ -1,7 +1,4 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
 import ViewNavigationNodeResources from './ViewNavigationNodeResources';
@@ -20,12 +17,12 @@ class ViewNavigationNodeProject extends ViewNavigationNode
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.collection = new Backbone.Collection();
-        var resourcesNodeModel = new Backbone.Model({name: "Resources", project: this.model});
-        var workflowBuilderNodeModel = new Backbone.Model({name: "Workflows", project: this.model});
-        var workflowRunnerNodeModel = new Backbone.Model({name: "Workflow Runs", project: this.model});
+        var resourcesNodeModel = new Backbone.Model({name: 'Resources', project: this.model});
+        var workflowBuilderNodeModel = new Backbone.Model({name: 'Workflows', project: this.model});
+        var workflowRunnerNodeModel = new Backbone.Model({name: 'Workflow Runs', project: this.model});
         this.collection.add(resourcesNodeModel);
         this.collection.add(workflowBuilderNodeModel);
         this.collection.add(workflowRunnerNodeModel);
@@ -36,19 +33,19 @@ class ViewNavigationNodeProject extends ViewNavigationNode
      */
     getChildView(aModel)
     {
-        switch (aModel.get("name"))
+        switch (aModel.get('name'))
         {
-            case "Resources":
+            case 'Resources':
             {
                 return ViewNavigationNodeResources;
             }
 
-            case "Workflows":
+            case 'Workflows':
             {
                 return ViewNavigationNodeWorkflows;
             }
 
-            case "Workflow Runs":
+            case 'Workflow Runs':
             {
                 return ViewNavigationNodeWorkflowRuns;
             }

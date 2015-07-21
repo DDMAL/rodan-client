@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -21,12 +19,12 @@ class LayoutViewControlJob extends Marionette.LayoutView
     initialize()
     {
         this.addRegions({
-            regionControlJobList: "#region-main_workflowbuilder_control_job_list",
-            regionControlJobIndividual: "#region-main_workflowbuilder_control_job_individual"
+            regionControlJobList: '#region-main_workflowbuilder_control_job_list',
+            regionControlJobIndividual: '#region-main_workflowbuilder_control_job_individual'
         });
         this._initializeViews();
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_job";
+        this.template = '#template-main_workflowbuilder_control_job';
     }
 
     /**
@@ -55,7 +53,7 @@ class LayoutViewControlJob extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__JOB_SELECTED, aReturn => this._handleEventJobSelected(aReturn), this);
     }
 
@@ -80,7 +78,7 @@ class LayoutViewControlJob extends Marionette.LayoutView
         catch (exception)
         {
             this.viewJob.destroy();
-            console.log("TODO - not sure why error is being thrown, https://github.com/ELVIS-Project/vis-client/issues/6");
+            console.log('TODO - not sure why error is being thrown, https://github.com/ELVIS-Project/vis-client/issues/6');
         }
     }
 }

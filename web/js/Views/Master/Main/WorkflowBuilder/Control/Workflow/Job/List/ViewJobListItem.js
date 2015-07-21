@@ -1,9 +1,7 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../../Shared/Events'
+import Events from '../../../../../../../../Shared/Events';
 
 /**
  * This class represents the view (and controller) for the job item.
@@ -21,9 +19,9 @@ class ViewJobListItem extends Marionette.ItemView
         this._initializeRadio();
 
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
-        this.template = "#template-main_workflowbuilder_control_job_list_item";
+        this.template = '#template-main_workflowbuilder_control_job_list_item';
         this.tagName = 'tr';
         this.events = {
             'click': '_handleClick'
@@ -40,7 +38,7 @@ class ViewJobListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

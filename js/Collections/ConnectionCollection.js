@@ -1,9 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import Connection from '../Models/Connection';
 
@@ -15,7 +13,7 @@ class ConnectionCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = Connection;
         this._initializeRadio();
@@ -24,7 +22,7 @@ class ConnectionCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp.results;
     }
@@ -37,7 +35,7 @@ class ConnectionCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

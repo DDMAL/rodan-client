@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -16,7 +14,7 @@ class BaseController extends Marionette.Object
      */
     constructor(aOptions)
     {
-        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel = Radio.channel('rodan');
         this._initializeViews();
         this._initializeRadio();
         super(aOptions);
@@ -30,7 +28,7 @@ class BaseController extends Marionette.Object
      */
     _initializeRadio()
     {
-        console.log("TODO - this must be implemented in the inheriting class");
+        console.log('TODO - this must be implemented in the inheriting class');
     }
 
     /**

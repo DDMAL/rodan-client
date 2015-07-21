@@ -1,10 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseItem from './BaseItem';
-import Events from '../../../Shared/Events';
 
 /**
  * InputPort item.
@@ -46,8 +40,8 @@ class InputPortItem extends BaseItem
      */
     update()
     {
-        this.fillColor = this.hasConnectionItem() ? "#00ff00" : "#ff0000";
-        if (this._connectionItem != null)
+        this.fillColor = this.hasConnectionItem() ? '#00ff00' : '#ff0000';
+        if (this._connectionItem !== null)
         {
             this._connectionItem.update();
         }

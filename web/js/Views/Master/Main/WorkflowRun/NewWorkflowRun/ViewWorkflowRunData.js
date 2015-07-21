@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,17 +17,17 @@ class ViewWorkflowRunData extends Marionette.ItemView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this._workflow = aParameters.workflow;
         this._initializeRadio();
-        this.template = "#template-main_workflowrun_newworkflowrun_data";
+        this.template = '#template-main_workflowrun_newworkflowrun_data';
         this.ui = {
             buttonRun: '#button-workflowrun_run',
             textName: '#text-workflowrun_name',
             textDescription: '#text-workflowrun_description'
-        }
+        };
         this.events = {
             'click @ui.buttonRun': '_handleButtonRun'
         };
@@ -43,7 +41,7 @@ class ViewWorkflowRunData extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

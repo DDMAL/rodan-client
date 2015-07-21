@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -21,9 +19,9 @@ class ViewInputPortList extends Marionette.CompositeView
     {
         this._initializeRadio();
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
-        this.template = "#template-main_workflowrun_newworkflowrun_inputport_list";
+        this.template = '#template-main_workflowrun_newworkflowrun_inputport_list';
         this.childView = ViewInputPortListItem;
         this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
@@ -39,7 +37,7 @@ class ViewInputPortList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

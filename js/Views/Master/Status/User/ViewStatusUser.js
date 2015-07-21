@@ -1,9 +1,5 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events'
 
 /**
  * This class represents the view (and controller) for the status bar - login info.
@@ -20,7 +16,7 @@ class ViewStatusUser extends Marionette.ItemView
     {
         this.model = aParameters.user;
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
     }
@@ -30,13 +26,13 @@ class ViewStatusUser extends Marionette.ItemView
      */
     getTemplate()
     {
-        if (this.model != null)
+        if (this.model !== null)
         {
-            return "#template-status_user";
+            return '#template-status_user';
         }
         else
         {
-            return "#template-status_user_none";
+            return '#template-status_user_none';
         }
     }
 
@@ -48,7 +44,7 @@ class ViewStatusUser extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

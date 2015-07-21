@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,19 +17,19 @@ class ViewWorkflowData extends Marionette.ItemView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this.model = aParameters.workflow;
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_workflow_data";
+        this.template = '#template-main_workflowbuilder_control_workflow_data';
         this.ui = {
             buttonSave: '#button-save_workflow_data',
             buttonValidate: '#button-validate_workflow',
             buttonRun: '#button-run_workflow',
             textName: '#text-workflow_name',
             textDescription: '#text-workflow_description'
-        }
+        };
         this.events = {
             'click @ui.buttonSave': '_handleButtonSave',
             'click @ui.buttonValidate': '_handleButtonValidate',
@@ -47,7 +45,7 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -71,9 +69,9 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     _handleButtonRun()
     {
-        if (!this.model.get("valid"))
+        if (!this.model.get('valid'))
         {
-            alert("The workflow must be valid prior to run.");
+            alert('The workflow must be valid prior to run.');
         }
         else
         {

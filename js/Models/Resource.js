@@ -1,11 +1,7 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 import _ from 'underscore';
 
 import BaseModel from './BaseModel';
-import ResourceType from './ResourceType';
 
 /**
  * Resource model.
@@ -18,9 +14,9 @@ class Resource extends BaseModel
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.routeName = "resources";
+        this.routeName = 'resources';
     }
 
     defaults()
@@ -31,7 +27,7 @@ class Resource extends BaseModel
     /**
      * Set the resource type.
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp;
     }
@@ -41,11 +37,11 @@ class Resource extends BaseModel
      */
     sync(aMethod, aModel, aOptions)
     {
-        if (aMethod === "create")
+        if (aMethod === 'create')
         {
             var formData = new FormData();
-            formData.append("project", aModel.get("project"));
-            formData.append("files", aModel.get("file"));
+            formData.append('project', aModel.get('project'));
+            formData.append('files', aModel.get('file'));
 
             // Set processData and contentType to false so data is sent as FormData
             _.defaults(aOptions || (aOptions = {}), {
@@ -63,10 +59,10 @@ class Resource extends BaseModel
      */
     getResourceTypeUuid()
     {
-        var lastSlash = this.get("resource_type").lastIndexOf('/');
-        var subString = this.get("resource_type").substring(0, lastSlash);
+        var lastSlash = this.get('resource_type').lastIndexOf('/');
+        var subString = this.get('resource_type').substring(0, lastSlash);
         var secondLastSlash = subString.lastIndexOf('/');
-        return this.get("resource_type").substring(secondLastSlash + 1, lastSlash);
+        return this.get('resource_type').substring(secondLastSlash + 1, lastSlash);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

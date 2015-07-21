@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../Shared/Events';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
@@ -18,13 +13,13 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.template = "#template-navigation_root";
+        this.template = '#template-navigation_root';
         this.childView = ViewNavigationNodeProject;
         this.ui = {
             buttonLogout: '#button-navigation_logout'
-        }
+        };
         this.events = {
             'click @ui.buttonLogout': '_handleButton'
         };

@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -22,12 +20,12 @@ class LayoutViewMain extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aOptions)
+    initialize()
     {
-        this.el = "#app";
-        this.template = "#template-empty";
+        this.el = '#app';
+        this.template = '#template-empty';
         this.addRegions({
-            region: "#region-main"
+            region: '#region-main'
         });
         this._initializeRadio();
 
@@ -47,7 +45,7 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.comply(Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
         this._rodanChannel.on(Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());

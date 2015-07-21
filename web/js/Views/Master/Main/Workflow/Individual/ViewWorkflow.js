@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -17,24 +15,23 @@ class ViewWorkflow extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.ui = {
             workflowDuplicate: '#workflow-duplicate',
             workflowEdit: '#workflow-edit',
             workflowDelete: '#workflow-delete'
-
-        }
+        };
         this.events = {
             'click @ui.workflowDuplicate': '_handleButtonWorkflowDuplicate',
             'click @ui.workflowEdit': '_handleButtonWorkflowEdit',
             'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflow_individual";
+        this.template = '#template-main_workflow_individual';
         this.childView = ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
     }
@@ -55,7 +52,7 @@ class ViewWorkflow extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
     }
 
@@ -74,7 +71,7 @@ class ViewWorkflow extends Marionette.CompositeView
      */
     _handleButtonWorkflowDuplicate()
     {
-        alert("not implemented");
+        alert('not implemented');
     }
 
     /**
@@ -90,7 +87,7 @@ class ViewWorkflow extends Marionette.CompositeView
      */
     _handleButtonWorkflowDelete()
     {// TODO fix
-        var confirmation = confirm("Are you sure you want to delete workflow '" + this.model.attributes.name + "'?");
+        var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.attributes.name + '"?');
         if (confirmation)
         {
             this.model.destroy();

@@ -1,6 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
@@ -48,7 +45,7 @@ class BaseItem extends paper.Path
         this._text.content = '';
         this._text.position = this.bounds.center;
         this.addChild(this._text);
-        this._text.visible = (aParameters.hasOwnProperty("text") && aParameters.text === true);
+        this._text.visible = (aParameters.hasOwnProperty('text') && aParameters.text === true);
 
         this._popup = new paper.PointText(new paper.Point(0, 0));
     }
@@ -60,7 +57,7 @@ class BaseItem extends paper.Path
     {
         this.position.x += aDelta.x;
         this.position.y += aDelta.y;
-        if (this._text != null)
+        if (this._text !== null)
         {
             this._text.position = this.bounds.center;
         }
@@ -76,7 +73,7 @@ class BaseItem extends paper.Path
     update()
     {
         // TODO - better way to do abstract methods
-        console.error("This must be defined in sub-class.");
+        console.error('This must be defined in sub-class.');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -87,7 +84,7 @@ class BaseItem extends paper.Path
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__MODEL_HASCHANGED, aPass => this._handleEventModelUpdated(aPass));
     }
 
@@ -96,7 +93,7 @@ class BaseItem extends paper.Path
      */
     _showPopup()
     {
-        console.log("todo - popup");
+        console.log('todo - popup');
     }
 
     /**
@@ -104,7 +101,7 @@ class BaseItem extends paper.Path
      */
     _hidePopup()
     {
-        console.log("todo - hide");
+        console.log('todo - hide');
     }
 
     /**
@@ -116,7 +113,7 @@ class BaseItem extends paper.Path
         {
             return;
         }
-        this._text.content = aPass.model.get("name");
+        this._text.content = aPass.model.get('name');
         this.update();
     }
 
@@ -127,20 +124,20 @@ class BaseItem extends paper.Path
     {
         switch (aEvent.type)
         {
-            case "mouseenter":
+            case 'mouseenter':
             {
                 this._timerEvent = setTimeout(this._showPopup, this._HOVERTIME);
                 break;
             }
 
-            case "mouseleave":
+            case 'mouseleave':
             {
                 this._hidePopup();
                 clearTimeout(this._timerEvent);
                 break;
             }
 
-            case "mousemove":
+            case 'mousemove':
             {
                 // do nothing
                 break;

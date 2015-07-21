@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -20,11 +18,11 @@ class ViewResourceAssignmentList extends Marionette.CompositeView
     initialize()
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this.childViewContainer = 'tbody';
-        this.template = "#template-main_workflowbuilder_control_resourceassignment_list";
+        this.template = '#template-main_workflowbuilder_control_resourceassignment_list';
         this.childView = ViewResourceAssignmentListItem;
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCE);
@@ -46,7 +44,7 @@ class ViewResourceAssignmentList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

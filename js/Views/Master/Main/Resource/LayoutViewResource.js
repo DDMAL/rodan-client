@@ -1,9 +1,5 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events';
 
 /**
  * This is a layout to help render a Collection and a single item.
@@ -19,13 +15,13 @@ class LayoutViewResource extends Marionette.LayoutView
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize()
     {
         this.addRegions({
-            regionList: "#region-main_resource_list",
-            regionItem: "#region-main_resource_item"
+            regionList: '#region-main_resource_list',
+            regionItem: '#region-main_resource_item'
         });
-        this.template = "#template-main_resource";
+        this.template = '#template-main_resource';
         this._initializeRadio();
     }
 
@@ -53,7 +49,7 @@ class LayoutViewResource extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

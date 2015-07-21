@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -20,10 +18,10 @@ class ViewResourceList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowrun_newworkflowrun_resource_list";
+        this.template = '#template-main_workflowrun_newworkflowrun_resource_list';
         this.childView = ViewResourceListItem;
         this.childViewContainer = 'tbody';
         this._workflow = aParameters.workflow;
@@ -41,7 +39,7 @@ class ViewResourceList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../../Shared/Events';
 import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
@@ -62,7 +57,8 @@ class ProjectController extends BaseController
      */
     _handleCommandProjectDelete(aReturn)
     {
-        alert("Not yet implemented");
+        alert('Not yet implemented');
+        console.log(aReturn);
     }
 
     /**
@@ -97,7 +93,7 @@ class ProjectController extends BaseController
      */
     _handleRequestProjectActive()
     {
-        return this._activeProject != null ? this._activeProject : null;
+        return this._activeProject !== null ? this._activeProject : null;
     }
 }
 

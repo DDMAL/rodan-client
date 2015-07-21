@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -21,17 +19,17 @@ class ViewResourceList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
         this._project = aParameters.project;
-        this.template = "#template-main_resource_list";
+        this.template = '#template-main_resource_list';
         this.childView = ViewResourceListItem;
         this.childViewContainer = 'tbody';
         this.ui = {
             buttonAdd: '#button-main_resource_list_add',
             fileInput: '#file-main_resource_list_file'
-        }
+        };
         this.events = {
             'click @ui.buttonAdd': '_handleClickButtonAdd'
         };
@@ -48,7 +46,7 @@ class ViewResourceList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -59,11 +57,11 @@ class ViewResourceList extends Marionette.CompositeView
         var file = this.ui.fileInput[0].files[0];
         if (file === undefined)
         {
-            alert("TODO -error");
+            alert('TODO -error');
             return;
         }
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        var resource = new Resource({project: project.get("url")});
+        var resource = new Resource({project: project.get('url')});
         resource.save({file: file});
         this.collection.add(resource);
     }

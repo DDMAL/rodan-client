@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
 
 /**
@@ -16,9 +11,9 @@ class InputPort extends BaseModel
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.routeName = "inputports";
+        this.routeName = 'inputports';
     }
 
     defaults()

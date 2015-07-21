@@ -1,10 +1,4 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseItem from './BaseItem';
-import Events from '../../../Shared/Events';
 
 /**
  * WorkflowJob item.
@@ -124,13 +118,13 @@ class WorkflowJobItem extends BaseItem
     {
         for (var i = 0; i < aGroup.children.length; i++)
         {
-            if (aPortItem == aGroup.children[i])
+            if (aPortItem === aGroup.children[i])
             {
                 aGroup.removeChildren(i, i + 1);
                 return;
             }
         }
-        console.error("TODO - ERROR HERE!!!!!");
+        console.error('TODO - ERROR HERE!!!!!');
     }
 }
 

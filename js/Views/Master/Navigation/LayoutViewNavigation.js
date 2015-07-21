@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -17,12 +16,12 @@ class LayoutViewNavigation extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aOptions)
+    initialize()
     {
         this._initializeRadio();
-        this.template = "#template-navigation";
+        this.template = '#template-navigation';
         this.addRegions({
-            regionNavigationTree: "#region-navigation_tree"
+            regionNavigationTree: '#region-navigation_tree'
         });
     }
 
@@ -34,7 +33,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel("rodan");
+        this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
@@ -44,18 +43,16 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleAuthenticationSuccess()
     {
-        var model = new Backbone.Model({name: "Projects"});
+        var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
     }
 
     /**
-     * Handle authentication.
+     * Handle deauthentication.
      */
     _handleDeauthenticationSuccess()
     {
-        var model = new Backbone.Model({name: "Projects"});
-        var object = {model: model, collection: this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT)};
         this.regionNavigationTree.reset(); 
     }
 }

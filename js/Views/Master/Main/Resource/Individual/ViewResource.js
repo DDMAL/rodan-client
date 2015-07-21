@@ -1,11 +1,8 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
-import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
 
 /**
  * This class represents the view for a single Resource summary.
@@ -21,15 +18,15 @@ class ViewResource extends Marionette.CompositeView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this.model = aParameters.resource;
         this._initializeRadio();
-        this.template = "#template-main_resource_individual";
+        this.template = '#template-main_resource_individual';
         this.ui = {
             buttonSave: '#button-main_resource_individual_save',
             selectResourceType: '#select-resourcetype'
-        }
+        };
         this.events = {
             'click @ui.buttonSave': '_handleClickButtonSave'
         };
@@ -54,7 +51,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

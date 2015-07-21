@@ -1,9 +1,7 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../Shared/Events'
+import Events from '../Shared/Events';
 
 /**
  * Base VISRC model
@@ -20,7 +18,7 @@ class BaseModel extends Backbone.Model
     {
         this.idAttribute = 'uuid';
         this._initializeRadio();
-        this.on("change", aEvent => this._onChange(aEvent));
+        this.on('change', aEvent => this._onChange(aEvent));
         super(aParameters);
     }
 
@@ -32,13 +30,12 @@ class BaseModel extends Backbone.Model
      */
     url()
     {
-        var id = this.get("uuid");
         var original_url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.routeName);
-        if (typeof this.get("uuid") !== "undefined")
+        if (typeof this.get('uuid') !== 'undefined')
         {
-            original_url = this.get("url");
+            original_url = this.get('url');
         }
-        var parsed_url = original_url + ( original_url.charAt( original_url.length - 1 ) == '/' ? '' : '/' );
+        var parsed_url = original_url + ( original_url.charAt( original_url.length - 1 ) === '/' ? '' : '/' );
         return parsed_url;
     }
 
@@ -51,13 +48,13 @@ class BaseModel extends Backbone.Model
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
      * On change handler.
      */
-    _onChange(aEvent)
+    _onChange()
     {
         this.rodanChannel.trigger(Events.EVENT__MODEL_HASCHANGED, {model: this});
     }

@@ -1,9 +1,6 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Configuration from './Configuration';
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
 import Events from './Shared/Events';
@@ -18,7 +15,6 @@ import ProjectCollection from './Collections/ProjectCollection';
 import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
 import ResourceTypeCollection from './Collections/ResourceTypeCollection';
-import ViewStatusUser from './Views/Master/Status/User/ViewStatusUser';
 import WorkflowCollection from './Collections/WorkflowCollection';
 import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
@@ -33,11 +29,11 @@ class Application extends Marionette.Application
     /**
      * Initialize the app.
      */
-    initialize(aOptions)
+    initialize()
     {
         this.addRegions({
-            regionNavigation: "#region-navigation",
-            regionStatus: "#region-status"
+            regionNavigation: '#region-navigation',
+            regionStatus: '#region-status'
         });
         this._initializeRadio();
         this._initializeControllers();
@@ -48,7 +44,7 @@ class Application extends Marionette.Application
     /**
      * When app is ready, start communicating.
      */
-    onStart(aOptions)
+    onStart()
     {
         this.rodanChannel.command(Events.COMMAND__GET_ROUTES);
     }
@@ -61,7 +57,7 @@ class Application extends Marionette.Application
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
     }
@@ -69,7 +65,7 @@ class Application extends Marionette.Application
     /**
      * Initialize controllers. These are not used for viewing; rather, they are server/auth control.
      */
-    _initializeControllers(aOptions)
+    _initializeControllers()
     {
         this.controllerServer = new ControllerServer();
         this.controllerAuthentication = new ControllerAuthentication(this.controllerServer);

@@ -1,9 +1,5 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../../../../../Shared/Events';
 
 /**
  * This class represents the view for a resource.
@@ -19,10 +15,10 @@ class ViewResourceAssignment extends Marionette.ItemView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_resourceassignment_individual";
+        this.template = '#template-main_workflowbuilder_control_resourceassignment_individual';
         this.model = aParameters.resource;
     }
 
@@ -34,7 +30,7 @@ class ViewResourceAssignment extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
 import ConnectionCollection from '../Collections/ConnectionCollection';
 
@@ -17,10 +12,10 @@ class Workflow extends BaseModel
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.routeName = "workflows";
-        this.set("connections", new ConnectionCollection());
+        this.routeName = 'workflows';
+        this.set('connections', new ConnectionCollection());
     }
 
     defaults()

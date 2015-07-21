@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -19,14 +17,14 @@ class ViewJob extends Marionette.ItemView
     initialize(aParameters)
     {
         this.modelEvents = {
-            "all": "render"
+            'all': 'render'
         };
         this._initializeRadio();
-        this.template = "#template-main_workflowbuilder_control_job_individual";
+        this.template = '#template-main_workflowbuilder_control_job_individual';
         this.model = aParameters.job;
         this.ui = {
             buttonAdd: '#button-main_workflowbuilder_control_job_individual_button_add'
-        }
+        };
         this.events = {
             'click @ui.buttonAdd': '_handleClickButtonAdd'
         };
@@ -40,7 +38,7 @@ class ViewJob extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

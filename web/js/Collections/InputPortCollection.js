@@ -1,9 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import InputPort from '../Models/InputPort';
 
@@ -15,7 +13,7 @@ class InputPortCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize()
     {
         this.model = InputPort;
         this._initializeRadio();
@@ -24,7 +22,7 @@ class InputPortCollection extends Backbone.Collection
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         return resp.results;
     }
@@ -37,7 +35,7 @@ class InputPortCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__LOAD_INPUTPORTS, aQueryParameters => this._retrieveList(aQueryParameters));
         this.rodanChannel.reply(Events.REQUEST__COLLECTION_INPUTPORT, () => this._handleRequestInstance());
     }

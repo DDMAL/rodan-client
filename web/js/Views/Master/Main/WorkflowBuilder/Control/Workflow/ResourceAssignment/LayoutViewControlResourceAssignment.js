@@ -1,5 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -21,18 +19,18 @@ class LayoutViewControlResourceAssignment extends Marionette.LayoutView
     initialize()
     {
         this.addRegions({
-            regionControlResourceAssignmentList: "#region-main_workflowbuilder_control_resourceassignment_list",
-            regionControlResourceAssignmentIndividual: "#region-main_workflowbuilder_control_resourceassignment_individual"
+            regionControlResourceAssignmentList: '#region-main_workflowbuilder_control_resourceassignment_list',
+            regionControlResourceAssignmentIndividual: '#region-main_workflowbuilder_control_resourceassignment_individual'
         });
         this._initializeViews();
         this._initializeRadio();
         this.ui = {
             buttonShowWorkflow: '#button-show_workflow'
-        }
+        };
         this.events = {
             'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow'
         };
-        this.template = "#template-main_workflowbuilder_control_resourceassignment";
+        this.template = '#template-main_workflowbuilder_control_resourceassignment';
     }
 
     /**
@@ -64,7 +62,7 @@ class LayoutViewControlResourceAssignment extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel("rodan");
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE, aReturn => this._handleEventResourceSelected(aReturn), this);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
@@ -90,7 +88,7 @@ class LayoutViewControlResourceAssignment extends Marionette.LayoutView
         catch (exception)
         {
             this.viewResourceAssignment.destroy();
-            console.log("TODO - not sure why error is being thrown, https://github.com/ELVIS-Project/vis-client/issues/6");
+            console.log('TODO - not sure why error is being thrown, https://github.com/ELVIS-Project/vis-client/issues/6');
         }
     }
 

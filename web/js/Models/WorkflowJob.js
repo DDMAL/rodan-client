@@ -1,8 +1,3 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
 import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
@@ -20,20 +15,20 @@ class WorkflowJob extends BaseModel
      */
     initialize(aParameters)
     {
-        this.set("input_ports", new InputPortCollection(aParameters.input_ports));
-        this.set("output_ports", new OutputPortCollection(aParameters.output_ports));
-        this.routeName = "workflowjobs";
+        this.set('input_ports', new InputPortCollection(aParameters.input_ports));
+        this.set('output_ports', new OutputPortCollection(aParameters.output_ports));
+        this.routeName = 'workflowjobs';
     }
 
     defaults()
     {
-        return {input_ports: null, output_ports: null, name: "untitled"};
+        return {input_ports: null, output_ports: null, name: 'untitled'};
     }
 
     /**
      * TODO docs
      */
-    parse(resp, options)
+    parse(resp)
     {
         resp.input_ports = new InputPortCollection(resp.input_ports);
         resp.output_ports = new OutputPortCollection(resp.output_ports);
@@ -45,10 +40,10 @@ class WorkflowJob extends BaseModel
      */
     getJobUuid()
     {
-        var lastSlash = this.get("job").lastIndexOf('/');
-        var subString = this.get("job").substring(0, lastSlash);
+        var lastSlash = this.get('job').lastIndexOf('/');
+        var subString = this.get('job').substring(0, lastSlash);
         var secondLastSlash = subString.lastIndexOf('/');
-        return this.get("job").substring(secondLastSlash + 1, lastSlash);
+        return this.get('job').substring(secondLastSlash + 1, lastSlash);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
