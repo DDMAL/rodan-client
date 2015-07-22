@@ -46,6 +46,7 @@ class BaseItem extends paper.Path
         this._text.position = this.bounds.center;
         this.addChild(this._text);
         this._text.visible = (aParameters.hasOwnProperty('text') && aParameters.text === true);
+        this._text.content = this._associatedModel.get('name');
 
         this._popup = new paper.PointText(new paper.Point(0, 0));
     }

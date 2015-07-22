@@ -32,6 +32,10 @@ class WorkflowEditorController extends Marionette.LayoutView
         this._initializeRadio();
         this.template = '#template-main_workflowbuilder_control_workflow';
         this._initializeViews(aParameters);
+
+        // Load the full workflow.
+        var options = {'success': () => this._handleWorkflowLoadSuccess()};
+        this._workflow.fetch(options);
     }
 
     /**
@@ -68,7 +72,6 @@ class WorkflowEditorController extends Marionette.LayoutView
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, aPass => this._handleCommandSaveWorkflowJob(aPass), this);
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW, () => this._handleCommandRunWorkflow(), this);
 
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
 
@@ -82,6 +85,14 @@ class WorkflowEditorController extends Marionette.LayoutView
     {
         this.viewWorkflowData = new ViewWorkflowData(aParameters);
         this.viewControlJob = new LayoutViewControlJob();
+    }
+
+    /**
+     * Handles success of workflow fetch.
+     */
+    _handleWorkflowLoadSuccess()
+    {
+        this._buildWorkflowInGui(this._workflow);
     }
 
     /**
@@ -107,17 +118,8 @@ class WorkflowEditorController extends Marionette.LayoutView
     _handleEventEditWorkflowJob(aReturn)
     {
         this._workflowJob = aReturn.workflowjob;
-
-        // TODO - not reusing this view...should find more efficient way
         this.controlWorkflowJobView = new LayoutViewControlWorkflowJob(aReturn);
-        try
-        {
-            this.regionControlWorkflowParts.show(this.controlWorkflowJobView);
-        }
-        catch (exception)
-        {
-            console.log('TODO - not sure why error is being thrown: https://github.com/ELVIS-Project/vis-client/issues/6');
-        }
+        this.regionControlWorkflowParts.show(this.controlWorkflowJobView);
     }
     
     /**
@@ -135,7 +137,8 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddInputPort(aPass)
     {
-        this._createInputPort(aPass.inputporttype, this._workflowJob);
+        var port = this._createInputPort(aPass.inputporttype, this._workflowJob);
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: this._workflowJob, inputport: port});
     }
 
     /**
@@ -143,7 +146,8 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandAddOutputPort(aPass)
     {
-        this._createOutputPort(aPass.outputporttype, this._workflowJob);
+        var port = this._createOutputPort(aPass.outputporttype, this._workflowJob);
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: this._workflowJob, outputport: port});
     }
 
     /**
@@ -187,14 +191,6 @@ class WorkflowEditorController extends Marionette.LayoutView
     }
 
     /**
-     * Handle run workflow.
-     */
-    _handleCommandRunWorkflow()
-    {
-        console.log('run');
-    }
-
-    /**
      * Handle validate error response.
      */
     _handleResponseValidateError(aModel, aResponse, aOptions)
@@ -219,6 +215,26 @@ class WorkflowEditorController extends Marionette.LayoutView
     }
 
     /**
+     * Builds the Workflow in GUI.
+     */
+    _buildWorkflowInGui(aModel)
+    {
+        var workflowJobs = aModel.get('workflow_jobs');
+        if (workflowJobs !== undefined)
+        {
+            for (var i = 0; i < workflowJobs.length; i++)
+            {
+                var workflowJob = workflowJobs.at(i);
+                this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
+            }
+        }
+
+//        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: this._workflowJob, inputport: aPass.inputporttype});
+ //       this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
+
+    }
+
+    /**
      * Create input port.
      */
     _createInputPort(aInputPortType, aWorkflowJob)
@@ -226,7 +242,6 @@ class WorkflowEditorController extends Marionette.LayoutView
         var port = new InputPort({input_port_type: aInputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
         aWorkflowJob.get('input_ports').add(port);
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: port});
     }
 
     /**
@@ -237,7 +252,6 @@ class WorkflowEditorController extends Marionette.LayoutView
         var port = new OutputPort({output_port_type: aOutputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
         aWorkflowJob.get('output_ports').add(port);
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
     }
 
     /**

@@ -2,7 +2,6 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../../Shared/Events';
-import ViewWorkflowJob from './ViewWorkflowJob';
 import ViewInputPortList from './ViewInputPortList';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';
@@ -30,14 +29,18 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlOutputPortTypes: '#region-main_workflowbuilder_control_workflowjob_outputporttypes',
             regionControlOutputPorts: '#region-main_workflowbuilder_control_workflowjob_outputports'
         });
+        this.model = aParameters.workflowjob;
         this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
         this.template = '#template-main_workflowbuilder_control_workflowjob';
         this.ui = {
-            buttonShowWorkflow: '#button-show_workflow'
+            buttonShowWorkflow: '#button-show_workflow',
+            buttonSave: '#button-save_workflowjob_data',
+            textName: '#text-workflowjob_name'
         };
         this.events = {
-            'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow'
+            'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
+            'click @ui.buttonSave': '_handleButtonSave'
         };
     }
 
@@ -46,15 +49,9 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     onBeforeShow()
     {
-        this.regionControlWorkflowJob.reset();
-        this.regionControlWorkflowJob.show(this._viewWorkflowJob);
-        this.regionControlInputPortTypes.reset();
         this.regionControlInputPortTypes.show(this._inputPortTypeListView);
-        this.regionControlInputPorts.reset();
         this.regionControlInputPorts.show(this._inputPortListView);
-        this.regionControlOutputPortTypes.reset();
         this.regionControlOutputPortTypes.show(this._outputPortTypeListView);
-        this.regionControlOutputPorts.reset();
         this.regionControlOutputPorts.show(this._outputPortListView);
     }
 
@@ -66,8 +63,6 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _initializeViews(aParameters)
     {
-        this._viewWorkflowJob = new ViewWorkflowJob(aParameters);
-
         // Create new input port and output port views.
         // We pass the workflow job so the views' initializers can setup their collections.
         this._inputPortListView = new ViewInputPortList(aParameters);

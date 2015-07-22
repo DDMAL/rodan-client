@@ -38,7 +38,6 @@ class WorkflowBuilderController extends BaseController
      */
     _initializeViews()
     {
-        this.controlWorkflowView = new LayoutViewWorkflowEditor();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +51,9 @@ class WorkflowBuilderController extends BaseController
         this._layoutView = new LayoutViewWorkflowBuilder();
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
 
+        // Initialize the workspace and build the workflow.
+        this._workspace.initialize('canvas-workspace');
+        
         // Get the workflow.
         if (aReturn.workflow !== null)
         {
@@ -63,12 +65,7 @@ class WorkflowBuilderController extends BaseController
             var workflow = this._createWorkflow(project);
             this.controlWorkflowView = new LayoutViewWorkflowEditor({workflow: workflow});
         }
-
-        // Create any required GUI objects.
         this._layoutView.showView(this.controlWorkflowView);
-
-        // Initialize the workspace.
-        this._workspace.initialize('canvas-workspace');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
