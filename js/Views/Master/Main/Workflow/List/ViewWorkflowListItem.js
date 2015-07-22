@@ -26,6 +26,12 @@ class ViewWorkflowListItem extends Marionette.ItemView
         this.events = {
             'click': '_handleClick'
         };
+        this.ui = {
+            deleteWorkflowButton: '#button-delete_workflow'
+        };
+        this.events = {
+            'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow'
+        };
 
         super(aParameters);
     }
@@ -47,6 +53,18 @@ class ViewWorkflowListItem extends Marionette.ItemView
     _handleClick()
     {
         this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
+    }
+
+    /**
+     * Handle button delete workflow.
+     */
+    _handleButtonDeleteWorkflow()
+    {
+        var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.get('name') + '"?');
+        if (confirmation)
+        {
+            this.rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
+        }
     }
 }
 

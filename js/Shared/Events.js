@@ -26,6 +26,7 @@ var Events = {
 
     COMMAND__PROJECT_SAVE: 'COMMAND__PROJECT_SAVE',   // Called when Project needs to be saved. Passes {project: Project, fields: {object with attributes to change}}.
     COMMAND__PROJECT_DELETE: 'COMMAND__PROJECT_DELETE',   // Called when Project needs to be deleted. Passes {project: Project}.
+    COMMAND__WORKFLOW_DELETE: 'COMMAND__WORKFLOW_DELETE', // Called when Workflow needs to be deleted. Passes {workflow: Workflow}.
 
     // Workflow builder commands. These are sent to the workflow builder controller. They will (most often) trigger a command to the workspace.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: Job}.

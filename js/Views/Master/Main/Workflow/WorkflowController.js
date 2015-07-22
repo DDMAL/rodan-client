@@ -30,6 +30,7 @@ class WorkflowController extends BaseController
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, aPass => this._handleEventListSelected(aPass));
         this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
+        this._rodanChannel.on(Events.COMMAND__WORKFLOW_DELETE, aPass => this._handleCommandDeleteWorkflow(aPass));
     }
 
     /**
@@ -50,6 +51,14 @@ class WorkflowController extends BaseController
     {
         this._viewItem = new ViewWorkflow();
         this._layoutView.showItem(this._viewItem);
+    }
+
+    /**
+     * Handle command delete workflow.
+     */
+    _handleCommandDeleteWorkflow(aPass)
+    {
+        aPass.workflow.destroy();
     }
 }
 

@@ -86,11 +86,11 @@ class ViewWorkflow extends Marionette.CompositeView
      * Handle button workflow delete.
      */
     _handleButtonWorkflowDelete()
-    {// TODO fix
+    {
         var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.attributes.name + '"?');
         if (confirmation)
         {
-            this.model.destroy();
+            this.rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
         }
     }
 }
