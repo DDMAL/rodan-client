@@ -15,7 +15,7 @@ gulp.task('develop:templates', shell.task([
 ]));
 
 gulp.task('develop:styles', shell.task([
-    'sassc -m styles/default.scss web/styles/default.css'
+    'sassc -m styles/default.scss web/styles/default.css; cp -rf styles/resources web/styles/'
 ]));
 
 gulp.task('develop:jshint', function (callback)

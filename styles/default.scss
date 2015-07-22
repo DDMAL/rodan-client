@@ -43,6 +43,7 @@ $height-top: 95; // % of vertical space in viewport
 body
 {
     overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 div.top {
@@ -103,7 +104,9 @@ div#region-status_server
 
 div#region-main
 {
-    background-color: $background-color-main;
+    background-image: url("resources/rodan.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
     height: 100%;
 }
 
@@ -111,10 +114,16 @@ canvas#canvas-workspace
 {
     background-color: $background-color-workflowbuilder-workspace;
     height: 100%;
+    padding: 0px;
 }
 
 div#region-main_workflowbuilder_control
 {
     background-color: $background-color-workflowbuilder-control;
     height: 100%;
+}
+
+div#main_workflowbuilder
+{
+    background-color: white;
 }
