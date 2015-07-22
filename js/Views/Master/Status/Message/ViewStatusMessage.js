@@ -29,7 +29,7 @@ class ViewStatusMessage extends Marionette.CompositeView
      */
     _template()
     {
-        return _.template($('#template-status_message').html())({test: 'messages should go here!'});
+        return _.template($('#template-status_message').html())({test: '---'});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

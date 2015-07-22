@@ -1,13 +1,13 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../../Shared/Events';
-import ViewJobListItem from './ViewJobListItem';
+import Events from '../../../../../../Shared/Events';
+import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
 
 /**
- * This class represents the view (and controller) for the job list.
+ * This class represents a list of input port types.
  */
-class ViewJobList extends Marionette.CompositeView
+class ViewInputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -15,17 +15,18 @@ class ViewJobList extends Marionette.CompositeView
     /**
      * TODO docs
      */
-    initialize()
+    initialize(aParameters)
     {
-        this._initializeRadio();
-
         this.modelEvents = {
             'all': 'render'
         };
+        this._initializeRadio();
+        this.template = '#template-main_workflowbuilder_control_inputporttype_list';
+        this.childView = ViewInputPortTypeListItem;
         this.childViewContainer = 'tbody';
-        this.template = '#template-main_workflowbuilder_control_job_list';
-        this.childView = ViewJobListItem;
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
+        this.collection = job.get('input_port_types');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -40,4 +41,4 @@ class ViewJobList extends Marionette.CompositeView
     }
 }
 
-export default ViewJobList;
+export default ViewInputPortTypeList;

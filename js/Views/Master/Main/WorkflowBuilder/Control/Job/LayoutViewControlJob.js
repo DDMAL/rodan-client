@@ -3,7 +3,7 @@ import Radio from 'backbone.radio';
 
 import ViewJob from './Individual/ViewJob';
 import ViewJobList from './List/ViewJobList';
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../../Shared/Events';
 
 /**
  * This class represents the layout view for Jobs.

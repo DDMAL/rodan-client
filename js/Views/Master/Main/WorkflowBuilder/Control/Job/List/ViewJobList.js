@@ -2,35 +2,30 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../../../Shared/Events';
+import ViewJobListItem from './ViewJobListItem';
 
 /**
- * This class represents the view of an individual output port list item.
+ * This class represents the view (and controller) for the job list.
  */
-class ViewOutputPortListItem extends Marionette.ItemView
+class ViewJobList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * TODO docs
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
 
         this.modelEvents = {
             'all': 'render'
         };
-        this.ui = {
-            buttonDelete: '#button-delete'
-        };
-        this.events = {
-            'click @ui.buttonDelete': '_handleButtonDelete'
-        };
-        this.template = '#template-main_workflowbuilder_control_outputport_list_item';
-        this.tagName = 'tr';
-
-        super(aParameters);
+        this.childViewContainer = 'tbody';
+        this.template = '#template-main_workflowbuilder_control_job_list';
+        this.childView = ViewJobListItem;
+        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,14 +38,6 @@ class ViewOutputPortListItem extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel('rodan');
     }
-
-    /**
-     * Handle delete.
-     */
-    _handleButtonDelete()
-    {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
-    }
 }
 
-export default ViewOutputPortListItem;
+export default ViewJobList;

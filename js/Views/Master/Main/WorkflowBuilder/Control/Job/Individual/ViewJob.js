@@ -1,13 +1,10 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
-import ViewOutputPortTypeListItem from './ViewOutputPortTypeListItem';
-
 /**
- * This class represents a list of output port types.
+ * This class represents the view for a single Job.
  */
-class ViewOutputPortTypeList extends Marionette.CompositeView
+class ViewJob extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,12 +18,8 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
             'all': 'render'
         };
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_outputporttype_list';
-        this.childView = ViewOutputPortTypeListItem;
-        this.childViewContainer = 'tbody';
-        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
-        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
-        this.collection = job.get('output_port_types');
+        this.template = '#template-main_workflowbuilder_control_job_individual';
+        this.model = aParameters.job;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,4 +34,4 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
     }
 }
 
-export default ViewOutputPortTypeList;
+export default ViewJob;

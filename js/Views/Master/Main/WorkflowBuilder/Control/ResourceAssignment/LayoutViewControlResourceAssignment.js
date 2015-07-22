@@ -3,7 +3,7 @@ import Radio from 'backbone.radio';
 
 import ViewResourceAssignment from './Individual/ViewResourceAssignment';
 import ViewResourceAssignmentList from './List/ViewResourceAssignmentList';
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../../Shared/Events';
 
 /**
  * This class represents the layout view for resource assignments.

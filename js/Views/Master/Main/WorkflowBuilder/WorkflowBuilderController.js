@@ -1,6 +1,6 @@
 import Events from '../../../../Shared/Events';
 import LayoutViewWorkflowBuilder from './LayoutViewWorkflowBuilder';
-import LayoutViewWorkflowEditor from './Control/Workflow/LayoutViewWorkflowEditor';
+import LayoutViewWorkflowEditor from './Control/LayoutViewWorkflowEditor';
 import Workflow from '../../../../Models/Workflow';
 import WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/WorkflowBuilder';
 import BaseController from '../../../../Controllers/BaseController';

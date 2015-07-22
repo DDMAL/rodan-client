@@ -1,12 +1,12 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../../Shared/Events';
+import Events from '../../../../../../../Shared/Events';
 
 /**
- * This class represents the view for a resource assignment
+ * This class represents the view (and controller) for the job item.
  */
-class ViewResourceAssignmentListItem extends Marionette.ItemView
+class ViewJobListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,14 +21,14 @@ class ViewResourceAssignmentListItem extends Marionette.ItemView
         this.modelEvents = {
             'all': 'render'
         };
-        this.template = '#template-main_workflowbuilder_control_resourceassignment_list_item';
+        this.template = '#template-main_workflowbuilder_control_job_list_item';
         this.tagName = 'tr';
         this.ui = {
-            buttonAddResource: '#button-add_resource'
+            buttonAdd: '#button-main_workflowbuilder_control_job_button_add'
         };
         this.events = {
-            'click': '_handleClick',
-            'click @ui.buttonAddResource': '_handleButtonAddResource'
+            'click @ui.buttonAdd': '_handleClickButtonAdd',
+            'click': '_handleClick'
         };
 
         super(aParameters);
@@ -50,16 +50,17 @@ class ViewResourceAssignmentListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_RESOURCE, {resource: this.model});
+        this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
     }
 
     /**
-     * Handles add resource button.
+     * Handle add button.
      */
-    _handleButtonAddResource()
+    _handleClickButtonAdd()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCE, {resource: this.model});
+        this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
     }
 }
 
-export default ViewResourceAssignmentListItem;
+export default ViewJobListItem;

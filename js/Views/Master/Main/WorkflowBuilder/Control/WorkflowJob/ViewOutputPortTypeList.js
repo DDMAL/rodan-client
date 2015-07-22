@@ -1,13 +1,13 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
-import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
+import Events from '../../../../../../Shared/Events';
+import ViewOutputPortTypeListItem from './ViewOutputPortTypeListItem';
 
 /**
- * This class represents a list of input port types.
+ * This class represents a list of output port types.
  */
-class ViewInputPortTypeList extends Marionette.CompositeView
+class ViewOutputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,12 +21,12 @@ class ViewInputPortTypeList extends Marionette.CompositeView
             'all': 'render'
         };
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_inputporttype_list';
-        this.childView = ViewInputPortTypeListItem;
+        this.template = '#template-main_workflowbuilder_control_outputporttype_list';
+        this.childView = ViewOutputPortTypeListItem;
         this.childViewContainer = 'tbody';
         var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
         var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
-        this.collection = job.get('input_port_types');
+        this.collection = job.get('output_port_types');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,4 +41,4 @@ class ViewInputPortTypeList extends Marionette.CompositeView
     }
 }
 
-export default ViewInputPortTypeList;
+export default ViewOutputPortTypeList;

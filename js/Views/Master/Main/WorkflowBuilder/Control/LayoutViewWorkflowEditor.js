@@ -1,15 +1,15 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Connection from '../../../../../../Models/Connection';
-import Events from '../../../../../../Shared/Events';
+import Connection from '../../../../../Models/Connection';
+import Events from '../../../../../Shared/Events';
 import ViewWorkflowData from './ViewWorkflowData';
 import LayoutViewControlJob from './Job/LayoutViewControlJob';
 import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflowJob';
-import WorkflowJob from '../../../../../../Models/WorkflowJob';
-import InputPort from '../../../../../../Models/InputPort';
-import OutputPort from '../../../../../../Models/OutputPort';
-import ResourceAssignment from '../../../../../../Models/ResourceAssignment';
+import WorkflowJob from '../../../../../Models/WorkflowJob';
+import InputPort from '../../../../../Models/InputPort';
+import OutputPort from '../../../../../Models/OutputPort';
+import ResourceAssignment from '../../../../../Models/ResourceAssignment';
 
 /**
  * This class represents the controller for editing a Workflow.
