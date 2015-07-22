@@ -18,10 +18,12 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
         this.template = '#template-navigation_root';
         this.childView = ViewNavigationNodeProject;
         this.ui = {
-            buttonLogout: '#button-navigation_logout'
+            buttonLogout: '#button-navigation_logout',
+            text: '#node_text'
         };
         this.events = {
-            'click @ui.buttonLogout': '_handleButton'
+            'click @ui.buttonLogout': '_handleButton',
+            'click @ui.text': '_handleClick'
         };
     }
 
