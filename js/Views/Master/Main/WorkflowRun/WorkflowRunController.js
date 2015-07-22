@@ -38,7 +38,7 @@ class WorkflowRunController extends BaseController
      */
     _handleEventItemSelected(aPass)
     {
-        this._viewItem = new ViewWorkflowRun({workflowRun: aPass.workflowrun});
+        this._viewItem = new ViewWorkflowRun({workflowRun: aPass.workflowRun});
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
     }
 

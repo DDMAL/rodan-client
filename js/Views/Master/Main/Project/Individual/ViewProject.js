@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
-import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
+import ViewWorkflowRunListItem from '../../WorkflowRun/List/ViewWorkflowRunListItem';
 
 /**
  * This class represents the view (and controller) for a project
