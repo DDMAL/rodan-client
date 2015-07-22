@@ -92,7 +92,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleWorkflowLoadSuccess()
     {
-        this._buildWorkflowInGui(this._workflow);
+        this._processWorkflow(this._workflow);
     }
 
     /**
@@ -215,26 +215,6 @@ class WorkflowEditorController extends Marionette.LayoutView
     }
 
     /**
-     * Builds the Workflow in GUI.
-     */
-    _buildWorkflowInGui(aModel)
-    {
-        var workflowJobs = aModel.get('workflow_jobs');
-        if (workflowJobs !== undefined)
-        {
-            for (var i = 0; i < workflowJobs.length; i++)
-            {
-                var workflowJob = workflowJobs.at(i);
-                this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
-            }
-        }
-
-//        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: this._workflowJob, inputport: aPass.inputporttype});
- //       this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: port});
-
-    }
-
-    /**
      * Create input port.
      */
     _createInputPort(aInputPortType, aWorkflowJob)
@@ -242,6 +222,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         var port = new InputPort({input_port_type: aInputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
         aWorkflowJob.get('input_ports').add(port);
+        return port;
     }
 
     /**
@@ -252,6 +233,7 @@ class WorkflowEditorController extends Marionette.LayoutView
         var port = new OutputPort({output_port_type: aOutputPortType.get('url'), workflow_job: aWorkflowJob.get('url')});
         port.save();
         aWorkflowJob.get('output_ports').add(port);
+        return port;
     }
 
     /**
@@ -305,6 +287,65 @@ class WorkflowEditorController extends Marionette.LayoutView
         connection.save();
         this._workflow.get('connections').add(connection);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
+    }
+
+    /**
+     * Process workflow for GUI.
+     */
+    _processWorkflow(aModel)
+    {
+        var workflowJobs = aModel.get('workflow_jobs');
+        if (workflowJobs !== undefined)
+        {
+            for (var i = 0; i < workflowJobs.length; i++)
+            {
+                this._processWorkflowJob(workflowJobs.at(i));
+            }
+        }
+    }
+
+    /**
+     * Process workflow job for GUI.
+     */
+    _processWorkflowJob(aModel)
+    {
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: aModel});
+
+        // Process input ports.
+        var inputPorts = aModel.get('input_ports');
+        if (inputPorts !== undefined)
+        {
+            for (var i = 0; i < inputPorts.length; i++)
+            {
+                this._processInputPort(inputPorts.at(i), aModel);
+            }
+        }
+
+        // Process output ports.
+        var outputPorts = aModel.get('output_ports');
+        if (outputPorts !== undefined)
+        {
+            for (var j = 0; j < outputPorts.length; j++)
+            {
+                this._processOutputPort(outputPorts.at(j), aModel);
+            }
+        }
+    }
+
+    /**
+     * Process input port for GUI.
+     */
+    _processInputPort(aModel, aWorkflowJob)
+    {
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: aWorkflowJob, inputport: aModel});
+    }
+
+    /**
+     * Process output port for GUI.
+     */
+    _processOutputPort(aModel, aWorkflowJob)
+    {
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: aWorkflowJob, outputport: aModel});
     }
 }
 

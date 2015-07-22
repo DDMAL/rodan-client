@@ -17,6 +17,7 @@ var Events = {
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
+    COMMAND__LOAD_CONNECTIONS: 'COMMAND__LOAD_CONNECTIONS', // Instructs loading of connections. Takes object containing various query IDs.
 
     COMMAND__AUTHENTICATION_LOGIN: 'COMMAND__AUTHENTICATION_LOGIN',
     COMMAND__AUTHENTICATION_LOGOUT: 'COMMAND__AUTHENTICATION_LOGOUT',
@@ -121,6 +122,7 @@ var Events = {
     REQUEST__COLLECTION_RESOURCETYPE: 'REQUEST__COLLECTION_RESOURCETYPE',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
     REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
+    REQUEST__COLLECTION_CONNECTION: 'REQUEST__COLLECTION_CONNECTION',
 
     REQUEST__SERVER_ROUTE: 'REQUEST__SERVER_ROUTE', // Returns server route. Pass associated string.
     REQUEST__SERVER_HOSTNAME: 'REQUEST__SERVER_HOSTNAME', // Returns server hostname. No pass.

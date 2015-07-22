@@ -36,6 +36,8 @@ class ConnectionCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.comply(Events.COMMAND__LOAD_CONNECTIONS, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(Events.REQUEST__COLLECTION_CONNECTION, () => this._handleRequestInstance());
     }
 
     /**

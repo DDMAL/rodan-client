@@ -89,6 +89,14 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     {
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
+
+    /**
+     * Handle save button.
+     */
+    _handleButtonSave()
+    {
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {name: this.ui.textName.val()});
+    }
 }
 
 export default LayoutViewControlWorkflowJob;
