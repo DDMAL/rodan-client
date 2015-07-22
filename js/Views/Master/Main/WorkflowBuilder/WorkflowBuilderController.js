@@ -68,30 +68,6 @@ class WorkflowBuilderController extends BaseController
         // Initialize the workspace.
         this._workspace.initialize('canvas-workspace');
     }
-    
-    /**
-     * Handle button zoom in.
-     */
-    _handleButtonZoomIn()
-    {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
-    }
-    
-    /**
-     * Handle button zoom out.
-     */
-    _handleButtonZoomOut()
-    {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
-    }
-    
-    /**
-     * Handle button zoom reset.
-     */
-    _handleButtonZoomReset()
-    {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
-    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - workflow object controls

@@ -1,5 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import Events from '../../../../Shared/Events';
 
 /**
  * Controller for the Workflow Builder.
@@ -39,7 +40,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
 
@@ -49,6 +50,30 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     showView(aView)
     {
         this.regionControl.show(aView);
+    }
+    
+    /**
+     * Handle button zoom in.
+     */
+    _handleButtonZoomIn()
+    {
+        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
+    }
+    
+    /**
+     * Handle button zoom out.
+     */
+    _handleButtonZoomOut()
+    {
+        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
+    }
+    
+    /**
+     * Handle button zoom reset.
+     */
+    _handleButtonZoomReset()
+    {
+        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 }
 
