@@ -9,7 +9,6 @@ import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflo
 import WorkflowJob from '../../../../../Models/WorkflowJob';
 import InputPort from '../../../../../Models/InputPort';
 import OutputPort from '../../../../../Models/OutputPort';
-import ResourceAssignment from '../../../../../Models/ResourceAssignment';
 
 /**
  * This class represents the controller for editing a Workflow.
@@ -188,14 +187,6 @@ class WorkflowEditorController extends Marionette.LayoutView
     }
 
     /**
-     * Handle add resource assignment.
-     */
-    _handleCommandAddResourceAssignment(aPass)
-    {
-        this._createResourceAssignment(aPass.resource, aPass.inputport);
-    }
-
-    /**
      * Handle run workflow.
      */
     _handleCommandRunWorkflow()
@@ -300,16 +291,6 @@ class WorkflowEditorController extends Marionette.LayoutView
         connection.save();
         this._workflow.get('connections').add(connection);
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connection, inputport: aInputPort, outputport: aOutputPort});
-    }
-
-    /**
-     * Create resource assignment.
-     */
-    _createResourceAssignment(aResource, aInputPort)
-    {
-        var resourceAssignment = new ResourceAssignment();
-        // todo
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_RESOURCEASSIGNMENT, {resourceassignment: resourceAssignment, resource: aResource, inputport: aInputPort});
     }
 }
 

@@ -48,7 +48,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -56,7 +56,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
     }
 
     /**
@@ -67,7 +67,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
         var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.get('name') + '"?');
         if (confirmation)
         {
-            this.rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
+            this._rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
         }
     }
 
@@ -76,7 +76,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
      */
     _handleButtonEditWorkflow()
     {
-        alert('not yet implemented');
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
     }
 
     /**

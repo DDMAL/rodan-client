@@ -11,7 +11,7 @@ class WorkflowRun extends BaseModel
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize()
     {
         this.routeName = 'workflowruns';
         this.set('statusText', this._getStatusText(this.get('status')));

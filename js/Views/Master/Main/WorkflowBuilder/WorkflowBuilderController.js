@@ -63,6 +63,8 @@ class WorkflowBuilderController extends BaseController
             var workflow = this._createWorkflow(project);
             this.controlWorkflowView = new LayoutViewWorkflowEditor({workflow: workflow});
         }
+
+        // Create any required GUI objects.
         this._layoutView.showView(this.controlWorkflowView);
 
         // Initialize the workspace.
