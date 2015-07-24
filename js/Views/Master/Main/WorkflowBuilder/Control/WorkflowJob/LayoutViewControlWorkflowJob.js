@@ -3,6 +3,7 @@ import Radio from 'backbone.radio';
 
 import Events from '../../../../../../Shared/Events';
 import LayoutViewControlPorts from './Ports/LayoutViewControlPorts';
+import ViewSettings from './Settings/ViewSettings';
 
 /**
  * This class represents the view for editing workflowjobs.
@@ -49,7 +50,8 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     onBeforeShow()
     {
         this.regionControlPorts.show(this._portsLayoutView);
-        //this.regionControlSettings.show(this._outputPortTypeListView);
+        this.regionControlSettings.show(this._viewSettings);
+        this.regionControlPorts.$el.hide();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +63,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _initializeViews(aParameters)
     {
         this._portsLayoutView = new LayoutViewControlPorts(aParameters);
-    //    this._outputPortListView = new ViewOutputPortList(aParameters);
+        this._viewSettings = new ViewSettings(aParameters);
     }
     
     /**
