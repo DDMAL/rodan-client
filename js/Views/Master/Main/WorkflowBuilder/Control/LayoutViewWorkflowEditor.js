@@ -178,7 +178,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      * Handle save workflowjob.
      */
     _handleCommandSaveWorkflowJob(aPass)
-    {
+    {debugger;
         this._workflowJob.save(aPass, {patch: true});
     }
 

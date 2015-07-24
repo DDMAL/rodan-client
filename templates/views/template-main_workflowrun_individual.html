@@ -1,12 +1,17 @@
 <h2>WorkflowRun <%= name%></h2>
-<div>Basic info goes here:  </div>
+Description: <%= description %><br/>
+Created on: <%= created %><br/>
+Updated on: <%= updated %><br/>
+Status: <%= statusText %>
 <hr>
 <h3>RunJobs</h3>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Project</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>

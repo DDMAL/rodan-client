@@ -1,8 +1,9 @@
 <h1>Project <%= name%></h1>
 Name: <input type="text" id="text-project_name" value="<%= name %>"><br>
 Description: <input type="text" id="text-project_description" value="<%= description %>"><br>
-Created by: <%= creator.username %> <br>
+Creator: <%= creator.username %> <br>
 Created on: <%= created %><br>
+Updated on: <%= updated %><br>
 Resources:  <span id="resource_count"><%= resource_count%></span><br>
 Workflows:  <span id="workflow_count"><%= workflow_count%></span><br>
 <button id="button-save_project">Save</button>
@@ -14,6 +15,8 @@ Workflows:  <span id="workflow_count"><%= workflow_count%></span><br>
         <tr>
             <th>Name</th>
             <th>Created</th>
+            <th>Updated</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
