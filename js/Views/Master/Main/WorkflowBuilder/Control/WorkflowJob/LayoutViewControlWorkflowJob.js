@@ -26,7 +26,6 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlSettings: '#region-main_workflowbuilder_control_settings'
         });
         this.model = aParameters.workflowjob;
-        this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
         this.template = '#template-main_workflowbuilder_control_workflowjob';
         this.ui = {
@@ -45,7 +44,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     }
 
     /**
-     * Initially show the list.
+     * Initially show just settings.
      */
     onBeforeShow()
     {
