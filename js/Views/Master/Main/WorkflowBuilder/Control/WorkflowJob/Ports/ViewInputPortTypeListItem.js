@@ -1,12 +1,12 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../Shared/Events';
+import Events from '../../../../../../../Shared/Events';
 
 /**
- * This class represents the view of an individual output port list item.
+ * This class represents the view of an individual input port type list item.
  */
-class ViewOutputPortListItem extends Marionette.ItemView
+class ViewInputPortTypeListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -22,12 +22,12 @@ class ViewOutputPortListItem extends Marionette.ItemView
             'all': 'render'
         };
         this.ui = {
-            buttonDelete: '#button-delete'
+            buttonNewInputPort: '#button-new_inputport'
         };
         this.events = {
-            'click @ui.buttonDelete': '_handleButtonDelete'
+            'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
         };
-        this.template = '#template-main_workflowbuilder_control_outputport_list_item';
+        this.template = '#template-main_workflowbuilder_control_inputporttype_list_item';
         this.tagName = 'tr';
 
         super(aParameters);
@@ -45,12 +45,12 @@ class ViewOutputPortListItem extends Marionette.ItemView
     }
 
     /**
-     * Handle delete.
+     * Handles input port add.
      */
-    _handleButtonDelete()
+    _handleButtonNewInputPort()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
+        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model});
     }
 }
 
-export default ViewOutputPortListItem;
+export default ViewInputPortTypeListItem;

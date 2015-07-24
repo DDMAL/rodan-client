@@ -2,10 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../../Shared/Events';
-import ViewInputPortList from './ViewInputPortList';
-import ViewInputPortTypeList from './ViewInputPortTypeList';
-import ViewOutputPortList from './ViewOutputPortList';
-import ViewOutputPortTypeList from './ViewOutputPortTypeList';
+import LayoutViewControlPorts from './Ports/LayoutViewControlPorts';
 
 /**
  * This class represents the view for editing workflowjobs.
@@ -24,21 +21,23 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
         this._initializeRadio();
         this.addRegions({
             regionControlWorkflowJob: '#region-main_workflowbuilder_control_workflowjob',
-            regionControlInputPortTypes: '#region-main_workflowbuilder_control_workflowjob_inputporttypes',
-            regionControlInputPorts: '#region-main_workflowbuilder_control_workflowjob_inputports',
-            regionControlOutputPortTypes: '#region-main_workflowbuilder_control_workflowjob_outputporttypes',
-            regionControlOutputPorts: '#region-main_workflowbuilder_control_workflowjob_outputports'
+            regionControlPorts: '#region-main_workflowbuilder_control_ports',
+            regionControlSettings: '#region-main_workflowbuilder_control_settings'
         });
         this.model = aParameters.workflowjob;
         this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
         this.template = '#template-main_workflowbuilder_control_workflowjob';
         this.ui = {
+            buttonTogglePorts: '#button-ports_toggle',
+            buttonToggleSettings: '#button-settings_toggle',
             buttonShowWorkflow: '#button-show_workflow',
             buttonSave: '#button-save_workflowjob_data',
             textName: '#text-workflowjob_name'
         };
         this.events = {
+            'click @ui.buttonTogglePorts': '_handleButtonTogglePorts',
+            'click @ui.buttonToggleSettings': '_handleButtonToggleSettings',
             'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
             'click @ui.buttonSave': '_handleButtonSave'
         };
@@ -49,10 +48,8 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     onBeforeShow()
     {
-        this.regionControlInputPortTypes.show(this._inputPortTypeListView);
-        this.regionControlInputPorts.show(this._inputPortListView);
-        this.regionControlOutputPortTypes.show(this._outputPortTypeListView);
-        this.regionControlOutputPorts.show(this._outputPortListView);
+        this.regionControlPorts.show(this._portsLayoutView);
+        //this.regionControlSettings.show(this._outputPortTypeListView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -63,15 +60,8 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _initializeViews(aParameters)
     {
-        // Create new input port and output port views.
-        // We pass the workflow job so the views' initializers can setup their collections.
-        this._inputPortListView = new ViewInputPortList(aParameters);
-        this._outputPortListView = new ViewOutputPortList(aParameters);
-
-        // Create new port type lists. We pass the workflow job, which has info on the associated job.
-        // The list views will do the rest.
-        this._inputPortTypeListView = new ViewInputPortTypeList(aParameters);
-        this._outputPortTypeListView = new ViewOutputPortTypeList(aParameters);
+        this._portsLayoutView = new LayoutViewControlPorts(aParameters);
+    //    this._outputPortListView = new ViewOutputPortList(aParameters);
     }
     
     /**
@@ -80,6 +70,30 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
+    }
+
+    /**
+     * Handle button toggle ports.
+     */
+    _handleButtonTogglePorts()
+    {
+        if (this.regionControlSettings.$el.is(':visible'))
+        {
+            this.regionControlSettings.$el.toggle('fast');
+        }
+        this.regionControlPorts.$el.toggle('fast');
+    }
+
+    /**
+     * Handle button toggle settings.
+     */
+    _handleButtonToggleSettings()
+    {
+        if (this.regionControlPorts.$el.is(':visible'))
+        {
+            this.regionControlPorts.$el.toggle('fast');
+        }
+        this.regionControlSettings.$el.toggle('fast');
     }
 
     /**
