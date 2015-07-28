@@ -6,4 +6,7 @@ Updated: <%= updated %><br>
 Type: <%= resource_type_full.description %> (<%= resource_type_full.mimetype %>, ext: <%= resource_type_full.extension %>)<br>
 New Resource Type: <select id="select-resourcetype"></select><br>
 <button id="button-main_resource_individual_save">Save</button>
+<form style="display: inline" action="<%= viewer_url %>" method="get">
+    <button>View/Download</button>
+</form>
 <button id="button-main_resource_individual_delete">Delete</button>
