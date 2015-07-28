@@ -2,6 +2,7 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 
 import BaseModel from './BaseModel';
+import Events from '../Shared/Events';
 
 /**
  * Resource model.
@@ -12,16 +13,14 @@ class Resource extends BaseModel
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize()
+    initialize(aParameters)
     {
+        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCETYPE);
         this.routeName = 'resources';
-    }
-
-    defaults()
-    {
-        return {resource_type: null};
+        this._updateResourceTypeFull();
+        this.on('change:resource_type', () => this._updateResourceTypeFull());
     }
 
     /**
@@ -68,6 +67,14 @@ class Resource extends BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Updates full description of resource type.
+     */
+    _updateResourceTypeFull()
+    {
+        var resourceTypeId = this.getResourceTypeUuid();
+        this.set('resource_type_full', this.resourceTypeCollection.get(resourceTypeId).toJSON());
+    }
 }
 
 export default Resource;

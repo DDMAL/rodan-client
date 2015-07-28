@@ -11,12 +11,12 @@ class ResourceCollection extends Backbone.Collection
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
-        this.model = Resource;
         this._initializeRadio();
+        this.model = Resource;
     }
 
     /**

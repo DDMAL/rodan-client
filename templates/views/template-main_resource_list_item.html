@@ -1,2 +1,5 @@
-<td><%= name%></td>
-<td><%= resource_type %></td>
+<td><%= name %></td>
+<td><%= creator.first_name %> <%= creator.last_name %> (<%= creator.username %>)</td>
+<td><%= created %></td>
+<td><%= updated %></td>
+<td><%= resource_type_full.description %> (<%= resource_type_full.mimetype %>, ext: <%= resource_type_full.extension %>)</td>

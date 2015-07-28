@@ -27,6 +27,17 @@ class ResourceTypeCollection extends Backbone.Collection
         return resp.results;
     }
 
+    /**
+     * Parses ID out of resource type URL.
+     */
+    parseIdFromUrl(aUrl)
+    {
+        var lastSlash = aUrl.lastIndexOf('/');
+        var subString = aUrl.substring(0, lastSlash);
+        var secondLastSlash = subString.lastIndexOf('/');
+        return aUrl.substring(secondLastSlash + 1, lastSlash);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
