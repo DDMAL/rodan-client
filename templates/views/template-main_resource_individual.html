@@ -1,3 +1,9 @@
-<h3><%= name %></h3>
-New Resource Type: <select id="select-resourcetype"></select>
+Name: <input type="text" id="text-resource_name" value="<%= name %>"><br>
+Description: <input type="text" id="text-resource_description" value="<%= description %>"><br>
+Creator: <%= creator.first_name %> <%= creator.last_name %> (<%= creator.username %>)<br>
+Created: <%= created %><br>
+Updated: <%= updated %><br>
+Type: <%= resource_type_full.description %> (<%= resource_type_full.mimetype %>, ext: <%= resource_type_full.extension %>)<br>
+New Resource Type: <select id="select-resourcetype"></select><br>
 <button id="button-main_resource_individual_save">Save</button>
+<button id="button-main_resource_individual_delete">Delete</button>

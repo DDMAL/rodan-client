@@ -21,6 +21,12 @@ class Resource extends BaseModel
         this.routeName = 'resources';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());
+
+        // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
+        if (this.get('creator') === null)
+        {
+            this.set('creator', {first_name: null, last_name: null, username: 'generated result'});
+        }
     }
 
     /**
@@ -34,7 +40,6 @@ class Resource extends BaseModel
     /**
      * Defaults
      */
-
     defaults()
     {
         return {

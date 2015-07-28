@@ -25,14 +25,18 @@ class ViewResource extends Marionette.CompositeView
         this.template = '#template-main_resource_individual';
         this.ui = {
             buttonSave: '#button-main_resource_individual_save',
-            selectResourceType: '#select-resourcetype'
+            buttonDelete: '#button-main_resource_individual_delete',
+            selectResourceType: '#select-resourcetype',
+            resourceName: '#text-resource_name',
+            resourceDescription: '#text-resource_description'
         };
         this.events = {
-            'click @ui.buttonSave': '_handleClickButtonSave'
+            'click @ui.buttonSave': '_handleClickButtonSave',
+            'click @ui.buttonDelete': '_handleClickButtonDelete'
         };
         this.childView = ViewResourceTypeListItem;
         this.childViewContainer = '#select-resourcetype';
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCETYPE);
+        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCETYPE);
     }
 
     /**
@@ -51,7 +55,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -60,7 +64,17 @@ class ViewResource extends Marionette.CompositeView
     _handleClickButtonSave()
     {
         var resourceTypeUrl = this.ui.selectResourceType.val();
-        this.model.save({resource_type: resourceTypeUrl}, {patch: true});
+        var name = this.ui.resourceName.val();
+        var description = this.ui.resourceDescription.val();
+        this.model.save({resource_type: resourceTypeUrl, name: name, description: description}, {patch: true});
+    }
+
+    /**
+     * Handle delete.
+     */
+    _handleClickButtonDelete()
+    {
+        this._rodanChannel.command(Events.COMMAND__RESOURCE_DELETE, {resource: this.model});
     }
 }
 
