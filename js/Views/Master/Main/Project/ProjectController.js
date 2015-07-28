@@ -57,8 +57,37 @@ class ProjectController extends BaseController
      */
     _handleCommandProjectDelete(aReturn)
     {
-        alert('Not yet implemented');
-        console.log(aReturn);
+        var confirmation = confirm('Are you sure you want to delete this project?');
+        if (confirmation)
+        {
+            // Remove the project.
+            this._activeProject = null;
+            try
+            {
+                aReturn.project.destroy({success: () => this._handleCallbackDeleteSuccess(),
+                                         error: () => this._handleCallbackDeleteError()});
+            }
+            catch (aError)
+            {
+                console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
+            }
+        }
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleCallbackDeleteSuccess()
+    {
+        this._rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleCallbackDeleteError()
+    {
+        alert('todo - error (need a global handler for errors)');
     }
 
     /**
