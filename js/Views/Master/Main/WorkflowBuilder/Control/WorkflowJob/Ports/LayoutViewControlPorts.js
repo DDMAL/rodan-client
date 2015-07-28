@@ -1,7 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
 import ViewInputPortList from './ViewInputPortList';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';
