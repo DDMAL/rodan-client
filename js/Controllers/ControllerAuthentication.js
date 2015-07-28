@@ -23,7 +23,10 @@ class ControllerAuthentication extends BaseController
         var that = this;
         $.ajaxPrefilter(function(options)
         {
-            console.log('ajax prefilter');
+            if (Configuration.DEBUG)
+            {
+                console.log('ajax prefilter');
+            }
             options.xhrFields = { withCredentials: true, };
             if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
             {
@@ -139,8 +142,8 @@ class ControllerAuthentication extends BaseController
         request.setRequestHeader('Accept', 'application/json');
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
-            var authToken = Configuration.authenticationToken;
-            request.setRequestHeader('Authorization', 'Token ' + authToken);
+            alert('TODO - token auth not working at the moment');
+            //request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
         else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
         {
@@ -193,8 +196,8 @@ class ControllerAuthentication extends BaseController
         }
         else
         {
-            var authToken = this.controllerServer.authenticationToken;
-            request.setRequestHeader('Authorization', 'Token ' + authToken);
+            alert('TODO - token auth not working at the moment');
+            //request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
         request.send();
         this._user = null;
