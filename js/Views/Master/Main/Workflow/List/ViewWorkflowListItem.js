@@ -27,11 +27,13 @@ class ViewWorkflowListItem extends Marionette.ItemView
             'click': '_handleClick'
         };
         this.ui = {
+            runWorkflowButton: '#button-run_workflow',
             deleteWorkflowButton: '#button-delete_workflow',
             copyWorkflowButton: '#button-copy_workflow',
             editWorkflowButton: '#button-edit_workflow'
         };
         this.events = {
+            'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
             'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
             'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
             'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow'
@@ -57,6 +59,21 @@ class ViewWorkflowListItem extends Marionette.ItemView
     _handleClick()
     {
         this._rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
+    }
+
+    /**
+     * Handle button run workflow.
+     */
+    _handleButtonRunWorkflow()
+    {
+        if (!this.model.get('valid'))
+        {
+            alert('The workflow must be valid prior to run.');
+        }
+        else
+        {
+            this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
+        }
     }
 
     /**

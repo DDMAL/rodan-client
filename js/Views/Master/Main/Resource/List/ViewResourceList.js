@@ -62,8 +62,23 @@ class ViewResourceList extends Marionette.CompositeView
         }
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         var resource = new Resource({project: project.get('url')});
-        resource.save({file: file});
-        this.collection.add(resource);
+        resource.save({file: file}, {success: () => this._handleCallbackAddSuccess(), error: () => this._handleCallbackAddError()});
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleCallbackAddSuccess()
+    {
+        this.rodanChannel.command(Events.COMMAND__LOAD_RESOURCES, {project: this._project.id});
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleCallbackAddError()
+    {
+        alert('todo - error (need a global handler for errors)');
     }
 }
 

@@ -32,6 +32,19 @@ class Resource extends BaseModel
     }
 
     /**
+     * Defaults
+     */
+
+    defaults()
+    {
+        return {
+            creator: {first_name: null, last_name: null, username: null},
+            created: null,
+            updated: null
+        };
+    }
+
+    /**
      * Override of sync. We do this to allow file uploads.
      */
     sync(aMethod, aModel, aOptions)
@@ -58,10 +71,14 @@ class Resource extends BaseModel
      */
     getResourceTypeUuid()
     {
-        var lastSlash = this.get('resource_type').lastIndexOf('/');
-        var subString = this.get('resource_type').substring(0, lastSlash);
-        var secondLastSlash = subString.lastIndexOf('/');
-        return this.get('resource_type').substring(secondLastSlash + 1, lastSlash);
+        if (this.get('resource_type') !== undefined)
+        {
+            var lastSlash = this.get('resource_type').lastIndexOf('/');
+            var subString = this.get('resource_type').substring(0, lastSlash);
+            var secondLastSlash = subString.lastIndexOf('/');
+            return this.get('resource_type').substring(secondLastSlash + 1, lastSlash);
+        }
+        return null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +90,12 @@ class Resource extends BaseModel
     _updateResourceTypeFull()
     {
         var resourceTypeId = this.getResourceTypeUuid();
-        this.set('resource_type_full', this.resourceTypeCollection.get(resourceTypeId).toJSON());
+        var jsonString = {};
+        if (resourceTypeId !== null)
+        {
+            jsonString = this.resourceTypeCollection.get(resourceTypeId).toJSON();
+        }
+        this.set('resource_type_full', jsonString); 
     }
 }
 
