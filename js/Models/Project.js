@@ -20,6 +20,7 @@ class Project extends BaseModel
     {
         return {creator: {username: null},
                 created: null,
+                updated: null,
                 workflow_count: null,
                 resource_count: null};
     }
