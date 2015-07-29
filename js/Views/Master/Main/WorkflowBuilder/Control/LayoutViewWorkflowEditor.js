@@ -127,7 +127,6 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandShowControlJobView()
     {
-        // TODO - not reusing this view...should find more efficient way
         this.viewControlJob = new LayoutViewControlJob();
         this.regionControlWorkflowParts.show(this.viewControlJob);
     }
@@ -294,13 +293,45 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _processWorkflow(aModel)
     {
+        // Process all WorkflowJobs and their associated ports.
+        var connections = {};
         var workflowJobs = aModel.get('workflow_jobs');
         if (workflowJobs !== undefined)
         {
             for (var i = 0; i < workflowJobs.length; i++)
             {
-                this._processWorkflowJob(workflowJobs.at(i));
+                var tempConnections = this._processWorkflowJob(workflowJobs.at(i));
+
+                // For the connections returned, merge them into our master list.
+                // TODO - maybe put this in its own method
+                for (var connectionUrl in tempConnections)
+                {
+                    var connection = tempConnections[connectionUrl];
+                    if (connections.hasOwnProperty(connectionUrl))
+                    {
+                        connections[connectionUrl].inputPort = 
+                            connections[connectionUrl].inputPort === null ? connection.inputPort : connections[connectionUrl].inputPort;
+                        connections[connectionUrl].inputPort = 
+                            connections[connectionUrl].inputPort === null ? connection.inputPort : connections[connectionUrl].inputPort;
+                    }
+                    else
+                    {
+                        connections[connectionUrl] = connection;
+                    }
+                }
             }
+        }
+
+        // Process connections.
+        for (var connectionUrl in connections)
+        {
+            var connection = connections[connectionUrl];
+            var connectionModel = new Connection({input_port: connection.inputPort.get('url'), 
+                                                  output_port: connection.outputPort.get('url')});
+            aModel.get('connections').add(connection);
+            this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connectionModel, 
+                                                                                                inputport: connection.inputPort,
+                                                                                                outputport: connection.outputPort});
         }
     }
 
@@ -311,13 +342,25 @@ class WorkflowEditorController extends Marionette.LayoutView
     {
         this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: aModel});
 
+        // We want to keep track of what connections need to be made and return those.
+        var connections = {};
+
         // Process input ports.
         var inputPorts = aModel.get('input_ports');
         if (inputPorts !== undefined)
         {
             for (var i = 0; i < inputPorts.length; i++)
             {
-                this._processInputPort(inputPorts.at(i), aModel);
+                var inputPort = inputPorts.at(i);
+                this._processInputPort(inputPort, aModel);
+
+                // Get connections.
+                var inputPortConnections = inputPort.get('connections');
+                for (var k = 0; k < inputPortConnections.length; k++)
+                {
+                    var connection = inputPortConnections[k];
+                    connections[connection] = {'inputPort': inputPort, 'outputPort': null};
+                }
             }
         }
 
@@ -327,9 +370,20 @@ class WorkflowEditorController extends Marionette.LayoutView
         {
             for (var j = 0; j < outputPorts.length; j++)
             {
-                this._processOutputPort(outputPorts.at(j), aModel);
+                var outputPort = outputPorts.at(j);
+                this._processOutputPort(outputPort, aModel);
+
+                // Get connections.
+                var outputPortConnections = outputPort.get('connections');
+                for (var k = 0; k < outputPortConnections.length; k++)
+                {
+                    var connection = outputPortConnections[k];
+                    connections[connection] = {'inputPort': null, 'outputPort': outputPort};
+                }
             }
         }
+
+        return connections;
     }
 
     /**
