@@ -4,10 +4,7 @@ import Radio from 'backbone.radio';
 import Events from '../../../../Shared/Events';
 
 /**
- * This is a layout to help render a Collection and a single item.
- * We're using a LayoutView as opposed to a CompositeView because the single model
- * that would be associated with the CompositveView is not initially known, so it can't
- * rerender.
+ * LayoutView for Workflow.
  */
 class LayoutViewWorkflow extends Marionette.LayoutView
 {

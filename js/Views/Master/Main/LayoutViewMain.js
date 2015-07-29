@@ -6,7 +6,6 @@ import ViewLogin from './Login/ViewLogin';
 import ProjectController from './Project/ProjectController';
 import ResourceController from './Resource/ResourceController';
 import WorkflowController from './Workflow/WorkflowController';
-import WorkflowRunController from './WorkflowRun/WorkflowRunController';
 import WorkflowBuilderController from './WorkflowBuilder/WorkflowBuilderController';
 
 /**
@@ -33,7 +32,6 @@ class LayoutViewMain extends Marionette.LayoutView
         this.projectController = new ProjectController();
         this.resourceController = new ResourceController();
         this.workflowController = new WorkflowController();
-        this.workflowRunController = new WorkflowRunController();
         this.workflowBuilderController = new WorkflowBuilderController();
     }
 

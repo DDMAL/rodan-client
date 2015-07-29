@@ -69,14 +69,7 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     _handleButtonRun()
     {
-        if (!this.model.get('valid'))
-        {
-            alert('The workflow must be valid prior to run.');
-        }
-        else
-        {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
-        }
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
     }
 }
 
