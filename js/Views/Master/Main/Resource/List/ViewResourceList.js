@@ -21,13 +21,6 @@ class ViewResourceList extends Marionette.CompositeView
         this.modelEvents = {
             'all': 'render'
         };
-        this.ui = {
-            buttonAdd: '#button-main_resource_list_add',
-            fileInput: '#file-main_resource_list_file'
-        };
-        this.events = {
-            'click @ui.buttonAdd': '_handleClickButtonAdd'
-        };
         this._project = aOptions.project;
         this.template = '#template-main_resource_list';
         this.childView = ViewResourceListItem;
@@ -45,20 +38,6 @@ class ViewResourceList extends Marionette.CompositeView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Handle add button.
-     */
-    _handleClickButtonAdd()
-    {
-        var file = this.ui.fileInput[0].files[0];
-        if (file === undefined)
-        {
-            alert('TODO -error');
-            return;
-        }
-        this._rodanChannel.command(Events.COMMAND__RESOURCE_ADD, {project: this._project, file: file});
     }
 }
 

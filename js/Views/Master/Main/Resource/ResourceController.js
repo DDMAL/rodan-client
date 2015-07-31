@@ -84,7 +84,7 @@ class ResourceController extends BaseController
      */
     _handleEventListSelected(aOptions)
     {
-        this._layoutView = new LayoutViewResource();
+        this._layoutView = new LayoutViewResource({project: aOptions.project});
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
         this._layoutView.showList(new ViewResourceList({project: aOptions.project}));
     }
