@@ -17,17 +17,16 @@ class ViewResourceList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
+        this._initializeRadio();
         this.modelEvents = {
             'all': 'render'
         };
-        this._initializeRadio();
         this.template = '#template-main_workflowrun_newworkflowrun_resource_list';
         this.childView = ViewResourceListItem;
         this.childViewContainer = 'tbody';
         this._workflow = aParameters.workflow;
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCE);
-        this.collection.reset();
+        this.collection = this.rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
         this.rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: project.id});
     }
 
