@@ -15,9 +15,9 @@ class Resource extends BaseModel
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize()
     {
-        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCETYPE);
+        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
         this.routeName = 'resources';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());

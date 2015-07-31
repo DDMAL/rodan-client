@@ -17,8 +17,8 @@ class ProjectCollection extends Backbone.Collection
      */
     initialize()
     {
-        this.model = Project;
         this._initializeRadio();
+        this.model = Project;
     }
 
     /**

@@ -5,7 +5,7 @@ import Events from '../../../../../Shared/Events';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
 
 /**
- * This class represents the view for a single Resource summary.
+ * Resource view.
  */
 class ViewResource extends Marionette.CompositeView
 {
@@ -13,16 +13,15 @@ class ViewResource extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize
      */
-    initialize(aParameters)
+    initialize(aOptions)
     {
         this.modelEvents = {
             'all': 'render'
         };
-        this.model = aParameters.resource;
+        this.model = aOptions.resource;
         this._initializeRadio();
-        this.template = '#template-main_resource_individual';
         this.ui = {
             buttonSave: '#button-main_resource_individual_save',
             buttonDelete: '#button-main_resource_individual_delete',
@@ -34,9 +33,10 @@ class ViewResource extends Marionette.CompositeView
             'click @ui.buttonSave': '_handleClickButtonSave',
             'click @ui.buttonDelete': '_handleClickButtonDelete'
         };
+        this.template = '#template-main_resource_individual';
         this.childView = ViewResourceTypeListItem;
         this.childViewContainer = '#select-resourcetype';
-        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCETYPE);
+        this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
     }
 
     /**
@@ -45,6 +45,14 @@ class ViewResource extends Marionette.CompositeView
     templateHelpers() 
     {
         return { items: this.collection.toJSON() };
+    }
+
+    /**
+     * Destroy callback.
+     */
+    onDestroy()
+    {
+        this.collection = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -59,18 +67,18 @@ class ViewResource extends Marionette.CompositeView
     }
 
     /**
-     * Handle save.
+     * Handle button save.
      */
     _handleClickButtonSave()
     {
-        var resourceTypeUrl = this.ui.selectResourceType.val();
-        var name = this.ui.resourceName.val();
-        var description = this.ui.resourceDescription.val();
-        this.model.save({resource_type: resourceTypeUrl, name: name, description: description}, {patch: true});
+        this._rodanChannel.command(Events.COMMAND__RESOURCE_SAVE, {resource: this.model,
+                                                                   resource_type: this.ui.selectResourceType.val(),
+                                                                   name: this.ui.resourceName.val(),
+                                                                   description: this.ui.resourceDescription.val()});
     }
 
     /**
-     * Handle delete.
+     * Handle button delete.
      */
     _handleClickButtonDelete()
     {

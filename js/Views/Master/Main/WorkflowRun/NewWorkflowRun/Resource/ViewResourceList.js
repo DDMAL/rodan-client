@@ -28,7 +28,7 @@ class ViewResourceList extends Marionette.CompositeView
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RESOURCE);
         this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_RESOURCES, {project: project.id});
+        this.rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: project.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

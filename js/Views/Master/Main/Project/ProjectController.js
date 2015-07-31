@@ -4,7 +4,7 @@ import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
 
 /**
- * Controller for all Project views.
+ * Controller for Project views.
  */
 class ProjectController extends BaseController
 {
@@ -74,7 +74,8 @@ class ProjectController extends BaseController
             try
             {
                 aOptions.project.destroy({success: () => this._handleCallbackDeleteSuccess(),
-                                          error: () => this._handleCallbackDeleteError()});
+                                          error: () => this._handleCallbackDeleteError(),
+                                          wait: true});
             }
             catch (aError)
             {

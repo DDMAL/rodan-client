@@ -5,6 +5,9 @@ import Radio from 'backbone.radio';
 import Events from '../Shared/Events';
 import Resource from '../Models/Resource';
 
+/**
+ * Resource collection.
+ */
 class ResourceCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -36,8 +39,8 @@ class ResourceCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(Events.COMMAND__LOAD_RESOURCES, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(Events.REQUEST__COLLECTION_RESOURCE, () => this._handleRequestInstance());
+        this.rodanChannel.comply(Events.COMMAND__RESOURCES_LOAD, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(Events.REQUEST__RESOURCE_COLLECTION, () => this._handleRequestInstance());
     }
 
     /**
@@ -45,6 +48,7 @@ class ResourceCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.reset();
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'resources');
         this.fetch({ data: $.param(aQueryParameters) });
     }

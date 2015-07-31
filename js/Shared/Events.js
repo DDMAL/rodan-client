@@ -4,24 +4,46 @@
 var Events = 
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// Project
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__PROJECT_ADD: 'COMMAND__PROJECT_ADD',               // Called when Project needs to be added. Takes {creator: User}.
+    COMMAND__PROJECT_DELETE: 'COMMAND__PROJECT_DELETE',         // Called when Project needs to be deleted. Passes {project: Project}.
+    COMMAND__PROJECTS_LOAD: 'COMMAND__PROJECTS_LOAD',           // Instructs loading of Projects. Takes object containing various query IDs.
+    COMMAND__PROJECT_SAVE: 'COMMAND__PROJECT_SAVE',             // Called when Project needs to be saved. Takes {project: Project, fields: {object with attributes to change}}.
+    COMMAND__PROJECT_SET_ACTIVE: 'COMMAND__PROJECT_SET_ACTIVE', // Sets the active Project. Takes {project: Project}.
+    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on project selection.
+    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on project selection. Takes {project: Project}.
+    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns global Project collection.
+    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Resource
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__RESOURCE_ADD: 'COMMAND__RESOURCE_ADD',                 // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
+    COMMAND__RESOURCE_DELETE: 'COMMAND__RESOURCE_DELETE',           // Called when Resource needs to be deleted. Passes {resource: Resource}.
+    COMMAND__RESOURCES_LOAD: 'COMMAND__RESOURCES_LOAD',             // Instructs loading of Resources. Takes object containing various query IDs.
+    COMMAND__RESOURCE_SAVE: 'COMMAND__RESOURCE_SAVE',               // Called when Resource needs to be saved. Takes {resource: Resource, fields: {object with attributes to change}}.
+    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',           // Called on resource selection. Takes {resource: Resource}.
+    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',         // Called on resources selection. Takes (project: Project}.
+    REQUEST__RESOURCE_COLLECTION: 'REQUEST__RESOURCE_COLLECTION',   // Returns global Resource collection.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// ResourceType
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES',             // Instructs loading of ResourceTypes. Takes object containing various query IDs.
+    REQUEST__RESOURCETYPE_COLLECTION: 'REQUEST__RESOURCETYPE_COLLECTION',   // Returns global ResourceType collection.
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
 ///////////////////////////////////////////////////////////////////////////////////////
-
-    // Project commands.
-    COMMAND__PROJECT_SET_ACTIVE: 'COMMAND__PROJECT_SET_ACTIVE', // Sets the active Project. Takes {project: Project}.
-    COMMAND__PROJECT_SAVE: 'COMMAND__PROJECT_SAVE',             // Called when Project needs to be saved. Takes {project: Project, fields: {object with attributes to change}}.
-    COMMAND__PROJECT_ADD: 'COMMAND__PROJECT_ADD',               // Called when Project needs to be added. Takes {creator: User}.
-    COMMAND__PROJECTS_LOAD: 'COMMAND__PROJECTS_LOAD',           // Instructs loading of Projects. Takes object containing various query IDs.
-
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
-
 
     COMMAND__LOAD_INPUTPORTS: 'COMMAND__LOAD_INPUTPORTS',  // Instructs loading of inputports. Takes object containing various query IDs.
     COMMAND__LOAD_INPUTPORTTYPES: 'COMMAND__LOAD_INPUTPORTTYPES',  // Instructs loading of inputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
     COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
-    COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
-    COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES', // Instructs loading of resource types. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
@@ -33,9 +55,7 @@ var Events =
 
     COMMAND__LAYOUTVIEW_SHOW: 'COMMAND__LAYOUTVIEW_SHOW',
 
-    COMMAND__PROJECT_DELETE: 'COMMAND__PROJECT_DELETE',   // Called when Project needs to be deleted. Passes {project: Project}.
     COMMAND__WORKFLOW_DELETE: 'COMMAND__WORKFLOW_DELETE', // Called when Workflow needs to be deleted. Passes {workflow: Workflow}.
-    COMMAND__RESOURCE_DELETE: 'COMMAND__RESOURCE_DELETE', // Called when Resource needs to be deleted. Passes {resource: Resource}.
 
     // Workflow builder commands. These are sent to the workflow builder controller. They will (most often) trigger a command to the workspace.
     COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB',   // Called when Workflow needs to be created. Passes {job: Job}.
@@ -74,10 +94,6 @@ var Events =
 // EVENTS
 ///////////////////////////////////////////////////////////////////////////////////////
 
-    // Projects.
-    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',   // Called on project selection.
-    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',     // Called on project selection. Takes {project: Project}.
-
     // Authentication events.
     EVENT__APPLICATION_READY: 'EVENT__APPLICATION_READY',   // Called when app is ready. No pass.
     EVENT__AUTHENTICATION_ERROR_400: 'EVENT__AUTHENTICATION_ERROR_400', // Called on error 400. No pass.
@@ -96,8 +112,6 @@ var Events =
 
     // Model/collection selected events.
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on job selection. No pass.
-    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED', // Called on resource selection. Passes {resource: Resource}.
-    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. Passes (project: Project}.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED', // Called on workflows selection. No pass.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED', // Called on workflow run selection. Passes {project: WorkflowRun}.
@@ -121,18 +135,12 @@ var Events =
 // REQUESTS
 ///////////////////////////////////////////////////////////////////////////////////////
 
-    // Project.
-    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns global Project collection.
-    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
-
     // Collection request.
     REQUEST__COLLECTION_INPUTPORT: 'REQUEST__COLLECTION_INPUTPORT',
     REQUEST__COLLECTION_INPUTPORTTYPE: 'REQUEST__COLLECTION_INPUTPORTTYPE',
     REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
     REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
-    REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',
-    REQUEST__COLLECTION_RESOURCETYPE: 'REQUEST__COLLECTION_RESOURCETYPE',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
     REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
     REQUEST__COLLECTION_CONNECTION: 'REQUEST__COLLECTION_CONNECTION',

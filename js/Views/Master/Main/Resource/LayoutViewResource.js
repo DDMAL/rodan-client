@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
  * This is a layout to help render a Collection and a single item.
  * We're using a LayoutView as opposed to a CompositeView because the single model
  * that would be associated with the CompositveView is not initially known, so it can't
- * rerender.
+ * rerend.
  */
 class LayoutViewResource extends Marionette.LayoutView
 {
@@ -17,16 +17,16 @@ class LayoutViewResource extends Marionette.LayoutView
      */
     initialize()
     {
+        this._initializeRadio();
         this.addRegions({
             regionList: '#region-main_resource_list',
             regionItem: '#region-main_resource_item'
         });
         this.template = '#template-main_resource';
-        this._initializeRadio();
     }
 
     /**
-     * TODO docs
+     * Show view in Resource list region.
      */
     showList(aView)
     {
@@ -34,7 +34,7 @@ class LayoutViewResource extends Marionette.LayoutView
     }
 
     /**
-     * TODO docs
+     * Show view in Resource item region.
      */
     showItem(aView)
     {

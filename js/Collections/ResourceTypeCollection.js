@@ -5,13 +5,16 @@ import Radio from 'backbone.radio';
 import Events from '../Shared/Events';
 import ResourceType from '../Models/ResourceType';
 
+/**
+ * ResourceType model.
+ */
 class ResourceTypeCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
@@ -20,7 +23,7 @@ class ResourceTypeCollection extends Backbone.Collection
     }
 
     /**
-     * TODO docs
+     * Parse.
      */
     parse(resp)
     {
@@ -48,7 +51,7 @@ class ResourceTypeCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.comply(Events.COMMAND__LOAD_RESOURCETYPES, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(Events.REQUEST__COLLECTION_RESOURCETYPE, () => this._handleRequestInstance());
+        this.rodanChannel.reply(Events.REQUEST__RESOURCETYPE_COLLECTION, () => this._handleRequestInstance());
     }
 
     /**
@@ -56,6 +59,7 @@ class ResourceTypeCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.reset();
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'resourcetypes');
         this.fetch({ data: $.param(aQueryParameters) });
     }
