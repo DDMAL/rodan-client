@@ -36,8 +36,7 @@ class ResourceController extends BaseController
     _handleCommandResourceAdd(aOptions)
     {
         var collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        collection.create({project: aOptions.project.get('url'), file: aOptions.file},
-                          {success: () => this._handleCallbackAddSuccess(), error: () => this._handleCallbackAddError()});
+        collection.create({project: aOptions.project.get('url'), file: aOptions.file}, {success: () => this._handleCallbackAddSuccess()});
     }
 
     /**
@@ -56,8 +55,7 @@ class ResourceController extends BaseController
             {
                 try
                 {
-                    aOptions.resource.destroy({success: () => this._handleCallbackDeleteSuccess(),
-                                               error: () => this._handleCallbackDeleteError()});
+                    aOptions.resource.destroy({success: () => this._handleCallbackDeleteSuccess()});
                 }
                 catch (aError)
                 {
@@ -75,7 +73,7 @@ class ResourceController extends BaseController
         aOptions.resource.save({resource_type: aOptions.resource_type,
                                 name: aOptions.name,
                                 description: aOptions.description},
-                               {patch: true});
+                               {patch: true, success: () => this._handleCallbackAddSuccess()});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -112,28 +110,12 @@ class ResourceController extends BaseController
     }
 
     /**
-     * Handle delete success.
-     */
-    _handleCallbackDeleteError()
-    {
-        alert('todo - error (need a global handler for errors)');
-    }
-
-    /**
-     * Handle delete success.
+     * Handle add success.
      */
     _handleCallbackAddSuccess()
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: project.id});
-    }
-
-    /**
-     * Handle delete success.
-     */
-    _handleCallbackAddError()
-    {
-        alert('todo - error (need a global handler for errors)');
     }
 }
 

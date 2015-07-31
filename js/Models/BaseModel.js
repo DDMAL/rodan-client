@@ -39,6 +39,23 @@ class BaseModel extends Backbone.Model
         return parsed_url;
     }
 
+    /**
+     * Override of destroy to allow for generic handling.
+     */
+    destroy(aOptions)
+    {
+        aOptions = this._applyResponseHandlers(aOptions);
+        super.destroy(aOptions);
+    }
+
+    /**
+     * Override of save to allow for generic handling.
+     */
+    save(aAttributes, aOptions)
+    {
+        aOptions = this._applyResponseHandlers(aOptions);
+        super.save(aAttributes, aOptions);
+    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -57,6 +74,68 @@ class BaseModel extends Backbone.Model
     _onChange()
     {
         this.rodanChannel.trigger(Events.EVENT__MODEL_HASCHANGED, {model: this});
+    }
+
+    /**
+     * Applies response handlers.
+     */
+    _applyResponseHandlers(aOptions)
+    {
+        // Check if options are defined.
+        if (aOptions === undefined)
+        {
+            aOptions = {};
+        }
+
+        // Success.
+        var genericSuccessFunction = (aModel, aResponse, aOptions) => this._handleSuccessResponse(aModel, aResponse, aOptions);
+        if (!aOptions.hasOwnProperty('success'))
+        {
+            aOptions.success = (aModel, aResponse, aOptions) => this._handleSuccessResponse(aModel, aResponse, aOptions);
+        }
+        else
+        {
+            var customSuccessFunction = aOptions.success;
+            aOptions.success = function(aModel, aResponse, aOptions)
+            {
+                customSuccessFunction(aModel, aResponse, aOptions);
+                genericSuccessFunction(aModel, aResponse, aOptions);
+            };
+        }
+
+        // Error.
+        var genericErrorFunction = (aModel, aResponse, aOptions) => this._handleErrorResponse(aModel, aResponse, aOptions);
+        if (!aOptions.hasOwnProperty('error'))
+        {
+            aOptions.error = (aModel, aResponse, aOptions) => this._handleErrorResponse(aModel, aResponse, aOptions);
+        }
+        else
+        {
+            var customErrorFunction = aOptions.error;
+            aOptions.error = function(aModel, aResponse, aOptions)
+            {
+                customErrorFunction(aModel, aResponse, aOptions);
+                genericErrorFunction(aModel, aResponse, aOptions);
+            };
+        }
+
+        return aOptions;
+    }
+
+    /**
+     * Handle success response.
+     */
+    _handleSuccessResponse(aModel, aResponse, aOptions)
+    {
+        console.log('todo - generic success handle here');
+    }
+
+    /**
+     * Handle error response.
+     */
+    _handleErrorResponse(aModel, aResponse, aOptions)
+    {
+        console.log('todo - generic error handle here...should pass to an error handler');
     }
 }
 
