@@ -1,7 +1,7 @@
+import BaseController from '../../../../Controllers/BaseController';
 import Events from '../../../../Shared/Events';
 import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
-import BaseController from '../../../../Controllers/BaseController';
 
 /**
  * Controller for all Project views.
@@ -12,12 +12,12 @@ class ProjectController extends BaseController
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor.
+     * Initialize.
      */
-    constructor(aOptions)
+    initialize()
     {
-        super(aOptions);
         this._activeProject = null;
+        this.collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -28,44 +28,53 @@ class ProjectController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__PROJECT_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
+        // Commands.
+        this._rodanChannel.comply(Events.COMMAND__PROJECT_ADD, aOptions => this._handleCommandAddProject(aOptions));
+        this._rodanChannel.comply(Events.COMMAND__PROJECT_SET_ACTIVE, aOptions => this._handleCommandSetActiveProject(aOptions));
+        this._rodanChannel.comply(Events.COMMAND__PROJECT_SAVE, aOptions => this._handleCommandProjectSave(aOptions));
+        this._rodanChannel.comply(Events.COMMAND__PROJECT_DELETE, aOptions => this._handleCommandProjectDelete(aOptions));
+
+        // Events.
+        this._rodanChannel.on(Events.EVENT__PROJECT_SELECTED, aOptions => this._handleEventItemSelected(aOptions));
         this._rodanChannel.on(Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+
+        // Requests.
         this._rodanChannel.reply(Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
-        this._rodanChannel.comply(Events.COMMAND__NEW_PROJECT, aReturn => this._handleCommandNewProject(aReturn));
-        this._rodanChannel.comply(Events.COMMAND__SET_ACTIVE_PROJECT, aReturn => this._handleCommandSetActiveProject(aReturn));
-        this._rodanChannel.comply(Events.COMMAND__PROJECT_SAVE, aReturn => this._handleCommandProjectSave(aReturn));
-        this._rodanChannel.comply(Events.COMMAND__PROJECT_DELETE, aReturn => this._handleCommandProjectDelete(aReturn));
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Command handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize views.
+     * Handle command Project save.
      */
-    _initializeViews()
+    _handleCommandProjectSave(aOptions)
     {
+        aOptions.project.save(aOptions.fields, {patch: true});
     }
 
     /**
-     * Save changes to project.
+     * Handle command Project add.
      */
-    _handleCommandProjectSave(aReturn)
+    _handleCommandAddProject(aOptions)
     {
-        aReturn.project.save(aReturn.fields, {patch: true});
+        var collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
+        collection.create({creator: aOptions.user});
     }
 
     /**
-     * Delete project.
+     * Handle command Project delete.
      */
-    _handleCommandProjectDelete(aReturn)
+    _handleCommandProjectDelete(aOptions)
     {
         var confirmation = confirm('Are you sure you want to delete this project?');
         if (confirmation)
         {
-            // Remove the project.
             this._activeProject = null;
             try
             {
-                aReturn.project.destroy({success: () => this._handleCallbackDeleteSuccess(),
-                                         error: () => this._handleCallbackDeleteError()});
+                aOptions.project.destroy({success: () => this._handleCallbackDeleteSuccess(),
+                                          error: () => this._handleCallbackDeleteError()});
             }
             catch (aError)
             {
@@ -74,6 +83,48 @@ class ProjectController extends BaseController
         }
     }
 
+    /**
+     * Handle command set active Project.
+     */
+    _handleCommandSetActiveProject(aOptions)
+    {
+        this._activeProject = aOptions.project;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Event handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle item selection.
+     */
+    _handleEventItemSelected(aOptions)
+    {
+        this._activeProject = aOptions.project;
+        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, new ViewProject({project: this._activeProject}));
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected()
+    {
+        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, new ViewProjectList());
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Request handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle request for current active project. Returns null.
+     */
+    _handleRequestProjectActive()
+    {
+        return this._activeProject !== null ? this._activeProject : null;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Callback handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle delete success.
      */
@@ -88,41 +139,6 @@ class ProjectController extends BaseController
     _handleCallbackDeleteError()
     {
         alert('todo - error (need a global handler for errors)');
-    }
-
-    /**
-     * Handle command set active project.
-     */
-    _handleCommandSetActiveProject(aReturn)
-    {
-        this._activeProject = aReturn.project;
-    }
-
-    /**
-     * Handle item selection.
-     */
-    _handleEventItemSelected(aReturn)
-    {
-        this._activeProject = aReturn.project;
-        this._viewItem = new ViewProject({project: this._activeProject});
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected()
-    {
-        this._viewList = new ViewProjectList();
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
-    }
-
-    /**
-     * Handle request for current active project. Returns null.
-     */
-    _handleRequestProjectActive()
-    {
-        return this._activeProject !== null ? this._activeProject : null;
     }
 }
 

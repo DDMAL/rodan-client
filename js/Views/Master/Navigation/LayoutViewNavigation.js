@@ -44,7 +44,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleAuthenticationSuccess()
     {
         var model = new Backbone.Model({name: 'Projects'});
-        var object = {model: model, collection: this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT)};
+        var object = {model: model, collection: this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
     }
 

@@ -5,7 +5,7 @@ import Events from '../../../../../Shared/Events';
 import ViewWorkflowRunListItem from '../../WorkflowRun/List/ViewWorkflowRunListItem';
 
 /**
- * This class represents the view (and controller) for a project
+ * Project view.
  */
 class ViewProject extends Marionette.CompositeView
 {
@@ -13,14 +13,14 @@ class ViewProject extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize(aParameters)
+    initialize(aOptions)
     {
         this.modelEvents = {
             'all': 'render'
         };
-        this.model = aParameters.project;
+        this.model = aOptions.project;
         this._initializeRadio();
         this.ui = {
             buttonSave: '#button-save_project',
@@ -39,9 +39,8 @@ class ViewProject extends Marionette.CompositeView
         this.template = '#template-main_project_individual';
         this.childView = ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: this.model.id});
+        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
+        this._rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: this.model.id});
     }
 
     /**
@@ -68,7 +67,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -76,7 +75,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.command(Events.COMMAND__PROJECT_SAVE, 
+        this._rodanChannel.command(Events.COMMAND__PROJECT_SAVE, 
                                   {project: this.model,
                                    fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
@@ -86,23 +85,23 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.command(Events.COMMAND__PROJECT_DELETE, {project: this.model});
+        this._rodanChannel.command(Events.COMMAND__PROJECT_DELETE, {project: this.model});
     }
 
     /**
-     * TODO docs
+     * Handle click resource count.
      */
     _handleClickResourceCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model});
+        this._rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model});
     }
 
     /**
-     * TODO docs
+     * Handle click workflow count.
      */
     _handleClickWorkflowCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
     }
 }
 

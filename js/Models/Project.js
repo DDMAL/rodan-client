@@ -1,7 +1,7 @@
 import BaseModel from './BaseModel';
 
 /**
- * TODO docs.
+ * Project model.
  */
 class Project extends BaseModel
 {
@@ -9,25 +9,25 @@ class Project extends BaseModel
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.routeName = 'projects';
     }
 
+    /**
+     * Return defaults.
+     */
     defaults()
     {
         return {creator: {username: null},
                 created: null,
                 updated: null,
                 workflow_count: null,
-                resource_count: null};
+                resource_count: null,
+                name: 'untitled'};
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
 
 export default Project;

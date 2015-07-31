@@ -4,13 +4,16 @@ import Radio from 'backbone.radio';
 import Events from '../Shared/Events';
 import Project from '../Models/Project';
 
+/**
+ * Project collection.
+ */
 class ProjectCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
@@ -19,7 +22,7 @@ class ProjectCollection extends Backbone.Collection
     }
 
     /**
-     * TODO docs
+     * Parse.
      */
     parse(resp)
     {
@@ -35,17 +38,18 @@ class ProjectCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(Events.COMMAND__LOAD_PROJECTS, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(Events.REQUEST__COLLECTION_PROJECT, () => this._handleRequestInstance());
+        this.rodanChannel.comply(Events.COMMAND__PROJECTS_LOAD, aQueryParameters => this._retrieveList(aQueryParameters));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_COLLECTION, () => this._handleRequestInstance());
     }
 
     /**
      * Retrieves list.
      */
-    _retrieveList(/*aQueryParameters*/)
+    _retrieveList(aQueryParameters)
     {
+        this.reset();
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'projects');
-        this.fetch();//{ data: $.param(aQueryParameters) });
+        this.fetch({ data: $.param(aQueryParameters) });
     }
 
     /**

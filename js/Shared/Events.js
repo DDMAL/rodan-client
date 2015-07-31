@@ -1,17 +1,25 @@
-var Events = {
-
+/**
+ * Backbone.Radio events use in the client.
+ */
+var Events = 
+{
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
 ///////////////////////////////////////////////////////////////////////////////////////
+
+    // Project commands.
+    COMMAND__PROJECT_SET_ACTIVE: 'COMMAND__PROJECT_SET_ACTIVE', // Sets the active Project. Takes {project: Project}.
+    COMMAND__PROJECT_SAVE: 'COMMAND__PROJECT_SAVE',             // Called when Project needs to be saved. Takes {project: Project, fields: {object with attributes to change}}.
+    COMMAND__PROJECT_ADD: 'COMMAND__PROJECT_ADD',               // Called when Project needs to be added. Takes {creator: User}.
+    COMMAND__PROJECTS_LOAD: 'COMMAND__PROJECTS_LOAD',           // Instructs loading of Projects. Takes object containing various query IDs.
+
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
 
-    COMMAND__SET_ACTIVE_PROJECT: 'COMMAND__SET_ACTIVE_PROJECT', // Sets the active project. Takes {project: Project}.
 
     COMMAND__LOAD_INPUTPORTS: 'COMMAND__LOAD_INPUTPORTS',  // Instructs loading of inputports. Takes object containing various query IDs.
     COMMAND__LOAD_INPUTPORTTYPES: 'COMMAND__LOAD_INPUTPORTTYPES',  // Instructs loading of inputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
     COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
-    COMMAND__LOAD_PROJECTS: 'COMMAND__LOAD_PROJECTS', // Instructs loading of projects. Takes object containing various query IDs.
     COMMAND__LOAD_RESOURCES: 'COMMAND__LOAD_RESOURCES', // Instructs loading of resources. Takes object containing various query IDs.
     COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES', // Instructs loading of resource types. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
@@ -25,7 +33,6 @@ var Events = {
 
     COMMAND__LAYOUTVIEW_SHOW: 'COMMAND__LAYOUTVIEW_SHOW',
 
-    COMMAND__PROJECT_SAVE: 'COMMAND__PROJECT_SAVE',   // Called when Project needs to be saved. Passes {project: Project, fields: {object with attributes to change}}.
     COMMAND__PROJECT_DELETE: 'COMMAND__PROJECT_DELETE',   // Called when Project needs to be deleted. Passes {project: Project}.
     COMMAND__WORKFLOW_DELETE: 'COMMAND__WORKFLOW_DELETE', // Called when Workflow needs to be deleted. Passes {workflow: Workflow}.
     COMMAND__RESOURCE_DELETE: 'COMMAND__RESOURCE_DELETE', // Called when Resource needs to be deleted. Passes {resource: Resource}.
@@ -67,6 +74,10 @@ var Events = {
 // EVENTS
 ///////////////////////////////////////////////////////////////////////////////////////
 
+    // Projects.
+    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',   // Called on project selection.
+    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',     // Called on project selection. Takes {project: Project}.
+
     // Authentication events.
     EVENT__APPLICATION_READY: 'EVENT__APPLICATION_READY',   // Called when app is ready. No pass.
     EVENT__AUTHENTICATION_ERROR_400: 'EVENT__AUTHENTICATION_ERROR_400', // Called on error 400. No pass.
@@ -85,8 +96,6 @@ var Events = {
 
     // Model/collection selected events.
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on job selection. No pass.
-    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED', // Called on project selection. No pass.
-    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED', // Called on project selection. Passes {project: Project}.
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED', // Called on resource selection. Passes {resource: Resource}.
     EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED', // Called on resources selection. Passes (project: Project}.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: Workflow}.
@@ -112,12 +121,15 @@ var Events = {
 // REQUESTS
 ///////////////////////////////////////////////////////////////////////////////////////
 
+    // Project.
+    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns global Project collection.
+    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
+
     // Collection request.
     REQUEST__COLLECTION_INPUTPORT: 'REQUEST__COLLECTION_INPUTPORT',
     REQUEST__COLLECTION_INPUTPORTTYPE: 'REQUEST__COLLECTION_INPUTPORTTYPE',
     REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
     REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',
-    REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
     REQUEST__COLLECTION_RESOURCE: 'REQUEST__COLLECTION_RESOURCE',
     REQUEST__COLLECTION_RESOURCETYPE: 'REQUEST__COLLECTION_RESOURCETYPE',
@@ -133,7 +145,6 @@ var Events = {
     REQUEST__WORKFLOWJOB_NEW: 'REQUEST__WORKFLOWJOB_NEW', // Returns new WorkflowJob not yet saved to server.
 
     REQUEST__USER: 'REQUEST__USER',
-    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',
 
     // WorkflowRun Creator requests.
     REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT' // Returns true iff RA exists for provided inputport and resource.

@@ -32,7 +32,7 @@ class ViewNavigationNodeResources extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.command(Events.COMMAND__SET_ACTIVE_PROJECT, {project: this.model.get('project')});
+        this._rodanChannel.command(Events.COMMAND__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
         this._rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model.get('project')});
     }
 

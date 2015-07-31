@@ -3,10 +3,9 @@ import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
 import ViewProjectListItem from './ViewProjectListItem';
-import Project from '../../../../../Models/Project';
 
 /**
- * This class represents the view (and controller) for the project list.
+ * Project list view.
  */
 class ViewProjectList extends Marionette.CompositeView
 {
@@ -14,7 +13,7 @@ class ViewProjectList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize
      */
     initialize()
     {
@@ -32,9 +31,8 @@ class ViewProjectList extends Marionette.CompositeView
         this.template = '#template-main_project_list';
         this.childView = ViewProjectListItem;
         var user = this.rodanChannel.request(Events.REQUEST__USER);
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT);
-        this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_PROJECTS, {user: user.uuid});
+        this.collection = this.rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
+        this.rodanChannel.command(Events.COMMAND__PROJECTS_LOAD, {user: user.get('uuid')});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -54,9 +52,7 @@ class ViewProjectList extends Marionette.CompositeView
     _handleButtonNewProject()
     {
         var user = this.rodanChannel.request(Events.REQUEST__USER);
-        var project = new Project({name: 'untitled', creator: user});
-        project.save();
-        this.collection.add(project);
+        this.rodanChannel.command(Events.COMMAND__PROJECT_ADD, {user: user});
     }
 }
 
