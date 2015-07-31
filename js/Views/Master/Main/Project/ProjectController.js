@@ -73,9 +73,7 @@ class ProjectController extends BaseController
             this._activeProject = null;
             try
             {
-                aOptions.project.destroy({success: () => this._handleCallbackDeleteSuccess(),
-                                          error: () => this._handleCallbackDeleteError(),
-                                          wait: true});
+                aOptions.project.destroy({success: () => this._handleCallbackDeleteSuccess()});
             }
             catch (aError)
             {
@@ -132,14 +130,6 @@ class ProjectController extends BaseController
     _handleCallbackDeleteSuccess()
     {
         this._rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
-    }
-
-    /**
-     * Handle delete success.
-     */
-    _handleCallbackDeleteError()
-    {
-        alert('todo - error (need a global handler for errors)');
     }
 }
 

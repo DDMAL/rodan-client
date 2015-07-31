@@ -135,7 +135,7 @@ class BaseModel extends Backbone.Model
      */
     _handleErrorResponse(aModel, aResponse, aOptions)
     {
-        console.log('todo - generic error handle here...should pass to an error handler');
+        alert('todo - generic error handle here...should pass to an error handler');
     }
 }
 
