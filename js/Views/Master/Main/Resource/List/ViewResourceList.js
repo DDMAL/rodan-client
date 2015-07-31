@@ -21,12 +21,11 @@ class ViewResourceList extends Marionette.CompositeView
         this.modelEvents = {
             'all': 'render'
         };
-        this._project = aOptions.project;
         this.template = '#template-main_resource_list';
         this.childView = ViewResourceListItem;
         this.childViewContainer = 'tbody';
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: this._project.id});
+        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: aOptions.project.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
