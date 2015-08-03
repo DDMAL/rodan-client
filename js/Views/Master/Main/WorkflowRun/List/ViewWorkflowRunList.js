@@ -5,7 +5,7 @@ import Events from '../../../../../Shared/Events';
 import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
 
 /**
- * This class represents the view (and controller) for the workflowrun list.
+ * View for WorkflowRun list.
  */
 class ViewWorkflowRunList extends Marionette.CompositeView
 {
@@ -13,9 +13,9 @@ class ViewWorkflowRunList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize()
+    initialize(aOptions)
     {
         this._initializeRadio();
 
@@ -26,9 +26,7 @@ class ViewWorkflowRunList extends Marionette.CompositeView
         this.template = '#template-main_workflowrun_list';
         this.childView = ViewWorkflowRunListItem;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: project.id});
+        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: aOptions.project.id});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

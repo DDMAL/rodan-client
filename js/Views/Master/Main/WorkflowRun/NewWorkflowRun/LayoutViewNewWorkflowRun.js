@@ -5,7 +5,8 @@ import _ from 'underscore';
 import Events from '../../../../../Shared/Events';
 import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewInputPortList from './InputPort/ViewInputPortList';
-import ViewResourceList from './Resource/ViewResourceList';
+import ViewResourceList from '../../Resource/List/ViewResourceList';
+import ViewResourceListItem from './Resource/ViewResourceListItem';
 import ViewWorkflowRunData from './ViewWorkflowRunData';
 
 /**
@@ -21,6 +22,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     initialize(aOptions)
     {
+        this._project = aOptions.project;
         this._workflow = aOptions.workflow;
         this.addRegions({
             regionData: '#region-main_workflowrun_newworkflowrun_data',
@@ -38,11 +40,16 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     onBeforeShow()
     {
+        // Empty regions.
         this.regionData.empty();
         this.regionInputPortList.empty();
         this.regionResourceList.empty();
+
+        // Create lists.
         this._viewInputPortList = new ViewInputPortList({workflow: this._workflow});
-        this._viewResourceList = new ViewResourceList({workflow: this._workflow});
+        this._viewResourceList = new ViewResourceList({project: this._project,
+                                                       template: '#template-main_workflowrun_newworkflowrun_resource_list',
+                                                       childView: ViewResourceListItem});
         this._viewData = new ViewWorkflowRunData({workflow: this._workflow});
         this.regionData.show(this._viewData);
         this.regionInputPortList.show(this._viewInputPortList);

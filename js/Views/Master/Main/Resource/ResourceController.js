@@ -3,6 +3,7 @@ import Events from '../../../../Shared/Events';
 import LayoutViewResource from './LayoutViewResource';
 import ViewResource from './Individual/ViewResource';
 import ViewResourceList from './List/ViewResourceList';
+import ViewResourceListItem from './List/ViewResourceListItem';
 
 /**
  * Controller for Resource views.
@@ -86,7 +87,9 @@ class ResourceController extends BaseController
     {
         this._layoutView = new LayoutViewResource({project: aOptions.project});
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        this._layoutView.showList(new ViewResourceList({project: aOptions.project}));
+        this._layoutView.showList(new ViewResourceList({project: aOptions.project,
+                                                        template: '#template-main_resource_list',
+                                                        childView: ViewResourceListItem}));
     }
 
     /**

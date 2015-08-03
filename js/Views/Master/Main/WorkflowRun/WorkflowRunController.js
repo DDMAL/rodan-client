@@ -1,3 +1,4 @@
+import { getUuidFromUrl } from '../../../../Helpers/Utilities';
 import Events from '../../../../Shared/Events';
 import ViewWorkflowRun from './Individual/ViewWorkflowRun';
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
@@ -13,11 +14,11 @@ class WorkflowRunController extends BaseController
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor.
+     * Initialize.
      */
-    constructor(aOptions)
+    initialize()
     {
-        super(aOptions);
+        this.collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +48,8 @@ class WorkflowRunController extends BaseController
      */
     _handleEventListSelected()
     {
-        this._viewList = new ViewWorkflowRunList();
+        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        this._viewList = new ViewWorkflowRunList({project: project});
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
     }
 
@@ -56,7 +58,8 @@ class WorkflowRunController extends BaseController
      */
     _handleCommandCreateWorkflowRun(aPass)
     {
-        this._layoutViewNewWorkflowRun = new LayoutViewNewWorkflowRun({workflow: aPass.workflow});
+        var project = this.collection.where({'url': aPass.workflow.get('project')})[0];
+        this._layoutViewNewWorkflowRun = new LayoutViewNewWorkflowRun({workflow: aPass.workflow, project: project});
         this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutViewNewWorkflowRun);
     }
 }

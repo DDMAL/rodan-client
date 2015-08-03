@@ -45,6 +45,7 @@ class WorkflowRunCollection extends Backbone.Collection
      */
     _retrieveList(aQueryParameters)
     {
+        this.reset();
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'workflowruns');
         this.fetch({ data: $.param(aQueryParameters) });
     }
