@@ -41,7 +41,7 @@ class ResourceController extends BaseController
     }
 
     /**
-     * Handle command Delete Resource.
+     * Handle command delete Resource.
      */
     _handleCommandResourceDelete(aOptions)
     {

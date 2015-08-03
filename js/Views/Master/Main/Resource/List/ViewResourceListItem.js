@@ -12,9 +12,9 @@ class ViewResourceListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Constructor.
      */
-    constructor(aParameters)
+    constructor(aOptions)
     {
         this._initializeRadio();
 
@@ -27,7 +27,7 @@ class ViewResourceListItem extends Marionette.ItemView
             'click': '_handleClick'
         };
 
-        super(aParameters);
+        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ class ViewResourceListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -46,7 +46,7 @@ class ViewResourceListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        this._rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
 }
 

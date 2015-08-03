@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 import Events from '../../../../../Shared/Events';
 
 /**
- * This class represents the view (and controller) for a project item in a list.
+ * View for Project list item.
  */
 class ViewProjectListItem extends Marionette.ItemView
 {
@@ -12,9 +12,9 @@ class ViewProjectListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Constructor.
      */
-    constructor(aParameters)
+    constructor(aOptions)
     {
         this._initializeRadio();
 
@@ -27,7 +27,7 @@ class ViewProjectListItem extends Marionette.ItemView
             'click': '_handleClick'
         };
 
-        super(aParameters);
+        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ class ViewProjectListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -46,7 +46,7 @@ class ViewProjectListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
+        this._rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 }
 

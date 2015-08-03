@@ -14,7 +14,6 @@ class ViewResourceTypeListItem extends Marionette.ItemView
      */
     constructor(aOptions)
     {
-        this._initializeRadio();
         this.modelEvents = {
             'all': 'render'
         };
@@ -29,17 +28,6 @@ class ViewResourceTypeListItem extends Marionette.ItemView
     onRender()
     {
         this.$el.attr('value', this.model.get('url'));
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
     }
 }
 
