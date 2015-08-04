@@ -33,7 +33,11 @@ var Events =
     COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES',             // Instructs loading of ResourceTypes. Takes object containing various query IDs.
     REQUEST__RESOURCETYPE_COLLECTION: 'REQUEST__RESOURCETYPE_COLLECTION',   // Returns global ResourceType collection.
 
-
+///////////////////////////////////////////////////////////////////////////////////////
+// System
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__PROCESS_ERROR: 'COMMAND__PROCESS_ERROR',       // Sends error to the status bar. Takes {text: string}.
+    COMMAND__PROCESS_MESSAGE: 'COMMAND__PROCESS_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS

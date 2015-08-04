@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 import Events from '../Shared/Events';
 
 /**
- * Base VISRC model
+ * Base model.
  */
 class BaseModel extends Backbone.Model
 {
@@ -55,6 +55,15 @@ class BaseModel extends Backbone.Model
     {
         aOptions = this._applyResponseHandlers(aOptions);
         super.save(aAttributes, aOptions);
+    }
+
+    /**
+     * Override of fetch to allow for generic handling.
+     */
+    fetch(aOptions)
+    {
+        aOptions = this._applyResponseHandlers(aOptions);
+        super.fetch(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -127,7 +136,10 @@ class BaseModel extends Backbone.Model
      */
     _handleSuccessResponse(aModel, aResponse, aOptions)
     {
-        console.log('todo - generic success handle here');
+        var text = 'Success: ' 
+                   + ' (' + aOptions.xhr.status + ') ' 
+                   + aModel.constructor.name + ' "' + aModel.get('name') + '"';
+        this.rodanChannel.command(Events.COMMAND__PROCESS_MESSAGE, {text: text});
     }
 
     /**
@@ -135,7 +147,11 @@ class BaseModel extends Backbone.Model
      */
     _handleErrorResponse(aModel, aResponse, aOptions)
     {
-        alert('todo - generic error handle here...should pass to an error handler');
+        var text = 'todo - need to process error code';
+        /*var text = 'Error: ' 
+                   + ' (' + aOptions.xhr.status + ') ' 
+                   + aResponse;*/
+        this.rodanChannel.command(Events.COMMAND__PROCESS_MESSAGE, {text: text});
     }
 }
 

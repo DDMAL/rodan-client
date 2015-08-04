@@ -1,10 +1,13 @@
 import $ from 'jquery';
+import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import _ from 'underscore';
 
+import Events from '../../../../Shared/Events';
+
 /**
- * This class represents the view (and controller) for the status bar - messages.
+ * View for status bar messages.
  */
 class ViewStatusMessage extends Marionette.CompositeView
 {
@@ -12,24 +15,24 @@ class ViewStatusMessage extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
-        this.model = null;
+        this._initializeRadio();
+        this.model = new Backbone.Model({text: null});
         this.modelEvents = {
             'all': 'render'
         };
-        this._initializeRadio();
         this.template = () => this._template();
     }
 
     /**
-     * TODO docs
+     * Return template.
      */
     _template()
     {
-        return _.template($('#template-status_message').html())({test: '---'});
+        return _.template($('#template-status_message').html())({test: this.model.get('text')});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +43,25 @@ class ViewStatusMessage extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
+        this._rodanChannel.comply(Events.COMMAND__PROCESS_MESSAGE, aOptions => this._processMessage(aOptions));
+        this._rodanChannel.comply(Events.COMMAND__PROCESS_ERROR, aOptions => this._processError(aOptions));
+    }
+
+    /**
+     * Process error.
+     */
+    _processError(aOptions)
+    {
+        this.model.set('text', aOptions.text);
+    }
+
+    /**
+     * Process message.
+     */
+    _processMessage(aOptions)
+    {
+        this.model.set('text', aOptions.text);
     }
 }
 

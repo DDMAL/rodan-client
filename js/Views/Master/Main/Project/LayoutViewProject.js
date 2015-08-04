@@ -1,8 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../Shared/Events';
-
 /**
  * LayoutView for Project controller.
  *
@@ -17,7 +15,7 @@ class LayoutViewProject extends Marionette.LayoutView
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize()
     {
         this._initializeRadio();
         this.addRegions({
