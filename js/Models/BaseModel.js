@@ -14,12 +14,12 @@ class BaseModel extends Backbone.Model
     /**
      * Constructor.
      */
-    constructor(aParameters)
+    constructor(options)
     {
         this.idAttribute = 'uuid';
         this._initializeRadio();
-        this.on('change', aEvent => this._onChange(aEvent));
-        super(aParameters);
+        this.on('change', event => this._onChange(event));
+        super(options);
     }
 
     /**
@@ -42,28 +42,31 @@ class BaseModel extends Backbone.Model
     /**
      * Override of destroy to allow for generic handling.
      */
-    destroy(aOptions)
+    destroy(options)
     {
-        aOptions = this._applyResponseHandlers(aOptions);
-        super.destroy(aOptions);
+        options = this._applyResponseHandlers(options);
+        options.task = 'destroy';
+        super.destroy(options);
     }
 
     /**
      * Override of save to allow for generic handling.
      */
-    save(aAttributes, aOptions)
+    save(attributes, options)
     {
-        aOptions = this._applyResponseHandlers(aOptions);
-        super.save(aAttributes, aOptions);
+        options = this._applyResponseHandlers(options);
+        options.task = 'save';
+        super.save(attributes, options);
     }
 
     /**
      * Override of fetch to allow for generic handling.
      */
-    fetch(aOptions)
+    fetch(options)
     {
-        aOptions = this._applyResponseHandlers(aOptions);
-        super.fetch(aOptions);
+        options = this._applyResponseHandlers(options);
+        options.task = 'fetch';
+        super.fetch(options);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -88,70 +91,72 @@ class BaseModel extends Backbone.Model
     /**
      * Applies response handlers.
      */
-    _applyResponseHandlers(aOptions)
+    _applyResponseHandlers(options)
     {
         // Check if options are defined.
-        if (aOptions === undefined)
+        if (options === undefined)
         {
-            aOptions = {};
+            options = {};
         }
 
         // Success.
-        var genericSuccessFunction = (aModel, aResponse, aOptions) => this._handleSuccessResponse(aModel, aResponse, aOptions);
-        if (!aOptions.hasOwnProperty('success'))
+        var genericSuccessFunction = (model, response, options) => this._handleSuccessResponse(model, response, options);
+        if (!options.hasOwnProperty('success'))
         {
-            aOptions.success = (aModel, aResponse, aOptions) => this._handleSuccessResponse(aModel, aResponse, aOptions);
+            options.success = (model, response, options) => this._handleSuccessResponse(model, response, options);
         }
         else
         {
-            var customSuccessFunction = aOptions.success;
-            aOptions.success = function(aModel, aResponse, aOptions)
+            var customSuccessFunction = options.success;
+            options.success = function(model, response, options)
             {
-                customSuccessFunction(aModel, aResponse, aOptions);
-                genericSuccessFunction(aModel, aResponse, aOptions);
+                customSuccessFunction(model, response, options);
+                genericSuccessFunction(model, response, options);
             };
         }
 
         // Error.
-        var genericErrorFunction = (aModel, aResponse, aOptions) => this._handleErrorResponse(aModel, aResponse, aOptions);
-        if (!aOptions.hasOwnProperty('error'))
+        var genericErrorFunction = (model, response, options) => this._handleErrorResponse(model, response, options);
+        if (!options.hasOwnProperty('error'))
         {
-            aOptions.error = (aModel, aResponse, aOptions) => this._handleErrorResponse(aModel, aResponse, aOptions);
+            options.error = (model, response, options) => this._handleErrorResponse(model, response, options);
         }
         else
         {
-            var customErrorFunction = aOptions.error;
-            aOptions.error = function(aModel, aResponse, aOptions)
+            var customErrorFunction = options.error;
+            options.error = function(model, response, options)
             {
-                customErrorFunction(aModel, aResponse, aOptions);
-                genericErrorFunction(aModel, aResponse, aOptions);
+                customErrorFunction(model, response, options);
+                genericErrorFunction(model, response, options);
             };
         }
 
-        return aOptions;
+        return options;
     }
 
     /**
      * Handle success response.
      */
-    _handleSuccessResponse(aModel, aResponse, aOptions)
+    _handleSuccessResponse(model, response, options)
     {
-        var text = 'Success: ' 
-                   + ' (' + aOptions.xhr.status + ') ' 
-                   + aModel.constructor.name + ' "' + aModel.get('name') + '"';
-        this.rodanChannel.command(Events.COMMAND__PROCESS_MESSAGE, {text: text});
+        var text = 'Successful ' + options.task
+                   + ' (' + options.xhr.status + '): ' 
+                   + model.constructor.name + ' "' + model.get('name') + '"';
+        this.rodanChannel.command(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
     }
 
     /**
      * Handle error response.
      */
-    _handleErrorResponse(aModel, aResponse, aOptions)
+    _handleErrorResponse(model, response, options)
     {
-        var text = 'todo - need to process error code';
-        /*var text = 'Error: ' 
-                   + ' (' + aOptions.xhr.status + ') ' 
-                   + aResponse;*/
-        this.rodanChannel.command(Events.COMMAND__PROCESS_MESSAGE, {text: text});
+        this.rodanChannel.command(Events.COMMAND__HANDLER_ERROR, {model: model,
+                                                                  response: response,
+                                                                  options: options});
+        var text = 'Unsuccessful ' + options.task
+                   + ' (' + options.xhr.status + '): ' 
+                   + model.constructor.name + ' "' + model.get('name') + '"';
+        this.rodanChannel.command(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
     }
 }
 

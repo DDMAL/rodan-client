@@ -36,8 +36,8 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
 ///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__PROCESS_ERROR: 'COMMAND__PROCESS_ERROR',       // Sends error to the status bar. Takes {text: string}.
-    COMMAND__PROCESS_MESSAGE: 'COMMAND__PROCESS_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
+    COMMAND__DISPLAY_MESSAGE: 'COMMAND__DISPLAY_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
+    COMMAND__HANDLER_ERROR: 'COMMAND__HANDLER_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS

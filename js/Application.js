@@ -3,6 +3,7 @@ import Radio from 'backbone.radio';
 
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
+import ErrorHandler from './ErrorHandler';
 import Events from './Shared/Events';
 import InputPortCollection from './Collections/InputPortCollection';
 import InputPortTypeCollection from './Collections/InputPortTypeCollection';
@@ -39,6 +40,7 @@ class Application extends Marionette.Application
         this._initializeControllers();
         this._initializeCollections();
         this._initializeViews();
+        this._errorHandler = new ErrorHandler();
     }
 
     /**

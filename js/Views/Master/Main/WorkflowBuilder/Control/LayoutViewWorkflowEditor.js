@@ -186,31 +186,7 @@ class WorkflowEditorController extends Marionette.LayoutView
      */
     _handleCommandValidateWorkflow()
     {
-        this._workflow.save({valid: true}, {patch: true, error: this._handleResponseValidateError, success: this._handleResponseValidateSuccess});
-    }
-
-    /**
-     * Handle validate error response.
-     */
-    _handleResponseValidateError(aModel, aResponse, aOptions)
-    {
-        // TODO - put this in some kind of handler outside of this class
-        alert(aResponse.responseJSON.detail);
-        console.log(aModel);
-        console.log(aResponse);
-        console.log(aOptions);
-    }
-
-    /**
-     * Handle validate response.
-     */
-    _handleResponseValidateSuccess(aModel, aResponse, aOptions)
-    {
-        // TODO - put this in some kind of handler outside of this class
-        alert('The workflow is valid.');
-        console.log(aModel);
-        console.log(aResponse);
-        console.log(aOptions);
+        this._workflow.save({valid: true}, {patch: true});
     }
 
     /**

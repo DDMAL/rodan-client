@@ -44,24 +44,15 @@ class ViewStatusMessage extends Marionette.CompositeView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.comply(Events.COMMAND__PROCESS_MESSAGE, aOptions => this._processMessage(aOptions));
-        this._rodanChannel.comply(Events.COMMAND__PROCESS_ERROR, aOptions => this._processError(aOptions));
-    }
-
-    /**
-     * Process error.
-     */
-    _processError(aOptions)
-    {
-        this.model.set('text', aOptions.text);
+        this._rodanChannel.comply(Events.COMMAND__DISPLAY_MESSAGE, options => this._processMessage(options));
     }
 
     /**
      * Process message.
      */
-    _processMessage(aOptions)
+    _processMessage(options)
     {
-        this.model.set('text', aOptions.text);
+        this.model.set('text', options.text);
     }
 }
 
