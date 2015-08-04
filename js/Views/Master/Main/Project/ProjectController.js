@@ -1,5 +1,6 @@
 import BaseController from '../../../../Controllers/BaseController';
 import Events from '../../../../Shared/Events';
+import LayoutViewProject from './LayoutViewProject';
 import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
 
@@ -99,7 +100,10 @@ class ProjectController extends BaseController
     _handleEventItemSelected(aOptions)
     {
         this._activeProject = aOptions.project;
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, new ViewProject({project: this._activeProject}));
+        var layoutView = new LayoutViewProject();
+        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, layoutView);
+        var view = new ViewProject({project: this._activeProject});
+        layoutView.showView(view);
     }
 
     /**
@@ -107,7 +111,9 @@ class ProjectController extends BaseController
      */
     _handleEventListSelected()
     {
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, new ViewProjectList());
+        var layoutView = new LayoutViewProject();
+        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, layoutView);
+        layoutView.showView(new ViewProjectList());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
