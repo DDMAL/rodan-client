@@ -1,4 +1,3 @@
-import { getUuidFromUrl } from '../../../../Helpers/Utilities';
 import Events from '../../../../Shared/Events';
 import ViewWorkflowRun from './Individual/ViewWorkflowRun';
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
