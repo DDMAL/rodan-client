@@ -1,5 +1,5 @@
+import _ from 'underscore';
 import Configuration from '../Configuration';
-import { mapFromJsonObject } from '../Helpers/Utilities';
 import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
 
@@ -74,8 +74,8 @@ class ControllerServer extends BaseController
             {
                 var resp = JSON.parse(routeRequest.responseText);
 
-                this.routes = mapFromJsonObject(resp.routes);
-                this.serverConfiguration = mapFromJsonObject(resp.configuration);
+                this.routes = this._mapFromJsonObject(resp.routes);
+                this.serverConfiguration = this._mapFromJsonObject(resp.configuration);
                 this.version = resp.version;
                 this._rodanChannel.trigger(Events.EVENT__ROUTESLOADED);
             }
@@ -104,6 +104,16 @@ class ControllerServer extends BaseController
         {
             return null;
         }
+    }
+
+    /**
+     * Makes map from JSON object.
+     */
+    _mapFromJsonObject(JsonObject)
+    {
+        var keyvals = _.pairs(JsonObject);
+        var map = new Map(keyvals);
+        return map;
     }
 }
 
