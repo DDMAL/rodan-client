@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 import Events from '../../../../Shared/Events';
 
 /**
- * This represents the login view.
+ * Login view.
  */
 class ViewLogin extends Marionette.ItemView
 {
@@ -12,7 +12,7 @@ class ViewLogin extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
