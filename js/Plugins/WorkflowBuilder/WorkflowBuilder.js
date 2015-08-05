@@ -32,8 +32,11 @@ class WorkflowBuilder
         this._zoomMax = 2;
         this._zoomRate = 0.1;
 
+        paper.install(window);
         paper.setup(aCanvasElementId);
         paper.handleMouseEvent = aData => this._handleMouseEvent(aData);
+
+        this._initializeGlobalMouseTool();
 
         this._initializeRadio();
 
@@ -64,30 +67,41 @@ class WorkflowBuilder
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - handlers
+// PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize global mouse tool.
+     */
+    _initializeGlobalMouseTool()
+    {
+        this._globalMouseTool = new Tool();
+        this._mouseDelta = new paper.Point(0, 0);
+        this._grabbedItem = null;
+        this._globalMouseTool.onMouseMove = event => this._handleMouseEvent(event);
+    }
+
     /**
      * Handle mouse event.
      */
-    _handleMouseEvent(aData)
+    _handleMouseEvent(event)
     {
         switch (this._state)
         {
             case this._STATES.IDLE:
             {
-                this._handleStateIdle(aData);
+                this._handleStateIdle(event);
                 break;
             }
 
             case this._STATES.GRABBED_WORKFLOWJOBITEM:
             {
-                this._handleStateGrabbedWorkflowJobItem(aData);
+                this._handleStateGrabbedWorkflowJobItem(event);
                 break;
             }
 
             case this._STATES.CREATING_CONNECTION:
             {
-                this._handleStateCreatingConnection(aData);
+                this._handleStateCreatingConnection(event);
                 break;
             }
 
@@ -102,25 +116,26 @@ class WorkflowBuilder
     /**
      * Handle idle state.
      */
-    _handleStateIdle(aData)
+    _handleStateIdle(event)
     {
-        if (aData.event.type === 'mousedown')
+        if (event.type === 'mousedown')
         {
-            if (aData.item instanceof WorkflowJobItem)
+            if (event.target instanceof WorkflowJobItem)
             {
+                this._grabbedItem = event.target;
                 this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;  
             }
         }
-        else if (aData.event.type === 'click')
+        else if (event.type === 'click')
         {
-            if (aData.item instanceof OutputPortItem)
+            if (event.target instanceof OutputPortItem)
             {
-                this._selectedOutputPortItem = aData.item;
+                this._selectedOutputPortItem = event.target;
                 this._state = this._STATES.CREATING_CONNECTION; 
             }
-            else if (aData.item instanceof WorkflowJobItem)
+            else if (event.target instanceof WorkflowJobItem)
             {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: aData.item._associatedModel});
+                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
             }
         }
     }
@@ -128,32 +143,30 @@ class WorkflowBuilder
     /**
      * Handle grabbed workflowjobitem state.
      */
-    _handleStateGrabbedWorkflowJobItem(aData)
+    _handleStateGrabbedWorkflowJobItem(event)
     {
-        if (aData.item instanceof WorkflowJobItem)
+        if (event.type === 'mousemove')
         {
-            if (aData.event.type === 'mousemove')
-            {
-                aData.item.move(aData.event.delta);
-            }
-            else
-            {
-                this._state = this._STATES.IDLE;
-            }
+
+            this._grabbedItem.move(event.delta);
+        }
+        else
+        {
+            this._state = this._STATES.IDLE;
         }
     }
 
     /**
      * Handle creating connection state.
      */
-    _handleStateCreatingConnection(aData)
+    _handleStateCreatingConnection(event)
     {
-        if (aData.event.type === 'click')
+        if (event.type === 'click')
         {
-            if (aData.item instanceof InputPortItem && !aData.item.hasConnectionItem())
+            if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
             {
-                this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: aData.item._associatedModel, 
-                                                                                                 outputport: this._selectedOutputPortItem._associatedModel});
+                this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
+                                                                                           outputport: this._selectedOutputPortItem._associatedModel});
             }
             this._selectedOutputPortItem = null;
             this._state = this._STATES.IDLE;

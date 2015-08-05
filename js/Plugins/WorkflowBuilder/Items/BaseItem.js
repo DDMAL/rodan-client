@@ -28,12 +28,11 @@ class BaseItem extends paper.Path
 
         this._timerEvent = null;
 
-        this.onMouseDown = aEvent => this._handleMouseEvent(aEvent);
-        this.onMouseUp = aEvent => this._handleMouseEvent(aEvent);
-        this.onMouseMove = aEvent => this._handleMouseEvent(aEvent);
-        this.onClick = aEvent => this._handleMouseEvent(aEvent);
-        this.onMouseEnter = aEvent => this._handleMouseEvent(aEvent);
-        this.onMouseLeave = aEvent => this._handleMouseEvent(aEvent);
+        this.onMouseDown = event => this._handleMouseEvent(event);
+        this.onMouseUp = event => this._handleMouseEvent(event);
+        this.onClick = event => this._handleMouseEvent(event);
+        this.onMouseEnter = event => this._handleMouseEvent(event);
+        this.onMouseLeave = event => this._handleMouseEvent(event);
 
         this._initializeRadio();
         this._associatedModel = aParameters.model;
@@ -121,9 +120,9 @@ class BaseItem extends paper.Path
     /**
      * Handle mouse event.
      */
-    _handleMouseEvent(aEvent)
+    _handleMouseEvent(event)
     {
-        switch (aEvent.type)
+        switch (event.type)
         {
             case 'mouseenter':
             {
@@ -138,19 +137,13 @@ class BaseItem extends paper.Path
                 break;
             }
 
-            case 'mousemove':
-            {
-                // do nothing
-                break;
-            }
-
             default:
             {
                 this._hidePopup();
                 clearTimeout(this._timerEvent);
+                paper.handleMouseEvent(event);
             }
         }
-        paper.handleMouseEvent({item: this, event: aEvent});
     }
 }
 
