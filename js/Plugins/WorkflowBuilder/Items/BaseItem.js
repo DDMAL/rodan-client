@@ -13,9 +13,9 @@ class BaseItem extends paper.Path
     /**
      * Constructor.
      */
-    constructor(aParameters)
+    constructor(options)
     {
-        super(aParameters.segments);
+        super(options.segments);
         
         // TODO - MAGIC NUMBERS
         this.strokeColor = 'black';
@@ -35,7 +35,7 @@ class BaseItem extends paper.Path
         this.onMouseLeave = event => this._handleMouseEvent(event);
 
         this._initializeRadio();
-        this._associatedModel = aParameters.model;
+        this._associatedModel = options.model;
 
         this._text = new paper.PointText(new paper.Point(0, 0));
         this._text.justification = 'center';
@@ -44,7 +44,7 @@ class BaseItem extends paper.Path
         this._text.content = '';
         this._text.position = this.bounds.center;
         this.addChild(this._text);
-        this._text.visible = (aParameters.hasOwnProperty('text') && aParameters.text === true);
+        this._text.visible = (options.hasOwnProperty('text') && options.text === true);
         this._text.content = this._associatedModel.get('name');
 
         this._popup = new paper.PointText(new paper.Point(0, 0));
@@ -53,10 +53,10 @@ class BaseItem extends paper.Path
     /**
      * Moves the item.
      */
-    move(aDelta)
+    move(delta)
     {
-        this.position.x += aDelta.x;
-        this.position.y += aDelta.y;
+        this.position.x += delta.x;
+        this.position.y += delta.y;
         if (this._text !== null)
         {
             this._text.position = this.bounds.center;

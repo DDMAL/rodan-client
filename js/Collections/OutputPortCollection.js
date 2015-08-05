@@ -1,58 +1,24 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Radio from 'backbone.radio';
-
+import BaseCollection from './BaseCollection';
 import Events from '../Shared/Events';
 import OutputPort from '../Models/OutputPort';
 
-class OutputPortCollection extends Backbone.Collection
+/**
+ * Collection of OutputPort models.
+ */
+class OutputPortCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.model = OutputPort;
-        this._initializeRadio();
-    }
-
-    /**
-     * TODO docs
-     */
-    parse(resp)
-    {
-        return resp.results;
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Retrieves list.
-     */
-    _retrieveList(aQueryParameters)
-    {
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'outputporttypes');
-        this.fetch({ data: $.param(aQueryParameters) });
-    }
-
-    /**
-     * Returns this instance.
-     */
-    _handleRequestInstance()
-    {
-        return this;
+        this.route = 'outputports';
+        this.loadCommand = Events.COMMAND__LOAD_OUTPUTPORTS;
+        this.requestCommand = Events.REQUEST__COLLECTION_OUTPUTPORT;
     }
 }
 

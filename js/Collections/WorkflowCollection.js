@@ -1,61 +1,24 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Radio from 'backbone.radio';
-
+import BaseCollection from './BaseCollection';
 import Events from '../Shared/Events';
 import Workflow from '../Models/Workflow';
 
-class WorkflowCollection extends Backbone.Collection
+/**
+ * Collection of Workflow models.
+ */
+class WorkflowCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.model = Workflow;
-        this._initializeRadio();
-    }
-
-    /**
-     * TODO docs
-     */
-    parse(resp)
-    {
-        return resp.results;
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(Events.COMMAND__LOAD_WORKFLOWS, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(Events.REQUEST__COLLECTION_WORKFLOW, () => this._handleRequestInstance());
-    }
-
-    /**
-     * Retrieves list.
-     */
-    _retrieveList(aQueryParameters)
-    {
-        this.reset();
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'workflows');
-        this.fetch({ data: $.param(aQueryParameters) });
-    }
-
-    /**
-     * Returns this instance.
-     */
-    _handleRequestInstance()
-    {
-        return this;
+        this.route = 'workflows';
+        this.loadCommand = Events.COMMAND__LOAD_WORKFLOWS;
+        this.requestCommand = Events.REQUEST__COLLECTION_WORKFLOW;
     }
 }
 

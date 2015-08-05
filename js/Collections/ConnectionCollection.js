@@ -1,60 +1,24 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Radio from 'backbone.radio';
-
+import BaseCollection from './BaseCollection';
 import Events from '../Shared/Events';
 import Connection from '../Models/Connection';
 
-class ConnectionCollection extends Backbone.Collection
+/**
+ * Collection of Connection models.
+ */
+class ConnectionCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.model = Connection;
-        this._initializeRadio();
-    }
-
-    /**
-     * TODO docs
-     */
-    parse(resp)
-    {
-        return resp.results;
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(Events.COMMAND__LOAD_CONNECTIONS, aQueryParameters => this._retrieveList(aQueryParameters));
-        this.rodanChannel.reply(Events.REQUEST__COLLECTION_CONNECTION, () => this._handleRequestInstance());
-    }
-
-    /**
-     * Retrieves list.
-     */
-    _retrieveList(aQueryParameters)
-    {
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'connections');
-        this.fetch({ data: $.param(aQueryParameters) });
-    }
-
-    /**
-     * Returns this instance.
-     */
-    _handleRequestInstance()
-    {
-        return this;
+        this.route = 'connections';
+        this.loadCommand = Events.COMMAND__LOAD_CONNECTIONS;
+        this.requestCommand = Events.REQUEST__COLLECTION_CONNECTION;
     }
 }
 
