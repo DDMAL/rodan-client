@@ -141,7 +141,8 @@ class BaseModel extends Backbone.Model
     {
         var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
-                   + model.constructor.name + ' "' + model.get('name') + '"';
+                   + model.constructor.name + ' "' + model.get('name') + '"'
+                   + ' (' + model.get('url') + ')';
         this.rodanChannel.command(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
     }
 
