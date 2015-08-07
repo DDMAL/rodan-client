@@ -17,7 +17,7 @@ class ResourceTypeCollection extends BaseCollection
     {
         this.model = ResourceType;
         this.route = 'resourcetypes';
-        this.loadCommand = Events.COMMAND__LOAD_RESOURCETYPES;
+        this.loadCommand = Events.COMMAND__RESOURCETYPES_LOAD;
         this.requestCommand = Events.REQUEST__RESOURCETYPE_COLLECTION;
     }
 }

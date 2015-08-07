@@ -26,7 +26,7 @@ class ViewInputPortList extends Marionette.CompositeView
         this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
         this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_INPUTPORTS, {workflow: aParameters.workflow.id, has_connections: false});
+        this.rodanChannel.command(Events.COMMAND__LOAD_INPUTPORTS, {query: {workflow: aParameters.workflow.id, has_connections: false}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

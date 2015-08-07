@@ -32,7 +32,7 @@ class ViewProjectList extends Marionette.CompositeView
         this.childView = ViewProjectListItem;
         var user = this.rodanChannel.request(Events.REQUEST__USER);
         this.collection = this.rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
-        this.rodanChannel.command(Events.COMMAND__PROJECTS_LOAD, {user: user.get('uuid')});
+        this.rodanChannel.command(Events.COMMAND__PROJECTS_LOAD, {query: {user: user.get('uuid')}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

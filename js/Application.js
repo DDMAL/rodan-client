@@ -17,6 +17,7 @@ import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
 import ResourceTypeCollection from './Collections/ResourceTypeCollection';
 import WorkflowCollection from './Collections/WorkflowCollection';
+import WorkflowJobCoordinateSetCollection from './Collections/WorkflowJobCoordinateSetCollection';
 import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
 /**
@@ -87,6 +88,7 @@ class Application extends Marionette.Application
         this.resourceTypeCollection = new ResourceTypeCollection();
         this.runJobCollection = new RunJobCollection();
         this.workflowCollection = new WorkflowCollection();
+        this.workflowJobCoordinateSetCollection = new WorkflowJobCoordinateSetCollection();
         this.workflowRunCollection = new WorkflowRunCollection();
     }
 
@@ -122,7 +124,7 @@ class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
-        this.rodanChannel.command(Events.COMMAND__LOAD_RESOURCETYPES, {});
+        this.rodanChannel.command(Events.COMMAND__RESOURCETYPES_LOAD, {});
         this.rodanChannel.command(Events.COMMAND__LOAD_JOBS, {});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }

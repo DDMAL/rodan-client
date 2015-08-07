@@ -40,7 +40,7 @@ class ViewProject extends Marionette.CompositeView
         this.childView = ViewWorkflowRunListItem;
         this.childViewContainer = 'tbody';
         this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this._rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: this.model.id});
+        this._rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {project: this.model.id}});
     }
 
     /**

@@ -26,7 +26,7 @@ class ViewWorkflowRun extends Marionette.CompositeView
         this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
         this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_RUNJOBS, {workflow_run: this.model.id});
+        this.rodanChannel.command(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
     }
 
     /**

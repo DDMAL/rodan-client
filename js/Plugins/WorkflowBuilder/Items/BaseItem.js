@@ -64,6 +64,19 @@ class BaseItem extends paper.Path
         this.update();
     }
 
+    /**
+     * Set position.
+     */
+    setPosition(point)
+    {
+        this.position = point;
+        if (this._text !== null)
+        {
+            this._text.position = this.bounds.center;
+        }
+        this.update();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

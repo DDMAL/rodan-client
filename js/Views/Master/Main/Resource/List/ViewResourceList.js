@@ -22,7 +22,7 @@ class ViewResourceList extends Marionette.CompositeView
         };
         this.childViewContainer = 'tbody';
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: aOptions.project.id});
+        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {query: {project: aOptions.project.id}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

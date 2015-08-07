@@ -118,7 +118,7 @@ class ResourceController extends BaseController
     _handleCallbackAddSuccess()
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {project: project.id});
+        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {query: {project: project.id}});
     }
 }
 

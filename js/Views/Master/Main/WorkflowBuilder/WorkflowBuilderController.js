@@ -18,7 +18,6 @@ class WorkflowBuilderController extends BaseController
      */
     initialize()
     {
-        this._initializeViews();
         this._workspace = new WorkflowBuilder();
     }
 
@@ -31,13 +30,6 @@ class WorkflowBuilderController extends BaseController
     _initializeRadio()
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
-    }
-
-    /**
-     * Initialize views.
-     */
-    _initializeViews()
-    {
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +45,12 @@ class WorkflowBuilderController extends BaseController
 
         // Initialize the workspace and build the workflow.
         this._workspace.initialize('canvas-workspace');
+
+        // Clear existing view.
+        if (this.hasOwnProperty('controlWorkflowView'))
+        {
+            this.controlWorkflowView.destroy();
+        }
         
         // Get the workflow.
         if (aReturn.workflow !== null)

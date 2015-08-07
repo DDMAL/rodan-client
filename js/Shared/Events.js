@@ -30,7 +30,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // ResourceType
 ///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__LOAD_RESOURCETYPES: 'COMMAND__LOAD_RESOURCETYPES',             // Instructs loading of ResourceTypes. Takes object containing various query IDs.
+    COMMAND__RESOURCETYPES_LOAD: 'COMMAND__RESOURCETYPES_LOAD',             // Instructs loading of ResourceTypes. Takes object containing various query IDs.
     REQUEST__RESOURCETYPE_COLLECTION: 'REQUEST__RESOURCETYPE_COLLECTION',   // Returns global ResourceType collection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +38,12 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__DISPLAY_MESSAGE: 'COMMAND__DISPLAY_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
     COMMAND__HANDLER_ERROR: 'COMMAND__HANDLER_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowJobCoordinateSet
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__WORKFLOWJOBCOORDINATESETS_LOAD:        'COMMAND__WORKFLOWJOBCOORDINATESETS_LOAD',      // Instructs loading of WorkflowJobCoordinateSets. Takes object containing various query IDs.
+    REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION', // Returns global WorkflowJobCoordinateSet collection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
@@ -72,6 +78,7 @@ var Events =
     COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB',  // Called when WorkflowJob needs to be saved. Passes object with attributes to change.
     COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW',  // Called when Workflow needs to be saved. No pass.
     COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW', // Called when Workflow needs to be run. No pass.
+    COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES: 'COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
 
     // Workflow builder commands that control the view.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when job control view needs to be shown. No pass.

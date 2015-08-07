@@ -26,7 +26,7 @@ class ViewWorkflowRunList extends Marionette.CompositeView
         this.template = '#template-main_workflowrun_list';
         this.childView = ViewWorkflowRunListItem;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {project: aOptions.project.id});
+        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {project: aOptions.project.id}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

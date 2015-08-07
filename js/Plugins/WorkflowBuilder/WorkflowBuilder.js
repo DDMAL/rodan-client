@@ -147,12 +147,16 @@ class WorkflowBuilder
     {
         if (event.type === 'mousemove')
         {
-
             this._grabbedItem.move(event.delta);
         }
         else
         {
+            // We've let go, so go idle and save the position.
             this._state = this._STATES.IDLE;
+            var object = {workflowjob: this._grabbedItem._associatedModel,
+                          x: this._grabbedItem.position.x / paper.view.size.width,
+                          y: this._grabbedItem.position.y / paper.view.size.height};
+            this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES, object);
         }
     }
 
@@ -184,7 +188,7 @@ class WorkflowBuilder
         this.rodanChannel = Radio.channel('rodan');
 
         // GUI commands.
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, aReturn => this._handleCommandAddWorkflowJobItem(aReturn));
+        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
         this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
@@ -198,9 +202,23 @@ class WorkflowBuilder
     /**
      * Handle add.
      */
-    _handleCommandAddWorkflowJobItem(aReturn)
+    _handleCommandAddWorkflowJobItem(options)
     {
-        this._createWorkflowJobItem(aReturn.workflowjob);
+        var item = this._createWorkflowJobItem(options.workflowjob);
+
+        // Set position if coordinates provided.
+        var position = new paper.Point(paper.view.size.width / 2,
+                                       paper.view.size.height / 2);
+        if (options.hasOwnProperty('x'))
+        {
+            position.x = options.x * paper.view.size.width;
+        }
+        if (options.hasOwnProperty('y'))
+        {
+            position.y = options.y * paper.view.size.height;
+        }
+        item.setPosition(position);
+        
         paper.view.draw();
     }
 
@@ -283,10 +301,11 @@ class WorkflowBuilder
     /**
      * Creates a workflow job item.
      */
-    _createWorkflowJobItem(aModel)
+    _createWorkflowJobItem(model)
     {
-        aModel.paperItem = new WorkflowJobItem({segments: this._segments.workflowJobItem, model: aModel, text: true});
-        aModel.paperItem.update();
+        model.paperItem = new WorkflowJobItem({segments: this._segments.workflowJobItem, model: model, text: true});
+        model.paperItem.update();
+        return model.paperItem;
     }
 
     /**

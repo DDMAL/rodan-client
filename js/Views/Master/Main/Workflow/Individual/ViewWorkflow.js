@@ -63,7 +63,7 @@ class ViewWorkflow extends Marionette.CompositeView
     {
         this.model = aReturn.workflow;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {workflow: this.model.id});
+        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {workflow: this.model.id}});
     }
 
     /**
