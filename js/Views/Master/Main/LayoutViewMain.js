@@ -23,7 +23,6 @@ class LayoutViewMain extends Marionette.LayoutView
     initialize()
     {
         this.el = '#app';
-        this.template = '#template-empty';
         this.addRegions({
             region: '#region-main'
         });
@@ -46,7 +45,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.comply(Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
+        this._rodanChannel.reply(Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
         this._rodanChannel.on(Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
     }
@@ -57,7 +56,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleAuthentication401()
     {
         this.loginView = new ViewLogin();
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
     }
 
     /**
@@ -74,8 +73,13 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.loginView = new ViewLogin();
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewMain.prototype.template = '#template-empty';
 
 export default LayoutViewMain;

@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import Radio from 'backbone.radio';
 import _ from 'underscore';
 
 import BaseModel from './BaseModel';
@@ -17,6 +18,7 @@ class Resource extends BaseModel
      */
     initialize()
     {
+        this.rodanChannel = Radio.channel('rodan'); // TODO - this is a hack; need to find better way of managing radio channels in general
         this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
         this.routeName = 'resources';
         this._updateResourceTypeFull();

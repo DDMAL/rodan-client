@@ -19,7 +19,6 @@ class LayoutViewStatus extends Marionette.LayoutView
      */
     initialize()
     {
-        this.template = '#template-status';
         this.addRegions({
             regionStatusUser: '#region-status_user',
             regionStatusMessage: '#region-status_message',
@@ -80,5 +79,10 @@ class LayoutViewStatus extends Marionette.LayoutView
         this.regionStatusUser.show(this.viewStatusUser);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewStatus.prototype.template = '#template-status';
 
 export default LayoutViewStatus;

@@ -18,15 +18,8 @@ class ViewInputPortList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this._initializeRadio();
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowrun_newworkflowrun_inputport_list';
-        this.childView = ViewInputPortListItem;
-        this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
-        this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_INPUTPORTS, {query: {workflow: aParameters.workflow.id, has_connections: false}});
+        this.rodanChannel.request(Events.COMMAND__LOAD_INPUTPORTS, {query: {workflow: aParameters.workflow.id, has_connections: false}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -40,5 +33,15 @@ class ViewInputPortList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewInputPortList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewInputPortList.prototype.template = '#template-main_workflowrun_newworkflowrun_inputport_list';
+ViewInputPortList.prototype.childView = ViewInputPortListItem;
+ViewInputPortList.prototype.childViewContainer = 'tbody';
 
 export default ViewInputPortList;

@@ -41,7 +41,7 @@ class WorkflowBuilderController extends BaseController
     _handleEventBuilderSelected(aReturn)
     {
         this._layoutView = new LayoutViewWorkflowBuilder();
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
 
         // Initialize the workspace and build the workflow.
         this._workspace.initialize('canvas-workspace');

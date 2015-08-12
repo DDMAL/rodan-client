@@ -17,7 +17,7 @@ class ControllerAuthentication extends BaseController
     /**
      * Initialize.
      */
-    initialize(aControllerServer)
+    initialize()
     {
         // AJAX prefilter.
         var that = this;
@@ -39,7 +39,6 @@ class ControllerAuthentication extends BaseController
 
         this._user = null;
         this._CSRFToken = new Cookie('csrftoken');
-        this.controllerServer = aControllerServer;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +50,9 @@ class ControllerAuthentication extends BaseController
     _initializeRadio()
     {
         this._rodanChannel.reply(Events.REQUEST__USER, () => this._handleRequestUser());
-        this._rodanChannel.comply(Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
-        this._rodanChannel.comply(Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
-        this._rodanChannel.comply(Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
+        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
+        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**

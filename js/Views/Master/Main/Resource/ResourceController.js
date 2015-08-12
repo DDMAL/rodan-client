@@ -19,9 +19,9 @@ class ResourceController extends BaseController
     _initializeRadio()
     {
         // Commands.
-        this._rodanChannel.comply(Events.COMMAND__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
-        this._rodanChannel.comply(Events.COMMAND__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
-        this._rodanChannel.comply(Events.COMMAND__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
+        this._rodanChannel.reply(Events.COMMAND__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
+        this._rodanChannel.reply(Events.COMMAND__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
+        this._rodanChannel.reply(Events.COMMAND__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
 
         // Requests.
         this._rodanChannel.on(Events.EVENT__RESOURCES_SELECTED, aOptions => this._handleEventListSelected(aOptions));
@@ -86,7 +86,7 @@ class ResourceController extends BaseController
     _handleEventListSelected(aOptions)
     {
         this._layoutView = new LayoutViewResource({project: aOptions.project});
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
         this._layoutView.showList(new ViewResourceList({project: aOptions.project,
                                                         template: '#template-main_resource_list',
                                                         childView: ViewResourceListItem}));
@@ -118,7 +118,7 @@ class ResourceController extends BaseController
     _handleCallbackAddSuccess()
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {query: {project: project.id}});
+        this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: {project: project.id}});
     }
 }
 

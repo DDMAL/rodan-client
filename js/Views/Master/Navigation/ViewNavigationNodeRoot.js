@@ -11,23 +11,6 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
-     */
-    initialize()
-    {
-        this.template = '#template-navigation_root';
-        this.childView = ViewNavigationNodeProject;
-        this.ui = {
-            buttonLogout: '#button-navigation_logout',
-            text: '#node_text'
-        };
-        this.events = {
-            'click @ui.buttonLogout': '_handleButton',
-            'click @ui.text': '_handleClick'
-        };
-    }
-
-    /**
      * Initially hide everything.
      */
     onRender()
@@ -58,8 +41,22 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _handleButton()
     {
-        this._rodanChannel.command(Events.COMMAND__AUTHENTICATION_LOGOUT);
+        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGOUT);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewNavigationNodeRoot.prototype.ui = {
+    buttonLogout: '#button-navigation_logout',
+    text: '#node_text'
+};
+ViewNavigationNodeRoot.prototype.events = {
+    'click @ui.buttonLogout': '_handleButton',
+    'click @ui.text': '_handleClick'
+};
+ViewNavigationNodeRoot.prototype.template = '#template-navigation_root';
+ViewNavigationNodeRoot.prototype.childView = ViewNavigationNodeProject;
 
 export default ViewNavigationNodeRoot;

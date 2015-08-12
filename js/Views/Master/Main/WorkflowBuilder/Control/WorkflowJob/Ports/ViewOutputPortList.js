@@ -15,14 +15,18 @@ class ViewOutputPortList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowbuilder_control_outputport_list';
         this.childView = ViewOutputPortListItem;
-        this.childViewContainer = 'tbody';
         this.collection = aParameters.workflowjob.get('output_ports');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewOutputPortList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewOutputPortList.prototype.template = '#template-main_workflowbuilder_control_outputport_list';
+ViewOutputPortList.prototype.childViewContainer = 'tbody';
 
 export default ViewOutputPortList;

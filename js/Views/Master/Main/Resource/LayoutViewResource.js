@@ -24,14 +24,6 @@ class LayoutViewResource extends Marionette.LayoutView
             regionList: '#region-main_resource_list',
             regionItem: '#region-main_resource_item'
         });
-        this.ui = {
-            buttonAdd: '#button-main_resource_add',
-            fileInput: '#file-main_resource_file'
-        };
-        this.events = {
-            'click @ui.buttonAdd': '_handleClickButtonAdd'
-        };
-        this.template = '#template-main_resource';
         this._project = aOptions.project;
     }
 
@@ -73,8 +65,20 @@ class LayoutViewResource extends Marionette.LayoutView
             alert('TODO -error');
             return;
         }
-        this._rodanChannel.command(Events.COMMAND__RESOURCE_ADD, {project: this._project, file: file});
+        this._rodanChannel.request(Events.COMMAND__RESOURCE_ADD, {project: this._project, file: file});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewResource.prototype.ui = {
+    buttonAdd: '#button-main_resource_add',
+    fileInput: '#file-main_resource_file'
+};
+LayoutViewResource.prototype.events = {
+    'click @ui.buttonAdd': '_handleClickButtonAdd'
+};
+LayoutViewResource.prototype.template = '#template-main_resource';
 
 export default LayoutViewResource;

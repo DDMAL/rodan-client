@@ -19,7 +19,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
     initialize()
     {
         this._initializeRadio();
-        this.template = '#template-navigation';
         this.addRegions({
             regionNavigationTree: '#region-navigation_tree'
         });
@@ -56,5 +55,10 @@ class LayoutViewNavigation extends Marionette.LayoutView
         this.regionNavigationTree.reset(); 
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewNavigation.prototype.template = '#template-navigation';
 
 export default LayoutViewNavigation;

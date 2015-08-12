@@ -46,7 +46,7 @@ class BaseCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.comply(this.loadCommand, options => this._retrieveList(options));
+        this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
         this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
     }
 
@@ -135,7 +135,7 @@ class BaseCollection extends Backbone.Collection
         var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        this.rodanChannel.command(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
     }
 
     /**
@@ -143,13 +143,13 @@ class BaseCollection extends Backbone.Collection
      */
     _handleErrorResponse(collection, response, options)
     {
-        this.rodanChannel.command(Events.COMMAND__HANDLER_ERROR, {collection: collection,
+        this.rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {collection: collection,
                                                                   response: response,
                                                                   options: options});
         var text = 'Unsuccessful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        this.rodanChannel.command(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.COMMAND__DISPLAY_MESSAGE, {text: text});
     }
 }
 

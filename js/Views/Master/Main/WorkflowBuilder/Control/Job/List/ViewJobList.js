@@ -18,13 +18,6 @@ class ViewJobList extends Marionette.CompositeView
     initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.childViewContainer = 'tbody';
-        this.template = '#template-main_workflowbuilder_control_job_list';
-        this.childView = ViewJobListItem;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
     }
 
@@ -39,5 +32,15 @@ class ViewJobList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewJobList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewJobList.prototype.childViewContainer = 'tbody';
+ViewJobList.prototype.template = '#template-main_workflowbuilder_control_job_list';
+ViewJobList.prototype.childView = ViewJobListItem;
 
 export default ViewJobList;

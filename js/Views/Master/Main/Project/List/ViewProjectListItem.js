@@ -12,22 +12,11 @@ class ViewProjectListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Constructor.
+     * Initialize.
      */
-    constructor(aOptions)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_project_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,5 +38,17 @@ class ViewProjectListItem extends Marionette.ItemView
         this._rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewProjectListItem.prototype.template = '#template-main_project_list_item';
+ViewProjectListItem.prototype.tagName = 'tr';
+ViewProjectListItem.prototype.events = {
+    'click': '_handleClick'
+};
+ViewProjectListItem.prototype.modelEvents = {
+    'all': 'render'
+};
 
 export default ViewProjectListItem;

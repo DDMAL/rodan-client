@@ -16,20 +16,8 @@ class ViewLogin extends Marionette.ItemView
      */
     initialize()
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this.model = null;
         this._initializeRadio();
-        this.template = '#template-main_login';
-        this.ui = {
-            textUsername: '#text-login_username',
-            textPassword: '#text-login_password',
-            buttonLogin: '#button-login'
-        };
-        this.events = {
-            'click @ui.buttonLogin': '_handleButton'
-        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -48,8 +36,24 @@ class ViewLogin extends Marionette.ItemView
      */
     _handleButton()
     {
-        this._rodanChannel.command(Events.COMMAND__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
+        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewLogin.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewLogin.prototype.ui = {
+    textUsername: '#text-login_username',
+    textPassword: '#text-login_password',
+    buttonLogin: '#button-login'
+};
+ViewLogin.prototype.events = {
+    'click @ui.buttonLogin': '_handleButton'
+};
+ViewLogin.prototype.template = '#template-main_login';
 
 export default ViewLogin;

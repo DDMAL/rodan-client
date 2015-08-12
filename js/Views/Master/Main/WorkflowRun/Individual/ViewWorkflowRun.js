@@ -17,24 +17,10 @@ class ViewWorkflowRun extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
         this.model = aParameters.workflowRun;
-        this.childView = ViewRunJobListItem;
-        this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
-        this.collection.reset();
-        this.rodanChannel.command(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
-    }
-
-    /**
-     * TODO
-     */
-    getTemplate()
-    {
-        return '#template-main_workflowrun_individual';
+        this.rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
     }
 
     /**
@@ -56,5 +42,15 @@ class ViewWorkflowRun extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflowRun.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewWorkflowRun.prototype.childView = ViewRunJobListItem;
+ViewWorkflowRun.prototype.childViewContainer = 'tbody';
+ViewWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
 
 export default ViewWorkflowRun;

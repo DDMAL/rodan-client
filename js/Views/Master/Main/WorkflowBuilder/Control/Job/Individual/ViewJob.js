@@ -14,11 +14,7 @@ class ViewJob extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_job_individual';
         this.model = aParameters.job;
     }
 
@@ -33,5 +29,13 @@ class ViewJob extends Marionette.ItemView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewJob.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewJob.prototype.template = '#template-main_workflowbuilder_control_job_individual';
 
 export default ViewJob;

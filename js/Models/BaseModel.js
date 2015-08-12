@@ -16,10 +16,9 @@ class BaseModel extends Backbone.Model
      */
     constructor(options)
     {
-        this.idAttribute = 'uuid';
+        super(options);
         this._initializeRadio();
         this.on('change', event => this._onChange(event));
-        super(options);
     }
 
     /**

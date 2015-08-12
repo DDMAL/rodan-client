@@ -12,20 +12,9 @@ class ViewRunJobListItem extends Marionette.ItemView
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowrun_individual_runjob_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -47,5 +36,17 @@ class ViewRunJobListItem extends Marionette.ItemView
        // this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewRunJobListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewRunJobListItem.prototype.template = '#template-main_workflowrun_individual_runjob_list_item';
+ViewRunJobListItem.prototype.tagName = 'tr';
+ViewRunJobListItem.prototype.events = {
+    'click': '_handleClick'
+};
 
 export default ViewRunJobListItem;

@@ -28,7 +28,7 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.comply(Events.COMMAND__GET_ROUTES, () => this._getRoutes());
+        this._rodanChannel.reply(Events.COMMAND__GET_ROUTES, () => this._getRoutes());
         this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, aString => this._handleRequestServerRoute(aString));
         this._rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
         this._rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());

@@ -17,23 +17,7 @@ class ViewWorkflow extends Marionette.CompositeView
      */
     initialize()
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.ui = {
-            workflowDuplicate: '#workflow-duplicate',
-            workflowEdit: '#workflow-edit',
-            workflowDelete: '#workflow-delete'
-        };
-        this.events = {
-            'click @ui.workflowDuplicate': '_handleButtonWorkflowDuplicate',
-            'click @ui.workflowEdit': '_handleButtonWorkflowEdit',
-            'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
-        };
         this._initializeRadio();
-        this.template = '#template-main_workflow_individual';
-        this.childView = ViewWorkflowRunListItem;
-        this.childViewContainer = 'tbody';
     }
 
     /**
@@ -63,7 +47,7 @@ class ViewWorkflow extends Marionette.CompositeView
     {
         this.model = aReturn.workflow;
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {workflow: this.model.id}});
+        this.rodanChannel.request(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {workflow: this.model.id}});
     }
 
     /**
@@ -94,5 +78,25 @@ class ViewWorkflow extends Marionette.CompositeView
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflow.prototype.modelEvents = {
+            'all': 'render'
+        };
+ViewWorkflow.prototype.ui = {
+            workflowDuplicate: '#workflow-duplicate',
+            workflowEdit: '#workflow-edit',
+            workflowDelete: '#workflow-delete'
+        };
+ViewWorkflow.prototype.events = {
+            'click @ui.workflowDuplicate': '_handleButtonWorkflowDuplicate',
+            'click @ui.workflowEdit': '_handleButtonWorkflowEdit',
+            'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
+        };
+ViewWorkflow.prototype.template = '#template-main_workflow_individual';
+ViewWorkflow.prototype.childView = ViewWorkflowRunListItem;
+ViewWorkflow.prototype.childViewContainer = 'tbody';
 
 export default ViewWorkflow;

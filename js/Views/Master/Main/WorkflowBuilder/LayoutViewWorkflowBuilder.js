@@ -18,17 +18,6 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
         this.addRegions({
             regionControl: '#region-main_workflowbuilder_control'
         });
-        this.template = '#template-main_workflowbuilder';
-        this.ui = {
-            buttonZoomIn: '#button-zoom_in',
-            buttonZoomOut: '#button-zoom_out',
-            buttonZoomReset: '#button-zoom_reset'
-        };
-        this.events = {
-            'click @ui.buttonZoomIn': '_handleButtonZoomIn',
-            'click @ui.buttonZoomOut': '_handleButtonZoomOut',
-            'click @ui.buttonZoomReset': '_handleButtonZoomReset'
-        };
         this._initializeRadio();
     }
 
@@ -43,7 +32,6 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
         this._rodanChannel = Radio.channel('rodan');
     }
 
-
     /**
      * TODO
      */
@@ -57,7 +45,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomIn()
     {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN);
     }
     
     /**
@@ -65,7 +53,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomOut()
     {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT);
     }
     
     /**
@@ -73,8 +61,23 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomReset()
     {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewWorkflowBuilder.prototype.template = '#template-main_workflowbuilder';
+LayoutViewWorkflowBuilder.prototype.ui = {
+    buttonZoomIn: '#button-zoom_in',
+    buttonZoomOut: '#button-zoom_out',
+    buttonZoomReset: '#button-zoom_reset'
+};
+LayoutViewWorkflowBuilder.prototype.events = {
+    'click @ui.buttonZoomIn': '_handleButtonZoomIn',
+    'click @ui.buttonZoomOut': '_handleButtonZoomOut',
+    'click @ui.buttonZoomReset': '_handleButtonZoomReset'
+};
 
 export default LayoutViewWorkflowBuilder;

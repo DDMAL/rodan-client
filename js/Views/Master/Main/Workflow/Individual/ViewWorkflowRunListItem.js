@@ -14,20 +14,9 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize(aParameters)
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflow_individual_workflowrun_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,5 +38,17 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
         this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflowRunListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewWorkflowRunListItem.prototype.template = '#template-main_workflow_individual_workflowrun_list_item';
+ViewWorkflowRunListItem.prototype.tagName = 'tr';
+ViewWorkflowRunListItem.prototype.events = {
+    'click': '_handleClick'
+};
 
 export default ViewWorkflowRunListItem;

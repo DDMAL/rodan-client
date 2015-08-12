@@ -14,23 +14,9 @@ class ViewOutputPortListItem extends Marionette.ItemView
     /**
      * Basic constructor. ('initialize' doesn't seem to work.)
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.ui = {
-            buttonDelete: '#button-delete'
-        };
-        this.events = {
-            'click @ui.buttonDelete': '_handleButtonDelete'
-        };
-        this.template = '#template-main_workflowbuilder_control_outputport_list_item';
-        this.tagName = 'tr';
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,8 +35,23 @@ class ViewOutputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewOutputPortListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewOutputPortListItem.prototype.ui = {
+    buttonDelete: '#button-delete'
+};
+ViewOutputPortListItem.prototype.events = {
+    'click @ui.buttonDelete': '_handleButtonDelete'
+};
+ViewOutputPortListItem.prototype.template = '#template-main_workflowbuilder_control_outputport_list_item';
+ViewOutputPortListItem.prototype.tagName = 'tr';
 
 export default ViewOutputPortListItem;

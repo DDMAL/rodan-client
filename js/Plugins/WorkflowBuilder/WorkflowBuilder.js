@@ -156,7 +156,7 @@ class WorkflowBuilder
             var object = {workflowjob: this._grabbedItem._associatedModel,
                           x: this._grabbedItem.position.x / paper.view.size.width,
                           y: this._grabbedItem.position.y / paper.view.size.height};
-            this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES, object);
+            this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES, object);
         }
     }
 
@@ -169,7 +169,7 @@ class WorkflowBuilder
         {
             if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
             {
-                this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
+                this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
                                                                                            outputport: this._selectedOutputPortItem._associatedModel});
             }
             this._selectedOutputPortItem = null;
@@ -188,15 +188,15 @@ class WorkflowBuilder
         this.rodanChannel = Radio.channel('rodan');
 
         // GUI commands.
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
     }
 
     /**

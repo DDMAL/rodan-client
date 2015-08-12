@@ -12,34 +12,11 @@ class ViewWorkflowListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflow_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-        this.ui = {
-            runWorkflowButton: '#button-run_workflow',
-            deleteWorkflowButton: '#button-delete_workflow',
-            copyWorkflowButton: '#button-copy_workflow',
-            editWorkflowButton: '#button-edit_workflow'
-        };
-        this.events = {
-            'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
-            'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
-            'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
-            'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow'
-        };
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -104,5 +81,29 @@ class ViewWorkflowListItem extends Marionette.ItemView
         alert('not yet implemented');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflowListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewWorkflowListItem.prototype.template = '#template-main_workflow_list_item';
+ViewWorkflowListItem.prototype.tagName = 'tr';
+ViewWorkflowListItem.prototype.events = {
+    'click': '_handleClick'
+};
+ViewWorkflowListItem.prototype.ui = {
+    runWorkflowButton: '#button-run_workflow',
+    deleteWorkflowButton: '#button-delete_workflow',
+    copyWorkflowButton: '#button-copy_workflow',
+    editWorkflowButton: '#button-edit_workflow'
+};
+ViewWorkflowListItem.prototype.events = {
+    'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
+    'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
+    'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
+    'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow'
+};
 
 export default ViewWorkflowListItem;

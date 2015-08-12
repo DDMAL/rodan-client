@@ -12,24 +12,14 @@ class ViewNavigationNode extends Marionette.CompositeView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-
-    constructor(aParameters)
+    /**
+     * Initialize.
+     */
+    initialize()
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.childViewContainer = 'ul';
-        this.template = '#template-navigation_node';
         this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.on(Events.EVENT_NAVIGATION_NODE_SELECTED, aEvent => this._handleEventNodeSelected(aEvent));
-        this.ui = {
-            text: '#node_text'
-        };
-        this.events = {
-            'click @ui.text': '_handleClick'
-        };
         this._initializeRadio();
-        super(aParameters);
     }
 
     /**
@@ -135,12 +125,21 @@ class ViewNavigationNode extends Marionette.CompositeView
             this._setHighlight(false);
         }
     }
-
-    /**
-     * Sends events on click.
-     */
-    _sendClickEvents()
-    {}
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewNavigationNode.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewNavigationNode.prototype.ui = {
+    text: '#node_text'
+};
+ViewNavigationNode.prototype.events = {
+    'click @ui.text': '_handleClick'
+};
+ViewNavigationNode.prototype.template = '#template-navigation_node';
+ViewNavigationNode.prototype.childViewContainer = 'ul';
 
 export default ViewNavigationNode;

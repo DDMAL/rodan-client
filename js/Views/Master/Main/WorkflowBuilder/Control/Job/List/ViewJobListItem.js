@@ -14,24 +14,9 @@ class ViewJobListItem extends Marionette.ItemView
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowbuilder_control_job_list_item';
-        this.tagName = 'tr';
-        this.ui = {
-            buttonAdd: '#button-main_workflowbuilder_control_job_button_add'
-        };
-        this.events = {
-            'click @ui.buttonAdd': '_handleClickButtonAdd',
-            'click': '_handleClick'
-        };
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -59,8 +44,24 @@ class ViewJobListItem extends Marionette.ItemView
     _handleClickButtonAdd()
     {
         this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewJobListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewJobListItem.prototype.template = '#template-main_workflowbuilder_control_job_list_item';
+ViewJobListItem.prototype.tagName = 'tr';
+ViewJobListItem.prototype.ui = {
+    buttonAdd: '#button-main_workflowbuilder_control_job_button_add'
+};
+ViewJobListItem.prototype.events = {
+    'click @ui.buttonAdd': '_handleClickButtonAdd',
+    'click': '_handleClick'
+};
 
 export default ViewJobListItem;

@@ -14,20 +14,10 @@ class ViewResourceListItem extends Marionette.ItemView
     /**
      * TODO docs
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowrun_newworkflowrun_resource_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
         this._inputPort = null;
-        super(aParameters);
     }
 
     /**
@@ -68,11 +58,11 @@ class ViewResourceListItem extends Marionette.ItemView
         var selected = this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         if (selected)
         {
-            this.rodanChannel.command(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
+            this.rodanChannel.request(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         }
         else
         {
-            this.rodanChannel.command(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
+            this.rodanChannel.request(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         }
         selected = this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         this._setHighlight(selected);
@@ -95,5 +85,17 @@ class ViewResourceListItem extends Marionette.ItemView
         this.render();
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewResourceListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewResourceListItem.prototype.template = '#template-main_workflowrun_newworkflowrun_resource_list_item';
+ViewResourceListItem.prototype.tagName = 'tr';
+ViewResourceListItem.prototype.events = {
+    'click': '_handleClick'
+};
 
 export default ViewResourceListItem;

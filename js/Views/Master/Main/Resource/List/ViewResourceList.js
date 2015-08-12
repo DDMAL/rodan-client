@@ -17,12 +17,8 @@ class ViewResourceList extends Marionette.CompositeView
     initialize(aOptions)
     {
         this._initializeRadio();
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.childViewContainer = 'tbody';
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        this._rodanChannel.command(Events.COMMAND__RESOURCES_LOAD, {query: {project: aOptions.project.id}});
+        this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: {project: aOptions.project.id}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -36,5 +32,13 @@ class ViewResourceList extends Marionette.CompositeView
         this._rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewResourceList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewResourceList.prototype.childViewContainer = 'tbody';
 
 export default ViewResourceList;

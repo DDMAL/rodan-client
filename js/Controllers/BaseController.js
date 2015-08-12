@@ -14,10 +14,10 @@ class BaseController extends Marionette.Object
      */
     constructor(aOptions)
     {
+        super(aOptions);
         this._rodanChannel = Radio.channel('rodan');
         this._initializeViews();
         this._initializeRadio();
-        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

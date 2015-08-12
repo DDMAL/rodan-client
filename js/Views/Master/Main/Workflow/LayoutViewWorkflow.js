@@ -23,13 +23,6 @@ class LayoutViewWorkflow extends Marionette.LayoutView
             regionList: '#region-main_workflow_list',
             regionItem: '#region-main_workflow_item'
         });
-        this.template = '#template-main_workflow';
-        this.ui = {
-            newWorkflowButton: '#button-new_workflow'
-        };
-        this.events = {
-            'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
-        };
         this._initializeRadio();
     }
 
@@ -68,5 +61,16 @@ class LayoutViewWorkflow extends Marionette.LayoutView
         this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: null});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewWorkflow.prototype.template = '#template-main_workflow';
+LayoutViewWorkflow.prototype.ui = {
+    newWorkflowButton: '#button-new_workflow'
+};
+LayoutViewWorkflow.prototype.events = {
+    'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
+};
 
 export default LayoutViewWorkflow;

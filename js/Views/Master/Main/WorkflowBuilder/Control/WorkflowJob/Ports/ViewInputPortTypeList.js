@@ -17,13 +17,7 @@ class ViewInputPortTypeList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_inputporttype_list';
-        this.childView = ViewInputPortTypeListItem;
-        this.childViewContainer = 'tbody';
         var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
         var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
         this.collection = job.get('input_port_types');
@@ -40,5 +34,15 @@ class ViewInputPortTypeList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewInputPortTypeList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewInputPortTypeList.prototype.template = '#template-main_workflowbuilder_control_inputporttype_list';
+ViewInputPortTypeList.prototype.childView = ViewInputPortTypeListItem;
+ViewInputPortTypeList.prototype.childViewContainer = 'tbody';
 
 export default ViewInputPortTypeList;

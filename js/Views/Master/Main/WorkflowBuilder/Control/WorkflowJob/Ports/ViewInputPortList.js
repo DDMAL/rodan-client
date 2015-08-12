@@ -15,14 +15,18 @@ class ViewInputPortList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowbuilder_control_inputport_list';
-        this.childView = ViewInputPortListItem;
-        this.childViewContainer = 'tbody';
         this.collection = aParameters.workflowjob.get('input_ports');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewInputPortList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewInputPortList.prototype.template = '#template-main_workflowbuilder_control_inputport_list';
+ViewInputPortList.prototype.childView = ViewInputPortListItem;
+ViewInputPortList.prototype.childViewContainer = 'tbody';
 
 export default ViewInputPortList;

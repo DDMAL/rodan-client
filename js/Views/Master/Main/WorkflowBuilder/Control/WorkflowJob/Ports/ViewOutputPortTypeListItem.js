@@ -14,23 +14,9 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
     /**
      * Basic constructor. ('initialize' doesn't seem to work.)
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.ui = {
-            buttonNewOutputPort: '#button-new_outputport'
-        };
-        this.events = {
-            'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
-        };
-        this.template = '#template-main_workflowbuilder_control_outputporttype_list_item';
-        this.tagName = 'tr';
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,8 +35,23 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
      */
     _handleButtonNewOutputPort()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewOutputPortTypeListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewOutputPortTypeListItem.prototype.tagName = 'tr';
+ViewOutputPortTypeListItem.prototype.template = '#template-main_workflowbuilder_control_outputporttype_list_item';
+ViewOutputPortTypeListItem.prototype.events = {
+    'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
+};
+ViewOutputPortTypeListItem.prototype.ui = {
+    buttonNewOutputPort: '#button-new_outputport'
+};
 
 export default ViewOutputPortTypeListItem;

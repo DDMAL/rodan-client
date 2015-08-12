@@ -13,19 +13,13 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_outputporttype_list';
-        this.childView = ViewOutputPortTypeListItem;
-        this.childViewContainer = 'tbody';
         var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
-        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
+        var job = jobCollection.get(options.workflowjob.getJobUuid());
         this.collection = job.get('output_port_types');
     }
 
@@ -40,5 +34,15 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewOutputPortTypeList.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewOutputPortTypeList.prototype.template = '#template-main_workflowbuilder_control_outputporttype_list';
+ViewOutputPortTypeList.prototype.childView = ViewOutputPortTypeListItem;
+ViewOutputPortTypeList.prototype.childViewContainer = 'tbody';
 
 export default ViewOutputPortTypeList;

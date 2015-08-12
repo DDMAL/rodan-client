@@ -17,16 +17,10 @@ class ViewWorkflowList extends Marionette.CompositeView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
         this._project = aParameters.project;
-        this.template = '#template-main_workflow_list';
-        this.childView = ViewWorkflowListItem;
-        this.childViewContainer = 'tbody';
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
-        this.rodanChannel.command(Events.COMMAND__LOAD_WORKFLOWS, {query: {project: this._project.id}});
+        this.rodanChannel.request(Events.COMMAND__LOAD_WORKFLOWS, {query: {project: this._project.id}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -40,5 +34,15 @@ class ViewWorkflowList extends Marionette.CompositeView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflowList.prototype.modelEvents = {
+            'all': 'render'
+        };
+ViewWorkflowList.prototype.template = '#template-main_workflow_list';
+ViewWorkflowList.prototype.childView = ViewWorkflowListItem;
+ViewWorkflowList.prototype.childViewContainer = 'tbody';
 
 export default ViewWorkflowList;

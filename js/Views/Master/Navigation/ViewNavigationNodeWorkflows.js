@@ -7,16 +7,6 @@ import ViewNavigationNode from './ViewNavigationNode';
 class ViewNavigationNodeWorkflows extends ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * TODO docs
-     */
-    initialize()
-    {
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -32,7 +22,7 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.command(Events.COMMAND__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
+        this._rodanChannel.request(Events.COMMAND__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
         this._rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.get('project')});
     }
 

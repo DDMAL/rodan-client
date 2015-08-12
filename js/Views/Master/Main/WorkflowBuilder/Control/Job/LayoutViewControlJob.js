@@ -24,7 +24,6 @@ class LayoutViewControlJob extends Marionette.LayoutView
         });
         this._initializeViews();
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_job';
     }
 
     /**
@@ -33,7 +32,6 @@ class LayoutViewControlJob extends Marionette.LayoutView
     onDestroy()
     {
         this.rodanChannel.off(null, null, this);
-        this.rodanChannel.stopComplying(null, null, this);
         this.rodanChannel.stopReplying(null, null, this);
     }
 
@@ -82,5 +80,10 @@ class LayoutViewControlJob extends Marionette.LayoutView
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewControlJob.prototype.template = '#template-main_workflowbuilder_control_job';
 
 export default LayoutViewControlJob;

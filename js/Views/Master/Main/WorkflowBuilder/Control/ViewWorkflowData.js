@@ -16,25 +16,9 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this._initializeRadio();
         this.model = aParameters.workflow;
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_workflow_data';
-        this.ui = {
-            buttonSave: '#button-save_workflow_data',
-            buttonValidate: '#button-validate_workflow',
-            buttonRun: '#button-run_workflow',
-            textName: '#text-workflow_name',
-            textDescription: '#text-workflow_description'
-        };
-        this.events = {
-            'click @ui.buttonSave': '_handleButtonSave',
-            'click @ui.buttonValidate': '_handleButtonValidate',
-            'click @ui.buttonRun': '_handleButtonRun'
-        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +37,7 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
     }
 
     /**
@@ -61,7 +45,7 @@ class ViewWorkflowData extends Marionette.ItemView
      */
     _handleButtonValidate()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
     /**
@@ -79,5 +63,25 @@ class ViewWorkflowData extends Marionette.ItemView
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewWorkflowData.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewWorkflowData.prototype.template = '#template-main_workflowbuilder_control_workflow_data';
+ViewWorkflowData.prototype.ui = {
+    buttonSave: '#button-save_workflow_data',
+    buttonValidate: '#button-validate_workflow',
+    buttonRun: '#button-run_workflow',
+    textName: '#text-workflow_name',
+    textDescription: '#text-workflow_description'
+};
+ViewWorkflowData.prototype.events = {
+    'click @ui.buttonSave': '_handleButtonSave',
+    'click @ui.buttonValidate': '_handleButtonValidate',
+    'click @ui.buttonRun': '_handleButtonRun'
+};
 
 export default ViewWorkflowData;

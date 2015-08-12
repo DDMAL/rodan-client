@@ -28,7 +28,6 @@ class LayoutViewControlPorts extends Marionette.LayoutView
         });
         this._workflowJob = aParameters.workflowjob;
         this._initializeViews(aParameters);
-        this.template = '#template-main_workflowbuilder_control_ports';
     }
 
     /**
@@ -64,5 +63,10 @@ class LayoutViewControlPorts extends Marionette.LayoutView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewControlPorts.prototype.template = '#template-main_workflowbuilder_control_ports';
 
 export default LayoutViewControlPorts;

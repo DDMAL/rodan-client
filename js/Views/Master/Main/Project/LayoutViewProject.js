@@ -21,7 +21,6 @@ class LayoutViewProject extends Marionette.LayoutView
         this.addRegions({
             regionProject: '#region-main_project_view'
         });
-        this.template = '#template-main_project';
     }
 
     /**
@@ -43,5 +42,10 @@ class LayoutViewProject extends Marionette.LayoutView
         this._rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewProject.prototype.template = '#template-main_project';
 
 export default LayoutViewProject;

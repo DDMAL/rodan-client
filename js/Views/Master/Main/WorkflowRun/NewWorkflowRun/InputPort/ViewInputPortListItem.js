@@ -14,20 +14,9 @@ class ViewInputPortListItem extends Marionette.ItemView
     /**
      * Basic constructor. ('initialize' doesn't seem to work.)
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_workflowrun_newworkflowrun_inputport_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aParameters);
     }
 
     /**
@@ -36,7 +25,6 @@ class ViewInputPortListItem extends Marionette.ItemView
     onDestroy()
     {
         this.rodanChannel.off(null, null, this);
-        this.rodanChannel.stopComplying(null, null, this);
         this.rodanChannel.stopReplying(null, null, this);
     }
 
@@ -85,5 +73,17 @@ class ViewInputPortListItem extends Marionette.ItemView
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewInputPortListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewInputPortListItem.prototype.template = '#template-main_workflowrun_newworkflowrun_inputport_list_item';
+ViewInputPortListItem.prototype.tagName = 'tr';
+ViewInputPortListItem.prototype.events = {
+    'click': '_handleClick'
+};
 
 export default ViewInputPortListItem;

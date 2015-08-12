@@ -10,17 +10,6 @@ import BaseController from '../../../../Controllers/BaseController';
 class WorkflowController extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Basic constructor.
-     */
-    constructor(aOptions)
-    {
-        super(aOptions);
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -39,7 +28,7 @@ class WorkflowController extends BaseController
     _handleEventListSelected(aPass)
     {
         this._layoutView = new LayoutViewWorkflow();
-        this._rodanChannel.command(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
         this._viewList = new ViewWorkflowList({project: aPass.project});
         this._layoutView.showList(this._viewList);
     }

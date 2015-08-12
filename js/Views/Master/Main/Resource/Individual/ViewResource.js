@@ -15,27 +15,10 @@ class ViewResource extends Marionette.CompositeView
     /**
      * Initialize
      */
-    initialize(aOptions)
+    initialize(options)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.model = aOptions.resource;
+        this.model = options.resource;
         this._initializeRadio();
-        this.ui = {
-            buttonSave: '#button-main_resource_individual_save',
-            buttonDelete: '#button-main_resource_individual_delete',
-            selectResourceType: '#select-resourcetype',
-            resourceName: '#text-resource_name',
-            resourceDescription: '#text-resource_description'
-        };
-        this.events = {
-            'click @ui.buttonSave': '_handleClickButtonSave',
-            'click @ui.buttonDelete': '_handleClickButtonDelete'
-        };
-        this.template = '#template-main_resource_individual';
-        this.childView = ViewResourceTypeListItem;
-        this.childViewContainer = '#select-resourcetype';
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
     }
 
@@ -71,7 +54,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        this._rodanChannel.command(Events.COMMAND__RESOURCE_SAVE, {resource: this.model,
+        this._rodanChannel.request(Events.COMMAND__RESOURCE_SAVE, {resource: this.model,
                                                                    resource_type: this.ui.selectResourceType.val(),
                                                                    name: this.ui.resourceName.val(),
                                                                    description: this.ui.resourceDescription.val()});
@@ -82,8 +65,29 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonDelete()
     {
-        this._rodanChannel.command(Events.COMMAND__RESOURCE_DELETE, {resource: this.model});
+        this._rodanChannel.request(Events.COMMAND__RESOURCE_DELETE, {resource: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewResource.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewResource.prototype.ui = {
+    buttonSave: '#button-main_resource_individual_save',
+    buttonDelete: '#button-main_resource_individual_delete',
+    selectResourceType: '#select-resourcetype',
+    resourceName: '#text-resource_name',
+    resourceDescription: '#text-resource_description'
+};
+ViewResource.prototype.events = {
+    'click @ui.buttonSave': '_handleClickButtonSave',
+    'click @ui.buttonDelete': '_handleClickButtonDelete'
+};
+ViewResource.prototype.template = '#template-main_resource_individual';
+ViewResource.prototype.childView = ViewResourceTypeListItem;
+ViewResource.prototype.childViewContainer = '#select-resourcetype';
 
 export default ViewResource;

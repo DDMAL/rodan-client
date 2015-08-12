@@ -20,19 +20,14 @@ class ViewStatusMessage extends Marionette.CompositeView
     initialize()
     {
         this._initializeRadio();
-        this.model = new Backbone.Model({text: null});
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = () => this._template();
     }
 
     /**
-     * Return template.
+     * Returns template.
      */
-    _template()
+    getTemplate()
     {
-        return _.template($('#template-status_message').html())({test: this.model.get('text')});
+        return _.template($('#template-status_message').html())({messageText: this.model.get('text')});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +39,7 @@ class ViewStatusMessage extends Marionette.CompositeView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.comply(Events.COMMAND__DISPLAY_MESSAGE, options => this._processMessage(options));
+        this._rodanChannel.reply(Events.COMMAND__DISPLAY_MESSAGE, options => this._processMessage(options));
     }
 
     /**
@@ -55,5 +50,13 @@ class ViewStatusMessage extends Marionette.CompositeView
         this.model.set('text', options.text);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewStatusMessage.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewStatusMessage.prototype.model = new Backbone.Model({text: 'initialized'});
 
 export default ViewStatusMessage;

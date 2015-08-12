@@ -29,7 +29,6 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
             regionInputPortList: '#region-main_workflowrun_newworkflowrun_inputport_list',
             regionResourceList: '#region-main_workflowrun_newworkflowrun_resource_list'
         });
-        this.template = '#template-main_workflowrun_newworkflowrun';
         this._initializeRadio();
         this._initializeViews();
         this._resourceAssignments = {};
@@ -66,9 +65,9 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, aPass => this._handleRequestIsResourceAssignment(aPass));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
-        this.rodanChannel.comply(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, aPass => this._handleCommandCreate(aPass));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, aPass => this._handleCommandCreate(aPass));
     }
 
     /**
@@ -148,5 +147,10 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         }
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewNewWorkflowRun.prototype.template = '#template-main_workflowrun_newworkflowrun';
 
 export default LayoutViewNewWorkflowRun;

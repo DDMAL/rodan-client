@@ -17,7 +17,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this._initializeRadio();
         this.addRegions({
@@ -25,22 +25,8 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlPorts: '#region-main_workflowbuilder_control_ports',
             regionControlSettings: '#region-main_workflowbuilder_control_settings'
         });
-        this.model = aParameters.workflowjob;
-        this._initializeViews(aParameters);
-        this.template = '#template-main_workflowbuilder_control_workflowjob';
-        this.ui = {
-            buttonTogglePorts: '#button-ports_toggle',
-            buttonToggleSettings: '#button-settings_toggle',
-            buttonShowWorkflow: '#button-show_workflow',
-            buttonSave: '#button-save_workflowjob_data',
-            textName: '#text-workflowjob_name'
-        };
-        this.events = {
-            'click @ui.buttonTogglePorts': '_handleButtonTogglePorts',
-            'click @ui.buttonToggleSettings': '_handleButtonToggleSettings',
-            'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
-            'click @ui.buttonSave': '_handleButtonSave'
-        };
+        this.model = options.workflowjob;
+        this._initializeViews(options);
     }
 
     /**
@@ -102,7 +88,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleButtonShowWorkflow()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 
     /**
@@ -110,8 +96,26 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {name: this.ui.textName.val()});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {name: this.ui.textName.val()});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewControlWorkflowJob.prototype.template = '#template-main_workflowbuilder_control_workflowjob';
+LayoutViewControlWorkflowJob.prototype.ui = {
+    buttonTogglePorts: '#button-ports_toggle',
+    buttonToggleSettings: '#button-settings_toggle',
+    buttonShowWorkflow: '#button-show_workflow',
+    buttonSave: '#button-save_workflowjob_data',
+    textName: '#text-workflowjob_name'
+};
+LayoutViewControlWorkflowJob.prototype.events = {
+    'click @ui.buttonTogglePorts': '_handleButtonTogglePorts',
+    'click @ui.buttonToggleSettings': '_handleButtonToggleSettings',
+    'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
+    'click @ui.buttonSave': '_handleButtonSave'
+};
 
 export default LayoutViewControlWorkflowJob;

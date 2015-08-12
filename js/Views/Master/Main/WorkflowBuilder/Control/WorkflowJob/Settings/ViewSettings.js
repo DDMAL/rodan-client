@@ -17,18 +17,8 @@ class ViewSettings extends Marionette.ItemView
      */
     initialize(aParameters)
     {
-        this.modelEvents = {
-            'all': 'render'
-        };
         this.model = aParameters.workflowjob;
         this._initializeRadio();
-        this.template = '#template-main_workflowbuilder_control_settings';
-        this.ui = {
-            buttonSaveSettings: '#button-save_settings'
-        };
-        this.events = {
-            'click @ui.buttonSaveSettings': '_handleButtonSaveSettings'
-        };
     }
 
     onRender()
@@ -52,7 +42,7 @@ class ViewSettings extends Marionette.ItemView
      */
     _handleButtonSaveSettings()
     {
-        this._rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'job_settings': this._editor.getValue()});
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'job_settings': this._editor.getValue()});
     }
 
     /**
@@ -82,5 +72,19 @@ class ViewSettings extends Marionette.ItemView
         this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewSettings.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewSettings.prototype.template = '#template-main_workflowbuilder_control_settings';
+ViewSettings.prototype.ui = {
+    buttonSaveSettings: '#button-save_settings'
+};
+ViewSettings.prototype.events = {
+    'click @ui.buttonSaveSettings': '_handleButtonSaveSettings'
+};
 
 export default ViewSettings;

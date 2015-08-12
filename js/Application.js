@@ -49,7 +49,7 @@ class Application extends Marionette.Application
      */
     onStart()
     {
-        this.rodanChannel.command(Events.COMMAND__GET_ROUTES);
+        this.rodanChannel.request(Events.COMMAND__GET_ROUTES);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +116,7 @@ class Application extends Marionette.Application
         this.rodanChannel.trigger(Events.EVENT__APPLICATION_READY);
 
         // Check authentication.
-        this.rodanChannel.command(Events.COMMAND__AUTHENTICATION_CHECK); 
+        this.rodanChannel.request(Events.COMMAND__AUTHENTICATION_CHECK); 
     }
 
     /**
@@ -124,8 +124,8 @@ class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
-        this.rodanChannel.command(Events.COMMAND__RESOURCETYPES_LOAD, {});
-        this.rodanChannel.command(Events.COMMAND__LOAD_JOBS, {});
+        this.rodanChannel.request(Events.COMMAND__RESOURCETYPES_LOAD, {});
+        this.rodanChannel.request(Events.COMMAND__LOAD_JOBS, {});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }
 }

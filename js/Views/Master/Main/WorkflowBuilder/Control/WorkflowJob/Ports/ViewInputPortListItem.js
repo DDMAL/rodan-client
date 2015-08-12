@@ -12,25 +12,11 @@ class ViewInputPortListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
-    constructor(aParameters)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.ui = {
-            buttonDelete: '#button-delete'
-        };
-        this.events = {
-            'click @ui.buttonDelete': '_handleButtonDelete'
-        };
-        this.template = '#template-main_workflowbuilder_control_inputport_list_item';
-        this.tagName = 'tr';
-
-        super(aParameters);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,8 +35,23 @@ class ViewInputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.command(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewInputPortListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewInputPortListItem.prototype.ui = {
+            buttonDelete: '#button-delete'
+        };
+ViewInputPortListItem.prototype.events = {
+            'click @ui.buttonDelete': '_handleButtonDelete'
+        };
+ViewInputPortListItem.prototype.template = '#template-main_workflowbuilder_control_inputport_list_item';
+ViewInputPortListItem.prototype.tagName = 'tr';
 
 export default ViewInputPortListItem;

@@ -12,22 +12,11 @@ class ViewResourceListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Constructor.
+     * Initialize.
      */
-    constructor(aOptions)
+    initialize()
     {
         this._initializeRadio();
-
-        this.modelEvents = {
-            'all': 'render'
-        };
-        this.template = '#template-main_resource_list_item';
-        this.tagName = 'tr';
-        this.events = {
-            'click': '_handleClick'
-        };
-
-        super(aOptions);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,5 +38,17 @@ class ViewResourceListItem extends Marionette.ItemView
         this._rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewResourceListItem.prototype.modelEvents = {
+    'all': 'render'
+};
+ViewResourceListItem.prototype.template = '#template-main_resource_list_item';
+ViewResourceListItem.prototype.tagName = 'tr';
+ViewResourceListItem.prototype.events = {
+    'click': '_handleClick'
+};
 
 export default ViewResourceListItem;
