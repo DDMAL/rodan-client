@@ -15,10 +15,11 @@ class ViewNavigationNodeProject extends ViewNavigationNode
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize()
+    initialize(options)
     {
+        super.initialize(options);
         this.collection = new Backbone.Collection();
         var resourcesNodeModel = new Backbone.Model({name: 'Resources', project: this.model});
         var workflowBuilderNodeModel = new Backbone.Model({name: 'Workflows', project: this.model});
