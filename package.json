@@ -50,6 +50,7 @@
       "backbone.radio": "npm:backbone.radio@1.0.0",
       "jquery": "github:components/jquery@2.1.4",
       "json-editor": "github:jdorn/json-editor@0.7.21",
+      "paper": "npm:paper@0.9.23",
       "twbs/bootstrap": "github:twbs/bootstrap@3.3.4",
       "underscore": "npm:underscore@1.8.3"
     }

@@ -1,4 +1,5 @@
 import Radio from 'backbone.radio';
+import paper from 'paper';
 
 import Events from '../../../Shared/Events';
 
