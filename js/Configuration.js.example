@@ -1,0 +1,22 @@
+/**
+ * This is a sample configuration file.
+ * Make sure to make a copy and rename it to 'Configuration.js'.
+ */
+var Configuration = {
+
+    // URL of the server to connect to.
+    SERVER_URL: 'http://url.to.server',
+
+    // Authentication type. Either 'session' or 'token'.
+    SERVER_AUTHENTICATION_TYPE: 'session',
+
+    // Debug flag, boolean. When true, extra output is presented in the
+    // Message area (at the bottom) and all messages are also routed
+    // to the console.
+    DEBUG: true,
+
+    // Identifier for this client.
+    USER_AGENT: 'rodan-vis_standard'
+};
+
+export default Configuration;
