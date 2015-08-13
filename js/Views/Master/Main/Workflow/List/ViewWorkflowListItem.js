@@ -58,7 +58,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
      */
     _handleButtonDeleteWorkflow()
     {
-        var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.get('name') + '"?');
+        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
         if (confirmation)
         {
             this._rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});

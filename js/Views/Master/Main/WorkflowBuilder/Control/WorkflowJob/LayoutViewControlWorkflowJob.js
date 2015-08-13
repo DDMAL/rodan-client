@@ -96,7 +96,19 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {name: this.ui.textName.val()});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE, {name: this.ui.textName.val()});
+    }
+
+    /**
+     * Handle delete button.
+     */
+    _handleButtonDelete()
+    {
+        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
+        if (confirmation)
+        {
+            this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_DELETE, {workflowjob: this.model});
+        }
     }
 }
 
@@ -109,13 +121,15 @@ LayoutViewControlWorkflowJob.prototype.ui = {
     buttonToggleSettings: '#button-settings_toggle',
     buttonShowWorkflow: '#button-show_workflow',
     buttonSave: '#button-save_workflowjob_data',
+    buttonDelete: '#button-delete_workflowjob',
     textName: '#text-workflowjob_name'
 };
 LayoutViewControlWorkflowJob.prototype.events = {
     'click @ui.buttonTogglePorts': '_handleButtonTogglePorts',
     'click @ui.buttonToggleSettings': '_handleButtonToggleSettings',
     'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
-    'click @ui.buttonSave': '_handleButtonSave'
+    'click @ui.buttonSave': '_handleButtonSave',
+    'click @ui.buttonDelete': '_handleButtonDelete'
 };
 
 export default LayoutViewControlWorkflowJob;

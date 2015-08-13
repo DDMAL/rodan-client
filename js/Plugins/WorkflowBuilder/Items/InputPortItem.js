@@ -59,9 +59,7 @@ class InputPortItem extends BaseItem
             this._connectionItem.destroy();
             this._connectionItem = null;
         }
-        this._associatedModel.paperItem = null;
-        this._associatedModel = null;
-        this.remove();
+        super.destroy();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

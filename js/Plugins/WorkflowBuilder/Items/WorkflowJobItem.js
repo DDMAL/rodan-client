@@ -73,6 +73,19 @@ class WorkflowJobItem extends BaseItem
         this.update();
     }
 
+    /**
+     * Destroy cleanup.
+     */
+    destroy()
+    {
+        if (this._paperGroupInputPorts.children.length > 0 || this._paperGroupOutputPorts.children.length > 0)
+        {
+            console.log('TODO - cant delete this item until all ports are deleted');
+            return;
+        }
+        super.destroy();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

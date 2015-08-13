@@ -78,6 +78,23 @@ class BaseItem extends paper.Path
         this.update();
     }
 
+    /**
+     * Destroy.
+     */
+    destroy()
+    {
+        if (this.hasOwnProperty('_associatedModel') && this._associatedModel !== null)
+        {
+            if (this._associatedModel.hasOwnProperty('paperItem'))
+            {
+                this._associatedModel.paperItem = null; 
+            }
+            this._associatedModel = null; 
+        }
+        this._text.remove();
+        this.remove();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

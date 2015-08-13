@@ -59,9 +59,7 @@ class OutputPortItem extends BaseItem
     destroy()
     {
         this._destroyConnections();
-        this._associatedModel.paperItem = null;
-        this._associatedModel = null;
-        this.remove();
+        super.destroy();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

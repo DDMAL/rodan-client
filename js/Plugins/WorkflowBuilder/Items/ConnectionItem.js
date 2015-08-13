@@ -39,7 +39,7 @@ class ConnectionItem extends BaseItem
         this._associatedInputPort = null;
         this._associatedOutputPort.paperItem.removeConnectionItem(this);
         this._associatedOutputPort = null;
-        this.remove();
+        super.destroy();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

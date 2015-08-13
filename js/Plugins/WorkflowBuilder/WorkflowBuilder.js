@@ -142,7 +142,7 @@ class WorkflowBuilder
             }
             else if (event.target instanceof WorkflowJobItem)
             {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
+                this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
             }
         }
     }
@@ -163,7 +163,7 @@ class WorkflowBuilder
             var object = {workflowjob: this._grabbedItem._associatedModel,
                           x: this._grabbedItem.position.x / paper.view.size.width,
                           y: this._grabbedItem.position.y / paper.view.size.height};
-            this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOWJOB_COORDINATES, object);
+            this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, object);
         }
     }
 
@@ -201,6 +201,7 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, options => this._handleCommandDeleteWorkflowJobItem(options));
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
@@ -266,6 +267,15 @@ class WorkflowBuilder
     {
         aReturn.workflowjob.paperItem.deleteOutputPortItem(aReturn.outputport.paperItem);
         aReturn.outputport.paperItem.destroy();
+        paper.view.draw();
+    }
+
+    /**
+     * Handle delete WorkflowJobItem.
+     */
+    _handleCommandDeleteWorkflowJobItem(options)
+    {
+        options.workflowjob.paperItem.destroy();
         paper.view.draw();
     }
 
