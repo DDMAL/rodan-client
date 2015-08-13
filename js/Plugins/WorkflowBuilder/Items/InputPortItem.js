@@ -1,4 +1,5 @@
 import BaseItem from './BaseItem';
+import Configuration from '../../../Configuration';
 
 /**
  * InputPort item.
@@ -40,7 +41,8 @@ class InputPortItem extends BaseItem
      */
     update()
     {
-        this.fillColor = this.hasConnectionItem() ? '#00ff00' : '#ff0000';
+        this.fillColor = this.hasConnectionItem() ? Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_SATISFIED : 
+                                                    Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
         if (this._connectionItem !== null)
         {
             this._connectionItem.update();

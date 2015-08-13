@@ -1,6 +1,7 @@
 import Radio from 'backbone.radio';
 import paper from 'paper';
 
+import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 
 /**
@@ -17,38 +18,37 @@ class BaseItem extends paper.Path
     constructor(options)
     {
         super(options.segments);
+        this._initializeRadio();
+        this._associatedModel = options.model;
         
-        // TODO - MAGIC NUMBERS
-        this.strokeColor = 'black';
+        // Set appearance parameters.
+        this.strokeColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
         this.strokeJoin = 'round';
-        this.strokeWidth = 2;
-        this.fillColor = '#5555ff';
+        this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+        this.fillColor = Configuration.WORKFLOWBUILDER.FILL_COLOR;
 
-        // magic numbers
-        this._HOVERTIME = 1000;
-
+        // Hover settings.
+        this._HOVERTIME = Configuration.WORKFLOWBUILDER.HOVER_TIME;
         this._timerEvent = null;
+        this._popup = new paper.PointText(new paper.Point(0, 0));
 
+        // Mouse handlers.
         this.onMouseDown = event => this._handleMouseEvent(event);
         this.onMouseUp = event => this._handleMouseEvent(event);
         this.onClick = event => this._handleMouseEvent(event);
         this.onMouseEnter = event => this._handleMouseEvent(event);
         this.onMouseLeave = event => this._handleMouseEvent(event);
 
-        this._initializeRadio();
-        this._associatedModel = options.model;
-
+        // Text settings.
         this._text = new paper.PointText(new paper.Point(0, 0));
         this._text.justification = 'center';
-        this._text.fillColor = '#000000';
-        this._text.fontSize = 20;
+        this._text.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this._text.fontSize = Configuration.WORKFLOWBUILDER.FONT_SIZE;
         this._text.content = '';
         this._text.position = this.bounds.center;
         this.addChild(this._text);
         this._text.visible = (options.hasOwnProperty('text') && options.text === true);
         this._text.content = this._associatedModel.get('name');
-
-        this._popup = new paper.PointText(new paper.Point(0, 0));
     }
 
     /**

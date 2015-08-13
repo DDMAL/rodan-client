@@ -1,6 +1,7 @@
 import Radio from 'backbone.radio';
 import paper from 'paper';
 
+import Configuration from '../../Configuration';
 import Events from '../../Shared/Events';
 import ConnectionItem from './Items/ConnectionItem';
 import InputPortItem from './Items/InputPortItem';
@@ -29,25 +30,33 @@ class WorkflowBuilder
         this._state = this._STATES.IDLE;
         this._selectedOutputPortItem = null;
 
-        this._zoomMin = 0.1;
-        this._zoomMax = 2;
-        this._zoomRate = 0.1;
+        this._zoomMin = Configuration.WORKFLOWBUILDER.ZOOM_MIM;
+        this._zoomMax = Configuration.WORKFLOWBUILDER.ZOOM_MAX;
+        this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
         paper.install(window);
         paper.setup(aCanvasElementId);
         paper.handleMouseEvent = aData => this._handleMouseEvent(aData);
-
+        
         this._initializeGlobalMouseTool();
-
         this._initializeRadio();
+        this._createSegments();
+    }
 
-        // TODO - magic numbers
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Create segment definitions.
+     */
+    _createSegments()
+    {
         var canvasWidth = paper.view.viewSize.width;
         var canvasHeight = paper.view.viewSize.height;
-        var workflowJobItemWidth = canvasWidth * 0.2;
-        var workflowJobItemHeight = canvasHeight * 0.1;
-        var inputPortItemWidth = workflowJobItemHeight * 0.2;
-        var inputPortItemHeight = workflowJobItemWidth * 0.1;
+        var workflowJobItemWidth = paper.view.viewSize.width * Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
+        var workflowJobItemHeight = paper.view.viewSize.height * Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
+        var portItemWidth = paper.view.viewSize.width * Configuration.WORKFLOWBUILDER.PORT_WIDTH;
+        var portItemHeight = paper.view.viewSize.height * Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 
@@ -58,18 +67,15 @@ class WorkflowBuilder
             ],
             portItem: [
                 new paper.Point(0, 0), 
-                new paper.Point(inputPortItemWidth, 0), 
-                new paper.Point(inputPortItemWidth, inputPortItemHeight), 
-                new paper.Point(0, inputPortItemHeight), 
+                new paper.Point(portItemWidth, 0), 
+                new paper.Point(portItemWidth, portItemHeight), 
+                new paper.Point(0, portItemHeight), 
                 new paper.Point(0, 0)
             ],
             connection: [new paper.Point(0, 0), new paper.Point(1, 0)]
         };
     }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize global mouse tool.
      */

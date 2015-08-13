@@ -16,7 +16,35 @@ var Configuration = {
     DEBUG: true,
 
     // Identifier for this client.
-    USER_AGENT: 'rodan-vis_standard'
+    USER_AGENT: 'rodan-vis_standard',
+
+    // Settings for WorkflowBuilder GUI.
+    WORKFLOWBUILDER: {
+
+        // Zoom settings. These are percentages of the paper zoom.
+        ZOOM_MAX: 2.0,
+        ZOOM_MIM: 0.1,
+        ZOOM_RATE: 0.1,
+
+        // Item sizes. These are percentages of the canvas.
+        WORKFLOWJOB_WIDTH: 0.2,
+        WORKFLOWJOB_HEIGHT: 0.1,
+        PORT_WIDTH: 0.02,
+        PORT_HEIGHT: 0.02,
+
+        // Appearance parameters.
+        OUTPUTPORT_COLOR: '#00ff00',
+        INPUTPORT_COLOR_SATISFIED: '#00ff00',
+        INPUTPORT_COLOR_UNSATISFIED: '#ff0000',
+        STROKE_COLOR: '#000000',
+        FILL_COLOR: '#5555ff',
+        STROKE_WIDTH: 2,
+        FONT_SIZE: 20,
+
+        // Hover time. This is the amount of time the mouse must
+        // hover over an item for a pop-up to appear in milliseconds.
+        HOVER_TIME: 1000
+    }
 };
 
 export default Configuration;
