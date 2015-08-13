@@ -17,19 +17,19 @@ class WorkflowController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, aPass => this._handleEventListSelected(aPass));
+        this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
         this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
-        this._rodanChannel.on(Events.COMMAND__WORKFLOW_DELETE, aPass => this._handleCommandDeleteWorkflow(aPass));
+        this._rodanChannel.on(Events.COMMAND__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
     }
 
     /**
      * Handle list selection.
      */
-    _handleEventListSelected(aPass)
+    _handleEventListSelected(options)
     {
         this._layoutView = new LayoutViewWorkflow();
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        this._viewList = new ViewWorkflowList({project: aPass.project});
+        this._viewList = new ViewWorkflowList({project: options.project});
         this._layoutView.showList(this._viewList);
     }
 
@@ -45,9 +45,9 @@ class WorkflowController extends BaseController
     /**
      * Handle command delete workflow.
      */
-    _handleCommandDeleteWorkflow(aPass)
+    _handleCommandDeleteWorkflow(options)
     {
-        aPass.workflow.destroy();
+        options.workflow.destroy();
     }
 }
 
