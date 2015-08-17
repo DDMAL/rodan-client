@@ -55,6 +55,14 @@ var Events =
     REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION', // Returns global WorkflowJobCoordinateSet collection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowJobGroup
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__WORKFLOWJOBGROUP_ADD: 'COMMAND__WORKFLOWJOBGROUP_ADD',         // Called when WorkflowJobGroup needs to be added. Takes {workflowjobgroup: WorkflowJobGroup}.
+    COMMAND__WORKFLOWJOBGROUP_DELETE: 'COMMAND__WORKFLOWJOBGROUP_DELETE',   // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
+    COMMAND__WORKFLOWJOBGROUP_SAVE: 'COMMAND__WORKFLOWJOBGROUP_SAVE',       // Called when WorkflowJobGroup needs to be saved. Takes object with attributes to change.
+    REQUEST__WORKFLOWJOBGROUPS_LOAD: 'REQUEST__WORKFLOWJOBGROUPS_LOAD',     // Returns WorkflowJobGroup Collection.  Takes (project: Project}.
+
+///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
