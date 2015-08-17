@@ -63,21 +63,19 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_ADD, aReturn => this._handleCommandAddWorkflowJob(aReturn));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_DELETE, options => this._handleCommandDeleteWorkflowJob(options));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_SAVE, aPass => this._handleCommandSaveWorkflowJob(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, options => this._handleCommandSaveWorkflowJobCoordinates(options));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow());
-
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView());
-
-        this.rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_ADD, aReturn => this._handleCommandAddWorkflowJob(aReturn), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_DELETE, options => this._handleCommandDeleteWorkflowJob(options), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_SAVE, aPass => this._handleCommandSaveWorkflowJob(aPass), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, options => this._handleCommandSaveWorkflowJobCoordinates(options), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
+        this.rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn), this);
     }
 
     /**
@@ -130,7 +128,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleEventEditWorkflowJob(aReturn)
     {
-        //why are dead layout view still capturing this!!!
         this._workflowJob = aReturn.workflowjob;
         this.controlWorkflowJobView = new LayoutViewControlWorkflowJob(aReturn);
         this.regionControlWorkflowParts.show(this.controlWorkflowJobView);
