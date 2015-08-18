@@ -16,7 +16,7 @@ var Configuration = {
     DEBUG: true,
 
     // Identifier for this client.
-    USER_AGENT: 'rodan-vis_standard',
+    USER_AGENT: 'rodan-standard',
 
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {

@@ -3,7 +3,7 @@ import ConnectionCollection from '../Collections/ConnectionCollection';
 import WorkflowJobCollection from '../Collections/WorkflowJobCollection';
 
 /**
- * Represents a VIS Workflow model (i.e. a Rodan Workflow).
+ * Represents a Workflow.
  */
 class Workflow extends BaseModel
 {

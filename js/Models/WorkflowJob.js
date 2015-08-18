@@ -3,7 +3,7 @@ import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 
 /**
- * Represents a VIS WorkflowJob model.
+ * Represents a WorkflowJob.
  */
 class WorkflowJob extends BaseModel
 {
