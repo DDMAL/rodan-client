@@ -17,15 +17,6 @@ var Events =
     REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowJob
-///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__WORKFLOWJOB_ADD: 'COMMAND__WORKFLOWJOB_ADD',                           // Called when WorkflowJob needs to be created. Takes {job: Job}.
-    COMMAND__WORKFLOWJOB_DELETE: 'COMMAND__WORKFLOWJOB_DELETE',                     // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
-    COMMAND__WORKFLOWJOB_SAVE: 'COMMAND__WORKFLOWJOB_SAVE',                         // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
-    COMMAND__WORKFLOWJOB_SAVE_COORDINATES: 'COMMAND__WORKFLOWJOB_SAVE_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
-    EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                     // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
-
-///////////////////////////////////////////////////////////////////////////////////////
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__RESOURCE_ADD: 'COMMAND__RESOURCE_ADD',                 // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
@@ -49,6 +40,19 @@ var Events =
     COMMAND__HANDLER_ERROR: 'COMMAND__HANDLER_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// Workflow
+///////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowJob
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__WORKFLOWJOB_ADD: 'COMMAND__WORKFLOWJOB_ADD',                           // Called when WorkflowJob needs to be created. Takes {job: Job}.
+    COMMAND__WORKFLOWJOB_DELETE: 'COMMAND__WORKFLOWJOB_DELETE',                     // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
+    COMMAND__WORKFLOWJOB_SAVE: 'COMMAND__WORKFLOWJOB_SAVE',                         // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
+    COMMAND__WORKFLOWJOB_SAVE_COORDINATES: 'COMMAND__WORKFLOWJOB_SAVE_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
+    EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                     // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
+
+///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobCoordinateSet
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__WORKFLOWJOBCOORDINATESETS_LOAD:        'COMMAND__WORKFLOWJOBCOORDINATESETS_LOAD',      // Instructs loading of WorkflowJobCoordinateSets. Takes object containing various query IDs.
@@ -57,10 +61,10 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup
 ///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__WORKFLOWJOBGROUP_ADD: 'COMMAND__WORKFLOWJOBGROUP_ADD',         // Called when WorkflowJobGroup needs to be added. Takes {workflowjobgroup: WorkflowJobGroup}.
-    COMMAND__WORKFLOWJOBGROUP_DELETE: 'COMMAND__WORKFLOWJOBGROUP_DELETE',   // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
-    COMMAND__WORKFLOWJOBGROUP_SAVE: 'COMMAND__WORKFLOWJOBGROUP_SAVE',       // Called when WorkflowJobGroup needs to be saved. Takes object with attributes to change.
-    REQUEST__WORKFLOWJOBGROUPS_LOAD: 'REQUEST__WORKFLOWJOBGROUPS_LOAD',     // Returns WorkflowJobGroup Collection.  Takes (project: Project}.
+    COMMAND__WORKFLOWJOBGROUP_ADD: 'COMMAND__WORKFLOWJOBGROUP_ADD',                 // Called when WorkflowJobGroup needs to be added. Takes {workflowjobgroup: WorkflowJobGroup}.
+    COMMAND__WORKFLOWJOBGROUP_DELETE: 'COMMAND__WORKFLOWJOBGROUP_DELETE',           // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
+    COMMAND__WORKFLOWJOBGROUP_SAVE: 'COMMAND__WORKFLOWJOBGROUP_SAVE',               // Called when WorkflowJobGroup needs to be saved. Takes object with attributes to change.
+    REQUEST__WORKFLOWJOBGROUP_COLLECTION: 'REQUEST__WORKFLOWJOBGROUP_COLLECTION',   // Returns WorkflowJobGroup Collection.  Takes (project: Project}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
@@ -95,8 +99,9 @@ var Events =
     COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_RUN_WORKFLOW', // Called when Workflow needs to be run. No pass.
 
     // Workflow builder commands that control the view.
-    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when job control view needs to be shown. No pass.
- 
+    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',                           // Called when WorkflowJobGroup control view needs to be shown.
+    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_WORKFLOWJOBGROUPS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_WORKFLOWJOBGROUPS', // Called when WorkflowJobGroup control view needs to be shown.
+
     // Workflow builder GUI commands. These events tell the workspace what needs to be done. The GUI sends these commands.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: Workflow}.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: WorkflowJob}.

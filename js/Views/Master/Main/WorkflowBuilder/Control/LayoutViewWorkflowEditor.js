@@ -7,6 +7,7 @@ import Events from '../../../../../Shared/Events';
 import ViewWorkflowData from './ViewWorkflowData';
 import LayoutViewControlJob from './Job/LayoutViewControlJob';
 import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflowJob';
+import LayoutViewControlWorkflowJobGroup from './WorkflowJobGroup/LayoutViewControlWorkflowJobGroup';
 import WorkflowJob from '../../../../../Models/WorkflowJob';
 import WorkflowJobCoordinateSet from '../../../../../Models/WorkflowJobCoordinateSet';
 import InputPort from '../../../../../Models/InputPort';
@@ -75,6 +76,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, options => this._handleCommandSaveWorkflowJobCoordinates(options), this);
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_WORKFLOWJOBGROUPS, () => this._handleCommandShowWorkflowJobGroupsView(), this);
         this.rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn), this);
     }
 
@@ -140,6 +142,15 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         this.viewControlJob = new LayoutViewControlJob();
         this.regionControlWorkflowParts.show(this.viewControlJob);
+    }
+
+    /**
+     * Handle command show WorkflowJobGroups control view.
+     */
+    _handleCommandShowWorkflowJobGroupsView()
+    {
+        this.viewControlWorkflowJobGroup = new LayoutViewControlWorkflowJobGroup();
+        this.regionControlWorkflowParts.show(this.viewControlWorkflowJobGroup);
     }
 
     /**
