@@ -19,26 +19,24 @@ class ControllerAuthentication extends BaseController
      */
     initialize()
     {
-        // AJAX prefilter.
-        var that = this;
-        $.ajaxPrefilter(function(options)
-        {
-            if (Configuration.DEBUG)
-            {
-                console.log('ajax prefilter');
-            }
-            options.xhrFields = { withCredentials: true, };
-            if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
-            {
-                options.beforeSend = function (xhr) 
-                { 
-                    xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
-                };
-            }
-        });
-
         this._user = null;
         this._CSRFToken = new Cookie('csrftoken');
+    }
+
+    /**
+     * AJAx prefilter associated with authentication.
+     */
+    ajaxPrefilter(options)
+    {
+        var that = this;
+        options.xhrFields = { withCredentials: true, };
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
+        {
+            options.beforeSend = function (xhr) 
+            { 
+                xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
+            };
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

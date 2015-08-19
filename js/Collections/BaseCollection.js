@@ -37,6 +37,16 @@ class BaseCollection extends Backbone.Collection
         return aUrl.substring(secondLastSlash + 1, lastSlash);
     }
 
+    /**
+     * Override of fetch to allow for generic handling.
+     */
+    fetch(options)
+    {
+        options = this._applyResponseHandlers(options);
+        options.task = 'fetch';
+        super.fetch(options);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,16 +79,6 @@ class BaseCollection extends Backbone.Collection
     _handleRequestInstance()
     {
         return this;
-    }
-
-    /**
-     * Override of fetch to allow for generic handling.
-     */
-    fetch(options)
-    {
-        options = this._applyResponseHandlers(options);
-        options.task = 'fetch';
-        super.fetch(options);
     }
 
     /**

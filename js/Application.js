@@ -39,6 +39,7 @@ class Application extends Marionette.Application
         });
         this._initializeRadio();
         this._initializeControllers();
+        this._initializeAjaxPrefilters();
         this._initializeCollections();
         this._initializeViews();
         this._errorHandler = new ErrorHandler();
@@ -72,6 +73,17 @@ class Application extends Marionette.Application
     {
         this.controllerServer = new ControllerServer();
         this.controllerAuthentication = new ControllerAuthentication(this.controllerServer);
+    }
+
+    /**
+     * Initialize AJAX prefilters. This allows the application a lower level of request monitoring (if desired).
+     */
+    _initializeAjaxPrefilters()
+    {
+        var that = this;
+        $.ajaxPrefilter(function(options) {
+            that.controllerAuthentication.ajaxPrefilter(options);
+        });
     }
 
     /**
