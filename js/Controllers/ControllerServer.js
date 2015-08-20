@@ -1,7 +1,11 @@
 import _ from 'underscore';
+import Backbone from 'backbone';
 import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
+
+var oldsync = Backbone.sync;
+Backbone.sync = function(method, model, options) { oldsync(method, model, options); };
 
 /**
  * Server controller.
@@ -18,11 +22,21 @@ class ControllerServer extends BaseController
     {
         this.routes = null;
         this.serverConfiguration = null;
+        this._originalSync = Backbone.sync;
+        Backbone.sync = (method, model, options) => this._sync(method, model, options);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Sync override. This is needed if we want to use WebSockets.
+     */
+    _sync(method, model, options)
+    {
+        var jqXHR = this._originalSync(method, model, options);
+    }
+
     /**
      * Event bindings.
      */
