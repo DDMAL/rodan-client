@@ -29,13 +29,22 @@ class ControllerAuthentication extends BaseController
     ajaxPrefilter(options)
     {
         var that = this;
-        options.xhrFields = { withCredentials: true, };
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
         {
+            options.xhrFields = { withCredentials: true, };
             options.beforeSend = function (xhr) 
             { 
                 xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
             };
+        }
+        else if(Configuration.SERVER_AUTHENTICATION_TYPE === 'token'
+                && that._user != null
+                && that._user.get('token') !== undefined)
+        {
+            options.beforeSend = function (xhr)
+            {
+                xhr.setRequestHeader('Authorization', 'Token ' + that._user.get('token'));
+            }
         }
     }
 
@@ -139,7 +148,6 @@ class ControllerAuthentication extends BaseController
         request.setRequestHeader('Accept', 'application/json');
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
-            alert('TODO - token auth not working at the moment');
             //request.setRequestHeader('Authorization', 'Token ' + authToken);
         }
         else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
