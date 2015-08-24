@@ -3,6 +3,14 @@
  **/
 class Cookie
 {
+    static saveCookie(name, value, days)
+    {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 86400000));
+        var expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + "; " + expires;
+    }
+
     constructor(aName)
     {
         this._cookieName = aName;

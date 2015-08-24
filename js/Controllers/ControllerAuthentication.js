@@ -20,7 +20,18 @@ class ControllerAuthentication extends BaseController
     initialize()
     {
         this._user = null;
-        this._CSRFToken = new Cookie('csrftoken');
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
+        {
+            this._token = new Cookie('csrftoken');
+        }
+        else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
+        {
+            this._token = new Cookie('token');
+        }
+        else
+        {
+            // todo error
+        }
     }
 
     /**
@@ -31,19 +42,17 @@ class ControllerAuthentication extends BaseController
         var that = this;
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
         {
-            options.xhrFields = { withCredentials: true, };
+            options.xhrFields = { withCredentials: true };
             options.beforeSend = function (xhr) 
             { 
-                xhr.setRequestHeader('X-CSRFToken', that._CSRFToken.value);
+                xhr.setRequestHeader('X-CSRFToken', that._token.value);
             };
         }
-        else if(Configuration.SERVER_AUTHENTICATION_TYPE === 'token'
-                && that._user != null
-                && that._user.get('token') !== undefined)
+        else if(Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
             options.beforeSend = function (xhr)
             {
-                xhr.setRequestHeader('Authorization', 'Token ' + that._user.get('token'));
+                xhr.setRequestHeader('Authorization', 'Token ' + that._token.value);
             }
         }
     }
@@ -76,9 +85,9 @@ class ControllerAuthentication extends BaseController
         switch (request.status)
         {
             case 200:
-                this._CSRFToken = new Cookie('csrftoken');
                 var parsed = JSON.parse(request.responseText);
                 this._user = new User(parsed);
+                this._processAuthenticationData();
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
                 break;
             case 400:
@@ -146,19 +155,7 @@ class ControllerAuthentication extends BaseController
         request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
         request.open('GET', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
-        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
-        {
-            //request.setRequestHeader('Authorization', 'Token ' + authToken);
-        }
-        else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
-        {
-            if (!this._CSRFToken.value)
-            {
-                this._CSRFToken = new Cookie('csrftoken');
-            }
-            request.withCredentials = true;
-            request.setRequestHeader('X-CSRFToken', this._CSRFToken.value);
-        }
+        this._setAuthenticationData(request);
         request.send();
     }
 
@@ -194,18 +191,41 @@ class ControllerAuthentication extends BaseController
         request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
         request.open('POST', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
-        if (authType === 'session')
-        {
-            request.withCredentials = true;
-            request.setRequestHeader('X-CSRFToken', this._CSRFToken.value);
-        }
-        else
-        {
-            alert('TODO - token auth not working at the moment');
-            //request.setRequestHeader('Authorization', 'Token ' + authToken);
-        }
+        this._setAuthenticationData(request);
         request.send();
         this._user = null;
+    }
+
+    /**
+     * Sets the appropriate authentication data to the request.
+     */
+    _setAuthenticationData(request)
+    {
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
+        {
+          //  request.setRequestHeader('Authorization', 'Token ' + this._token.value);
+        }
+        else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
+        {
+            request.withCredentials = true;
+            request.setRequestHeader('X-CSRFToken', this._token.value);
+        }   
+    }
+
+    /** 
+     * Save authentication data.
+     */
+    _processAuthenticationData()
+    {
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
+        {
+            Cookie.saveCookie('token', this._user.get('token'), 365);
+            this._token = new Cookie('token');
+        }
+        else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
+        {
+            this._token = new Cookie('csrftoken');
+        }
     }
 
     /**
