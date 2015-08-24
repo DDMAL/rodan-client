@@ -192,6 +192,7 @@ class ControllerAuthentication extends BaseController
         request.open('POST', authRoute, true);
         request.setRequestHeader('Accept', 'application/json');
         this._setAuthenticationData(request);
+        this._deleteAuthenticationData();
         request.send();
         this._user = null;
     }
@@ -203,13 +204,26 @@ class ControllerAuthentication extends BaseController
     {
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
         {
-          //  request.setRequestHeader('Authorization', 'Token ' + this._token.value);
+            request.setRequestHeader('Authorization', 'Token ' + this._token.value);
         }
         else if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session')
         {
             request.withCredentials = true;
             request.setRequestHeader('X-CSRFToken', this._token.value);
         }   
+    }
+
+    /**
+     * Deletes authentication data.
+     */
+    _deleteAuthenticationData()
+    {
+        // Only need to worry about token authentication.
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
+        {
+            Cookie.saveCookie('token', '', 0);
+            this._token = new Cookie('token');
+        }
     }
 
     /** 
