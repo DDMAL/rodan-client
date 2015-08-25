@@ -65,6 +65,7 @@ div#region-navigation
                                 $background-color-navigation-gradient_right);
     height: 100%;
     color: $text-color-navigation;
+    overflow: auto;
 }
 
 div#region-navigation ul
@@ -110,6 +111,7 @@ div#region-main
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
+    overflow: auto;
 }
 
 canvas#canvas-workspace 
