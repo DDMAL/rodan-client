@@ -36,23 +36,45 @@ class ErrorHandler extends Marionette.Object
      */
     _handleError(options)
     {
-        var responseObject = JSON.parse(options.response.responseText);
-        if (responseObject.hasOwnProperty('error_code'))
+        var response = options.response;
+        var responseTextObject = JSON.parse(response.responseText);
+        if (responseTextObject.hasOwnProperty('error_code'))
         {
-            this._processRodanError(responseObject);
+            this._processRodanError(options); // custom Rodan error code present
         }
         else
         {
-            alert('Unknown error.');
+            this._processHTTPError(options); // HTTP error
         }
+    }
+
+    /**
+     * Processes HTTP errors.
+     */
+    _processHTTPError(options)
+    {debugger;
+        var response = options.response;
+        var responseTextObject = JSON.parse(response.responseText);
+        var message = response.response;
+        if (responseTextObject.hasOwnProperty('detail'))
+        {
+            message = responseTextObject.detail;
+        }
+        else if (options.hasOwnProperty('message'))
+        {
+            message = options.message;
+        }
+        alert(message);
     }
 
     /**
      * Processes Rodan-generated error response.
      */
-    _processRodanError(responseObject)
+    _processRodanError(options)
     {
-        switch (responseObject.error_code)
+        var response = options.response;
+        var responseTextObject = JSON.parse(response.responseText);
+        switch (responseTextObject.error_code)
         {
             case 'IP_TOO_MANY_CONNECTIONS':
             {
@@ -134,7 +156,7 @@ class ErrorHandler extends Marionette.Object
 
             default:
             {
-                alert('Unknown error code ' + responseObject.error_code);
+                alert('Unknown error code ' + response.error_code);
                 break;
             }
         }

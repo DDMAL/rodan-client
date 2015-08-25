@@ -47,13 +47,13 @@ class LayoutViewMain extends Marionette.LayoutView
         this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.reply(Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
-        this._rodanChannel.on(Events.EVENT__AUTHENTICATION_ERROR_401, () => this._handleAuthentication401());
+        this._rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
     }
 
     /**
-     * Handles failed authentication check.
+     * Handles request for login.
      */
-    _handleAuthentication401()
+    _handleAuthenticationLoginRequired()
     {
         this.loginView = new ViewLogin();
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);

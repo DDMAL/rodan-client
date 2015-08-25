@@ -91,16 +91,20 @@ class ControllerAuthentication extends BaseController
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
                 break;
             case 400:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_400);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 401:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_401);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request,
+                                                                           message: 'Incorrect username/password.'});
+                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 403:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_403);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             default:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
                 break;
         }
     }
@@ -122,16 +126,16 @@ class ControllerAuthentication extends BaseController
                 this._rodanChannel.trigger(Events.EVENT__DEAUTHENTICATION_SUCCESS);
                 break;
             case 400:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_400);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
                 break;
             case 401:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_401);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
                 break;
             case 403:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_403);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
                 break;
             default:
-                this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_UNKNOWN);
+                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
                 break;
         }
     }
@@ -149,14 +153,23 @@ class ControllerAuthentication extends BaseController
      */
     _checkAuthenticationStatus()
     {
-        var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-status');
-        var request = new XMLHttpRequest();
-        request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
-        request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
-        request.open('GET', authRoute, true);
-        request.setRequestHeader('Accept', 'application/json');
-        this._setAuthenticationData(request);
-        request.send();
+        // First, check if we have the appropriate authentication data. If we do, check it.
+        // If we don't, trigger an event to inform of login require.
+        if (this._token.value === '')
+        {
+            this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+        }
+        else
+        {
+            var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-status');
+            var request = new XMLHttpRequest();
+            request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
+            request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
+            request.open('GET', authRoute, true);
+            request.setRequestHeader('Accept', 'application/json');
+            this._setAuthenticationData(request);
+            request.send();
+        }
     }
 
     /**
