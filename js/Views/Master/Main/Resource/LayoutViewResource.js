@@ -57,14 +57,10 @@ class LayoutViewResource extends Marionette.LayoutView
     /**
      * Handle add button.
      */
-    _handleClickButtonAdd()
+    _handleClickButtonFile()
     {
         var file = this.ui.fileInput[0].files[0];
-        if (file === undefined)
-        {
-            alert('TODO -error');
-            return;
-        }
+        this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
         this._rodanChannel.request(Events.COMMAND__RESOURCE_ADD, {project: this._project, file: file});
     }
 }
@@ -73,11 +69,10 @@ class LayoutViewResource extends Marionette.LayoutView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewResource.prototype.ui = {
-    buttonAdd: '#button-main_resource_add',
     fileInput: '#file-main_resource_file'
 };
 LayoutViewResource.prototype.events = {
-    'click @ui.buttonAdd': '_handleClickButtonAdd'
+    'change @ui.fileInput': '_handleClickButtonFile'
 };
 LayoutViewResource.prototype.template = '#template-main_resource';
 
