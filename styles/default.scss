@@ -1,5 +1,5 @@
 /**
- * Styles for Rodan-VIS client.
+ * Styles for Rodan client.
  */
 
 /**************************************************************************************
@@ -39,11 +39,13 @@ $background-color-workflowbuilder-control: #ffffff;
  *************************************************************************************/
 $height-bottom: 5; // % of vertical space in viewport
 $height-top: 95; // % of vertical space in viewport
+$size-font: 0.8; // % of viewport widht to define font size
 
 body
 {
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: $size-font + vw;
 }
 
 div.top {
