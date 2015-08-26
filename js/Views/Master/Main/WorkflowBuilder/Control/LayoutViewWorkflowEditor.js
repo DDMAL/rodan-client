@@ -208,7 +208,15 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandValidateWorkflow()
     {
-        this._workflow.save({valid: true}, {patch: true});
+        this._workflow.save({valid: true}, {patch: true, success: () => this._handleValidationSuccess()});
+    }
+
+    /**
+     * Handle validation success.
+     */
+    _handleValidationSuccess()
+    {
+        alert('The workflow is valid.');
     }
 
     /**
