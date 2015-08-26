@@ -1,5 +1,5 @@
 <h2>Workflow <%= name%></h2>
-<div>Basic info goes here:  <%= creator.username%> <%= created%> </div>
+<div>Basic info goes here:  <%= creator.username%> <%= _.formatFromUTC(created) %> </div>
 <button id="workflow-duplicate">Duplicate</button>
 <button id="workflow-edit">Edit</button>
 <button id="workflow-delete">Delete</button>

@@ -1,6 +1,9 @@
+import moment from 'moment';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Configuration from './Configuration';
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
 import ErrorHandler from './ErrorHandler';
@@ -37,6 +40,7 @@ class Application extends Marionette.Application
             regionNavigation: '#region-navigation',
             regionStatus: '#region-status'
         });
+        this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeControllers();
         this._initializeAjaxPrefilters();
@@ -56,6 +60,18 @@ class Application extends Marionette.Application
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initializes various helpers.
+     */
+    _initializeDateTimeFormatter()
+    {
+        moment.defaultFormat = Configuration.DATETIME_FORMAT;
+        _.formatFromUTC = function(dateTime)
+        {
+            return moment(dateTime).format();
+        };
+    }
+
     /**
      * Set event binding.
      */

@@ -2,8 +2,8 @@
 Name: <input type="text" id="text-project_name" value="<%= name %>"><br>
 Description: <input type="text" id="text-project_description" value="<%= description %>"><br>
 Creator: <%= creator.username %> <br>
-Created on: <%= created %><br>
-Updated on: <%= updated %><br>
+Created on: <%= _.formatFromUTC(created) %><br>
+Updated on: <%= _.formatFromUTC(updated) %><br>
 <span id="resource_count">Resources: <%= resource_count%></span><br>
 <span id="workflow_count">Workflows: <%= workflow_count%></span><br>
 <button id="button-save_project">Save</button>

@@ -1,7 +1,7 @@
 <h2>WorkflowRun <%= name%></h2>
 Description: <%= description %><br/>
-Created on: <%= created %><br/>
-Updated on: <%= updated %><br/>
+Created on: <%= _.formatFromUTC(created) %><br/>
+Updated on: <%= _.formatFromUTC(updated) %><br/>
 Status: <%= statusText %>
 <hr>
 <h3>RunJobs</h3>

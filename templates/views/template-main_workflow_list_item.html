@@ -1,6 +1,6 @@
 <td><%= name %></td>
-<td><%= created %></td>
-<td><%= updated %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
 <td><%= valid %></td>
 <td>
     <button id="button-run_workflow">Run</button>

@@ -7,6 +7,9 @@ var Configuration = {
     // URL of the server to connect to.
     SERVER_URL: 'http://url.to.server',
 
+    // Date/time format. See http://momentjs.com/docs/#/displaying/format/
+    DATETIME_FORMAT: 'dddd, MMMM Do YYYY, h:mm:ss a', 
+
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: 'session',
 
