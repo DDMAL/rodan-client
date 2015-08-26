@@ -41,6 +41,19 @@ $height-bottom: 5; // % of vertical space in viewport
 $height-top: 95; // % of vertical space in viewport
 $size-font: 0.8; // % of viewport widht to define font size
 
+.vertical-center {
+    height: $height-top + %; //fallback
+    height: $height-top + vh;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-center
+{
+    width: 100%;
+    text-align: center;
+}
+
 body
 {
     overflow: hidden;
