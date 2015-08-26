@@ -1,3 +1,4 @@
+import Events from '../../../Shared/Events';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
 
