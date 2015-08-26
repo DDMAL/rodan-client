@@ -1,4 +1,3 @@
-import Events from '../../../Shared/Events';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
 
@@ -35,25 +34,15 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
     {
         this._rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
     }
-
-    /**
-     * Handle button.
-     */
-    _handleButton()
-    {
-        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGOUT);
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewNavigationNodeRoot.prototype.ui = {
-    buttonLogout: '#button-navigation_logout',
     text: '#node_text'
 };
 ViewNavigationNodeRoot.prototype.events = {
-    'click @ui.buttonLogout': '_handleButton',
     'click @ui.text': '_handleClick'
 };
 ViewNavigationNodeRoot.prototype.template = '#template-navigation_root';

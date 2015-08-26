@@ -1,6 +1,8 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Events from '../../../../Shared/Events';
+
 /**
  * This class represents the view (and controller) for the status bar - login info.
  */
@@ -44,8 +46,26 @@ class ViewStatusUser extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
+    }
+
+    /**
+     * Handle button.
+     */
+    _handleButton()
+    {
+        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGOUT);
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+ViewStatusUser.prototype.ui = {
+    buttonLogout: '#button-navigation_logout'
+};
+ViewStatusUser.prototype.events = {
+    'click @ui.buttonLogout': '_handleButton'
+};
 
 export default ViewStatusUser;
