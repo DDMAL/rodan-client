@@ -46,7 +46,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
 
         // Create lists.
         this._viewInputPortList = new ViewInputPortList({workflow: this._workflow});
-        this._viewResourceList = new ViewResourceList({project: this._project,
+        this._viewResourceList = new ViewResourceList({query: {project: this._project.id},
                                                        template: '#template-main_workflowrun_newworkflowrun_resource_list',
                                                        childView: ViewResourceListItem});
         this._viewData = new ViewWorkflowRunData({workflow: this._workflow});

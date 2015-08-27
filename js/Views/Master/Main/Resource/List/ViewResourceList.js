@@ -15,12 +15,12 @@ class ViewResourceList extends Marionette.CompositeView
     /**
      * Initialize.
      */
-    initialize(aOptions)
+    initialize(options)
     {
         this._initializeRadio();
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: {project: aOptions.project.id}});
-        this._includeGeneratedResources = false;
+        this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: options.query});
+        this._includeGeneratedResources = true;
         this._includeNoFileResources = false;
     }
 
@@ -32,13 +32,13 @@ class ViewResourceList extends Marionette.CompositeView
         var showResource = true;
         if (!this._includeGeneratedResources)
         {
-            showResource = child.get('origin') === null;
+            showResource = child.get('creator') !== null && child.get('creator').last_name !== null;
         }
 
-        if (!this._includeNoFileResources)
+  /*      if (!this._includeNoFileResources)
         {
-            showResource = child.get('resource_file') !== null; 
-        }
+            showResource = child.get('compat_resource_file') !== null; 
+        }*/
         return showResource;
     }
 
@@ -51,11 +51,11 @@ class ViewResourceList extends Marionette.CompositeView
         {
             this.ui.checkboxFilterOrigin[0].checked = this._includeGeneratedResources;
         }
-
+/*
         if (this.ui.checkboxFilterNoFile.length > 0)
         {
             this.ui.checkboxFilterNoFile[0].checked = this._includeNoFileResources;
-        }
+        }*/
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

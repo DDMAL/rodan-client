@@ -87,7 +87,7 @@ class ResourceController extends BaseController
     {
         this._layoutView = new LayoutViewResource({project: aOptions.project});
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        this._layoutView.showList(new ViewResourceList({project: aOptions.project,
+        this._layoutView.showList(new ViewResourceList({query: {project: aOptions.project.id},
                                                         template: '#template-main_resource_list',
                                                         childView: ViewResourceListItem}));
     }

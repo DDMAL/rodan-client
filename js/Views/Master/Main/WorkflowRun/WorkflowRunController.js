@@ -1,5 +1,5 @@
 import Events from '../../../../Shared/Events';
-import ViewWorkflowRun from './Individual/ViewWorkflowRun';
+import LayoutViewIndividualWorkflowRun from './Individual/LayoutViewIndividualWorkflowRun';
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
 import LayoutViewNewWorkflowRun from './NewWorkflowRun/LayoutViewNewWorkflowRun';
 import BaseController from '../../../../Controllers/BaseController';
@@ -37,7 +37,7 @@ class WorkflowRunController extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._viewItem = new ViewWorkflowRun({workflowRun: options.workflowRun});
+        this._viewItem = new LayoutViewIndividualWorkflowRun({workflowRun: options.workflowRun});
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
     }
 

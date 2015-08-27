@@ -1,13 +1,12 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../Shared/Events';
-import ViewRunJobListItem from './ViewRunJobListItem';
+import Events from '../../../../../../Shared/Events';
 
 /**
  * This class represents the view for an individual WorkflowRun.
  */
-class ViewWorkflowRun extends Marionette.CompositeView
+class ViewWorkflowRunData extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -15,21 +14,21 @@ class ViewWorkflowRun extends Marionette.CompositeView
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this._initializeRadio();
-        this.model = aParameters.workflowRun;
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
-        this.rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
+        this.model = options.workflowRun;
+    //    this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
+      //  this.rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
     }
 
     /**
      * Returns the associated collection item to the template.
      */
-    templateHelpers() 
+/*    templateHelpers() 
     {
         return { items: this.collection.toJSON() };
-    }
+    }*/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -46,11 +45,11 @@ class ViewWorkflowRun extends Marionette.CompositeView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewWorkflowRun.prototype.modelEvents = {
+ViewWorkflowRunData.prototype.modelEvents = {
     'all': 'render'
 };
-ViewWorkflowRun.prototype.childView = ViewRunJobListItem;
-ViewWorkflowRun.prototype.childViewContainer = 'tbody';
-ViewWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
+ViewWorkflowRunData.prototype.childView = ViewRunJobListItem;
+ViewWorkflowRunData.prototype.childViewContainer = 'tbody';
+ViewWorkflowRunData.prototype.template = '#template-main_workflowrun_individual';
 
-export default ViewWorkflowRun;
+export default ViewWorkflowRunData;
