@@ -13,7 +13,7 @@ class ViewWorkflowRun extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize(aParameters)
     {

@@ -28,16 +28,16 @@ class WorkflowRunController extends BaseController
     _initializeRadio()
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, () => this._handleEventListSelected());
-        this._rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, aPass => this._handleEventItemSelected(aPass));
+        this._rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, aPass => this._handleCommandCreateWorkflowRun(aPass));
     }
 
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected(aPass)
+    _handleEventItemSelected(options)
     {
-        this._viewItem = new ViewWorkflowRun({workflowRun: aPass.workflowRun});
+        this._viewItem = new ViewWorkflowRun({workflowRun: options.workflowRun});
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
     }
 

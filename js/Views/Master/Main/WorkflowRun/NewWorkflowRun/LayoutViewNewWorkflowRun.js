@@ -109,7 +109,15 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         var workflowRun = new WorkflowRun(options);
         workflowRun.set('resource_assignments', this._resourceAssignments);
         workflowRun.set('workflow', this._workflow.get('url'));
-        workflowRun.save();
+        workflowRun.save({}, {'success': (model) => this._handleCreationSuccess(model)});
+    }
+
+    /**
+     * Handle a successful creation.
+     */
+    _handleCreationSuccess(model)
+    {
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: model});  
     }
 
     /**
