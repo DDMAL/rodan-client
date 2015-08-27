@@ -33,7 +33,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     }
 
     /**
-     * Insert views.
+     * Insert views before show.
      */
     onBeforeShow()
     {
@@ -51,6 +51,10 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
                                                       childView: ViewRunJobListItem});
         this.regionRunJobList.show(this._viewRunJobList);
         this.regionResourceList.show(this._viewResourceList);
+
+        // Hide RunJob list by default.
+//        this.regionRunJobList.$el.hide();
+        this._showResources();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,10 +69,31 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     }
 
     /**
-     * Initialize views.
+     * Handle button show Resources.
      */
-    _initializeViews()
+    _showResources()
     {
+        this.regionRunJobList.$el.hide();
+        this.ui.buttonShowResources.css('text-decoration', 'underline');
+        this.ui.buttonShowRunJobs.css('text-decoration', 'none');
+        if (!this.regionResourceList.$el.is(':visible'))
+        {
+            this.regionResourceList.$el.toggle('fast');
+        }
+    }
+
+    /**
+     * Handle button show RunJobs.
+     */
+    _showRunJobs()
+    {
+        this.regionResourceList.$el.hide();
+        this.ui.buttonShowResources.css('text-decoration', 'none');
+        this.ui.buttonShowRunJobs.css('text-decoration', 'underline');
+        if (!this.regionRunJobList.$el.is(':visible'))
+        {
+            this.regionRunJobList.$el.toggle('fast');
+        }
     }
 }
 
@@ -77,6 +102,14 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewIndividualWorkflowRun.prototype.modelEvents = {
     'all': 'render'
+};
+LayoutViewIndividualWorkflowRun.prototype.ui = {
+    buttonShowResources: '#button-resources_show',
+    buttonShowRunJobs: '#button-runjobs_show'
+};
+LayoutViewIndividualWorkflowRun.prototype.events = {
+    'click @ui.buttonShowResources': '_showResources',
+    'click @ui.buttonShowRunJobs': '_showRunJobs'
 };
 LayoutViewIndividualWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
 

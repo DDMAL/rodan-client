@@ -4,13 +4,7 @@ Description: <%= description %><br/>
 Created on: <%= _.formatFromUTC(created) %><br/>
 Updated on: <%= _.formatFromUTC(updated) %><br/>
 Status: <%= statusText %>
-<div class='row'>
-    <div class='col-lg-6'>
-        <h2>Resources</h2>
-        <div id="region-main_workflowrun_individual_resource_list"></div>
-    </div>
-    <div class='col-lg-6' id="">
-        <h2>RunJobs</h2>
-        <div id="region-main_workflowrun_individual_runjob_list"></div>
-    </div>
-</div>
+
+<h3><span id="button-resources_show">Resources</span> | <span id="button-runjobs_show">RunJobs</span></h3>
+<div id="region-main_workflowrun_individual_resource_list"></div>
+<div id="region-main_workflowrun_individual_runjob_list"></div>
