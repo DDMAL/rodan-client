@@ -21,6 +21,7 @@ class ViewResourceList extends Marionette.CompositeView
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
         this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: {project: aOptions.project.id}});
         this._includeGeneratedResources = false;
+        this._includeNoFileResources = false;
     }
 
     /**
@@ -28,11 +29,17 @@ class ViewResourceList extends Marionette.CompositeView
      */
     filter(child, index, collection)
     {
+        var showResource = true;
         if (!this._includeGeneratedResources)
         {
-            return child.get('origin') === null;
+            showResource = child.get('origin') === null;
         }
-        return true;
+
+        if (!this._includeNoFileResources)
+        {
+            showResource = child.get('resource_file') !== null; 
+        }
+        return showResource;
     }
 
     /**
@@ -40,7 +47,15 @@ class ViewResourceList extends Marionette.CompositeView
      */
     onRender()
     {
-        this.ui.checkboxFilter[0].checked = this._includeGeneratedResources;
+        if (this.ui.checkboxFilterOrigin.length > 0)
+        {
+            this.ui.checkboxFilterOrigin[0].checked = this._includeGeneratedResources;
+        }
+
+        if (this.ui.checkboxFilterNoFile.length > 0)
+        {
+            this.ui.checkboxFilterNoFile[0].checked = this._includeNoFileResources;
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -55,11 +70,20 @@ class ViewResourceList extends Marionette.CompositeView
     }
 
     /**
-     * Handle checkbox for resource filtering.
+     * Handle checkbox for resource origin filtering.
      */
-    _handleCheckboxFilter()
+    _handleCheckboxFilterOrigin()
     {
-        this._includeGeneratedResources = this.ui.checkboxFilter[0].checked;
+        this._includeGeneratedResources = this.ui.checkboxFilterOrigin[0].checked;
+        this.render();
+    }
+
+    /**
+     * Handle checkbox for resource no-file filtering.
+     */
+    _handleCheckboxFilterNoFile()
+    {
+        this._includeNoFileResources = this.ui.checkboxFilterNoFile[0].checked;
         this.render();
     }
 }
@@ -74,10 +98,12 @@ ViewResourceList.prototype.collectionEvents = {
     'all': 'render'
 };
 ViewResourceList.prototype.ui = {
-    'checkboxFilter': '#checkbox-filter'
+    'checkboxFilterOrigin': '#checkbox-filter_origin',
+    'checkboxFilterNoFile': '#checkbox-filter_nofile'
 };
 ViewResourceList.prototype.events = {
-    'change @ui.checkboxFilter': '_handleCheckboxFilter'
+    'change @ui.checkboxFilterOrigin': '_handleCheckboxFilterOrigin',
+    'change @ui.checkboxFilterNoFile': '_handleCheckboxFilterNoFile'
 };
 ViewResourceList.prototype.childViewContainer = 'tbody';
 
