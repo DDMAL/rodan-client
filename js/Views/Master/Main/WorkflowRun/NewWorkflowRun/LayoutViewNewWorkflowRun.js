@@ -67,7 +67,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, aPass => this._handleRequestIsResourceAssignment(aPass));
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
         this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, aPass => this._handleCommandCreate(aPass));
+        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, options => this._handleCommandCreate(options), this);
     }
 
     /**
@@ -104,9 +104,9 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
     /**
      * Handle create command.
      */
-    _handleCommandCreate(aPass)
+    _handleCommandCreate(options)
     {
-        var workflowRun = new WorkflowRun(aPass);
+        var workflowRun = new WorkflowRun(options);
         workflowRun.set('resource_assignments', this._resourceAssignments);
         workflowRun.set('workflow', this._workflow.get('url'));
         workflowRun.save();

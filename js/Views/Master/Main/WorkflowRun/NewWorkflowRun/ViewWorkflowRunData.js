@@ -17,7 +17,7 @@ class ViewWorkflowRunData extends Marionette.ItemView
     initialize(options)
     {
         this._initializeRadio();
-        this._workflow = options.workflow;
+        this.model = options.workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
