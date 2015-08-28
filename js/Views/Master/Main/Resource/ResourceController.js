@@ -22,6 +22,7 @@ class ResourceController extends BaseController
         this._rodanChannel.reply(Events.COMMAND__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
         this._rodanChannel.reply(Events.COMMAND__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
         this._rodanChannel.reply(Events.COMMAND__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
+        this._rodanChannel.reply(Events.COMMAND__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
 
         // Requests.
         this._rodanChannel.on(Events.EVENT__RESOURCES_SELECTED, aOptions => this._handleEventListSelected(aOptions));
@@ -29,8 +30,36 @@ class ResourceController extends BaseController
    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Command handlers
+// PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle show LayoutView.
+     */
+    _handleCommandShowLayoutView(options)
+    {
+        this._layoutView = options.layoutView;
+    }
+
+    /**
+     * Handle list selection.
+     */
+    _handleEventListSelected(aOptions)
+    {
+        this._layoutView = new LayoutViewResource({project: aOptions.project});
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
+        this._layoutView.showList(new ViewResourceList({query: {project: aOptions.project.id},
+                                                        template: '#template-main_resource_list',
+                                                        childView: ViewResourceListItem}));
+    }
+
+    /**
+     * Handle item selection.
+     */
+    _handleEventItemSelected(aOptions)
+    {
+        this._layoutView.showItem(new ViewResource(aOptions));
+    }
+
     /**
      * Handle command add Resource.
      */
@@ -77,32 +106,6 @@ class ResourceController extends BaseController
                                {patch: true, success: () => this._handleCallbackAddSuccess()});
     }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Event handlers
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected(aOptions)
-    {
-        this._layoutView = new LayoutViewResource({project: aOptions.project});
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
-        this._layoutView.showList(new ViewResourceList({query: {project: aOptions.project.id},
-                                                        template: '#template-main_resource_list',
-                                                        childView: ViewResourceListItem}));
-    }
-
-    /**
-     * Handle item selection.
-     */
-    _handleEventItemSelected(aOptions)
-    {
-        this._layoutView.showItem(new ViewResource(aOptions));
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Callback handlers
-///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle delete success.
      */

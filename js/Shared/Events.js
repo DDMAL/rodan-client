@@ -34,13 +34,14 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__RESOURCE_ADD: 'COMMAND__RESOURCE_ADD',                 // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
-    COMMAND__RESOURCE_DELETE: 'COMMAND__RESOURCE_DELETE',           // Called when Resource needs to be deleted. Passes {resource: Resource}.
-    COMMAND__RESOURCES_LOAD: 'COMMAND__RESOURCES_LOAD',             // Instructs loading of Resources. Takes object containing various query IDs.
-    COMMAND__RESOURCE_SAVE: 'COMMAND__RESOURCE_SAVE',               // Called when Resource needs to be saved. Takes {resource: Resource, fields: {object with attributes to change}}.
-    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',           // Called on resource selection. Takes {resource: Resource}.
-    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',         // Called on resources selection. Takes (project: Project}.
-    REQUEST__RESOURCE_COLLECTION: 'REQUEST__RESOURCE_COLLECTION',   // Returns global Resource collection.
+    COMMAND__RESOURCE_ADD: 'COMMAND__RESOURCE_ADD',                         // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
+    COMMAND__RESOURCE_DELETE: 'COMMAND__RESOURCE_DELETE',                   // Called when Resource needs to be deleted. Passes {resource: Resource}.
+    COMMAND__RESOURCES_LOAD: 'COMMAND__RESOURCES_LOAD',                     // Instructs loading of Resources. Takes object containing various query IDs.
+    COMMAND__RESOURCE_SAVE: 'COMMAND__RESOURCE_SAVE',                       // Called when Resource needs to be saved. Takes {resource: Resource, fields: {object with attributes to change}}.
+    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on resource selection. Takes {resource: Resource}.
+    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on resources selection. Takes (project: Project}.
+    REQUEST__RESOURCE_COLLECTION: 'REQUEST__RESOURCE_COLLECTION',           // Returns global Resource collection.
+    COMMAND__RESOURCE_SHOWLAYOUTVIEW: 'COMMAND__RESOURCE_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Resources (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // ResourceType

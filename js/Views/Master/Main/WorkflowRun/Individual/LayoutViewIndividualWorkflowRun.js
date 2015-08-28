@@ -3,6 +3,7 @@ import Radio from 'backbone.radio';
 import _ from 'underscore';
 
 import Events from '../../../../../Shared/Events';
+import LayoutViewResource from '../../Resource/LayoutViewResource';
 import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewResourceList from '../../Resource/List/ViewResourceList';
 import ViewResourceListItem from '../../Resource/List/ViewResourceListItem';
@@ -24,11 +25,11 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.model = options.workflowRun;
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
-        this.rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
+        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
+        this._rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
         this.addRegions({
-            regionRunJobList: '#region-main_workflowrun_individual_runjob_list',
-            regionResourceList: '#region-main_workflowrun_individual_resource_list'
+            regionRunJobList: '#region-main_workflowrun_individual_runjobs',
+            regionResourceList: '#region-main_workflowrun_individual_resources'
         });
     }
 
@@ -41,19 +42,23 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this.regionRunJobList.empty();
         this.regionResourceList.empty();
 
-        // Create lists.
+        // Create Resource views.
+        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        this._layoutViewResources = new LayoutViewResource({project: project, template: '#template-main_workflowrun_individual_resources'});
+        this._rodanChannel.request(Events.COMMAND__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
+        this.regionResourceList.show(this._layoutViewResources);
         this._viewResourceList = new ViewResourceList({query: {result_of_workflow_run: this.model.id},
-                                                       template: '#template-main_workflowrun_individual_resource_list',
-                                                       childView: ViewResourceListItem,
-                                                       filters: false})
+                                                       template: '#template-main_workflowrun_individual_resources_list',
+                                                       childView: ViewResourceListItem});
+        this._layoutViewResources.showList(this._viewResourceList);
+
+        // Create RunJob views.
         this._viewRunJobList = new ViewRunJobList({query: {workflow_run: this.model.id},
                                                       template: '#template-main_runjob_list',
                                                       childView: ViewRunJobListItem});
         this.regionRunJobList.show(this._viewRunJobList);
-        this.regionResourceList.show(this._viewResourceList);
 
-        // Hide RunJob list by default.
-//        this.regionRunJobList.$el.hide();
+        // Show Resources on default.
         this._showResources();
     }
 
@@ -65,7 +70,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
