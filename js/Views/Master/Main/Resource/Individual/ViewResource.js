@@ -20,6 +20,7 @@ class ViewResource extends Marionette.CompositeView
         this.model = options.resource;
         this._initializeRadio();
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
+        this.collection.each(function(model) { model.unset('selected'); });
         var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});
         resourceType.set('selected', 'selected');
     }
