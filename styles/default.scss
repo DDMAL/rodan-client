@@ -61,6 +61,11 @@ body
     font-size: $size-font + vw;
 }
 
+textarea {
+    width: 100%;
+    resize: nonw
+}
+
 div.top {
     height: $height-top + %; //fallback
     height: $height-top + vh;

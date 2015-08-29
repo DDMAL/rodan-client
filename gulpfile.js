@@ -11,7 +11,7 @@ gulp.task('develop:javascript', shell.task([
 ]));
 
 gulp.task('develop:templates', shell.task([
-    'python support/build-template.py -b templates/index.html -t templates/views web'
+    'python support/build-template.py -b templates/index.html -t templates/Views web'
 ]));
 
 gulp.task('develop:styles', shell.task([
@@ -81,7 +81,7 @@ gulp.task('develop', ['develop:server'], function() {
 * Production tasks.
 */
 gulp.task('production:templates', shell.task([
-    'python support/build-template.py -b templates/index.html -t templates/views web'
+    'python support/build-template.py -b templates/index.html -t templates/Views web'
 ]));
 
 gulp.task('production:javascript', shell.task([

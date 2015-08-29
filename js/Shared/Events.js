@@ -83,14 +83,6 @@ var Events =
     REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION', // Returns global WorkflowJobCoordinateSet collection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowJobGroup
-///////////////////////////////////////////////////////////////////////////////////////
-    COMMAND__WORKFLOWJOBGROUP_ADD: 'COMMAND__WORKFLOWJOBGROUP_ADD',                 // Called when WorkflowJobGroup needs to be added. Takes {workflowjobgroup: WorkflowJobGroup}.
-    COMMAND__WORKFLOWJOBGROUP_DELETE: 'COMMAND__WORKFLOWJOBGROUP_DELETE',           // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
-    COMMAND__WORKFLOWJOBGROUP_SAVE: 'COMMAND__WORKFLOWJOBGROUP_SAVE',               // Called when WorkflowJobGroup needs to be saved. Takes object with attributes to change.
-    REQUEST__WORKFLOWJOBGROUP_COLLECTION: 'REQUEST__WORKFLOWJOBGROUP_COLLECTION',   // Returns WorkflowJobGroup Collection.  Takes (project: Project}.
-
-///////////////////////////////////////////////////////////////////////////////////////
 // COMMANDS
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__GET_ROUTES: 'COMMAND__GET_ROUTES',
@@ -121,7 +113,6 @@ var Events =
 
     // Workflow builder commands that control the view.
     COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',                           // Called when WorkflowJobGroup control view needs to be shown.
-    COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_WORKFLOWJOBGROUPS: 'COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_WORKFLOWJOBGROUPS', // Called when WorkflowJobGroup control view needs to be shown.
 
     // Workflow builder GUI commands. These events tell the workspace what needs to be done. The GUI sends these commands.
     COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: Workflow}.
