@@ -50,6 +50,14 @@ var Events =
     REQUEST__RESOURCETYPE_COLLECTION: 'REQUEST__RESOURCETYPE_COLLECTION',   // Returns global ResourceType collection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// RunJob
+///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',                   // Called on RunJob selection. Takes {runjob: RunJob}.
+    EVENT__RUNJOBS_SELECTED: 'EVENT__RUNJOBS_SELECTED',                 // Called on RunJob selection. Takes (project: Project}.
+    REQUEST__RUNJOB_COLLECTION: 'REQUEST__RUNJOB_COLLECTION',           // Returns global RunJob collection.
+    COMMAND__RUNJOB_SHOWLAYOUTVIEW: 'COMMAND__RUNJOB_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing RunJobs (outside of the primary RunJobs view). This tells the RunJobController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+
+///////////////////////////////////////////////////////////////////////////////////////
 // System
 ///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__DISPLAY_MESSAGE: 'COMMAND__DISPLAY_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.

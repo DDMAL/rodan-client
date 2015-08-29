@@ -1,10 +1,10 @@
-Name: <input type="text" id="text-resource_name" value="<%= name %>"><br>
-Description: <input type="text" id="text-resource_description" value="<%= description %>"><br>
+Name: <input type="text" id="text-resource_name" value="<%= name %>" style="width: 100%"><br>
+Description: <textarea id="text-resource_description" rows="10" style="width: 100%; resize: none"><%= description %></textarea><br>
 Creator: <%= creator.first_name %> <%= creator.last_name %> (<%= creator.username %>)<br>
 Created: <%= _.formatFromUTC(created) %><br>
 Updated: <%= _.formatFromUTC(updated) %><br>
 Type: <%= resource_type_full.description %> (<%= resource_type_full.mimetype %>, ext: <%= resource_type_full.extension %>)<br>
-New Resource Type: <select id="select-resourcetype"></select><br>
+New Resource Type: <select id="select-resourcetype" style="width: 100%;"></select><br>
 <button id="button-main_resource_individual_save">Save</button>
 <form style="display: inline" action="<%= viewer_url %>" method="get">
     <button>View/Download</button>

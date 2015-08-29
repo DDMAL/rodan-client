@@ -4,11 +4,12 @@ import _ from 'underscore';
 
 import Events from '../../../../../Shared/Events';
 import LayoutViewResource from '../../Resource/LayoutViewResource';
+import LayoutViewRunJob from '../../RunJob/LayoutViewRunJob';
 import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewResourceList from '../../Resource/List/ViewResourceList';
 import ViewResourceListItem from '../../Resource/List/ViewResourceListItem';
-import ViewRunJobList from './RunJob/ViewRunJobList';
-import ViewRunJobListItem from './RunJob/ViewRunJobListItem';
+import ViewRunJobList from '../../RunJob/List/ViewRunJobList';
+import ViewRunJobListItem from '../../RunJob/List/ViewRunJobListItem';
 
 /**
  * LayoutView for viewing an individual WorkflowRun.
@@ -25,7 +26,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.model = options.workflowRun;
-        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
+        this.collection = this._rodanChannel.request(Events.REQUEST__RUNJOB_COLLECTION);
         this._rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
         this.addRegions({
             regionRunJobList: '#region-main_workflowrun_individual_runjobs',
@@ -52,11 +53,14 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
                                                        childView: ViewResourceListItem});
         this._layoutViewResources.showList(this._viewResourceList);
 
-        // Create RunJob views.
+        // Create Resource views.
+        this._layoutViewRunJobs = new LayoutViewRunJob({project: project, template: '#template-main_workflowrun_individual_runjobs'});
+        this._rodanChannel.request(Events.COMMAND__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
+        this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({query: {workflow_run: this.model.id},
-                                                      template: '#template-main_runjob_list',
-                                                      childView: ViewRunJobListItem});
-        this.regionRunJobList.show(this._viewRunJobList);
+                                                   template: '#template-main_runjob_list',
+                                                   childView: ViewRunJobListItem});
+        this._layoutViewRunJobs.showList(this._viewRunJobList);
 
         // Show Resources on default.
         this._showResources();

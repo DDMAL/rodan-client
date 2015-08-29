@@ -1,20 +1,25 @@
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Events from '../../../../../Shared/Events';
+
 /**
- * This class represents the view of a RunJob.
+ * RunJob list view.
  */
-class ViewRunJobListItem extends Marionette.ItemView
+class ViewRunJobList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
+        this.collection = this._rodanChannel.request(Events.REQUEST__RUNJOB_COLLECTION);
+        this._rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: options.query});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -25,28 +30,19 @@ class ViewRunJobListItem extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Handles click.
-     */
-    _handleClick()
-    {
-       // this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
+        this._rodanChannel = Radio.channel('rodan');
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewRunJobListItem.prototype.modelEvents = {
+ViewRunJobList.prototype.modelEvents = {
     'all': 'render'
 };
-ViewRunJobListItem.prototype.template = '#template-main_workflowrun_individual_runjob_list_item';
-ViewRunJobListItem.prototype.tagName = 'tr';
-ViewRunJobListItem.prototype.events = {
-    'click': '_handleClick'
+ViewRunJobList.prototype.collectionEvents = {
+    'all': 'render'
 };
+ViewRunJobList.prototype.childViewContainer = 'tbody';
 
-export default ViewRunJobListItem;
+export default ViewRunJobList;

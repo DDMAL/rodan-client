@@ -99,7 +99,7 @@ class ResourceController extends BaseController
      * Handle command save Resource.
      */
     _handleCommandResourceSave(aOptions)
-    {
+    {debugger;
         aOptions.resource.save({resource_type: aOptions.resource_type,
                                 name: aOptions.name,
                                 description: aOptions.description},

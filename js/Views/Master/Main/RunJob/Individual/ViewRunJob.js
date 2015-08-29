@@ -1,25 +1,23 @@
-import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 
 /**
- * RunJob list view.
+ * RunJob view.
  */
-class ViewRunJobList extends Marionette.CompositeView
+class ViewRunJob extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initialize
      */
     initialize(options)
     {
+        this.model = options.runjob;
         this._initializeRadio();
-        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_RUNJOB);
-        this._rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: options.query});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -37,12 +35,9 @@ class ViewRunJobList extends Marionette.CompositeView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewRunJobList.prototype.modelEvents = {
+ViewRunJob.prototype.modelEvents = {
     'all': 'render'
 };
-ViewRunJobList.prototype.collectionEvents = {
-    'all': 'render'
-};
-ViewRunJobList.prototype.childViewContainer = 'tbody';
+ViewRunJob.prototype.template = '#template-main_runjob_individual';
 
-export default ViewRunJobList;
+export default ViewRunJob;

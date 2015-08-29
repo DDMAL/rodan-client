@@ -5,6 +5,7 @@ import Events from '../../../Shared/Events';
 import ViewLogin from './Login/ViewLogin';
 import ProjectController from './Project/ProjectController';
 import ResourceController from './Resource/ResourceController';
+import RunJobController from './RunJob/RunJobController';
 import WorkflowController from './Workflow/WorkflowController';
 import WorkflowRunController from './WorkflowRun/WorkflowRunController';
 import WorkflowBuilderController from './WorkflowBuilder/WorkflowBuilderController';
@@ -31,6 +32,7 @@ class LayoutViewMain extends Marionette.LayoutView
         // Create controllers.
         this.projectController = new ProjectController();
         this.resourceController = new ResourceController();
+        this.runJobController = new RunJobController();
         this.workflowController = new WorkflowController();
         this.workflowRunController = new WorkflowRunController();
         this.workflowBuilderController = new WorkflowBuilderController();
