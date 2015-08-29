@@ -14,6 +14,10 @@ class ViewResourceTypeListItem extends Marionette.ItemView
     onRender()
     {
         this.$el.attr('value', this.model.get('url'));
+        if (this.model.has('selected'))
+        {
+            this.$el.attr('selected', 'selected');
+        }
     }
 }
 

@@ -20,6 +20,8 @@ class ViewResource extends Marionette.CompositeView
         this.model = options.resource;
         this._initializeRadio();
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
+        var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});
+        resourceType.set('selected', 'selected');
     }
 
     /**
@@ -27,7 +29,11 @@ class ViewResource extends Marionette.CompositeView
      */
     templateHelpers() 
     {
-        return { items: this.collection.toJSON() };
+        // Find the ResourceType that matches this one and select it.
+  /*      
+        var jsonArray = this.collection.toJSON();
+        $.each(jsonArray, function(object) { object.selected = object.url === url ? 'selected' : 'no'; });
+        return [];*/
     }
 
     /**
