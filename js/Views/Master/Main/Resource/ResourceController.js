@@ -28,10 +28,7 @@ class ResourceController extends BaseController
         this._rodanChannel.on(Events.EVENT__RESOURCES_SELECTED, aOptions => this._handleEventListSelected(aOptions));
         this._rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, aOptions => this._handleEventItemSelected(aOptions));
    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
+   
     /**
      * Handle show LayoutView.
      */

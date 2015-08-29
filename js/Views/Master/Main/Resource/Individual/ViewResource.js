@@ -26,18 +26,6 @@ class ViewResource extends Marionette.CompositeView
     }
 
     /**
-     * Returns ResourceTypes.
-     */
-    templateHelpers() 
-    {
-        // Find the ResourceType that matches this one and select it.
-  /*      
-        var jsonArray = this.collection.toJSON();
-        $.each(jsonArray, function(object) { object.selected = object.url === url ? 'selected' : 'no'; });
-        return [];*/
-    }
-
-    /**
      * Destroy callback.
      */
     onDestroy()

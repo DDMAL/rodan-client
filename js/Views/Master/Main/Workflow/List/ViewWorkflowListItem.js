@@ -34,7 +34,7 @@ class ViewWorkflowListItem extends Marionette.ItemView
      * Handles click.
      */
     _handleClick()
-    {
+    {debugger;
         this._rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED, {workflow: this.model});
     }
 

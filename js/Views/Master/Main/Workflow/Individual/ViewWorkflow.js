@@ -7,25 +7,17 @@ import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
 /**
  * This class represents the view for a single Workflow summary.
  */
-class ViewWorkflow extends Marionette.CompositeView
+class ViewWorkflow extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize
      */
     initialize()
     {
         this._initializeRadio();
-    }
-
-    /**
-     * Returns the associated WorkflowRun collection to the template.
-     */
-    templateHelpers() 
-    {
-        return { items: this.collection.toJSON() };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -46,8 +38,6 @@ class ViewWorkflow extends Marionette.CompositeView
     _handleEventItemSelected(aReturn)
     {
         this.model = aReturn.workflow;
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.request(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {workflow: this.model.id}});
     }
 
     /**
@@ -96,7 +86,5 @@ ViewWorkflow.prototype.events = {
             'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
-ViewWorkflow.prototype.childView = ViewWorkflowRunListItem;
-ViewWorkflow.prototype.childViewContainer = 'tbody';
 
 export default ViewWorkflow;
