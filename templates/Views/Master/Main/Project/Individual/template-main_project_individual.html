@@ -1,24 +1,33 @@
-<h1>Project <%= name%></h1>
-Name: <input type="text" id="text-project_name" value="<%= name %>"><br>
-Description: <input type="text" id="text-project_description" value="<%= description %>"><br>
-Creator: <%= creator.username %> <br>
-Created on: <%= _.formatFromUTC(created) %><br>
-Updated on: <%= _.formatFromUTC(updated) %><br>
-<span id="resource_count">Resources: <%= resource_count%></span><br>
-<span id="workflow_count">Workflows: <%= workflow_count%></span><br>
-<button id="button-save_project">Save</button>
-<button id="button-delete_project">Delete</button>
-<hr>
-<h2>Workflow Runs</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class='row'>
+    <div class='col-lg-4'>
+        <div style=''>
+            <h1>Project</h1>
+            Name: <input type="text" id="text-project_name" value="<%= name %>" style='width: 100%;'><br>
+            Description: <textarea id="text-project_description" rows="10"><%= description %></textarea><br>
+            Creator: <%= creator.username %> <br>
+            Created on: <%= _.formatFromUTC(created) %><br>
+            Updated on: <%= _.formatFromUTC(updated) %><br>
+            <span id="resource_count">Resources: <%= resource_count%></span><br>
+            <span id="workflow_count">Workflows: <%= workflow_count%></span><br>
+            <button id="button-save_project">Save</button>
+            <button id="button-delete_project">Delete</button>
+        </div>
+    </div>
+    <div class='col-lg-8'>
+        <div class="table-responsive">
+            <h2>Workflow Runs</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

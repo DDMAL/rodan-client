@@ -48,9 +48,9 @@ class ProjectController extends BaseController
     /**
      * Handle command Project save.
      */
-    _handleCommandProjectSave(aOptions)
+    _handleCommandProjectSave(options)
     {
-        aOptions.project.save(aOptions.fields, {patch: true});
+        options.project.save(options.fields, {patch: true});
     }
 
     /**
