@@ -10,12 +10,12 @@ class ViewJob extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this._initializeRadio();
-        this.model = aParameters.job;
+        this.model = options.job;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +36,6 @@ class ViewJob extends Marionette.ItemView
 ViewJob.prototype.modelEvents = {
     'all': 'render'
 };
-ViewJob.prototype.template = '#template-main_workflowbuilder_control_job_individual';
+ViewJob.prototype.template = '#template-main_job_individual';
 
 export default ViewJob;

@@ -5,7 +5,7 @@ import Configuration from '../../../../../Configuration';
 import Connection from '../../../../../Models/Connection';
 import Events from '../../../../../Shared/Events';
 import ViewWorkflowData from './ViewWorkflowData';
-import LayoutViewControlJob from './Job/LayoutViewControlJob';
+import LayoutViewJob from '../../Job/LayoutViewJob';
 import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflowJob';
 import WorkflowJob from '../../../../../Models/WorkflowJob';
 import WorkflowJobCoordinateSet from '../../../../../Models/WorkflowJobCoordinateSet';
@@ -84,7 +84,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _initializeViews(aParameters)
     {
         this.viewWorkflowData = new ViewWorkflowData(aParameters);
-        this.viewControlJob = new LayoutViewControlJob();
+        this.viewControlJob = new LayoutViewJob();
     }
 
     /**
@@ -138,7 +138,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandShowControlJobView()
     {
-        this.viewControlJob = new LayoutViewControlJob();
+        this.viewControlJob = new LayoutViewJob();
         this.regionControlWorkflowParts.show(this.viewControlJob);
     }
 

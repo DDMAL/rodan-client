@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 
 /**
  * This class represents the view (and controller) for the job item.
@@ -12,7 +12,7 @@ class ViewJobListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
@@ -54,10 +54,10 @@ class ViewJobListItem extends Marionette.ItemView
 ViewJobListItem.prototype.modelEvents = {
     'all': 'render'
 };
-ViewJobListItem.prototype.template = '#template-main_workflowbuilder_control_job_list_item';
+ViewJobListItem.prototype.template = '#template-main_job_list_item';
 ViewJobListItem.prototype.tagName = 'tr';
 ViewJobListItem.prototype.ui = {
-    buttonAdd: '#button-main_workflowbuilder_control_job_button_add'
+    buttonAdd: '#button-main_job_button_add'
 };
 ViewJobListItem.prototype.events = {
     'click @ui.buttonAdd': '_handleClickButtonAdd',

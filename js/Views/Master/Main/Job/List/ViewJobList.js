@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 import ViewJobListItem from './ViewJobListItem';
 
 /**
@@ -13,7 +13,7 @@ class ViewJobList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * TInitialize.
      */
     initialize()
     {
@@ -40,7 +40,7 @@ ViewJobList.prototype.modelEvents = {
     'all': 'render'
 };
 ViewJobList.prototype.childViewContainer = 'tbody';
-ViewJobList.prototype.template = '#template-main_workflowbuilder_control_job_list';
+ViewJobList.prototype.template = '#template-main_job_list';
 ViewJobList.prototype.childView = ViewJobListItem;
 
 export default ViewJobList;

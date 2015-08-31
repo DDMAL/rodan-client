@@ -3,24 +3,24 @@ import Radio from 'backbone.radio';
 
 import ViewJob from './Individual/ViewJob';
 import ViewJobList from './List/ViewJobList';
-import Events from '../../../../../../Shared/Events';
+import Events from '../../../../Shared/Events';
 
 /**
  * This class represents the layout view for Jobs.
  */
-class LayoutViewControlJob extends Marionette.LayoutView
+class LayoutViewJob extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.addRegions({
-            regionControlJobList: '#region-main_workflowbuilder_control_job_list',
-            regionControlJobIndividual: '#region-main_workflowbuilder_control_job_individual'
+            regionControlJobList: '#region-main_job_list',
+            regionControlJobIndividual: '#region-main_job_individual'
         });
         this._initializeViews();
         this._initializeRadio();
@@ -84,6 +84,6 @@ class LayoutViewControlJob extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewControlJob.prototype.template = '#template-main_workflowbuilder_control_job';
+LayoutViewJob.prototype.template = '#template-main_job';
 
-export default LayoutViewControlJob;
+export default LayoutViewJob;
