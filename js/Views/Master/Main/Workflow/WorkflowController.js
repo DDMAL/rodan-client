@@ -18,7 +18,7 @@ class WorkflowController extends BaseController
     _initializeRadio()
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
-        this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, () => this._handleEventItemSelected());
+        this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
         this._rodanChannel.reply(Events.COMMAND__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this._rodanChannel.reply(Events.COMMAND__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
 
@@ -46,9 +46,9 @@ class WorkflowController extends BaseController
     /**
      * Handle item selection.
      */
-    _handleEventItemSelected()
+    _handleEventItemSelected(options)
     {
-        this._viewItem = new ViewWorkflow();
+        this._viewItem = new ViewWorkflow({model: options.workflow});
         this._layoutView.showItem(this._viewItem);
     }
 

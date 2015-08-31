@@ -28,44 +28,50 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, aReturn => this._handleEventItemSelected(aReturn));
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
-     * Handle item selection.
+     * Handle button run workflow.
      */
-    _handleEventItemSelected(aReturn)
+    _handleButtonRunWorkflow()
     {
-        this.model = aReturn.workflow;
+        if (!this.model.get('valid'))
+        {
+            alert('The workflow must be valid prior to run.');
+        }
+        else
+        {
+            this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
+        }
     }
 
     /**
-     * Handle button workflow duplicate.
+     * Handle button delete workflow.
      */
-    _handleButtonWorkflowDuplicate()
+    _handleButtonDeleteWorkflow()
     {
-        alert('not implemented');
-    }
-
-    /**
-     * Handle button workflow edit.
-     */
-    _handleButtonWorkflowEdit()
-    {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
-    }
-
-    /**
-     * Handle button workflow delete.
-     */
-    _handleButtonWorkflowDelete()
-    {
-        var confirmation = confirm('Are you sure you want to delete workflow "' + this.model.attributes.name + '"?');
+        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
         if (confirmation)
         {
-            this.rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
+            this._rodanChannel.trigger(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
         }
+    }
+
+    /**
+     * Handle button edit workflow.
+     */
+    _handleButtonEditWorkflow()
+    {
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
+    }
+
+    /**
+     * Handle button copy workflow.
+     */
+    _handleButtonCopyWorkflow()
+    {
+        alert('not yet implemented');
     }
 }
 
@@ -76,14 +82,16 @@ ViewWorkflow.prototype.modelEvents = {
             'all': 'render'
         };
 ViewWorkflow.prototype.ui = {
-            workflowDuplicate: '#workflow-duplicate',
-            workflowEdit: '#workflow-edit',
-            workflowDelete: '#workflow-delete'
+    runWorkflowButton: '#button-run_workflow',
+    deleteWorkflowButton: '#button-delete_workflow',
+    copyWorkflowButton: '#button-copy_workflow',
+    editWorkflowButton: '#button-edit_workflow'
         };
 ViewWorkflow.prototype.events = {
-            'click @ui.workflowDuplicate': '_handleButtonWorkflowDuplicate',
-            'click @ui.workflowEdit': '_handleButtonWorkflowEdit',
-            'click @ui.workflowDelete': '_handleButtonWorkflowDelete'
+    'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
+    'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
+    'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
+    'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
 
