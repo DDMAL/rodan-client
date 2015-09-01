@@ -1,6 +1,5 @@
 import Events from '../../../../Shared/Events';
 import LayoutViewWorkflowBuilder from './LayoutViewWorkflowBuilder';
-import LayoutViewWorkflowEditor from './Control/LayoutViewWorkflowEditor';
 import Workflow from '../../../../Models/Workflow';
 import WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/WorkflowBuilder';
 import BaseController from '../../../../Controllers/BaseController';
@@ -29,7 +28,7 @@ class WorkflowBuilderController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, aReturn => this._handleEventBuilderSelected(aReturn));
+        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,45 +37,11 @@ class WorkflowBuilderController extends BaseController
     /**
      * Handle selection.
      */
-    _handleEventBuilderSelected(aReturn)
+    _handleEventBuilderSelected(options)
     {
-        this._layoutView = new LayoutViewWorkflowBuilder();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView );
-
-        // Initialize the workspace and build the workflow.
+        this._layoutView = new LayoutViewWorkflowBuilder({workflow: options.workflow});
+        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
         this._workspace.initialize('canvas-workspace');
-
-        // Clear existing view.
-        if (this.hasOwnProperty('controlWorkflowView'))
-        {
-            this.controlWorkflowView.destroy();
-        }
-        
-        // Get the workflow.
-        if (aReturn.workflow !== null)
-        {
-            this.controlWorkflowView = new LayoutViewWorkflowEditor({workflow: aReturn.workflow});
-        }
-        else
-        {
-            var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-            var workflow = this._createWorkflow(project);
-            this.controlWorkflowView = new LayoutViewWorkflowEditor({workflow: workflow});
-        }
-        this._layoutView.showView(this.controlWorkflowView);
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - workflow object controls
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Create workflow.
-     */
-    _createWorkflow(aProject)
-    {
-        var workflow =  new Workflow({project: aProject.get('url'), name: 'untitled'});
-        workflow.save();
-        return workflow;
     }
 }
 

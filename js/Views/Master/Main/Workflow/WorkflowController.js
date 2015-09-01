@@ -2,6 +2,7 @@ import Events from '../../../../Shared/Events';
 import LayoutViewWorkflow from './LayoutViewWorkflow';
 import ViewWorkflow from './Individual/ViewWorkflow';
 import ViewWorkflowList from './List/ViewWorkflowList';
+import Workflow from '../../../../Models/Workflow';
 import BaseController from '../../../../Controllers/BaseController';
 
 /**
@@ -21,7 +22,7 @@ class WorkflowController extends BaseController
         this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
         this._rodanChannel.reply(Events.COMMAND__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this._rodanChannel.reply(Events.COMMAND__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-
+        this._rodanChannel.reply(Events.COMMAND__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
     }
    
     /**
@@ -58,6 +59,16 @@ class WorkflowController extends BaseController
     _handleCommandDeleteWorkflow(options)
     {
         options.workflow.destroy();
+    }
+
+    /**
+     * Handle command add workflow.
+     */
+    _handleCommandAddWorkflow(options)
+    {
+        var workflows = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
+        var workflow = workflows.create({project: options.project.get('url'), name: 'untitled'});
+        return workflow;
     }
 }
 

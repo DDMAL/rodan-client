@@ -22,7 +22,7 @@ class Workflow extends BaseModel
 
     defaults()
     {
-        return {description: null, name: null};
+        return {description: null, name: null, created: null, updated: null, valid: false};
     }
 
     /**

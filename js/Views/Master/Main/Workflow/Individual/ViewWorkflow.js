@@ -73,6 +73,37 @@ class ViewWorkflow extends Marionette.ItemView
     {
         alert('not yet implemented');
     }
+
+    /**
+     * Handle save button.
+     */
+    _handleButtonSave()
+    {
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+    }
+
+    /**
+     * Handle validate button.
+     */
+    _handleButtonValidate()
+    {
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+    }
+
+    /**
+     * Handle run button.
+     */
+    _handleButtonRun()
+    {
+        if (!this.model.get('valid'))
+        {
+            alert('The workflow must be valid prior to run.');
+        }
+        else
+        {
+            this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -85,13 +116,21 @@ ViewWorkflow.prototype.ui = {
     runWorkflowButton: '#button-run_workflow',
     deleteWorkflowButton: '#button-delete_workflow',
     copyWorkflowButton: '#button-copy_workflow',
-    editWorkflowButton: '#button-edit_workflow'
+    editWorkflowButton: '#button-edit_workflow',
+    buttonSave: '#button-save_workflow_data',
+    buttonValidate: '#button-validate_workflow',
+    buttonRun: '#button-run_workflow',
+    textName: '#text-workflow_name',
+    textDescription: '#text-workflow_description'
         };
 ViewWorkflow.prototype.events = {
     'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
     'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
     'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
     'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
+    'click @ui.buttonSave': '_handleButtonSave',
+    'click @ui.buttonValidate': '_handleButtonValidate',
+    'click @ui.buttonRun': '_handleButtonRun'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
 
