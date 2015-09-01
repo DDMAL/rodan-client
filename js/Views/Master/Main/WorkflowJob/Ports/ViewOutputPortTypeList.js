@@ -1,22 +1,26 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
+import ViewOutputPortTypeListItem from './ViewOutputPortTypeListItem';
 
 /**
- * This class represents the view of an individual output port list item.
+ * This class represents a list of output port types.
  */
-class ViewOutputPortListItem extends Marionette.ItemView
+class ViewOutputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(options.workflowjob.getJobUuid());
+        this.collection = job.get('output_port_types');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,29 +33,16 @@ class ViewOutputPortListItem extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel('rodan');
     }
-
-    /**
-     * Handle delete.
-     */
-    _handleButtonDelete()
-    {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewOutputPortListItem.prototype.modelEvents = {
+ViewOutputPortTypeList.prototype.modelEvents = {
     'all': 'render'
 };
-ViewOutputPortListItem.prototype.ui = {
-    buttonDelete: '#button-delete'
-};
-ViewOutputPortListItem.prototype.events = {
-    'click @ui.buttonDelete': '_handleButtonDelete'
-};
-ViewOutputPortListItem.prototype.template = '#template-main_workflowbuilder_control_outputport_list_item';
-ViewOutputPortListItem.prototype.tagName = 'tr';
+ViewOutputPortTypeList.prototype.template = '#template-main_outputporttype_list';
+ViewOutputPortTypeList.prototype.childView = ViewOutputPortTypeListItem;
+ViewOutputPortTypeList.prototype.childViewContainer = 'tbody';
 
-export default ViewOutputPortListItem;
+export default ViewOutputPortTypeList;

@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 
 /**
  * This class represents the view of an individual output port type list item.
@@ -12,7 +12,7 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
     initialize()
     {
@@ -46,7 +46,7 @@ ViewOutputPortTypeListItem.prototype.modelEvents = {
     'all': 'render'
 };
 ViewOutputPortTypeListItem.prototype.tagName = 'tr';
-ViewOutputPortTypeListItem.prototype.template = '#template-main_workflowbuilder_control_outputporttype_list_item';
+ViewOutputPortTypeListItem.prototype.template = '#template-main_outputporttype_list_item';
 ViewOutputPortTypeListItem.prototype.events = {
     'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
 };

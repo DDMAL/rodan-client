@@ -1,22 +1,26 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
+import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
 
 /**
- * This class represents the view of an individual input port list item.
+ * This class represents a list of input port types.
  */
-class ViewInputPortListItem extends Marionette.ItemView
+class ViewInputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * TODO docs
      */
-    initialize()
+    initialize(aParameters)
     {
         this._initializeRadio();
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
+        this.collection = job.get('input_port_types');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,29 +33,16 @@ class ViewInputPortListItem extends Marionette.ItemView
     {
         this.rodanChannel = Radio.channel('rodan');
     }
-
-    /**
-     * Handle delete.
-     */
-    _handleButtonDelete()
-    {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewInputPortListItem.prototype.modelEvents = {
+ViewInputPortTypeList.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortListItem.prototype.ui = {
-            buttonDelete: '#button-delete'
-        };
-ViewInputPortListItem.prototype.events = {
-            'click @ui.buttonDelete': '_handleButtonDelete'
-        };
-ViewInputPortListItem.prototype.template = '#template-main_workflowbuilder_control_inputport_list_item';
-ViewInputPortListItem.prototype.tagName = 'tr';
+ViewInputPortTypeList.prototype.template = '#template-main_inputporttype_list';
+ViewInputPortTypeList.prototype.childView = ViewInputPortTypeListItem;
+ViewInputPortTypeList.prototype.childViewContainer = 'tbody';
 
-export default ViewInputPortListItem;
+export default ViewInputPortTypeList;

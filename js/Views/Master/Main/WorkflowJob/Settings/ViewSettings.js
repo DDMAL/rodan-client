@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import JSONEditor from 'json-editor';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 
 /**
  * This represents settings for a workflow job.

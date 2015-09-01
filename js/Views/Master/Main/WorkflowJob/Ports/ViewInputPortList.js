@@ -25,7 +25,7 @@ class ViewInputPortList extends Marionette.CompositeView
 ViewInputPortList.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortList.prototype.template = '#template-main_workflowbuilder_control_inputport_list';
+ViewInputPortList.prototype.template = '#template-main_inputport_list';
 ViewInputPortList.prototype.childView = ViewInputPortListItem;
 ViewInputPortList.prototype.childViewContainer = 'tbody';
 

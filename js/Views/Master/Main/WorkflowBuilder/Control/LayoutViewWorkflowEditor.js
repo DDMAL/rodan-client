@@ -6,7 +6,7 @@ import Connection from '../../../../../Models/Connection';
 import Events from '../../../../../Shared/Events';
 import ViewWorkflowData from './ViewWorkflowData';
 import LayoutViewJob from '../../Job/LayoutViewJob';
-import LayoutViewControlWorkflowJob from './WorkflowJob/LayoutViewControlWorkflowJob';
+import LayoutViewControlWorkflowJob from '../../WorkflowJob/LayoutViewControlWorkflowJob';
 import WorkflowJob from '../../../../../Models/WorkflowJob';
 import WorkflowJobCoordinateSet from '../../../../../Models/WorkflowJobCoordinateSet';
 import InputPort from '../../../../../Models/InputPort';

@@ -1,18 +1,18 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../../Shared/Events';
+import Events from '../../../../../Shared/Events';
 
 /**
- * This class represents the view of an individual input port type list item.
+ * This class represents the view of an individual input port list item.
  */
-class ViewInputPortTypeListItem extends Marionette.ItemView
+class ViewInputPortListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
     initialize()
     {
@@ -31,27 +31,27 @@ class ViewInputPortTypeListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles input port add.
+     * Handle delete.
      */
-    _handleButtonNewInputPort()
+    _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model});
+        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewInputPortTypeListItem.prototype.modelEvents = {
+ViewInputPortListItem.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortTypeListItem.prototype.tagName = 'tr';
-ViewInputPortTypeListItem.prototype.template = '#template-main_workflowbuilder_control_inputporttype_list_item';
-ViewInputPortTypeListItem.prototype.events = {
-    'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
-};
-ViewInputPortTypeListItem.prototype.ui = {
-    buttonNewInputPort: '#button-new_inputport'
-};
+ViewInputPortListItem.prototype.ui = {
+            buttonDelete: '#button-delete'
+        };
+ViewInputPortListItem.prototype.events = {
+            'click @ui.buttonDelete': '_handleButtonDelete'
+        };
+ViewInputPortListItem.prototype.template = '#template-main_inputport_list_item';
+ViewInputPortListItem.prototype.tagName = 'tr';
 
-export default ViewInputPortTypeListItem;
+export default ViewInputPortListItem;

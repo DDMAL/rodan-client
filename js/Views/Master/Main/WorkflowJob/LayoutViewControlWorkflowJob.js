@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../../Shared/Events';
+import Events from '../../../../Shared/Events';
 import LayoutViewControlPorts from './Ports/LayoutViewControlPorts';
 import ViewSettings from './Settings/ViewSettings';
 
@@ -34,9 +34,14 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     onBeforeShow()
     {
+        // Empty regions.
+        this.regionControlPorts.empty();
+        this.regionControlSettings.empty();
+
+        
         this.regionControlPorts.show(this._portsLayoutView);
         this.regionControlSettings.show(this._viewSettings);
-        this.regionControlPorts.$el.hide();
+        this._showSettings();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -57,30 +62,6 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Handle button toggle ports.
-     */
-    _handleButtonTogglePorts()
-    {
-        if (this.regionControlSettings.$el.is(':visible'))
-        {
-            this.regionControlSettings.$el.toggle('fast');
-        }
-        this.regionControlPorts.$el.toggle('fast');
-    }
-
-    /**
-     * Handle button toggle settings.
-     */
-    _handleButtonToggleSettings()
-    {
-        if (this.regionControlPorts.$el.is(':visible'))
-        {
-            this.regionControlPorts.$el.toggle('fast');
-        }
-        this.regionControlSettings.$el.toggle('fast');
     }
 
     /**
@@ -110,6 +91,34 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
             this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_DELETE, {workflowjob: this.model});
         }
     }
+
+    /**
+     * Handle button show Ports.
+     */
+    _showPorts()
+    {
+        this.regionControlSettings.$el.hide();
+        this.ui.buttonTogglePorts.css('text-decoration', 'underline');
+        this.ui.buttonToggleSettings.css('text-decoration', 'none');
+        if (!this.regionControlPorts.$el.is(':visible'))
+        {
+            this.regionControlPorts.$el.toggle('fast');
+        }
+    }
+
+    /**
+     * Handle button show Settings.
+     */
+    _showSettings()
+    {
+        this.regionControlPorts.$el.hide();
+        this.ui.buttonTogglePorts.css('text-decoration', 'none');
+        this.ui.buttonToggleSettings.css('text-decoration', 'underline');
+        if (!this.regionControlSettings.$el.is(':visible'))
+        {
+            this.regionControlSettings.$el.toggle('fast');
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -125,8 +134,8 @@ LayoutViewControlWorkflowJob.prototype.ui = {
     textName: '#text-workflowjob_name'
 };
 LayoutViewControlWorkflowJob.prototype.events = {
-    'click @ui.buttonTogglePorts': '_handleButtonTogglePorts',
-    'click @ui.buttonToggleSettings': '_handleButtonToggleSettings',
+    'click @ui.buttonTogglePorts': '_showPorts',
+    'click @ui.buttonToggleSettings': '_showSettings',
     'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
     'click @ui.buttonSave': '_handleButtonSave',
     'click @ui.buttonDelete': '_handleButtonDelete'
