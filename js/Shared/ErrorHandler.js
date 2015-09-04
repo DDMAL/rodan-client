@@ -17,6 +17,7 @@ class ErrorHandler extends Marionette.Object
     initialize()
     {
         this._initializeRadio();
+        window.onerror = (errorText, url, lineNumber, columnNumber, error) => this._handleJavaScriptError(errorText, url, lineNumber, columnNumber, error);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +30,19 @@ class ErrorHandler extends Marionette.Object
     {
         this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.reply(Events.COMMAND__HANDLER_ERROR, (options) => this._handleError(options));
+    }
+
+    /**
+     * Handles Javscript error.
+     */
+    _handleJavaScriptError(errorText, url, lineNumber, columnNumber, error)
+    {
+        var text = 'text: ' + errorText + '\n';
+        text += 'url: ' + url + '\n';
+        text += 'line: ' + lineNumber + '\n';
+        text += 'column: ' + columnNumber + '\n';
+        text += 'stack trace: ' + '\n';
+        text += error.stack;
     }
 
     /**
@@ -55,14 +69,28 @@ class ErrorHandler extends Marionette.Object
     {
         var response = options.response;
         var responseTextObject = JSON.parse(response.responseText);
-        var message = response.response;
-        if (responseTextObject.hasOwnProperty('detail'))
-        {
-            message = responseTextObject.detail;
-        }
-        else if (options.hasOwnProperty('message'))
+        var message = 'An unknown error occured.';
+
+        // Look for message in options first.
+        if (options.hasOwnProperty('message'))
         {
             message = options.message;
+        }
+
+        // Go through the response text.
+        var first =  true;
+        for(var property in responseTextObject)
+        {
+            if (responseTextObject.hasOwnProperty(property))
+            {
+                message += '\n';
+                if (first)
+                {
+                    message += '\n';
+                    first = false;
+                }
+                message += responseTextObject[property];
+            }
         }
         alert(message);
     }
