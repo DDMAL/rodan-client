@@ -21,6 +21,12 @@ var Configuration = {
     // Identifier for this client.
     USER_AGENT: 'rodan-standard',
 
+    // Client admin info. Leave fields empty if you don't want to be bothered. ;)
+    ADMIN_CLIENT: {
+        name: '', // your name
+        email: '' // your email
+    },
+
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {
 

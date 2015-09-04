@@ -52,7 +52,7 @@ class ErrorHandler extends Marionette.Object
      * Processes HTTP errors.
      */
     _processHTTPError(options)
-    {debugger;
+    {
         var response = options.response;
         var responseTextObject = JSON.parse(response.responseText);
         var message = response.response;

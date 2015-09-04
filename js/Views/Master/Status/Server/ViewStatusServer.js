@@ -3,6 +3,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import _ from 'underscore';
 
+import Configuration from '../../../../Configuration';
 import Events from '../../../../Shared/Events';
 
 /**
@@ -33,7 +34,17 @@ class ViewStatusServer extends Marionette.CompositeView
     {
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_VERSION_RODAN);
-        return _.template($('#template-status_server').html())({hostname: hostname, version: version});
+        if (Configuration.ADMIN_CLIENT.name === '' || Configuration.ADMIN_CLIENT.email === '')
+        {
+            return _.template($('#template-status_server').html())({hostname: hostname, version: version});
+        }
+        else
+        {
+            return _.template($('#template-status_server_withadmin').html())({hostname: hostname,
+                                                                              version: version,
+                                                                              name: Configuration.ADMIN_CLIENT.name,
+                                                                              email: Configuration.ADMIN_CLIENT.email});
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
