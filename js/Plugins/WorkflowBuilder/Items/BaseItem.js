@@ -47,6 +47,11 @@ class BaseItem extends paper.Path
         this._text.content = '';
         this._text.position = this.bounds.center;
         this.addChild(this._text);
+        this._text.onMouseDown = event => this._handleMouseEvent(event);
+        this._text.onMouseUp = event => this._handleMouseEvent(event);
+        this._text.onClick = event => this._handleMouseEvent(event);
+        this._text.onMouseEnter = event => this._handleMouseEvent(event);
+        this._text.onMouseLeave = event => this._handleMouseEvent(event);
         this._text.visible = (options.hasOwnProperty('text') && options.text === true);
         this._text.content = this._associatedModel.get('name');
     }
@@ -153,6 +158,10 @@ class BaseItem extends paper.Path
      */
     _handleMouseEvent(event)
     {
+        // We do this because paperjs doesn't bubble up events.
+        // This line guarantees that events caught by the TEXT actually get to the parent base item.
+        event.target = this;
+
         switch (event.type)
         {
             case 'mouseenter':
