@@ -161,8 +161,8 @@ class WorkflowBuilder
             // We've let go, so go idle and save the position.
             this._state = this._STATES.IDLE;
             var object = {workflowjob: this._grabbedItem._associatedModel,
-                          x: this._grabbedItem.position.x / paper.view.size.width,
-                          y: this._grabbedItem.position.y / paper.view.size.height};
+                          x: this._grabbedItem.position.x / paper.view.zoom / paper.view.size.width,
+                          y: this._grabbedItem.position.y / paper.view.zoom / paper.view.size.height};
             this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, object);
         }
     }
