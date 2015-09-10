@@ -66,6 +66,11 @@ textarea {
     resize: none
 }
 
+div.fixed_individual {
+    position: fixed;
+    width: 25%;
+}
+
 div.top {
     height: $height-top + %; //fallback
     height: $height-top + vh;
@@ -83,7 +88,8 @@ div#region-navigation
                                 $background-color-navigation-gradient_right);
     height: 100%;
     color: $text-color-navigation;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 div#region-navigation ul
