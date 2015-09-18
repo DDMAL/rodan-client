@@ -81,7 +81,7 @@ class ControllerAuthentication extends BaseController
         {
             this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
         }
-
+        
         switch (request.status)
         {
             case 200:

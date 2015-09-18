@@ -126,7 +126,12 @@ class ControllerServer extends BaseController
     _mapFromJsonObject(JsonObject)
     {
         var keyvals = _.pairs(JsonObject);
-        var map = new Map(keyvals);
+        var map = new Map();
+        var x = null;
+        for (x in keyvals)
+        {
+            map.set(keyvals[x][0], keyvals[x][1]);
+        }
         return map;
     }
 }

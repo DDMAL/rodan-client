@@ -40,9 +40,7 @@ class ErrorHandler extends Marionette.Object
         var text = 'text: ' + errorText + '\n';
         text += 'url: ' + url + '\n';
         text += 'line: ' + lineNumber + '\n';
-        text += 'column: ' + columnNumber + '\n';
-        text += 'stack trace: ' + '\n';
-        text += error.stack;
+        text += 'column: ' + columnNumber;
     }
 
     /**
@@ -51,14 +49,21 @@ class ErrorHandler extends Marionette.Object
     _handleError(options)
     {
         var response = options.response;
-        var responseTextObject = JSON.parse(response.responseText);
-        if (responseTextObject.hasOwnProperty('error_code'))
+        var responseTextObject = response.responseText !== '' ? JSON.parse(response.responseText) : null;
+        if (responseTextObject !== null)
         {
-            this._processRodanError(options); // custom Rodan error code present
+            if (responseTextObject.hasOwnProperty('error_code'))
+            {
+                this._processRodanError(options); // custom Rodan error code present
+            }
+            else
+            {
+                this._processHTTPError(options); // HTTP error
+            }
         }
         else
         {
-            this._processHTTPError(options); // HTTP error
+            alert(response.statusText);
         }
     }
 
