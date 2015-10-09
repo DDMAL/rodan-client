@@ -36,10 +36,10 @@ gulp.task('develop:server', function()
         .use(serveIndex('web'));
 
     require('http').createServer(app)
-        .listen(9001)
+        .listen(9002)
         .on('listening', function()
         {
-            console.log('Started a web server on http://localhost:9001');
+            console.log('Started a web server on http://localhost:9002');
         });
 });
 

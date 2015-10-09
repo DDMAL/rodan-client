@@ -197,7 +197,7 @@ class ControllerAuthentication extends BaseController
      */
     _logout()
     {
-        var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-close');
+        var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-reset-token');
         var authType = Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (aEvent) => this._handleDeauthenticationResponse(aEvent);
