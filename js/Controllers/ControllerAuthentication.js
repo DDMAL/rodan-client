@@ -44,7 +44,7 @@ class ControllerAuthentication extends BaseController
         {
             options.xhrFields = { withCredentials: true };
             options.beforeSend = function (xhr) 
-            { 
+            {
                 xhr.setRequestHeader('X-CSRFToken', that._token.value);
             };
         }
@@ -161,7 +161,7 @@ class ControllerAuthentication extends BaseController
         }
         else
         {
-            var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-status');
+            var authRoute = this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-me');
             var request = new XMLHttpRequest();
             request.onload = (aEvent) => this._handleAuthenticationResponse(aEvent);
             request.ontimeout = (aEvent) => this._handleTimeout(aEvent);
@@ -244,7 +244,7 @@ class ControllerAuthentication extends BaseController
      */
     _processAuthenticationData()
     {
-        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token')
+        if (Configuration.SERVER_AUTHENTICATION_TYPE === 'token' && this._user.has('token'))
         {
             Cookie.saveCookie('token', this._user.get('token'), 365);
             this._token = new Cookie('token');
@@ -277,7 +277,7 @@ class ControllerAuthentication extends BaseController
 
             case 'token':
             {
-                return this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'token-auth');
+                return this._rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-token');
             }
 
             default:
