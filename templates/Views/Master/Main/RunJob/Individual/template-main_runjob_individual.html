@@ -5,5 +5,5 @@
     Status: <%= statusText %><br/>
     Error summary: <%= error_summary %><br/>
     Error details:<br/>
-    <textarea rows='10' readonly='readonly' style='width: 100%; resize: none;'><%= error_details %></textarea>
+    <textarea rows='10' readonly='readonly' style='width: 100%; resize: none;'><%= _.escape(error_details) %></textarea>
 </div>

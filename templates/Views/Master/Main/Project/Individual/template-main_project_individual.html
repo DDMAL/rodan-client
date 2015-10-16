@@ -2,8 +2,8 @@
     <div class='col-lg-4'>
         <div class='fixed_individual'>
             <h1>Project</h1>
-            Name: <input type="text" id="text-project_name" value="<%= name %>" style='width: 100%;'><br>
-            Description: <textarea id="text-project_description" rows="10"><%= description %></textarea><br>
+            Name: <input type="text" id="text-project_name" value="<%= _.escape(name) %>" style='width: 100%;'><br>
+            Description: <textarea id="text-project_description" rows="10"><%= _.escape(description) %></textarea><br>
             Creator: <%= creator.username %> <br>
             Created on: <%= _.formatFromUTC(created) %><br>
             Updated on: <%= _.formatFromUTC(updated) %><br>

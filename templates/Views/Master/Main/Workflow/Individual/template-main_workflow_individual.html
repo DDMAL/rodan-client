@@ -1,10 +1,11 @@
 <div class="fixed_individual">
-    Name: <input type="text" id="text-workflow_name" value="<%= name %>" style="width: 100%"><br>
-    Description: <textarea id="text-workflow_description" rows="10" style="width: 100%; resize: none"><%= description %></textarea><br>
+    Name: <input type="text" id="text-workflow_name" value="<%= _.escape(name) %>" style="width: 100%"><br>
+    Description: <textarea id="text-workflow_description" rows="10" style="width: 100%; resize: none"><%= _.escape(description) %></textarea><br>
    <!-- Creator: <%= creator.first_name %> <%= creator.last_name %> (<%= creator.username %>)<br>-->
     Created: <%= _.formatFromUTC(created) %><br>
     Updated: <%= _.formatFromUTC(updated) %><br>
     Valid: <%= valid %><br>
+    <button id="button-save_workflow">Save</button>
     <button id="button-run_workflow">Run</button>
     <button id="button-copy_workflow">Copy</button>
     <button id="button-edit_workflow">Edit</button>

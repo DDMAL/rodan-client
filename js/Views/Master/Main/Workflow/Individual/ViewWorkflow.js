@@ -79,7 +79,8 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this._rodanChannel.request(Events.COMMAND__WORKFLOW_SAVE, {workflow: this.model});
     }
 
     /**
@@ -117,7 +118,8 @@ ViewWorkflow.prototype.ui = {
     deleteWorkflowButton: '#button-delete_workflow',
     copyWorkflowButton: '#button-copy_workflow',
     editWorkflowButton: '#button-edit_workflow',
-    buttonSave: '#button-save_workflow_data',
+    buttonSaveData: '#button-save_workflow_data',
+    buttonSave: '#button-save_workflow',
     buttonValidate: '#button-validate_workflow',
     buttonRun: '#button-run_workflow',
     textName: '#text-workflow_name',
@@ -128,6 +130,7 @@ ViewWorkflow.prototype.events = {
     'click @ui.deleteWorkflowButton': '_handleButtonDeleteWorkflow',
     'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
     'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
+    'click @ui.buttonSaveData': '_handleButtonSave',
     'click @ui.buttonSave': '_handleButtonSave',
     'click @ui.buttonValidate': '_handleButtonValidate',
     'click @ui.buttonRun': '_handleButtonRun'

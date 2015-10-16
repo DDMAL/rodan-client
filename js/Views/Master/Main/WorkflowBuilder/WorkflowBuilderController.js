@@ -28,7 +28,8 @@ class WorkflowBuilderController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options));
+        this._rodanChannel.reply(Events.COMMAND__WORKFLOW_SAVE, options => this._handleCommandSaveWorkflow(options), this);
+        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +43,14 @@ class WorkflowBuilderController extends BaseController
         this._layoutView = new LayoutViewWorkflowBuilder({workflow: options.workflow});
         this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
         this._workspace.initialize('canvas-workspace');
+    }
+
+    /**
+     * Handle save workflow.
+     */
+    _handleCommandSaveWorkflow(options)
+    {
+        options.workflow.save({name: options.workflow.get('name'), description: options.workflow.get('description')}, {patch: true});
     }
 }
 
