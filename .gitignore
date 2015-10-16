@@ -1,6 +1,7 @@
 ._.DS_Store
 .DS_Store
 js/Configuration.js
+Configuration.js
 npm-debug.log
 node_modules/
 web/
