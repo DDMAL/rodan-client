@@ -24,14 +24,6 @@ class ViewProject extends Marionette.CompositeView
     }
 
     /**
-     * Returns the associated WorkflowRun collection to the template.
-     */
-    templateHelpers() 
-    {
-        return { items: this.collection.toJSON() };
-    }
-
-    /**
      * Destroy callback.
      */
     onDestroy()
@@ -108,5 +100,6 @@ ViewProject.prototype.events = {
 ViewProject.prototype.template = '#template-main_project_individual';
 ViewProject.prototype.childView = ViewWorkflowRunListItem;
 ViewProject.prototype.childViewContainer = 'tbody';
+ViewProject.prototype.behaviors = {Pagination: {'table': '#table-workflowruns'}};
 
 export default ViewProject;

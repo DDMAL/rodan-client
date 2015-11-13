@@ -56,10 +56,10 @@ class ProjectController extends BaseController
     /**
      * Handle command Project add.
      */
-    _handleCommandAddProject(aOptions)
+    _handleCommandAddProject(options)
     {
         var collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
-        collection.create({creator: aOptions.user});
+        collection.create({creator: options.user});
     }
 
     /**

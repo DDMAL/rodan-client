@@ -94,9 +94,6 @@ class ViewResourceList extends Marionette.CompositeView
 ViewResourceList.prototype.modelEvents = {
     'all': 'render'
 };
-ViewResourceList.prototype.collectionEvents = {
-    'all': 'render'
-};
 ViewResourceList.prototype.ui = {
     'checkboxFilterOrigin': '#checkbox-filter_origin',
     'checkboxFilterNoFile': '#checkbox-filter_nofile'
@@ -106,5 +103,6 @@ ViewResourceList.prototype.events = {
     'change @ui.checkboxFilterNoFile': '_handleCheckboxFilterNoFile'
 };
 ViewResourceList.prototype.childViewContainer = 'tbody';
+ViewResourceList.prototype.behaviors = {Pagination: {'table': '#table-resources'}};
 
 export default ViewResourceList;

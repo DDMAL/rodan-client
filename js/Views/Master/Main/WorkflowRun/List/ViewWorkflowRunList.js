@@ -43,5 +43,6 @@ ViewWorkflowRunList.prototype.modelEvents = {
 ViewWorkflowRunList.prototype.childViewContainer = 'tbody';
 ViewWorkflowRunList.prototype.template = '#template-main_workflowrun_list';
 ViewWorkflowRunList.prototype.childView = ViewWorkflowRunListItem;
+ViewWorkflowRunList.prototype.behaviors = {Pagination: {'table': '#table-workflowruns'}};
 
 export default ViewWorkflowRunList;

@@ -2,6 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 
+import Pagination from '../Models/Pagination';
 import Events from '../Shared/Events';
 
 class BaseCollection extends Backbone.Collection
@@ -15,6 +16,7 @@ class BaseCollection extends Backbone.Collection
     constructor(options)
     {
         super(options);
+        this._pagination = new Pagination();
         this._initializeRadio();
     }
 
@@ -23,6 +25,7 @@ class BaseCollection extends Backbone.Collection
      */
     parse(resp)
     {
+        this._parsePagination(resp);
         return resp.results;
     }
 
@@ -47,6 +50,28 @@ class BaseCollection extends Backbone.Collection
         super.fetch(options);
     }
 
+    /**
+     * Override of create.
+     * This override exists because we do NOT want to add it to the collection
+     * by default (as there's a limit to what the server returns for collections,
+     * and we need to respect that). However, we do want to sync against the last
+     * page in the collection. THIS is the result we want.
+     */
+    create(options)
+    {
+        var instance = new this.model(options);
+        instance.save();
+        this.fetch();
+    }
+
+    /**
+     * Returns pagination.
+     */
+    getPagination()
+    {
+        return this._pagination;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +83,18 @@ class BaseCollection extends Backbone.Collection
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
         this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
+    }
+
+    /**
+     * Parses pagination parameters from response.
+     */
+    _parsePagination(options)
+    {
+        this._pagination.set({'count': options.count,
+                              'next': options.next !== null ? options.next : '#',
+                              'previous': options.previous !== null ? options.previous : '#',
+                              'current': options.current_page,
+                              'total': options.total_pages});
     }
 
     /**

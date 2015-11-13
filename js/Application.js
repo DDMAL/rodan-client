@@ -3,6 +3,7 @@ import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import BehaviorPagination from './Behaviors/BehaviorPagination';
 import Configuration from './Configuration';
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
@@ -40,6 +41,7 @@ class Application extends Marionette.Application
             regionNavigation: '#region-navigation',
             regionStatus: '#region-status'
         });
+        this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeControllers();
@@ -70,6 +72,17 @@ class Application extends Marionette.Application
         {
             return moment(dateTime).format();
         };
+    }
+
+    /**
+     * Initialize behaviors.
+     */
+    _initializeBehaviors()
+    {
+        Marionette.Behaviors.behaviorsLookup = function()
+        {
+            return {'Pagination': BehaviorPagination};
+        }
     }
 
     /**
@@ -124,7 +137,7 @@ class Application extends Marionette.Application
      * Initialize all the views so they can respond to events.
      */
     _initializeViews()
-    {   
+    {
         this.layoutViewNavigation = new LayoutViewNavigation();
         this.layoutViewMain = new LayoutViewMain();
         this.layoutViewStatus = new LayoutViewStatus();

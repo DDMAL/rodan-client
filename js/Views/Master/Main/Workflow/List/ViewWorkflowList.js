@@ -44,5 +44,6 @@ ViewWorkflowList.prototype.modelEvents = {
 ViewWorkflowList.prototype.template = '#template-main_workflow_list';
 ViewWorkflowList.prototype.childView = ViewWorkflowListItem;
 ViewWorkflowList.prototype.childViewContainer = 'tbody';
+ViewWorkflowList.prototype.behaviors = {Pagination: {'table': '#table-workflows'}};
 
 export default ViewWorkflowList;
