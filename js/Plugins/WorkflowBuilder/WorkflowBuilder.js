@@ -89,6 +89,7 @@ class WorkflowBuilder
         this._grabbedItem = null;
         this._globalMouseTool.onMouseMove = event => this._handleMouseEvent(event);
         this._globalMouseTool.onMouseUp = event => this._handleMouseEvent(event);
+        this._globalMouseTool.onMouseDown = event => this._handleMouseEvent(event);
     }
 
     /**
@@ -142,6 +143,10 @@ class WorkflowBuilder
                 this._selectedOutputPortItem = event.target;
                 this._state = this._STATES.CREATING_CONNECTION; 
             }
+            else
+            {
+                this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+            }
         }
     }
 
@@ -154,7 +159,7 @@ class WorkflowBuilder
         {
             this._grabbedItem.move(event.delta);
         }
-        else
+        else if (event.type === 'mouseup')
         {
             // We've let go, so go idle and save the position.
             this._state = this._STATES.IDLE;
@@ -171,7 +176,7 @@ class WorkflowBuilder
     _handleStateCreatingConnection(event)
     {
         if (event.type === 'mouseup')
-        {debugger;
+        {
             if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
             {
                 this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
