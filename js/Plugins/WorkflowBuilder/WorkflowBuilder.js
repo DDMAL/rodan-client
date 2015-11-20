@@ -5,6 +5,7 @@ import Configuration from '../../Configuration';
 import Events from '../../Shared/Events';
 import ConnectionItem from './Items/ConnectionItem';
 import InputPortItem from './Items/InputPortItem';
+import LineItem from './Items/LineItem';
 import OutputPortItem from './Items/OutputPortItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
@@ -41,6 +42,8 @@ class WorkflowBuilder
         this._initializeGlobalMouseTool();
         this._initializeRadio();
         this._createSegments();
+
+        this._line = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +184,28 @@ class WorkflowBuilder
             }
             this._selectedOutputPortItem = null;
             this._state = this._STATES.IDLE;
+
+            // Destroy our temp line.
+            if (this._line)
+            {
+                this._line.remove();
+                this._line = null;
+            }
+        }
+        else if (event.type === 'mousemove')
+        {
+            // If line hasn't been created, create it.
+            if (this._line === null)
+            {
+                var startPoint = new Point(this._selectedOutputPortItem.position.x, this._selectedOutputPortItem.bounds.bottom);
+                this._line = new LineItem({segments: this._segments.connection, startPoint: startPoint});
+                paper.view.draw();
+            }
+
+            // Update end point to one pixel ABOVE the mouse pointer. This ensures that the next click event does NOT register
+            // the line as the target.
+            var adjustedPoint = new Point(event.point.x, event.point.y - 1);
+            this._line.setEndPoint(adjustedPoint);
         }
     }
 

@@ -53,7 +53,10 @@ class BaseItem extends paper.Path
         this._text.onMouseEnter = event => this._handleMouseEvent(event);
         this._text.onMouseLeave = event => this._handleMouseEvent(event);
         this._text.visible = (options.hasOwnProperty('text') && options.text === true);
-        this._text.content = this._associatedModel.get('name');
+        if (this._associatedModel)
+        {
+            this._text.content = this._associatedModel.get('name');
+        }
     }
 
     /**
