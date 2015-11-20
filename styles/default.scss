@@ -138,10 +138,18 @@ div#region-main
     overflow: auto;
 }
 
+div#canvas-wrap
+{
+    height: 100%;
+    overflow-y: hidden;
+    padding: 0px;
+}
+
 canvas#canvas-workspace 
 {
     background-color: $background-color-workflowbuilder-workspace;
     height: 100%;
+    width: 100%;
     padding: 0px;
 }
 
