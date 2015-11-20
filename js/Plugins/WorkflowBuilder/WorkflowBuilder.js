@@ -88,6 +88,7 @@ class WorkflowBuilder
         this._mouseDelta = new paper.Point(0, 0);
         this._grabbedItem = null;
         this._globalMouseTool.onMouseMove = event => this._handleMouseEvent(event);
+        this._globalMouseTool.onMouseUp = event => this._handleMouseEvent(event);
     }
 
     /**
@@ -132,20 +133,14 @@ class WorkflowBuilder
         {
             if (event.target instanceof WorkflowJobItem)
             {
+                this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
                 this._grabbedItem = event.target;
                 this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;  
             }
-        }
-        else if (event.type === 'click')
-        {
-            if (event.target instanceof OutputPortItem)
+            else if (event.target instanceof OutputPortItem)
             {
                 this._selectedOutputPortItem = event.target;
                 this._state = this._STATES.CREATING_CONNECTION; 
-            }
-            else if (event.target instanceof WorkflowJobItem)
-            {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
             }
         }
     }
@@ -175,8 +170,8 @@ class WorkflowBuilder
      */
     _handleStateCreatingConnection(event)
     {
-        if (event.type === 'click')
-        {
+        if (event.type === 'mouseup')
+        {debugger;
             if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
             {
                 this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
