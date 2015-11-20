@@ -17,6 +17,7 @@ class BaseCollection extends Backbone.Collection
     {
         super(options);
         this._pagination = new Pagination();
+        this._lastQuery = null;
         this._initializeRadio();
     }
 
@@ -42,11 +43,16 @@ class BaseCollection extends Backbone.Collection
 
     /**
      * Override of fetch to allow for generic handling.
+     *
+     * Note that we save the data options. This is in case we do a create
+     * and have to reload/fetch the previous collection. We need to preserve
+     * the fetch parameters.
      */
     fetch(options)
     {
         options = this._applyResponseHandlers(options);
         options.task = 'fetch';
+        this._lastData = options.data ? options.data : {}; 
         super.fetch(options);
     }
 
@@ -56,12 +62,16 @@ class BaseCollection extends Backbone.Collection
      * by default (as there's a limit to what the server returns for collections,
      * and we need to respect that). However, we do want to sync against the last
      * page in the collection. THIS is the result we want.
+     *
+     * Also, we use the last data (query) options that were called on a fetch for this collection.
+     * This ensures that we're getting the context of the last view we had.
      */
     create(options)
-    {
+    {debugger;
         var instance = new this.model(options);
         instance.save();
-        this.fetch();
+        console.log(this._lastData);
+        this.fetch({data: this._lastData});
     }
 
     /**
