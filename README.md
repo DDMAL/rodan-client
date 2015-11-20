@@ -1,4 +1,4 @@
-# vis-client
-VIS client (Rodan)
+# VIS-Client
+VIS-Client (Rodan)
 
 TODO - write some setup/install stuff here
