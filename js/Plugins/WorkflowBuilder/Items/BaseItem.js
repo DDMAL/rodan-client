@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Radio from 'backbone.radio';
 import paper from 'paper';
 
@@ -130,9 +131,16 @@ class BaseItem extends paper.Path
     /**
      * Shows popup.
      */
-    _showPopup()
+    _showPopup(event)
     {
-        console.log('todo - popup');
+        if ($('div#canvas-tooltip'))
+        {
+            var tooltip = $('div#canvas-tooltip');
+            tooltip.css('visibility', 'visible');
+            tooltip.css('top', this.bounds.top);
+            tooltip.css('left', this.bounds.right);
+            tooltip.text(this._associatedModel.getDescription());
+        }
     }
 
     /**
@@ -140,7 +148,10 @@ class BaseItem extends paper.Path
      */
     _hidePopup()
     {
-        console.log('todo - hide');
+        if ($('div#canvas-tooltip'))
+        {
+            $('div#canvas-tooltip').css('visibility', 'hidden');
+        }
     }
 
     /**
@@ -169,7 +180,7 @@ class BaseItem extends paper.Path
         {
             case 'mouseenter':
             {
-                this._timerEvent = setTimeout(this._showPopup, this._HOVERTIME);
+                this._timerEvent = setTimeout(() => this._showPopup(event), this._HOVERTIME);
                 break;
             }
 
@@ -182,8 +193,6 @@ class BaseItem extends paper.Path
 
             default:
             {
-                this._hidePopup();
-                clearTimeout(this._timerEvent);
                 paper.handleMouseEvent(event);
             }
         }

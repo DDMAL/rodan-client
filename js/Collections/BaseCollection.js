@@ -67,7 +67,7 @@ class BaseCollection extends Backbone.Collection
      * This ensures that we're getting the context of the last view we had.
      */
     create(options)
-    {debugger;
+    {
         var instance = new this.model(options);
         instance.save();
         console.log(this._lastData);

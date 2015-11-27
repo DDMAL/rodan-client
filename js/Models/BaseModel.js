@@ -68,6 +68,15 @@ class BaseModel extends Backbone.Model
         super.fetch(options);
     }
 
+    /**
+     * Returns descriptive string for model. This should be overridden by sub-classes.
+     */
+    getDescription()
+    {
+        return "no description available";
+    }
+
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

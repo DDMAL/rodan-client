@@ -46,6 +46,15 @@ class WorkflowJob extends BaseModel
         return this.get('job').substring(secondLastSlash + 1, lastSlash);
     }
 
+    /**
+     * Returns human-readable descriptive text.
+     */
+    getDescription()
+    {
+        var string = this.get('name') + ' (' + this.get('job_name') + ')';
+        return string;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
