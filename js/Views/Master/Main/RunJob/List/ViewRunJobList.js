@@ -44,6 +44,6 @@ ViewRunJobList.prototype.collectionEvents = {
     'all': 'render'
 };
 ViewRunJobList.prototype.childViewContainer = 'tbody';
-ViewRunJobList.prototype.behaviors = {Pagination: {'table': '#table-runjobs'}};
+ViewRunJobList.prototype.behaviors = {Table: {'table': '#table-runjobs'}};
 
 export default ViewRunJobList;

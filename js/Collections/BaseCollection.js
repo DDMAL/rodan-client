@@ -17,7 +17,7 @@ class BaseCollection extends Backbone.Collection
     {
         super(options);
         this._pagination = new Pagination();
-        this._lastQuery = null;
+        this._lastData = {};
         this._initializeRadio();
     }
 
@@ -52,7 +52,7 @@ class BaseCollection extends Backbone.Collection
     {
         options = this._applyResponseHandlers(options);
         options.task = 'fetch';
-        this._lastData = options.data ? options.data : {}; 
+        this._lastData = options.data ? options.data : {};
         super.fetch(options);
     }
 
@@ -70,8 +70,26 @@ class BaseCollection extends Backbone.Collection
     {
         var instance = new this.model(options);
         instance.save();
-        console.log(this._lastData);
         this.fetch({data: this._lastData});
+    }
+
+    /**
+     * Requests a sorted fetch.
+     *
+     * Note that it uses _lastData. We need to keep the last options
+     * data in case we're paginating.
+     *
+     * IMPORTANT: this is not called "sort" because backbone already has
+     * a "sort" method for the Collection (but don't use it)
+     */
+    fetchSort(ascending, field)
+    {
+        this._lastData.ordering = field;
+        if (!ascending)
+        {
+            this._lastData.ordering = '-' + field;
+        }
+        this.fetch({data: this._lastData, reset: true});
     }
 
     /**
@@ -114,7 +132,7 @@ class BaseCollection extends Backbone.Collection
     {
         this.reset();
         var data = options.hasOwnProperty('query') ? options.query : {};
-        options.data = $.param(data);
+        options.data = data;
         options = this._applyResponseHandlers(options);
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
         this.fetch(options);

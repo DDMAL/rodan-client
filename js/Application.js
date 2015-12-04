@@ -3,7 +3,7 @@ import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import BehaviorPagination from './Behaviors/BehaviorPagination';
+import BehaviorTable from './Behaviors/BehaviorTable';
 import Configuration from './Configuration';
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
@@ -81,7 +81,7 @@ class Application extends Marionette.Application
     {
         Marionette.Behaviors.behaviorsLookup = function()
         {
-            return {'Pagination': BehaviorPagination};
+            return {'Table': BehaviorTable};
         }
     }
 

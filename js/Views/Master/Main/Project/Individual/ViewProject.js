@@ -100,6 +100,6 @@ ViewProject.prototype.events = {
 ViewProject.prototype.template = '#template-main_project_individual';
 ViewProject.prototype.childView = ViewWorkflowRunListItem;
 ViewProject.prototype.childViewContainer = 'tbody';
-ViewProject.prototype.behaviors = {Pagination: {'table': '#table-workflowruns'}};
+ViewProject.prototype.behaviors = {Table: {'table': '#table-workflowruns'}};
 
 export default ViewProject;

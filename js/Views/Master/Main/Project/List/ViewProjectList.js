@@ -59,6 +59,6 @@ ViewProjectList.prototype.events = {
 ViewProjectList.prototype.childViewContainer = 'tbody';
 ViewProjectList.prototype.template = '#template-main_project_list';
 ViewProjectList.prototype.childView = ViewProjectListItem;
-ViewProjectList.prototype.behaviors = {Pagination: {'table': '#table-projects'}};
+ViewProjectList.prototype.behaviors = {Table: {'table': '#table-projects'}};
 
 export default ViewProjectList;
