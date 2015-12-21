@@ -166,7 +166,7 @@ class Application extends Marionette.Application
     _handleAuthenticationSuccess()
     {
         this.rodanChannel.request(Events.COMMAND__RESOURCETYPES_LOAD, {});
-        this.rodanChannel.request(Events.COMMAND__LOAD_JOBS, {});
+        this.rodanChannel.request(Events.COMMAND__LOAD_JOBS, {query: {enabled: 'True'}});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }
 }
