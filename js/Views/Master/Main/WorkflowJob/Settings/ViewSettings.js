@@ -23,7 +23,7 @@ class ViewSettings extends Marionette.ItemView
 
     onRender()
     {
-        this._createEditor();
+        this._initializeSettingsDisplay();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -46,30 +46,35 @@ class ViewSettings extends Marionette.ItemView
     }
 
     /**
-     * Creates editor.
+     * Initializes settings display.
      */
-    _createEditor()
+    _initializeSettingsDisplay()
     {
-        var jobUuid = this.model.getJobUuid();
-        var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
-        var job = collection.get(jobUuid);
+        // Initially hide.
         var element = $(this.$el.find('#workflowjob-settings')[0])[0];
+        $(element).hide();
 
-        // Only set start values if we have them.
+        // Check if we have settings.
         var startValues = this.model.get('job_settings');
         startValues = $.isEmptyObject(startValues) ? null : startValues;
-
-        var settingsSchema = { 
-            schema: job.get('settings'),
-            ajax: true,
-            disable_collapse: true,
-            disable_edit_json: true,
-            disable_properties: true,
-            no_additional_properties: true,
-            show_errors: 'always',
-            startval: startValues
-        };
-        this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
+        if (startValues !== null)
+        {
+            $(element).show();
+            var jobUuid = this.model.getJobUuid();
+            var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+            var job = collection.get(jobUuid);
+            var settingsSchema = { 
+                schema: job.get('settings'),
+                theme: 'bootstrap3',
+                disable_collapse: true,
+                disable_edit_json: true,
+                disable_properties: false,
+                no_additional_properties: true,
+                show_errors: 'always',
+                startval: startValues
+            };
+            this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
+        }
     }
 }
 

@@ -26,8 +26,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     initialize(aParameters)
     {
         this.addRegions({
-            regionControlWorkflowData: '#region-main_workflowbuilder_control_workflow_data',
-            regionControlWorkflowParts: '#region-main_workflowbuilder_control_workflow_parts'
+            regionControlWorkflowUpperArea: '#region-main_workflowbuilder_control_workflow_upperarea',
+            regionControlWorkflowLowerArea: '#region-main_workflowbuilder_control_workflow_lowerarea'
         });
         this._workflow = aParameters.workflow;
         this._workflowJob = null;
@@ -50,8 +50,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 
     onBeforeShow()
     {
-        this.regionControlWorkflowData.show(this.viewWorkflow);
-        this.regionControlWorkflowParts.show(this.viewControlJob);
+        this.regionControlWorkflowUpperArea.show(this.viewWorkflow);
+        this.regionControlWorkflowLowerArea.show(this.viewControlJob);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         this._workflowJob = aReturn.workflowjob;
         this.controlWorkflowJobView = new LayoutViewControlWorkflowJob(aReturn);
-        this.regionControlWorkflowParts.show(this.controlWorkflowJobView);
+        this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
+        this.regionControlWorkflowLowerArea.$el.hide();
     }
     
     /**
@@ -162,8 +163,11 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandShowControlJobView()
     {
+        this.viewWorkflow = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: this._workflow});
         this.viewControlJob = new LayoutViewJob();
-        this.regionControlWorkflowParts.show(this.viewControlJob);
+        this.regionControlWorkflowUpperArea.show(this.viewWorkflow);
+        this.regionControlWorkflowLowerArea.show(this.viewControlJob);
+        this.regionControlWorkflowLowerArea.$el.show();
     }
 
     /**

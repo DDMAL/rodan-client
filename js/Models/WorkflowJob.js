@@ -51,7 +51,7 @@ class WorkflowJob extends BaseModel
      */
     getDescription()
     {
-        var string = this.get('name') + ' (' + this.get('job_name') + ')';
+        var string = this.get('name') + ': ' + this.get('job_description');
         return string;
     }
 
