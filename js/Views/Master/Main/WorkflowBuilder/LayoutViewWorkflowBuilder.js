@@ -63,11 +63,11 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_ADD, aReturn => this._handleCommandAddWorkflowJob(aReturn), this);
+        this._rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_ADD, options => this._handleCommandAddWorkflowJob(options), this);
         this._rodanChannel.reply(Events.COMMAND__WORKFLOWJOB_DELETE, options => this._handleCommandDeleteWorkflowJob(options), this);
         this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, aPass => this._handleCommandAddInputPort(aPass), this);
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, aPass => this._handleCommandAddOutputPort(aPass), this);
+        this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, options => this._handleCommandAddInputPort(options), this);
+        this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, options => this._handleCommandAddOutputPort(options), this);
         this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass), this);
         this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass), this);
         this._rodanChannel.reply(Events.COMMAND__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
@@ -125,10 +125,11 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Handle command add workflow job.
      */
-    _handleCommandAddWorkflowJob(aReturn)
+    _handleCommandAddWorkflowJob(options)
     {
-        var workflowJob = this._createWorkflowJob(aReturn.job, this._workflow);
+        var workflowJob = this._createWorkflowJob(options.job, this._workflow);
         this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: workflowJob});
     }
 
     /**
@@ -173,19 +174,21 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Create input port
      */
-    _handleCommandAddInputPort(aPass)
+    _handleCommandAddInputPort(options)
     {
-        var port = this._createInputPort(aPass.inputporttype, this._workflowJob);
-        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: this._workflowJob, inputport: port});
+        var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
+        var port = this._createInputPort(options.inputporttype, workflowJob);
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: port});
     }
 
     /**
      * Create output port
      */
-    _handleCommandAddOutputPort(aPass)
+    _handleCommandAddOutputPort(options)
     {
-        var port = this._createOutputPort(aPass.outputporttype, this._workflowJob);
-        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: this._workflowJob, outputport: port});
+        var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
+        var port = this._createOutputPort(options.outputporttype, workflowJob);
+        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: port});
     }
 
     /**
@@ -256,6 +259,35 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
                                                                     user_agent: Configuration.USER_AGENT});
             workflowJob.coordinates.save();
         }
+    }
+
+    /**
+     * Given a WorkflowJob, adds ports that must be present.
+     * This method assumes that the WorkflowJob has NO ports to begin with.
+     */
+    _addRequiredPorts(workflowJob)
+    {
+        var jobCollection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var job = jobCollection.get(workflowJob.getJobUuid());
+        var outputPortTypes = job.get('output_port_types');
+        var inputPortTypes = job.get('input_port_types');
+
+        // Go through port collections.
+        var that = this;
+        inputPortTypes.forEach(function(inputPortType) 
+        {
+            for (var i = 0; i < inputPortType.get('minimum');i ++)
+            {
+                that._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob});
+            }
+        });
+        outputPortTypes.forEach(function(outputPortType) 
+        {
+            for (var i = 0; i < outputPortType.get('minimum'); i++)
+            {
+                that._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: outputPortType, workflowjob: workflowJob});
+            }
+        });
     }
 
     /**
@@ -336,11 +368,20 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 
     /**
      * Create workflow job.
+     *
+     * If ports are to be automatically generated, we add a success function that adds them.
      */
     _createWorkflowJob(aJob, aWorkflow)
     {
         var workflowJob = new WorkflowJob({job: aJob.get('url'), workflow: aWorkflow.get('url')});
-        workflowJob.save();
+        if (this.ui.checkboxAddPorts.is(':checked'))
+        {
+            workflowJob.save({}, {success: (model, response, options) => this._addRequiredPorts(model)});
+        }
+        else
+        {
+            workflowJob.save();
+        }
         return workflowJob;
     }
 
@@ -495,7 +536,8 @@ LayoutViewWorkflowEditor.prototype.template = '#template-main_workflowbuilder';
 LayoutViewWorkflowEditor.prototype.ui = {
     buttonZoomIn: '#button-zoom_in',
     buttonZoomOut: '#button-zoom_out',
-    buttonZoomReset: '#button-zoom_reset'
+    buttonZoomReset: '#button-zoom_reset',
+    checkboxAddPorts: '#checkbox-add_ports'
 };
 LayoutViewWorkflowEditor.prototype.events = {
     'click @ui.buttonZoomIn': '_handleButtonZoomIn',

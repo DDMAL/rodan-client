@@ -22,7 +22,7 @@ class WorkflowJob extends BaseModel
 
     defaults()
     {
-        return {input_ports: null, output_ports: null};
+        return {input_ports: null, output_ports: null, job_name: null, job_description: null};
     }
 
     /**
