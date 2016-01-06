@@ -63,7 +63,8 @@ class ResourceController extends BaseController
     _handleCommandResourceAdd(options)
     {
         var collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
-        collection.create({project: options.project.get('url'), file: options.file}, {success: () => this._handleCallbackAddSuccess()});
+        var resource = collection.create({project: options.project.get('url'), file: options.file}, {success: () => this._handleCallbackAddSuccess()});
+        return resource;
     }
 
     /**

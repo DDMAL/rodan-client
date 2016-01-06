@@ -36,6 +36,12 @@ class Resource extends BaseModel
      */
     parse(resp)
     {
+        // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
+        // TODO not sure why this is just happening here...
+        if (resp.creator === null)
+        {
+            resp.creator = {first_name: null, last_name: null, username: 'generated result'};
+        }
         return resp;
     }
 
