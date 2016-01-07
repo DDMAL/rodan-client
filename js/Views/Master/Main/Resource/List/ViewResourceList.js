@@ -20,6 +20,9 @@ class ViewResourceList extends Marionette.CompositeView
         this._initializeRadio();
         this.collection = this._rodanChannel.request(Events.REQUEST__RESOURCE_COLLECTION);
         this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: options.query});
+        /*this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
+                                                                      options: {query: options.query}, 
+                                                                      callback: null});*/
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

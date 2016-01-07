@@ -19,6 +19,7 @@ class WorkflowRunCollection extends BaseCollection
         this.route = 'workflowruns';
         this.loadCommand = Events.COMMAND__LOAD_WORKFLOWRUNS;
         this.requestCommand = Events.REQUEST__COLLECTION_WORKFLOWRUN;
+        this.syncCommand = Events.REQUEST__WORKFLOWRUNS_SYNC;
     }
 }
 

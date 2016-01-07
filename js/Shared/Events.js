@@ -6,6 +6,14 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
 ///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Called when an Event is to be scheduled. Takes {event: Event string, options: options for the event}.
+    REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Called when a Request is to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
+    EVENT__TIMER_TEST: 'EVENT__TIMER_TEST',                     // DO NOT USE.
+    REQUEST__TIMER_TEST: 'REQUEST__TIMER_TEST',                 // DO NOT USE.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Authentication
+///////////////////////////////////////////////////////////////////////////////////////
     COMMAND__AUTHENTICATION_LOGIN: 'COMMAND__AUTHENTICATION_LOGIN',
     COMMAND__AUTHENTICATION_LOGOUT: 'COMMAND__AUTHENTICATION_LOGOUT',
     COMMAND__AUTHENTICATION_CHECK: 'COMMAND__AUTHENTICATION_CHECK',
@@ -30,6 +38,7 @@ var Events =
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on project selection. Takes {project: Project}.
     REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns global Project collection.
     REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
+    REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the Projects collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource
@@ -42,6 +51,7 @@ var Events =
     EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on resources selection. Takes (project: Project}.
     REQUEST__RESOURCE_COLLECTION: 'REQUEST__RESOURCE_COLLECTION',           // Returns global Resource collection.
     COMMAND__RESOURCE_SHOWLAYOUTVIEW: 'COMMAND__RESOURCE_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Resources (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Updates the Resources collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // ResourceType
@@ -69,6 +79,7 @@ var Events =
     COMMAND__WORKFLOW_SHOWLAYOUTVIEW: 'COMMAND__WORKFLOW_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Workflows (outside of the primary Workflows view). This tells the WorkflowController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     COMMAND__WORKFLOW_ADD: 'COMMAND__WORKFLOW_ADD',                         // Called when Workflow needs to be added. Takes {project: Project}.
     COMMAND__WORKFLOW_SAVE: 'COMMAND__WORKFLOW_SAVE',                       // Called when a Workflow needs to be saved. This is different from the builder save as it only saves the name and description. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -78,6 +89,15 @@ var Events =
     COMMAND__WORKFLOWJOB_SAVE: 'COMMAND__WORKFLOWJOB_SAVE',                         // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
     COMMAND__WORKFLOWJOB_SAVE_COORDINATES: 'COMMAND__WORKFLOWJOB_SAVE_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
     EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                     // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowRun
+///////////////////////////////////////////////////////////////////////////////////////
+    COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS',           // Instructs loading of workflow runs. Takes object containing various query IDs.
+    EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on workflow run selection. Passes {project: WorkflowRun}.
+    EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
+    REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN', 
+    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC',           // Updates the WorkflowRuns collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobCoordinateSet
@@ -95,7 +115,6 @@ var Events =
     COMMAND__LOAD_JOBS: 'COMMAND__LOAD_JOBS', // Instructs loading of jobs. Takes object containing various query IDs.
     COMMAND__LOAD_OUTPUTPORTTYPES: 'COMMAND__LOAD_OUTPUTPORTTYPES', // Instructs loading of outputporttypes. Takes object containing various query IDs.
     COMMAND__LOAD_RUNJOBS: 'COMMAND__LOAD_RUNJOBS', // Instructs loading of run jobs. Takes object containing various query IDs.
-    COMMAND__LOAD_WORKFLOWRUNS: 'COMMAND__LOAD_WORKFLOWRUNS', // Instructs loading of workflow runs. Takes object containing various query IDs.
     COMMAND__LOAD_WORKFLOWS: 'COMMAND__LOAD_WORKFLOWS', // Instructs loading of workflows. Takes object containing various query IDs.
     COMMAND__LOAD_CONNECTIONS: 'COMMAND__LOAD_CONNECTIONS', // Instructs loading of connections. Takes object containing various query IDs.
 
@@ -153,8 +172,6 @@ var Events =
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on job selection. No pass.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED', // Called on workflow selection. Passes {workflow: Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED', // Called on workflows selection. No pass.
-    EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED', // Called on workflow run selection. Passes {project: WorkflowRun}.
-    EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED', // Called on workflow runs selection. No pass.
 
     // General model events.
     EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Passes {model: BaseModel};
@@ -180,7 +197,6 @@ var Events =
     REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',
     REQUEST__COLLECTION_RUNJOB: 'REQUEST__COLLECTION_RUNJOB',
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
-    REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN',
     REQUEST__COLLECTION_CONNECTION: 'REQUEST__COLLECTION_CONNECTION',
 
     REQUEST__SERVER_ROUTE: 'REQUEST__SERVER_ROUTE', // Returns server route. Pass associated string.

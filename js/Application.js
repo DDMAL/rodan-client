@@ -9,6 +9,7 @@ import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerServer from './Controllers/ControllerServer';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
+import EventTimer from './Shared/EventTimer';
 import InputPortCollection from './Collections/InputPortCollection';
 import InputPortTypeCollection from './Collections/InputPortTypeCollection';
 import JobCollection from './Collections/JobCollection';
@@ -49,14 +50,27 @@ class Application extends Marionette.Application
         this._initializeCollections();
         this._initializeViews();
         this._errorHandler = new ErrorHandler();
+        this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
     }
 
     /**
      * When app is ready, start communicating.
      */
     onStart()
-    {
+    {/*
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_EVENT, {event: Events.EVENT__TIMER_TEST, options: {}});
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__TIMER_TEST, 
+                                                                      options: {}, 
+                                                                      callback: (response) => this.timerRequestCallback(response)});*/
         this.rodanChannel.request(Events.COMMAND__GET_ROUTES);
+    }
+
+    /**
+     * Timer request callback test.
+     */
+    timerRequestCallback(response)
+    {
+        console.log('Callback response: ' + response);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

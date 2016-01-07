@@ -19,6 +19,7 @@ class ProjectCollection extends BaseCollection
         this.route = 'projects';
         this.loadCommand = Events.COMMAND__PROJECTS_LOAD;
         this.requestCommand = Events.REQUEST__PROJECT_COLLECTION;
+        this.syncCommand = Events.REQUEST__PROJECTS_SYNC;
     }
 }
 

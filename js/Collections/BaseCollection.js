@@ -110,6 +110,7 @@ class BaseCollection extends Backbone.Collection
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
+        this.rodanChannel.reply(this.syncCommand, options => this._syncList(options));
         this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
     }
 
@@ -136,6 +137,14 @@ class BaseCollection extends Backbone.Collection
         options = this._applyResponseHandlers(options);
         this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
         this.fetch(options);
+    }
+
+    /**
+     * Syncs list.
+     */
+    _syncList(options)
+    {
+        this.fetch({data: this._lastData, reset: true});
     }
 
     /**

@@ -1,6 +1,7 @@
 import Events from '../../../Shared/Events';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
+import Radio from 'backbone.radio';
 
 /**
  * This class represents a navigation menu node.
@@ -26,6 +27,7 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _initializeRadio()
     {
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
