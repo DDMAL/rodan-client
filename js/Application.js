@@ -38,6 +38,7 @@ class Application extends Marionette.Application
      */
     initialize()
     {
+        this._getOS();
         this.addRegions({
             regionNavigation: '#region-navigation',
             regionStatus: '#region-status'
@@ -76,6 +77,19 @@ class Application extends Marionette.Application
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Get OS info.
+     */
+    _getOS()
+    {
+        var OSName="Unknown OS";
+        if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+        if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+        if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+        if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+        Configuration.OS = OSName;
+    }
+
     /**
      * Initializes various helpers.
      */

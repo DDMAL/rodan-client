@@ -23,10 +23,13 @@ class WorkflowBuilder
      */
     initialize(aCanvasElementId)
     {
+        this._multipleSelectionKey = null;
+
         this._STATES = {
             IDLE: 0,
-            GRABBED_WORKFLOWJOBITEM: 1,
-            CREATING_CONNECTION: 2
+            GRABBED_WORKFLOWJOBITEMS: 1,
+            MOVING_WORKFLOWJOBITEMS: 2,
+            CREATING_CONNECTION: 3
         };
         this._state = this._STATES.IDLE;
         this._selectedOutputPortItem = null;
@@ -37,18 +40,60 @@ class WorkflowBuilder
 
         paper.install(window);
         paper.setup(aCanvasElementId);
-        paper.handleMouseEvent = aData => this._handleMouseEvent(aData);
+        paper.handleMouseEvent = aData => this._handleEvent(aData);
         
-        this._initializeGlobalMouseTool();
+        this._initializeGlobalTool();
         this._initializeRadio();
         this._createSegments();
+        this._setMultipleSelectionKey();
 
         this._line = null;
+        this._selectedItems = {};
+        this._selectingMultiple = false;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Sets key for multiple selections.
+     */
+    _setMultipleSelectionKey()
+    {
+        switch (Configuration.OS)
+        {
+            case "Windows":
+            {
+                this._multipleSelectionKey = "control";
+                break;
+            }
+
+            case "MacOS":
+            {
+                this._multipleSelectionKey = "command";
+                break;
+            }
+
+            case "Linux":
+            {
+                this._multipleSelectionKey = "control";
+                break;
+            }
+
+            case "UNIX":
+            {
+                this._multipleSelectionKey = "control";
+                break;
+            }
+
+            default:
+            {
+                this._multipleSelectionKey = "control";
+                break;
+            }
+        }
+    }
+
     /**
      * Create segment definitions.
      */
@@ -80,23 +125,30 @@ class WorkflowBuilder
     }
 
     /**
-     * Initialize global mouse tool.
+     * Initialize global tool.
      */
-    _initializeGlobalMouseTool()
+    _initializeGlobalTool()
     {
-        this._globalMouseTool = new Tool();
+        this._globalTool = new Tool();
         this._mouseDelta = new paper.Point(0, 0);
         this._grabbedItem = null;
-        this._globalMouseTool.onMouseMove = event => this._handleMouseEvent(event);
-        this._globalMouseTool.onMouseUp = event => this._handleMouseEvent(event);
-        this._globalMouseTool.onMouseDown = event => this._handleMouseEvent(event);
+        this._globalTool.onMouseMove = event => this._handleEvent(event);
+        this._globalTool.onMouseUp = event => this._handleEvent(event);
+        this._globalTool.onMouseDown = event => this._handleEvent(event);
+        this._globalTool.onKeyDown = event => this._handleEvent(event);
+        this._globalTool.onKeyUp = event => this._handleEvent(event);
     }
 
     /**
      * Handle mouse event.
      */
-    _handleMouseEvent(event)
+    _handleEvent(event)
     {
+        if ((event.type === 'keydown' || event.type === 'keyup') && event.key === this._multipleSelectionKey)
+        {
+            this._selectingMultiple = event.type === 'keydown';
+        }
+
         switch (this._state)
         {
             case this._STATES.IDLE:
@@ -105,15 +157,27 @@ class WorkflowBuilder
                 break;
             }
 
-            case this._STATES.GRABBED_WORKFLOWJOBITEM:
+            case this._STATES.GRABBED_WORKFLOWJOBITEMS:
             {
-                this._handleStateGrabbedWorkflowJobItem(event);
+                this._handleStateGrabbedWorkflowJobItems(event);
+                break;
+            }
+
+            case this._STATES.MOVING_WORKFLOWJOBITEMS:
+            {
+                this._handleStateMovingWorkflowJobItems(event);
                 break;
             }
 
             case this._STATES.CREATING_CONNECTION:
             {
                 this._handleStateCreatingConnection(event);
+                break;
+            }
+
+            case this._STATES.SELECTING_MULTIPLE:
+            {
+                this._handleStateSelectingMultiple(event);
                 break;
             }
 
@@ -134,18 +198,42 @@ class WorkflowBuilder
         {
             if (event.target instanceof WorkflowJobItem)
             {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: event.target._associatedModel});
-                this._grabbedItem = event.target;
-                this._state = this._STATES.GRABBED_WORKFLOWJOBITEM;  
-            }
-            else if (event.target instanceof OutputPortItem)
-            {
-                this._selectedOutputPortItem = event.target;
-                this._state = this._STATES.CREATING_CONNECTION; 
+                if (!this._selectingMultiple)
+                {
+                    if (!this._isSelected(event.target))
+                    {
+                        this._clearSelected();
+                        this._selectItem(event.target);
+                    }
+                    this._state = this._STATES.GRABBED_WORKFLOWJOBITEMS;  
+                }
+                else
+                {
+                    if (!this._isSelected(event.target))
+                    {
+                        this._selectItem(event.target);
+                    }
+                    else
+                    {
+                        this._unselectItem(event.target);
+                    }
+                }
             }
             else
             {
-                this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+                if (!this._selectingMultiple)
+                {
+                    this._clearSelected();
+                }
+                if (event.target instanceof OutputPortItem)
+                {
+                    this._selectedOutputPortItem = event.target;
+                    this._state = this._STATES.CREATING_CONNECTION; 
+                }
+                else
+                {
+                    this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+                }
             }
         }
     }
@@ -153,20 +241,45 @@ class WorkflowBuilder
     /**
      * Handle grabbed workflowjobitem state.
      */
-    _handleStateGrabbedWorkflowJobItem(event)
+    _handleStateGrabbedWorkflowJobItems(event)
     {
         if (event.type === 'mousemove')
         {
-            this._grabbedItem.move(event.delta);
+            this._state = this._STATES.MOVING_WORKFLOWJOBITEMS;
         }
         else if (event.type === 'mouseup')
         {
-            // We've let go, so go idle and save the position.
+            this._clearSelected();
+            this._selectItem(event.target);
             this._state = this._STATES.IDLE;
-            var object = {workflowjob: this._grabbedItem._associatedModel,
-                          x: this._grabbedItem.position.x / paper.view.zoom / paper.view.size.width,
-                          y: this._grabbedItem.position.y / paper.view.zoom / paper.view.size.height};
-            this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, object);
+        }
+    }
+
+    /**
+     * Handle moving workflowjobitem state.
+     */
+    _handleStateMovingWorkflowJobItems(event)
+    {
+        if (event.type === 'mousemove')
+        {
+            for (var itemIndex in this._selectedItems)
+            {
+                var item = this._selectedItems[itemIndex];
+                item.move(event.delta);
+            }
+        }
+        else if (event.type === 'mouseup')
+        {
+            // We've let go, so go idle and save the positions.
+            this._state = this._STATES.IDLE;
+            for (var itemIndex in this._selectedItems)
+            {
+                var item = this._selectedItems[itemIndex];
+                var object = {workflowjob: item._associatedModel,
+                              x: item.position.x / paper.view.zoom / paper.view.size.width,
+                              y: item.position.y / paper.view.zoom / paper.view.size.height};
+                this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE_COORDINATES, object);
+            }
         }
     }
 
@@ -207,6 +320,46 @@ class WorkflowBuilder
             var adjustedPoint = new Point(event.point.x, event.point.y - 1);
             this._line.setEndPoint(adjustedPoint);
         }
+    }
+
+    /**
+     * Selects the given item.
+     */
+    _selectItem(item)
+    {
+        this._selectedItems[item.id] = item;
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: item._associatedModel});
+        item.setHighlight(true);
+    }
+
+    /**
+     * Unselects the given item.
+     */
+    _unselectItem(item)
+    {
+        delete this._selectedItems[item.id];
+        item.setHighlight(false);
+    }
+
+    /**
+     * Clears selection.
+     */
+    _clearSelected()
+    {
+        for (var itemIndex in this._selectedItems)
+        {
+            var item = this._selectedItems[itemIndex];
+            this._unselectItem(item);
+        }
+        this._selectedItems = {}; // TODO memory leak? 
+    }
+
+    /**
+     * Return true iff item is selected.
+     */
+    _isSelected(item)
+    {
+        return this._selectedItems.hasOwnProperty(item.id);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

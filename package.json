@@ -57,7 +57,7 @@
       "jquery": "github:components/jquery@2.1.4",
       "json-editor": "github:jdorn/json-editor@0.7.21",
       "moment": "github:moment/moment@^2.10.6",
-      "paper": "npm:paper@0.9.23",
+      "paper": "npm:paper@0.9.25",
       "traceur": "npm:traceur@^0.0.91",
       "twbs/bootstrap": "github:twbs/bootstrap@3.3.4",
       "underscore": "npm:underscore@1.8.3"

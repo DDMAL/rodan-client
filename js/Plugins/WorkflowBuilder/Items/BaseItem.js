@@ -168,6 +168,15 @@ class BaseItem extends paper.Path
     }
 
     /**
+     * Highlights this object.
+     */
+    setHighlight(highlighted)
+    {
+        this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+    }
+
+    /**
      * Handle mouse event.
      */
     _handleMouseEvent(event)
@@ -191,9 +200,16 @@ class BaseItem extends paper.Path
                 break;
             }
 
+            case 'click':
+            {
+                paper.handleMouseEvent(event);
+                break;
+            }
+
             default:
             {
                 paper.handleMouseEvent(event);
+                break;
             }
         }
     }
