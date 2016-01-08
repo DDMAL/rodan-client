@@ -27,6 +27,9 @@ var Configuration = {
         email: '' // your email
     },
 
+    // Event timer frequency (ms).
+    EVENT_TIMER_FREQUENCY: 3000,
+
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {
 
@@ -49,6 +52,8 @@ var Configuration = {
         FILL_COLOR: '#5555ff',
         STROKE_WIDTH: 2,
         FONT_SIZE: 20,
+        STROKE_COLOR_SELECTED: '#0000ff',
+        STROKE_WIDTH_SELECTED: 3,
 
         // Hover time. This is the amount of time the mouse must
         // hover over an item for a pop-up to appear in milliseconds.
