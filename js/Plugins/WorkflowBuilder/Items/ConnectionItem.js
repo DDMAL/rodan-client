@@ -23,7 +23,7 @@ class ConnectionItem extends BaseItem
 
         // We'll put a small circle in the middle of our connection so it's easier to select.
         var circleCenter = new paper.Point(0, 0);
-        this._circle = new paper.Shape.Circle(circleCenter, 10);
+        this._circle = new paper.Shape.Circle(circleCenter, Configuration.WORKFLOWBUILDER.CONNECTION_CIRCLE_RADIUS);
         this._circle.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
         this._circle.onMouseDown = event => this._handleMouseEvent(event);
         this._circle.onMouseUp = event => this._handleMouseEvent(event);

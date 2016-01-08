@@ -54,6 +54,7 @@ var Configuration = {
         FONT_SIZE: 20,
         STROKE_COLOR_SELECTED: '#0000ff',
         STROKE_WIDTH_SELECTED: 3,
+        CONNECTION_CIRCLE_RADIUS: 10,
 
         // Hover time. This is the amount of time the mouse must
         // hover over an item for a pop-up to appear in milliseconds.
