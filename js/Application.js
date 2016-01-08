@@ -193,8 +193,8 @@ class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
-        this.rodanChannel.request(Events.REQUEST__RESOURCETYPES_LOAD, {});
-        this.rodanChannel.request(Events.REQUEST__LOAD_JOBS, {query: {enabled: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__RESOURCETYPES_LOAD, {query: {disable_pagination: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__LOAD_JOBS, {query: {enabled: 'True', disable_pagination: 'True'}});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }
 }
