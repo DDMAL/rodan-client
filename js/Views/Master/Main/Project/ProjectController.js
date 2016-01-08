@@ -29,10 +29,10 @@ class ProjectController extends BaseController
     _initializeRadio()
     {
         // Commands.
-        this._rodanChannel.reply(Events.COMMAND__PROJECT_ADD, aOptions => this._handleCommandAddProject(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__PROJECT_SET_ACTIVE, aOptions => this._handleCommandSetActiveProject(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__PROJECT_SAVE, aOptions => this._handleCommandProjectSave(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__PROJECT_DELETE, aOptions => this._handleCommandProjectDelete(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__PROJECT_ADD, aOptions => this._handleCommandAddProject(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, aOptions => this._handleCommandSetActiveProject(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, aOptions => this._handleCommandProjectSave(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, aOptions => this._handleCommandProjectDelete(aOptions));
 
         // Events.
         this._rodanChannel.on(Events.EVENT__PROJECT_SELECTED, aOptions => this._handleEventItemSelected(aOptions));
@@ -100,7 +100,7 @@ class ProjectController extends BaseController
     {
         this._activeProject = aOptions.project;
         var layoutView = new LayoutViewProject();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, layoutView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
         var view = new ViewProject({project: this._activeProject});
         layoutView.showView(view);
     }
@@ -111,7 +111,7 @@ class ProjectController extends BaseController
     _handleEventListSelected()
     {
         var layoutView = new LayoutViewProject();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, layoutView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
         layoutView.showView(new ViewProjectList());
     }
 

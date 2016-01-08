@@ -17,7 +17,7 @@ class ResourceCollection extends BaseCollection
     {
         this.model = Resource;
         this.route = 'resources';
-        this.loadCommand = Events.COMMAND__RESOURCES_LOAD;
+        this.loadCommand = Events.REQUEST__RESOURCES_LOAD;
         this.requestCommand = Events.REQUEST__RESOURCE_COLLECTION;
         this.syncCommand = Events.REQUEST__RESOURCES_SYNC;
     }

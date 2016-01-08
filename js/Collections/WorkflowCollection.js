@@ -17,7 +17,7 @@ class WorkflowCollection extends BaseCollection
     {
         this.model = Workflow;
         this.route = 'workflows';
-        this.loadCommand = Events.COMMAND__LOAD_WORKFLOWS;
+        this.loadCommand = Events.REQUEST__LOAD_WORKFLOWS;
         this.requestCommand = Events.REQUEST__COLLECTION_WORKFLOW;
         this.syncCommand = Events.REQUEST__WORKFLOWS_SYNC;
     }

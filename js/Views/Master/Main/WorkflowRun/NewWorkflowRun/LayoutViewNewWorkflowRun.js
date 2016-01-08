@@ -65,9 +65,9 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, aPass => this._handleRequestIsResourceAssignment(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
-        this.rodanChannel.reply(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, options => this._handleCommandCreate(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, aPass => this._handleCommandAddRequest(aPass));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, aPass => this._handleCommandRemoveRequest(aPass));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, options => this._handleCommandCreate(options), this);
     }
 
     /**

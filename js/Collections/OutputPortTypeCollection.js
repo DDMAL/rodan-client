@@ -17,7 +17,7 @@ class OutputPortTypeCollection extends BaseCollection
     {
         this.model = OutputPortType;
         this.route = 'outputporttypes';
-        this.loadCommand = Events.COMMAND__LOAD_OUTPUTPORTTYPES;
+        this.loadCommand = Events.REQUEST__LOAD_OUTPUTPORTTYPES;
         this.requestCommand = Events.REQUEST__COLLECTION_OUTPUTPORTTYPE;
     }
 }

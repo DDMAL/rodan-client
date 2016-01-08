@@ -17,7 +17,7 @@ class RunJobCollection extends BaseCollection
     {
         this.model = RunJob;
         this.route = 'runjobs';
-        this.loadCommand = Events.COMMAND__LOAD_RUNJOBS;
+        this.loadCommand = Events.REQUEST__LOAD_RUNJOBS;
         this.requestCommand = Events.REQUEST__RUNJOB_COLLECTION;
     }
 }

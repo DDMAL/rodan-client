@@ -17,7 +17,7 @@ class ConnectionCollection extends BaseCollection
     {
         this.model = Connection;
         this.route = 'connections';
-        this.loadCommand = Events.COMMAND__LOAD_CONNECTIONS;
+        this.loadCommand = Events.REQUEST__LOAD_CONNECTIONS;
         this.requestCommand = Events.REQUEST__COLLECTION_CONNECTION;
     }
 }

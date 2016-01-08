@@ -22,7 +22,7 @@ class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.request(Events.COMMAND__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
+        this._rodanChannel.request(Events.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
         this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: this.model.get('project')});
     }
 
@@ -33,7 +33,7 @@ class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
     {
         if (aEvent.project === this.model.get('project'))
         {
-            this._rodanChannel.trigger(Events.EVENT_NAVIGATION_NODE_SELECTED, {node: this});
+            this._rodanChannel.trigger(Events.EVENT__NAVIGATION_NODE_SELECTED, {node: this});
         }
     }
 }

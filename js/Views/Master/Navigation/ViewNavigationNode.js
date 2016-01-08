@@ -18,7 +18,7 @@ class ViewNavigationNode extends Marionette.CompositeView
     initialize()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.on(Events.EVENT_NAVIGATION_NODE_SELECTED, aEvent => this._handleEventNodeSelected(aEvent));
+        this._rodanChannel.on(Events.EVENT__NAVIGATION_NODE_SELECTED, aEvent => this._handleEventNodeSelected(aEvent));
         this._initializeRadio();
     }
 

@@ -54,7 +54,7 @@ class ViewWorkflow extends Marionette.ItemView
         var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
         if (confirmation)
         {
-            this._rodanChannel.request(Events.COMMAND__WORKFLOW_DELETE, {workflow: this.model});
+            this._rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
         }
     }
 
@@ -80,7 +80,7 @@ class ViewWorkflow extends Marionette.ItemView
     _handleButtonSave()
     {
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
-        this._rodanChannel.request(Events.COMMAND__WORKFLOW_SAVE, {workflow: this.model});
+        this._rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model});
     }
 
     /**
@@ -88,7 +88,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonValidate()
     {
-        this._rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
     /**

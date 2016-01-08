@@ -35,7 +35,7 @@ class ViewOutputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {outputport: this.model});
     }
 }
 

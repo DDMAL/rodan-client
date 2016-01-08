@@ -58,11 +58,11 @@ class ViewResourceListItem extends Marionette.ItemView
         var selected = this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         if (selected)
         {
-            this.rodanChannel.request(Events.COMMAND__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         }
         else
         {
-            this.rodanChannel.request(Events.COMMAND__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         }
         selected = this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT, {inputport: this._inputPort, resource: this.model});
         this._setHighlight(selected);

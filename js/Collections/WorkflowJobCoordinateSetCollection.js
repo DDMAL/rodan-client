@@ -17,7 +17,7 @@ class WorkflowJobCoordinateSetCollection extends BaseCollection
     {
         this.model = WorkflowJobCoordinateSet;
         this.route = 'workflowjobcoordinatesets';
-        this.loadCommand = Events.COMMAND__WORKFLOWJOBCOORDINATESETS_LOAD;
+        this.loadCommand = Events.REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD;
         this.requestCommand = Events.REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION;
     }
 }

@@ -63,7 +63,7 @@ class Application extends Marionette.Application
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__TIMER_TEST, 
                                                                       options: {}, 
                                                                       callback: (response) => this.timerRequestCallback(response)});*/
-        this.rodanChannel.request(Events.COMMAND__GET_ROUTES);
+        this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTES);
     }
 
     /**
@@ -119,7 +119,7 @@ class Application extends Marionette.Application
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__ROUTESLOADED, () => this._handleEventRoutesLoaded());
+        this.rodanChannel.on(Events.EVENT__SERVER_ROUTESLOADED, () => this._handleEventRoutesLoaded());
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
     }
 
@@ -172,7 +172,7 @@ class Application extends Marionette.Application
     }
 
     /**
-     * Handle EVENT__ROUTESLOADED.
+     * Handle EVENT__SERVER_ROUTESLOADED.
      */
     _handleEventRoutesLoaded()
     {
@@ -185,7 +185,7 @@ class Application extends Marionette.Application
         this.rodanChannel.trigger(Events.EVENT__APPLICATION_READY);
 
         // Check authentication.
-        this.rodanChannel.request(Events.COMMAND__AUTHENTICATION_CHECK); 
+        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_CHECK); 
     }
 
     /**
@@ -193,8 +193,8 @@ class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
-        this.rodanChannel.request(Events.COMMAND__RESOURCETYPES_LOAD, {});
-        this.rodanChannel.request(Events.COMMAND__LOAD_JOBS, {query: {enabled: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__RESOURCETYPES_LOAD, {});
+        this.rodanChannel.request(Events.REQUEST__LOAD_JOBS, {query: {enabled: 'True'}});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }
 }

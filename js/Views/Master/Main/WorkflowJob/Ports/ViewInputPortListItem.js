@@ -35,7 +35,7 @@ class ViewInputPortListItem extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, {inputport: this.model});
     }
 }
 

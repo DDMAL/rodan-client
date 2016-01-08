@@ -20,9 +20,9 @@ class WorkflowController extends BaseController
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
         this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        this._rodanChannel.reply(Events.COMMAND__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
     }
    
     /**
@@ -39,7 +39,7 @@ class WorkflowController extends BaseController
     _handleEventListSelected(options)
     {
         this._layoutView = new LayoutViewWorkflow();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         this._viewList = new ViewWorkflowList({project: options.project});
         this._layoutView.showList(this._viewList);
     }

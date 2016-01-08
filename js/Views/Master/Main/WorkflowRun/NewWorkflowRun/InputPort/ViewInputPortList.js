@@ -19,7 +19,7 @@ class ViewInputPortList extends Marionette.CompositeView
     {
         this._initializeRadio();
         this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
-        this.rodanChannel.request(Events.COMMAND__LOAD_INPUTPORTS, {query: {workflow: aParameters.workflow.id, has_connections: false}});
+        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTS, {query: {workflow: aParameters.workflow.id, has_connections: false}});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

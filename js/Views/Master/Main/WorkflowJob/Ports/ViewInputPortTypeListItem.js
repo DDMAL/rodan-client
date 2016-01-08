@@ -35,7 +35,7 @@ class ViewInputPortTypeListItem extends Marionette.ItemView
      */
     _handleButtonNewInputPort()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model, workflowjob: null});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model, workflowjob: null});
     }
 }
 

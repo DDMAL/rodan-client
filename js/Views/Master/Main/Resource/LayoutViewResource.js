@@ -61,7 +61,7 @@ class LayoutViewResource extends Marionette.LayoutView
     {
         var file = this.ui.fileInput[0].files[0];
         this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
-        this._rodanChannel.request(Events.COMMAND__RESOURCE_ADD, {project: this._project, file: file});
+        this._rodanChannel.request(Events.REQUEST__RESOURCE_ADD, {project: this._project, file: file});
     }
 }
 

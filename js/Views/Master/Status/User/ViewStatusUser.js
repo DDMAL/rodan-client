@@ -54,7 +54,7 @@ class ViewStatusUser extends Marionette.ItemView
      */
     _handleButton()
     {
-        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGOUT);
+        this._rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
     }
 }
 

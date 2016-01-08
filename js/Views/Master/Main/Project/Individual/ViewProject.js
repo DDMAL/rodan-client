@@ -20,7 +20,7 @@ class ViewProject extends Marionette.CompositeView
         this.model = options.project;
         this._initializeRadio();
         this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this._rodanChannel.request(Events.COMMAND__LOAD_WORKFLOWRUNS, {query: {project: this.model.id}});
+        this._rodanChannel.request(Events.REQUEST__LOAD_WORKFLOWRUNS, {query: {project: this.model.id}});
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
                                                                       options: {query: {project: this.model.id}}, 
                                                                       callback: null});
@@ -50,7 +50,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        this._rodanChannel.request(Events.COMMAND__PROJECT_SAVE, 
+        this._rodanChannel.request(Events.REQUEST__PROJECT_SAVE, 
                                   {project: this.model,
                                    fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
@@ -60,7 +60,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonDelete()
     {
-        this._rodanChannel.request(Events.COMMAND__PROJECT_DELETE, {project: this.model});
+        this._rodanChannel.request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
     }
 
     /**

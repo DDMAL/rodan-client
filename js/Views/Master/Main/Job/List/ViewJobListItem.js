@@ -44,7 +44,7 @@ class ViewJobListItem extends Marionette.ItemView
     _handleClickButtonAdd()
     {
         this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWJOB_ADD, {job: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_ADD, {job: this.model});
     }
 }
 

@@ -38,7 +38,7 @@ class WorkflowRunController extends BaseController
     _handleEventItemSelected(options)
     {
         this._viewItem = new LayoutViewIndividualWorkflowRun({workflowRun: options.workflowRun});
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewItem);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewItem);
     }
 
     /**
@@ -48,7 +48,7 @@ class WorkflowRunController extends BaseController
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._viewList = new ViewWorkflowRunList({project: project});
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._viewList);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewList);
     }
 
     /**
@@ -59,7 +59,7 @@ class WorkflowRunController extends BaseController
         var collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
         var project = collection.where({'url': aPass.workflow.get('project')})[0];
         this._layoutViewNewWorkflowRun = new LayoutViewNewWorkflowRun({workflow: aPass.workflow, project: project});
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutViewNewWorkflowRun);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutViewNewWorkflowRun);
     }
 }
 

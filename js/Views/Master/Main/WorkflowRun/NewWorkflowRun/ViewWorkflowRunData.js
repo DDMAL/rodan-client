@@ -36,7 +36,7 @@ class ViewWorkflowRunData extends Marionette.ItemView
      */
     _handleButtonRun()
     {
-        this.rodanChannel.request(Events.COMMAND__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
     }
 }
 

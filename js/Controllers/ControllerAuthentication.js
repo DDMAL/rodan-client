@@ -65,10 +65,10 @@ class ControllerAuthentication extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__USER, () => this._handleRequestUser());
-        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_LOGIN, aData => this._login(aData));
-        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
-        this._rodanChannel.reply(Events.COMMAND__AUTHENTICATION_LOGOUT, () => this._logout());
+        this._rodanChannel.reply(Events.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
+        this._rodanChannel.reply(Events.REQUEST__AUTHENTICATION_LOGIN, aData => this._login(aData));
+        this._rodanChannel.reply(Events.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        this._rodanChannel.reply(Events.REQUEST__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**
@@ -91,20 +91,20 @@ class ControllerAuthentication extends BaseController
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
                 break;
             case 400:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 401:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request,
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request,
                                                                            message: 'Incorrect username/password.'});
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 403:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 this._rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             default:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 break;
         }
     }
@@ -126,16 +126,16 @@ class ControllerAuthentication extends BaseController
                 this._rodanChannel.trigger(Events.EVENT__DEAUTHENTICATION_SUCCESS);
                 break;
             case 400:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 break;
             case 401:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 break;
             case 403:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 break;
             default:
-                this._rodanChannel.request(Events.COMMAND__HANDLER_ERROR, {response: request});
+                this._rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
                 break;
         }
     }

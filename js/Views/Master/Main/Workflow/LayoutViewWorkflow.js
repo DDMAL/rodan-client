@@ -59,7 +59,7 @@ class LayoutViewWorkflow extends Marionette.LayoutView
     _handleButtonNewWorkflow()
     {
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        var workflow = this.rodanChannel.request(Events.COMMAND__WORKFLOW_ADD, {project: project});
+        var workflow = this.rodanChannel.request(Events.REQUEST__WORKFLOW_ADD, {project: project});
     }
 }
 

@@ -84,7 +84,7 @@ class ViewNavigationNodeProject extends ViewNavigationNode
     {
         if (aEvent.project === this.model)
         {
-            this._rodanChannel.trigger(Events.EVENT_NAVIGATION_NODE_SELECTED, {node: this});
+            this._rodanChannel.trigger(Events.EVENT__NAVIGATION_NODE_SELECTED, {node: this});
         }
     }
 }

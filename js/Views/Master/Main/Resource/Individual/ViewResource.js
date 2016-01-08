@@ -49,7 +49,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        this._rodanChannel.request(Events.COMMAND__RESOURCE_SAVE, {resource: this.model,
+        this._rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model,
                                                                    resource_type: this.ui.selectResourceType.val(),
                                                                    name: this.ui.resourceName.val(),
                                                                    description: this.ui.resourceDescription.val()});
@@ -60,7 +60,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonDelete()
     {
-        this._rodanChannel.request(Events.COMMAND__RESOURCE_DELETE, {resource: this.model});
+        this._rodanChannel.request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
     }
 }
 

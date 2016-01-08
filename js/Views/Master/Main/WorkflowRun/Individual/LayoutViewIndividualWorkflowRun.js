@@ -27,7 +27,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this._initializeRadio();
         this.model = options.workflowRun;
         this.collection = this._rodanChannel.request(Events.REQUEST__RUNJOB_COLLECTION);
-        this._rodanChannel.request(Events.COMMAND__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
+        this._rodanChannel.request(Events.REQUEST__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
         this.addRegions({
             regionRunJobList: '#region-main_workflowrun_individual_runjobs',
             regionResourceList: '#region-main_workflowrun_individual_resources'
@@ -46,7 +46,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         // Create Resource views.
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._layoutViewResources = new LayoutViewResource({project: project, template: '#template-main_workflowrun_individual_resources'});
-        this._rodanChannel.request(Events.COMMAND__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
+        this._rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
         this._viewResourceList = new ViewResourceList({query: {result_of_workflow_run: this.model.id},
                                                        template: '#template-main_workflowrun_individual_resources_list',
@@ -55,7 +55,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
 
         // Create Resource views.
         this._layoutViewRunJobs = new LayoutViewRunJob({project: project, template: '#template-main_workflowrun_individual_runjobs'});
-        this._rodanChannel.request(Events.COMMAND__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
+        this._rodanChannel.request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({query: {workflow_run: this.model.id},
                                                    template: '#template-main_runjob_list',

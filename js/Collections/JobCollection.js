@@ -17,7 +17,7 @@ class JobCollection extends BaseCollection
     {
         this.model = Job;
         this.route = 'jobs';
-        this.loadCommand = Events.COMMAND__LOAD_JOBS;
+        this.loadCommand = Events.REQUEST__LOAD_JOBS;
         this.requestCommand = Events.REQUEST__COLLECTION_JOB;
     }
 }

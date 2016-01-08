@@ -18,9 +18,9 @@ class ViewProjectList extends Marionette.CompositeView
     initialize()
     {
         this._initializeRadio();
-        var user = this.rodanChannel.request(Events.REQUEST__USER);
+        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
         this.collection = this.rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
-        this.rodanChannel.request(Events.COMMAND__PROJECTS_LOAD, {query: {user: user.get('uuid')}});
+        this.rodanChannel.request(Events.REQUEST__PROJECTS_LOAD, {query: {user: user.get('uuid')}});
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                       options: {}, 
                                                                       callback: null});
@@ -42,8 +42,8 @@ class ViewProjectList extends Marionette.CompositeView
      */
     _handleButtonNewProject()
     {
-        var user = this.rodanChannel.request(Events.REQUEST__USER);
-        this.rodanChannel.request(Events.COMMAND__PROJECT_ADD, {user: user});
+        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
+        this.rodanChannel.request(Events.REQUEST__PROJECT_ADD, {user: user});
     }
 }
 

@@ -19,10 +19,10 @@ class ResourceController extends BaseController
     _initializeRadio()
     {
         // Commands.
-        this._rodanChannel.reply(Events.COMMAND__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
-        this._rodanChannel.reply(Events.COMMAND__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        this._rodanChannel.reply(Events.REQUEST__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
 
         // Requests.
         this._rodanChannel.on(Events.EVENT__RESOURCES_SELECTED, aOptions => this._handleEventListSelected(aOptions));
@@ -43,7 +43,7 @@ class ResourceController extends BaseController
     _handleEventListSelected(options)
     {
         this._layoutView = new LayoutViewResource({project: options.project});
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this._layoutView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         this._layoutView.showList(new ViewResourceList({query: {project: options.project.id},
                                                         template: '#template-main_resource_list',
                                                         childView: ViewResourceListItem}));
@@ -119,7 +119,7 @@ class ResourceController extends BaseController
     _handleCallbackAddSuccess()
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this._rodanChannel.request(Events.COMMAND__RESOURCES_LOAD, {query: {project: project.id}});
+        this._rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {query: {project: project.id}});
     }
 }
 

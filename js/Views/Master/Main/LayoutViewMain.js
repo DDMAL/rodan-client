@@ -47,7 +47,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.reply(Events.COMMAND__LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
+        this._rodanChannel.reply(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, aView => this._handleCommandShow(aView));
         this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
         this._rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
     }
@@ -58,7 +58,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleAuthenticationLoginRequired()
     {
         this.loginView = new ViewLogin();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this.loginView);
     }
 
     /**
@@ -75,7 +75,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.loginView = new ViewLogin();
-        this._rodanChannel.request(Events.COMMAND__LAYOUTVIEW_SHOW, this.loginView);
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this.loginView);
     }
 }
 

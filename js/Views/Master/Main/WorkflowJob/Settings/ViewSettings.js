@@ -42,7 +42,7 @@ class ViewSettings extends Marionette.ItemView
      */
     _handleButtonSaveSettings()
     {
-        this._rodanChannel.request(Events.COMMAND__WORKFLOWJOB_SAVE, {'job_settings': this._editor.getValue()});
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'job_settings': this._editor.getValue()});
     }
 
     /**

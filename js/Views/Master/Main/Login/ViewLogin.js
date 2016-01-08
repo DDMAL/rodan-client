@@ -36,7 +36,7 @@ class ViewLogin extends Marionette.ItemView
      */
     _handleButton()
     {
-        this._rodanChannel.request(Events.COMMAND__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
+        this._rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
     }
 }
 
