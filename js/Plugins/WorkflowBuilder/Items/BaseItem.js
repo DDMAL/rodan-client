@@ -137,8 +137,8 @@ class BaseItem extends paper.Path
         {
             var tooltip = $('div#canvas-tooltip');
             tooltip.css('visibility', 'visible');
-            tooltip.css('top', this.bounds.top);
-            tooltip.css('left', this.bounds.right);
+            tooltip.css('top', event.event.y);
+            tooltip.css('left', event.event.x);
             tooltip.text(this._associatedModel.getDescription());
         }
     }
