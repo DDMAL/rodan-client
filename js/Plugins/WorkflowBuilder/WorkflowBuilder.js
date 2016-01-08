@@ -24,6 +24,10 @@ class WorkflowBuilder
     initialize(aCanvasElementId)
     {
         this._multipleSelectionKey = null;
+        this._line = null;
+        this._selectedItems = {};
+        this._selectingMultiple = false;
+        this._selectedOutputPortItem = null;
 
         this._STATES = {
             IDLE: 0,
@@ -32,7 +36,6 @@ class WorkflowBuilder
             CREATING_CONNECTION: 3
         };
         this._state = this._STATES.IDLE;
-        this._selectedOutputPortItem = null;
 
         this._zoomMin = Configuration.WORKFLOWBUILDER.ZOOM_MIM;
         this._zoomMax = Configuration.WORKFLOWBUILDER.ZOOM_MAX;
@@ -46,10 +49,6 @@ class WorkflowBuilder
         this._initializeRadio();
         this._createSegments();
         this._setMultipleSelectionKey();
-
-        this._line = null;
-        this._selectedItems = {};
-        this._selectingMultiple = false;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

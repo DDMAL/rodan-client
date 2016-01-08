@@ -15,7 +15,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize(options)
     {
@@ -62,14 +62,6 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Handle button show workflow.
-     */
-    _handleButtonShowWorkflow()
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 
     /**
@@ -128,7 +120,6 @@ LayoutViewControlWorkflowJob.prototype.template = '#template-main_workflowbuilde
 LayoutViewControlWorkflowJob.prototype.ui = {
     buttonTogglePorts: '#button-ports_toggle',
     buttonToggleSettings: '#button-settings_toggle',
-    buttonShowWorkflow: '#button-show_workflow',
     buttonSave: '#button-save_workflowjob_data',
     buttonDelete: '#button-delete_workflowjob',
     textName: '#text-workflowjob_name'
@@ -136,7 +127,6 @@ LayoutViewControlWorkflowJob.prototype.ui = {
 LayoutViewControlWorkflowJob.prototype.events = {
     'click @ui.buttonTogglePorts': '_showPorts',
     'click @ui.buttonToggleSettings': '_showSettings',
-    'click @ui.buttonShowWorkflow': '_handleButtonShowWorkflow',
     'click @ui.buttonSave': '_handleButtonSave',
     'click @ui.buttonDelete': '_handleButtonDelete'
 };

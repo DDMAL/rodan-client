@@ -38,11 +38,15 @@ class ViewSettings extends Marionette.ItemView
     }
 
     /**
-     * Handle button save settings.
+     * Save settings.
      */
-    _handleButtonSaveSettings()
+    _saveSettings()
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'job_settings': this._editor.getValue()});
+        var element = this._getJQueryElement();
+        if ($(element).is(":visible"))
+        {
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'job_settings': this._editor.getValue()});
+        }
     }
 
     /**
@@ -51,7 +55,7 @@ class ViewSettings extends Marionette.ItemView
     _initializeSettingsDisplay()
     {
         // Initially hide.
-        var element = $(this.$el.find('#workflowjob-settings')[0])[0];
+        var element = this._getJQueryElement();
         $(element).hide();
 
         // Check if we have settings.
@@ -74,8 +78,18 @@ class ViewSettings extends Marionette.ItemView
                 startval: startValues
             };
             this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
+            this._editor.on('change', () => this._saveSettings());
         }
     }
+
+    /**
+     * Get HTML element as jQuery object.
+     */
+    _getJQueryElement()
+    {
+        return $(this.$el.find('#workflowjob-settings')[0])[0];
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -85,11 +99,5 @@ ViewSettings.prototype.modelEvents = {
     'all': 'render'
 };
 ViewSettings.prototype.template = '#template-main_workflowbuilder_control_settings';
-ViewSettings.prototype.ui = {
-    buttonSaveSettings: '#button-save_settings'
-};
-ViewSettings.prototype.events = {
-    'click @ui.buttonSaveSettings': '_handleButtonSaveSettings'
-};
 
 export default ViewSettings;
