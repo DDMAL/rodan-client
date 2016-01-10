@@ -43,13 +43,16 @@ class Application extends Marionette.Application
             regionNavigation: '#region-navigation',
             regionStatus: '#region-status'
         });
+
+        // Non-network and non-GUI inits. Do these first.
         this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
-        this._initializeControllers();
-        this._initializeAjaxPrefilters();
         this._initializeCollections();
+        
+        this._initializeAjaxPrefilters();
         this._initializeViews();
+        this._initializeControllers();
         this._errorHandler = new ErrorHandler();
         this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
     }

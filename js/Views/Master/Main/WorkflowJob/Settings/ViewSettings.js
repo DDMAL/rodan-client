@@ -72,10 +72,11 @@ class ViewSettings extends Marionette.ItemView
                 theme: 'bootstrap3',
                 disable_collapse: true,
                 disable_edit_json: true,
-                disable_properties: false,
+                disable_properties: true,
                 no_additional_properties: true,
                 show_errors: 'always',
-                startval: startValues
+                startval: startValues,
+                form_name_root: ''
             };
             this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
             this._editor.on('change', () => this._saveSettings());

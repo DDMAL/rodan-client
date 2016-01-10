@@ -6,23 +6,14 @@
  * General parameters
  *************************************************************************************/
 /* Navigation area */
-$background-color-navigation-gradient_left: #000000;
-$background-color-navigation-gradient_right: #333333;
+$background-color-navigation: #000000;
 $text-color-navigation: #cccccc;
 $text-color-navigation-logout: #000000;
 
-/* Status area - User */
-$background-color-status-user-gradient_left: #000000;
-$background-color-status-user-gradient_right: #333333;
+/* Status area */
+$background-color-status: #000000;
 $text-color-status-user: #cccccc;
-
-/* Status area - Messages */
-$background-color-status_message: #333333;
 $text-color-status-user: #cccccc;
-
-/* Status area - Server */
-$background-color-status-server-gradient_left: #333333;
-$background-color-status-server-gradient_right: #555555;
 $text-color-status-server: #cccccc;
 
 /* Main area */
@@ -83,9 +74,7 @@ div.bottom {
 
 div#region-navigation 
 {
-    background: linear-gradient(to right, 
-                                $background-color-navigation-gradient_left,
-                                $background-color-navigation-gradient_right);
+    background: $background-color-navigation;
     height: 100%;
     color: $text-color-navigation;
     overflow-y: auto;
@@ -104,27 +93,26 @@ button#button-navigation_logout
     color: $text-color-navigation-logout;
 }
 
+div#region-status
+{
+    background: $background-color-status;
+    height: 100%;
+}
+
 div#region-status_user 
 {
-    background: linear-gradient(to right, 
-                                $background-color-status-user-gradient_left,
-                                $background-color-status-user-gradient_right);
     height: 100%;
     color: $text-color-status-user;
 }
 
 div#region-status_message 
 {
-    background-color: $background-color-status_message;
     height: 100%;
     color: $text-color-status-user;
 }
 
 div#region-status_server
 {
-    background: linear-gradient(to right, 
-                                $background-color-status-server-gradient_left,
-                                $background-color-status-server-gradient_right);
     height: 100%;
     color: $text-color-status-server;
 }
