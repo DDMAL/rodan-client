@@ -1,5 +1,5 @@
 {
-  "name": "vis-client",
+  "name": "rodan-client",
   "version": "0.1.0",
   "description": "Rodan client",
   "main": "gulpfile.js",
@@ -10,7 +10,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ELVIS-Project/vis-client"
+    "url": "https://github.com/ddmal/rodan-client"
   },
   "devDependencies": {
     "babel": "^4.5.5",
