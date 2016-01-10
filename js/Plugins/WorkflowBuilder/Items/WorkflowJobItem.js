@@ -29,6 +29,8 @@ class WorkflowJobItem extends BaseItem
      */
     update()
     {
+        this.bounds.width = this._text.bounds.width + 10;
+        this._text.position = this.bounds.center;
         this._paperGroupInputPorts.position = this.bounds.topCenter;
         this._paperGroupOutputPorts.position = this.bounds.bottomCenter;
         this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
