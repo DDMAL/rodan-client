@@ -372,6 +372,7 @@ class WorkflowBuilder
         this.rodanChannel = Radio.channel('rodan');
 
         // GUI commands.
+        this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_DESTROYED, () => this._handleEventWorkflowBuilderDestroy(), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
@@ -382,6 +383,15 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
+    }
+
+    /**
+     * Handles WorkflowBuilder destroy event.
+     * This will clear the paperjs project.
+     */
+    _handleEventWorkflowBuilderDestroy()
+    {
+        paper.project.clear();
     }
 
     /**

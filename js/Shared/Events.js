@@ -158,7 +158,7 @@ var Events =
     REQUEST__WORKFLOWBUILDER_RUN_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_RUN_WORKFLOW',             // Called when Workflow needs to be run.
     REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when Job list view needs to be shown.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
-
+    EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI

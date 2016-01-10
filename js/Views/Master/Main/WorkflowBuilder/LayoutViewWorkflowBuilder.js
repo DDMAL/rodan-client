@@ -44,6 +44,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     onDestroy()
     {
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_DESTROY);
         this._rodanChannel.off(null, null, this);
         this._rodanChannel.stopReplying(null, null, this);
     }
