@@ -29,17 +29,25 @@ class LayoutViewWorkflow extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    showList(aView)
+    showList(view)
     {
-        this.regionList.show(aView);
+        this.regionList.show(view);
     }
 
     /**
      * TODO docs
      */
-    showItem(aView)
+    showItem(view)
     {
-        this.regionItem.show(aView);
+        this.regionItem.show(view);
+    }
+
+    /**
+     * Clears item view.
+     */
+    clearItemView()
+    {
+        this.regionItem.empty();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

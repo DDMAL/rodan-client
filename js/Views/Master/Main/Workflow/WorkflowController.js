@@ -58,7 +58,16 @@ class WorkflowController extends BaseController
      */
     _handleCommandDeleteWorkflow(options)
     {
+        // Clear the individual view (if there).
+        if (this._viewItem != null && options.workflow == this._viewItem.model)
+        {
+            this._layoutView.clearItemView();
+        }
+
+        // Remove.
         options.workflow.destroy();
+        var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
+        collection.remove(options.workflow);
     }
 
     /**
