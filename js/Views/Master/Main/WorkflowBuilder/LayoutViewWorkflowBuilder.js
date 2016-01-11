@@ -350,18 +350,18 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _deleteWorkflowJob(workflowJob)
     {
-        // Delete input ports.
-        while (workflowJob.get('input_ports').length > 0)
+        // Remove input ports from GUI.
+        for (var i = 0; i < workflowJob.get('input_ports').length; i++)
         {
-            var inputPort = workflowJob.get('input_ports').at(0);
-            this._deleteInputPort(inputPort, workflowJob)
+            var inputPort = workflowJob.get('input_ports').at(i);
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: inputPort});
         }
 
-        // Delete output ports.
-        while (workflowJob.get('output_ports').length > 0)
+        // Remove output ports from GUI.
+        for (var i = 0; i < workflowJob.get('output_ports').length; i++)
         {
-            var outputPort = workflowJob.get('output_ports').at(0);
-            this._deleteOutputPort(outputPort, workflowJob)
+            var outputPort = workflowJob.get('output_ports').at(i);
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: outputPort});
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
         workflowJob.destroy();

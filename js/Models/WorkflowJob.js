@@ -31,13 +31,11 @@ class WorkflowJob extends BaseModel
      */
     parse(resp)
     {
-        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTS, {query: {workflow_job: this.id}});
-        var inputPorts = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
-        resp.input_ports = new InputPortCollection(inputPorts);
+//        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTS, {query: {workflow_job: this.id}});
+        resp.input_ports = this.get('input_ports');//this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
 
-        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTS, {query: {workflow_job: this.id}});
-        var outputPorts = this.rodanChannel.request(Events.REQUEST__COLLECTION_OUTPUTPORT);
-        resp.output_ports = new OutputPortCollection(outputPorts);
+//        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTS, {query: {workflow_job: this.id}});
+        resp.output_ports = this.get('output_ports');//this.rodanChannel.request(Events.REQUEST__COLLECTION_OUTPUTPORT);
 
         return resp;
     }
