@@ -53,6 +53,7 @@ class ConnectionItem extends BaseItem
      */
     destroy()
     {
+        this._circle.remove();
         this._associatedInputPort.paperItem.setConnectionItem(null);
         this._associatedInputPort = null;
         this._associatedOutputPort.paperItem.removeConnectionItem(this);
