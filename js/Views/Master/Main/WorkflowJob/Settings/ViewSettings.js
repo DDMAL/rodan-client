@@ -38,15 +38,6 @@ class ViewSettings extends Marionette.ItemView
     }
 
     /**
-     * Handle button save settings.
-     */
-    _handleButtonSaveSettings()
- //   _saveSettings()
-    {
-        this._saveSettings();
-    }
-
-    /**
      * Save settings.
      */
     _saveSettings()
@@ -88,7 +79,7 @@ class ViewSettings extends Marionette.ItemView
                 form_name_root: ''
             };
             this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
-      //      this._editor.on('change', () => this._saveSettings());
+            this._editor.on('change', () => this._saveSettings());
         }
     }
 
@@ -107,12 +98,6 @@ class ViewSettings extends Marionette.ItemView
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewSettings.prototype.modelEvents = {
     'all': 'render'
-};
-ViewSettings.prototype.ui = {
-    buttonSaveSettings: '#button-save_settings'
-};
-ViewSettings.prototype.events = {
-   'click @ui.buttonSaveSettings': '_handleButtonSaveSettings'
 };
 ViewSettings.prototype.template = '#template-main_workflowbuilder_control_settings';
 

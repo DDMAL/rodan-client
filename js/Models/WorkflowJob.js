@@ -1,4 +1,5 @@
 import BaseModel from './BaseModel';
+import Events from '../Shared/Events';
 import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 
@@ -26,12 +27,18 @@ class WorkflowJob extends BaseModel
     }
 
     /**
-     * TODO docs
+     * Initialize.
      */
     parse(resp)
     {
-        resp.input_ports = new InputPortCollection(resp.input_ports);
-        resp.output_ports = new OutputPortCollection(resp.output_ports);
+        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTS, {query: {workflow_job: this.id}});
+        var inputPorts = this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
+        resp.input_ports = new InputPortCollection(inputPorts);
+
+        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTS, {query: {workflow_job: this.id}});
+        var outputPorts = this.rodanChannel.request(Events.REQUEST__COLLECTION_OUTPUTPORT);
+        resp.output_ports = new OutputPortCollection(outputPorts);
+
         return resp;
     }
 
