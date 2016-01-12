@@ -70,7 +70,7 @@ class BaseCollection extends Backbone.Collection
     create(options)
     {
         var instance = new this.model(options);
-        instance.save({}, {success: () => this._handleCreateSuccess()});
+       // instance.save({}, {success: () => this._handleCreateSuccess()});
     }
 
     /**
