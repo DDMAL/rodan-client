@@ -8,6 +8,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Called when an Event is to be scheduled. Takes {event: Event string, options: options for the event}.
     REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Called when a Request is to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
+    REQUEST__CLEAR_TIMED_EVENT: 'REQUEST__CLEAR_TIMED_EVENT',   // Called to clear timed event.
     EVENT__TIMER_TEST: 'EVENT__TIMER_TEST',                     // DO NOT USE.
     REQUEST__TIMER_TEST: 'REQUEST__TIMER_TEST',                 // DO NOT USE.
 
