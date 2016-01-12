@@ -130,7 +130,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         var workflowJob = this._createWorkflowJob(options.job, this._workflow);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
-        this._rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: workflowJob});
     }
 
     /**
@@ -139,6 +138,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleCommandDeleteWorkflowJob(options)
     {
         this._deleteWorkflowJob(options.workflowjob);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 
     /**
