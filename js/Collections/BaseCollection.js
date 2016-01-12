@@ -64,17 +64,13 @@ class BaseCollection extends Backbone.Collection
      * Override of create.
      * This override exists because we do NOT want to add it to the collection
      * by default (as there's a limit to what the server returns for collections,
-     * and we need to respect that). However, we do want to sync against the last
-     * page in the collection. THIS is the result we want.
-     *
-     * Also, we use the last data (query) options that were called on a fetch for this collection.
-     * This ensures that we're getting the context of the last view we had.
+     * and we need to respect that). However, if the save worked, we do want to do a fetch
+     * to update the Collection. The fetch is called in the custom success handler for creation.
      */
     create(options)
     {
         var instance = new this.model(options);
-        instance.save();
-        this.fetch({data: this._lastData});
+        instance.save({}, {success: () => this._handleCreateSuccess()});
     }
 
     /**
@@ -116,6 +112,14 @@ class BaseCollection extends Backbone.Collection
         this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
         this.rodanChannel.reply(this.syncCommand, options => this._syncList(options));
         this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
+    }
+
+    /**
+     * Handles a succesful creation. All this does is "properly" reload the collection.
+     */
+    _handleCreateSuccess()
+    {
+        this._syncList({});
     }
 
     /**
