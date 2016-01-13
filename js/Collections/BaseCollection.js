@@ -62,15 +62,26 @@ class BaseCollection extends Backbone.Collection
 
     /**
      * Override of create.
+     *
      * This override exists because we do NOT want to add it to the collection
      * by default (as there's a limit to what the server returns for collections,
      * and we need to respect that). However, if the save worked, we do want to do a fetch
      * to update the Collection. The fetch is called in the custom success handler for creation.
+     *
+     * There's also the case if this Collection is local and not associated with a DB Collection.
      */
     create(options)
     {
         var instance = new this.model(options);
-        instance.save({}, {success: () => this._handleCreateSuccess()});
+        if (this.hasOwnProperty('url'))
+        {
+            instance.save({}, {success: () => this._handleCreateSuccess()});
+        }
+        else
+        {
+            instance.save({}, {success: (model) => this.add(model)});
+        }
+        return instance;
     }
 
     /**

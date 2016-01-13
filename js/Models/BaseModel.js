@@ -125,18 +125,28 @@ class BaseModel extends Backbone.Model
 
         // Error.
         var genericErrorFunction = (model, response, options) => this._handleErrorResponse(model, response, options);
-        if (!options.hasOwnProperty('error'))
+        if (!options.hasOwnProperty('error') && (!options.hasOwnProperty('use_generic') || options.use_generic))
         {
             options.error = (model, response, options) => this._handleErrorResponse(model, response, options);
         }
         else
         {
             var customErrorFunction = options.error;
-            options.error = function(model, response, options)
+            if (!options.hasOwnProperty('use_generic') || options.use_generic)
             {
-                customErrorFunction(model, response, options);
-                genericErrorFunction(model, response, options);
-            };
+                options.error = function(model, response, options)
+                {
+                    customErrorFunction(model, response, options);
+                    genericErrorFunction(model, response, options);
+                }; 
+            }
+            else
+            {
+                options.error = function(model, response, options)
+                {
+                    customErrorFunction(model, response, options);
+                }; 
+            }
         }
 
         return options;
