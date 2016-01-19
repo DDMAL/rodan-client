@@ -50,6 +50,7 @@ var Configuration = {
         INPUTPORT_COLOR_UNSATISFIED: '#ff0000',
         STROKE_COLOR: '#000000',
         FILL_COLOR: '#5555ff',
+        WORKFLOWJOBGROUP_FILL_COLOR: '#8888ff',
         STROKE_WIDTH: 2,
         FONT_SIZE: 20,
         STROKE_COLOR_SELECTED: '#0000ff',
