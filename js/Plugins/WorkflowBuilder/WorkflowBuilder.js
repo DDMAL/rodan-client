@@ -7,6 +7,7 @@ import ConnectionItem from './Items/ConnectionItem';
 import InputPortItem from './Items/InputPortItem';
 import LineItem from './Items/LineItem';
 import OutputPortItem from './Items/OutputPortItem';
+import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
 /**
@@ -52,8 +53,35 @@ class WorkflowBuilder
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS - Initializers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel('rodan');
+
+        // GUI commands.
+        this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_DESTROYED, () => this._handleEventWorkflowBuilderDestroy(), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, options => this._handleCommandDeleteWorkflowJobItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS, () => this._handleRequestGetSelectedWorkflowJobs());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, (options) => this._handleRequestHideWorkflowJob(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, (options) => this._handleRequestShowWorkflowJob(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, (options) => this._handleCommandAddWorkflowJobGroupItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, (options) => this._handleRequestPortsWorkflowJobGroupItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, options => this._handleCommandDeleteWorkflowJobGroupItem(options));
+    }
+
     /**
      * Sets key for multiple selections.
      */
@@ -138,6 +166,9 @@ class WorkflowBuilder
         this._globalTool.onKeyUp = event => this._handleEvent(event);
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Events and state machine
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle mouse event.
      */
@@ -195,7 +226,8 @@ class WorkflowBuilder
     {
         if (event.type === 'mousedown')
         {
-            if (event.target instanceof WorkflowJobItem)
+            if (event.target instanceof WorkflowJobItem
+                || event.target instanceof WorkflowJobGroupItem)
             {
                 if (!this._selectingMultiple)
                 {
@@ -231,7 +263,14 @@ class WorkflowBuilder
                 }
                 else
                 {
-                    this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+                    if (this._canGroupSelectedItems())
+                    {
+                        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP); 
+                    }
+                    else
+                    {
+                        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
+                    }
                 }
             }
         }
@@ -327,8 +366,15 @@ class WorkflowBuilder
     _selectItem(item)
     {
         this._selectedItems[item.id] = item;
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: item._associatedModel});
         item.setHighlight(true);
+        if (item instanceof WorkflowJobItem)
+        {
+            this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: item._associatedModel});
+        }
+        else if (item instanceof WorkflowJobGroupItem)
+        {
+            this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, {workflowjobgroup: item._associatedModel});
+        }
     }
 
     /**
@@ -361,30 +407,37 @@ class WorkflowBuilder
         return this._selectedItems.hasOwnProperty(item.id);
     }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize radio.
+     * Returns number of selected items.
      */
-    _initializeRadio()
+    _getSelectedCount()
     {
-        this.rodanChannel = Radio.channel('rodan');
-
-        // GUI commands.
-        this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_DESTROYED, () => this._handleEventWorkflowBuilderDestroy(), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleCommandAddWorkflowJobItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, aReturn => this._handleCommandAddConnection(aReturn));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, aReturn => this._handleCommandAddInputPortItem(aReturn));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, aReturn => this._handleCommandAddOutputPortItem(aReturn));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, aReturn => this._handleCommandDeleteInputPortItem(aReturn));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, aReturn => this._handleCommandDeleteOutputPortItem(aReturn));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, options => this._handleCommandDeleteWorkflowJobItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
+        return Object.keys(this._selectedItems).length;
     }
 
+    /**
+     * Returns true iff we can group the selected items.
+     */
+    _canGroupSelectedItems()
+    {
+        if (Object.keys(this._selectedItems).length > 1)
+        {
+            for (var itemIndex in this._selectedItems)
+            {
+                var item = this._selectedItems[itemIndex];
+                if (!(item instanceof WorkflowJobItem))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Radio handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handles WorkflowBuilder destroy event.
      * This will clear the paperjs project.
@@ -400,6 +453,29 @@ class WorkflowBuilder
     _handleCommandAddWorkflowJobItem(options)
     {
         var item = this._createWorkflowJobItem(options.workflowjob);
+
+        // Set position if coordinates provided.
+        var position = new paper.Point(paper.view.size.width / 2,
+                                       paper.view.size.height / 2);
+        if (options.hasOwnProperty('x'))
+        {
+            position.x = options.x * paper.view.size.width;
+        }
+        if (options.hasOwnProperty('y'))
+        {
+            position.y = options.y * paper.view.size.height;
+        }
+        item.setPosition(position);
+        
+        paper.view.draw();
+    }
+
+    /**
+     * Handle add WorkflowJobGroupItem.
+     */
+    _handleCommandAddWorkflowJobGroupItem(options)
+    {
+        var item = this._createWorkflowJobGroupItem(options.workflowjobgroup);
 
         // Set position if coordinates provided.
         var position = new paper.Point(paper.view.size.width / 2,
@@ -503,6 +579,67 @@ class WorkflowBuilder
     }
 
     /**
+     * Handle request for all selected WorkflowJobs.
+     */
+    _handleRequestGetSelectedWorkflowJobs()
+    {
+        var workflowJobs = [];
+        for (var itemIndex in this._selectedItems)
+        {
+            workflowJobs.push(this._selectedItems[itemIndex]._associatedModel);
+        }
+        return workflowJobs;
+    }
+
+    /**
+     * Handle request to hide WorkflowJob.
+     */
+    _handleRequestHideWorkflowJob(options)
+    {
+        options.workflowjob.paperItem.setVisible(false);
+    }
+
+    /**
+     * Handle request to show WorkflowJob.
+     */
+    _handleRequestShowWorkflowJob(options)
+    {
+        options.workflowjob.paperItem.setVisible(true);
+    }
+
+    /**
+     * Associates the given port items with the given WorkflowJobGroup.
+     */
+    _handleRequestPortsWorkflowJobGroupItem(options)
+    {
+        for (var index in options.inputports)
+        {
+            var inputPort = options.inputports[index];
+            inputPort.paperItem.disassociate();
+            options.workflowjobgroup.paperItem.addInputPortItem(inputPort.paperItem);
+        }
+
+        for (var index in options.outputports)
+        {
+            var outputPort = options.outputports[index];
+            outputPort.paperItem.disassociate();
+            options.workflowjobgroup.paperItem.addOutputPortItem(outputPort.paperItem);
+        }
+    }
+
+    /**
+     * Handle request delete WorkflowJobGroupItem.
+     */
+    _handleCommandDeleteWorkflowJobGroupItem(options)
+    {
+        options.workflowjobgroup.paperItem.destroy();
+        paper.view.draw();
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
      * Creates a workflow job item.
      */
     _createWorkflowJobItem(model)
@@ -511,23 +648,32 @@ class WorkflowBuilder
         model.paperItem.update();
         return model.paperItem;
     }
+    /**
+     * Creates a WorkflowJobGroupItem.
+     */
+    _createWorkflowJobGroupItem(model)
+    {
+        model.paperItem = new WorkflowJobGroupItem({segments: this._segments.workflowJobItem, model: model, text: true});
+        model.paperItem.update();
+        return model.paperItem;
+    }
 
     /**
      * Creates an input port item for the associated workflow job.
      */
-    _createInputPortItem(aWorkflowJob, aModel)
+    _createInputPortItem(workflowJob, model)
     {
-        aModel.paperItem = new InputPortItem({segments: this._segments.portItem, model: aModel});
-        aWorkflowJob.paperItem.addInputPortItem(aModel.paperItem);
+        model.paperItem = new InputPortItem({segments: this._segments.portItem, model: model, workflowjobitem: workflowJob.paperItem});
+        workflowJob.paperItem.addInputPortItem(model.paperItem);
     }
 
     /**
      * Creates an output port item for the associated workflow job.
      */
-    _createOutputPortItem(aWorkflowJob, aModel)
+    _createOutputPortItem(workflowJob, model)
     {
-        aModel.paperItem = new OutputPortItem({segments: this._segments.portItem, model: aModel});
-        aWorkflowJob.paperItem.addOutputPortItem(aModel.paperItem);
+        model.paperItem = new OutputPortItem({segments: this._segments.portItem, model: model, workflowjobitem: workflowJob.paperItem});
+        workflowJob.paperItem.addOutputPortItem(model.paperItem);
     }
 
     /**

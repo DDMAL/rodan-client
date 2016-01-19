@@ -166,18 +166,24 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW', // Called when Workflow needs to be added to workspace. Passes {workflow: Workflow}.
-    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be added to workspace. Passes {workflowJob: WorkflowJob}.
-    REQUEST__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB', // Called when WorkflowJob needs to be updated. Passes {workflowJob: WorkflowJob}.
-    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION', // Called when connection needs to be added to workflow. Passed {connection: Connection, inputport: InputPort, outputport: OutputPort}.
-    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT', // Called when input port needs to be added to workflow job. Passes {workflowjob: WorkflowJob, inputport: InputPort}.
-    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT', // Called when output port needs to be added to workflow job. Passes {workflowjob: WorkflowJob, outputport: OutputPort}.
-    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT', // Called when input port needs to be deleted from workflow job. Passes {workflowjob: WorkflowJob, inputport: InputPort}.
-    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT', // Called when output port needs to be deleted from workflow job. Passes {workflowjob: WorkflowJob, outputport: OutputPort}.
-    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB', // Called when WorkflowJob item needs to be deleted. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN', // Called when request workspace zoom in. No pass.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT', // Called when request workspace zoom out. No pass.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET', // Called when request workspace zoom reset. No pass.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOW',                               // Called when Workflow needs to be added to workspace. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB',                         // Called when WorkflowJob needs to be added to workspace. Takes {workflowJob: WorkflowJob}.
+    REQUEST__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_UPDATE_ITEM_WORKFLOWJOB',                   // Called when WorkflowJob needs to be updated. Takes {workflowJob: WorkflowJob}.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION',                           // Called when Connection needs to be added to Workflow. Takes {connection: Connection, inputport: InputPort, outputport: OutputPort}.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT',                             // Called when InputPort needs to be added to WorkflowJob. Takes {workflowjob: WorkflowJob, inputport: InputPort}.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT',                           // Called when OutputPort needs to be added to WorkflowJob Takes {workflowjob: WorkflowJob, outputport: OutputPort}.
+    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT',                       // Called when InputPort needs to be deleted from WorkflowJob. Takes {workflowjob: WorkflowJob, inputport: InputPort}.
+    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT',                     // Called when OutputPort needs to be deleted from WorkflowJob. Takes {workflowjob: WorkflowJob, outputport: OutputPort}.
+    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB',                   // Called when WorkflowJob item needs to be deleted. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN',                                                   // Called when request workspace zoom in.
+    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT',                                                 // Called when request workspace zoom out.
+    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET',                                             // Called when request workspace zoom reset.
+    REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS: 'REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS',               // Called when request list of all selected WorkflowJobs.
+    REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB',                                 // Called when the GUI should hide a provided WorkflowJob and its associated Connections. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB',                                 // Called when the GUI should show a provided WorkflowJob and its associated Connections. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP',               // Called when WorkflowJobGroup item needs to be added to workspace. Takes {workflowjobgroup: WorkflowJobGroup, position: {x: real, y: real}}.
+    REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP', // Called when the GUI should associated port items with a WorkflowJobGroup. Takes {workflowjobgroup: WorkflowJobGroup, inputports: [InputPort], outputports: [OutputPort]}.
+    REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP',         // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -187,6 +193,15 @@ var Events =
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                         // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
     REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
     EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                     // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowJobGroup
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__WORKFLOWJOBGROUP_CREATE: 'REQUEST__WORKFLOWJOBGROUP_CREATE',                 
+    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
+    REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',
+    REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP: 'REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP',   // Called when control view for a WorkflowJobGroup should be shown. Takes {workflow: Workflow}.
+    EVENT__WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWJOBGROUP_SELECTED',                           // Called when WorkflowJobGroup selected. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun

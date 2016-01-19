@@ -111,6 +111,14 @@ class BaseCollection extends Backbone.Collection
         return this._pagination;
     }
 
+    /**
+     * Return the URL.
+     */
+    url()
+    {
+        return this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +171,7 @@ class BaseCollection extends Backbone.Collection
      */
     _syncList(options)
     {
-        this.fetch({data: this._lastData, reset: true});
+        this.fetch({data: this._lastData});
     }
 
     /**

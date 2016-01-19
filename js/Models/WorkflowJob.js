@@ -1,5 +1,7 @@
 import BaseModel from './BaseModel';
 import Events from '../Shared/Events';
+import InputPort from './InputPort';
+import OutputPort from './OutputPort';
 import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 
@@ -12,12 +14,12 @@ class WorkflowJob extends BaseModel
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
-        this.set('input_ports', new InputPortCollection(aParameters.input_ports));
-        this.set('output_ports', new OutputPortCollection(aParameters.output_ports));
+        this.set('input_ports', new InputPortCollection(options.input_ports));
+        this.set('output_ports', new OutputPortCollection(options.output_ports));
         this.routeName = 'workflowjobs';
     }
 
@@ -29,15 +31,45 @@ class WorkflowJob extends BaseModel
     /**
      * Initialize.
      */
-    parse(resp)
+    parse(response)
     {
-//        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTS, {query: {workflow_job: this.id}});
-        resp.input_ports = this.get('input_ports');//this.rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORT);
+        // Check for unknown InputPorts.
+     /*   for (var index in response.input_ports)
+        {
+            if (typeof response.input_ports[index] === 'string')
+            {
+                var uuid = this.parseIdFromUrl(response.input_ports[index]);
+                if (!this.get('input_ports').get(uuid))
+                {
+                    var port = new InputPort({'uuid': uuid, 'url': response.input_ports[index]});
+                    port.fetch();
+                    this.get('input_ports').add(port);
+                }
+            }
+        }
 
-//        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTS, {query: {workflow_job: this.id}});
-        resp.output_ports = this.get('output_ports');//this.rodanChannel.request(Events.REQUEST__COLLECTION_OUTPUTPORT);
+        // Check for unknown OutputPorts.
+        for (var index in response.output_ports)
+        {
+            if (typeof response.output_ports[index] === 'string')
+            {
+                var uuid = this.parseIdFromUrl(response.output_ports[index]);
+                if (!this.get('output_ports').get(uuid))
+                {
+                    var port = new OutputPort({'uuid': uuid, 'url': response.output_ports[index]});
+                    port.fetch();
+                    this.get('output_ports').add(port);
+                }
+            }
+        }*//*
+        this.get('input_ports').fetch({data: {'workflow_job': response.uuid}});
+        this.get('output_ports').fetch({data: {'workflow_job': response.uuid}});*/
 
-        return resp;
+        // Put the Collections in the response (so backbone doesn't populate the Collections with URLs).
+        response.input_ports = this.get('input_ports');
+        response.output_ports = this.get('output_ports');
+
+        return response;
     }
 
     /**

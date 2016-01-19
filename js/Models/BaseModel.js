@@ -17,6 +17,7 @@ class BaseModel extends Backbone.Model
     constructor(options)
     {
         super(options);
+        this.idAttribute = 'uuid';
         this._initializeRadio();
         this.on('change', event => this._onChange(event));
     }
@@ -74,6 +75,17 @@ class BaseModel extends Backbone.Model
     getDescription()
     {
         return "no description available";
+    }
+
+    /**
+     * Parses ID out of resource type URL.
+     */
+    parseIdFromUrl(aUrl)
+    {
+        var lastSlash = aUrl.lastIndexOf('/');
+        var subString = aUrl.substring(0, lastSlash);
+        var secondLastSlash = subString.lastIndexOf('/');
+        return aUrl.substring(secondLastSlash + 1, lastSlash);
     }
 
 

@@ -41,6 +41,7 @@ class BaseItem extends paper.Path
         this.onMouseLeave = event => this._handleMouseEvent(event);
 
         // Text settings.
+        this._useText = (options.hasOwnProperty('text') && options.text === true);
         this._text = new paper.PointText(new paper.Point(0, 0));
         this._text.justification = 'center';
         this._text.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
@@ -53,7 +54,6 @@ class BaseItem extends paper.Path
         this._text.onClick = event => this._handleMouseEvent(event);
         this._text.onMouseEnter = event => this._handleMouseEvent(event);
         this._text.onMouseLeave = event => this._handleMouseEvent(event);
-        this._text.visible = (options.hasOwnProperty('text') && options.text === true);
         if (this._associatedModel)
         {
             this._text.content = this._associatedModel.get('name');
@@ -84,6 +84,16 @@ class BaseItem extends paper.Path
         {
             this._text.position = this.bounds.center;
         }
+        this.update();
+    }
+
+    /**
+     * Set visibility.
+     */
+    setVisible(visible)
+    {
+        this.visible = visible;
+        this._text.visible = this._useText && this.visible;
         this.update();
     }
 

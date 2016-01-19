@@ -80,11 +80,20 @@ class WorkflowJobItem extends BaseItem
      */
     destroy()
     {
-        if (this._paperGroupInputPorts.children.length > 0 || this._paperGroupOutputPorts.children.length > 0)
+        // Delete ports.
+        var inputPortItems = this._paperGroupInputPorts.removeChildren();
+        var outputPortItems = this._paperGroupOutputPorts.removeChildren();
+        for (var index in inputPortItems)
         {
-            console.log('TODO - cant delete this item until all ports are deleted');
-            return;
+            var port = inputPortItems[index];
+            port.destroy();
         }
+        for (var index in outputPortItems)
+        {
+            var port = outputPortItems[index];
+            port.destroy();
+        }
+
         super.destroy();
     }
 
@@ -119,11 +128,12 @@ class WorkflowJobItem extends BaseItem
     /**
      * Updates port items.
      */
-    _updatePortItems(aGroup)
+    _updatePortItems(group)
     {
-        for (var i = 0; i < aGroup.children.length; i++)
+        for (var i = 0; i < group.children.length; i++)
         {
-            aGroup.children[i].update();
+            group.children[i].setVisible(this.visible);
+            group.children[i].update();
         }
     }
 

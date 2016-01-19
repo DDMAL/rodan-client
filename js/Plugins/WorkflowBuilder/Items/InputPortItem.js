@@ -12,10 +12,11 @@ class InputPortItem extends BaseItem
     /**
      * Constructor.
      */
-    constructor(aParameters)
+    constructor(options)
     {
-        super(aParameters);
+        super(options);
         this._connectionItem = null;
+        this._workflowJobItem = options.workflowjobitem;
         this.update();
     }
 
@@ -45,8 +46,28 @@ class InputPortItem extends BaseItem
                                                     Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
         if (this._connectionItem !== null)
         {
-            this._connectionItem.update();
+            this._connectionItem.setVisible(this.visible);
+            if (this.visible)
+            {
+                this._connectionItem.update();
+            }
         }
+    }
+
+    /**
+     * Disassociate self with WorkflowJobItem.
+     */
+    disassociate()
+    {
+        this._workflowJobItem.deleteInputPortItem(this);
+    }
+
+    /**
+     * Reassociates itself with WorkflowJobItem.
+     */
+    reassociate()
+    {
+        this._workflowJobItem.addInputPortItem(this);
     }
 
     /**

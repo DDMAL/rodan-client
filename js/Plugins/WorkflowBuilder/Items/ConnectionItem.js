@@ -40,6 +40,7 @@ class ConnectionItem extends BaseItem
      */
     update()
     {
+        this._circle.visible = this.visible;
         this.firstSegment.point.x = this._associatedOutputPort.paperItem.position.x;
         this.firstSegment.point.y = this._associatedOutputPort.paperItem.bounds.bottom;
         this.lastSegment.point.x = this._associatedInputPort.paperItem.position.x;
