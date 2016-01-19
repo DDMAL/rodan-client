@@ -200,7 +200,6 @@ var Events =
     REQUEST__WORKFLOWJOBGROUP_CREATE: 'REQUEST__WORKFLOWJOBGROUP_CREATE',                 
     REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',
-    REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP: 'REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP',   // Called when control view for a WorkflowJobGroup should be shown. Takes {workflow: Workflow}.
     EVENT__WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWJOBGROUP_SELECTED',                           // Called when WorkflowJobGroup selected. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -105,6 +105,22 @@ class ViewWorkflow extends Marionette.ItemView
             this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
         }
     }
+
+    /**
+     * Handle button group.
+     */
+    _handleButtonGroup()
+    {
+        var workflowJobs = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS);
+        if (workflowJobs.length < 1)
+        {
+            alert('At least two WorkflowJobs must be selected.');
+        }
+        else
+        {
+            this._workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this.model});
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +139,8 @@ ViewWorkflow.prototype.ui = {
     buttonValidate: '#button-validate_workflow',
     buttonRun: '#button-run_workflow',
     textName: '#text-workflow_name',
-    textDescription: '#text-workflow_description'
+    textDescription: '#text-workflow_description',
+    buttonGroup: '#button-group_workflow'
         };
 ViewWorkflow.prototype.events = {
     'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
@@ -133,7 +150,8 @@ ViewWorkflow.prototype.events = {
     'click @ui.buttonSaveData': '_handleButtonSave',
     'click @ui.buttonSave': '_handleButtonSave',
     'click @ui.buttonValidate': '_handleButtonValidate',
-    'click @ui.buttonRun': '_handleButtonRun'
+    'click @ui.buttonRun': '_handleButtonRun',
+    'click @ui.buttonGroup': '_handleButtonGroup'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
 

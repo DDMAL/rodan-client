@@ -80,7 +80,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE_COORDINATES, options => this._handleCommandSaveWorkflowJobCoordinates(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP, () => this._handleRequestShowWorkflowJobGroupView(), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
     }
@@ -165,16 +164,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._workflowJob = aReturn.workflowjob;
         this.controlWorkflowJobView = new LayoutViewControlWorkflowJob(aReturn);
         this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
-        this.regionControlWorkflowLowerArea.$el.hide();
-    }
-
-    /**
-     * Handle request show WorkflowJobGroup view (new WorkflowJobGroup).
-     */
-    _handleRequestShowWorkflowJobGroupView()
-    {
-        this.controlWorkflowJobGroupView = new LayoutViewControlWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: null});
-        this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobGroupView);
         this.regionControlWorkflowLowerArea.$el.hide();
     }
 

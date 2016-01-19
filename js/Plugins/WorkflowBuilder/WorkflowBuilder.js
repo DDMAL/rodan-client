@@ -263,14 +263,7 @@ class WorkflowBuilder
                 }
                 else
                 {
-                    if (this._canGroupSelectedItems())
-                    {
-                        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CONTROL_SHOW_GROUP); 
-                    }
-                    else
-                    {
-                        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
-                    }
+                    this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
                 }
             }
         }
