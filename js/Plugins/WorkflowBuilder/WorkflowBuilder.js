@@ -306,10 +306,17 @@ class WorkflowBuilder
             for (var itemIndex in this._selectedItems)
             {
                 var item = this._selectedItems[itemIndex];
-                var object = {workflowjob: item._associatedModel,
-                              x: item.position.x / paper.view.zoom / paper.view.size.width,
-                              y: item.position.y / paper.view.zoom / paper.view.size.height};
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE_COORDINATES, object);
+                if (item instanceof WorkflowJobItem)
+                {
+                    var object = {workflowjob: item._associatedModel,
+                                  x: item.position.x / paper.view.zoom / paper.view.size.width,
+                                  y: item.position.y / paper.view.zoom / paper.view.size.height};
+                    this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE_COORDINATES, object);
+                }
+                else if (item instanceof WorkflowJobGroupItem)
+                {
+                    //this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, {workflowjobgroup: item._associatedModel});
+                }
             }
         }
     }

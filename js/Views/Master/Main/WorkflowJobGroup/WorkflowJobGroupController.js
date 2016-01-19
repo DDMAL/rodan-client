@@ -1,6 +1,7 @@
 import Events from '../../../../Shared/Events';
 import BaseController from '../../../../Controllers/BaseController';
 import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
+import WorkflowJobGroupCollection from '../../../../Collections/WorkflowJobGroupCollection';
 
 /**
  * Controller for WorkflowJobGroup.
@@ -28,8 +29,12 @@ class WorkflowJobGroupController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Radio handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle WorkflowJobGroup creation.
      */
@@ -55,21 +60,47 @@ class WorkflowJobGroupController extends BaseController
     }
 
     /**
+     * Handle WorkflowJobGroup import.
+     */
+    _handleRequestImportWorkflowJobGroup(options)
+    {
+        var collection = new WorkflowJobGroupCollection();
+        collection.fetch({data: {'workflow': options.workflow.get('uuid')}, success: (model) => this._handleWorkflowJobGroupImportSuccess(model, options.workflow)});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - REST handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
      * Handle WorkflowJobGroup creation success.
      */
     _handleWorkflowJobGroupCreationSuccess(model, workflowJobs)
     {
-        for (var index in workflowJobs)
-        {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
-        }
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: model});
-        var exposedPorts = this._getExposedPorts(workflowJobs);
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: model,
-                                                                                                          inputports: exposedPorts.inputPorts,
-                                                                                                          outputports: exposedPorts.outputPorts});
+        this._processWorkflowJobGroup(model, workflowJobs);
     }
 
+    /**
+     * Handle import success.
+     */
+    _handleWorkflowJobGroupImportSuccess(workflowJobGroups, workflow)
+    {
+        for (var i = 0; i < workflowJobGroups.length; i++)
+        {
+            var workflowJobGroup = workflowJobGroups.at(i);
+            var workflowJobs = [];
+            for (var j = 0; j < workflowJobGroup.get('workflow_jobs').length; j++)
+            {
+                var workflowJobUrl = workflowJobGroup.get('workflow_jobs')[j];
+                var workflowJob = workflow.get('workflow_jobs').findWhere({'url': workflowJobUrl});
+                workflowJobs.push(workflowJob)
+            }
+            this._processWorkflowJobGroup(workflowJobGroup, workflowJobs);
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Creates and returns a WorkflowJobGroup.
      */
@@ -108,6 +139,23 @@ class WorkflowJobGroupController extends BaseController
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
+        workflowJobGroup.destroy();
+    }
+
+    /**
+     * Processes the WorkflowJobGroup.
+     */
+    _processWorkflowJobGroup(workflowJobGroup, workflowJobs)
+    {
+        for (var index in workflowJobs)
+        {
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
+        }
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
+        var exposedPorts = this._getExposedPorts(workflowJobs);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
+                                                                                                          inputports: exposedPorts.inputPorts,
+                                                                                                          outputports: exposedPorts.outputPorts});
     }
 
     /**

@@ -533,6 +533,9 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
                                                                                                 inputport: connection.inputPort,
                                                                                                 outputport: connection.outputPort});
         }
+
+        // Finally inport the WorkflowJobGroups. 
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, {workflow: this._workflow});
     }
 
     /**

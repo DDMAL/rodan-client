@@ -200,7 +200,8 @@ var Events =
     REQUEST__WORKFLOWJOBGROUP_CREATE: 'REQUEST__WORKFLOWJOBGROUP_CREATE',                 
     REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',
-    EVENT__WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWJOBGROUP_SELECTED',                           // Called when WorkflowJobGroup selected. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
+    REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',   // Called when WorkflowJobGroups are to be imported for given Workflow. Takes {workflow: Workflow}.
+    EVENT__WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWJOBGROUP_SELECTED',   // Called when WorkflowJobGroup selected. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
