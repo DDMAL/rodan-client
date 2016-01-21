@@ -1,7 +1,9 @@
+import Configuration from '../../../../Configuration';
 import Events from '../../../../Shared/Events';
 import BaseController from '../../../../Controllers/BaseController';
 import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
 import WorkflowJobGroupCollection from '../../../../Collections/WorkflowJobGroupCollection';
+import WorkflowJobGroupCoordinateSet from '../../../../Models/WorkflowJobGroupCoordinateSet';
 
 /**
  * Controller for WorkflowJobGroup.
@@ -30,6 +32,7 @@ class WorkflowJobGroupController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES, (options) => this._handleCommandSaveWorkflowJobGroupCoordinates(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +71,28 @@ class WorkflowJobGroupController extends BaseController
         collection.fetch({data: {'workflow': options.workflow.get('uuid')}, success: (model) => this._handleWorkflowJobGroupImportSuccess(model, options.workflow)});
     }
 
+    /**
+     * Handle WorkflowJobGroup save coordinates.
+     */
+    _handleCommandSaveWorkflowJobGroupCoordinates(options)
+    {
+        // Check if a coordinate set is attached. If not, we have to create a new set.
+        var workflowJobGroup = options.workflowjobgroup;
+        if (workflowJobGroup.hasOwnProperty('coordinates'))
+        {
+            workflowJobGroup.coordinates.get('data').x = options.x;
+            workflowJobGroup.coordinates.get('data').y = options.y;
+            workflowJobGroup.coordinates.save({data: {x: options.x, y: options.y}}, {patch: true});
+        }
+        else
+        {
+            workflowJobGroup.coordinates = new WorkflowJobGroupCoordinateSet({workflow_job_group: workflowJobGroup.get('url'),
+                                                                         data: {x: options.x, y: options.y},
+                                                                         user_agent: Configuration.USER_AGENT});
+            workflowJobGroup.coordinates.save();
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +123,45 @@ class WorkflowJobGroupController extends BaseController
         }
     }
 
+    /**
+     * Handle WorkflowJobGroupCoordinateSet load success.
+     */
+    _handleWorkflowJobGroupCoordinateSetLoadSuccess(collection, workflowJobGroup, workflowJobs)
+    {
+        if (collection.length > 0)
+        {
+            workflowJobGroup.coordinates = collection.at(0);
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP,
+                                      {workflowjobgroup: workflowJobGroup,
+                                       x: workflowJobGroup.coordinates.get('data').x,
+                                       y: workflowJobGroup.coordinates.get('data').y});
+        }
+        else
+        {
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
+        }
+
+        // Associate ports.
+        var exposedPorts = this._getExposedPorts(workflowJobs);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
+                                                                                                          inputports: exposedPorts.inputPorts,
+                                                                                                          outputports: exposedPorts.outputPorts});
+    }
+
+    /**
+     * Handle WorkflowJobGroupCoordinateSet load error.
+     */
+    _handleWorkflowJobGroupCoordinateSetLoadError(workflowJobGroup, workflowJobs)
+    {
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
+
+        // Associate ports.
+        var exposedPorts = this._getExposedPorts(workflowJobs);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
+                                                                                                          inputports: exposedPorts.inputPorts,
+                                                                                                          outputports: exposedPorts.outputPorts});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +172,6 @@ class WorkflowJobGroupController extends BaseController
     {
        /* TODO
         - delete connection (general)
-        - importing groups
         - importing workflows
         - saving group coordinates
         - setting initial position of group
@@ -147,15 +210,17 @@ class WorkflowJobGroupController extends BaseController
      */
     _processWorkflowJobGroup(workflowJobGroup, workflowJobs)
     {
+        // Hide WorkflowJobs.
         for (var index in workflowJobs)
         {
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
         }
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
-        var exposedPorts = this._getExposedPorts(workflowJobs);
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
-                                                                                                          inputports: exposedPorts.inputPorts,
-                                                                                                          outputports: exposedPorts.outputPorts});
+
+        // Get coordinate sets.
+        var query = {workflow_job_group: workflowJobGroup.id, user_agent: Configuration.USER_AGENT};
+        var callbackSuccess = (model) => this._handleWorkflowJobGroupCoordinateSetLoadSuccess(model, workflowJobGroup, workflowJobs);
+        var callbackError = () => this._handleWorkflowJobGroupCoordinateSetLoadError(workflowJobGroup, workflowJobs);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD, {query: query, success: callbackSuccess, error: callbackError});
     }
 
     /**

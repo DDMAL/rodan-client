@@ -486,7 +486,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
                 // Create WorkflowJob item then process connections.
                 var workflowJob = workflowJobs.at(i);
                 var coordinateSets = coordinateSetCollection.where({'workflow_job': workflowJob.get('url')});
-                var coordinates = {};
                 if (coordinateSets.length > 0)
                 {
                     workflowJob.coordinates = coordinateSets[0];
@@ -503,7 +502,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
                 var tempConnections = this._processWorkflowJob(workflowJob);
 
                 // For the connections returned, merge them into our master list.
-                // TODO - maybe put this in its own method
                 for (var connectionUrl in tempConnections)
                 {
                     var connection = tempConnections[connectionUrl];

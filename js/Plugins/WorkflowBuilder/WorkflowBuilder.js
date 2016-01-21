@@ -315,7 +315,10 @@ class WorkflowBuilder
                 }
                 else if (item instanceof WorkflowJobGroupItem)
                 {
-                    //this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, {workflowjobgroup: item._associatedModel});
+                    var object = {workflowjobgroup: item._associatedModel,
+                                  x: item.position.x / paper.view.zoom / paper.view.size.width,
+                                  y: item.position.y / paper.view.zoom / paper.view.size.height};
+                    this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES, object);
                 }
             }
         }

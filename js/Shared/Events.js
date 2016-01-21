@@ -188,11 +188,12 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOB_ADD: 'REQUEST__WORKFLOWJOB_ADD',                           // Called when WorkflowJob needs to be created. Takes {job: Job}.
-    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE',                     // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                         // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
-    REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES', // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
-    EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                     // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOB_ADD: 'REQUEST__WORKFLOWJOB_ADD',                                       // Called when WorkflowJob needs to be created. Takes {job: Job}.
+    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE',                                 // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                                     // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
+    REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES',             // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
+    EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                                 // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES',   // Called when coordinates need to be saved for a WorkflowJobGroup. Takes {workflowjobgroup: WorkflowJobGroup, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup
@@ -226,7 +227,13 @@ var Events =
 // WorkflowJobCoordinateSet
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD:        'REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD',      // Instructs loading of WorkflowJobCoordinateSets. Takes object containing various query IDs.
-    REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION'  // Returns global WorkflowJobCoordinateSet collection.
+    REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION', // Returns global WorkflowJobCoordinateSet collection.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowJobGroupCoordinateSet
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD:        'REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD',        // Instructs loading of WorkflowJobGroupCoordinateSets. Takes object containing various query IDs.
+    REQUEST__WORKFLOWJOBGROUPCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBGROUPCOORDINATESET_COLLECTION'    // Returns global WorkflowJobGroupCoordinateSet collection.
 };
 
 export default Events;
