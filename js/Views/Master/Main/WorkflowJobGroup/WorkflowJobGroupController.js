@@ -17,6 +17,7 @@ class WorkflowJobGroupController extends BaseController
      */
     initialize()
     {
+        this._collection = new WorkflowJobGroupCollection();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +32,7 @@ class WorkflowJobGroupController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,8 +67,15 @@ class WorkflowJobGroupController extends BaseController
      */
     _handleRequestImportWorkflowJobGroup(options)
     {
-        var collection = new WorkflowJobGroupCollection();
-        collection.fetch({data: {'workflow': options.workflow.get('uuid')}, success: (model) => this._handleWorkflowJobGroupImportSuccess(model, options.workflow)});
+        this._collection.fetch({data: {'workflow': options.workflow.get('uuid')}, success: () => this._handleWorkflowJobGroupImportSuccess(options.workflow)});
+    }
+
+    /**
+     * Handle WorkflowJobGroup request.
+     */
+    _handleRequestWorkflowJobGroup(options)
+    {
+        return this._collection.get(options.id);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -83,11 +92,11 @@ class WorkflowJobGroupController extends BaseController
     /**
      * Handle import success.
      */
-    _handleWorkflowJobGroupImportSuccess(workflowJobGroups, workflow)
+    _handleWorkflowJobGroupImportSuccess(workflow)
     {
-        for (var i = 0; i < workflowJobGroups.length; i++)
+        for (var i = 0; i < this._collection.length; i++)
         {
-            var workflowJobGroup = workflowJobGroups.at(i);
+            var workflowJobGroup = this._collection.at(i);
             var workflowJobs = [];
             for (var j = 0; j < workflowJobGroup.get('workflow_jobs').length; j++)
             {
@@ -114,7 +123,6 @@ class WorkflowJobGroupController extends BaseController
         }
         var workflowJobGroup = new WorkflowJobGroup({workflow_jobs: urls, workflow: workflow});
         workflowJobGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflowJobs)});
-        return workflowJobGroup; 
     }
 
     /**
@@ -132,6 +140,7 @@ class WorkflowJobGroupController extends BaseController
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
+        this._collection.remove(workflowJobGroup);
         workflowJobGroup.destroy();
     }
 
@@ -140,6 +149,8 @@ class WorkflowJobGroupController extends BaseController
      */
     _processWorkflowJobGroup(workflowJobGroup, workflowJobs)
     {
+        this._collection.set(workflowJobGroup);
+
         // Hide WorkflowJobs.
         for (var index in workflowJobs)
         {

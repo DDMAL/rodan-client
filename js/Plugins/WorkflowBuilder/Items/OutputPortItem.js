@@ -1,5 +1,6 @@
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
+import Events from '../../../Shared/Events';
 
 /**
  * OutputPort item.
@@ -15,6 +16,7 @@ class OutputPortItem extends BaseItem
     constructor(options)
     {
         super(options);
+        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT;
         this.fillColor = Configuration.WORKFLOWBUILDER.OUTPUTPORT_COLOR;
         this._connectionItems = [];
         this._workflowJobItem = options.workflowjobitem;

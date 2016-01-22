@@ -1,7 +1,8 @@
 import paper from 'paper';
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
-import Events from '../Events';
+import Events from '../../../Shared/Events';
+import WorkflowBuilderEvents from '../Events';
 import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
 
 /**
@@ -19,11 +20,14 @@ class WorkflowJobGroupItem extends BaseItem
     {
         super(aParameters);
 
+        // Get getter Event.
+        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP;
+
         // Set coordinate set info.
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job_group';
-        this.coordinateSetInfo['collectionLoadEvent'] = Events.REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD;
+        this.coordinateSetInfo['collectionLoadEvent'] = WorkflowBuilderEvents.REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD;
 
         this.fillColor = Configuration.WORKFLOWBUILDER.WORKFLOWJOBGROUP_FILL_COLOR;
         

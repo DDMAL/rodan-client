@@ -1,5 +1,6 @@
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
+import Events from '../../../Shared/Events';
 
 /**
  * InputPort item.
@@ -15,6 +16,10 @@ class InputPortItem extends BaseItem
     constructor(options)
     {
         super(options);
+
+        // Get getter Event.
+        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT;
+
         this._connectionItem = null;
         this._workflowJobItem = options.workflowjobitem;
         this.update();

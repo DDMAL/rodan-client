@@ -1,6 +1,7 @@
 import paper from 'paper';
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
+import Events from '../../../Shared/Events';
 
 /**
  * Connection item.
@@ -16,6 +17,9 @@ class ConnectionItem extends BaseItem
     constructor(options)
     {
         super(options);
+
+        // Get getter Event.
+        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION;
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
         this._associatedInputPort = options.inputPort;

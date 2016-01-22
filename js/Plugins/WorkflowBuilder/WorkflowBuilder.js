@@ -80,7 +80,7 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleCommandZoomIn());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleCommandZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleCommandZoomReset());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS, () => this._handleRequestGetSelectedWorkflowJobs());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, (options) => this._handleRequestHideWorkflowJob(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, (options) => this._handleRequestShowWorkflowJob(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, (options) => this._handleCommandAddWorkflowJobGroupItem(options));
@@ -330,8 +330,8 @@ class WorkflowBuilder
         {
             if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
             {
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: event.target._associatedModel, 
-                                                                                           outputport: this._selectedOutputPortItem._associatedModel});
+                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputportid: event.target.getModelID(), 
+                                                                                           outputportid: this._selectedOutputPortItem.getModelID()});
             }
             this._selectedOutputPortItem = null;
             this._state = this._STATES.IDLE;
@@ -369,11 +369,11 @@ class WorkflowBuilder
         item.setHighlight(true);
         if (item instanceof WorkflowJobItem)
         {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SELECTED, {workflowjob: item._associatedModel});
+            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {id: item.getModelID()});
         }
         else if (item instanceof WorkflowJobGroupItem)
         {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, {workflowjobgroup: item._associatedModel});
+            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, {id: item.getModelID()});
         }
     }
 
@@ -579,14 +579,14 @@ class WorkflowBuilder
     }
 
     /**
-     * Handle request for all selected WorkflowJobs.
+     * Handle request for all selected WorkflowJob IDs.
      */
-    _handleRequestGetSelectedWorkflowJobs()
+    _handleRequestGetSelectedWorkflowJobIDs()
     {
         var workflowJobs = [];
         for (var itemIndex in this._selectedItems)
         {
-            workflowJobs.push(this._selectedItems[itemIndex]._associatedModel);
+            workflowJobs.push(this._selectedItems[itemIndex].getModelID());
         }
         return workflowJobs;
     }

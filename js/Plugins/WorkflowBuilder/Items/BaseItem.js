@@ -20,7 +20,10 @@ class BaseItem extends paper.Path
     {
         super(options.segments);
         this._initializeRadio();
-        this._associatedModel = options.model;
+        this._modelId = options.model ? options.model.id : null;
+
+        // Getter event for the model. Need to set this.
+        this.getModelEvent = null;
 
         // This is the coordinate set model settings. Should be overridden if want to save.
         this.coordinateSetInfo = null;
@@ -58,9 +61,9 @@ class BaseItem extends paper.Path
         this._text.onClick = event => this._handleMouseEvent(event);
         this._text.onMouseEnter = event => this._handleMouseEvent(event);
         this._text.onMouseLeave = event => this._handleMouseEvent(event);
-        if (this._associatedModel)
+        if (options.model)
         {
-            this._text.content = this._associatedModel.get('name');
+            this._text.content = options.model.get('name');
         }
     }
 
@@ -106,14 +109,7 @@ class BaseItem extends paper.Path
      */
     destroy()
     {
-        if (this.hasOwnProperty('_associatedModel') && this._associatedModel !== null)
-        {
-            if (this._associatedModel.hasOwnProperty('paperItem'))
-            {
-                this._associatedModel.paperItem = null; 
-            }
-            this._associatedModel = null; 
-        }
+        // TODO - remove from map
         this._text.remove();
         this.remove();
     }
@@ -130,9 +126,10 @@ class BaseItem extends paper.Path
             var coordinates = {x: x, y: y};
             if (this._coordinateSetModel === null)
             {
+                var model = this._getModel();
                 var name = this.coordinateSetInfo['class'];
                 var options = {};
-                options[this.coordinateSetInfo['url']] = this._associatedModel.get('url');
+                options[this.coordinateSetInfo['url']] = model.get('url');
                 options['data'] = {};
                 options['user_agent'] = Configuration.USER_AGENT;
                 this._coordinateSetModel = new name(options);
@@ -148,10 +145,19 @@ class BaseItem extends paper.Path
     loadCoordinates()
     {
         var query = {};
-        query[this.coordinateSetInfo['url']] = this._associatedModel.id;
+        var model = this._getModel();
+        query[this.coordinateSetInfo['url']] = model.id;
         query['user_agent'] = Configuration.USER_AGENT;
         var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
         this.rodanChannel.request(this.coordinateSetInfo['collectionLoadEvent'], {query: query, success: callback, error: callback});
+    }
+
+    /**
+     * Returns associated model ID.
+     */
+    getModelID()
+    {
+        return this._modelId;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -179,10 +185,22 @@ class BaseItem extends paper.Path
     }
 
     /**
+     * Gets the associated model.
+     */
+    _getModel()
+    {
+        if (this.getModelEvent !== null)
+        {
+            return this.rodanChannel.request(this.getModelEvent, {'id': this._modelId});
+        }
+    }
+
+    /**
      * Handle coordinate load success.
      */
     _handleCoordinateLoadSuccess(coordinateSets)
     {
+        this._getModel();
         if (coordinateSets.length > 0)
         {
             this._coordinateSetModel = coordinateSets.at(0);
@@ -203,11 +221,12 @@ class BaseItem extends paper.Path
     {
         if ($('div#canvas-tooltip'))
         {
+            var model = this._getModel();
             var tooltip = $('div#canvas-tooltip');
             tooltip.css('visibility', 'visible');
             tooltip.css('top', event.event.y);
             tooltip.css('left', event.event.x);
-            tooltip.text(this._associatedModel.getDescription());
+            tooltip.text(model.getDescription());
         }
     }
 
@@ -227,7 +246,8 @@ class BaseItem extends paper.Path
      */
     _handleEventModelUpdated(aPass)
     {
-        if (aPass.model !== this._associatedModel)
+        var model = this._getModel();
+        if (aPass.model !== model)
         {
             return;
         }

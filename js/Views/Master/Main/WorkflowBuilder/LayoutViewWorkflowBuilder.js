@@ -66,6 +66,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
+        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, options => this._handleEventEditWorkflowJob(options), this);
+        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_ADD, options => this._handleCommandAddWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleCommandDeleteWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
@@ -77,9 +79,12 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleCommandSaveWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
-        this._rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn), this);
-        this._rodanChannel.on(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
     }
 
     /**
@@ -146,18 +151,20 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Handle add connection.
      */
-    _handleCommandAddConnection(aPass)
+    _handleCommandAddConnection(options)
     {
-        this._createConnection(aPass.outputport, aPass.inputport);
+        var inputPort = this._handleRequestGetInputPort({'id': options.inputportid});
+        var outputPort = this._handleRequestGetOutputPort({'id': options.outputportid});
+        this._createConnection(outputPort, inputPort);
     }
 
     /**
      * Handle event edit workflow job.
      */
-    _handleEventEditWorkflowJob(aReturn)
+    _handleEventEditWorkflowJob(options)
     {
-        this._workflowJob = aReturn.workflowjob;
-        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob(aReturn);
+        this._workflowJob = this._handleRequestGetWorkflowJob(options);
+        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob});
         this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
         this.regionControlWorkflowLowerArea.$el.hide();
     }
@@ -167,8 +174,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleEventWorkflowJobGroupSelected(options)
     {
-        options.workflow = this._workflow;
-        this.controlWorkflowJobGroupView = new LayoutViewControlWorkflowJobGroup(options);
+        var workflowJobGroup = this._handleRequestGetWorkflowJobGroup(options);
+        this.controlWorkflowJobGroupView = new LayoutViewControlWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: workflowJobGroup});
         this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobGroupView);
         this.regionControlWorkflowLowerArea.$el.hide();
     }
@@ -243,6 +250,66 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 
+    /**
+     * Handle request get WorkflowJob.
+     */
+    _handleRequestGetWorkflowJob(options)
+    {
+        return this._workflow.get('workflow_jobs').get(options.id);
+    }
+
+    /**
+     * Handle request get WorkflowJobGroup.
+     */
+    _handleRequestGetWorkflowJobGroup(options)
+    {
+        return this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP, {'id': options.id});
+    }
+
+    /**
+     * Handle request get InputPort.
+     */
+    _handleRequestGetInputPort(options)
+    {
+        var workflowJobs = this._workflow.get('workflow_jobs');
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            var workflowJob = workflowJobs.at(i);
+            var port = workflowJob.get('input_ports').get(options.id);
+            if (port)
+            {
+                return port;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Handle request get OutputPort.
+     */
+    _handleRequestGetOutputPort(options)
+    {
+        var workflowJobs = this._workflow.get('workflow_jobs');
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            var workflowJob = workflowJobs.at(i);
+            var port = workflowJob.get('output_ports').get(options.id);
+            if (port)
+            {
+                return port;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Handle request get Connection.
+     */
+    _handleRequestGetConnection(options)
+    {
+        return this._workflow.get('connections').get(options.id);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - response handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -251,12 +318,12 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleWorkflowJobCreationSuccess(model, workflow, addPorts, validate)
     {
+        workflow.get('workflow_jobs').add(model);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: model});
         if (addPorts)
         {
             this._addRequiredPorts(model);
         }
-        workflow.get('workflow_jobs').add(model);
         this._validateWorkflow(workflow);
     }
 
@@ -265,8 +332,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleInputPortCreationSuccess(model, workflow, workflowJob)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         workflowJob.get('input_ports').add(model);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -275,8 +342,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleOutputPortCreationSuccess(model, workflow, workflowJob)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         workflowJob.get('output_ports').add(model);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -285,10 +352,10 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleConnectionCreationSuccess(model, workflow, inputPort, outputPort)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: model, inputport: inputPort, outputport: outputPort});
         workflow.get('connections').add(model);
         inputPort.fetch(); // to get populated Connection array
         outputPort.fetch(); // to get populated Connection array
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: model, inputport: inputPort, outputport: outputPort});
         this._validateWorkflow(workflow);
     }
 
@@ -307,8 +374,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleInputPortDeletionSuccess(model, workflow, workflowJob)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         workflowJob.get('output_ports').remove(model);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -317,8 +384,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleOutputPortDeletionSuccess(model, workflow, workflowJob)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         workflowJob.get('output_ports').remove(model);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         this._validateWorkflow(workflow);
     }
 
