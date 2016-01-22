@@ -194,7 +194,6 @@ var Events =
     REQUEST__WORKFLOWJOB_ADD: 'REQUEST__WORKFLOWJOB_ADD',                                       // Called when WorkflowJob needs to be created. Takes {job: Job}.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE',                                 // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                                     // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
-   // REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES',             // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
     EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                                 // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -223,19 +222,7 @@ var Events =
     REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT', // Called when resource assignment remove requested. Passes {inputport: InputPort, resource: Resource}.
     EVENT__WORKFLOWRUNCREATOR_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_SELECTED', // Called on workflowrun creator opening. Passes {workflow: Workflow}.
     EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED', // Called when an InputPort has been selected. Passes {inputport: InputPort}.
-    REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT', // Returns true iff RA exists for provided inputport and resource.
-
-///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowJobCoordinateSet
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD:        'REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD',      // Instructs loading of WorkflowJobCoordinateSets. Takes object containing various query IDs.
-    REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION', // Returns global WorkflowJobCoordinateSet collection.
-
-///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowJobGroupCoordinateSet
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD:        'REQUEST__WORKFLOWJOBGROUPCOORDINATESETS_LOAD',        // Instructs loading of WorkflowJobGroupCoordinateSets. Takes object containing various query IDs.
-    REQUEST__WORKFLOWJOBGROUPCOORDINATESET_COLLECTION:   'REQUEST__WORKFLOWJOBGROUPCOORDINATESET_COLLECTION'    // Returns global WorkflowJobGroupCoordinateSet collection.
+    REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT' // Returns true iff RA exists for provided inputport and resource.
 };
 
 export default Events;

@@ -10,7 +10,8 @@ import OutputPortItem from './Items/OutputPortItem';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
-import WorkflowJobCoordinateSet from './Models/WorkflowJobCoordinateSet';
+import WorkflowJobCoordinateSetCollection from './Collections/WorkflowJobCoordinateSetCollection';
+import WorkflowJobGroupCoordinateSetCollection from './Collections/WorkflowJobGroupCoordinateSetCollection';
 
 /**
  * Main WorkflowBuilder class.
@@ -26,6 +27,9 @@ class WorkflowBuilder
      */
     initialize(aCanvasElementId)
     {
+        this.workflowJobCoordinateSetCollection = new WorkflowJobCoordinateSetCollection();
+        this.workflowJobGroupCoordinateSetCollection = new WorkflowJobGroupCoordinateSetCollection();
+        
         this._multipleSelectionKey = null;
         this._line = null;
         this._selectedItems = {};

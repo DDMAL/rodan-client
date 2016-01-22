@@ -20,8 +20,8 @@ class Workflow extends BaseModel
     {
         this.routeName = 'workflows';
         this.set('connections', new ConnectionCollection(options.connections));
-        this.set('workflow_input_ports', new InputPortCollection(options.workflow_input_ports));
-        this.set('workflow_output_ports', new OutputPortCollection(options.workflow_output_ports));
+        //this.set('workflow_input_ports', new InputPortCollection(options.workflow_input_ports));
+        //this.set('workflow_output_ports', new OutputPortCollection(options.workflow_output_ports));
         this.set('workflow_jobs', new WorkflowJobCollection(options.workflow_jobs));
         this.set('workflow_runs', new WorkflowRunCollection(options.workflow_runs));
     }
@@ -38,10 +38,10 @@ class Workflow extends BaseModel
     {
         this.get('connections').add(resp.connections, {merge: true});
         resp.connections = this.get('connections');
-        this.get('workflow_input_ports').add(resp.workflow_input_ports, {merge: true});
-        resp.workflow_input_ports = this.get('workflow_input_ports');
-        this.get('workflow_output_ports').add(resp.workflow_output_ports, {merge: true});
-        resp.workflow_output_ports = this.get('workflow_output_ports');
+        //this.get('workflow_input_ports').add(resp.workflow_input_ports, {merge: true});
+        //resp.workflow_input_ports = this.get('workflow_input_ports');
+        //this.get('workflow_output_ports').add(resp.workflow_output_ports, {merge: true});
+        //resp.workflow_output_ports = this.get('workflow_output_ports');
         this.get('workflow_runs').add(resp.workflow_runs, {merge: true});
         resp.workflow_runs = this.get('workflow_runs');
 

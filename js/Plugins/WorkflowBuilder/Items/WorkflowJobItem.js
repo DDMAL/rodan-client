@@ -1,7 +1,7 @@
 import paper from 'paper';
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Events from '../Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
 /**

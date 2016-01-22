@@ -22,8 +22,6 @@ import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
 import ResourceTypeCollection from './Collections/ResourceTypeCollection';
 import WorkflowCollection from './Collections/WorkflowCollection';
-import WorkflowJobCoordinateSetCollection from './Collections/WorkflowJobCoordinateSetCollection';
-import WorkflowJobGroupCoordinateSetCollection from './Collections/WorkflowJobGroupCoordinateSetCollection';
 import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
 /**
@@ -161,8 +159,6 @@ class Application extends Marionette.Application
         this.resourceTypeCollection = new ResourceTypeCollection();
         this.runJobCollection = new RunJobCollection();
         this.workflowCollection = new WorkflowCollection();
-        this.workflowJobCoordinateSetCollection = new WorkflowJobCoordinateSetCollection();
-        this.workflowJobGroupCoordinateSetCollection = new WorkflowJobGroupCoordinateSetCollection();
         this.workflowRunCollection = new WorkflowRunCollection();
     }
 
