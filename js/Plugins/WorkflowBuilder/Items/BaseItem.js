@@ -21,6 +21,10 @@ class BaseItem extends paper.Path
         super(options.segments);
         this._initializeRadio();
         this._associatedModel = options.model;
+
+        // This is the coordinate set model settings. Should be overridden if want to save.
+        this.coordinateSetInfo = null;
+        this._coordinateSetModel = null;
         
         // Set appearance parameters.
         this.strokeColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
@@ -114,6 +118,42 @@ class BaseItem extends paper.Path
         this.remove();
     }
 
+    /**
+     * Updates the position to the server.
+     */
+    updatePositionToServer()
+    {
+        if (this.coordinateSetInfo !== null)
+        {
+            var x = this.position.x / paper.view.zoom / paper.view.size.width;
+            var y = this.position.y / paper.view.zoom / paper.view.size.height;
+            var coordinates = {x: x, y: y};
+            if (this._coordinateSetModel === null)
+            {
+                var name = this.coordinateSetInfo['class'];
+                var options = {};
+                options[this.coordinateSetInfo['url']] = this._associatedModel.get('url');
+                options['data'] = {};
+                options['user_agent'] = Configuration.USER_AGENT;
+                this._coordinateSetModel = new name(options);
+            }
+            this._coordinateSetModel.set({'data': coordinates});
+            this._coordinateSetModel.save();
+        }
+    }
+
+    /**
+     * Gets coordinates from server.
+     */
+    loadCoordinates()
+    {
+        var query = {};
+        query[this.coordinateSetInfo['url']] = this._associatedModel.id;
+        query['user_agent'] = Configuration.USER_AGENT;
+        var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
+        this.rodanChannel.request(this.coordinateSetInfo['collectionLoadEvent'], {query: query, success: callback, error: callback});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -136,6 +176,24 @@ class BaseItem extends paper.Path
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__MODEL_HASCHANGED, aPass => this._handleEventModelUpdated(aPass));
+    }
+
+    /**
+     * Handle coordinate load success.
+     */
+    _handleCoordinateLoadSuccess(coordinateSets)
+    {
+        if (coordinateSets.length > 0)
+        {
+            this._coordinateSetModel = coordinateSets.at(0);
+            var coordinates = this._coordinateSetModel.get('data');
+            this.position = new paper.Point(coordinates.x * paper.view.size.width, coordinates.y * paper.view.size.height);
+        }
+        else
+        {
+            this.updatePositionToServer();
+        }
+        this.update();
     }
 
     /**

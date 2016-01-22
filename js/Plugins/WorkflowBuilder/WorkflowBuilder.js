@@ -10,6 +10,8 @@ import OutputPortItem from './Items/OutputPortItem';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
+import WorkflowJobCoordinateSet from './Models/WorkflowJobCoordinateSet';
+
 /**
  * Main WorkflowBuilder class.
  */
@@ -80,6 +82,7 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, (options) => this._handleCommandAddWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, (options) => this._handleRequestPortsWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, options => this._handleCommandDeleteWorkflowJobGroupItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
     }
 
     /**
@@ -306,19 +309,9 @@ class WorkflowBuilder
             for (var itemIndex in this._selectedItems)
             {
                 var item = this._selectedItems[itemIndex];
-                if (item instanceof WorkflowJobItem)
+                if (item instanceof WorkflowJobItem || item instanceof WorkflowJobGroupItem)
                 {
-                    var object = {workflowjob: item._associatedModel,
-                                  x: item.position.x / paper.view.zoom / paper.view.size.width,
-                                  y: item.position.y / paper.view.zoom / paper.view.size.height};
-                    this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE_COORDINATES, object);
-                }
-                else if (item instanceof WorkflowJobGroupItem)
-                {
-                    var object = {workflowjobgroup: item._associatedModel,
-                                  x: item.position.x / paper.view.zoom / paper.view.size.width,
-                                  y: item.position.y / paper.view.zoom / paper.view.size.height};
-                    this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES, object);
+                    item.updatePositionToServer();
                 }
             }
         }
@@ -636,6 +629,15 @@ class WorkflowBuilder
     _handleCommandDeleteWorkflowJobGroupItem(options)
     {
         options.workflowjobgroup.paperItem.destroy();
+        paper.view.draw();
+    }
+
+    /**
+     * Handle request clear.
+     */
+    _handleRequestClear()
+    {
+        paper.project.clear();
         paper.view.draw();
     }
 

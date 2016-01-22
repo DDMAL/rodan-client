@@ -147,6 +147,7 @@ var Events =
     REQUEST__COLLECTION_WORKFLOW: 'REQUEST__COLLECTION_WORKFLOW',
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED',                 // Called on Workflows selection.
     REQUEST__LOAD_WORKFLOWS: 'REQUEST__LOAD_WORKFLOWS',                     // Instructs loading of workflows. Takes object containing various query IDs.
+    REQUEST_WORKFLOW_IMPORT: 'REQUEST_WORKFLOW_IMPORT',                     // Imports Workflow into another. Takes {target: Workflow, origin: Workflow}. 'origin' is imported into 'target'.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder
@@ -162,6 +163,7 @@ var Events =
     REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when Job list view needs to be shown.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
+    REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI
@@ -184,6 +186,7 @@ var Events =
     REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP',               // Called when WorkflowJobGroup item needs to be added to workspace. Takes {workflowjobgroup: WorkflowJobGroup, position: {x: real, y: real}}.
     REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP', // Called when the GUI should associated port items with a WorkflowJobGroup. Takes {workflowjobgroup: WorkflowJobGroup, inputports: [InputPort], outputports: [OutputPort]}.
     REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP',         // Called when WorkflowJobGroup needs to be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
+    REQUEST__WORKFLOWBUILDER_GUI_CLEAR: 'REQUEST__WORKFLOWBUILDER_GUI_CLEAR',                                                       // Called when the GUI should clear the canvas and all items.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -191,9 +194,8 @@ var Events =
     REQUEST__WORKFLOWJOB_ADD: 'REQUEST__WORKFLOWJOB_ADD',                                       // Called when WorkflowJob needs to be created. Takes {job: Job}.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE',                                 // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                                     // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
-    REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES',             // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
+   // REQUEST__WORKFLOWJOB_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOB_SAVE_COORDINATES',             // Called when coordinates need to be saved for a WorkflowJob. Takes {workflowjob: WorkflowJob, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
     EVENT__WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWJOB_SELECTED',                                 // Called when WorkflowJob selected for editing. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES: 'REQUEST__WORKFLOWJOBGROUP_SAVE_COORDINATES',   // Called when coordinates need to be saved for a WorkflowJobGroup. Takes {workflowjobgroup: WorkflowJobGroup, x: float (position relative to canvas width), y: float (position relative to canvas height)}. 
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup

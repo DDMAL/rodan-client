@@ -1,5 +1,6 @@
 import BaseModel from './BaseModel';
 import ConnectionCollection from '../Collections/ConnectionCollection';
+import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 import WorkflowJobCollection from '../Collections/WorkflowJobCollection';
@@ -18,11 +19,11 @@ class Workflow extends BaseModel
     initialize(options)
     {
         this.routeName = 'workflows';
-        this.set('connections', new ConnectionCollection());
-        this.set('workflow_input_ports', new InputPortCollection());
-        this.set('workflow_output_ports', new OutputPortCollection());
-        this.set('workflow_jobs', new WorkflowJobCollection());
-        this.set('workflow_runs', new OutputPortCollection());
+        this.set('connections', new ConnectionCollection(options.connections));
+        this.set('workflow_input_ports', new InputPortCollection(options.workflow_input_ports));
+        this.set('workflow_output_ports', new OutputPortCollection(options.workflow_output_ports));
+        this.set('workflow_jobs', new WorkflowJobCollection(options.workflow_jobs));
+        this.set('workflow_runs', new WorkflowRunCollection(options.workflow_runs));
     }
 
     defaults()

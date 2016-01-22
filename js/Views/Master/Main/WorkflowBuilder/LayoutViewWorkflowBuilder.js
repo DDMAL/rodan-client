@@ -9,7 +9,6 @@ import LayoutViewJob from '../Job/LayoutViewJob';
 import LayoutViewControlWorkflowJob from '../WorkflowJob/LayoutViewControlWorkflowJob';
 import LayoutViewControlWorkflowJobGroup from '../WorkflowJobGroup/LayoutViewControlWorkflowJobGroup';
 import WorkflowJob from '../../../../Models/WorkflowJob';
-import WorkflowJobCoordinateSet from '../../../../Models/WorkflowJobCoordinateSet';
 import InputPort from '../../../../Models/InputPort';
 import OutputPort from '../../../../Models/OutputPort';
 
@@ -39,8 +38,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
 
         // Load the full workflow.
-        var options = {'success': () => this._handleWorkflowLoadSuccess()};
-        this._workflow.fetch(options);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': this._workflow});
     }
 
     /**
@@ -77,11 +75,11 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleCommandSaveWorkflowJob(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE_COORDINATES, options => this._handleCommandSaveWorkflowJobCoordinates(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, () => this._handleCommandValidateWorkflow(), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWJOB_SELECTED, aReturn => this._handleEventEditWorkflowJob(aReturn), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
     }
 
     /**
@@ -124,12 +122,9 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Handles success of workflow fetch.
      */
-    _handleWorkflowLoadSuccess()
+    _handleWorkflowLoadSuccess(workflow)
     {
-        // Attempt to get coordinate sets to pass. Regardless of success or not, we process the workflow.
-        var query = {workflow: this._workflow.id, user_agent: Configuration.USER_AGENT};
-        var callback = () => this._processWorkflow();
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD, {query: query, success: callback, error: callback});
+        this._processWorkflow(workflow);
     }
 
     /**
@@ -241,25 +236,11 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     }
 
     /**
-     * Handle WorkflowJob coordinate save.
+     * Handle request load Workflow.
      */
-    _handleCommandSaveWorkflowJobCoordinates(options)
+    _handleEventLoadWorkflow(options)
     {
-        // Check if a coordinate set is attached. If not, we have to create a new set.
-        var workflowJob = options.workflowjob;
-        if (workflowJob.hasOwnProperty('coordinates'))
-        {
-            workflowJob.coordinates.get('data').x = options.x;
-            workflowJob.coordinates.get('data').y = options.y;
-            workflowJob.coordinates.save({data: {x: options.x, y: options.y}}, {patch: true});
-        }
-        else
-        {
-            workflowJob.coordinates = new WorkflowJobCoordinateSet({workflow_job: workflowJob.get('url'),
-                                                                    data: {x: options.x, y: options.y},
-                                                                    user_agent: Configuration.USER_AGENT});
-            workflowJob.coordinates.save();
-        }
+        options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -471,34 +452,18 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Process workflow for GUI.
      */
-    _processWorkflow()
+    _processWorkflow(workflow)
     {
-        // Get the coordinates loaded for this workflow.
-        var coordinateSetCollection = this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBCOORDINATESET_COLLECTION);
-
         // Process all WorkflowJobs and their associated ports.
         var connections = {};
-        var workflowJobs = this._workflow.get('workflow_jobs');
+        var workflowJobs = workflow.get('workflow_jobs');
         if (workflowJobs !== undefined)
         {
             for (var i = 0; i < workflowJobs.length; i++)
             {
                 // Create WorkflowJob item then process connections.
                 var workflowJob = workflowJobs.at(i);
-                var coordinateSets = coordinateSetCollection.where({'workflow_job': workflowJob.get('url')});
-                if (coordinateSets.length > 0)
-                {
-                    workflowJob.coordinates = coordinateSets[0];
-                    this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB,
-                                              {workflowjob: workflowJob,
-                                               x: workflowJob.coordinates.get('data').x,
-                                               y: workflowJob.coordinates.get('data').y});
-                }
-                else
-                {
-                    this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB,
-                                              {workflowjob: workflowJob});
-                }
+                this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
                 var tempConnections = this._processWorkflowJob(workflowJob);
 
                 // For the connections returned, merge them into our master list.
@@ -526,7 +491,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
             var connection = connections[connectionUrl];
             var connectionModel = new Connection({input_port: connection.inputPort.get('url'), 
                                                   output_port: connection.outputPort.get('url')});
-            this._workflow.get('connections').add(connection);
+            workflow.get('connections').add(connection);
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connectionModel, 
                                                                                                 inputport: connection.inputPort,
                                                                                                 outputport: connection.outputPort});

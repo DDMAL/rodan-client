@@ -1,9 +1,9 @@
-import BaseModel from './BaseModel';
+import BaseModel from '../../../Models/BaseModel';
 
 /**
- * WorkflowJobGroupCoordinateSet.
+ * WorkflowJobCoordinateSet.
  */
-class WorkflowJobGroupCoordinateSet extends BaseModel
+class WorkflowJobCoordinateSet extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -13,7 +13,7 @@ class WorkflowJobGroupCoordinateSet extends BaseModel
      */
     initialize()
     {
-        this.routeName = 'workflowjobgroupcoordinatesets';
+        this.routeName = 'workflowjobcoordinatesets';
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -21,4 +21,4 @@ class WorkflowJobGroupCoordinateSet extends BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
 }
 
-export default WorkflowJobGroupCoordinateSet;
+export default WorkflowJobCoordinateSet;

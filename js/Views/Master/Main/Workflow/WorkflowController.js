@@ -4,6 +4,7 @@ import ViewWorkflow from './Individual/ViewWorkflow';
 import ViewWorkflowList from './List/ViewWorkflowList';
 import Workflow from '../../../../Models/Workflow';
 import BaseController from '../../../../Controllers/BaseController';
+import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
 
 /**
  * Controller for all Workflow views.
@@ -11,7 +12,7 @@ import BaseController from '../../../../Controllers/BaseController';
 class WorkflowController extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS - Initialization
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize Radio.
@@ -23,8 +24,12 @@ class WorkflowController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
+        this._rodanChannel.reply(Events.REQUEST_WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
     }
-   
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Radio handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle show LayoutView.
      */
@@ -78,6 +83,29 @@ class WorkflowController extends BaseController
         var workflows = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
         var workflow = workflows.create({project: options.project.get('url'), name: 'untitled'});
         return workflow;
+    }
+
+    /**
+     * Handle request import Workflow.
+     */
+    _handleRequestImportWorkflow(options)
+    {
+        var workflow = options.target;
+        var originWorkflow = options.origin;
+        var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow});
+        newGroup.save({}, {success: () => this.blah(workflow)});
+    }
+
+    blah(workflow)
+    {debugger;
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
+        var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
+        workflow.get('workflow_jobs').reset(null); // Please reference issue #43; we need the collections to be empty
+        workflow.get('connections').reset(null); // Please reference issue #43; we need the collections to be empty
+        workflow.get('workflow_input_ports').reset(null); // Please reference issue #43; we need the collections to be empty
+        workflow.get('workflow_output_ports').reset(null); // Please reference issue #43; we need the collections to be empty
+        workflow.get('workflow_runs').reset(null); // Please reference issue #43; we need the collections to be empty
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
     }
 }
 
