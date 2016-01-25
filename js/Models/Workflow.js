@@ -20,8 +20,8 @@ class Workflow extends BaseModel
     {
         this.routeName = 'workflows';
         this.set('connections', new ConnectionCollection(options.connections));
-        //this.set('workflow_input_ports', new InputPortCollection(options.workflow_input_ports));
-        //this.set('workflow_output_ports', new OutputPortCollection(options.workflow_output_ports));
+        this.set('workflow_input_ports', new InputPortCollection(options.workflow_input_ports));
+        this.set('workflow_output_ports', new OutputPortCollection(options.workflow_output_ports));
         this.set('workflow_jobs', new WorkflowJobCollection(options.workflow_jobs));
         this.set('workflow_runs', new WorkflowRunCollection(options.workflow_runs));
     }
@@ -36,23 +36,45 @@ class Workflow extends BaseModel
      */
     parse(resp)
     {
-        this.get('connections').add(resp.connections, {merge: true});
+        for (var i in resp.connections)
+        {
+            var modelClass = this.get('connections').model;
+            var model = new modelClass(resp.connections[i]);
+            this.get('connections').add(model, {merge: true});
+        }
         resp.connections = this.get('connections');
-        //this.get('workflow_input_ports').add(resp.workflow_input_ports, {merge: true});
-        //resp.workflow_input_ports = this.get('workflow_input_ports');
-        //this.get('workflow_output_ports').add(resp.workflow_output_ports, {merge: true});
-        //resp.workflow_output_ports = this.get('workflow_output_ports');
-        this.get('workflow_runs').add(resp.workflow_runs, {merge: true});
+
+        for (var i in resp.workflow_runs)
+        {
+            var modelClass = this.get('workflow_runs').model;
+            var model = new modelClass(resp.workflow_runs[i]);
+            this.get('workflow_runs').add(model, {merge: true});
+        }
         resp.workflow_runs = this.get('workflow_runs');
 
-        // If the WorkflowJobs Collection has already been populated, we don't want to repopulate it.
-        // This will cause the ports to be clobbered.
-        // Issue #43: think of a better way to load WorkflowJobs on the fly. Might require adjustment to Rodan.
-        if (this.get('workflow_jobs').length === 0)
+        for (var i in resp.workflow_jobs)
         {
-            this.get('workflow_jobs').add(resp.workflow_jobs, {merge: true});
+            var modelClass = this.get('workflow_jobs').model;
+            var model = new modelClass(resp.workflow_jobs[i]);
+            this.get('workflow_jobs').add(model, {merge: true});
         }
         resp.workflow_jobs = this.get('workflow_jobs');
+
+        for (var i in resp.workflow_input_ports)
+        {
+            var modelClass = this.get('workflow_input_ports').model;
+            var model = new modelClass(resp.workflow_input_ports[i]);
+            this.get('workflow_input_ports').add(model, {merge: true});
+        }
+        resp.workflow_input_ports = this.get('workflow_input_ports');
+
+        for (var i in resp.workflow_output_ports)
+        {
+            var modelClass = this.get('workflow_output_ports').model;
+            var model = new modelClass(resp.workflow_output_ports[i]);
+            this.get('workflow_output_ports').add(model, {merge: true});
+        }
+        resp.workflow_output_ports = this.get('workflow_output_ports');
 
         return resp;
     }

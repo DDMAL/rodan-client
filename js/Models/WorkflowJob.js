@@ -33,40 +33,20 @@ class WorkflowJob extends BaseModel
      */
     parse(response)
     {
-        // Check for unknown InputPorts.
-     /*   for (var index in response.input_ports)
+        for (var i in response.input_ports)
         {
-            if (typeof response.input_ports[index] === 'string')
-            {
-                var uuid = this.parseIdFromUrl(response.input_ports[index]);
-                if (!this.get('input_ports').get(uuid))
-                {
-                    var port = new InputPort({'uuid': uuid, 'url': response.input_ports[index]});
-                    port.fetch();
-                    this.get('input_ports').add(port);
-                }
-            }
+            var modelClass = this.get('input_ports').model;
+            var model = new modelClass(response.input_ports[i]);
+            this.get('input_ports').add(model, {merge: true});
         }
-
-        // Check for unknown OutputPorts.
-        for (var index in response.output_ports)
-        {
-            if (typeof response.output_ports[index] === 'string')
-            {
-                var uuid = this.parseIdFromUrl(response.output_ports[index]);
-                if (!this.get('output_ports').get(uuid))
-                {
-                    var port = new OutputPort({'uuid': uuid, 'url': response.output_ports[index]});
-                    port.fetch();
-                    this.get('output_ports').add(port);
-                }
-            }
-        }*//*
-        this.get('input_ports').fetch({data: {'workflow_job': response.uuid}});
-        this.get('output_ports').fetch({data: {'workflow_job': response.uuid}});*/
-
-        // Put the Collections in the response (so backbone doesn't populate the Collections with URLs).
         response.input_ports = this.get('input_ports');
+
+        for (var i in response.output_ports)
+        {
+            var modelClass = this.get('output_ports').model;
+            var model = new modelClass(response.output_ports[i]);
+            this.get('output_ports').add(model, {merge: true});
+        }
         response.output_ports = this.get('output_ports');
 
         return response;

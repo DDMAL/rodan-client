@@ -5,11 +5,55 @@ import paper from 'paper';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 
+let itemMap = null;
+
 /**
  * Base Item in WorkflowBuilder
  */
 class BaseItem extends paper.Path
 {
+///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC STATIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns associated item given an ID.
+     */
+    static getAssociatedItem(id)
+    {
+        if (!itemMap)
+        {
+            itemMap = {};
+        }
+        return itemMap[id];
+    }
+
+    /**
+     * Associates given item with ID.
+     */
+    static associateItemWithID(item, id)
+    {
+        if (!itemMap)
+        {
+            itemMap = {};
+        }
+        itemMap[id] = item;
+    }
+
+    /**
+     * Removes item from map witht he provided ID.
+     */
+    static removeItemFromMap(id)
+    {
+        if (!itemMap)
+        {
+            itemMap = {};
+        }
+        if (itemMap[id])
+        {
+            delete itemMap[id];
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -19,8 +63,10 @@ class BaseItem extends paper.Path
     constructor(options)
     {
         super(options.segments);
+
         this._initializeRadio();
         this._modelId = options.model ? options.model.id : null;
+        BaseItem.associateItemWithID(this, this._modelId);
 
         // Getter event for the model. Need to set this.
         this.getModelEvent = null;
@@ -109,7 +155,7 @@ class BaseItem extends paper.Path
      */
     destroy()
     {
-        // TODO - remove from map
+        BaseItem.removeItemFromMap(this._modelId);
         this._text.remove();
         this.remove();
     }

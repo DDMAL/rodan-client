@@ -22,8 +22,8 @@ class ConnectionItem extends BaseItem
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION;
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
-        this._associatedInputPort = options.inputPort;
-        this._associatedOutputPort = options.outputPort;
+        this._associatedInputPortItem = options.inputportitem;
+        this._associatedOutputPortItem = options.outputportitem;
 
         // We'll put a small circle in the middle of our connection so it's easier to select.
         var circleCenter = new paper.Point(0, 0);
@@ -45,10 +45,10 @@ class ConnectionItem extends BaseItem
     update()
     {
         this._circle.visible = this.visible;
-        this.firstSegment.point.x = this._associatedOutputPort.paperItem.position.x;
-        this.firstSegment.point.y = this._associatedOutputPort.paperItem.bounds.bottom;
-        this.lastSegment.point.x = this._associatedInputPort.paperItem.position.x;
-        this.lastSegment.point.y = this._associatedInputPort.paperItem.bounds.top;
+        this.firstSegment.point.x = this._associatedOutputPortItem.position.x;
+        this.firstSegment.point.y = this._associatedOutputPortItem.bounds.bottom;
+        this.lastSegment.point.x = this._associatedInputPortItem.position.x;
+        this.lastSegment.point.y = this._associatedInputPortItem.bounds.top;
         this._circle.position.x = this.firstSegment.point.x + ((this.lastSegment.point.x - this.firstSegment.point.x) / 2);
         this._circle.position.y = this.firstSegment.point.y + ((this.lastSegment.point.y - this.firstSegment.point.y) / 2);
     }
@@ -59,10 +59,10 @@ class ConnectionItem extends BaseItem
     destroy()
     {
         this._circle.remove();
-        this._associatedInputPort.paperItem.setConnectionItem(null);
-        this._associatedInputPort = null;
-        this._associatedOutputPort.paperItem.removeConnectionItem(this);
-        this._associatedOutputPort = null;
+        this._associatedInputPortItem.setConnectionItem(null);
+        this._associatedInputPortItem = null;
+        this._associatedOutputPortItem.removeConnectionItem(this);
+        this._associatedOutputPortItem = null;
         super.destroy();
     }
 

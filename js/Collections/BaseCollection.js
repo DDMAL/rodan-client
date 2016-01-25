@@ -26,7 +26,10 @@ class BaseCollection extends Backbone.Collection
      */
     parse(resp)
     {
-        this._parsePagination(resp);
+        if (resp.count)
+        {
+            this._parsePagination(resp);
+        }
         if (resp.hasOwnProperty('results'))
         {
             return resp.results;
