@@ -155,23 +155,27 @@ var Events =
     REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT',           // Called when InputPort needs to be added to WorkflowJob. Takes {inputportype: InputPortType, workflowjob: WorkflowJob (may be null, in which case currently selected WorkflowJob will be used)}.
     REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT',         // Called when OutputPort needs to be added to WorkflowJob. Takes {outputporttype: OutputPortType, workflowjob: WorkflowJob (may be null, in which case currently selected WorkflowJob will be used)}.
     REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT',     // Called when InputPort needs to be deleted from workflow job. Takes {inputport: InputPort}.
+    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB',       // Called when WorkflowJob needs to be added to active Workfoow. Takes {job: Job}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB', // Called when WorkflowJob needs to be removed from Workflow. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT',   // Called when OutputPort needs to be deleted from workflow job. Takes {outputport: OutputPort}.
+    REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB',     // Called when WorkflowJob needs to be saved. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWBUILDER_ADD_CONNECTION: 'REQUEST__WORKFLOWBUILDER_ADD_CONNECTION',         // Called when Connection should be created. Takes {inputportid: string, outputportid: string}.
     REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOW',           // Called when Workflow needs to be saved. Takes object with attributes to change.
     REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW',   // Called when Workflow needs to be saved.
     REQUEST__WORKFLOWBUILDER_RUN_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_RUN_WORKFLOW',             // Called when Workflow needs to be run.
     REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS: 'REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS',   // Called when Job list view needs to be shown.
-    EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
-    EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
     REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW',
     REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB',
     REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP',
     REQUEST__WORKFLOWBUILDER_GET_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_GET_INPUTPORT',
     REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT',
     REQUEST__WORKFLOWBUILDER_GET_CONNECTION: 'REQUEST__WORKFLOWBUILDER_GET_CONNECTION',
+
     EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED',             // Called when WorkflowJob selected in WorkflowBuilder. Takes {id: string}.
     EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED',   // Called when WorkflowJobGroup selected. Takes {id: string}.
-
+    EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
+    EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
+ 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -198,9 +202,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOB_ADD: 'REQUEST__WORKFLOWJOB_ADD',                                       // Called when WorkflowJob needs to be created. Takes {job: Job}.
-    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE',                                 // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',                                     // Called when WorkflowJob needs to be saved. Takes object with attributes to change.
+    REQUEST__WORKFLOWJOB_CREATE: 'REQUEST__WORKFLOWJOB_CREATE', // Called when WorkflowJob needs to be created. Takes {job: Job, workflow: Workflow}.
+    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Called when WorkflowJob needs to be saved. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup
