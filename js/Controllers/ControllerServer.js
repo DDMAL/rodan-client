@@ -207,9 +207,9 @@ class ControllerServer extends BaseController
      * Sends a notification that queries are still pending.
      */
     _sendWaitingNotification()
-    {
+    {debugger;
         this._waitingEventTriggered = true;
-        this._rodanChannel.trigger(Event.EVENT__SERVER_WAITING);
+        this._rodanChannel.trigger(Events.EVENT__SERVER_WAITING);
     }
 
     /**
@@ -218,7 +218,7 @@ class ControllerServer extends BaseController
     _sendIdleNotification()
     {
         this._waitingEventTriggered = false;
-        this._rodanChannel.trigger(Event.EVENT__SERVER_IDLE);
+        this._rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
     }
 }
 
