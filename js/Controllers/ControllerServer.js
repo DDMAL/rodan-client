@@ -23,6 +23,8 @@ class ControllerServer extends BaseController
         this.routes = null;
         this.serverConfiguration = null;
         this._originalSync = Backbone.sync;
+        this._responseTimeout = null;
+        this._waitingEventTriggered = false;
         Backbone.sync = (method, model, options) => this._sync(method, model, options);
     }
 
@@ -34,6 +36,16 @@ class ControllerServer extends BaseController
      */
     _sync(method, model, options)
     {
+        // Set a timeout for x seconds.
+        if (this._responseTimeout === null)
+        {
+            this._responseTimeout = setTimeout(() => this._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
+        }
+
+        // Apply generic handler for timeout.
+        options = this._applyResponseHandlers(options);
+
+        // Do call.
         var jqXHR = this._originalSync(method, model, options);
     }
 
@@ -133,6 +145,80 @@ class ControllerServer extends BaseController
             map.set(keyvals[x][0], keyvals[x][1]);
         }
         return map;
+    }
+
+    /**
+     * Apply success/error handlers to HTTP request.
+     */
+    _applyResponseHandlers(options)
+    {
+        var genericResponseFunction = (model, response, options) => this._handleResponse(model, response, options);
+
+        // Success.
+        if (!options.hasOwnProperty('success'))
+        {
+            options.success = genericResponseFunction;
+        }
+        else
+        {
+            var customSuccessFunction = options.success;
+            options.success = function(model, response, options)
+            {
+                customSuccessFunction(model, response, options);
+                genericResponseFunction(model, response, options);
+            };
+        }
+
+        // Error
+        if (!options.hasOwnProperty('error'))
+        {
+            options.error = genericResponseFunction;
+        }
+        else
+        {
+            var customErrorFunction = options.error;
+            options.error = function(model, response, options)
+            {
+                customErrorFunction(model, response, options);
+                genericResponseFunction(model, response, options);
+            };
+        }
+
+        return options;
+    }
+
+    /**
+     * Handle response.
+     */
+    _handleResponse(model, response, options)
+    {
+        if (document.readyState === 'complete')
+        {
+            clearTimeout(this._responseTimeout);
+            this._responseTimeout = null;
+            if (this._waitingEventTriggered)
+            {
+                this._sendIdleNotification();
+            }
+        }
+    }
+
+    /**
+     * Sends a notification that queries are still pending.
+     */
+    _sendWaitingNotification()
+    {
+        this._waitingEventTriggered = true;
+        this._rodanChannel.trigger(Event.EVENT__SERVER_WAITING);
+    }
+
+    /**
+     * Send idle notification.
+     */
+    _sendIdleNotification()
+    {
+        this._waitingEventTriggered = false;
+        this._rodanChannel.trigger(Event.EVENT__SERVER_IDLE);
     }
 }
 

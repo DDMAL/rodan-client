@@ -127,6 +127,8 @@ var Events =
     EVENT__SERVER_WENT_AWAY: 'EVENT__SERVER_WENT_AWAY', // Called on server disconnect. No pass.
     EVENT__SERVER_ROUTESLOADED: 'EVENT__SERVER_ROUTESLOADED', // Called when routes loaded. No pass.
     REQUEST__SERVER_GET_ROUTES: 'REQUEST__SERVER_GET_ROUTES',
+    EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',             // Fired when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
+    EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                   // Fired when server no longer waiting. Only happens if a EVENT__SERVER_WAITING had previously been fired.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
