@@ -5,7 +5,7 @@ import Configuration from '../../../../Configuration';
 import Connection from '../../../../Models/Connection';
 import Events from '../../../../Shared/Events';
 import ViewWorkflow from '../Workflow/Individual/ViewWorkflow';
-import LayoutViewJob from '../Job/LayoutViewJob';
+import LayoutViewJobSelection from './JobSelection/LayoutViewJobSelection';
 import LayoutViewControlWorkflowJob from '../WorkflowJob/LayoutViewControlWorkflowJob';
 import LayoutViewControlWorkflowJobGroup from '../WorkflowJobGroup/LayoutViewControlWorkflowJobGroup';
 import WorkflowJob from '../../../../Models/WorkflowJob';
@@ -54,7 +54,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     onBeforeShow()
     {
         this.regionControlWorkflowUpperArea.show(this.viewWorkflow);
-        this.regionControlWorkflowLowerArea.show(this.viewControlJob);
+        this.regionControlWorkflowLowerArea.show(this._viewJobSelection);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -70,27 +70,28 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, options => this._handleEventEditWorkflowJob(options), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
 
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
+
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, options => this._handleRequestAddWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options => this._handleRequestRemoveWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
-
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
-
-
-
+        
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, options => this._handleCommandAddInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, options => this._handleCommandAddOutputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, aPass => this._handleCommandDeleteInputPort(aPass), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, aPass => this._handleCommandDeleteOutputPort(aPass), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOW, aPass => this._handleCommandSaveWorkflow(aPass), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
+
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
     }
 
     /**
@@ -99,7 +100,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _initializeViews(options)
     {
         this.viewWorkflow = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: options.workflow});
-        this.viewControlJob = new LayoutViewJob();
+        this._viewJobSelection = new LayoutViewJobSelection();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -165,6 +166,14 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     }
 
     /**
+     * Handle request import Workflow.
+     */
+    _handleRequestImportWorkflow(options)
+    {
+        this._rodanChannel.request(Events.REQUEST_WORKFLOW_IMPORT, {origin: options.workflow, target: this._workflow});
+    }
+
+    /**
      * Handle add connection.
      */
     _handleCommandAddConnection(options)
@@ -202,9 +211,9 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleCommandShowControlJobView()
     {
         this.viewWorkflow = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: this._workflow});
-        this.viewControlJob = new LayoutViewJob();
+        this._viewJobSelection = new LayoutViewJobSelection();
         this.regionControlWorkflowUpperArea.show(this.viewWorkflow);
-        this.regionControlWorkflowLowerArea.show(this.viewControlJob);
+        this.regionControlWorkflowLowerArea.show(this._viewJobSelection);
         this.regionControlWorkflowLowerArea.$el.show();
     }
 

@@ -92,7 +92,7 @@ class WorkflowController extends BaseController
     {
         var workflow = options.target;
         var originWorkflow = options.origin;
-        var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow});
+        var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
         newGroup.save({}, {success: () => this._handleSuccessWorkflowJobGroupSave(workflow)});
     }
 
@@ -106,11 +106,6 @@ class WorkflowController extends BaseController
     {
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
         var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
-     /*   workflow.get('workflow_jobs').reset(null); // Please reference issue #43; we need the collections to be empty
-        workflow.get('connections').reset(null); // Please reference issue #43; we need the collections to be empty
-        workflow.get('workflow_input_ports').reset(null); // Please reference issue #43; we need the collections to be empty
-        workflow.get('workflow_output_ports').reset(null); // Please reference issue #43; we need the collections to be empty
-        workflow.get('workflow_runs').reset(null); // Please reference issue #43; we need the collections to be empty*/
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
     }
 }

@@ -70,7 +70,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _handleButtonSave()
     {
         this.model.set({'name': this.ui.textName.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'workflowjob': this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model});
     }
 
     /**
@@ -81,7 +81,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
         var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
         if (confirmation)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, {workflowjob: this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: this.model});
         }
     }
 
