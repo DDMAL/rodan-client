@@ -1,7 +1,9 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Events from '../../Shared/Events';
 import LayoutViewMain from './Main/LayoutViewMain';
+import LayoutViewMasterModal from './Modals/LayoutViewMasterModal';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
 import LayoutViewStatus from './Status/LayoutViewStatus';
 
@@ -18,7 +20,6 @@ class LayoutViewMaster extends Marionette.LayoutView
      */
     initialize()
     {
-        //this.el = '#app';
         this.addRegions({
             regionMain: '#region-main',
             regionNavigation: '#region-navigation',
@@ -49,6 +50,7 @@ class LayoutViewMaster extends Marionette.LayoutView
         this.layoutViewNavigation = new LayoutViewNavigation();
         this.layoutViewMain = new LayoutViewMain();
         this.layoutViewStatus = new LayoutViewStatus();
+        this._layoutViewModalWaiting = new LayoutViewMasterModal({template: '#template-modal_waiting'});
     }
 
     /**
@@ -57,6 +59,29 @@ class LayoutViewMaster extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
+        this._rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._showModalWaiting());
+        this._rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._hideModalWaiting());
+    }
+
+    /**
+     * Show waiting modal.
+     */
+    _showModalWaiting()
+    {
+        this._layoutViewModalWaiting.render();
+        var $modalEl = $("#modal-generic");
+        $modalEl.html(this._layoutViewModalWaiting.el);
+        $modalEl.modal('show');
+    }
+
+    /**
+     * Hide waiting modal.
+     */
+    _hideModalWaiting()
+    {
+        var $modalEl = $("#modal-generic");
+        $modalEl.html(view.el);
+        $modalEl.modal('hide');
     }
 }
 
