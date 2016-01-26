@@ -30,6 +30,9 @@ var Configuration = {
     // Event timer frequency (ms).
     EVENT_TIMER_FREQUENCY: 3000,
 
+    // Milliseconds to wait before the client goes into a 'wait' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
+    SERVER_WAIT_TIMER: 500,
+
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {
 

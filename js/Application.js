@@ -14,9 +14,7 @@ import InputPortCollection from './Collections/InputPortCollection';
 import InputPortTypeCollection from './Collections/InputPortTypeCollection';
 import JobCollection from './Collections/JobCollection';
 import OutputPortTypeCollection from './Collections/OutputPortTypeCollection';
-import LayoutViewMain from './Views/Master/Main/LayoutViewMain';
-import LayoutViewNavigation from './Views/Master/Navigation/LayoutViewNavigation';
-import LayoutViewStatus from './Views/Master/Status/LayoutViewStatus';
+import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import ProjectCollection from './Collections/ProjectCollection';
 import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
@@ -38,9 +36,9 @@ class Application extends Marionette.Application
     initialize()
     {
         this._getOS();
+
         this.addRegions({
-            regionNavigation: '#region-navigation',
-            regionStatus: '#region-status'
+            regionMaster: '#region-master'
         });
 
         // Non-network and non-GUI inits. Do these first.
@@ -167,9 +165,7 @@ class Application extends Marionette.Application
      */
     _initializeViews()
     {
-        this.layoutViewNavigation = new LayoutViewNavigation();
-        this.layoutViewMain = new LayoutViewMain();
-        this.layoutViewStatus = new LayoutViewStatus();
+        this._layoutViewMaster = new LayoutViewMaster();
     }
 
     /**
@@ -178,9 +174,7 @@ class Application extends Marionette.Application
     _handleEventRoutesLoaded()
     {
         // Render layout views.
-        this.layoutViewMain.render();
-        this.regionNavigation.show(this.layoutViewNavigation);
-        this.regionStatus.show(this.layoutViewStatus);
+        this.regionMaster.show(this._layoutViewMaster);
 
         // Send event that the app has started.
         this.rodanChannel.trigger(Events.EVENT__APPLICATION_READY);

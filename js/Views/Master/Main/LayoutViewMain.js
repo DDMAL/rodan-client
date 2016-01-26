@@ -25,9 +25,8 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     initialize()
     {
-        this.el = '#app';
         this.addRegions({
-            region: '#region-main'
+            region: 'div'
         });
         this._initializeRadio();
 
