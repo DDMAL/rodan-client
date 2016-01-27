@@ -33,14 +33,6 @@ class WorkflowBuilder
         this._zoomMax = Configuration.WORKFLOWBUILDER.ZOOM_MAX;
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
-        this._STATES = {
-            IDLE: 0,
-            GRABBED_WORKFLOWJOBITEMS: 1,
-            MOVING_WORKFLOWJOBITEMS: 2,
-            CREATING_CONNECTION: 3
-        };
-        this._state = this._STATES.IDLE;
-
         paper.install(window);
         paper.setup(aCanvasElementId);
         paper.handleMouseEvent = aData => this._handleEvent(aData);
@@ -50,6 +42,17 @@ class WorkflowBuilder
         this._initializeGlobalTool();
         this._initializeRadio();
         this._setMultipleSelectionKey();
+
+        // State info.
+        this._STATES = {
+            IDLE: 0,
+            GRABBED_WORKFLOWJOBITEMS: 1,
+            MOVING_WORKFLOWJOBITEMS: 2,
+            CREATING_CONNECTION: 3
+        };
+        this._firstEntry = false;
+        this._setState(this._STATES.IDLE);
+        paper.view.onFrame = (event) => this._handleState(event);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -123,46 +126,25 @@ class WorkflowBuilder
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Radio handlers
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle zoom in.
-     */
-    _handleRequestZoomIn()
-    {
-        paper.view.zoom = paper.view.zoom + this._zoomRate < this._zoomMax ? paper.view.zoom + this._zoomRate : this._zoomMax;
-        paper.view.draw(); // should be removed when frame-driven
-    }
-
-    /**
-     * Handle zoom out.
-     */
-    _handleRequestZoomOut()
-    {
-        paper.view.zoom = paper.view.zoom - this._zoomRate > this._zoomMin ? paper.view.zoom - this._zoomRate : this._zoomMin;
-        paper.view.draw(); // should be removed when frame-driven
-    }
-
-    /**
-     * Handle zoom reset.
-     */
-    _handleRequestZoomReset()
-    {
-        paper.view.zoom = 1;
-        paper.view.draw(); // should be removed when frame-driven
-    }
-
-    /**
-     * Handle request clear.
-     */
-    _handleRequestClear()
-    {
-        paper.project.clear();
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Events and state machine
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle state. This is frame driven.
+     */
+    _handleState(event)
+    {
+        paper.view.draw();
+    }
+
+    /**
+     * Sets state.
+     */
+    _setState(state)
+    {
+        this._state = state;
+        this._firstEntry = true;
+    }
+
     /**
      * Handle mouse event.
      */
@@ -211,7 +193,6 @@ class WorkflowBuilder
                 break;
             }
         }
-        paper.view.draw();
     }
 
     /**
@@ -411,6 +392,41 @@ class WorkflowBuilder
             var adjustedPoint = new Point(event.point.x, event.point.y - 1);
             this._line.setEndPoint(adjustedPoint);
         }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Radio handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle zoom in.
+     */
+    _handleRequestZoomIn()
+    {
+        paper.view.zoom = paper.view.zoom + this._zoomRate < this._zoomMax ? paper.view.zoom + this._zoomRate : this._zoomMax;
+    }
+
+    /**
+     * Handle zoom out.
+     */
+    _handleRequestZoomOut()
+    {
+        paper.view.zoom = paper.view.zoom - this._zoomRate > this._zoomMin ? paper.view.zoom - this._zoomRate : this._zoomMin;
+    }
+
+    /**
+     * Handle zoom reset.
+     */
+    _handleRequestZoomReset()
+    {
+        paper.view.zoom = 1;
+    }
+
+    /**
+     * Handle request clear.
+     */
+    _handleRequestClear()
+    {
+        paper.project.clear();
     }
 }
 
