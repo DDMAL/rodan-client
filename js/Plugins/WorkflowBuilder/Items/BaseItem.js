@@ -206,6 +206,16 @@ class BaseItem extends paper.Path
         return this._modelId;
     }
 
+    /**
+     * Highlights this object.
+     */
+    setHighlight(highlighted)
+    {
+        this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+        this.update();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -299,15 +309,6 @@ class BaseItem extends paper.Path
         }
         this._text.content = aPass.model.get('name');
         this.update();
-    }
-
-    /**
-     * Highlights this object.
-     */
-    setHighlight(highlighted)
-    {
-        this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDER.STROKE_COLOR;
-        this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
     }
 
     /**
