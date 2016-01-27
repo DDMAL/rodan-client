@@ -249,6 +249,7 @@ class BaseItem extends paper.Path
         {
             return this.rodanChannel.request(this.getModelEvent, {'id': this._modelId});
         }
+        return null;
     }
 
     /**
@@ -278,11 +279,14 @@ class BaseItem extends paper.Path
         if ($('div#canvas-tooltip'))
         {
             var model = this._getModel();
-            var tooltip = $('div#canvas-tooltip');
-            tooltip.css('visibility', 'visible');
-            tooltip.css('top', event.event.y);
-            tooltip.css('left', event.event.x);
-            tooltip.text(model.getDescription());
+            if (model)
+            {
+                var tooltip = $('div#canvas-tooltip');
+                tooltip.css('visibility', 'visible');
+                tooltip.css('top', event.event.y);
+                tooltip.css('left', event.event.x);
+                tooltip.text(model.getDescription());
+            }
         }
     }
 
