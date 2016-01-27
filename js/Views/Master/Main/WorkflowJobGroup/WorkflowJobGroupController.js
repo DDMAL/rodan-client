@@ -149,7 +149,7 @@ class WorkflowJobGroupController extends BaseController
      */
     _processWorkflowJobGroup(workflowJobGroup, workflowJobs)
     {
-        this._collection.set(workflowJobGroup);
+        this._collection.set(workflowJobGroup, {remove: false});
 
         // Hide WorkflowJobs.
         for (var index in workflowJobs)
