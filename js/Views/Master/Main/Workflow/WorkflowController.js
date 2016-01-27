@@ -104,6 +104,7 @@ class WorkflowController extends BaseController
      */
     _handleSuccessWorkflowJobGroupSave(workflow)
     {
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
         var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});

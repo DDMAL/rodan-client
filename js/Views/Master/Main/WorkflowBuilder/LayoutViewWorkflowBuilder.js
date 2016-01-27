@@ -189,7 +189,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleEventEditWorkflowJob(options)
     {
         this._workflowJob = this._handleRequestGetWorkflowJob(options);
-        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob});
+        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob, 'workflow': this._workflow});
         this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
         this.regionControlWorkflowLowerArea.$el.hide();
     }

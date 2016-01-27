@@ -84,14 +84,6 @@ class ViewWorkflow extends Marionette.ItemView
     }
 
     /**
-     * Handle validate button.
-     */
-    _handleButtonValidate()
-    {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
-    }
-
-    /**
      * Handle run button.
      */
     _handleButtonRun()
@@ -143,7 +135,6 @@ ViewWorkflow.prototype.ui = {
     editWorkflowButton: '#button-edit_workflow',
     buttonSaveData: '#button-save_workflow_data',
     buttonSave: '#button-save_workflow',
-    buttonValidate: '#button-validate_workflow',
     buttonRun: '#button-run_workflow',
     textName: '#text-workflow_name',
     textDescription: '#text-workflow_description',
@@ -156,7 +147,6 @@ ViewWorkflow.prototype.events = {
     'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
     'click @ui.buttonSaveData': '_handleButtonSave',
     'click @ui.buttonSave': '_handleButtonSave',
-    'click @ui.buttonValidate': '_handleButtonValidate',
     'click @ui.buttonRun': '_handleButtonRun',
     'click @ui.buttonGroup': '_handleButtonGroup'
         };
