@@ -30,9 +30,63 @@ class ItemController
         this.workflowJobGroupCoordinateSetCollection = new WorkflowJobGroupCoordinateSetCollection();
 
         this._selectedItems = {};
+        this._selectingMultiple = false;
+        this._overItem = null;
+        this._outputPortItem = null;
         
         this._initializeRadio();
         this._createSegments();
+    }
+
+    /**
+     * Handles MouseEvent on item.
+     */
+    handleMouseEvent(mouseEvent)
+    {
+        var item = mouseEvent.target;
+        this._overItem = mouseEvent.type === 'mouseenter' ? item : mouseEvent.type === 'mouseleave' ? null : item;
+        if (mouseEvent.type === 'mousedown')
+        {
+            this._handleEventMouseDown(mouseEvent);
+        }
+        else if (mouseEvent.type === 'mouseup')
+        {
+        }
+    }
+
+    /**
+     * Returns current item mouse is over (or null).
+     */
+    getMouseOverItem()
+    {
+        return this._overItem;
+    }
+
+    /**
+     * Saves item positions.
+     */
+    saveSelectedItemPositions()
+    {
+        for (var itemIndex in this._selectedItems)
+        {
+            var item = this._selectedItems[itemIndex];
+            item.updatePositionToServer();
+        } 
+    }
+
+    /**
+     * Move item positions.
+     */
+    moveSelectedItems(delta)
+    {
+        for (var itemIndex in this._selectedItems)
+        {
+            var item = this._selectedItems[itemIndex];
+            if (item.isMoveable())
+            {
+                item.move(delta); 
+            }
+        } 
     }
 
     /**
@@ -42,14 +96,7 @@ class ItemController
     {
         this._selectedItems[item.id] = item;
         item.setHighlight(true);
-        if (item instanceof WorkflowJobItem)
-        {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {id: item.getModelID()});
-        }
-        else if (item instanceof WorkflowJobGroupItem)
-        {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, {id: item.getModelID()});
-        }
+        this._processSelection();
     }
 
     /**
@@ -59,6 +106,7 @@ class ItemController
     {
         delete this._selectedItems[item.id];
         item.setHighlight(false);
+        this._processSelection();
     }
 
     /**
@@ -72,6 +120,8 @@ class ItemController
             this.unselectItem(item);
         }
         this._selectedItems = {}; // TODO memory leak? 
+        this._outputPortItem = null;
+        this._processSelection();
     }
 
     /**
@@ -127,11 +177,80 @@ class ItemController
     }
 
     /**
+     * Return OutputPortItem flagged for Connection creation (null if none).
+     */
+    getOutputPortItemForConnection()
+    {
+        return this._outputPortItem;
+    }
+
+    /**
      * Returns a line item.
      */
     createLineItem(startPoint)
     {
         return new LineItem({segments: this._segments.connection, startPoint: startPoint});
+    }
+
+    /**
+     * Set selecting multiple.
+     */
+    setSelectingMultiple(selectingMultiple)
+    {
+        this._selectingMultiple = selectingMultiple;
+    }
+
+    /**
+     * Return true iff selecting multiple.
+     */
+    selectingMultiple()
+    {
+        return this._selectingMultiple;
+    }
+
+    /**
+     * Attempts to create a connection.
+     */
+    createConnection(outputPortItem, inputPortItem)
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputportid: inputPortItem.getModelID(), 
+                                                                                   outputportid: outputPortItem.getModelID()});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - MouseEvent handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event mousedown.
+     */
+    _handleEventMouseDown(mouseEvent)
+    {
+        var item = mouseEvent.target;
+        if (!this._selectingMultiple)
+        {
+            if (!this.isSelected(item))
+            {
+                this.clearSelected();
+                this.selectItem(item);
+            } 
+        }
+        else
+        {
+            if (!this.isSelected(item))
+            {
+                this.selectItem(item);
+            }
+            else
+            {
+                this.unselectItem(item);
+            }
+        }
+
+        // Check if we can start making a connection.
+        if (this.getSelectedCount() === 1 && item instanceof OutputPortItem)
+        {
+            this._outputPortItem = item;
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -352,6 +471,29 @@ class ItemController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Take the appropriate action depending on what has been selected.
+     */
+    _processSelection()
+    {
+        var keys = this.getSelectedItemKeys();
+        if (keys.length === 1)
+        {
+            var item = this.getSelectedItem(keys[0]);
+            if (item instanceof WorkflowJobItem)
+            {
+                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {id: item.getModelID()});
+                return;
+            }
+            else if (item instanceof WorkflowJobGroupItem)
+            {
+                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, {id: item.getModelID()});
+                return;
+            }
+        }
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+    }
+
     /**
      * Creates a workflow job item.
      */

@@ -26,6 +26,14 @@ class InputPortItem extends BaseItem
     }
 
     /**
+     * Return true iff this item can be moved by itself.
+     */
+    isMoveable()
+    {
+        return false;
+    }
+
+    /**
      * Sets associated connection item.
      */
     setConnectionItem(aItem)

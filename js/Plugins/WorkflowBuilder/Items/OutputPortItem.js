@@ -24,6 +24,14 @@ class OutputPortItem extends BaseItem
     }
 
     /**
+     * Return true iff this item can be moved by itself.
+     */
+    isMoveable()
+    {
+        return false;
+    }
+
+    /**
      * Adds associated connection item.
      */
     addConnectionItem(aItem)

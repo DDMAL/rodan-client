@@ -27,8 +27,6 @@ class WorkflowBuilder
     {        
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
-        this._selectingMultiple = false;
-        this._selectedOutputPortItem = null;
         
         this._zoomMin = Configuration.WORKFLOWBUILDER.ZOOM_MIM;
         this._zoomMax = Configuration.WORKFLOWBUILDER.ZOOM_MAX;
@@ -36,23 +34,23 @@ class WorkflowBuilder
 
         paper.install(window);
         paper.setup(aCanvasElementId);
-        paper.handleMouseEvent = aData => this._handleEvent(aData);
-        
-        this._itemController = new ItemController();
 
+        this._itemController = new ItemController();
+        paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
+        
         this._initializeGlobalTool();
         this._initializeRadio();
 
         // State info.
         this._STATES = {
             IDLE: 0,
-            GRABBED_WORKFLOWJOBITEMS: 1,
-            MOVING_WORKFLOWJOBITEMS: 2,
-            CREATING_CONNECTION: 3
+            MOUSE_DOWN: 1,
+            MOUSE_UP: 2,
+            DRAWING_LINE: 3
         };
         this._firstEntry = false;
         this._setState(this._STATES.IDLE);
-        paper.view.onFrame = (event) => this._handleState(event);
+        paper.view.onFrame = (event) => this._handleFrame(event);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,45 +67,6 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
-    }
-
-    /**
-     * Sets key for multiple selections.
-     */
-    _setMultipleSelectionKey()
-    {
-        switch (Configuration.OS)
-        {
-            case "Windows":
-            {
-                this._multipleSelectionKey = "control";
-                break;
-            }
-
-            case "MacOS":
-            {
-                this._multipleSelectionKey = "command";
-                break;
-            }
-
-            case "Linux":
-            {
-                this._multipleSelectionKey = "control";
-                break;
-            }
-
-            case "UNIX":
-            {
-                this._multipleSelectionKey = "control";
-                break;
-            }
-
-            default:
-            {
-                this._multipleSelectionKey = "control";
-                break;
-            }
-        }
     }
 
     /**
@@ -129,8 +88,9 @@ class WorkflowBuilder
     /**
      * Handle state. This is frame driven.
      */
-    _handleState(event)
+    _handleFrame(event)
     {
+       // this._handleState();
         paper.view.draw();
     }
 
@@ -144,246 +104,145 @@ class WorkflowBuilder
     }
 
     /**
-     * Handle mouse event.
+     * Handle ToolEvent.
      */
-    _handleEvent(event)
+    _handleEvent(toolEvent)
     {
         switch (this._state)
         {
             case this._STATES.IDLE:
             {
-                this._handleStateIdle(event);
+                this._handleStateIdle(toolEvent);
                 break;
             }
 
-            case this._STATES.GRABBED_WORKFLOWJOBITEMS:
+            case this._STATES.MOUSE_DOWN:
             {
-                this._handleStateGrabbedWorkflowJobItems(event);
+                this._handleStateMouseDown(toolEvent);
                 break;
             }
 
-            case this._STATES.MOVING_WORKFLOWJOBITEMS:
+            case this._STATES.MOUSE_UP:
             {
-                this._handleStateMovingWorkflowJobItems(event);
+                this._handleStateMouseUp(toolEvent);
                 break;
             }
 
-            case this._STATES.CREATING_CONNECTION:
+            case this._STATES.DRAWING_LINE:
             {
-                this._handleStateCreatingConnection(event);
-                break;
-            }
-
-            case this._STATES.SELECTING_MULTIPLE:
-            {
-                this._handleStateSelectingMultiple(event);
+                this._handleStateDrawingLine(toolEvent);
                 break;
             }
 
             default:
             {
-                console.log('TODO - ERROR');
+                console.log('unknown state');
                 break;
             }
         }
     }
 
     /**
-     * Handle idle state.
+     * Handle state idle.
      */
     _handleStateIdle(event)
     {
+        if (this._firstEntry)
+        {
+            this._firstEntry = false;
+        }
+
         if (event.type === 'mousedown')
         {
-            if (event.target)
+            this._setState(this._STATES.MOUSE_DOWN);
+        } 
+    }
+
+    /**
+     * Handle state mouse down.
+     */
+    _handleStateMouseDown(event)
+    {
+        if (this._firstEntry)
+        {
+            this._firstEntry = false;
+            if (!this._itemController.getMouseOverItem())
             {
-                switch (event.target.constructor.name)
-                {
-                    case 'WorkflowJobItem':
-                    {
-                        if (!this._selectingMultiple)
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.clearSelected();
-                                this._itemController.selectItem(event.target);
-                            }
-                            this._state = this._STATES.GRABBED_WORKFLOWJOBITEMS;  
-                        }
-                        else
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.selectItem(event.target);
-                            }
-                            else
-                            {
-                                this._itemController.unselectItem(event.target);
-                            }
-                        }
-                        break;
-                    }
+                this._itemController.clearSelected();
+            }
+        }
 
-                    case 'WorkflowJobGroupItem':
-                    {
-                        if (!this._itemController.selectingMultiple)
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.clearSelected();
-                                this._itemController.selectItem(event.target);
-                            }
-                            this._state = this._STATES.GRABBED_WORKFLOWJOBITEMS;  
-                        }
-                        else
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.selectItem(event.target);
-                            }
-                            else
-                            {
-                                this._itemController.unselectItem(event.target);
-                            }
-                        }
-                        break;
-                    }
-
-                    case 'InputPortItem':
-                    {
-                        if (!this._selectingMultiple)
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.clearSelected();
-                                this._itemController.selectItem(event.target);
-                            } 
-                        }
-                        else
-                        {
-                            if (!this._itemController.isSelected(event.target))
-                            {
-                                this._itemController.selectItem(event.target);
-                            }
-                            else
-                            {
-                                this._itemController.unselectItem(event.target);
-                            }
-                        }
-                        break;
-                    }
-
-                    case 'OutputPortItem':
-                    {
-                        this._selectedOutputPortItem = event.target;
-                        this._state = this._STATES.CREATING_CONNECTION; 
-                    }
-
-                    default:
-                    {
-                        if (!this._selectingMultiple)
-                        {
-                            this._itemController.clearSelected();
-                        }
-                        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-                        break;
-                    }
-                }
+        if (event.type === 'mousemove')
+        {
+            if (this._itemController.getOutputPortItemForConnection() !== null)
+            {
+                this._setState(this._STATES.DRAWING_LINE);
             }
             else
             {
-                if (!this._selectingMultiple)
-                {
-                    this._itemController.clearSelected();
-                }
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-            }
-        }
-    }
-
-    /**
-     * Handle grabbed workflowjobitem state.
-     */
-    _handleStateGrabbedWorkflowJobItems(event)
-    {
-        if (event.type === 'mousemove')
-        {
-            this._state = this._STATES.MOVING_WORKFLOWJOBITEMS;
-        }
-        else if (event.type === 'mouseup')
-        {
-            this._itemController.clearSelected();
-            this._itemController.selectItem(event.target);
-            this._state = this._STATES.IDLE;
-        }
-    }
-
-    /**
-     * Handle moving workflowjobitem state.
-     */
-    _handleStateMovingWorkflowJobItems(event)
-    {
-        var keys = this._itemController.getSelectedItemKeys();
-        if (event.type === 'mousemove')
-        {
-            for (var i = 0; i < keys.length; i++)
-            {
-                var key = keys[i];
-                var item = this._itemController.getSelectedItem(key);
-                item.move(event.delta);
+                this._itemController.moveSelectedItems(event.delta);
             }
         }
         else if (event.type === 'mouseup')
         {
-            // We've let go, so go idle and save the positions.
-            this._state = this._STATES.IDLE;
-            for (var i = 0; i < keys.length; i++)
-            {
-                var key = keys[i];
-                var item = this._itemController.getSelectedItem(key);
-                if (item instanceof WorkflowJobItem || item instanceof WorkflowJobGroupItem)
-                {
-                    item.updatePositionToServer();
-                }
-            }
+            this._setState(this._STATES.MOUSE_UP);
+            this._itemController.saveSelectedItemPositions();
         }
     }
 
     /**
-     * Handle creating connection state.
+     * Handle state mouse up.
      */
-    _handleStateCreatingConnection(event)
+    _handleStateMouseUp(event)
     {
-        if (event.type === 'mouseup')
+        if (this._firstEntry)
         {
-            if (event.target instanceof InputPortItem && !event.target.hasConnectionItem())
-            {
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputportid: event.target.getModelID(), 
-                                                                                           outputportid: this._selectedOutputPortItem.getModelID()});
-            }
-            this._selectedOutputPortItem = null;
-            this._state = this._STATES.IDLE;
+            this._firstEntry = false;
+            this._itemController.saveSelectedItemPositions();
+        }
+        this._setState(this._STATES.IDLE);
+    }
 
-            // Destroy our temp line.
+    /**
+     * Handle state drawing line.
+     */
+    _handleStateDrawingLine(event)
+    {
+        if (this._firstEntry)
+        {
+            this._firstEntry = false;
+            if (this._line === null)
+            {
+                var item = this._itemController.getOutputPortItemForConnection();
+                var startPoint = new Point(item.position.x, item.bounds.bottom);
+                this._line = this._itemController.createLineItem(startPoint);
+            }
+        }
+
+        if (event.type === 'mousemove')
+        {
+            // Update end point to one pixel ABOVE the mouse pointer. This ensures that the next click event does NOT register
+            // the line as the target.
+            var adjustedPoint = new Point(event.point.x, event.point.y - 1);
+            this._line.setEndPoint(adjustedPoint);
+        }
+        else if (event.type === 'mouseup')
+        {
+            var overItem = this._itemController.getMouseOverItem();
+            if (overItem instanceof InputPortItem && !overItem.hasConnectionItem())
+            {
+                var outputPortItem = this._itemController.getOutputPortItemForConnection();
+                this._itemController.createConnection(outputPortItem, overItem);
+            }
+
+            // Reset.
+            this._state = this._STATES.IDLE;
             if (this._line)
             {
                 this._line.remove();
                 this._line = null;
             }
-        }
-        else if (event.type === 'mousemove')
-        {
-            // If line hasn't been created, create it.
-            if (this._line === null)
-            {
-                var startPoint = new Point(this._selectedOutputPortItem.position.x, this._selectedOutputPortItem.bounds.bottom);
-                this._line = this._itemController.createLineItem(startPoint);
-            }
-
-            // Update end point to one pixel ABOVE the mouse pointer. This ensures that the next click event does NOT register
-            // the line as the target.
-            var adjustedPoint = new Point(event.point.x, event.point.y - 1);
-            this._line.setEndPoint(adjustedPoint);
+            this._itemController.clearSelected();
         }
     }
 
@@ -397,7 +256,7 @@ class WorkflowBuilder
     {
         if (event.key === this._multipleSelectionKey)
         {
-            this._selectingMultiple = true;
+            this._itemController.setSelectingMultiple(true);
         }
     }
 
@@ -408,7 +267,7 @@ class WorkflowBuilder
     {
         if (event.key === this._multipleSelectionKey)
         {
-            this._selectingMultiple = false;
+            this._itemController.setSelectingMultiple(false);
         }
     }
 

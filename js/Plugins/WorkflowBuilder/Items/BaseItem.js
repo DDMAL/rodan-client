@@ -71,6 +71,14 @@ class BaseItem extends paper.Path
     }
 
     /**
+     * Return true iff this item can be moved by itself.
+     */
+    isMoveable()
+    {
+        return true;
+    }
+
+    /**
      * Moves the item.
      */
     move(delta)
@@ -193,7 +201,6 @@ class BaseItem extends paper.Path
      */
     _initializeHover(options)
     {
-        this._HOVERTIME = Configuration.WORKFLOWBUILDER.HOVER_TIME;
         this._timerEvent = null;
         this._popup = new paper.PointText(new paper.Point(0, 0));
     }
@@ -358,7 +365,8 @@ class BaseItem extends paper.Path
         {
             case 'mouseenter':
             {
-                this._timerEvent = setTimeout(() => this._showPopup(event), this._HOVERTIME);
+                this._timerEvent = setTimeout(() => this._showPopup(event), Configuration.WORKFLOWBUILDER.HOVER_TIME);
+                paper.handleMouseEvent(event);
                 break;
             }
 
@@ -366,11 +374,6 @@ class BaseItem extends paper.Path
             {
                 this._hidePopup();
                 clearTimeout(this._timerEvent);
-                break;
-            }
-
-            case 'click':
-            {
                 paper.handleMouseEvent(event);
                 break;
             }
