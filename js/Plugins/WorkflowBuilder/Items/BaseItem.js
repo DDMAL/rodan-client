@@ -63,54 +63,11 @@ class BaseItem extends paper.Path
     constructor(options)
     {
         super(options.segments);
-
-        this._initializeRadio();
-        this._modelId = options.model ? options.model.id : null;
-        BaseItem.associateItemWithID(this, this._modelId);
-
-        // Getter event for the model. Need to set this.
-        this.getModelEvent = null;
-
-        // This is the coordinate set model settings. Should be overridden if want to save.
-        this.coordinateSetInfo = null;
-        this._coordinateSetModel = null;
-        
-        // Set appearance parameters.
-        this.strokeColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
-        this.strokeJoin = 'round';
-        this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
-        this.fillColor = Configuration.WORKFLOWBUILDER.FILL_COLOR;
-
-        // Hover settings.
-        this._HOVERTIME = Configuration.WORKFLOWBUILDER.HOVER_TIME;
-        this._timerEvent = null;
-        this._popup = new paper.PointText(new paper.Point(0, 0));
-
-        // Mouse handlers.
-        this.onMouseDown = event => this._handleMouseEvent(event);
-        this.onMouseUp = event => this._handleMouseEvent(event);
-        this.onClick = event => this._handleMouseEvent(event);
-        this.onMouseEnter = event => this._handleMouseEvent(event);
-        this.onMouseLeave = event => this._handleMouseEvent(event);
-
-        // Text settings.
-        this._useText = (options.hasOwnProperty('text') && options.text === true);
-        this._text = new paper.PointText(new paper.Point(0, 0));
-        this._text.justification = 'center';
-        this._text.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
-        this._text.fontSize = Configuration.WORKFLOWBUILDER.FONT_SIZE;
-        this._text.content = '';
-        this._text.position = this.bounds.center;
-        this.addChild(this._text);
-        this._text.onMouseDown = event => this._handleMouseEvent(event);
-        this._text.onMouseUp = event => this._handleMouseEvent(event);
-        this._text.onClick = event => this._handleMouseEvent(event);
-        this._text.onMouseEnter = event => this._handleMouseEvent(event);
-        this._text.onMouseLeave = event => this._handleMouseEvent(event);
-        if (options.model)
-        {
-            this._text.content = options.model.get('name');
-        }
+        this._initializeRadio(options);
+        this._initializeAppearance(options);
+        this._initializeModelBinding(options);
+        this._initializeText(options);
+        this._initializeInputEventHandlers(options);
     }
 
     /**
@@ -231,6 +188,79 @@ class BaseItem extends paper.Path
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize hover.
+     */
+    _initializeHover(options)
+    {
+        this._HOVERTIME = Configuration.WORKFLOWBUILDER.HOVER_TIME;
+        this._timerEvent = null;
+        this._popup = new paper.PointText(new paper.Point(0, 0));
+    }
+
+    /**
+     * Initialize appearance.
+     */
+    _initializeAppearance(options)
+    {
+        this.strokeColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this.strokeJoin = 'round';
+        this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+        this.fillColor = Configuration.WORKFLOWBUILDER.FILL_COLOR;
+    }
+
+    /**
+     * Initialize model binding.
+     */
+    _initializeModelBinding(options)
+    {
+        this._modelId = options.model ? options.model.id : null;
+        BaseItem.associateItemWithID(this, this._modelId);
+
+        // Getter event for the model. Need to set this.
+        this.getModelEvent = null;
+
+        // This is the coordinate set model settings. Should be overridden if want to save.
+        this.coordinateSetInfo = null;
+        this._coordinateSetModel = null;
+    }
+
+    /**
+     * Initialize event handlers.
+     */
+    _initializeInputEventHandlers(options)
+    {
+        this.onMouseDown = event => this._handleMouseEvent(event);
+        this.onMouseUp = event => this._handleMouseEvent(event);
+        this.onClick = event => this._handleMouseEvent(event);
+        this.onMouseEnter = event => this._handleMouseEvent(event);
+        this.onMouseLeave = event => this._handleMouseEvent(event);
+        this._text.onMouseDown = event => this._handleMouseEvent(event);
+        this._text.onMouseUp = event => this._handleMouseEvent(event);
+        this._text.onClick = event => this._handleMouseEvent(event);
+        this._text.onMouseEnter = event => this._handleMouseEvent(event);
+        this._text.onMouseLeave = event => this._handleMouseEvent(event);
+    }
+
+    /**
+     * Initialize text.
+     */
+    _initializeText(options)
+    {
+        this._useText = (options.hasOwnProperty('text') && options.text === true);
+        this._text = new paper.PointText(new paper.Point(0, 0));
+        this._text.justification = 'center';
+        this._text.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this._text.fontSize = Configuration.WORKFLOWBUILDER.FONT_SIZE;
+        this._text.content = '';
+        this._text.position = this.bounds.center;
+        this.addChild(this._text);
+        if (options.model)
+        {
+            this._text.content = options.model.get('name');
+        }
+    }
+
     /**
      * Initialize radio.
      */

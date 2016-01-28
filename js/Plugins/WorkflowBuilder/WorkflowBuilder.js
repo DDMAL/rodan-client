@@ -3,6 +3,7 @@ import paper from 'paper';
 
 import Configuration from '../../Configuration';
 import ConnectionItem from './Items/ConnectionItem';
+import Environment from '../../Shared/Environment';
 import Events from '../../Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './ItemController';
@@ -24,7 +25,7 @@ class WorkflowBuilder
      */
     initialize(aCanvasElementId)
     {        
-        this._multipleSelectionKey = null;
+        this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
         this._selectingMultiple = false;
         this._selectedOutputPortItem = null;
@@ -41,7 +42,6 @@ class WorkflowBuilder
 
         this._initializeGlobalTool();
         this._initializeRadio();
-        this._setMultipleSelectionKey();
 
         // State info.
         this._STATES = {
@@ -115,14 +115,12 @@ class WorkflowBuilder
      */
     _initializeGlobalTool()
     {
-        this._globalTool = new Tool();
-        this._mouseDelta = new paper.Point(0, 0);
-        this._grabbedItem = null;
-        this._globalTool.onMouseMove = event => this._handleEvent(event);
-        this._globalTool.onMouseUp = event => this._handleEvent(event);
-        this._globalTool.onMouseDown = event => this._handleEvent(event);
-        this._globalTool.onKeyDown = event => this._handleEvent(event);
-        this._globalTool.onKeyUp = event => this._handleEvent(event);
+        paper.tool = new Tool();
+        paper.tool.onMouseMove = event => this._handleEvent(event);
+        paper.tool.onMouseUp = event => this._handleEvent(event);
+        paper.tool.onMouseDown = event => this._handleEvent(event);
+        paper.tool.onKeyDown = event => this._handleEventKeyDown(event);
+        paper.tool.onKeyUp = event => this._handleEventKeyUp(event);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -150,11 +148,6 @@ class WorkflowBuilder
      */
     _handleEvent(event)
     {
-        if ((event.type === 'keydown' || event.type === 'keyup') && event.key === this._multipleSelectionKey)
-        {
-            this._selectingMultiple = event.type === 'keydown';
-        }
-
         switch (this._state)
         {
             case this._STATES.IDLE:
@@ -391,6 +384,31 @@ class WorkflowBuilder
             // the line as the target.
             var adjustedPoint = new Point(event.point.x, event.point.y - 1);
             this._line.setEndPoint(adjustedPoint);
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Input event handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event key down.
+     */
+    _handleEventKeyDown(event)
+    {
+        if (event.key === this._multipleSelectionKey)
+        {
+            this._selectingMultiple = true;
+        }
+    }
+
+    /**
+     * Handle event key up.
+     */
+    _handleEventKeyUp(event)
+    {
+        if (event.key === this._multipleSelectionKey)
+        {
+            this._selectingMultiple = false;
         }
     }
 
