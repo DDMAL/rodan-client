@@ -45,7 +45,7 @@ class WorkflowController extends BaseController
     {
         this._layoutView = new LayoutViewWorkflow();
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
-        this._viewList = new ViewWorkflowList({project: options.project});
+        this._viewList = new ViewWorkflowList({query: {project: options.project.id}});
         this._layoutView.showList(this._viewList);
     }
 

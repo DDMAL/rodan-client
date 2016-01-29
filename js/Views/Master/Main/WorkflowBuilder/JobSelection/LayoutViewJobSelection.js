@@ -54,7 +54,7 @@ class LayoutViewJobSelection extends Marionette.LayoutView
     {
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._viewJobList = new ViewJobList();
-        this._viewWorkflowList = new ViewWorkflowList({project: project,
+        this._viewWorkflowList = new ViewWorkflowList({query: {project: project.id, valid: 'True'},
                                                        childView: ViewWorkflowListImportItem,
                                                        template: '#template-main_workflow_list_import'});
     }
