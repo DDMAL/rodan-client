@@ -26,9 +26,9 @@ class LayoutViewProject extends Marionette.LayoutView
     /**
      * Show view in region
      */
-    showView(aView)
+    showView(view)
     {
-        this.regionProject.show(aView);
+        this.regionProject.show(view);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

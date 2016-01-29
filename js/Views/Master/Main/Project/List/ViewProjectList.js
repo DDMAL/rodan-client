@@ -15,15 +15,9 @@ class ViewProjectList extends Marionette.CompositeView
     /**
      * Initialize
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
-        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.collection = this.rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
-        this.rodanChannel.request(Events.REQUEST__PROJECTS_LOAD, {query: {user: user.get('uuid')}});
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
-                                                                      options: {}, 
-                                                                      callback: null});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

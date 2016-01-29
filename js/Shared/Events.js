@@ -81,10 +81,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__PROJECT_ADD: 'REQUEST__PROJECT_ADD',               // Called when Project needs to be added. Takes {creator: User}.
     REQUEST__PROJECT_DELETE: 'REQUEST__PROJECT_DELETE',         // Called when Project needs to be deleted. Passes {project: Project}.
-    REQUEST__PROJECTS_LOAD: 'REQUEST__PROJECTS_LOAD',           // Instructs loading of Projects. Takes object containing various query IDs.
     REQUEST__PROJECT_SAVE: 'REQUEST__PROJECT_SAVE',             // Called when Project needs to be saved. Takes {project: Project, fields: {object with attributes to change}}.
     REQUEST__PROJECT_SET_ACTIVE: 'REQUEST__PROJECT_SET_ACTIVE', // Sets the active Project. Takes {project: Project}.
-    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns global Project collection.
+    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns current ProjectCollection from ProjectController. May be null;
     REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
     REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the Projects collection without resetting.
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on project selection.

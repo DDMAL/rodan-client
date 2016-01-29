@@ -15,7 +15,6 @@ import InputPortTypeCollection from './Collections/InputPortTypeCollection';
 import JobCollection from './Collections/JobCollection';
 import OutputPortTypeCollection from './Collections/OutputPortTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
-import ProjectCollection from './Collections/ProjectCollection';
 import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
 import ResourceTypeCollection from './Collections/ResourceTypeCollection';
@@ -138,7 +137,6 @@ class Application extends Marionette.Application
         this.inputPortTypeCollection = new InputPortTypeCollection();
         this.jobCollection = new JobCollection();
         this.outputPortTypeCollection = new OutputPortTypeCollection();
-        this.projectCollection = new ProjectCollection();
         this.resourceCollection = new ResourceCollection();
         this.resourceTypeCollection = new ResourceTypeCollection();
         this.runJobCollection = new RunJobCollection();
