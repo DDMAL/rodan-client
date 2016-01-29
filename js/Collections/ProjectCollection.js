@@ -19,7 +19,7 @@ class ProjectCollection extends BaseCollection
     {
         if (_hasBeenInstantiated)
         {
-            console.error('TODO - the ProjectCollection should be migrated to a singleton; this should only be instantiated once!!!!!!!');
+            throw new Error('only one instance of this class may exist');
         }
         _hasBeenInstantiated = true;
         this.model = Project;

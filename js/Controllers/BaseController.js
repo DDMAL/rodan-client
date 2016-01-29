@@ -28,7 +28,7 @@ class BaseController extends Marionette.Object
      */
     _initializeRadio()
     {
-        console.log('TODO - this must be implemented in the inheriting class');
+        throw new Error('this method must be defined by the inheriting class');
     }
 
     /**
