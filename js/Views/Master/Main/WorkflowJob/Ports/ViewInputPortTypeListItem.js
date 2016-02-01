@@ -12,11 +12,12 @@ class ViewInputPortTypeListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
+        this._workflowJob = options.workflowjob;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ class ViewInputPortTypeListItem extends Marionette.ItemView
      */
     _handleButtonNewInputPort()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model, workflowjob: null});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model, workflowjob: this._workflowJob});
     }
 }
 

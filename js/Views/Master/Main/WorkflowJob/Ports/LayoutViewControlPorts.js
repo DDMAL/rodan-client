@@ -50,13 +50,13 @@ class LayoutViewControlPorts extends Marionette.LayoutView
      * Handle workflowjob selection.
      */
     _initializeViews(options)
-    {
-        var inputPortsCollection = this.rodanChannel.request(Events.REQUEST__INPUTPORTS_LOAD, {data: {workflow_job: options.workflowjob.id}});
-        this._inputPortListView = new ViewInputPortList({collection: inputPortsCollection,
+    {                                             
+        this._inputPortListView = new ViewInputPortList({collection: options.workflowjob.get('input_ports'),
                                                          template: '#template-main_inputport_list',
                                                          childView: ViewInputPortListItem});
         this._outputPortListView = new ViewOutputPortList(options);
-        this._inputPortTypeListView = new ViewInputPortTypeList(options);
+        this._inputPortTypeListView = new ViewInputPortTypeList({workflowjob: options.workflowjob,
+                                                                 childViewOptions: options});
         this._outputPortTypeListView = new ViewOutputPortTypeList(options);
     }
     

@@ -48,7 +48,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         // Create lists.
         var resourcesCollection = this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: this._project.id}});
         var inputPortsCollection = this.rodanChannel.request(Events.REQUEST__INPUTPORTS_LOAD, {data: {workflow: this._workflow.id, has_connections: false}});
-
+// TODO - get input_ports from the model...?
         this._viewInputPortList = new ViewInputPortList({collection: inputPortsCollection,
                                                          template: '#template-main_workflowrun_newworkflowrun_inputport_list',
                                                          childView: ViewInputPortListItem});

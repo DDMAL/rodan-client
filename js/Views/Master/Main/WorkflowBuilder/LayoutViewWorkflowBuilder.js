@@ -223,7 +223,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleCommandAddInputPort(options)
     {
         var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
-        this._createInputPort(options.inputporttype, workflowJob);
+        this._createInputPort(options.inputporttype, options.workflowjob);
     }
 
     /**
@@ -411,7 +411,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         var workflowJob = new WorkflowJob({job: job.get('url'), workflow: workflow.get('url')});
         var addPorts = this.ui.checkboxAddPorts.is(':checked');
-        workflowJob.save({}, {success: (model) => this._handleWorkflowJobCreationSuccess(model, workflow, addPorts)});
+        workflowJob.save();
     }
 
     /**
