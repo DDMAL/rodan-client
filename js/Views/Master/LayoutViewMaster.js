@@ -80,7 +80,7 @@ class LayoutViewMaster extends Marionette.LayoutView
     _hideModalWaiting()
     {
         var $modalEl = $("#modal-generic");
-        $modalEl.html(view.el);
+        $modalEl.html(this._layoutViewModalWaiting.el);
         $modalEl.modal('hide');
     }
 }

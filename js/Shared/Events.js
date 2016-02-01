@@ -84,9 +84,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__RESOURCE_ADD: 'REQUEST__RESOURCE_ADD',                         // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
     REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                   // Called when Resource needs to be deleted. Passes {resource: Resource}.
-    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Instructs loading of Resources. Takes object containing various query IDs.
     REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                       // Called when Resource needs to be saved. Takes {resource: Resource, fields: {object with attributes to change}}.
-    REQUEST__RESOURCE_COLLECTION: 'REQUEST__RESOURCE_COLLECTION',           // Returns global Resource collection.
     REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Resources (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Updates the Resources collection without resetting.
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on resource selection. Takes {resource: Resource}.

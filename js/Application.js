@@ -20,7 +20,6 @@ import GlobalProjectCollection from './Collections/Global/GlobalProjectCollectio
 
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import RunJobCollection from './Collections/RunJobCollection';
-import ResourceCollection from './Collections/ResourceCollection';
 import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
 /**
@@ -142,7 +141,6 @@ class Application extends Marionette.Application
         this.projectCollection = new GlobalProjectCollection();
 
         this.inputPortCollection = new InputPortCollection();
-        this.resourceCollection = new ResourceCollection();
         this.runJobCollection = new RunJobCollection();
         this.workflowRunCollection = new WorkflowRunCollection();
     }
