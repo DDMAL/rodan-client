@@ -155,12 +155,22 @@ class BaseItem extends paper.Path
      */
     loadCoordinates()
     {
+        // Create query.
         var query = {};
         var model = this._getModel();
         query[this.coordinateSetInfo['url']] = model.id;
         query['user_agent'] = Configuration.USER_AGENT;
+
+        // Create callback.
         var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
-        this.rodanChannel.request(this.coordinateSetInfo['collectionLoadEvent'], {query: query, success: callback, error: callback});
+
+        // Create model and fetch.
+        var name = this.coordinateSetInfo['class'];
+        var options = {};
+        options[this.coordinateSetInfo['url']] = model.get('url');
+        options['user_agent'] = Configuration.USER_AGENT;
+        this._coordinateSetModel = new name(options);
+        this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
     }
 
     /**
@@ -292,12 +302,12 @@ class BaseItem extends paper.Path
     /**
      * Handle coordinate load success.
      */
-    _handleCoordinateLoadSuccess(coordinateSets)
+    _handleCoordinateLoadSuccess(coordinateSet)
     {
         this._getModel();
-        if (coordinateSets.length > 0)
+        if (coordinateSet)
         {
-            this._coordinateSetModel = coordinateSets.at(0);
+            this._coordinateSetModel = coordinateSet;
             var coordinates = this._coordinateSetModel.get('data');
             this.position = new paper.Point(coordinates.x * paper.view.size.width, coordinates.y * paper.view.size.height);
         }

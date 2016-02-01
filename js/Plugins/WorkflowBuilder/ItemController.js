@@ -8,8 +8,6 @@ import Events from '../../Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import LineItem from './Items/LineItem';
 import OutputPortItem from './Items/OutputPortItem';
-import WorkflowJobCoordinateSetCollection from './Collections/WorkflowJobCoordinateSetCollection'
-import WorkflowJobGroupCoordinateSetCollection from './Collections/WorkflowJobGroupCoordinateSetCollection';;
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
@@ -26,9 +24,6 @@ class ItemController
      */
     constructor()
     {
-        this.workflowJobCoordinateSetCollection = new WorkflowJobCoordinateSetCollection();
-        this.workflowJobGroupCoordinateSetCollection = new WorkflowJobGroupCoordinateSetCollection();
-
         this._selectedItems = {};
         this._selectingMultiple = false;
         this._overItem = null;

@@ -2,7 +2,6 @@ import paper from 'paper';
 import BaseItem from './BaseItem';
 import Events from '../../../Shared/Events';
 import Configuration from '../../../Configuration';
-import WorkflowBuilderEvents from '../Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
 /**
@@ -27,7 +26,6 @@ class WorkflowJobItem extends BaseItem
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job';
-        this.coordinateSetInfo['collectionLoadEvent'] = WorkflowBuilderEvents.REQUEST__WORKFLOWJOBCOORDINATESETS_LOAD;
 
         this._paperGroupInputPorts = new paper.Group();
         this.addChild(this._paperGroupInputPorts);
