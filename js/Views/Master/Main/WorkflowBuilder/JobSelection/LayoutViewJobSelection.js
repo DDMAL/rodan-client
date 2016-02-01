@@ -2,6 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../../Shared/Events';
+import WorkflowCollection from '../../../../../Collections/WorkflowCollection';
 import ViewJobList from '../../Job/List/ViewJobList';
 import ViewWorkflowList from '../../Workflow/List/ViewWorkflowList';
 import ViewWorkflowListImportItem from './ViewWorkflowListImportItem';
@@ -52,9 +53,11 @@ class LayoutViewJobSelection extends Marionette.LayoutView
      */
     _initializeViews(options)
     {
+        this._collection = new WorkflowCollection();
+        this._collection.fetch({data: {/*project: project.id, */valid: 'True'}});
         var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._viewJobList = new ViewJobList();
-        this._viewWorkflowList = new ViewWorkflowList({query: {project: project.id, valid: 'True'},
+        this._viewWorkflowList = new ViewWorkflowList({collection: this._collection,
                                                        childView: ViewWorkflowListImportItem,
                                                        template: '#template-main_workflow_list_import'});
     }
