@@ -17,8 +17,6 @@ class WorkflowJobGroupCollection extends BaseCollection
     {
         this.model = WorkflowJobGroup;
         this.route = 'workflowjobgroups';
-        this.loadCommand = Events.REQUEST__LOAD_WORKFLOWJOBGROUPS;
-        this.requestCommand = Events.REQUEST__COLLECTION_WORKFLOWJOBGROUP;
     }
 }
 

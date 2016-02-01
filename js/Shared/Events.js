@@ -29,12 +29,6 @@ var Events =
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Connection
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__LOAD_CONNECTIONS: 'REQUEST__LOAD_CONNECTIONS',             // Instructs loading of connections. Takes object containing various query IDs.
-    REQUEST__COLLECTION_CONNECTION: 'REQUEST__COLLECTION_CONNECTION',
-
-///////////////////////////////////////////////////////////////////////////////////////
 // InputPort
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__COLLECTION_INPUTPORT: 'REQUEST__COLLECTION_INPUTPORT',
@@ -65,12 +59,6 @@ var Events =
     REQUEST__NAVIGATION_LAYOUTVIEW_SHOW: 'REQUEST__NAVIGATION_LAYOUTVIEW_SHOW',
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// OutputPort
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__COLLECTION_OUTPUTPORT: 'REQUEST__COLLECTION_OUTPUTPORT',
-    REQUEST__LOAD_OUTPUTPORTS: 'REQUEST__LOAD_OUTPUTPORTS',             // Instructs loading of outputporttypes. Takes object containing various query IDs.
-
-///////////////////////////////////////////////////////////////////////////////////////
 // OutputPortType
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__LOAD_OUTPUTPORTTYPES: 'REQUEST__LOAD_OUTPUTPORTTYPES',             // Instructs loading of outputporttypes. Takes object containing various query IDs.
@@ -88,6 +76,8 @@ var Events =
     REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the Projects collection without resetting.
     EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on project selection.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on project selection. Takes {project: Project}.
+    REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
+    REQUEST__LOAD_PROJECTS: 'REQUEST__LOAD_PROJECTS',           // Instructs loading of inputporttypes. Takes object containing various query IDs.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource

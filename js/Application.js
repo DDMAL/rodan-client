@@ -11,13 +11,16 @@ import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
 import InputPortCollection from './Collections/InputPortCollection';
-import InputPortTypeCollection from './Collections/InputPortTypeCollection';
-import JobCollection from './Collections/JobCollection';
-import OutputPortTypeCollection from './Collections/OutputPortTypeCollection';
+
+import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
+import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
+import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
+import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPortTypeCollection';
+import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
+
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import RunJobCollection from './Collections/RunJobCollection';
 import ResourceCollection from './Collections/ResourceCollection';
-import ResourceTypeCollection from './Collections/ResourceTypeCollection';
 import WorkflowCollection from './Collections/WorkflowCollection';
 import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
@@ -133,12 +136,14 @@ class Application extends Marionette.Application
      */
     _initializeCollections()
     {
+        this.jobCollection = new GlobalJobCollection();
+        this.resourceTypeCollection = new GlobalResourceTypeCollection();
+        this.inputPortTypeCollection = new GlobalInputPortTypeCollection();
+        this.outputPortTypeCollection = new GlobalOutputPortTypeCollection();
+        this.projectCollection = new GlobalProjectCollection();
+
         this.inputPortCollection = new InputPortCollection();
-        this.inputPortTypeCollection = new InputPortTypeCollection();
-        this.jobCollection = new JobCollection();
-        this.outputPortTypeCollection = new OutputPortTypeCollection();
         this.resourceCollection = new ResourceCollection();
-        this.resourceTypeCollection = new ResourceTypeCollection();
         this.runJobCollection = new RunJobCollection();
         this.workflowCollection = new WorkflowCollection();
         this.workflowRunCollection = new WorkflowRunCollection();
@@ -172,6 +177,10 @@ class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
+        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
+        this.rodanChannel.request(Events.REQUEST__LOAD_PROJECTS, {query: {user: user.get('uuid'), disable_pagination: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTTYPES, {query: {disable_pagination: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTTYPES, {query: {disable_pagination: 'True'}});
         this.rodanChannel.request(Events.REQUEST__RESOURCETYPES_LOAD, {query: {disable_pagination: 'True'}});
         this.rodanChannel.request(Events.REQUEST__LOAD_JOBS, {query: {enabled: 'True', disable_pagination: 'True'}});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 

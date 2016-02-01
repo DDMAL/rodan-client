@@ -1,13 +1,14 @@
-import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
-import Job from '../Models/Job';
+import BaseCollection from '../BaseCollection';
+import Events from '../../Shared/Events';
+import Job from '../../Models/Job';
 
-let _hasBeenInstantiated = false;
+let _instance = null;
 
 /**
- * Collection of Job models.
+ * Global Collection of Job models.
+ * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class JobCollection extends BaseCollection
+class GlobalJobCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -17,11 +18,11 @@ class JobCollection extends BaseCollection
      */
     initialize()
     {
-        if (_hasBeenInstantiated)
+        if (_instance)
         {
             throw new Error('only one instance of this class may exist');
         }
-        _hasBeenInstantiated = true;
+        _instance = this;
         this.model = Job;
         this.route = 'jobs';
         this.loadCommand = Events.REQUEST__LOAD_JOBS;
@@ -29,4 +30,4 @@ class JobCollection extends BaseCollection
     }
 }
 
-export default JobCollection;
+export default GlobalJobCollection;

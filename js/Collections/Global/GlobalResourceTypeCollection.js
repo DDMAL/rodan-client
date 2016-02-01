@@ -1,13 +1,14 @@
-import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
-import ResourceType from '../Models/ResourceType';
+import BaseCollection from '../BaseCollection';
+import Events from '../../Shared/Events';
+import ResourceType from '../../Models/ResourceType';
 
-let _hasBeenInstantiated = false;
+let _instance = null;
 
 /**
- * Collection of ResourceType models.
+ * Global Collection of ResourceType models.
+ * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class ResourceTypeCollection extends BaseCollection
+class GlobalResourceTypeCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -17,11 +18,11 @@ class ResourceTypeCollection extends BaseCollection
      */
     initialize()
     {
-        if (_hasBeenInstantiated)
+        if (_instance)
         {
             throw new Error('only one instance of this class may exist');
         }
-        _hasBeenInstantiated = true;
+        _instance = this;
         this.model = ResourceType;
         this.route = 'resourcetypes';
         this.loadCommand = Events.REQUEST__RESOURCETYPES_LOAD;
@@ -29,4 +30,4 @@ class ResourceTypeCollection extends BaseCollection
     }
 }
 
-export default ResourceTypeCollection;
+export default GlobalResourceTypeCollection;

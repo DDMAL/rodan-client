@@ -1,7 +1,6 @@
 import BaseController from '../../../../Controllers/BaseController';
 import Events from '../../../../Shared/Events';
 import LayoutViewProject from './LayoutViewProject';
-import ProjectCollection from '../../../../Collections/ProjectCollection';
 import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
 
@@ -18,7 +17,6 @@ class ProjectController extends BaseController
      */
     initialize()
     {
-        this._collection = null;
         this._activeProject = null;
     }
 
@@ -108,15 +106,10 @@ class ProjectController extends BaseController
      */
     _handleEventListSelected()
     {
-        var user = this._rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this._collection = new ProjectCollection();
-        this._collection.fetch({data: {user: user.get('uuid')}});
-
+        this._collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT);
         var layoutView = new LayoutViewProject();
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-
         layoutView.showView(new ViewProjectList({collection: this._collection}));
-
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
