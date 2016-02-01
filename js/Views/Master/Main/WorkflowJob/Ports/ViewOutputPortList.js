@@ -11,11 +11,10 @@ class ViewOutputPortList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
-        this.collection = aParameters.workflowjob.get('output_ports');
     }
 }
 

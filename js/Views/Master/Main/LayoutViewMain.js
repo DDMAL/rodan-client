@@ -3,7 +3,6 @@ import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
 import ViewLogin from './Login/ViewLogin';
-import InputPortController from './InputPort/InputPortController';
 import ProjectController from './Project/ProjectController';
 import ResourceController from './Resource/ResourceController';
 import RunJobController from './RunJob/RunJobController';
@@ -32,7 +31,6 @@ class LayoutViewMain extends Marionette.LayoutView
         this._initializeRadio();
 
         // Create controllers.
-        this.inputPortController = new InputPortController();
         this.projectController = new ProjectController();
         this.resourceController = new ResourceController();
         this.runJobController = new RunJobController();
