@@ -3,6 +3,7 @@ import LayoutViewIndividualWorkflowRun from './Individual/LayoutViewIndividualWo
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
 import LayoutViewNewWorkflowRun from './NewWorkflowRun/LayoutViewNewWorkflowRun';
 import BaseController from '../../../../Controllers/BaseController';
+import RunJobCollection from '../../../../Collections/RunJobCollection';
 
 /**
  * Controller for WorkflowRun views.
@@ -37,7 +38,9 @@ class WorkflowRunController extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._viewItem = new LayoutViewIndividualWorkflowRun({workflowRun: options.workflowRun});
+        var runJobs = new RunJobCollection();
+        runJobs.fetch({data: {workflow_run: options.workflowrun.id}});
+        this._viewItem = new LayoutViewIndividualWorkflowRun({collection: runJobs, model: options.workflowrun});
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewItem);
     }
 

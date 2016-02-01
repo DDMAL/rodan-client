@@ -18,11 +18,7 @@ class RunJobController extends BaseController
      */
     _initializeRadio()
     {
-        // Commands.
         this._rodanChannel.reply(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-
-        // Requests.
-        this._rodanChannel.on(Events.EVENT__RUNJOBS_SELECTED, options => this._handleEventListSelected(options));
         this._rodanChannel.on(Events.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
    }
 
@@ -35,18 +31,6 @@ class RunJobController extends BaseController
     _handleCommandShowLayoutView(options)
     {
         this._layoutView = options.layoutView;
-    }
-
-    /**
-     * Handle list selection.
-     */
-    _handleEventListSelected(options)
-    {debugger;
-        this._layoutView = new LayoutViewRunJob();
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
-        this._layoutView.showList(new ViewResourceList({query: {project: options.project.id},
-                                                        template: '#template-main_runjob_list',
-                                                        childView: ViewRunJobListItem}));
     }
 
     /**

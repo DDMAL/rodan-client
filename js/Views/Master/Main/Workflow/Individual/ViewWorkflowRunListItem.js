@@ -35,7 +35,7 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: this.model});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
 }
 

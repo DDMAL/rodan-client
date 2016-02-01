@@ -18,8 +18,6 @@ class ViewWorkflowRunData extends Marionette.ItemView
     {
         this._initializeRadio();
         this.model = options.workflowRun;
-    //    this.collection = this.rodanChannel.request(Events.REQUEST__RUNJOB_COLLECTION);
-      //  this.rodanChannel.request(Events.REQUEST__LOAD_RUNJOBS, {query: {workflow_run: this.model.id}});
     }
 
     /**

@@ -122,7 +122,7 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
      */
     _handleCreationSuccess(model)
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowRun: model});  
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: model});  
     }
 
     /**

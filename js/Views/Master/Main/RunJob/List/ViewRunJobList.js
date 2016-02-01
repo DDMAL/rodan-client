@@ -18,8 +18,6 @@ class ViewRunJobList extends Marionette.CompositeView
     initialize(options)
     {
         this._initializeRadio();
-        this.collection = this._rodanChannel.request(Events.REQUEST__RUNJOB_COLLECTION);
-        this._rodanChannel.request(Events.REQUEST__LOAD_RUNJOBS, {query: options.query});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
