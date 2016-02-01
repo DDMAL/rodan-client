@@ -13,17 +13,11 @@ class ViewWorkflowList extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize
      */
     initialize(options)
     {
         this._initializeRadio();
-        var query = options.query ? options.query : {};
-        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOW);
-        this._rodanChannel.request(Events.REQUEST__LOAD_WORKFLOWS, {query: query});
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
-                                                                       options: {query: query}, 
-                                                                       callback: null});
     }
 
 
