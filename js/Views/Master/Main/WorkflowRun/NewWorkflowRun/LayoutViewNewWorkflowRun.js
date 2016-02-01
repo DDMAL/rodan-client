@@ -45,8 +45,9 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         this.regionResourceList.empty();
 
         // Create lists.
+        var collection = this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: this._project.id}});
         this._viewInputPortList = new ViewInputPortList({workflow: this._workflow});
-        this._viewResourceList = new ViewResourceList({query: {project: this._project.id},
+        this._viewResourceList = new ViewResourceList({collection: collection,
                                                        template: '#template-main_workflowrun_newworkflowrun_resource_list',
                                                        childView: ViewResourceListItem});
         this._viewData = new ViewWorkflowRunData({workflow: this._workflow});

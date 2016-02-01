@@ -41,7 +41,7 @@ class RunJobController extends BaseController
      * Handle list selection.
      */
     _handleEventListSelected(options)
-    {
+    {debugger;
         this._layoutView = new LayoutViewRunJob();
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         this._layoutView.showList(new ViewResourceList({query: {project: options.project.id},

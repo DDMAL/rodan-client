@@ -48,7 +48,8 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this._layoutViewResources = new LayoutViewResource({project: project, template: '#template-main_workflowrun_individual_resources'});
         this._rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
-        this._viewResourceList = new ViewResourceList({query: {result_of_workflow_run: this.model.id},
+        var collection = this._rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
+        this._viewResourceList = new ViewResourceList({collection: collection,
                                                        template: '#template-main_workflowrun_individual_resources_list',
                                                        childView: ViewResourceListItem});
         this._layoutViewResources.showList(this._viewResourceList);

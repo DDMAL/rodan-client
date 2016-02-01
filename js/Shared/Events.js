@@ -89,6 +89,7 @@ var Events =
     REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Updates the Resources collection without resetting.
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on resource selection. Takes {resource: Resource}.
     EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on resources selection. Takes (project: Project}.
+    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Called when a ResourceCollection is needed. Takes {data: Object (query parameters)}. The ResourceController will manage update to the ResourceCollection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // ResourceType
