@@ -10,7 +10,6 @@ import ControllerServer from './Controllers/ControllerServer';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
-import InputPortCollection from './Collections/InputPortCollection';
 
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
@@ -140,7 +139,6 @@ class Application extends Marionette.Application
         this.outputPortTypeCollection = new GlobalOutputPortTypeCollection();
         this.projectCollection = new GlobalProjectCollection();
 
-        this.inputPortCollection = new InputPortCollection();
         this.runJobCollection = new RunJobCollection();
         this.workflowRunCollection = new WorkflowRunCollection();
     }

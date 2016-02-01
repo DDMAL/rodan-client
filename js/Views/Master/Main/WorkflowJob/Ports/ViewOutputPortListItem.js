@@ -12,7 +12,7 @@ class ViewOutputPortListItem extends Marionette.ItemView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Basic constructor. ('initialize' doesn't seem to work.)
+     * Initialize.
      */
     initialize()
     {

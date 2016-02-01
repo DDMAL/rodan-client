@@ -305,10 +305,10 @@ class BaseItem extends paper.Path
     _handleCoordinateLoadSuccess(coordinateSet)
     {
         this._getModel();
-        if (coordinateSet)
+        this._coordinateSetModel = coordinateSet;
+        var coordinates = this._coordinateSetModel.get('data');
+        if (coordinates)
         {
-            this._coordinateSetModel = coordinateSet;
-            var coordinates = this._coordinateSetModel.get('data');
             this.position = new paper.Point(coordinates.x * paper.view.size.width, coordinates.y * paper.view.size.height);
         }
         else

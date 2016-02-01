@@ -33,6 +33,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__COLLECTION_INPUTPORT: 'REQUEST__COLLECTION_INPUTPORT',
     REQUEST__LOAD_INPUTPORTS: 'REQUEST__LOAD_INPUTPORTS',           // Instructs loading of inputports. Takes object containing various query IDs.
+    REQUEST__INPUTPORTS_SYNC: 'REQUEST__INPUTPORTS_SYNC',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // InputPortType

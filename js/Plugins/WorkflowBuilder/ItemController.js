@@ -371,7 +371,7 @@ class ItemController
         var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
         var inputPortItem = BaseItem.getAssociatedItem(options.inputport.id);
         workflowJobItem.deleteInputPortItem(inputPortItem);
-        inputPortItem.paperItem.destroy();
+        inputPortItem.destroy();
     }
 
     /**

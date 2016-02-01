@@ -4,7 +4,8 @@ import _ from 'underscore';
 
 import Events from '../../../../../Shared/Events';
 import WorkflowRun from '../../../../../Models/WorkflowRun';
-import ViewInputPortList from './InputPort/ViewInputPortList';
+import ViewInputPortList from '../../InputPort/ViewInputPortList';
+import ViewInputPortListItem from './ViewInputPortListItem';
 import ViewResourceList from '../../Resource/List/ViewResourceList';
 import ViewResourceListItem from './Resource/ViewResourceListItem';
 import ViewWorkflowRunData from './ViewWorkflowRunData';
@@ -45,9 +46,14 @@ class LayoutViewNewWorkflowRun extends Marionette.LayoutView
         this.regionResourceList.empty();
 
         // Create lists.
-        var collection = this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: this._project.id}});
-        this._viewInputPortList = new ViewInputPortList({workflow: this._workflow});
-        this._viewResourceList = new ViewResourceList({collection: collection,
+        var resourcesCollection = this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: this._project.id}});
+        var inputPortsCollection = this.rodanChannel.request(Events.REQUEST__INPUTPORTS_LOAD, {data: {workflow: this._workflow.id, has_connections: false}});
+
+        this._viewInputPortList = new ViewInputPortList({collection: inputPortsCollection,
+                                                         template: '#template-main_workflowrun_newworkflowrun_inputport_list',
+                                                         childView: ViewInputPortListItem});
+
+        this._viewResourceList = new ViewResourceList({collection: resourcesCollection,
                                                        template: '#template-main_workflowrun_newworkflowrun_resource_list',
                                                        childView: ViewResourceListItem});
         this._viewData = new ViewWorkflowRunData({workflow: this._workflow});

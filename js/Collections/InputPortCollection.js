@@ -1,5 +1,4 @@
 import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
 import InputPort from '../Models/InputPort';
 
 /**
@@ -17,8 +16,6 @@ class InputPortCollection extends BaseCollection
     {
         this.model = InputPort;
         this.route = 'inputports';
-        this.loadCommand = Events.REQUEST__LOAD_INPUTPORTS;
-        this.requestCommand = Events.REQUEST__COLLECTION_INPUTPORT;
     }
 }
 
