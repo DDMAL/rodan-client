@@ -130,23 +130,17 @@ class BaseItem extends paper.Path
      */
     updatePositionToServer()
     {
-        if (this.coordinateSetInfo !== null)
+        // If an ID exists, we know it exists on the server, so we can patch it.
+        // Else if we haven't tried saving it before, do it. This should create
+        // a new model on the server.
+        if (this._coordinateSetModel.id || !this._coordinateSetSaveAttempted)
         {
+            this._coordinateSetSaveAttempted = true;
             var x = this.position.x / paper.view.zoom / paper.view.size.width;
             var y = this.position.y / paper.view.zoom / paper.view.size.height;
             var coordinates = {x: x, y: y};
-            if (this._coordinateSetModel === null)
-            {
-                var model = this._getModel();
-                var name = this.coordinateSetInfo['class'];
-                var options = {};
-                options[this.coordinateSetInfo['url']] = model.get('url');
-                options['data'] = {};
-                options['user_agent'] = Configuration.USER_AGENT;
-                this._coordinateSetModel = new name(options);
-            }
             this._coordinateSetModel.set({'data': coordinates});
-            this._coordinateSetModel.save();
+            this._coordinateSetModel.save(); 
         }
     }
 
@@ -240,6 +234,7 @@ class BaseItem extends paper.Path
         // This is the coordinate set model settings. Should be overridden if want to save.
         this.coordinateSetInfo = null;
         this._coordinateSetModel = null;
+        this._coordinateSetSaveAttempted = false;
     }
 
     /**
@@ -304,18 +299,13 @@ class BaseItem extends paper.Path
      */
     _handleCoordinateLoadSuccess(coordinateSet)
     {
-        this._getModel();
-        this._coordinateSetModel = coordinateSet;
-        var coordinates = this._coordinateSetModel.get('data');
+        var coordinates = coordinateSet.get('data');
         if (coordinates)
         {
+            this._coordinateSetModel = coordinateSet;
             this.position = new paper.Point(coordinates.x * paper.view.size.width, coordinates.y * paper.view.size.height);
+            this.update();
         }
-        else
-        {
-            this.updatePositionToServer();
-        }
-        this.update();
     }
 
     /**

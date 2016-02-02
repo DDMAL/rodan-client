@@ -14,7 +14,7 @@ class WorkflowRunCollection extends BaseCollection
      * Initialize.
      */
     initialize()
-    {
+    {//todo - get rid of me!
         this.model = WorkflowRun;
         this.route = 'workflowruns';
         this.loadCommand = Events.REQUEST__LOAD_WORKFLOWRUNS;

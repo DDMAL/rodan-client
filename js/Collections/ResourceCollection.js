@@ -1,5 +1,4 @@
 import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
 import Resource from '../Models/Resource';
 
 /**

@@ -1,5 +1,4 @@
 import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
 import OutputPortType from '../Models/OutputPortType';
 
 /**
