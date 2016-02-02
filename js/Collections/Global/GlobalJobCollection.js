@@ -1,4 +1,4 @@
-import BaseCollection from '../BaseCollection';
+import GlobalCollection from './GlobalCollection';
 import Events from '../../Shared/Events';
 import Job from '../../Models/Job';
 
@@ -8,7 +8,7 @@ let _instance = null;
  * Global Collection of Job models.
  * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalJobCollection extends BaseCollection
+class GlobalJobCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

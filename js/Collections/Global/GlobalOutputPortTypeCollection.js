@@ -1,4 +1,4 @@
-import BaseCollection from '../BaseCollection';
+import GlobalCollection from './GlobalCollection';
 import Events from '../../Shared/Events';
 import OutputPortType from '../../Models/OutputPortType';
 
@@ -8,7 +8,7 @@ let _instance = null;
  * Global Collection of OutputPortType models.
  * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalOutputPortTypeCollection extends BaseCollection
+class GlobalOutputPortTypeCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

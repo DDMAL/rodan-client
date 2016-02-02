@@ -1,4 +1,4 @@
-import BaseCollection from '../BaseCollection';
+import GlobalCollection from './GlobalCollection';
 import Events from '../../Shared/Events';
 import Project from '../../Models/Project';
 
@@ -8,7 +8,7 @@ let _instance = null;
  * Global Collection of Project models.
  * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalProjectCollection extends BaseCollection
+class GlobalProjectCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -25,6 +25,7 @@ class GlobalProjectCollection extends BaseCollection
         _instance = this;
         this.model = Project;
         this.route = 'projects';
+        this._allowPagination = true;
         this.loadCommand = Events.REQUEST__LOAD_PROJECTS;
         this.requestCommand = Events.REQUEST__COLLECTION_PROJECT;
     }

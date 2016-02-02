@@ -139,18 +139,6 @@ class BaseCollection extends Backbone.Collection
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        if (this.loadCommand)
-        {
-            this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
-        }
-        if (this.syncCommand)
-        {
-            this.rodanChannel.reply(this.syncCommand, options => this.syncList(options));
-        }
-        if (this.requestCommand)
-        {
-            this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
-        }
     }
 
     /**
@@ -171,27 +159,6 @@ class BaseCollection extends Backbone.Collection
                               'previous': options.previous !== null ? options.previous : '#',
                               'current': options.current_page,
                               'total': options.total_pages});
-    }
-
-    /**
-     * Retrieves list.
-     */
-    _retrieveList(options)
-    {
-        this.reset();
-        var data = options.hasOwnProperty('query') ? options.query : {};
-        options.data = data;
-        options = this._applyResponseHandlers(options);
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
-        this.fetch(options);
-    }
-
-    /**
-     * Returns this instance.
-     */
-    _handleRequestInstance()
-    {
-        return this;
     }
 
     /**

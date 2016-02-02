@@ -1,4 +1,4 @@
-import BaseCollection from '../BaseCollection';
+import GlobalCollection from './GlobalCollection';
 import Events from '../../Shared/Events';
 import ResourceType from '../../Models/ResourceType';
 
@@ -8,7 +8,7 @@ let _instance = null;
  * Global Collection of ResourceType models.
  * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalResourceTypeCollection extends BaseCollection
+class GlobalResourceTypeCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
