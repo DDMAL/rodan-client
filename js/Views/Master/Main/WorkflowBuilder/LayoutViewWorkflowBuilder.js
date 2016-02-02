@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -92,6 +93,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);        
     }
 
     /**
@@ -232,7 +235,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleCommandAddOutputPort(options)
     {
         var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
-        var port = this._createOutputPort(options.outputporttype, workflowJob);
+        this._createOutputPort(options.outputporttype, workflowJob, options.targetinputports);
     }
 
     /**
@@ -335,16 +338,38 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._validateWorkflow(options.workflow);
     }
 
+    /**
+     * Handle request create distributor.
+     */
+    _handleRequestCreateDistributor(options)
+    {
+        var requiredResourceTypes = this._getCompatibleResourceTypeURLs(options.urls);
+        if (requiredResourceTypes.length > 0)
+        {
+            var jobs = this._getCandidateResourceDistributorJobs(requiredResourceTypes);
+            if (jobs.length > 0)
+            {
+                // TODO - offer list
+                var targetInputPorts = [];
+                for (var i = 0; i < options.urls.length; i++)
+                {
+                    targetInputPorts.push(this._workflow.get('workflow_input_ports').findWhere(options.urls[i]));
+                }
+                this._createConnectedWorkflowJob(jobs[0], targetInputPorts);
+            }
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - response handlers
 ///////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * Handle InputPort creation success.
      */
     _handleInputPortCreationSuccess(model, workflow, workflowJob)
     {
-        workflowJob.get('input_ports').add(model);
+        workflow.get('workflow_input_ports').add(model);
+        workflowJob.get('output_ports').add(model);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
@@ -352,11 +377,18 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Handle OutputPort creation success.
      */
-    _handleOutputPortCreationSuccess(model, workflow, workflowJob)
+    _handleOutputPortCreationSuccess(model, workflow, workflowJob, targetInputPorts)
     {
+        workflow.get('workflow_output_ports').add(model);
         workflowJob.get('output_ports').add(model);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         this._validateWorkflow(workflow);
+
+        // Create Connections (if any).
+        for (var index in targetInputPorts)
+        {
+            this._createConnection(model, targetInputPorts[index]);
+        }
     }
 
     /**
@@ -376,7 +408,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleInputPortDeletionSuccess(model, workflow, workflowJob)
     {
-        workflowJob.get('output_ports').remove(model);
+        workflowJob.get('input_ports').remove(model);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
@@ -403,18 +435,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Create workflow job.
-     *
-     * If ports are to be automatically generated, we add a success function that adds them.
-     */
-    _createWorkflowJob(job, workflow)
-    {
-        var workflowJob = new WorkflowJob({job: job.get('url'), workflow: workflow.get('url')});
-        var addPorts = this.ui.checkboxAddPorts.is(':checked');
-        workflowJob.save();
-    }
-
-    /**
      * Create input port.
      */
     _createInputPort(inputPortType, workflowJob)
@@ -426,10 +446,10 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * Create input port.
      */
-    _createOutputPort(outputPortType, workflowJob)
+    _createOutputPort(outputPortType, workflowJob, targetInputPorts)
     {
         var port = new OutputPort({output_port_type: outputPortType.get('url'), workflow_job: workflowJob.get('url')});
-        port.save({}, {success: (model) => this._handleOutputPortCreationSuccess(model, this._workflow, workflowJob)});
+        port.save({}, {success: (model) => this._handleOutputPortCreationSuccess(model, this._workflow, workflowJob, targetInputPorts)});
     }
 
     /**
@@ -596,6 +616,77 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         workflow.save({valid: true}, {patch: true,
                                       error: (model) => this._handleValidationFailure(model),
                                       use_generic: false});
+    }
+
+    /**
+     * Given an array of InputPort URLs, returns an array of ResourceType URLs that
+     * would satisfy the InputPorts.
+     */
+    _getCompatibleResourceTypeURLs(urls)
+    {
+        var resourceTypes = [];
+        var inputPortTypes = this._rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORTTYPE);
+        for (var index in urls)
+        {
+            // Get the available resource types.
+            var inputPort = this._workflow.get('workflow_input_ports').findWhere(urls[index]);
+            var inputPortTypeURL = inputPort.get('input_port_type');
+            var inputPortType = inputPortTypes.findWhere({url: inputPortTypeURL});
+            var inputPortResourceTypes = inputPortType.get('resource_types');
+
+            // If this is the first iteration, set the array. Else, do an intersection.
+            if (resourceTypes.length === 0)
+            {
+                resourceTypes = inputPortResourceTypes;
+            }
+            resourceTypes = _.intersection(resourceTypes, inputPortResourceTypes);
+        }
+        return resourceTypes;
+    }
+
+    /**
+     * Given an array of ResourceType URLs, finds jobs that both give at least one and take at least
+     * one of the ResourceTypes. The returned array {job: Job, inputporttypes: URL strings, outputporttypes: URL string}.
+     * The port types are those ports of the associated Job that will satisfy the resource requirements.
+     */
+    _getCandidateResourceDistributorJobs(resourceTypes)
+    {
+        var jobs = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB).where({category: Configuration.RESOURCE_DISTRIBUTOR_CATEGORY});
+        var satisfiableJobs = [];
+        for (var i = 0; i < jobs.length; i++)
+        {
+            var job = jobs[i];
+            var inputPortType = job.get('input_port_types').at(0);
+            var outputPortType = job.get('output_port_types').at(0);
+
+            // Intersect against InputPortType ResourceTypes.
+            var intersect = _.intersection(resourceTypes, inputPortType.get('resource_types'));
+            if (intersect.length === 0)
+            {
+                continue;
+            }
+
+            intersect = _.intersection(resourceTypes, outputPortType.get('resource_types'));
+            if (intersect.length === 0)
+            {
+                continue;
+            }
+            
+            // We want to keep this job.
+            satisfiableJobs.push(job);
+        }
+        return satisfiableJobs;
+    }
+
+    /**
+     * Given a Job URL with associated port type URLs, creates a WorkflowJob.
+     */
+    _createConnectedWorkflowJob(job, targetInputPorts)
+    {
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_CREATE, {job: job, 
+                                                                        workflow: this._workflow, 
+                                                                        addports: true,
+                                                                        targetinputports: targetInputPorts});
     }
 }
 

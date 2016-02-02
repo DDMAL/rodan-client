@@ -486,7 +486,53 @@ class ItemController
                 return;
             }
         }
+        else if (keys.length > 1)
+        {
+            this._processMultipleSelections();
+            return;
+        }
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+    }
+
+    /**
+     * Process multiple selections.
+     */
+    _processMultipleSelections()
+    {
+        var keys = this.getSelectedItemKeys();
+        var itemType = null;
+        var urls = [];
+        for (var index in keys)
+        {
+            var item = this.getSelectedItem(keys[index]);
+            if (itemType === null)
+            {
+                itemType = item.constructor.name;
+            }
+            if (item.constructor.name !== itemType)
+            {
+                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+                break;
+            }
+            urls.push({'url': item.getModelURL()});
+        }
+
+        // If we got here, let's see if we can process the multiple.
+        switch (itemType)
+        {
+         /*   case 'InputPortItem':
+            {// TODO - TEST
+                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, {urls: urls});
+                this.clearSelected();
+                break;
+            }*/
+
+            default:
+            {
+                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
+                break;
+            }
+        }
     }
 
     /**

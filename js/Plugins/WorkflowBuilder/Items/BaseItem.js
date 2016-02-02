@@ -130,17 +130,20 @@ class BaseItem extends paper.Path
      */
     updatePositionToServer()
     {
-        // If an ID exists, we know it exists on the server, so we can patch it.
-        // Else if we haven't tried saving it before, do it. This should create
-        // a new model on the server.
-        if (this._coordinateSetModel.id || !this._coordinateSetSaveAttempted)
+        if (this.isMoveable())
         {
-            this._coordinateSetSaveAttempted = true;
-            var x = this.position.x / paper.view.zoom / paper.view.size.width;
-            var y = this.position.y / paper.view.zoom / paper.view.size.height;
-            var coordinates = {x: x, y: y};
-            this._coordinateSetModel.set({'data': coordinates});
-            this._coordinateSetModel.save(); 
+            // If an ID exists, we know it exists on the server, so we can patch it.
+            // Else if we haven't tried saving it before, do it. This should create
+            // a new model on the server.
+            if (this._coordinateSetModel.id || !this._coordinateSetSaveAttempted)
+            {
+                this._coordinateSetSaveAttempted = true;
+                var x = this.position.x / paper.view.zoom / paper.view.size.width;
+                var y = this.position.y / paper.view.zoom / paper.view.size.height;
+                var coordinates = {x: x, y: y};
+                this._coordinateSetModel.set({'data': coordinates});
+                this._coordinateSetModel.save(); 
+            }
         }
     }
 
@@ -173,6 +176,14 @@ class BaseItem extends paper.Path
     getModelID()
     {
         return this._modelId;
+    }
+
+    /**
+     * Returns associated model URL.
+     */
+    getModelURL()
+    {
+        return this._modelURL;
     }
 
     /**
@@ -226,6 +237,7 @@ class BaseItem extends paper.Path
     _initializeModelBinding(options)
     {
         this._modelId = options.model ? options.model.id : null;
+        this._modelURL= options.model ? options.model.get('url') : null;
         BaseItem.associateItemWithID(this, this._modelId);
 
         // Getter event for the model. Need to set this.

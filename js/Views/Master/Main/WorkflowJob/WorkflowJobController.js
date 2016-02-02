@@ -31,8 +31,12 @@ class WorkflowJobController extends BaseController
     _handleRequestCreateWorkflowJob(options)
     {
         var workflowJob = new WorkflowJob({job: options.job.get('url'), workflow: options.workflow.get('url')});
-        var addPorts = options.addports;
-        workflowJob.save({}, {success: (model) => this._handleWorkflowJobCreationSuccess(model, options.workflow, addPorts)});
+        var addPorts = options.addports ? options.addports : false;
+        var targetInputPorts = options.targetinputports ? options.targetinputports : [];
+        workflowJob.save({}, {success: (model) => this._handleWorkflowJobCreationSuccess(model, 
+                                                                                         options.workflow, 
+                                                                                         addPorts,
+                                                                                         targetInputPorts)});
     }
 
     /**
@@ -57,13 +61,13 @@ class WorkflowJobController extends BaseController
     /**
      * Handle WorkflowJob creation success.
      */
-    _handleWorkflowJobCreationSuccess(model, workflow, addPorts, validate)
+    _handleWorkflowJobCreationSuccess(model, workflow, addPorts, targetInputPorts)
     {
         workflow.get('workflow_jobs').add(model);
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: model});
         if (addPorts)
         {
-            this._addRequiredPorts(model);
+            this._addRequiredPorts(model, targetInputPorts);
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
@@ -92,15 +96,25 @@ class WorkflowJobController extends BaseController
     /**
      * Given a WorkflowJob, adds ports that must be present.
      * This method assumes that the WorkflowJob has NO ports to begin with.
+     * The InputPorts in targetInputPorts will be automatically connected to IFF the resulting
+     * WorkflowJob has one OutputPort.
      */
-    _addRequiredPorts(workflowJob)
+    _addRequiredPorts(workflowJob, targetInputPorts)
     {
         var jobCollection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
         var job = jobCollection.get(workflowJob.getJobUuid());
         var outputPortTypes = job.get('output_port_types');
         var inputPortTypes = job.get('input_port_types');
 
-        // Go through port collections.
+        this._addInputPorts(workflowJob, inputPortTypes);
+        this._addOutputPorts(workflowJob, outputPortTypes, targetInputPorts);
+    }
+
+    /**
+     * Adds InputPorts.
+     */
+    _addInputPorts(workflowJob, inputPortTypes)
+    {
         var that = this;
         inputPortTypes.forEach(function(inputPortType) 
         {
@@ -109,11 +123,21 @@ class WorkflowJobController extends BaseController
                 that._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob});
             }
         });
+    }
+
+    /**
+     * Adds OutputPorts.
+     */
+    _addOutputPorts(workflowJob, outputPortTypes, targetInputPorts)
+    {
+        var that = this;
+        var sendTargetInputPorts = outputPortTypes.length === 1 && outputPortTypes.at(0).get('minimum') === 1 ? targetInputPorts : [];
         outputPortTypes.forEach(function(outputPortType) 
         {
             for (var i = 0; i < outputPortType.get('minimum'); i++)
             {
-                that._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: outputPortType, workflowjob: workflowJob});
+                that._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
+                                           {outputporttype: outputPortType, workflowjob: workflowJob, targetinputports: targetInputPorts});
             }
         });
     }

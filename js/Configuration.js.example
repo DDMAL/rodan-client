@@ -33,6 +33,11 @@ var Configuration = {
     // Milliseconds to wait before the client goes into a 'wait' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
     SERVER_WAIT_TIMER: 500,
 
+    // If you have a Job package meant solely for distributing Resources (i.e. takes in a single Resource and outputs that Resource) you have the option to use a 
+    // feature that will automatically create a WorkflowJob of the correct Job that satisfies selected InputPorts. If this is the case, those Jobs must have
+    // their category set to the value of RESOURCE_DISTRIBUTOR_CATEGORY.
+    RESOURCE_DISTRIBUTOR_CATEGORY: 'Resource Distributor',
+
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {
 

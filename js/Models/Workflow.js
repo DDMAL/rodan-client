@@ -60,12 +60,14 @@ class Workflow extends BaseModel
         }
         resp.workflow_jobs = this.get('workflow_jobs');
 
-        for (var i in resp.workflow_input_ports)
+     /*   for (var i in resp.workflow_input_ports)
         {
             var modelClass = this.get('workflow_input_ports').model;
             var model = new modelClass(resp.workflow_input_ports[i]);
             this.get('workflow_input_ports').add(model, {merge: true});
-        }
+        }*/
+     //   debugger;
+        this.get('workflow_input_ports').set(resp.workflow_input_ports, {merge: true, remove: true});
         resp.workflow_input_ports = this.get('workflow_input_ports');
 
         for (var i in resp.workflow_output_ports)
