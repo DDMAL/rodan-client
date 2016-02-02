@@ -3,6 +3,7 @@ import Events from '../../../../Shared/Events';
 import LayoutViewProject from './LayoutViewProject';
 import ViewProjectList from './List/ViewProjectList';
 import ViewProject from './Individual/ViewProject';
+import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
 
 /**
  * Controller for Project views.
@@ -94,10 +95,22 @@ class ProjectController extends BaseController
      */
     _handleEventItemSelected(options)
     {
+        // Get appropriate collection. In this case, a single project is being shown.
+        // So, we want to pass all the WorkflowRuns associated with it.
+        // Make sure we update it.
         this._activeProject = options.project;
+        var workflowRunCollection = new WorkflowRunCollection();
+        workflowRunCollection.fetch({data: {project: this._activeProject.id}});
+        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
+                                                                       options: {}, 
+                                                                       callback: null});
+
+        // Show layout view.
         var layoutView = new LayoutViewProject();
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-        var view = new ViewProject({project: this._activeProject});
+
+        // Show the list view with the collection.
+        var view = new ViewProject({model: this._activeProject, collection: workflowRunCollection});
         layoutView.showView(view);
     }
 
@@ -106,13 +119,19 @@ class ProjectController extends BaseController
      */
     _handleEventListSelected()
     {
+        // Get appropriate collection. In this case, a list of Projects.
+        // Make sure we update it.
         this._collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT);
-        var layoutView = new LayoutViewProject();
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-        layoutView.showView(new ViewProjectList({collection: this._collection}));
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
+
+        // Show layout view.
+        var layoutView = new LayoutViewProject();
+        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
+
+        // Show the list view with the collection.
+        layoutView.showView(new ViewProjectList({collection: this._collection}));
     }
 
     /**

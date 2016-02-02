@@ -18,8 +18,6 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
-import RunJobCollection from './Collections/RunJobCollection';
-import WorkflowRunCollection from './Collections/WorkflowRunCollection';
 
 /**
  * Main app class.
@@ -138,9 +136,6 @@ class Application extends Marionette.Application
         this.inputPortTypeCollection = new GlobalInputPortTypeCollection();
         this.outputPortTypeCollection = new GlobalOutputPortTypeCollection();
         this.projectCollection = new GlobalProjectCollection();
-
-        this.runJobCollection = new RunJobCollection();
-        this.workflowRunCollection = new WorkflowRunCollection();
     }
 
     /**

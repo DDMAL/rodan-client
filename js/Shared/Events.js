@@ -197,10 +197,8 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__LOAD_WORKFLOWRUNS: 'REQUEST__LOAD_WORKFLOWRUNS',           // Instructs loading of workflow runs. Takes object containing various query IDs.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on WorkflowRun selection. Takes {workflowrun: WorkflowRun}.
     EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
-    REQUEST__COLLECTION_WORKFLOWRUN: 'REQUEST__COLLECTION_WORKFLOWRUN', 
     REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC',           // Updates the WorkflowRuns collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////

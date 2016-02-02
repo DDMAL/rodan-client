@@ -17,13 +17,7 @@ class ViewProject extends Marionette.CompositeView
      */
     initialize(options)
     {
-        this.model = options.project;
         this._initializeRadio();
-        this.collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this._rodanChannel.request(Events.REQUEST__LOAD_WORKFLOWRUNS, {query: {project: this.model.id}});
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                      options: {query: {project: this.model.id}}, 
-                                                                      callback: null});
     }
 
     /**

@@ -18,11 +18,6 @@ class ViewWorkflowRunList extends Marionette.CompositeView
     initialize(aOptions)
     {
         this._initializeRadio();
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_WORKFLOWRUN);
-        this.rodanChannel.request(Events.REQUEST__LOAD_WORKFLOWRUNS, {query: {project: aOptions.project.id}});
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                      options: {}, 
-                                                                      callback: null});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
