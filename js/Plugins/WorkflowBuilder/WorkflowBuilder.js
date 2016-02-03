@@ -68,6 +68,8 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
     }
 
     /**
@@ -178,6 +180,7 @@ class WorkflowBuilder
             this._firstEntry = false;
             if (!this._itemController.getMouseOverItem())
             {
+                this._handleRequestHideContextMenu();
                 this._itemController.clearSelected();
             }
         }
@@ -314,6 +317,47 @@ class WorkflowBuilder
     _handleRequestClear()
     {
         paper.project.clear();
+    }
+    /**
+     * Hides the context menu.
+     */
+    _handleRequestHideContextMenu()
+    {
+        $("#menu-context").hide();
+    }
+
+    /**
+     * Handle show context menu.
+     */
+    _handleRequestShowContextMenu(options)
+    {
+        $('#menu-context').empty();
+        for (var index in options.items)
+        {
+            var listItemData = options.items[index];
+            var callOptions = listItemData.options ? listItemData.options : {};
+            var functionCall = () => {this._handleContextMenuItemCallback(listItemData.radiorequest, callOptions);};
+            var anchor = $('<a>' + listItemData.label + '</a>');
+            anchor.click(functionCall);
+            var listItem = $('<li></li>');
+            anchor.appendTo(listItem);
+            listItem.appendTo('#menu-context');
+        }
+        $('#menu-context').css('top', options.mouseevent.event.y);
+        $('#menu-context').css('left', options.mouseevent.event.x);
+        $('#menu-context').show();
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Callbacks
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handles callback from menu item.
+     */
+    _handleContextMenuItemCallback(radioEvent, options)
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU);
+        this.rodanChannel.request(radioEvent, options);
     }
 }
 

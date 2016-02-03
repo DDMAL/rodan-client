@@ -8,6 +8,27 @@ import Events from '../../../Shared/Events';
 class InputPortItem extends BaseItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC STATIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns context menu data for multiple items of this class.
+     * Takes in URLs of multiple selections.
+     *
+     * The menu data is simply an array of objects. Objects should be:
+     *
+     * {
+     *      label: [string] // The text that should appear
+     *      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
+     *      options: Object holding any options for Event
+     * }
+     */
+    static getContextMenuDataMultiple()
+    {
+        return [{label: 'Create Resource Distributor', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR},
+                {label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**

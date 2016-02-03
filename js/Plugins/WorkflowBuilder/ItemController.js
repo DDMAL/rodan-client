@@ -220,6 +220,7 @@ class ItemController
      */
     _handleEventMouseDown(mouseEvent)
     {
+        // Handle selection first.
         var item = mouseEvent.target;
         if (!this._selectingMultiple)
         {
@@ -241,10 +242,55 @@ class ItemController
             }
         }
 
+        // Next, what kind of button was it.
+        switch (mouseEvent.event.button)
+        {
+            case 0:
+            {
+                this._handleEventMouseDownMain(mouseEvent);
+                break;
+            }
+
+            default:
+            {
+                this._handleEventMouseDownSecondary(mouseEvent);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Handle main button mousedown.
+     */
+    _handleEventMouseDownMain(mouseEvent)
+    {
         // Check if we can start making a connection.
+        var item = mouseEvent.target;
         if (this.getSelectedCount() === 1 && item instanceof OutputPortItem)
         {
             this._outputPortItem = item;
+        } 
+    }
+
+    /**
+     * Handle secondary button mousedown.
+     */
+    _handleEventMouseDownSecondary(mouseEvent)
+    {
+        var itemClass = this._getSelectionItemType();
+        var contextMenuData = [];
+        if (this.getSelectedCount() === 1)
+        {
+            contextMenuData = itemClass.getContextMenuDataSingle();
+        }
+        else
+        {
+            contextMenuData = itemClass.getContextMenuDataMultiple();
+        }
+
+        if (contextMenuData.length > 0)
+        {
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, mouseevent: mouseEvent});
         }
     }
 
@@ -270,6 +316,7 @@ class ItemController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, (options) => this._handleRequestAddWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, (options) => this._handleRequestPortsWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroupItem(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
     }
 
     /**
@@ -463,6 +510,21 @@ class ItemController
         workflowJobGroupItem.destroy();
     }
 
+    /**
+     * Handle add resource distributor for selected InputPorts.
+     */
+    _handleRequestAddResourceDistributor(options)
+    {
+        var keys = this.getSelectedItemKeys();
+        var urls = [];
+        for (var index in keys)
+        {
+            var item = this.getSelectedItem(keys[index]);
+            urls.push({'url': item.getModelURL()});
+        }
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, {urls: urls});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -486,18 +548,14 @@ class ItemController
                 return;
             }
         }
-        else if (keys.length > 1)
-        {
-            this._processMultipleSelections();
-            return;
-        }
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
     }
 
     /**
-     * Process multiple selections.
+     * Returns item type (class constructor) of multiple selection.
+     * If mixed, returns BaseItem. Returns null if none.
      */
-    _processMultipleSelections()
+    _getSelectionItemType()
     {
         var keys = this.getSelectedItemKeys();
         var itemType = null;
@@ -507,32 +565,15 @@ class ItemController
             var item = this.getSelectedItem(keys[index]);
             if (itemType === null)
             {
-                itemType = item.constructor.name;
+                itemType = item.constructor;
             }
-            if (item.constructor.name !== itemType)
+            if (item.constructor !== itemType)
             {
                 this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-                break;
-            }
-            urls.push({'url': item.getModelURL()});
-        }
-
-        // If we got here, let's see if we can process the multiple.
-        switch (itemType)
-        {
-         /*   case 'InputPortItem':
-            {// TODO - TEST
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, {urls: urls});
-                this.clearSelected();
-                break;
-            }*/
-
-            default:
-            {
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-                break;
+                return BaseItem;
             }
         }
+        return itemType;
     }
 
     /**
