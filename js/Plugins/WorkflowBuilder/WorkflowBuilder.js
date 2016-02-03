@@ -336,28 +336,23 @@ class WorkflowBuilder
         {
             var listItemData = options.items[index];
             var callOptions = listItemData.options ? listItemData.options : {};
-            var functionCall = () => {this._handleContextMenuItemCallback(listItemData.radiorequest, callOptions);};
-            var anchor = $('<a>' + listItemData.label + '</a>');
+            var label = listItemData.label;
+            var radiorequest = listItemData.radiorequest;
+
+            var functionCall = (event) => {
+                var data = $(event.currentTarget).data('radio');
+                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU);
+                this.rodanChannel.request(data.request, data.options);
+            };
+
+            var anchor = $('<a>' + label + '</a>');
+            anchor.data('radio', {request: radiorequest, options: callOptions});
             anchor.click(functionCall);
-            var listItem = $('<li></li>');
-            anchor.appendTo(listItem);
-            listItem.appendTo('#menu-context');
+            $('#menu-context').append($('<li></li>').append(anchor));
         }
         $('#menu-context').css('top', options.mouseevent.event.y);
         $('#menu-context').css('left', options.mouseevent.event.x);
         $('#menu-context').show();
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Callbacks
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handles callback from menu item.
-     */
-    _handleContextMenuItemCallback(radioEvent, options)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU);
-        this.rodanChannel.request(radioEvent, options);
     }
 }
 
