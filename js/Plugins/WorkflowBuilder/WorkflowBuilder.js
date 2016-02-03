@@ -23,7 +23,7 @@ class WorkflowBuilder
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
-    initialize(aCanvasElementId)
+    initialize(canvasElementId)
     {        
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
@@ -33,13 +33,10 @@ class WorkflowBuilder
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
         paper.install(window);
-        paper.setup(aCanvasElementId);
+        paper.setup(canvasElementId);
 
         this._itemController = new ItemController();
         paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
-        
-        this._initializeGlobalTool();
-        this._initializeRadio();
 
         // State info.
         this._STATES = {
@@ -51,6 +48,10 @@ class WorkflowBuilder
         this._firstEntry = false;
         this._setState(this._STATES.IDLE);
         paper.view.onFrame = (event) => this._handleFrame(event);
+
+        this._initializeGlobalTool();
+        this._initializeRadio();
+        this._initializeInterface();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -80,6 +81,15 @@ class WorkflowBuilder
         paper.tool.onMouseDown = event => this._handleEvent(event);
         paper.tool.onKeyDown = event => this._handleEventKeyDown(event);
         paper.tool.onKeyUp = event => this._handleEventKeyUp(event);
+    }
+
+    /**
+     * Initialize global interface for GUI.
+     */
+    _initializeInterface()
+    {
+        var canvas = paper.view.element;
+        canvas.oncontextmenu = function() {return false;};
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
