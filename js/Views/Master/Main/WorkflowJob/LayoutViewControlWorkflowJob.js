@@ -71,7 +71,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _handleButtonSave()
     {
         this.model.set({'name': this.ui.textName.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model, 'workflow': this._workflow});
     }
 
     /**
