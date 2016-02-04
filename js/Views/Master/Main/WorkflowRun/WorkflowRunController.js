@@ -68,7 +68,7 @@ class WorkflowRunController extends BaseController
     _handleCommandCreateWorkflowRun(options)
     {
         options.workflow.fetch();
-        var collection = this._rodanChannel.request(Events.REQUEST__PROJECT_COLLECTION);
+        var collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
         var project = collection.where({'url': options.workflow.get('project')})[0];
         this._layoutViewNewWorkflowRun = new LayoutViewNewWorkflowRun({workflow: options.workflow, project: project});
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutViewNewWorkflowRun);

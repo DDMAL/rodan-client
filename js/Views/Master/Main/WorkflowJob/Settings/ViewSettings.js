@@ -66,7 +66,7 @@ class ViewSettings extends Marionette.ItemView
         {
             $(element).show();
             var jobUuid = this.model.getJobUuid();
-            var collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+            var collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
             var job = collection.get(jobUuid);
             var settingsSchema = { 
                 schema: job.get('settings'),

@@ -167,11 +167,11 @@ class Application extends Marionette.Application
     _handleAuthenticationSuccess()
     {
         var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.rodanChannel.request(Events.REQUEST__LOAD_PROJECTS, {data: {user: user.get('uuid')}});
-        this.rodanChannel.request(Events.REQUEST__LOAD_INPUTPORTTYPES);
-        this.rodanChannel.request(Events.REQUEST__LOAD_OUTPUTPORTTYPES);
-        this.rodanChannel.request(Events.REQUEST__RESOURCETYPES_LOAD);
-        this.rodanChannel.request(Events.REQUEST__LOAD_JOBS, {data: {enabled: 'True'}});
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {data: {user: user.get('uuid')}});
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD);
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
         this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
     }
 }

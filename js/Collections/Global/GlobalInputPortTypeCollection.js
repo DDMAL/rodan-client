@@ -25,8 +25,8 @@ class GlobalInputPortTypeCollection extends GlobalCollection
         _instance = this;
         this.model = InputPortType;
         this.route = 'inputporttypes';
-        this.loadCommand = Events.REQUEST__LOAD_INPUTPORTTYPES;
-        this.requestCommand = Events.REQUEST__COLLECTION_INPUTPORTTYPE;
+        this.loadCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD;
+        this.requestCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION;
     }
 }
 

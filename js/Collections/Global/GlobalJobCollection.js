@@ -25,8 +25,8 @@ class GlobalJobCollection extends GlobalCollection
         _instance = this;
         this.model = Job;
         this.route = 'jobs';
-        this.loadCommand = Events.REQUEST__LOAD_JOBS;
-        this.requestCommand = Events.REQUEST__COLLECTION_JOB;
+        this.loadCommand = Events.REQUEST__GLOBAL_JOBS_LOAD;
+        this.requestCommand = Events.REQUEST__GLOBAL_JOB_COLLECTION;
     }
 }
 

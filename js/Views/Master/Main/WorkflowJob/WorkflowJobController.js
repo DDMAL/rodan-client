@@ -101,7 +101,7 @@ class WorkflowJobController extends BaseController
      */
     _addRequiredPorts(workflowJob, targetInputPorts)
     {
-        var jobCollection = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var jobCollection = this._rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(workflowJob.getJobUuid());
         var outputPortTypes = job.get('output_port_types');
         var inputPortTypes = job.get('input_port_types');

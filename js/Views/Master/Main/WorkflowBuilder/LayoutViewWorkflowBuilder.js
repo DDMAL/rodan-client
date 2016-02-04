@@ -173,7 +173,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleRequestImportWorkflow(options)
     {
-        this._rodanChannel.request(Events.REQUEST_WORKFLOW_IMPORT, {origin: options.workflow, target: this._workflow});
+        this._rodanChannel.request(Events.REQUEST__WORKFLOW_IMPORT, {origin: options.workflow, target: this._workflow});
     }
 
     /**
@@ -625,7 +625,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _getCompatibleResourceTypeURLs(urls)
     {
         var resourceTypes = [];
-        var inputPortTypes = this._rodanChannel.request(Events.REQUEST__COLLECTION_INPUTPORTTYPE);
+        var inputPortTypes = this._rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION);
         for (var index in urls)
         {
             // Get the available resource types.
@@ -651,7 +651,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _getCandidateResourceDistributorJobs(resourceTypes)
     {
-        var jobs = this._rodanChannel.request(Events.REQUEST__COLLECTION_JOB).where({category: Configuration.RESOURCE_DISTRIBUTOR_CATEGORY});
+        var jobs = this._rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION).where({category: Configuration.RESOURCE_DISTRIBUTOR_CATEGORY});
         var satisfiableJobs = [];
         for (var i = 0; i < jobs.length; i++)
         {

@@ -20,7 +20,7 @@ class ResourceController extends BaseController
     _initializeRadio()
     {
         // Commands.
-        this._rodanChannel.reply(Events.REQUEST__RESOURCE_ADD, aOptions => this._handleCommandResourceAdd(aOptions));
+        this._rodanChannel.reply(Events.REQUEST__RESOURCE_CREATE, aOptions => this._handleRequestResourceCreate(aOptions));
         this._rodanChannel.reply(Events.REQUEST__RESOURCE_DELETE, aOptions => this._handleCommandResourceDelete(aOptions));
         this._rodanChannel.reply(Events.REQUEST__RESOURCE_SAVE, aOptions => this._handleCommandResourceSave(aOptions));
         this._rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
@@ -64,7 +64,7 @@ class ResourceController extends BaseController
     /**
      * Handle command add Resource.
      */
-    _handleCommandResourceAdd(options)
+    _handleRequestResourceCreate(options)
     {
         return this._collection.create({project: options.project.get('url'), file: options.file});
     }

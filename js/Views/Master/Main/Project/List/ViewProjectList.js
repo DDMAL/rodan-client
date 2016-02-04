@@ -37,7 +37,7 @@ class ViewProjectList extends Marionette.CompositeView
     _handleButtonNewProject()
     {
         var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.rodanChannel.request(Events.REQUEST__PROJECT_ADD, {user: user});
+        this.rodanChannel.request(Events.REQUEST__PROJECT_CREATE, {user: user});
     }
 }
 

@@ -25,8 +25,8 @@ class GlobalResourceTypeCollection extends GlobalCollection
         _instance = this;
         this.model = ResourceType;
         this.route = 'resourcetypes';
-        this.loadCommand = Events.REQUEST__RESOURCETYPES_LOAD;
-        this.requestCommand = Events.REQUEST__RESOURCETYPE_COLLECTION;
+        this.loadCommand = Events.REQUEST__GLOBAL_RESOURCETYPES_LOAD;
+        this.requestCommand = Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION;
     }
 }
 

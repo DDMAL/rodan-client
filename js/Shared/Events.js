@@ -29,17 +29,25 @@ var Events =
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// InputPortType
+// Global Collections
+//
+// The 'LOAD' commands are not meant for general use. They are called on startup.
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__COLLECTION_INPUTPORTTYPE: 'REQUEST__COLLECTION_INPUTPORTTYPE',
-    REQUEST__LOAD_INPUTPORTTYPES: 'REQUEST__LOAD_INPUTPORTTYPES',           // Instructs loading of inputporttypes. Takes object containing various query IDs.
+    REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION',   // Returns InputPortTypes.
+    REQUEST__GLOBAL_INPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_INPUTPORTTYPES_LOAD',             // Load InputPortTypes from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_JOB_COLLECTION: 'REQUEST__GLOBAL_JOB_COLLECTION',                       // Returns Jobs.
+    REQUEST__GLOBAL_JOBS_LOAD: 'REQUEST__GLOBAL_JOBS_LOAD',                                 // Load Jobs from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION', // Returns OutputPortTypes.
+    REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD',           // Load OutputPortTypes from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_PROJECT_COLLECTION: 'REQUEST__GLOBAL_PROJECT_COLLECTION',               // Returns Projects.
+    REQUEST__GLOBAL_PROJECTS_LOAD: 'REQUEST__GLOBAL_PROJECTS_LOAD',                         // Load Projects from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_RESOURCETYPE_COLLECTION: 'REQUEST__GLOBAL_RESOURCETYPE_COLLECTION',     // Returns ResourceTypes.
+    REQUEST__GLOBAL_RESOURCETYPES_LOAD: 'REQUEST__GLOBAL_RESOURCETYPES_LOAD',               // Load ResourceTypes from server. Takes {data: {query parameters}}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Job
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on Job selection.
-    REQUEST__LOAD_JOBS: 'REQUEST__LOAD_JOBS',   // Instructs loading of jobs. Takes object containing various query IDs.
-    REQUEST__COLLECTION_JOB: 'REQUEST__COLLECTION_JOB',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Model
@@ -49,53 +57,38 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Navigation/UI
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__NAVIGATION_NODE_SELECTED: 'EVENT__NAVIGATION_NODE_SELECTED', // Informs of node selection. Takes {node: ViewNavigationNode}.
+    EVENT__NAVIGATION_NODE_SELECTED: 'EVENT__NAVIGATION_NODE_SELECTED',         // Informs of node selection. Takes {node: ViewNavigationNode}.
     REQUEST__NAVIGATION_LAYOUTVIEW_SHOW: 'REQUEST__NAVIGATION_LAYOUTVIEW_SHOW',
-
-///////////////////////////////////////////////////////////////////////////////////////
-// OutputPortType
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__LOAD_OUTPUTPORTTYPES: 'REQUEST__LOAD_OUTPUTPORTTYPES',             // Instructs loading of outputporttypes. Takes object containing various query IDs.
-    REQUEST__COLLECTION_OUTPUTPORTTYPE: 'REQUEST__COLLECTION_OUTPUTPORTTYPE',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Project
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__PROJECT_ADD: 'REQUEST__PROJECT_ADD',               // Called when Project needs to be added. Takes {creator: User}.
-    REQUEST__PROJECT_DELETE: 'REQUEST__PROJECT_DELETE',         // Called when Project needs to be deleted. Passes {project: Project}.
-    REQUEST__PROJECT_SAVE: 'REQUEST__PROJECT_SAVE',             // Called when Project needs to be saved. Takes {project: Project, fields: {object with attributes to change}}.
-    REQUEST__PROJECT_SET_ACTIVE: 'REQUEST__PROJECT_SET_ACTIVE', // Sets the active Project. Takes {project: Project}.
-    REQUEST__PROJECT_COLLECTION: 'REQUEST__PROJECT_COLLECTION', // Returns current ProjectCollection from ProjectController. May be null;
+    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on Project selection. Takes {project: Project}.
+    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on Project selection.
     REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
-    REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the Projects collection without resetting.
-    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on project selection.
-    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on project selection. Takes {project: Project}.
-    REQUEST__COLLECTION_PROJECT: 'REQUEST__COLLECTION_PROJECT',
-    REQUEST__LOAD_PROJECTS: 'REQUEST__LOAD_PROJECTS',           // Instructs loading of inputporttypes. Takes object containing various query IDs.
+    REQUEST__PROJECT_CREATE: 'REQUEST__PROJECT_CREATE',         // Create Project. Takes {creator: User}.
+    REQUEST__PROJECT_DELETE: 'REQUEST__PROJECT_DELETE',         // Delete Project. Takes {project: Project}.
+    REQUEST__PROJECT_SAVE: 'REQUEST__PROJECT_SAVE',             // Save Project. Takes {project: Project, fields: {object with attributes to change}}.
+    REQUEST__PROJECT_SET_ACTIVE: 'REQUEST__PROJECT_SET_ACTIVE', // Set active Project. Takes {project: Project}.
+    REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the ProjectCollection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__RESOURCE_ADD: 'REQUEST__RESOURCE_ADD',                         // Called when Resource needs to be added. Takes {project: Project, file: JavaScript File object}.
-    REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                   // Called when Resource needs to be deleted. Passes {resource: Resource}.
-    REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                       // Called when Resource needs to be saved. Takes {resource: Resource, fields: {object with attributes to change}}.
-    REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Resources (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
-    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Updates the Resources collection without resetting.
-    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on resource selection. Takes {resource: Resource}.
-    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on resources selection. Takes (project: Project}.
-    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Called when a ResourceCollection is needed. Takes {data: Object (query parameters)}. The ResourceController will manage update to the ResourceCollection.
-
-///////////////////////////////////////////////////////////////////////////////////////
-// ResourceType
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__RESOURCETYPES_LOAD: 'REQUEST__RESOURCETYPES_LOAD',             // Instructs loading of ResourceTypes. Takes object containing various query IDs.
-    REQUEST__RESOURCETYPE_COLLECTION: 'REQUEST__RESOURCETYPE_COLLECTION',   // Returns global ResourceType collection.
+    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on Resource selection. Takes {resource: Resource}.
+    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on Resources selection. Takes (project: Project}.
+    REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                   // Create Resource. Takes {project: Project, file: JavaScript File object}.
+    REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                   // Delete Resource. Takes {resource: Resource}.
+    REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                       // Save Resource. Takes {resource: Resource, fields: {object with attributes to change}}.
+    REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Load Resources from server. Takes {data: Object (query parameters)}. The ResourceController will manage/update to the ResourceCollection.
+    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Update the ResourceCollection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',                   // Called on RunJob selection. Takes {runjob: RunJob}.
-    REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing RunJobs (outside of the primary RunJobs view). This tells the RunJobController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the RunJobController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server
@@ -126,7 +119,7 @@ var Events =
     REQUEST__WORKFLOW_DELETE: 'REQUEST__WORKFLOW_DELETE',                   // Called when Workflow needs to be deleted. Takes {workflow: Workflow}.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED',                   // Called on Workflow selection. Takes {workflow: Workflow}.
     EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED',                 // Called on Workflows selection.
-    REQUEST_WORKFLOW_IMPORT: 'REQUEST_WORKFLOW_IMPORT',                     // Imports Workflow into another. Takes {target: Workflow, origin: Workflow}. 'origin' is imported into 'target'.
+    REQUEST__WORKFLOW_IMPORT: 'REQUEST__WORKFLOW_IMPORT',                     // Imports Workflow into another. Takes {target: Workflow, origin: Workflow}. 'origin' is imported into 'target'.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder

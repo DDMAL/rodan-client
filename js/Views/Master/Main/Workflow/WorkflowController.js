@@ -25,7 +25,7 @@ class WorkflowController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
-        this._rodanChannel.reply(Events.REQUEST_WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
     }
 

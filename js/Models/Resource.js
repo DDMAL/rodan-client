@@ -19,7 +19,7 @@ class Resource extends BaseModel
     initialize()
     {
         this.rodanChannel = Radio.channel('rodan'); // TODO - this is a hack; need to find better way of managing radio channels in general
-        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__RESOURCETYPE_COLLECTION);
+        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         this.routeName = 'resources';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());

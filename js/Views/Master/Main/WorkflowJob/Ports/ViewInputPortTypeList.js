@@ -18,7 +18,7 @@ class ViewInputPortTypeList extends Marionette.CompositeView
     initialize(aParameters)
     {
         this._initializeRadio();
-        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(aParameters.workflowjob.getJobUuid());
         this.collection = job.get('input_port_types');
     }

@@ -35,12 +35,11 @@ class ProjectController extends BaseController
 
         // Requests.
         this._rodanChannel.reply(Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_ADD, options => this._handleRequestAddProject(options));
+        this._rodanChannel.reply(Events.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
         this._rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
         this._rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
         this._rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
         this._rodanChannel.reply(Events.REQUEST__PROJECTS_SYNC, options => this._handleRequestProjectsSync(options));
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_COLLECTION, options => this._handleRequestProjectsCollection(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -55,9 +54,9 @@ class ProjectController extends BaseController
     }
 
     /**
-     * Handle request Project add.
+     * Handle request Project create.
      */
-    _handleRequestAddProject(options)
+    _handleRequestCreateProject(options)
     {
         this._collection.create({creator: options.user});
     }
@@ -121,7 +120,7 @@ class ProjectController extends BaseController
     {
         // Get appropriate collection. In this case, a list of Projects.
         // Make sure we update it.
-        this._collection = this._rodanChannel.request(Events.REQUEST__COLLECTION_PROJECT);
+        this._collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
@@ -151,14 +150,6 @@ class ProjectController extends BaseController
         {
             options.collection.syncList();
         }
-    }
-
-    /**
-     * Handle request project collection.
-     */
-    _handleRequestProjectsCollection(options)
-    {
-        return this._collection;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

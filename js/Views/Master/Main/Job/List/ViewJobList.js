@@ -18,7 +18,7 @@ class ViewJobList extends Marionette.CompositeView
     initialize()
     {
         this._initializeRadio();
-        this.collection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        this.collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

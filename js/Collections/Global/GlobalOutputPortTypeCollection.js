@@ -25,8 +25,8 @@ class GlobalOutputPortTypeCollection extends GlobalCollection
         _instance = this;
         this.model = OutputPortType;
         this.route = 'outputporttypes';
-        this.loadCommand = Events.REQUEST__LOAD_OUTPUTPORTTYPES;
-        this.requestCommand = Events.REQUEST__COLLECTION_OUTPUTPORTTYPE;
+        this.loadCommand = Events.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD;
+        this.requestCommand = Events.REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION;
     }
 }
 

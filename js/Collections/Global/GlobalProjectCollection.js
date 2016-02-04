@@ -26,8 +26,8 @@ class GlobalProjectCollection extends GlobalCollection
         this.model = Project;
         this.route = 'projects';
         this._allowPagination = true;
-        this.loadCommand = Events.REQUEST__LOAD_PROJECTS;
-        this.requestCommand = Events.REQUEST__COLLECTION_PROJECT;
+        this.loadCommand = Events.REQUEST__GLOBAL_PROJECTS_LOAD;
+        this.requestCommand = Events.REQUEST__GLOBAL_PROJECT_COLLECTION;
     }
 }
 

@@ -18,7 +18,7 @@ class ViewOutputPortTypeList extends Marionette.CompositeView
     initialize(options)
     {
         this._initializeRadio();
-        var jobCollection = this.rodanChannel.request(Events.REQUEST__COLLECTION_JOB);
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(options.workflowjob.getJobUuid());
         this.collection = job.get('output_port_types');
     }
