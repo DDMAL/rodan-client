@@ -281,7 +281,8 @@ class ItemController
         var contextMenuData = [];
         if (this.getSelectedCount() === 1)
         {
-            contextMenuData = itemClass.getContextMenuDataSingle();
+            var item = mouseEvent.target;
+            contextMenuData = item.getContextMenuDataSingle();
         }
         else
         {

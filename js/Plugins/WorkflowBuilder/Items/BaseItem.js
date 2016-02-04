@@ -55,15 +55,6 @@ class BaseItem extends paper.Path
     }
 
     /**
-     * Returns context menu data for single item of this class.
-     */
-    static getContextMenuDataSingle()
-    {
-        return [{label: 'Cancel',
-                 radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
-    }
-
-    /**
      * Returns context menu data for multiple items of this class.
      */
     static getContextMenuDataMultiple()
@@ -86,6 +77,15 @@ class BaseItem extends paper.Path
         this._initializeModelBinding(options);
         this._initializeText(options);
         this._initializeInputEventHandlers(options);
+    }
+
+    /**
+     * Returns context menu data for single item of this class.
+     */
+    getContextMenuDataSingle()
+    {
+        return [{label: 'Cancel',
+                 radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
     }
 
     /**
