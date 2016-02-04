@@ -81,7 +81,19 @@ class Application extends Marionette.Application
         moment.defaultFormat = Configuration.DATETIME_FORMAT;
         _.formatFromUTC = function(dateTime)
         {
-            return moment(dateTime).format();
+            // TODO - see https://github.com/DDMAL/rodan-client/issues/59
+            try
+            {
+                return moment(dateTime).format();
+            }
+            catch(error)
+            {
+                return moment.moment(dateTime).format();
+            }
+            finally
+            {
+                return dateTime;
+            }
         };
     }
 
