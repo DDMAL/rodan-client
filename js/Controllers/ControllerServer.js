@@ -24,6 +24,7 @@ class ControllerServer extends BaseController
         this.serverConfiguration = null;
         this._originalSync = Backbone.sync;
         this._responseTimeout = null;
+        this._responsePanic = null;
         this._waitingEventTriggered = false;
         Backbone.sync = (method, model, options) => this._sync(method, model, options);
     }
@@ -40,6 +41,12 @@ class ControllerServer extends BaseController
         if (this._responseTimeout === null)
         {
             this._responseTimeout = setTimeout(() => this._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
+        }
+
+        // Set a timeout for panic.
+        if (this._responsePanic === null)
+        {
+            this._responsePanic = setTimeout(() => this._sendPanicNotification(), Configuration.SERVER_PANIC_TIMER);
         }
 
         // Apply generic handler for timeout.
@@ -195,7 +202,9 @@ class ControllerServer extends BaseController
         if (document.readyState === 'complete')
         {
             clearTimeout(this._responseTimeout);
+            clearTimeout(this._responsePanic);
             this._responseTimeout = null;
+            this._responsePanic = null;
             if (this._waitingEventTriggered)
             {
                 this._sendIdleNotification();
@@ -219,6 +228,14 @@ class ControllerServer extends BaseController
     {
         this._waitingEventTriggered = false;
         this._rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
+    }
+
+    /**
+     * Sends a panic notification
+     */
+    _sendPanicNotification()
+    {
+        this._rodanChannel.trigger(Events.EVENT__SERVER_PANIC);
     }
 }
 

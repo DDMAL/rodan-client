@@ -61,6 +61,7 @@ class LayoutViewMaster extends Marionette.LayoutView
         this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._showModalWaiting());
         this._rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._hideModalWaiting());
+        this._rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleServerPanic());
     }
 
     /**
@@ -82,6 +83,14 @@ class LayoutViewMaster extends Marionette.LayoutView
         var $modalEl = $("#modal-generic");
         $modalEl.html(this._layoutViewModalWaiting.el);
         $modalEl.modal('hide');
+    }
+
+    /**
+     * Handle application panic.
+     */
+    _handleServerPanic()
+    {
+        console.log('ERROR - client panic...no server response yet!');
     }
 }
 

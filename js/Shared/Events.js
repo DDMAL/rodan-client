@@ -4,7 +4,7 @@
 var Events = 
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// Authentication
+// TIMER
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Called when an Event is to be scheduled. Takes {event: Event string, options: options for the event}.
     REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Called when a Request is to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
@@ -101,6 +101,7 @@ var Events =
     REQUEST__SERVER_GET_ROUTES: 'REQUEST__SERVER_GET_ROUTES',
     EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',             // Fired when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
     EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                   // Fired when server no longer waiting. Only happens if a EVENT__SERVER_WAITING had previously been fired.
+    EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                     // Called when the app suspects that something went wrong.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
