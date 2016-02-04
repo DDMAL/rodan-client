@@ -20,6 +20,7 @@ class ConnectionItem extends BaseItem
 
         // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION;
+        this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION;
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
         this._associatedInputPortItem = options.inputportitem;

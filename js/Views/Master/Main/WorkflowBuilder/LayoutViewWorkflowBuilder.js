@@ -94,7 +94,9 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
 
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);        
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);       
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
     }
 
     /**
@@ -162,6 +164,14 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         {
             this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.model, workflow: this._workflow});
         }
+    }
+
+    /**
+     * Handle request delete Connection.
+     */
+    _handleRequestDeleteConnection(options)
+    {
+        this._deleteConnection(options.model);
     }
 
     /**
@@ -432,6 +442,16 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     }
 
     /**
+     * Handle Connection deletion success.
+     */
+    _handleConnectionDeletionSuccess(model, workflow)
+    {
+        workflow.get('connections').remove(model);
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_CONNECTION, {connection: model});
+        this._validateWorkflow(workflow);
+    }
+
+    /**
      * Handle validation failure.
      */
     _handleValidationFailure(model)
@@ -467,6 +487,14 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         var connection = new Connection({input_port: inputPort.get('url'), output_port: outputPort.get('url')});
         connection.save({}, {success: (model) => this._handleConnectionCreationSuccess(model, this._workflow, inputPort, outputPort)});
+    }
+
+    /**
+     * Delete connection.
+     */
+    _deleteConnection(connection)
+    {
+        connection.destroy({success: (model) => this._handleConnectionDeletionSuccess(model, this._workflow)});
     }
 
     /**

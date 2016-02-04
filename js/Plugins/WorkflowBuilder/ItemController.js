@@ -318,6 +318,7 @@ class ItemController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, (options) => this._handleRequestPortsWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroupItem(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_CONNECTION, options => this._handleRequestDeleteConnectionItem(options));
     }
 
     /**
@@ -419,6 +420,7 @@ class ItemController
         var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
         var inputPortItem = BaseItem.getAssociatedItem(options.inputport.id);
         workflowJobItem.deleteInputPortItem(inputPortItem);
+        this.unselectItem(inputPortItem);
         inputPortItem.destroy();
     }
 
@@ -430,6 +432,7 @@ class ItemController
         var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
         var outputPortItem = BaseItem.getAssociatedItem(options.outputport.id);
         workflowJobItem.deleteOutputPortItem(outputPortItem);
+        this.unselectItem(outputPortItem);
         outputPortItem.destroy();
     }
 
@@ -439,7 +442,18 @@ class ItemController
     _handleRequestDeleteWorkflowJobItem(options)
     {
         var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
+        this.unselectItem(workflowJobItem);
         workflowJobItem.destroy();
+    }
+
+    /**
+     * Handle delete Connection.
+     */
+    _handleRequestDeleteConnectionItem(options)
+    {
+        var connectionItem = BaseItem.getAssociatedItem(options.connection.id);
+        this.unselectItem(connectionItem);
+        connectionItem.destroy();
     }
 
     /**
