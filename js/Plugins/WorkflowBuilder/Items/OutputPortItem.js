@@ -17,6 +17,7 @@ class OutputPortItem extends BaseItem
     {
         super(options);
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT;
+        //this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT;
         this.fillColor = Configuration.WORKFLOWBUILDER.OUTPUTPORT_COLOR;
         this._connectionItems = [];
         this._workflowJobItem = options.workflowjobitem;

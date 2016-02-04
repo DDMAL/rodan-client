@@ -78,7 +78,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, {workflowjob: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, {model: this.model});
     }
 
     /**

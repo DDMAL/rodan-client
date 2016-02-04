@@ -21,6 +21,7 @@ class WorkflowJobItem extends BaseItem
 
         // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB;
+        this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB;
 
         // Set coordinate set info.
         this.coordinateSetInfo = [];

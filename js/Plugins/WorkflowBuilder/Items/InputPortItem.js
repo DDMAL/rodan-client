@@ -37,10 +37,8 @@ class InputPortItem extends BaseItem
     constructor(options)
     {
         super(options);
-
-        // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT;
-
+      //  this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT;
         this._connectionItem = null;
         this._workflowJobItem = options.workflowjobitem;
         this.update();
