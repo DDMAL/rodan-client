@@ -74,7 +74,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, options => this._handleRequestAddWorkflowJob(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options => this._handleRequestRemoveWorkflowJob(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
         
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
@@ -153,11 +153,15 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     }
 
     /**
-     * Handle command remove WorkflowJob.
+     * Handle command delete WorkflowJob.
      */
-    _handleRequestRemoveWorkflowJob(options)
+    _handleRequestDeleteWorkflowJob(options)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.workflowjob, workflow: this._workflow});
+        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
+        if (confirmation)
+        {
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.workflowjob, workflow: this._workflow});
+        }
     }
 
     /**
@@ -192,7 +196,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     _handleEventEditWorkflowJob(options)
     {
         this._workflowJob = this._handleRequestGetWorkflowJob(options);
-        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob, 'workflow': this._workflow});
+        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob});
         this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
         this.regionControlWorkflowLowerArea.$el.hide();
     }

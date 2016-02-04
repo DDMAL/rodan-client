@@ -26,7 +26,6 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
             regionControlSettings: '#region-main_workflowbuilder_control_settings'
         });
         this.model = options.workflowjob;
-        this._workflow = options.workflow;
         this._initializeViews(options);
     }
 
@@ -71,7 +70,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     _handleButtonSave()
     {
         this.model.set({'name': this.ui.textName.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model, 'workflow': this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {workflowjob: this.model});
     }
 
     /**
@@ -79,11 +78,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
      */
     _handleButtonDelete()
     {
-        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
-        if (confirmation)
-        {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: this.model, workflow: this._workflow});
-        }
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, {workflowjob: this.model});
     }
 
     /**
