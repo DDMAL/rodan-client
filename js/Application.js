@@ -90,10 +90,6 @@ class Application extends Marionette.Application
             {
                 return moment.moment(dateTime).format();
             }
-            finally
-            {
-                return dateTime;
-            }
         };
     }
 
