@@ -565,11 +565,17 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 
         // Process connections.
         for (var connectionUrl in connections)
-        {
+        { 
             var connection = connections[connectionUrl];
             var connectionModel = new Connection({input_port: connection.inputPort.get('url'), 
-                                                  output_port: connection.outputPort.get('url')});
-            workflow.get('connections').add(connection);
+                                                  output_port: connection.outputPort.get('url'),
+                                                  url: connectionUrl});
+
+            // TODO - better way to get connections?
+            var connectionId = connectionModel.parseIdFromUrl(connectionUrl);
+            connectionModel.set({uuid: connectionId});
+            connectionModel.fetch();
+            workflow.get('connections').add(connectionModel);
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connectionModel, 
                                                                                                 inputport: connection.inputPort,
                                                                                                 outputport: connection.outputPort});
