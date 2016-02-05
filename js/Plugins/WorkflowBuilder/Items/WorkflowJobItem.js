@@ -10,18 +10,39 @@ import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 class WorkflowJobItem extends BaseItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC STATIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns context menu data for multiple items of this class.
+     * Takes in URLs of multiple selections.
+     *
+     * The menu data is simply an array of objects. Objects should be:
+     *
+     * {
+     *      label: [string] // The text that should appear
+     *      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
+     *      options: Object holding any options for Event
+     * }
+     */
+    static getContextMenuDataMultiple()
+    {
+        return [{label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP},
+                {label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Constructor.
      */
-    constructor(aParameters)
+    constructor(options)
     {
-        super(aParameters);
+        super(options);
 
         // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB;
-        this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB;
+        this.menuItems = [{label: 'Delete...', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options: {model: options.model}}];
 
         // Set coordinate set info.
         this.coordinateSetInfo = [];
@@ -118,23 +139,26 @@ class WorkflowJobItem extends BaseItem
     /**
      * Positions ports.
      */
-    _positionPortItems(aGroup, aPositionY)
+    _positionPortItems(group, positionY)
     {
-        if (aGroup.isEmpty())
+        if (group.isEmpty())
         {
             return;
         }
 
-        // Get position parameters.
-        var offsetX = aGroup.children[0].bounds.width;
-        var portsWidth = aGroup.children.length * aGroup.children[0].bounds.width;
-        var farLeft = this.position.x - (portsWidth / 2);
+        // Get port width and height.
+        var portWidth = group.children[0].bounds.width;
+        var portHeight = group.children[0].bounds.height;
+        var groupWidth = group.children.length * portWidth;
 
-        for (var i = 0; i < aGroup.children.length; i++)
+        // Get position parameters.
+        var offsetX = group.children[0].bounds.width;
+        var farLeft = this.position.x - (groupWidth / 2);
+
+        for (var i = 0; i < group.children.length; i++)
         {
-            var port = aGroup.children[i];
-            var positionX = (farLeft + (offsetX * (i + 1))) - (aGroup.children[i].bounds.width / 2);
-            var positionY = aPositionY;
+            var port = group.children[i];
+            var positionX = (farLeft + (offsetX * (i + 1))) - (group.children[i].bounds.width / 2);
             var newPosition = new paper.Point(positionX, positionY);
             port.position = newPosition;
         }

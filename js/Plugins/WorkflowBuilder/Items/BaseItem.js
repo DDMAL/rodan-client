@@ -85,10 +85,15 @@ class BaseItem extends paper.Path
     getContextMenuDataSingle()
     {
         var menuItems = [];
-        if (this.deleteModelEvent)
+        if (this.menuItems)
+        {
+            menuItems = this.menuItems;
+        }
+   //     var menuItems = [];
+     /*   if (this.deleteModelEvent)
         {
             menuItems.push({label: 'Delete', radiorequest: this.deleteModelEvent, options: {model: this._getModel()}});
-        }
+        }*/
         menuItems.push({label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU});
         return menuItems;
     }

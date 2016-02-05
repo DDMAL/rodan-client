@@ -36,14 +36,6 @@ class Workflow extends BaseModel
      */
     parse(resp)
     {
-        for (var i in resp.connections)
-        {
-            var modelClass = this.get('connections').model;
-            var model = new modelClass(resp.connections[i]);
-            this.get('connections').add(model, {merge: true});
-        }
-        resp.connections = this.get('connections');
-
         for (var i in resp.workflow_runs)
         {
             var modelClass = this.get('workflow_runs').model;
@@ -60,13 +52,6 @@ class Workflow extends BaseModel
         }
         resp.workflow_jobs = this.get('workflow_jobs');
 
-     /*   for (var i in resp.workflow_input_ports)
-        {
-            var modelClass = this.get('workflow_input_ports').model;
-            var model = new modelClass(resp.workflow_input_ports[i]);
-            this.get('workflow_input_ports').add(model, {merge: true});
-        }*/
-     //   debugger;
         this.get('workflow_input_ports').set(resp.workflow_input_ports, {merge: true, remove: true});
         resp.workflow_input_ports = this.get('workflow_input_ports');
 

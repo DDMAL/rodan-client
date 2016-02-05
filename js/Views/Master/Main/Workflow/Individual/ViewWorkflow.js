@@ -103,22 +103,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonGroup()
     {
-        var workflowJobIDs = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS);
-        if (workflowJobIDs.length < 2)
-        {
-            alert('At least two WorkflowJobs must be selected.');
-        }
-        else
-        {
-            var workflowJobs = [];
-            for (var i in workflowJobIDs)
-            {
-                var workflowJobID = workflowJobIDs[i];
-                var workflowJob = this.model.get('workflow_jobs').get(workflowJobID);
-                workflowJobs.push(workflowJob);
-            }
-            this._workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this.model});
-        }
+        this._workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP);
     }
 }
 

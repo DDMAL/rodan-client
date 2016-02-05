@@ -15,12 +15,13 @@ class WorkflowJobGroupItem extends BaseItem
     /**
      * Constructor.
      */
-    constructor(aParameters)
+    constructor(options)
     {
-        super(aParameters);
+        super(options);
 
         // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP;
+        this.menuItems = [{label: 'Ungroup', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options: {model: options.model}}];
 
         // Set coordinate set info.
         this.coordinateSetInfo = [];
@@ -104,23 +105,26 @@ class WorkflowJobGroupItem extends BaseItem
     /**
      * Positions ports.
      */
-    _positionPortItems(aGroup, aPositionY)
+    _positionPortItems(group, positionY)
     {
-        if (aGroup.isEmpty())
+        if (group.isEmpty())
         {
             return;
         }
 
-        // Get position parameters.
-        var offsetX = aGroup.children[0].bounds.width;
-        var portsWidth = aGroup.children.length * aGroup.children[0].bounds.width;
-        var farLeft = this.position.x - (portsWidth / 2);
+        // Get port width and height.
+        var portWidth = group.children[0].bounds.width;
+        var portHeight = group.children[0].bounds.height;
+        var groupWidth = group.children.length * portWidth;
 
-        for (var i = 0; i < aGroup.children.length; i++)
+        // Get position parameters.
+        var offsetX = group.children[0].bounds.width;
+        var farLeft = this.position.x - (groupWidth / 2);
+
+        for (var i = 0; i < group.children.length; i++)
         {
-            var port = aGroup.children[i];
-            var positionX = (farLeft + (offsetX * (i + 1))) - (aGroup.children[i].bounds.width / 2);
-            var positionY = aPositionY;
+            var port = group.children[i];
+            var positionX = (farLeft + (offsetX * (i + 1))) - (group.children[i].bounds.width / 2);
             var newPosition = new paper.Point(positionX, positionY);
             port.position = newPosition;
         }

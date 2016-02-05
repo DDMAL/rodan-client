@@ -151,6 +151,9 @@ var Events =
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
  
+    REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP',
+    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP',
+
     REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR: 'REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR',   // Called when a resource distributor WorkflowJob should be created. Takes {urls: [{url: string}]}.
 
 ///////////////////////////////////////////////////////////////////////////////////////

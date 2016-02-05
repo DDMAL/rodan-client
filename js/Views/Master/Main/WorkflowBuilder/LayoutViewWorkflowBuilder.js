@@ -87,6 +87,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupDelete(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
@@ -97,6 +98,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);       
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options => this._handleRequestAddWorkflowJobGroup(options), this);
     }
 
     /**
@@ -376,6 +379,30 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
                 this._createConnectedWorkflowJob(jobs[0], targetInputPorts);
             }
         }
+    }
+
+    /**
+     * Handle request WorkflowJobGroup delete.
+     */
+    _handleRequestWorkflowJobGroupDelete(options)
+    {
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: options.model, workflow: this._workflow});
+    }
+
+    /**
+     * Handle request add WorkflowJobGroup.
+     */
+    _handleRequestAddWorkflowJobGroup(options)
+    {
+        var workflowJobIDs = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS);
+        var workflowJobs = [];
+        for (var i in workflowJobIDs)
+        {
+            var workflowJobID = workflowJobIDs[i];
+            var workflowJob = this._workflow.get('workflow_jobs').get(workflowJobID);
+            workflowJobs.push(workflowJob);
+        }
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this._workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
