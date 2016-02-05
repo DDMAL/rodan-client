@@ -89,11 +89,6 @@ class BaseItem extends paper.Path
         {
             menuItems = this.menuItems;
         }
-   //     var menuItems = [];
-     /*   if (this.deleteModelEvent)
-        {
-            menuItems.push({label: 'Delete', radiorequest: this.deleteModelEvent, options: {model: this._getModel()}});
-        }*/
         menuItems.push({label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU});
         return menuItems;
     }
@@ -343,7 +338,8 @@ class BaseItem extends paper.Path
         if (coordinates)
         {
             this._coordinateSetModel = coordinateSet;
-            this.position = new paper.Point(coordinates.x * paper.view.size.width, coordinates.y * paper.view.size.height);
+            this.position = new paper.Point(coordinates.x * paper.view.size.width * paper.view.zoom, 
+                                            coordinates.y * paper.view.size.height * paper.view.zoom);
             this.update();
         }
     }

@@ -8,11 +8,26 @@ import Events from '../../Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './ItemController';
 import OutputPortItem from './Items/OutputPortItem';
+import { drawGrid} from './Utilities/PaperUtilities';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
 /**
  * Main WorkflowBuilder class.
+ *
+ * Grid code by: Nicholas Kyriakides(@nicholaswmin, nik.kyriakides@gmail.com)
+ * ---
+ * Draws a grid on the current viewport
+ * - If grid already exists, it removes and redraws it
+ *
+ * @param  {Number} cellSize - Size of each cell in pixels
+ *
+ * Author:
+ * - Nicholas Kyriakides(@nicholaswmin, nik.kyriakides@gmail.com)
+ *
+ * License:
+ * - MIT
+ * ---
  */
 class WorkflowBuilder
 {
@@ -28,30 +43,17 @@ class WorkflowBuilder
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
         
-        this._zoomMin = Configuration.WORKFLOWBUILDER.ZOOM_MIM;
-        this._zoomMax = Configuration.WORKFLOWBUILDER.ZOOM_MAX;
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
-        paper.install(window);
-        paper.setup(canvasElementId);
+
+        this._initializeStateMachine();
+        this._initializePaper(canvasElementId);
+        this._initializeRadio();
+        this._initializeInterface();
+        this._initializeGlobalTool();
 
         this._itemController = new ItemController();
         paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
-
-        // State info.
-        this._STATES = {
-            IDLE: 0,
-            MOUSE_DOWN: 1,
-            MOUSE_UP: 2,
-            DRAWING_LINE: 3
-        };
-        this._firstEntry = false;
-        this._setState(this._STATES.IDLE);
-        paper.view.onFrame = (event) => this._handleFrame(event);
-
-        this._initializeGlobalTool();
-        this._initializeRadio();
-        this._initializeInterface();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +72,21 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
+    }
+
+    /**
+     * Initialize state machine.
+     */
+    _initializeStateMachine()
+    {
+        this._STATES = {
+            IDLE: 0,
+            MOUSE_DOWN: 1,
+            MOUSE_UP: 2,
+            DRAWING_LINE: 3
+        };
+        this._firstEntry = false;
+        this._setState(this._STATES.IDLE);
     }
 
     /**
@@ -92,6 +109,19 @@ class WorkflowBuilder
     {
         var canvas = paper.view.element;
         canvas.oncontextmenu = function() {return false;};
+    }
+
+    /**
+     * Initialize paper.
+     */
+    _initializePaper(canvasElementId)
+    {
+        paper.install(window);
+        paper.setup(canvasElementId);
+        paper.view.onFrame = (event) => this._handleFrame(event);
+        this.drawGrid = drawGrid;
+        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID_DIMENSION, paper);
+        this._handleRequestZoomReset();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -292,7 +322,8 @@ class WorkflowBuilder
      */
     _handleRequestZoomIn()
     {
-        paper.view.zoom = paper.view.zoom + this._zoomRate < this._zoomMax ? paper.view.zoom + this._zoomRate : this._zoomMax;
+        var zoom = paper.view.zoom + Configuration.WORKFLOWBUILDER.ZOOM_RATE;
+        paper.view.zoom = zoom < Configuration.WORKFLOWBUILDER.ZOOM_MAX ? zoom : Configuration.WORKFLOWBUILDER.ZOOM_MAX;
     }
 
     /**
@@ -300,7 +331,8 @@ class WorkflowBuilder
      */
     _handleRequestZoomOut()
     {
-        paper.view.zoom = paper.view.zoom - this._zoomRate > this._zoomMin ? paper.view.zoom - this._zoomRate : this._zoomMin;
+        var zoom = paper.view.zoom - Configuration.WORKFLOWBUILDER.ZOOM_RATE;
+        paper.view.zoom = zoom > Configuration.WORKFLOWBUILDER.ZOOM_MIN ? zoom : Configuration.WORKFLOWBUILDER.ZOOM_MIN;    
     }
 
     /**
@@ -308,7 +340,7 @@ class WorkflowBuilder
      */
     _handleRequestZoomReset()
     {
-        paper.view.zoom = 1;
+        paper.view.zoom = Configuration.WORKFLOWBUILDER.ZOOM_INITIAL;
     }
 
     /**

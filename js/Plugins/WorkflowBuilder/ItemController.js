@@ -328,10 +328,10 @@ class ItemController
     {
         var canvasWidth = paper.view.viewSize.width;
         var canvasHeight = paper.view.viewSize.height;
-        var workflowJobItemWidth = paper.view.viewSize.width * Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
-        var workflowJobItemHeight = paper.view.viewSize.height * Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
-        var portItemWidth = paper.view.viewSize.width * Configuration.WORKFLOWBUILDER.PORT_WIDTH;
-        var portItemHeight = paper.view.viewSize.height * Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
+        var workflowJobItemWidth = /*paper.view.viewSize.width * */Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
+        var workflowJobItemHeight = /*paper.view.viewSize.height * */Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
+        var portItemWidth = /*paper.view.viewSize.width * */Configuration.WORKFLOWBUILDER.PORT_WIDTH;
+        var portItemHeight = /*paper.view.viewSize.height * */Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 
@@ -362,8 +362,8 @@ class ItemController
         var item = this._createWorkflowJobItem(options.workflowjob);
 
         // Set position if coordinates provided.
-        var position = new paper.Point(paper.view.size.width / 2,
-                                       paper.view.size.height / 2);
+        var position = new paper.Point(paper.view.size.width * paper.view.zoom / 2,
+                                       paper.view.size.height * paper.view.zoom / 2);
         if (options.hasOwnProperty('x'))
         {
             position.x = options.x * paper.view.size.width;
@@ -383,8 +383,8 @@ class ItemController
         var item = this._createWorkflowJobGroupItem(options.workflowjobgroup);
 
         // Set position if coordinates provided.
-        var position = new paper.Point(paper.view.size.width / 2,
-                                       paper.view.size.height / 2);
+        var position = new paper.Point(paper.view.size.width * paper.view.zoom  / 2,
+                                       paper.view.size.height * paper.view.zoom  / 2);
         if (options.hasOwnProperty('x'))
         {
             position.x = options.x * paper.view.size.width;
