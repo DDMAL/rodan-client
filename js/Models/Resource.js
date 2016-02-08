@@ -27,7 +27,7 @@ class Resource extends BaseModel
         // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
         if (this.get('creator') === null)
         {
-            this.set('creator', {first_name: null, last_name: null, username: 'generated result'});
+            this.set('creator', 'generated result');
         }
     }
 
@@ -40,7 +40,7 @@ class Resource extends BaseModel
         // TODO not sure why this is just happening here...
         if (resp.creator === null)
         {
-            resp.creator = {first_name: null, last_name: null, username: 'generated result'};
+            resp.creator = 'generated result';
         }
         return resp;
     }
