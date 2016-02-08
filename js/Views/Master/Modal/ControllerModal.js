@@ -56,8 +56,9 @@ class ControllerModal extends BaseController
         this._layoutViewModal.render();
         this._layoutViewModal.getRegion('modal_resource_list').show(options.view);
         var $modalEl = $("#modal-generic");
+        $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
-        $("#modal-generic").draggable({handle: ".modal-header"});
+        $modalEl.draggable({handle: ".modal-header"});
         $modalEl.modal({backdrop: 'static'});
     }
 
@@ -69,6 +70,7 @@ class ControllerModal extends BaseController
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal_waiting'});
         this._layoutViewModal.render();
         var $modalEl = $("#modal-generic");
+        $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.modal({backdrop: 'static', keyboard: false});
     }
