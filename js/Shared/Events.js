@@ -199,7 +199,6 @@ var Events =
                                                                                                                                     //      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
                                                                                                                                     //      options: Object holding any options for Event
                                                                                                                                     // }
-    REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING: 'REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -223,16 +222,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on WorkflowRun selection. Takes {workflowrun: WorkflowRun}.
     EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
-    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC',           // Updates the WorkflowRuns collection without resetting.
-
-///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowRunCreator
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN: 'REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN', // Called when workflow run requested. Passes object containing various data for WorkflowRun (name, description, etc).
-    REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT', // Called when resource assignment add requested. Passes {inputport: InputPort, resource: Resource}.
-    REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT', // Called when resource assignment remove requested. Passes {inputport: InputPort, resource: Resource}.
-    EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED', // Called when an InputPort has been selected. Passes {inputport: InputPort}.
-    REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT' // Returns true iff RA exists for provided inputport and resource.
+    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC'            // Updates the WorkflowRuns collection without resetting.
 };
 
 export default Events;

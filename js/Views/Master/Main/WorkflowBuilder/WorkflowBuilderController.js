@@ -71,16 +71,9 @@ class WorkflowBuilderController extends BaseController
      */
     _handleWorkflowLoadSuccess(workflow)
     {
-        // If we need to satisfy InputPorts we need the builder interface.
-        // Else, just create the WorkflowRun.
         if (workflow.get('workflow_input_ports').length > 0)
         {
-            if (!this._layoutView || !this._layoutView.isRendered)
-            {
-                this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: workflow});
-            }
-            var inputPort = workflow.get('workflow_input_ports').at(0);
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING, {inputport: inputPort});
+            console.log('tell user they need to satisfy the ports!')
         }
         else
         {

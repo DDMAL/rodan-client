@@ -4,9 +4,9 @@ import Radio from 'backbone.radio';
 import Events from '../../../../../Shared/Events';
 
 /**
- * This class represents the basic data for a Workflow.
+ * Resource item View for Collection in modal
  */
-class ViewWorkflowRunData extends Marionette.ItemView
+class ViewResourceListItemModal extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -14,10 +14,9 @@ class ViewWorkflowRunData extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize(options)
+    initialize()
     {
         this._initializeRadio();
-        this.model = options.workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -28,32 +27,29 @@ class ViewWorkflowRunData extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this._rodanChannel = Radio.channel('rodan');
     }
 
     /**
-     * Handle run button.
+     * Handles click.
      */
-    _handleButtonRun()
+    _handleClick()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN, {name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        console.log('handle this click!');
+        //this._rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewWorkflowRunData.prototype.modelEvents = {
+ViewResourceListItemModal.prototype.modelEvents = {
     'all': 'render'
 };
-ViewWorkflowRunData.prototype.template = '#template-main_workflowrun_newworkflowrun_data';
-ViewWorkflowRunData.prototype.ui = {
-    buttonRun: '#button-workflowrun_run',
-    textName: '#text-workflowrun_name',
-    textDescription: '#text-workflowrun_description'
-};
-ViewWorkflowRunData.prototype.events = {
-    'click @ui.buttonRun': '_handleButtonRun'
+ViewResourceListItemModal.prototype.template = '#template-modal_resource_list_item';
+ViewResourceListItemModal.prototype.tagName = 'tr';
+ViewResourceListItemModal.prototype.events = {
+    'click': '_handleClick'
 };
 
-export default ViewWorkflowRunData;
+export default ViewResourceListItemModal;

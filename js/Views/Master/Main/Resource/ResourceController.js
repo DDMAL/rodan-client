@@ -4,6 +4,7 @@ import LayoutViewResource from './LayoutViewResource';
 import ViewResource from './Individual/ViewResource';
 import ViewResourceList from './List/ViewResourceList';
 import ViewResourceListItem from './List/ViewResourceListItem';
+import ViewResourceListItemModal from './List/ViewResourceListItemModal';
 import ResourceCollection from '../../../../Collections/ResourceCollection';
 
 /**
@@ -121,8 +122,8 @@ class ResourceController extends BaseController
         var resourceTypes = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, {urls: [options.url]});
         this._handleRequestResources();
         var listView = new ViewResourceList({collection: this._collection,
-                                             template: '#template-main_resource_list',
-                                             childView: ViewResourceListItem});
+                                             template: '#template-modal_resource_list',
+                                             childView: ViewResourceListItemModal});
         return listView;
     }
 }

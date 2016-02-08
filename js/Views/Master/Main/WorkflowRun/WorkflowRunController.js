@@ -1,7 +1,6 @@
 import Events from '../../../../Shared/Events';
 import LayoutViewIndividualWorkflowRun from './Individual/LayoutViewIndividualWorkflowRun';
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
-import LayoutViewNewWorkflowRun from './NewWorkflowRun/LayoutViewNewWorkflowRun';
 import BaseController from '../../../../Controllers/BaseController';
 import RunJobCollection from '../../../../Collections/RunJobCollection';
 import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
@@ -59,18 +58,6 @@ class WorkflowRunController extends BaseController
 
         this._viewList = new ViewWorkflowRunList({collection: workflowRunCollection});
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewList);
-    }
-
-    /**
-     * Handle workflow run creation.
-     */
-    _handleCommandCreateWorkflowRun(options)
-    {
-        options.workflow.fetch();
-        var collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
-        var project = collection.where({'url': options.workflow.get('project')})[0];
-        this._layoutViewNewWorkflowRun = new LayoutViewNewWorkflowRun({workflow: options.workflow, project: project});
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutViewNewWorkflowRun);
     }
 
     /**

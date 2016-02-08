@@ -57,7 +57,6 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING, (options) => this._handleRequestShowInputPortMapping(options));
     }
 
     /**
