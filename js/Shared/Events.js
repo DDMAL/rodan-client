@@ -50,6 +50,13 @@ var Events =
     EVENT__JOB_SELECTED: 'EVENT__JOB_SELECTED', // Called on Job selection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// Modal
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__MODAL_HIDE: 'REQUEST__MODAL_HIDE',                 // Hide modal.
+    REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Show modal. Takes {view: Marionette.View}.
+    REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Show special modal for waiting on server/whatever.
+
+///////////////////////////////////////////////////////////////////////////////////////
 // Model
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Takes {model: BaseModel};
@@ -83,6 +90,7 @@ var Events =
     REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Load Resources from server. Takes {data: Object (query parameters)}. The ResourceController will manage/update to the ResourceCollection.
     REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Update the ResourceCollection without resetting.
+    REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT: 'REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob
@@ -156,6 +164,9 @@ var Events =
 
     REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR: 'REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR',   // Called when a resource distributor WorkflowJob should be created. Takes {urls: [{url: string}]}.
 
+    REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN: 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN',   // Create a WorkflowRun (but do not save). Takes {model: WorkflowRun}.
+    REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES: 'REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES', // Given an array of InputPort URLs, returns list of ResourceType URLs that would satisfy it. Takes {urls: [string]}.
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +199,7 @@ var Events =
                                                                                                                                     //      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
                                                                                                                                     //      options: Object holding any options for Event
                                                                                                                                     // }
+    REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING: 'REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -219,7 +231,6 @@ var Events =
     REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN: 'REQUEST__WORKFLOWRUNCREATOR_CREATE_WORKFLOWRUN', // Called when workflow run requested. Passes object containing various data for WorkflowRun (name, description, etc).
     REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_ADD_RESOURCEASSIGNMENT', // Called when resource assignment add requested. Passes {inputport: InputPort, resource: Resource}.
     REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_REMOVE_RESOURCEASSIGNMENT', // Called when resource assignment remove requested. Passes {inputport: InputPort, resource: Resource}.
-    EVENT__WORKFLOWRUNCREATOR_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_SELECTED', // Called on workflowrun creator opening. Passes {workflow: Workflow}.
     EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED: 'EVENT__WORKFLOWRUNCREATOR_INPUTPORT_SELECTED', // Called when an InputPort has been selected. Passes {inputport: InputPort}.
     REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT: 'REQUEST__WORKFLOWRUNCREATOR_IS_RESOURCEASSIGNMENT' // Returns true iff RA exists for provided inputport and resource.
 };

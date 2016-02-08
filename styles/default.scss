@@ -181,3 +181,9 @@ th.sort-ascending .glyphicon .glyphicon-arrow-up
 {
     background: #dddddd;
 }
+
+.modal-body 
+{
+    max-height:400px; 
+    overflow-y: auto;
+}

@@ -1,9 +1,9 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import ControllerModal from './Modal/ControllerModal';
 import Events from '../../Shared/Events';
 import LayoutViewMain from './Main/LayoutViewMain';
-import LayoutViewMasterModal from './Modals/LayoutViewMasterModal';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
 import LayoutViewStatus from './Status/LayoutViewStatus';
 
@@ -27,6 +27,8 @@ class LayoutViewMaster extends Marionette.LayoutView
         });
         this._initializeRadio();
         this._initializeViews();
+
+        this.modalController = new ControllerModal();
     }
 
     /**
@@ -50,7 +52,6 @@ class LayoutViewMaster extends Marionette.LayoutView
         this.layoutViewNavigation = new LayoutViewNavigation();
         this.layoutViewMain = new LayoutViewMain();
         this.layoutViewStatus = new LayoutViewStatus();
-        this._layoutViewModalWaiting = new LayoutViewMasterModal({template: '#template-modal_waiting'});
     }
 
     /**
@@ -59,38 +60,6 @@ class LayoutViewMaster extends Marionette.LayoutView
     _initializeRadio()
     {
         this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._showModalWaiting());
-        this._rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._hideModalWaiting());
-        this._rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleServerPanic());
-    }
-
-    /**
-     * Show waiting modal.
-     */
-    _showModalWaiting()
-    {
-        this._layoutViewModalWaiting.render();
-        var $modalEl = $("#modal-generic");
-        $modalEl.html(this._layoutViewModalWaiting.el);
-        $modalEl.modal({backdrop: 'static', keyboard: false});
-    }
-
-    /**
-     * Hide waiting modal.
-     */
-    _hideModalWaiting()
-    {
-        var $modalEl = $("#modal-generic");
-        $modalEl.html(this._layoutViewModalWaiting.el);
-        $modalEl.modal('hide');
-    }
-
-    /**
-     * Handle application panic.
-     */
-    _handleServerPanic()
-    {
-        console.log('ERROR - client panic...no server response yet!');
     }
 }
 

@@ -28,12 +28,13 @@ class WorkflowBuilderController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleCommandSaveWorkflow(options), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options => this._handleRequestCreateWorkflowRun(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - view controls
+// PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle selection.
@@ -48,9 +49,43 @@ class WorkflowBuilderController extends BaseController
     /**
      * Handle save workflow.
      */
-    _handleCommandSaveWorkflow(options)
+    _handleRequestSaveWorkflow(options)
     {
         options.workflow.save({name: options.workflow.get('name'), description: options.workflow.get('description')}, {patch: true});
+    }
+
+    /**
+     * Handle request create WorkflowRun.
+     */
+    _handleRequestCreateWorkflowRun(options)
+    {
+        var workflow = options.model;
+        workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - REST response handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle workflow load success.
+     */
+    _handleWorkflowLoadSuccess(workflow)
+    {
+        // If we need to satisfy InputPorts we need the builder interface.
+        // Else, just create the WorkflowRun.
+        if (workflow.get('workflow_input_ports').length > 0)
+        {
+            if (!this._layoutView || !this._layoutView.isRendered)
+            {
+                this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: workflow});
+            }
+            var inputPort = workflow.get('workflow_input_ports').at(0);
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING, {inputport: inputPort});
+        }
+        else
+        {
+            console.log('run workflow!!!!');
+        }
     }
 }
 

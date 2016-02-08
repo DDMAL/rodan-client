@@ -42,7 +42,7 @@ class ViewWorkflow extends Marionette.ItemView
         }
         else
         {
-            this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
+            this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
         }
     }
 
@@ -94,7 +94,7 @@ class ViewWorkflow extends Marionette.ItemView
         }
         else
         {
-            this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, {workflow: this.model});
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {model: this.model});
         }
     }
 

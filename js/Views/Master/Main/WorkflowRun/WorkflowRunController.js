@@ -7,7 +7,7 @@ import RunJobCollection from '../../../../Collections/RunJobCollection';
 import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
 
 /**
- * Controller for WorkflowRun views.
+ * Controller for WorkflowRun.
  */
 class WorkflowRunController extends BaseController
 {
@@ -31,7 +31,6 @@ class WorkflowRunController extends BaseController
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, () => this._handleEventListSelected());
         this._rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        this._rodanChannel.on(Events.EVENT__WORKFLOWRUNCREATOR_SELECTED, options => this._handleCommandCreateWorkflowRun(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options));
     }
 

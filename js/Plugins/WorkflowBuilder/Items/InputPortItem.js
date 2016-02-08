@@ -40,6 +40,7 @@ class InputPortItem extends BaseItem
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT;
         this._connectionItem = null;
         this._workflowJobItem = options.workflowjobitem;
+        this.onDoubleClick = event => this._handleDoubleClick(event);
         this.update();
     }
 
@@ -117,6 +118,14 @@ class InputPortItem extends BaseItem
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle double click.
+     */
+    _handleDoubleClick(mouseEvent)
+    {
+        var view = this.rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: this.getModelURL()});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view});
+    }
 }
 
 export default InputPortItem;

@@ -100,6 +100,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options => this._handleRequestAddWorkflowJobGroup(options), this);
+
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, options => this._handleRequestgetCompatibleResourceTypes(options), this);
     }
 
     /**
@@ -403,6 +405,14 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
             workflowJobs.push(workflowJob);
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this._workflow});
+    }
+
+    /**
+     * Handle request get compatible ResourceType URL list.
+     */
+    _handleRequestgetCompatibleResourceTypes(options)
+    {
+        return this._getCompatibleResourceTypeURLs(options.urls);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
