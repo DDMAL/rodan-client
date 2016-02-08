@@ -51,13 +51,13 @@ class WorkflowBuilder
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_DESTROYED, () => this._handleEventWorkflowBuilderDestroy(), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_INPUTPORT_MAPPING, (options) => this._handleRequestShowInputPortMapping(options));
     }
 
     /**
@@ -341,6 +341,7 @@ class WorkflowBuilder
     _handleRequestClear()
     {
         paper.project.clear();
+        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID_DIMENSION, paper);
     }
     /**
      * Hides the context menu.
@@ -377,6 +378,14 @@ class WorkflowBuilder
         $('#menu-context').css('top', options.mouseevent.event.y);
         $('#menu-context').css('left', options.mouseevent.event.x);
         $('#menu-context').show();
+    }
+
+    /**
+     * Handle request show InputPort mapping.
+     */
+    _handleRequestShowInputPortMapping(options)
+    {
+        console.log('load modal');
     }
 }
 
