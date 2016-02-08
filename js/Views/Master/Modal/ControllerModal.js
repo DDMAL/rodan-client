@@ -59,6 +59,7 @@ class ControllerModal extends BaseController
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.draggable({handle: ".modal-header"});
+        $('.modal-title').text(options.description);
         $modalEl.modal({backdrop: 'static'});
     }
 

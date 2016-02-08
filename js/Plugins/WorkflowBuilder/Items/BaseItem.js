@@ -219,6 +219,22 @@ class BaseItem extends paper.Path
         this.update();
     }
 
+    /**
+     * Gets description.
+     */
+    getDescription()
+    {
+        var model = this._getModel();
+        if (model)
+        {
+            return model.getDescription();
+        }
+        else
+        {
+            return 'no description available';
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -351,15 +367,12 @@ class BaseItem extends paper.Path
     {
         if ($('div#canvas-tooltip'))
         {
-            var model = this._getModel();
-            if (model)
-            {
-                var tooltip = $('div#canvas-tooltip');
-                tooltip.css('visibility', 'visible');
-                tooltip.css('top', event.event.y);
-                tooltip.css('left', event.event.x);
-                tooltip.text(model.getDescription());
-            }
+            var description = this.getDescription();
+            var tooltip = $('div#canvas-tooltip');
+            tooltip.css('visibility', 'visible');
+            tooltip.css('top', event.event.y);
+            tooltip.css('left', event.event.x);
+            tooltip.text(description);
         }
     }
 

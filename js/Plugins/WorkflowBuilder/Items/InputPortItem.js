@@ -123,8 +123,11 @@ class InputPortItem extends BaseItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        var view = this.rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: this.getModelURL()});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view});
+        if (!this.hasConnectionItem())
+        {
+            var resourceListView = this.rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: this.getModelURL()});
+            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: resourceListView, description: 'InputPort: ' + this.getDescription()});
+        }
     }
 }
 

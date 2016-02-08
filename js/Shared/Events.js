@@ -53,7 +53,7 @@ var Events =
 // Modal
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__MODAL_HIDE: 'REQUEST__MODAL_HIDE',                 // Hide modal.
-    REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Show modal. Takes {view: Marionette.View}.
+    REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Show modal. Takes {view: Marionette.View, description: string}.
     REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Show special modal for waiting on server/whatever.
 
 ///////////////////////////////////////////////////////////////////////////////////////
