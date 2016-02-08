@@ -14,20 +14,6 @@ import WorkflowJobItem from './Items/WorkflowJobItem';
 
 /**
  * Main WorkflowBuilder class.
- *
- * Grid code by: Nicholas Kyriakides(@nicholaswmin, nik.kyriakides@gmail.com)
- * ---
- * Draws a grid on the current viewport
- * - If grid already exists, it removes and redraws it
- *
- * @param  {Number} cellSize - Size of each cell in pixels
- *
- * Author:
- * - Nicholas Kyriakides(@nicholaswmin, nik.kyriakides@gmail.com)
- *
- * License:
- * - MIT
- * ---
  */
 class WorkflowBuilder
 {
@@ -221,9 +207,15 @@ class WorkflowBuilder
             {
                 this._setState(this._STATES.DRAWING_LINE);
             }
-            else
+            else if (this._itemController.getSelectedCount() > 0)
             {
                 this._itemController.moveSelectedItems(event.delta);
+            }
+            else
+            {
+                // TODO translate canvas
+               // BUG HERE WHEN I TRY TO TRANSLATE CANVAS
+                //this._itemController.moveSelectedItems(event.delta);
             }
         }
         else if (event.type === 'mouseup')
