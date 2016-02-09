@@ -107,9 +107,9 @@ class ResourceController extends BaseController
     {
         this._collection = new ResourceCollection();
         this._collection.fetch(options);
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
+    /*    this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
                                                                        options: {}, 
-                                                                       callback: null});
+                                                                       callback: null});*/
         return this._collection;
     }
 

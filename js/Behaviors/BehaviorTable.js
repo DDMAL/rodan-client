@@ -98,18 +98,18 @@ class BehaviorTable extends Marionette.Behavior
         // Set buttons.
         if (pagination.get('current') === 1)
         {
-            this.$('#template-pagination li.previous').hide();
-            this.$('#template-pagination li.next').show();
+            this.$('#template-pagination #pagination-previous').hide();
+            this.$('#template-pagination #pagination-next').show();
         }
         else if (pagination.get('current') === pagination.get('total'))
         {
-            this.$('#template-pagination li.previous').show();
-            this.$('#template-pagination li.next').hide();
+            this.$('#template-pagination #pagination-previous').show();
+            this.$('#template-pagination #pagination-next').hide();
         }
         else
         {
-            this.$('#template-pagination li.previous').show();
-            this.$('#template-pagination li.next').show();
+            this.$('#template-pagination #pagination-previous').show();
+            this.$('#template-pagination #pagination-next').show();
         }
     }
 

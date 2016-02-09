@@ -167,11 +167,6 @@ div#main_workflowbuilder
     overflow: auto;
 }
 
-th.sort-ascending .glyphicon .glyphicon-arrow-up
-{
-    font-family: Arial, Helvetica, sans-serif; 
-}
-
 .instruction
 {
     font-style: italic;
@@ -182,8 +177,64 @@ th.sort-ascending .glyphicon .glyphicon-arrow-up
     background: #dddddd;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// Modals
+///////////////////////////////////////////////////////////////////////////////////////
 .modal-body 
 {
-    max-height:400px; 
+    max-height: 600px; 
     overflow-y: auto;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Paginated tables
+///////////////////////////////////////////////////////////////////////////////////////
+div#template-pagination
+{
+   width: 100%;
+
+}
+
+div#template-pagination span
+{
+    display:inline-block;
+    font-size: $size-font + vw;
+    font-weight: bold;
+}
+
+div#template-pagination span
+{
+    display:inline-block; 
+    width: 50%;
+}
+
+div#template-pagination span.align-right
+{
+    text-align: right;
+    padding-right: 25px;
+}
+
+div#template-pagination p
+{
+    font-size:0; /* Fixes inline block spacing */  
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Sortable tables
+///////////////////////////////////////////////////////////////////////////////////////
+th.sort-ascending .glyphicon .glyphicon-arrow-up
+{
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Scrollable tables
+///////////////////////////////////////////////////////////////////////////////////////
+table.scroll
+{   
+    display: block;
+    height: 400px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

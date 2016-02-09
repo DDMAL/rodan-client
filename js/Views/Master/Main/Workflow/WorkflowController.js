@@ -22,6 +22,7 @@ class WorkflowController extends BaseController
     {
         this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
         this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
@@ -106,6 +107,14 @@ class WorkflowController extends BaseController
     _handleRequestWorkflowsSync(options)
     {
         this._collection.syncList();
+    }
+
+    /**
+     * Handle save workflow.
+     */
+    _handleRequestSaveWorkflow(options)
+    {
+        options.workflow.save({name: options.workflow.get('name'), description: options.workflow.get('description')}, {patch: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

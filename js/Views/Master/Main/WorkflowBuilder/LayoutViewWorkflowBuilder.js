@@ -66,37 +66,27 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         this._rodanChannel = Radio.channel('rodan');
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW, () => this._handleRequestGetWorkflow(), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, options => this._handleRequestAddWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
-        
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, aPass => this._handleCommandAddConnection(aPass), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, options => this._handleCommandAddInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, options => this._handleCommandAddOutputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, options => this._handleCommandDeleteInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, options => this._handleCommandDeleteOutputPort(options), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupDelete(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, () => this._handleCommandShowControlJobView(), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);       
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options => this._handleRequestAddWorkflowJobGroup(options), this);
-
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, options => this._handleRequestgetCompatibleResourceTypes(options), this);
     }
 
