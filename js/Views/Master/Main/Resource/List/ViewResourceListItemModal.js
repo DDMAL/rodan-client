@@ -31,9 +31,9 @@ class ViewResourceListItemModal extends Marionette.ItemView
     }
 
     /**
-     * Handles click.
+     * Handles double click.
      */
-    _handleClick()
+    _handleDoubleClick()
     {
         console.log('handle this click!');
         //this._rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
@@ -49,7 +49,7 @@ ViewResourceListItemModal.prototype.modelEvents = {
 ViewResourceListItemModal.prototype.template = '#template-modal_resource_list_item';
 ViewResourceListItemModal.prototype.tagName = 'tr';
 ViewResourceListItemModal.prototype.events = {
-    'click': '_handleClick'
+    'dblclick': '_handleDoubleClick'
 };
 
 export default ViewResourceListItemModal;

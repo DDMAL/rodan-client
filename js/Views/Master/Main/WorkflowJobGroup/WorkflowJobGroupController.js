@@ -151,7 +151,6 @@ class WorkflowJobGroupController extends BaseController
             var workflowJob = workflowJobCollection.findWhere({'url': workflowJobURLs[index]});
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
         }
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {}); 
         this._collection.remove(workflowJobGroup);
         workflowJobGroup.destroy();
     }

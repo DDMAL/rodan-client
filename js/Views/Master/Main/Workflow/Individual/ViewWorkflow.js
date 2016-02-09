@@ -97,14 +97,6 @@ class ViewWorkflow extends Marionette.ItemView
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {model: this.model});
         }
     }
-
-    /**
-     * Handle button group.
-     */
-    _handleButtonGroup()
-    {
-        this._workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP);
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -122,8 +114,7 @@ ViewWorkflow.prototype.ui = {
     buttonSave: '#button-save_workflow',
     buttonRun: '#button-run_workflow',
     textName: '#text-workflow_name',
-    textDescription: '#text-workflow_description',
-    buttonGroup: '#button-group_workflow'
+    textDescription: '#text-workflow_description'
         };
 ViewWorkflow.prototype.events = {
     'click @ui.runWorkflowButton': '_handleButtonRunWorkflow',
@@ -132,8 +123,7 @@ ViewWorkflow.prototype.events = {
     'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
     'click @ui.buttonSaveData': '_handleButtonSave',
     'click @ui.buttonSave': '_handleButtonSave',
-    'click @ui.buttonRun': '_handleButtonRun',
-    'click @ui.buttonGroup': '_handleButtonGroup'
+    'click @ui.buttonRun': '_handleButtonRun'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
 

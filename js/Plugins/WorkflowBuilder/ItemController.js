@@ -556,11 +556,6 @@ class ItemController
             {
                 itemType = item.constructor;
             }
-            if (item.constructor !== itemType)
-            {
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-                return BaseItem;
-            }
         }
         return itemType;
     }

@@ -57,9 +57,9 @@ class ControllerModal extends BaseController
             return;
         }
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal'});
-        this._layoutViewModal.addRegions({modal_resource_list: '#region-modal_resource_list'});
+        this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
         this._layoutViewModal.render();
-        this._layoutViewModal.getRegion('modal_resource_list').show(options.view);
+        this._layoutViewModal.getRegion('modal_body').show(options.view);
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.draggable({handle: ".modal-header"});
