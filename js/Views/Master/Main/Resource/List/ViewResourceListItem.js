@@ -14,7 +14,7 @@ class ViewResourceListItem extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
     }

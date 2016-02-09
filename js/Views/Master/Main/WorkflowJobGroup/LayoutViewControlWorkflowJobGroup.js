@@ -64,7 +64,7 @@ class LayoutViewControlWorkflowJobGroup extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewControlWorkflowJobGroup.prototype.template = '#template-main_workflowbuilder_control_workflowjobgroup';
+LayoutViewControlWorkflowJobGroup.prototype.template = '#template-main_workflowjobgroup';
 LayoutViewControlWorkflowJobGroup.prototype.ui = {
     buttonSave: '#button-save_workflowjobgroup_data',
     buttonDelete: '#button-delete_workflowjobgroup',

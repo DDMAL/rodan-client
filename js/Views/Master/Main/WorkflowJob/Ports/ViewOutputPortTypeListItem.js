@@ -14,9 +14,10 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize()
+    initialize(options)
     {
         this._initializeRadio();
+        this._workflowJob = options.workflowjob;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
      */
     _handleButtonNewOutputPort()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: null});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob});
     }
 }
 

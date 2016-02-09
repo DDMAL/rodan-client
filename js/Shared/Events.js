@@ -153,8 +153,7 @@ var Events =
     REQUEST__WORKFLOWBUILDER_GET_CONNECTION: 'REQUEST__WORKFLOWBUILDER_GET_CONNECTION',
     REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW',       // Import provided Workflow into Workflow loaded in the WorkflowBuilder. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION: 'REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION',
-
-    EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED',   // Called when WorkflowJobGroup selected. Takes {id: string}.
+    REQUEST__WORKFLOWBUILDER_GET_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_GET_WORKFLOW',             // Returns currently loaded Workflow.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
  
@@ -216,6 +215,7 @@ var Events =
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',
     REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',   // Called when WorkflowJobGroups are to be imported for given Workflow. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWJOBGROUP',                 // ...
+    REQUEST__WORKFLOWJOBGROUP_VIEW: 'REQUEST__WORKFLOWJOBGROUP_VIEW',       // Returns view for WorkflowJobGroup. Takes {id: string}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun

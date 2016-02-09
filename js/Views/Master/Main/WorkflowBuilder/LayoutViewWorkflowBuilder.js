@@ -7,8 +7,6 @@ import Connection from '../../../../Models/Connection';
 import Events from '../../../../Shared/Events';
 import ViewWorkflow from '../Workflow/Individual/ViewWorkflow';
 import LayoutViewJobSelection from './JobSelection/LayoutViewJobSelection';
-import LayoutViewControlWorkflowJob from '../WorkflowJob/LayoutViewControlWorkflowJob';
-import LayoutViewControlWorkflowJobGroup from '../WorkflowJobGroup/LayoutViewControlWorkflowJobGroup';
 import WorkflowJob from '../../../../Models/WorkflowJob';
 import InputPort from '../../../../Models/InputPort';
 import OutputPort from '../../../../Models/OutputPort';
@@ -24,16 +22,15 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this.addRegions({
             regionControlWorkflowUpperArea: '#region-main_workflowbuilder_control_workflow_upperarea',
             regionControlWorkflowLowerArea: '#region-main_workflowbuilder_control_workflow_lowerarea'
         });
-        this._workflow = aParameters.workflow;
-        this._workflowJob = null;
+        this._workflow = options.workflow;
         this._initializeRadio();
-        this._initializeViews(aParameters);
+        this._initializeViews(options);
 
         // Clear timed events.
         this._rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
@@ -68,7 +65,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         this._rodanChannel = Radio.channel('rodan');
 
-        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW, () => this._handleRequestGetWorkflow(), this);
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
 
@@ -115,6 +112,13 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle request get Workflow.
+     */
+    _handleRequestGetWorkflow()
+    {
+        return this._workflow;
+    }
     
     /**
      * Handle button zoom in.
@@ -163,11 +167,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        var confirmation = confirm('Are you sure you want to delete "' + options.model.get('name') + '"?');
-        if (confirmation)
-        {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.model, workflow: this._workflow});
-        }
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.model, workflow: this._workflow});
     }
 
     /**
@@ -203,17 +203,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         var outputPort = this._handleRequestGetOutputPort({'id': options.outputportid});
         this._createConnection(outputPort, inputPort);
     }
-
-    /**
-     * Handle event WorkflowJobGroup selected.
-     */
-    _handleEventWorkflowJobGroupSelected(options)
-    {
-        var workflowJobGroup = this._handleRequestGetWorkflowJobGroup(options);
-        this.controlWorkflowJobGroupView = new LayoutViewControlWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: workflowJobGroup});
-        this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobGroupView);
-        this.regionControlWorkflowLowerArea.$el.hide();
-    }
     
     /**
      * Handle command show job control view.
@@ -232,7 +221,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandAddInputPort(options)
     {
-        var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
         this._createInputPort(options.inputporttype, options.workflowjob);
     }
 
@@ -241,8 +229,7 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandAddOutputPort(options)
     {
-        var workflowJob = options.workflowjob != null ? options.workflowjob : this._workflowJob;
-        this._createOutputPort(options.outputporttype, workflowJob, options.targetinputports);
+        this._createOutputPort(options.outputporttype, options.workflowjob, options.targetinputports);
     }
 
     /**
@@ -250,9 +237,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandDeleteInputPort(options)
     {
-     /*   var workflowJobURL = options.model.get('workflow_job');
-        var workflowJob = this._workflow.get('workflow_jobs').findWhere({url: workflowJobURL});*/
-        this._deleteInputPort(options.model, this._workflowJob);
+        var workflowJob = this._getWorkflowJobWithInputPort(options.model);
+        this._deleteInputPort(options.model, workflowJob);
     }
 
     /**
@@ -260,9 +246,8 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
      */
     _handleCommandDeleteOutputPort(options)
     {
-       /* var workflowJobURL = options.model.get('workflow_job');
-        var workflowJob = this._workflow.get('workflow_jobs').findWhere({url: workflowJobURL});*/
-        this._deleteOutputPort(options.model, this._workflowJob);
+        var workflowJob = this._getWorkflowJobWithOutputPort(options.model);
+        this._deleteOutputPort(options.model, workflowJob);
     }
 
     /**
@@ -487,6 +472,42 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns WorkflowJob associated with InputPort.
+     */
+    _getWorkflowJobWithInputPort(inputPort)
+    {
+        var workflowJobs = this._workflow.get('workflow_jobs');
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            var workflowJob = workflowJobs.at(i);
+            var port = workflowJob.get('input_ports').get(inputPort.id);
+            if (port)
+            {
+                return workflowJob
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns WorkflowJob associated with OutputPort.
+     */
+    _getWorkflowJobWithOutputPort(outputPort)
+    {
+        var workflowJobs = this._workflow.get('workflow_jobs');
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            var workflowJob = workflowJobs.at(i);
+            var port = workflowJob.get('output_ports').get(outputPort.id);
+            if (port)
+            {
+                return workflowJob
+            }
+        }
+        return null;
+    }
+
     /**
      * Create input port.
      */

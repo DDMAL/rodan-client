@@ -123,7 +123,8 @@ class ResourceController extends BaseController
         this._handleRequestResources();
         var listView = new ViewResourceList({collection: this._collection,
                                              template: '#template-modal_resource_list',
-                                             childView: ViewResourceListItemModal});
+                                             childView: ViewResourceListItemModal/*,
+                                             childViewOptions: {template: '#template-modal_resource_list_item'}*/});
         return listView;
     }
 }

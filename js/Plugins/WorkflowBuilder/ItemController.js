@@ -91,7 +91,6 @@ class ItemController
     {
         this._selectedItems[item.id] = item;
         item.setHighlight(true);
-        this._processSelection();
     }
 
     /**
@@ -101,7 +100,6 @@ class ItemController
     {
         delete this._selectedItems[item.id];
         item.setHighlight(false);
-        this._processSelection();
     }
 
     /**
@@ -116,7 +114,6 @@ class ItemController
         }
         this._selectedItems = {}; // TODO memory leak? 
         this._outputPortItem = null;
-        this._processSelection();
     }
 
     /**
@@ -328,10 +325,10 @@ class ItemController
     {
         var canvasWidth = paper.view.viewSize.width;
         var canvasHeight = paper.view.viewSize.height;
-        var workflowJobItemWidth = /*paper.view.viewSize.width * */Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
-        var workflowJobItemHeight = /*paper.view.viewSize.height * */Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
-        var portItemWidth = /*paper.view.viewSize.width * */Configuration.WORKFLOWBUILDER.PORT_WIDTH;
-        var portItemHeight = /*paper.view.viewSize.height * */Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
+        var workflowJobItemWidth = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
+        var workflowJobItemHeight = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
+        var portItemWidth = Configuration.WORKFLOWBUILDER.PORT_WIDTH;
+        var portItemHeight = Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 
@@ -543,24 +540,6 @@ class ItemController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Take the appropriate action depending on what has been selected.
-     */
-    _processSelection()
-    {
-        var keys = this.getSelectedItemKeys();
-        if (keys.length === 1)
-        {
-            var item = this.getSelectedItem(keys[0]);
-            if (item instanceof WorkflowJobGroupItem)
-            {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, {id: item.getModelID()});
-                return;
-            }
-        }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CONTROL_SHOW_JOBS, {});
-    }
-
     /**
      * Returns item type (class constructor) of multiple selection.
      * If mixed, returns BaseItem. Returns null if none.

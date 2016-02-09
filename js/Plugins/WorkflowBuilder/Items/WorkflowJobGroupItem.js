@@ -38,6 +38,8 @@ class WorkflowJobGroupItem extends BaseItem
         // Attempt coordinate load.
         this.loadCoordinates();
 
+        this.onDoubleClick = event => this._handleDoubleClick(event);
+
         this.update();
     }
 
@@ -160,6 +162,15 @@ class WorkflowJobGroupItem extends BaseItem
         var children = this._paperGroupOutputPorts.removeChildren();
         this.update();
         return children;
+    }
+
+    /**
+     * Handle double click.
+     */
+    _handleDoubleClick(mouseEvent)
+    {
+        var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_VIEW, {id: this.getModelID()});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJobGroup: ' + this.getDescription()});
     }
 }
 
