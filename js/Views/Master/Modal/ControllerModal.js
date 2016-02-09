@@ -51,11 +51,15 @@ class ControllerModal extends BaseController
      */
     _handleRequestModalShow(options)
     {
+        var $modalEl = $("#modal-generic");
+        if ($modalEl.is(':visible'))
+        {
+            return;
+        }
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal'});
         this._layoutViewModal.addRegions({modal_resource_list: '#region-modal_resource_list'});
         this._layoutViewModal.render();
         this._layoutViewModal.getRegion('modal_resource_list').show(options.view);
-        var $modalEl = $("#modal-generic");
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.draggable({handle: ".modal-header"});
@@ -68,9 +72,13 @@ class ControllerModal extends BaseController
      */
     _handleRequestModalShowWaiting(options)
     {
+        var $modalEl = $("#modal-generic");
+        if ($modalEl.is(':visible'))
+        {
+            return;
+        }
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal_waiting'});
         this._layoutViewModal.render();
-        var $modalEl = $("#modal-generic");
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.modal({backdrop: 'static', keyboard: false});
