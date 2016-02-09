@@ -552,12 +552,7 @@ class ItemController
         if (keys.length === 1)
         {
             var item = this.getSelectedItem(keys[0]);
-            if (item instanceof WorkflowJobItem)
-            {
-                this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, {id: item.getModelID()});
-                return;
-            }
-            else if (item instanceof WorkflowJobGroupItem)
+            if (item instanceof WorkflowJobGroupItem)
             {
                 this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, {id: item.getModelID()});
                 return;

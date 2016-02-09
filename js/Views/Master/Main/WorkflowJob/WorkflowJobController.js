@@ -1,5 +1,6 @@
 import Events from '../../../../Shared/Events';
 import BaseController from '../../../../Controllers/BaseController';
+import LayoutViewControlWorkflowJob from './LayoutViewControlWorkflowJob';
 import WorkflowJob from '../../../../Models/WorkflowJob';
 
 /**
@@ -18,6 +19,7 @@ class WorkflowJobController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_CREATE, options => this._handleRequestCreateWorkflowJob(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleRequestDeleteWorkflowJob(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleRequestSaveWorkflowJob(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_VIEW, options => this._handleRequestWorkflowJobView(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +55,15 @@ class WorkflowJobController extends BaseController
     _handleRequestSaveWorkflowJob(options)
     {
         options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model, options.workflow)});
+    }
+
+    /**
+     * Handle request WorkflowJob view.
+     */
+    _handleRequestWorkflowJobView(options)
+    {
+        var workflowJob = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {id: options.id});
+        return new LayoutViewControlWorkflowJob({'workflowjob': workflowJob});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

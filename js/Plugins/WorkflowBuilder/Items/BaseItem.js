@@ -298,11 +298,13 @@ class BaseItem extends paper.Path
         this.onClick = event => this._handleMouseEvent(event);
         this.onMouseEnter = event => this._handleMouseEvent(event);
         this.onMouseLeave = event => this._handleMouseEvent(event);
+        this.onDoubleClick = event => this._handleMouseEvent(event);
         this._text.onMouseDown = event => this._handleMouseEvent(event);
         this._text.onMouseUp = event => this._handleMouseEvent(event);
         this._text.onClick = event => this._handleMouseEvent(event);
         this._text.onMouseEnter = event => this._handleMouseEvent(event);
         this._text.onMouseLeave = event => this._handleMouseEvent(event);
+        this._text.onDoubleClick = event => this._handleMouseEvent(event);
     }
 
     /**
@@ -427,12 +429,87 @@ class BaseItem extends paper.Path
                 break;
             }
 
+            case 'mouseup':
+            {
+                this._handleMouseUp(event);
+                break;
+            }
+
+            case 'mousedown':
+            {
+                this._handleMouseDown(event);
+                break;
+            }
+
+            case 'click':
+            {
+                this._handleClick(event);
+                break;
+            }
+
+            case 'doubleclick':
+            {
+                this._handleDoubleClick(event);
+                break;
+            }
+
             default:
             {
                 paper.handleMouseEvent(event);
                 break;
             }
         }
+    }
+
+    /**
+     * Handle mouse enter.
+     */
+    _handleMouseEnter(mouseEvent)
+    {
+        this._timerEvent = setTimeout(() => this._showPopup(mouseEvent), Configuration.WORKFLOWBUILDER.HOVER_TIME);
+        paper.handleMouseEvent(mouseEvent);
+    }
+
+    /**
+     * Handle mouse leave.
+     */
+    _handleMouseLeave(mouseEvent)
+    {
+        this._hidePopup();
+        clearTimeout(this._timerEvent);
+        paper.handleMouseEvent(mouseEvent); 
+    }
+
+    /**
+     * Handle mouse up.
+     */
+    _handleMouseUp(mouseEvent)
+    {
+        paper.handleMouseEvent(mouseEvent);
+    }
+
+    /**
+     * Handle mouse down.
+     */
+    _handleMouseDown(mouseEvent)
+    {
+        paper.handleMouseEvent(mouseEvent);
+    }
+
+    /**
+     * Handle mouse click.
+     */
+    _handleClick(mouseEvent)
+    {
+        paper.handleMouseEvent(mouseEvent);
+    }
+
+    /**
+     * Handle mouse double click.
+     */
+    _handleDoubleClick(mouseEvent)
+    {
+        paper.handleMouseEvent(mouseEvent);
     }
 }
 

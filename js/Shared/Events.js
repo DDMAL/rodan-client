@@ -154,7 +154,6 @@ var Events =
     REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW',       // Import provided Workflow into Workflow loaded in the WorkflowBuilder. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION: 'REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION',
 
-    EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED',             // Called when WorkflowJob selected in WorkflowBuilder. Takes {id: string}.
     EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED: 'EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED',   // Called when WorkflowJobGroup selected. Takes {id: string}.
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Called on WorkflowBuilder opening. Takes {workflow: Workflow}. May be null if new workflow needed.
     EVENT__WORKFLOWBUILDER_DESTROY: 'EVENT__WORKFLOWBUILDER_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
@@ -207,6 +206,7 @@ var Events =
                                                                 // If targetintputports is provided and only one OutputPort was auto created, will connect that OutputPort to the provided InputPorts. Only works if only one OutputPort was created.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Called when WorkflowJob needs to be saved. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWJOB_VIEW',     // Return control view for WorkflowJob. Takes {id: string}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup

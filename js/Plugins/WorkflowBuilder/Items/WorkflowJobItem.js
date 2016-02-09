@@ -57,6 +57,8 @@ class WorkflowJobItem extends BaseItem
         // Attempt coordinate load.
         this.loadCoordinates();
 
+        this.onDoubleClick = event => this._handleDoubleClick(event);
+
         this.update();
     }
 
@@ -190,6 +192,18 @@ class WorkflowJobItem extends BaseItem
             }
         }
         console.error('TODO - ERROR HERE!!!!!');
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle double click.
+     */
+    _handleDoubleClick(mouseEvent)
+    {
+        var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_VIEW, {id: this.getModelID()});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJob: ' + this.getDescription()});
     }
 }
 

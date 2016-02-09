@@ -21,9 +21,9 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.addRegions({
-            regionControlWorkflowJob: '#region-main_workflowbuilder_control_workflowjob',
-            regionControlPorts: '#region-main_workflowbuilder_control_ports',
-            regionControlSettings: '#region-main_workflowbuilder_control_settings'
+            regionControlWorkflowJob: '#region-main_workflowjob',
+            regionControlPorts: '#region-main_workflowjob_ports',
+            regionControlSettings: '#region-main_workflowjob_settings'
         });
         this.model = options.workflowjob;
         this._initializeViews(options);
@@ -113,7 +113,7 @@ class LayoutViewControlWorkflowJob extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewControlWorkflowJob.prototype.template = '#template-main_workflowbuilder_control_workflowjob';
+LayoutViewControlWorkflowJob.prototype.template = '#template-main_workflowjob';
 LayoutViewControlWorkflowJob.prototype.ui = {
     buttonTogglePorts: '#button-ports_toggle',
     buttonToggleSettings: '#button-settings_toggle',

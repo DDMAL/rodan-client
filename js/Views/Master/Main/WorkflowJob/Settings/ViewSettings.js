@@ -100,6 +100,6 @@ class ViewSettings extends Marionette.ItemView
 ViewSettings.prototype.modelEvents = {
     'all': 'render'
 };
-ViewSettings.prototype.template = '#template-main_workflowbuilder_control_settings';
+ViewSettings.prototype.template = '#template-main_workflowjob_settings';
 
 export default ViewSettings;

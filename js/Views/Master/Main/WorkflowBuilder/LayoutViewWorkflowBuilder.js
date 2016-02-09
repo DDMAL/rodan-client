@@ -68,7 +68,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
     {
         this._rodanChannel = Radio.channel('rodan');
 
-        this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOB_SELECTED, options => this._handleEventEditWorkflowJob(options), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOWJOBGROUP_SELECTED, options => this._handleEventWorkflowJobGroupSelected(options), this);
 
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
@@ -203,17 +202,6 @@ class LayoutViewWorkflowEditor extends Marionette.LayoutView
         var inputPort = this._handleRequestGetInputPort({'id': options.inputportid});
         var outputPort = this._handleRequestGetOutputPort({'id': options.outputportid});
         this._createConnection(outputPort, inputPort);
-    }
-
-    /**
-     * Handle event edit workflow job.
-     */
-    _handleEventEditWorkflowJob(options)
-    {
-        this._workflowJob = this._handleRequestGetWorkflowJob(options);
-        this.controlWorkflowJobView = new LayoutViewControlWorkflowJob({'workflowjob': this._workflowJob});
-        this.regionControlWorkflowUpperArea.show(this.controlWorkflowJobView);
-        this.regionControlWorkflowLowerArea.$el.hide();
     }
 
     /**

@@ -73,6 +73,6 @@ class LayoutViewControlPorts extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewControlPorts.prototype.template = '#template-main_workflowbuilder_control_ports';
+LayoutViewControlPorts.prototype.template = '#template-main_workflowjob_ports';
 
 export default LayoutViewControlPorts;
