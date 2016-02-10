@@ -205,8 +205,8 @@ class ItemController
      */
     createConnection(outputPortItem, inputPortItem)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputportid: inputPortItem.getModelID(), 
-                                                                                   outputportid: outputPortItem.getModelID()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputporturl: inputPortItem.getModelURL(), 
+                                                                                   outputporturl: outputPortItem.getModelURL()});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -534,7 +534,7 @@ class ItemController
             var item = this.getSelectedItem(keys[index]);
             urls.push({'url': item.getModelURL()});
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATEDISTRIBUTOR, {urls: urls});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_DISTRIBUTOR, {urls: urls});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

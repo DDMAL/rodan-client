@@ -59,7 +59,7 @@ class LayoutViewControlPorts extends Marionette.LayoutView
         this._inputPortTypeListView = new ViewInputPortTypeList({workflowjob: options.workflowjob,
                                                                  childViewOptions: options});
         this._outputPortTypeListView = new ViewOutputPortTypeList({workflowjob: options.workflowjob,
-                                                                 childViewOptions: options});
+                                                                   childViewOptions: options});
     }
     
     /**

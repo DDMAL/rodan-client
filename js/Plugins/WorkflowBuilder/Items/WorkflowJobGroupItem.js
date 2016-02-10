@@ -169,7 +169,7 @@ class WorkflowJobGroupItem extends BaseItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_VIEW, {id: this.getModelID()});
+        var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_VIEW, {url: this.getModelURL()});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJobGroup: ' + this.getDescription()});
     }
 }

@@ -116,13 +116,13 @@ class ResourceController extends BaseController
     _handleRequestResourceGetListForAssignment(options)
     {
         // TODO - get proper resource list!
-        //var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {id: options.id});
+        var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
         var resourceTypes = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, {urls: [options.url]});
         this._handleRequestResources();
         var listView = new ViewResourceList({collection: this._collection,
                                              template: '#template-modal_resource_list',
-                                             childView: ViewResourceListItemModal/*,
-                                             childViewOptions: {template: '#template-modal_resource_list_item'}*/});
+                                             childView: ViewResourceListItemModal,
+                                             childViewOptions: {inputport: inputPort}});
         return listView;
     }
 }

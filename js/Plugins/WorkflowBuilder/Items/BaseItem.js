@@ -342,7 +342,7 @@ class BaseItem extends paper.Path
     {
         if (this.getModelEvent !== null)
         {
-            return this.rodanChannel.request(this.getModelEvent, {'id': this._modelId});
+            return this.rodanChannel.request(this.getModelEvent, {'url': this.getModelURL()});
         }
         return null;
     }

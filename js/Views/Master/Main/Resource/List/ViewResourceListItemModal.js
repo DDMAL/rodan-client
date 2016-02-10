@@ -14,8 +14,9 @@ class ViewResourceListItemModal extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize()
+    initialize(options)
     {
+        this._inputPort = options.inputport;
         this._initializeRadio();
     }
 
@@ -36,7 +37,7 @@ class ViewResourceListItemModal extends Marionette.ItemView
     _handleDoubleClick()
     {
         console.log('handle this click!');
-        //this._rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        //this._rodanChannel.trigger(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {resource: this.model});
     }
 }
 

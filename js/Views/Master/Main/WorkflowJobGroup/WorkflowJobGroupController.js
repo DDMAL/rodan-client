@@ -77,7 +77,7 @@ class WorkflowJobGroupController extends BaseController
      */
     _handleRequestWorkflowJobGroup(options)
     {
-        return this._collection.get(options.id);
+        return this._collection.findWhere({url: options.url});
     }
 
     /**
@@ -85,7 +85,7 @@ class WorkflowJobGroupController extends BaseController
      */
     _handleRequestWorkflowJobGroupView(options)
     {
-        var workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {id: options.id});
+        var workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {url: options.url});
         var workflow = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW);
         return new LayoutViewControlWorkflowJobGroup({workflow: workflow, workflowjobgroup: workflowJobGroup});
     }
