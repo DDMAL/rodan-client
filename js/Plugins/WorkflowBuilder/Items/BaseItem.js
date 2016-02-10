@@ -59,8 +59,7 @@ class BaseItem extends paper.Path
      */
     static getContextMenuDataMultiple()
     {
-        return [{label: 'Cancel',
-                 radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
+        return [{label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

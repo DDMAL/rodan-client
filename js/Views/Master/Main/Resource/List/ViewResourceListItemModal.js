@@ -17,8 +17,7 @@ class ViewResourceListItemModal extends Marionette.ItemView
     initialize(options)
     {
         this._inputPort = options.inputport;
-        this._assignedList = options.assignedlist;
-        this._assigned = false;
+        this._assigned = options.assigned;
         this._initializeRadio();
     }
 
@@ -38,11 +37,11 @@ class ViewResourceListItemModal extends Marionette.ItemView
      */
     _handleDoubleClick()
     {
-        if (this._assignedList)
+        if (this._assigned)
         {
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
         }
-        else if (!this._assigned)
+        else
         {
             this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
         }

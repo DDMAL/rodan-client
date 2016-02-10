@@ -62,7 +62,7 @@ class WorkflowJobController extends BaseController
      */
     _handleRequestWorkflowJobView(options)
     {
-        var workflowJob = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {id: options.id});
+        var workflowJob = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
         return new LayoutViewControlWorkflowJob({'workflowjob': workflowJob});
     }
 

@@ -70,12 +70,21 @@ class InputPortItem extends BaseItem
     }
 
     /**
+     * Return true iff satisfied.
+     */
+    isSatisfied()
+    {
+        var resourceAssignments = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, {url: this.getModelURL()});
+        return this.hasConnectionItem() || resourceAssignments.length > 0;
+    }
+
+    /**
      * Update.
      */
     update()
     {
-        this.fillColor = this.hasConnectionItem() ? Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_SATISFIED : 
-                                                    Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
+        this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_SATISFIED : 
+                                              Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
         if (this._connectionItem !== null)
         {
             this._connectionItem.setVisible(this.visible);

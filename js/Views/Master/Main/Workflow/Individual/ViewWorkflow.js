@@ -51,11 +51,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonDeleteWorkflow()
     {
-        var confirmation = confirm('Are you sure you want to delete "' + this.model.get('name') + '"?');
-        if (confirmation)
-        {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
-        }
+        this._rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
     }
 
     /**
