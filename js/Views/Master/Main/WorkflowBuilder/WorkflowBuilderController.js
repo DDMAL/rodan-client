@@ -30,6 +30,7 @@ class WorkflowBuilderController extends BaseController
     {
         this._workspace = new WorkflowBuilder();
         this._resourceAssignments = [];
+        this._resourcesAvailable = [];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +67,7 @@ class WorkflowBuilderController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, options => this._handleRequestUnassignResource(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
     }
 
@@ -78,6 +80,8 @@ class WorkflowBuilderController extends BaseController
     _handleEventBuilderSelected(options)
     {
         this._workflow = options.workflow;
+        this._resourceAssignments = [];
+        this._resourcesAvailable = [];
         this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': options.workflow});
         this._layoutView = new LayoutViewWorkflowBuilder({workflow: options.workflow});
         this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
@@ -90,7 +94,18 @@ class WorkflowBuilderController extends BaseController
     _handleRequestCreateWorkflowRun(options)
     {
         var workflow = options.model;
-        workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
+        var assignments = {};
+        for (var inputPortURL in this._resourceAssignments)
+        {
+            assignments[inputPortURL] = [];
+            var collection = this._resourceAssignments[inputPortURL];
+            for (var i = 0; i < collection.length; i++)
+            {
+                var resource = collection.at(i);
+                assignments[inputPortURL].push(resource.get('url'));
+            }
+        }
+        this._rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, {workflow: options.model, assignments: assignments});
     }
 
     /**
@@ -98,13 +113,29 @@ class WorkflowBuilderController extends BaseController
      */
     _handleRequestGetResourceAssignmentView(options)
     {
-        var assignedResourceCollection = new BaseCollection(this._resourceAssignments, {model: Resource});
-        var assignedResourceView = new ViewResourceList({collection: assignedResourceCollection,
-                                                         template: '#template-modal_resource_list',
-                                                         childView: ViewResourceListItemModal});
+        // Create assigned collection if DNE.
+        if (!this._resourceAssignments[options.url])
+        {
+            this._resourceAssignments[options.url] = new BaseCollection(null, {model: Resource});
+        }
 
-        // Get flist of available Resources.
-        var resourceListView = this._rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: options.url});
+        // Create/update available collection.
+        if (!this._resourcesAvailable[options.url])
+        {
+            this._resourcesAvailable[options.url] = this._rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: options.url});
+        }
+        this._resourcesAvailable[options.url].syncList();
+
+        // Create views.
+        var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
+        var assignedResourceView = new ViewResourceList({collection: this._resourceAssignments[options.url],
+                                                         template: '#template-modal_resource_list',
+                                                         childView: ViewResourceListItemModal,
+                                                         childViewOptions: {inputport: inputPort, assignedlist: true}});
+        var resourceListView = new ViewResourceList({collection: this._resourcesAvailable[options.url],
+                                                     template: '#template-modal_resource_list',
+                                                     childView: ViewResourceListItemModal,
+                                                     childViewOptions: {inputport: inputPort, assignedlist: false}});
 
         // Return the layout view.
         return new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
@@ -356,8 +387,21 @@ class WorkflowBuilderController extends BaseController
      */
     _handleRequestAssignResource(options)
     {
-
+        var resourcesAssigned = this._resourceAssignments[options.inputport.get('url')];
+        var resourcesAvailable = this._resourcesAvailable[options.inputport.get('url')];
+        resourcesAssigned.add(options.resource);
     }
+
+    /**
+     * Handle request unassigne Resource from InputPort.
+     */
+    _handleRequestUnassignResource(options)
+    {
+        var resourcesAssigned = this._resourceAssignments[options.inputport.get('url')];
+        var resourcesAvailable = this._resourcesAvailable[options.inputport.get('url')];
+        resourcesAssigned.remove(options.resource.id); // use ID just in case model 'c'ids don't match 
+    }
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST response handlers
@@ -443,14 +487,6 @@ class WorkflowBuilderController extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Given an InputPort URL, returns a list of Resources that have been associated with that InputPort.
-     */
-    _getAssociatedResources(inputPortURL)
-    {
-        return this._resourceAssignments[inputPotURL];
-    }
-
     /**
      * Returns WorkflowJob associated with InputPort.
      */

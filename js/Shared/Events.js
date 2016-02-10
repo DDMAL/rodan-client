@@ -163,7 +163,7 @@ var Events =
     REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE',       
     REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN: 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN',   // Create a WorkflowRun (but do not save). Takes {model: WorkflowRun}.
     REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES: 'REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES', // Given an array of InputPort URLs, returns list of ResourceType URLs that would satisfy it. Takes {urls: [string]}.
-
+    REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE',
     REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW',
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -223,6 +223,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on WorkflowRun selection. Takes {workflowrun: WorkflowRun}.
     EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
+    REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',         // Create WorkflowRun. Takes {workflow: Workflow, assignments: [string (Resource URL)] (index by InputPort URLs)}.
     REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC'            // Updates the WorkflowRuns collection without resetting.
 };
 

@@ -4,7 +4,6 @@ import LayoutViewResource from './LayoutViewResource';
 import ViewResource from './Individual/ViewResource';
 import ViewResourceList from './List/ViewResourceList';
 import ViewResourceListItem from './List/ViewResourceListItem';
-import ViewResourceListItemModal from './List/ViewResourceListItemModal';
 import ResourceCollection from '../../../../Collections/ResourceCollection';
 
 /**
@@ -116,14 +115,10 @@ class ResourceController extends BaseController
     _handleRequestResourceGetListForAssignment(options)
     {
         // TODO - get proper resource list!
-        var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
-        var resourceTypes = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, {urls: [options.url]});
+        //var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
+       // var resourceTypes = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, {urls: [options.url]});
         this._handleRequestResources();
-        var listView = new ViewResourceList({collection: this._collection,
-                                             template: '#template-modal_resource_list',
-                                             childView: ViewResourceListItemModal,
-                                             childViewOptions: {inputport: inputPort}});
-        return listView;
+        return this._collection.clone();
     }
 }
 

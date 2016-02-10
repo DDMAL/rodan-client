@@ -93,11 +93,17 @@ class BaseCollection extends Backbone.Collection
      * Note that it uses _lastData. We need to keep the last options
      * data in case we're paginating.
      *
+     * If options.data IS passed, it will override _lastData.
+     *
      * IMPORTANT: this is not called "sort" because backbone already has
      * a "sort" method for the Collection (but don't use it)
      */
-    fetchSort(ascending, field)
+    fetchSort(ascending, field, options)
     {
+        if (options && options.data)
+        {
+            this._lastData = options.data;
+        }
         this._lastData.ordering = field;
         if (!ascending)
         {

@@ -3,6 +3,7 @@ import LayoutViewIndividualWorkflowRun from './Individual/LayoutViewIndividualWo
 import ViewWorkflowRunList from './List/ViewWorkflowRunList';
 import BaseController from '../../../../Controllers/BaseController';
 import RunJobCollection from '../../../../Collections/RunJobCollection';
+import WorkflowRun from '../../../../Models/WorkflowRun';
 import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
 
 /**
@@ -21,18 +22,22 @@ class WorkflowRunController extends BaseController
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS - Initialize
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize Radio.
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, () => this._handleEventListSelected());
+        this._rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, options => this._handleEventListSelected(options), this);
         this._rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options));
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Radio handlers
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle item selection.
      */
@@ -47,13 +52,12 @@ class WorkflowRunController extends BaseController
     /**
      * Handle list selection.
      */
-    _handleEventListSelected()
+    _handleEventListSelected(options)
     {
-        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         var workflowRunCollection = new WorkflowRunCollection();
-        workflowRunCollection.fetch({data: {project: project.id}});
+        workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {}, 
+                                                                       options: {collection: workflowRunCollection}, 
                                                                        callback: null});
 
         this._viewList = new ViewWorkflowRunList({collection: workflowRunCollection});
@@ -65,10 +69,28 @@ class WorkflowRunController extends BaseController
      */
     _handleRequestWorkflowRunsSync(options)
     {
-        if (options.collection)
-        {
-            options.collection.syncList();
-        }
+        options.collection.syncList();
+    }
+
+    /**
+     * Handle request create WorkflowRun.
+     */
+    _handleRequestWorkflowRunCreate(options)
+    {
+        var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), resource_assignments: options.assignments});
+        workflowRun.save({}, {success: (model) => this._handleSuccess(model)});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - REST callbacks
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle success.
+     */
+    _handleSuccess(model)
+    {
+        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: project});
     }
 }
 
