@@ -409,7 +409,14 @@ class WorkflowBuilderController extends BaseController
      */
     _handleRequestAssignResource(options)
     {
-        var resourcesAssigned = this._getResourceAssignments(options.inputport.get('url'));
+        var url = options.inputport.get('url');
+        var resourcesAssigned = this._getResourceAssignments(url);
+        var multipleUrl = this._getInputPortURLWithMultipleAssignments();
+        if (multipleUrl && resourcesAssigned.length > 0 && multipleUrl !== url)
+        {
+            alert('Only one InputPort may have multiple Resources assigned to it.');
+            return;
+        }
         resourcesAssigned.add(options.resource);
     }
 
@@ -419,7 +426,7 @@ class WorkflowBuilderController extends BaseController
     _handleRequestUnassignResource(options)
     {
         var resourcesAssigned = this._getResourceAssignments(options.inputport.get('url'));
-        resourcesAssigned.remove(options.resource); // use ID just in case model 'c'ids don't match 
+        resourcesAssigned.remove(options.resource);
     }
 
     /**
@@ -817,6 +824,23 @@ class WorkflowBuilderController extends BaseController
                                                                         workflow: this._workflow, 
                                                                         addports: true,
                                                                         targetinputports: targetInputPorts});
+    }
+
+    /**
+     * Return InputPort URL that has multiple assignments.
+     * Returns null if DNE.
+     */
+    _getInputPortURLWithMultipleAssignments()
+    {
+        for (var url in this._resourceAssignments)
+        {
+            var resourceAssignments = this._getResourceAssignments(url);
+            if (resourceAssignments.length > 1)
+            {
+                return url;
+            }
+        }
+        return null;
     }
 
     /**
