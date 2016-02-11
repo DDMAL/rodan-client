@@ -94,22 +94,51 @@ class WorkflowBuilderController extends BaseController
      */
     _handleRequestCreateWorkflowRun(options)
     {
-      //  TODO - need to make sure the inputports in assignments match those of the workflow_input_ports
-       // - I should remove all the assignments for input ports that are NOT in the list of workflow_input_ports
-
         var workflow = options.model;
+
+        // Get the known unsatisfied InputPorts for this Workflow.
+        var unsatisfiedInputPorts = workflow.get('workflow_input_ports').clone();
+
+        // Go through the assignments, checking against the InputPort collection.
         var assignments = {};
         for (var inputPortURL in this._resourceAssignments)
         {
+            // If our assignments for an InputPort are not needed, we just skip it.
+            var inputPort = unsatisfiedInputPorts.findWhere({url: inputPortURL});
+            if (!inputPort)
+            {
+                continue;
+            }
+
+            // If there is nothing for a given InputPort, error.
             assignments[inputPortURL] = [];
             var collection = this._getResourceAssignments(inputPortURL);
+            if (collection.length === 0)
+            {
+                alert('There are still unsatisfied InputPorts.');
+                return;
+            }
+
+            // Copy the assignments. 
             for (var i = 0; i < collection.length; i++)
             {
                 var resource = collection.at(i);
                 assignments[inputPortURL].push(resource.get('url'));
             }
+
+            // Finally, remove the InputPort from the cloned Collection.
+            unsatisfiedInputPorts.remove(inputPort);
         }
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, {workflow: options.model, assignments: assignments});
+
+        // If we have anything left oveer in our cloned Collection, something is wrong.
+        if (unsatisfiedInputPorts.length > 0)
+        {
+            alert('There are still unsatisfied InputPorts.');
+        }
+        else
+        {
+            this._rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, {workflow: options.model, assignments: assignments});
+        }
     }
 
     /**
