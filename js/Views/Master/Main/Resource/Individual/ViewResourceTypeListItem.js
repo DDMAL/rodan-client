@@ -25,7 +25,7 @@ class ViewResourceTypeListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewResourceTypeListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewResourceTypeListItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
 ViewResourceTypeListItem.prototype.tagName = 'option';

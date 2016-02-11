@@ -14,7 +14,7 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this._initializeRadio();
     }
@@ -43,7 +43,7 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowRunListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewWorkflowRunListItem.prototype.template = '#template-main_workflowrun_list_item';
 ViewWorkflowRunListItem.prototype.tagName = 'tr';

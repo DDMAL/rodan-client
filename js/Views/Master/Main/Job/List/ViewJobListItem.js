@@ -52,7 +52,7 @@ class ViewJobListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewJobListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewJobListItem.prototype.template = '#template-main_job_list_item';
 ViewJobListItem.prototype.tagName = 'tr';

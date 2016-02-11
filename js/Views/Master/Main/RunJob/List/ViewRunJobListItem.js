@@ -43,7 +43,7 @@ class ViewRunJobListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewRunJobListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewRunJobListItem.prototype.template = '#template-main_runjob_list_item';
 ViewRunJobListItem.prototype.tagName = 'tr';

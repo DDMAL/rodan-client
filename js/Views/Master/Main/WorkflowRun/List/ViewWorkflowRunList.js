@@ -15,7 +15,7 @@ class ViewWorkflowRunList extends Marionette.CompositeView
     /**
      * Initialize.
      */
-    initialize(aOptions)
+    initialize(options)
     {
         this._initializeRadio();
     }

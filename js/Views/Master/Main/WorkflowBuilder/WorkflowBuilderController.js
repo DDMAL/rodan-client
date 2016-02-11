@@ -597,14 +597,7 @@ class WorkflowBuilderController extends BaseController
      */
     _deleteInputPort(port, workflowJob)
     {
-        try
-        {
-            port.destroy({success: (model) => this._handleInputPortDeletionSuccess(model, this._workflow, workflowJob)});
-        }
-        catch (aError)
-        {
-            console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
-        }
+        port.destroy({success: (model) => this._handleInputPortDeletionSuccess(model, this._workflow, workflowJob)});
     }
 
     /**
@@ -612,14 +605,7 @@ class WorkflowBuilderController extends BaseController
      */
     _deleteOutputPort(port, workflowJob)
     {
-        try
-        {
-            port.destroy({success: (model) => this._handleOutputPortDeletionSuccess(model, this._workflow, workflowJob)});
-        }
-        catch (aError)
-        {
-            console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
-        }
+        port.destroy({success: (model) => this._handleOutputPortDeletionSuccess(model, this._workflow, workflowJob)});
     }
 
     /**

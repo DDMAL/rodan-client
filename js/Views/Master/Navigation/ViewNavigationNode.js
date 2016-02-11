@@ -131,7 +131,7 @@ class ViewNavigationNode extends Marionette.CompositeView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewNavigationNode.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewNavigationNode.prototype.ui = {
     text: '#node_text'

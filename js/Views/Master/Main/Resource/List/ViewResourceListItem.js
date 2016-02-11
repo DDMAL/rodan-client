@@ -43,7 +43,7 @@ class ViewResourceListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewResourceListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewResourceListItem.prototype.template = '#template-main_resource_list_item';
 ViewResourceListItem.prototype.tagName = 'tr';

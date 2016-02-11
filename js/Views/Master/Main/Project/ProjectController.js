@@ -70,14 +70,7 @@ class ProjectController extends BaseController
         if (confirmation)
         {
             this._activeProject = null;
-            try
-            {
-                options.project.destroy({success: () => this._handleCallbackDeleteSuccess()});
-            }
-            catch (aError)
-            {
-                console.log('TODO - not sure why this error is happening; see https://github.com/ELVIS-Project/vis-client/issues/5');
-            }
+            options.project.destroy({success: () => this._handleCallbackDeleteSuccess()});
         }
     }
 

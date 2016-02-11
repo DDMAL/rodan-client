@@ -32,7 +32,6 @@ class Application extends Marionette.Application
      */
     initialize()
     {
-
         this.addRegions({
             regionMaster: '#region-master'
         });

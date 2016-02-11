@@ -43,7 +43,7 @@ class ViewInputPortListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewInputPortListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewInputPortListItem.prototype.ui = {
             buttonDelete: '#button-delete'

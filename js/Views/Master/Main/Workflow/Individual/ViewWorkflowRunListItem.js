@@ -43,7 +43,7 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowRunListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewWorkflowRunListItem.prototype.template = '#template-main_workflow_individual_workflowrun_list_item';
 ViewWorkflowRunListItem.prototype.tagName = 'tr';

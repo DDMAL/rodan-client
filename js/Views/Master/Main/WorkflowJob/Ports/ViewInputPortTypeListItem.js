@@ -44,7 +44,7 @@ class ViewInputPortTypeListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewInputPortTypeListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewInputPortTypeListItem.prototype.tagName = 'tr';
 ViewInputPortTypeListItem.prototype.template = '#template-main_inputporttype_list_item';

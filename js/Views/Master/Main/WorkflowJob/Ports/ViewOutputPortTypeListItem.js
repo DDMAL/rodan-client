@@ -44,7 +44,7 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewOutputPortTypeListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewOutputPortTypeListItem.prototype.tagName = 'tr';
 ViewOutputPortTypeListItem.prototype.template = '#template-main_outputporttype_list_item';

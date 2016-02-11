@@ -40,7 +40,7 @@ class ViewWorkflowListImportItem extends Marionette.ItemView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowListImportItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 ViewWorkflowListImportItem.prototype.template = '#template-main_workflowbuilder_workflow_list_item_import';
 ViewWorkflowListImportItem.prototype.tagName = 'tr';

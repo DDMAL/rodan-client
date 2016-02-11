@@ -48,7 +48,7 @@ ViewProjectListItem.prototype.events = {
     'click': '_handleClick'
 };
 ViewProjectListItem.prototype.modelEvents = {
-    'all': 'render'
+    'change': 'render'
 };
 
 export default ViewProjectListItem;
