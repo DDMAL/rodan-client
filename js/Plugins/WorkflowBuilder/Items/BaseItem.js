@@ -104,7 +104,6 @@ class BaseItem extends paper.Path
         {
             menuItems = this.menuItems;
         }
-        menuItems.push({label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU});
         return menuItems;
     }
 

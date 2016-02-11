@@ -24,6 +24,12 @@ class LineItem extends BaseItem
     {
         this.lastSegment.point = point;
     }
+
+    /**
+     * Update (dummy).
+     */
+    update()
+    {}
 }
 
 export default LineItem;

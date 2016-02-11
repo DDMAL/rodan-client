@@ -274,6 +274,7 @@ class WorkflowBuilder
             if (this._line)
             {
                 this._line.remove();
+                this._line.destroy();
                 this._line = null;
             }
             this._itemController.clearSelected();
