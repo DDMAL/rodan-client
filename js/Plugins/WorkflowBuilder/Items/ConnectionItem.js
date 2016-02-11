@@ -36,8 +36,6 @@ class ConnectionItem extends BaseItem
         this._circle.onMouseEnter = event => this._handleMouseEvent(event);
         this._circle.onMouseLeave = event => this._handleMouseEvent(event);
         this.addChild(this._circle);
-
-        this.update();
     }
 
     /**

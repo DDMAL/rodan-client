@@ -41,7 +41,6 @@ class InputPortItem extends BaseItem
         this._connectionItem = null;
         this._workflowJobItem = options.workflowjobitem;
         this.onDoubleClick = event => this._handleDoubleClick(event);
-        this.update();
     }
 
     /**
@@ -58,7 +57,6 @@ class InputPortItem extends BaseItem
     setConnectionItem(aItem)
     {
         this._connectionItem = aItem;
-        this.update();
     }
 
     /**
@@ -88,10 +86,6 @@ class InputPortItem extends BaseItem
         if (this._connectionItem !== null)
         {
             this._connectionItem.setVisible(this.visible);
-            if (this.visible)
-            {
-                this._connectionItem.update();
-            }
         }
     }
 

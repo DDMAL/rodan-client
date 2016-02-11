@@ -1,6 +1,7 @@
 import Radio from 'backbone.radio';
 import paper from 'paper';
 
+import BaseItem from './Items/BaseItem';
 import Configuration from '../../Configuration';
 import ConnectionItem from './Items/ConnectionItem';
 import Environment from '../../Shared/Environment';
@@ -117,8 +118,7 @@ class WorkflowBuilder
      */
     _handleFrame(event)
     {
-       // this._handleState();
-        paper.view.draw();
+        BaseItem.updateItems();
     }
 
     /**

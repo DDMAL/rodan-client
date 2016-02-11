@@ -55,6 +55,22 @@ class BaseItem extends paper.Path
     }
 
     /**
+     * Update all items.
+     */
+    static updateItems()
+    {
+        if (!itemMap)
+        {
+            itemMap = {};
+        }
+        for (var id in itemMap)
+        {
+            var item = itemMap[id];
+            item.update();
+        }
+    }
+
+    /**
      * Returns context menu data for multiple items of this class.
      */
     static getContextMenuDataMultiple()
@@ -111,7 +127,6 @@ class BaseItem extends paper.Path
         {
             this._text.position = this.bounds.center;
         }
-        this.update();
     }
 
     /**
@@ -124,7 +139,6 @@ class BaseItem extends paper.Path
         {
             this._text.position = this.bounds.center;
         }
-        this.update();
     }
 
     /**
@@ -134,7 +148,6 @@ class BaseItem extends paper.Path
     {
         this.visible = visible;
         this._text.visible = this._useText && this.visible;
-        this.update();
     }
 
     /**
@@ -215,7 +228,6 @@ class BaseItem extends paper.Path
     {
         this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDER.STROKE_COLOR;
         this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
-        this.update();
     }
 
     /**
@@ -357,7 +369,6 @@ class BaseItem extends paper.Path
             this._coordinateSetModel = coordinateSet;
             this.position = new paper.Point(coordinates.x * paper.view.size.width * paper.view.zoom, 
                                             coordinates.y * paper.view.size.height * paper.view.zoom);
-            this.update();
         }
     }
 
@@ -399,7 +410,6 @@ class BaseItem extends paper.Path
             return;
         }
         this._text.content = aPass.model.get('name');
-        this.update();
     }
 
     /**

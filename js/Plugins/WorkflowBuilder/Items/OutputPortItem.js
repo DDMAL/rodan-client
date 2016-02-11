@@ -21,7 +21,6 @@ class OutputPortItem extends BaseItem
         this.fillColor = Configuration.WORKFLOWBUILDER.OUTPUTPORT_COLOR;
         this._connectionItems = [];
         this._workflowJobItem = options.workflowjobitem;
-        this.update();
     }
 
     /**
@@ -55,15 +54,10 @@ class OutputPortItem extends BaseItem
     }
 
     /**
-     * Update.
+     * Update (dummy).
      */
     update()
     {
-        for (var i = 0; i < this._connectionItems.length; i++)
-        {
-            // NOTE: we let the InputPorts handle the visibility of ConnectionItems.
-            this._connectionItems[i].update();
-        }
     }
 
     /**

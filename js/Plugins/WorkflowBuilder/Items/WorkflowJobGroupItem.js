@@ -39,8 +39,6 @@ class WorkflowJobGroupItem extends BaseItem
         this.loadCoordinates();
 
         this.onDoubleClick = event => this._handleDoubleClick(event);
-
-        this.update();
     }
 
     /**
@@ -49,7 +47,6 @@ class WorkflowJobGroupItem extends BaseItem
     addInputPortItem(aInputPortItem)
     {
         this._paperGroupInputPorts.addChild(aInputPortItem);
-        this.update();
     }
 
     /**
@@ -58,7 +55,6 @@ class WorkflowJobGroupItem extends BaseItem
     addOutputPortItem(aOutputPortItem)
     {
         this._paperGroupOutputPorts.addChild(aOutputPortItem);
-        this.update();
     }
 
     /**
@@ -140,7 +136,6 @@ class WorkflowJobGroupItem extends BaseItem
         for (var i = 0; i < group.children.length; i++)
         {
             group.children[i].setVisible(this.visible);
-            group.children[i].update();
         }
     }
 
@@ -150,7 +145,6 @@ class WorkflowJobGroupItem extends BaseItem
     _removeInputPortItems()
     {
         var children = this._paperGroupInputPorts.removeChildren();
-        this.update();
         return children;
     }
 
@@ -160,7 +154,6 @@ class WorkflowJobGroupItem extends BaseItem
     _removeOutputPortItems()
     {
         var children = this._paperGroupOutputPorts.removeChildren();
-        this.update();
         return children;
     }
 
