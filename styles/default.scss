@@ -189,32 +189,32 @@ div#main_workflowbuilder
 ///////////////////////////////////////////////////////////////////////////////////////
 // Paginated tables
 ///////////////////////////////////////////////////////////////////////////////////////
-div#template-pagination
+div#pagination
 {
    width: 100%;
 
 }
 
-div#template-pagination span
+div#pagination span
 {
     display:inline-block;
     font-size: $size-font + vw;
     font-weight: bold;
 }
 
-div#template-pagination span
+div#pagination span
 {
     display:inline-block; 
     width: 50%;
 }
 
-div#template-pagination span.align-right
+div#pagination span.align-right
 {
     text-align: right;
     padding-right: 25px;
 }
 
-div#template-pagination p
+div#pagination p
 {
     font-size:0; /* Fixes inline block spacing */  
 }

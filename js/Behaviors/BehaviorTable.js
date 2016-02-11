@@ -90,7 +90,7 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectPagination(pagination)
     {
-        if (this.$('#template-pagination').length === 0)
+        if (this.$('#pagination').length === 0)
         {
             this.$(this.options.table).before($(this.options.template).html());
         }
@@ -98,18 +98,18 @@ class BehaviorTable extends Marionette.Behavior
         // Set buttons.
         if (pagination.get('current') === 1)
         {
-            this.$('#template-pagination #pagination-previous').hide();
-            this.$('#template-pagination #pagination-next').show();
+            this.$('#pagination #pagination-previous').hide();
+            this.$('#pagination #pagination-next').show();
         }
         else if (pagination.get('current') === pagination.get('total'))
         {
-            this.$('#template-pagination #pagination-previous').show();
-            this.$('#template-pagination #pagination-next').hide();
+            this.$('#pagination #pagination-previous').show();
+            this.$('#pagination #pagination-next').hide();
         }
         else
         {
-            this.$('#template-pagination #pagination-previous').show();
-            this.$('#template-pagination #pagination-next').show();
+            this.$('#pagination #pagination-previous').show();
+            this.$('#pagination #pagination-next').show();
         }
     }
 
@@ -118,7 +118,7 @@ class BehaviorTable extends Marionette.Behavior
      */
     _removePagination()
     {
-        this.$('#template-pagination').remove();
+        $(this.el).remove('#pagination');
     }
 
     /**

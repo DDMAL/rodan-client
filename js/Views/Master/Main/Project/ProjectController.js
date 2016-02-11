@@ -101,7 +101,7 @@ class ProjectController extends BaseController
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetch({data: {project: this._activeProject.id}});
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {}, 
+                                                                       options: {collection: workflowRunCollection}, 
                                                                        callback: null});
 
         // Show layout view.
