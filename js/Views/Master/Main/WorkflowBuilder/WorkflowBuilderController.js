@@ -9,6 +9,7 @@ import LayoutViewResourceAssignment from './ResourceAssignment/LayoutViewResourc
 import LayoutViewWorkflowBuilder from './LayoutViewWorkflowBuilder';
 import OutputPort from '../../../../Models/OutputPort';
 import Resource from '../../../../Models/Resource';
+import ResourceCollection from '../../../../Collections/ResourceCollection';
 import ViewResourceList from '../Resource/List/ViewResourceList';
 import ViewResourceListItemModal from '../Resource/List/ViewResourceListItemModal';
 import Workflow from '../../../../Models/Workflow';
@@ -848,7 +849,11 @@ class WorkflowBuilderController extends BaseController
     {
         if (!this._resourcesAvailable[url])
         {
-            this._resourcesAvailable[url] = this._rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: url});
+            var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+            // todo - need proper way of getting resource list for types
+            //this._resourcesAvailable[url] = this._rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: url});
+            this._resourcesAvailable[url] = new ResourceCollection();
+            this._resourcesAvailable[url].fetch({data: {project: project.id}});
         }
         this._resourcesAvailable[url].syncList();
         return this._resourcesAvailable[url];
