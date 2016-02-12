@@ -195,8 +195,7 @@ class WorkflowJobItem extends BaseItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_VIEW, {url: this.getModelURL()});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJob: ' + this.getDescription()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, {url: this.getModelURL()});
     }
 }
 

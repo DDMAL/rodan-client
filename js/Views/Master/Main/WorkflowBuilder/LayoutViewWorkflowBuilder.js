@@ -2,8 +2,6 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../../Shared/Events';
-import LayoutViewJobSelection from './JobSelection/LayoutViewJobSelection';
-import ViewWorkflow from '../Workflow/Individual/ViewWorkflow';
 
 /**
  * This class represents the controller for editing a Workflow.
@@ -18,12 +16,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     initialize(options)
     {
-        this.addRegions({
-            regionControlWorkflowUpperArea: '#region-main_workflowbuilder_control_workflow_upperarea',
-            regionControlWorkflowLowerArea: '#region-main_workflowbuilder_control_workflow_lowerarea'
-        });
         this._initializeRadio();
-        this._initializeViews(options);
         this._rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
     }
 
@@ -37,12 +30,6 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
         this._rodanChannel.stopReplying(null, null, this);
     }
 
-    onBeforeShow()
-    {
-        this.regionControlWorkflowUpperArea.show(this._viewWorkflow);
-        this.regionControlWorkflowLowerArea.show(this._viewJobSelection);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -53,15 +40,6 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this._rodanChannel = Radio.channel('rodan');
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_ADDPORTS, () => this._handleRequestGetAddPorts(), this); 
-    }
-
-    /**
-     * Initialize views.
-     */
-    _initializeViews(options)
-    {
-        this._viewWorkflow = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: options.workflow});
-        this._viewJobSelection = new LayoutViewJobSelection();
     }
 
     /**

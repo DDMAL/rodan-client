@@ -165,6 +165,10 @@ var Events =
     REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES: 'REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES', // Given an array of InputPort URLs, returns list of ResourceType URLs that would satisfy it. Takes {urls: [string]}.
     REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE',
     REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW',
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW',
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW',
+    REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW',
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder GUI
@@ -206,7 +210,6 @@ var Events =
                                                                 // If targetintputports is provided and only one OutputPort was auto created, will connect that OutputPort to the provided InputPorts. Only works if only one OutputPort was created.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Called when WorkflowJob needs to be saved. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
-    REQUEST__WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWJOB_VIEW',     // Return control view for WorkflowJob. Takes {id: string}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup

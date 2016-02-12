@@ -288,7 +288,9 @@ class ItemController
 
         if (contextMenuData.length > 0)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, mouseevent: mouseEvent});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, 
+                                                                                             top: mouseEvent.event.y,
+                                                                                             left: mouseEvent.event.x});
         }
     }
 

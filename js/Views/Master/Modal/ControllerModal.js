@@ -75,7 +75,7 @@ class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if ($modalEl.is(':visible'))
         {
-            return;
+            $modalEl.modal('hide');
         }
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal_waiting'});
         this._layoutViewModal.render();

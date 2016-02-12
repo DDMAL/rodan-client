@@ -25,13 +25,17 @@ class WorkflowBuilder
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
-    initialize(canvasElementId)
+    initialize(canvasElementId, workflow)
     {        
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
         
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
+        this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {model: workflow}},
+                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW},
+                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW},
+                           {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {model: workflow}}];
 
         this._initializeStateMachine();
         this._initializePaper(canvasElementId);
@@ -197,6 +201,13 @@ class WorkflowBuilder
             {
                 this._handleRequestHideContextMenu();
                 this._itemController.clearSelected();
+                
+                // If right-click, open context menu.
+                if (event.event.button === 2)
+                {
+                    this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU,
+                                              {items: this._menuItems, top: event.event.y, left: event.event.x});
+                }
             }
         }
 
@@ -375,8 +386,8 @@ class WorkflowBuilder
             anchor.click(functionCall);
             $('#menu-context').append($('<li></li>').append(anchor));
         }
-        $('#menu-context').css('top', options.mouseevent.event.y);
-        $('#menu-context').css('left', options.mouseevent.event.x);
+        $('#menu-context').css('top', options.top);
+        $('#menu-context').css('left', options.left);
         $('#menu-context').show();
     }
 
