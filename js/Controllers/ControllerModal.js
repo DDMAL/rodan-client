@@ -1,10 +1,10 @@
 import $ from 'jquery';
 import jqueryui from 'jqueryui';
 
-import BaseController from '../../../Controllers/BaseController';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
-import LayoutViewMasterModal from './LayoutViewMasterModal';
+import BaseController from './BaseController';
+import Configuration from '../Configuration';
+import Events from '../Shared/Events';
+import LayoutViewMasterModal from '../Views/Master/Modal/LayoutViewMasterModal';
 
 /**
  * Controls modals.

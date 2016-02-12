@@ -11,6 +11,17 @@ import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
 
+import ControllerModal from './Controllers/ControllerModal';
+import ProjectController from './Views/Master/Main/Project/ProjectController';
+import ResourceController from './Views/Master/Main/Resource/ResourceController';
+import RunJobController from './Views/Master/Main/RunJob/RunJobController';
+import WorkflowController from './Views/Master/Main/Workflow/WorkflowController';
+import WorkflowRunController from './Views/Master/Main/WorkflowRun/WorkflowRunController';
+import WorkflowBuilderController from './Controllers/WorkflowBuilderController';
+import WorkflowJobController from './Controllers/WorkflowJobController';
+import WorkflowJobGroupController from './Controllers/WorkflowJobGroupController';
+import WorkflowBuilderMenuController from './Controllers/WorkflowBuilderMenuController';
+
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
@@ -120,6 +131,17 @@ class Application extends Marionette.Application
     {
         this.controllerServer = new ControllerServer();
         this.controllerAuthentication = new ControllerAuthentication(this.controllerServer);
+
+        this.modalController = new ControllerModal();
+        this.projectController = new ProjectController();
+        this.resourceController = new ResourceController();
+        this.runJobController = new RunJobController();
+        this.workflowController = new WorkflowController();
+        this.workflowRunController = new WorkflowRunController();
+        this.workflowBuilderController = new WorkflowBuilderController();
+        this.workflowJobController = new WorkflowJobController();
+        this.workflowJobGroupController = new WorkflowJobGroupController();
+        this.workflowBuilderMenuController = new WorkflowBuilderMenuController();
     }
 
     /**

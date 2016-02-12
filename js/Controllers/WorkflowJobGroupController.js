@@ -1,8 +1,8 @@
-import Configuration from '../../../../Configuration';
-import Events from '../../../../Shared/Events';
-import BaseController from '../../../../Controllers/BaseController';
-import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
-import WorkflowJobGroupCollection from '../../../../Collections/WorkflowJobGroupCollection';
+import Configuration from '../Configuration';
+import Events from '../Shared/Events';
+import BaseController from './BaseController';
+import WorkflowJobGroup from '../Models/WorkflowJobGroup';
+import WorkflowJobGroupCollection from '../Collections/WorkflowJobGroupCollection';
 
 /**
  * Controller for WorkflowJobGroup.

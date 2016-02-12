@@ -1,7 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import ControllerModal from './Modal/ControllerModal';
 import Events from '../../Shared/Events';
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
@@ -28,7 +27,6 @@ class LayoutViewMaster extends Marionette.LayoutView
         this._initializeRadio();
         this._initializeViews();
 
-        this.modalController = new ControllerModal();
     }
 
     /**

@@ -31,7 +31,7 @@ class WorkflowJobController extends BaseController
     _handleRequestCreateWorkflowJob(options)
     {
         var workflowJob = new WorkflowJob({job: options.job.get('url'), workflow: options.workflow.get('url')});
-        var addPorts = options.addports ? options.addports : true;
+        var addPorts = options.addports ? options.addports : false;
         var targetInputPorts = options.targetinputports ? options.targetinputports : [];
         workflowJob.save({}, {success: (model) => this._handleWorkflowJobCreationSuccess(model, 
                                                                                          options.workflow, 

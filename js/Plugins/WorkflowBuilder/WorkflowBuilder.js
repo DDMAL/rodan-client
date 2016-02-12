@@ -390,14 +390,6 @@ class WorkflowBuilder
         $('#menu-context').css('left', options.left);
         $('#menu-context').show();
     }
-
-    /**
-     * Handle request show InputPort mapping.
-     */
-    _handleRequestShowInputPortMapping(options)
-    {
-        console.log('load modal');
-    }
 }
 
 export default WorkflowBuilder;

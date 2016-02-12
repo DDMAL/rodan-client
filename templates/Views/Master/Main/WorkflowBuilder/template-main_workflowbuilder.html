@@ -1,14 +1,32 @@
-<div class="row top">
-    <div id="canvas-wrap" class="col-lg-10">
+<div class="row gui_menu">
+    <div class="col-lg-12">
+        <nav class="menu_horizontal">
+            <ul>
+              <!--  <li><a>Workflow</a></li>-->
+                <li>
+                    <a>View</a>
+                    <ul id="submenu">
+                        <li><a id="button-zoom_in">Zoom in</a></li>
+                        <li><a id="button-zoom_out">Zoom out</a></li>
+                        <li><a id="button-zoom_reset">Reset</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>Settings</a>
+                    <ul id="submenu">
+                        <li><a>Automatically add ports to job  <input type="checkbox" checked="checked" id="checkbox-add_ports"/></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+       <!-- <div class="info-workflow_validity">
+            <span>Workflow is INVALID. Click here to see issues.</span>
+        </div>-->
+    </div>
+</div>
+<div class="row gui">
+    <div id="canvas-wrap" class="col-lg-12">
         <canvas id="canvas-workspace"></canvas>
         <div id="canvas-tooltip">placeholder</div>
-    </div>
-    <div class="col-lg-2" id="main_workflowbuilder">
-        <h2>Workflow Builder</h2>
-        <hr/>
-        <button id="button-zoom_in">+</button>
-        <button id="button-zoom_out">-</button>
-        <button id="button-zoom_reset">Reset</button><br/>
-        <input type="checkbox" checked="checked" id="checkbox-add_ports" /> Automatically add ports to job<br/>
     </div>
 </div>

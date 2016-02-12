@@ -42,6 +42,8 @@ class WorkflowJobItem extends BaseItem
         // Get getter Event.
         this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB;
         this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {url: this.getModelURL()}},
+                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {url: this.getModelURL()}},
+                          {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {url: this.getModelURL()}},
                           {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options: {model: options.model}}];
 
         // Set coordinate set info.
