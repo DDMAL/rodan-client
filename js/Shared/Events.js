@@ -90,7 +90,6 @@ var Events =
     REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ResourceController which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Load Resources from server. Takes {data: Object (query parameters)}. The ResourceController will manage/update to the ResourceCollection.
     REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Update the ResourceCollection without resetting.
-    REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT: 'REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob

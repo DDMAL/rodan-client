@@ -64,7 +64,6 @@ class WorkflowBuilderController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, options => this._handleCommandDeleteOutputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupDelete(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, options => this._handleRequestgetCompatibleResourceTypes(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
@@ -408,14 +407,6 @@ class WorkflowBuilderController extends BaseController
             workflowJobs.push(workflowJob);
         }
         this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this._workflow});
-    }
-
-    /**
-     * Handle request get compatible ResourceType URL list.
-     */
-    _handleRequestgetCompatibleResourceTypes(options)
-    {
-        return this._getCompatibleResourceTypeURLs(options.urls);
     }
 
     /**
@@ -915,10 +906,27 @@ class WorkflowBuilderController extends BaseController
         if (!this._resourcesAvailable[url])
         {
             var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-            // todo - need proper way of getting resource list for types
-            //this._resourcesAvailable[url] = this._rodanChannel.request(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, {url: url});
+            var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: url});
+            var resourceTypeURLs = this._getCompatibleResourceTypeURLs(url);
+            var data = {project: project.id, resource_type__in: ''};
+            var globalResourceTypes = this._rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+            var first = true;
+            for (var index in resourceTypeURLs)
+            {
+                var idString = null;
+                if (first)
+                {
+                    first = false;
+                    idString = globalResourceTypes.findWhere({url: resourceTypeURLs[index]}).id;
+                }
+                else
+                {
+                    idString = ',' + globalResourceTypes.findWhere({url: resourceTypeURLs[index]}).id;
+                }
+                data.resource_type__in = data.resource_type__in + idString;
+            }
             this._resourcesAvailable[url] = new ResourceCollection();
-            this._resourcesAvailable[url].fetch({data: {project: project.id}});
+            this._resourcesAvailable[url].fetch({data: data});
         }
         this._resourcesAvailable[url].syncList();
         return this._resourcesAvailable[url];

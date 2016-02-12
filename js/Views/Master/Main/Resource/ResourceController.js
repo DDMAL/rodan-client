@@ -30,7 +30,6 @@ class ResourceController extends BaseController
         this._rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, aOptions => this._handleEventItemSelected(aOptions));
         this._rodanChannel.reply(Events.REQUEST__RESOURCES_SYNC, options => this._handleRequestResourcesSync(options));
         this._rodanChannel.reply(Events.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
-        this._rodanChannel.reply(Events.REQUEST__RESOURCES_GET_LIST_FOR_ASSIGNMENT, options => this._handleRequestResourceGetListForAssignment(options));
    }
    
     /**
@@ -107,18 +106,6 @@ class ResourceController extends BaseController
         this._collection = new ResourceCollection();
         this._collection.fetch(options);
         return this._collection;
-    }
-
-    /**
-     * Handle request get list for assignment.
-     */
-    _handleRequestResourceGetListForAssignment(options)
-    {
-        // TODO - get proper resource list!
-        //var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
-       // var resourceTypes = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES, {urls: [options.url]});
-        this._handleRequestResources();
-        return this._collection.clone();
     }
 }
 
