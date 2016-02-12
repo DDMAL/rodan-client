@@ -1,7 +1,6 @@
 import Configuration from '../../../../Configuration';
 import Events from '../../../../Shared/Events';
 import BaseController from '../../../../Controllers/BaseController';
-import LayoutViewControlWorkflowJobGroup from './LayoutViewControlWorkflowJobGroup';
 import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
 import WorkflowJobGroupCollection from '../../../../Collections/WorkflowJobGroupCollection';
 
@@ -34,7 +33,6 @@ class WorkflowJobGroupController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_VIEW, (options) => this._handleRequestWorkflowJobGroupView(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -78,16 +76,6 @@ class WorkflowJobGroupController extends BaseController
     _handleRequestWorkflowJobGroup(options)
     {
         return this._collection.findWhere({url: options.url});
-    }
-
-    /**
-     * Handle request WorkflowJobGroup view.
-     */
-    _handleRequestWorkflowJobGroupView(options)
-    {
-        var workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {url: options.url});
-        var workflow = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW);
-        return new LayoutViewControlWorkflowJobGroup({workflow: workflow, workflowjobgroup: workflowJobGroup});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

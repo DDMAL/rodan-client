@@ -118,6 +118,20 @@ class InputPortItem extends BaseItem
         super.destroy();
     }
 
+    /**
+     * Returns context menu data for single item of this class.
+     * We override as some things should not be visible.
+     */
+    getContextMenuDataSingle()
+    {
+        var menuItems = [];
+        if (!this.hasConnectionItem())
+        {
+            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {url: this.getModelURL()}});
+        }
+        return menuItems;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -128,8 +142,7 @@ class InputPortItem extends BaseItem
     {
         if (!this.hasConnectionItem())
         {
-            var view = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW, {url: this.getModelURL()});
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'InputPort: ' + this.getDescription()});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {url: this.getModelURL()});
         }
     }
 }

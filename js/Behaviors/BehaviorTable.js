@@ -74,7 +74,7 @@ class BehaviorTable extends Marionette.Behavior
         if (returnObject instanceof BaseCollection)
         {
             pagination = returnObject.getPagination();
-            if (pagination !== null && pagination.get('total') > 1)
+            if (pagination !== null/* && pagination.get('total') > 1*/)
             {
                 this._injectPagination(pagination);
             }
@@ -96,20 +96,15 @@ class BehaviorTable extends Marionette.Behavior
         }
 
         // Set buttons.
-        if (pagination.get('current') === 1)
+        this.$('#pagination #pagination-previous').hide();
+        this.$('#pagination #pagination-next').hide();
+        if (pagination.get('current') < pagination.get('total'))
         {
-            this.$('#pagination #pagination-previous').hide();
             this.$('#pagination #pagination-next').show();
         }
-        else if (pagination.get('current') === pagination.get('total'))
+        if (pagination.get('current') > 1)
         {
             this.$('#pagination #pagination-previous').show();
-            this.$('#pagination #pagination-next').hide();
-        }
-        else
-        {
-            this.$('#pagination #pagination-previous').show();
-            this.$('#pagination #pagination-next').show();
         }
     }
 

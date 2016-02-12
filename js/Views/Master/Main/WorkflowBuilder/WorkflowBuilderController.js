@@ -21,6 +21,7 @@ import Workflow from '../../../../Models/Workflow';
 import WorkflowBuilder from '../../../../Plugins/WorkflowBuilder/WorkflowBuilder';
 import WorkflowCollection from '../../../../Collections/WorkflowCollection';
 import WorkflowJob from '../../../../Models/WorkflowJob';
+import LayoutViewControlWorkflowJobGroup from '../WorkflowJobGroup/LayoutViewControlWorkflowJobGroup';
 
 /**
  * Controller for the Workflow Builder.
@@ -70,13 +71,14 @@ class WorkflowBuilderController extends BaseController
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW, () => this._handleRequestGetWorkflow(), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestGetResourceAssignmentView(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, options => this._handleRequestGetResourceAssignments(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW, options => this._handleRequestShowJobListView(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestShowResourceAssignmentView(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options => this._handleRequestShowWorkflowView(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW, options => this._handleRequestShowWorkflowListView(options), this);
+        this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options => this._handleRequestShowWorkflowJobGroupView(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options => this._handleRequestShowWorkflowJobView(options), this);
         this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, options => this._handleRequestUnassignResource(options), this);
@@ -153,9 +155,9 @@ class WorkflowBuilderController extends BaseController
     }
 
     /**
-     * Handle request get Resource assignment view.
+     * Handle request show Resource assignment view.
      */
-    _handleRequestGetResourceAssignmentView(options)
+    _handleRequestShowResourceAssignmentView(options)
     {
         // Create views.
         var inputPort = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
@@ -170,8 +172,9 @@ class WorkflowBuilderController extends BaseController
                                                      childView: ViewResourceListItemModal,
                                                      childViewOptions: {inputport: inputPort, assigned: false}});
 
-        // Return the layout view.
-        return new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
+        // Show the layout view.
+        var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
+        this._rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'InputPort'});
     }
 
     /**
@@ -488,6 +491,16 @@ class WorkflowBuilderController extends BaseController
                                                        childView: ViewWorkflowListImportItem,
                                                        template: '#template-main_workflow_list_import'});
         this._rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'Workflows'});
+    }
+
+    /**
+     * Handle request show WorkflowJobGroup view.
+     */
+    _handleRequestShowWorkflowJobGroupView(options)
+    {
+        var workflowJobGroup = this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {url: options.url});
+        var view = new LayoutViewControlWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: workflowJobGroup});
+        this._rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJobGroup'});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
