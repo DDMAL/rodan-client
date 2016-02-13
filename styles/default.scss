@@ -26,7 +26,7 @@ $text-color-workflowbuilder-menu: #ffffff;
 
 /* WorkflowBuilder control area */
 $background-color-workflowbuilder-control: #ffffff;
-
+ 
 /**************************************************************************************
  * DO NOT TOUCH unless you know what you're doing.
  *************************************************************************************/
@@ -34,7 +34,7 @@ $height-bottom: 8; // % of vertical space in viewport
 $height-top: 92; // % of vertical space in viewport
 $height-gui: 88; // % of vertical space in GUI viewport
 $height-gui_menu: 4; // % of vertical space in GUI viewport for menu
-$size-font: 0.7; // % of viewport widht to define font size
+$size-font: 12px; // pixels
 
 .vertical-center {
     height: $height-top + %; //fallback
@@ -53,7 +53,7 @@ body
 {
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: $size-font + vw;
+    font-size: $size-font;
 }
 
 textarea {
@@ -231,12 +231,12 @@ div#main_workflowbuilder
 }
 
 .menu_horizontal a 
-{
+{ 
     background: $background-color-workflowbuilder-menu;
     color: $text-color-workflowbuilder-menu;
     display: block;
-    font: bold 12px/20px sans-serif;
-    padding: 10px 20px;
+    font: 12px/20px sans-serif;
+    padding: 0px 10px 0px 10px;
     height: 100%;
     text-decoration: none;
     vertical-align:middle;
@@ -246,7 +246,7 @@ div#main_workflowbuilder
     -ms-transition: all .25s ease;
     -o-transition: all .25s ease;
     transition: all .25s ease;
-}
+} 
 
 .menu_horizontal li:hover a 
 {
@@ -288,6 +288,7 @@ li:hover ul#submenu
 {
     background-color: $background-color-workflowbuilder-menu;
     width: 100%;
+    padding: 0px 10px 0px 10px;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +322,7 @@ div#pagination
 div#pagination span
 {
     display:inline-block;
-    font-size: $size-font + vw;
+    font-size: $size-font;
     font-weight: bold;
 }
 
