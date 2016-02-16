@@ -26,6 +26,15 @@ class ViewResource extends Marionette.CompositeView
     }
 
     /**
+     * Post-render.
+     */
+    onRender()
+    {
+        var disabled = this.model.get('origin') !== null;
+        $(this.ui.buttonDelete).attr('disabled', disabled); 
+    }
+
+    /**
      * Destroy callback.
      */
     onDestroy()
