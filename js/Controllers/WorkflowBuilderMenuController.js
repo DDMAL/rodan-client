@@ -26,8 +26,6 @@ class WorkflowBuilderMenuController extends BaseController
      */
     _initializeRadio()
     {
-       // this._rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options), this);
-       // this._rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, options => this._handleCommandAddConnection(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

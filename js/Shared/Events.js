@@ -54,6 +54,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__MODAL_HIDE: 'REQUEST__MODAL_HIDE',                 // Hide modal.
     REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Show modal. Takes {view: Marionette.View, description: string}.
+    REQUEST__MODAL_SIMPLE_SHOW: 'REQUEST__MODAL_SIMPLE_SHOW',   // Show modal without view. Takes {title: string, text: string}.
     REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Show special modal for waiting on server/whatever.
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +110,7 @@ var Events =
     EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',             // Fired when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
     EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                   // Fired when server no longer waiting. Only happens if a EVENT__SERVER_WAITING had previously been fired.
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                     // Called when the app suspects that something went wrong.
+    EVENT__RODAN_ERROR: 'EVENT__RODAN_ERROR',                       // Triggered on Rodan-based server events. Takes {json: JSON object of error}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
@@ -132,6 +134,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED: 'EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED',     // Triggered when Workflow in WorkflowBuilder has been validated.
     REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT',           // Called when InputPort needs to be added to WorkflowJob. Takes {inputportype: InputPortType, workflowjob: WorkflowJob (may be null, in which case currently selected WorkflowJob will be used)}.
     REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT',         // Called when OutputPort needs to be added to WorkflowJob. Takes {outputporttype: OutputPortType, workflowjob: WorkflowJob (may be null, in which case currently selected WorkflowJob will be used), targetinputports: [InputPort] optional}.
                                                                                                 // targetinputports are InputPorts that will automatically have a Connection created

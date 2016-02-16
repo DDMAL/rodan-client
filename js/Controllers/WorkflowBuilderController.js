@@ -194,6 +194,7 @@ class WorkflowBuilderController extends BaseController
     _handleWorkflowLoadSuccess(workflow)
     {
         this._processWorkflow(workflow);
+        this._validateWorkflow(this._workflow);
     }
 
     /**
@@ -594,9 +595,17 @@ class WorkflowBuilderController extends BaseController
     /**
      * Handle validation failure.
      */
-    _handleValidationFailure(model)
+    _handleValidationFailure(model, response, options)
     {
-        model.set({'valid': false})
+        model.set({'valid': false});
+    }
+
+    /**
+     * Handle validation success.
+     */
+    _handleValidationSuccess(model, response, options)
+    {
+        this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -818,8 +827,9 @@ class WorkflowBuilderController extends BaseController
     _validateWorkflow(workflow)
     {
         workflow.save({valid: true}, {patch: true,
-                                      error: (model) => this._handleValidationFailure(model),
-                                      use_generic: false});
+                                      success: (model, response, options) => this._handleValidationSuccess(model, response, options),
+                                      error: (model, response, options) => this._handleValidationFailure(model, response, options)/*,
+                                      use_generic: false*/});
     }
 
     /**

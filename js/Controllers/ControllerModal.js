@@ -32,6 +32,7 @@ class ControllerModal extends BaseController
         this._rodanChannel.reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
+        this._rodanChannel.reply(Events.REQUEST__MODAL_SIMPLE_SHOW, options => this._handleRequestModalSimpleShow(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +45,25 @@ class ControllerModal extends BaseController
     {
         var $modalElement = $("#modal-generic");
         $modalElement.modal('hide');
+    }
+
+    /**
+     * Handle request modal simple show.
+     */
+    _handleRequestModalSimpleShow(options)
+    {
+        var $modalEl = $("#modal-generic");
+        if ($modalEl.is(':visible'))
+        {
+            $modalEl.modal('hide');
+        }
+        this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal_simple'});
+        this._layoutViewModal.render();
+        $modalEl.css({top: 0, left: 0, position: 'absolute'});
+        $modalEl.html(this._layoutViewModal.el);
+        $('.modal-title').text(options.title);
+        $('.modal-body').text(options.text);
+        $modalEl.modal({backdrop: 'static', keyboard: false}); 
     }
 
     /**

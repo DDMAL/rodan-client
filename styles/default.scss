@@ -213,6 +213,7 @@ div#main_workflowbuilder
 {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .menu_horizontal ul 
@@ -220,14 +221,15 @@ div#main_workflowbuilder
     background: gray;
     list-style: none;
     width: 100%;
-    //display:table;
+    height: 100%;
 }
 
 .menu_horizontal li 
 {
     float: left;
     position: relative;
-    width:auto;
+    width: auto;
+    height: 100%;
 }
 
 .menu_horizontal a 
@@ -236,10 +238,10 @@ div#main_workflowbuilder
     color: $text-color-workflowbuilder-menu;
     display: block;
     font: 12px/20px sans-serif;
-    padding: 0px 10px 0px 10px;
+    padding: 10px 10px 10px 10px;
     height: 100%;
     text-decoration: none;
-    vertical-align:middle;
+    vertical-align: middle;
 
     -webkit-transition: all .25s ease;
     -moz-transition: all .25s ease;
@@ -258,7 +260,6 @@ div#main_workflowbuilder
     left: 0;
     opacity: 0;
     position: absolute;
-    //top: 35px;
     visibility: hidden;
     z-index: 1;
 }
@@ -266,9 +267,8 @@ div#main_workflowbuilder
 li:hover ul#submenu 
 {
     opacity: 1;
-   // top: 40px;  /* adjust this as per top nav padding top & bottom comes */
     visibility: visible;
-    min-width:100%; /* at least the size of the header */
+    min-width: 100%; /* at least the size of the header */
     width:auto; /* size the block automatically */
 }
 
@@ -288,7 +288,7 @@ li:hover ul#submenu
 {
     background-color: $background-color-workflowbuilder-menu;
     width: 100%;
-    padding: 0px 10px 0px 10px;
+    padding: 10px 10px 10px 10px;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
