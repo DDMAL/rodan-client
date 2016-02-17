@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Configuration from '../Configuration';
@@ -20,8 +21,7 @@ class ControllerServer extends BaseController
      */
     initialize()
     {
-        this.routes = null;
-        this.serverConfiguration = null;
+        this._server = null;
         this._originalSync = Backbone.sync;
         this._responseTimeout = null;
         this._responsePanic = null;
@@ -62,7 +62,8 @@ class ControllerServer extends BaseController
     _initializeRadio()
     {
         this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTES, () => this._getRoutes());
-        this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, aString => this._handleRequestServerRoute(aString));
+        this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
+        this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, routeName => this._handleRequestServerRoute(routeName));
         this._rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
         this._rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
     }
@@ -70,9 +71,9 @@ class ControllerServer extends BaseController
     /**
      * Returns associated route.
      */
-    _handleRequestServerRoute(aString)
+    _handleRequestServerRoute(routeName)
     {
-        return this._routeForRouteName(aString);
+        return this._server.routes[routeName].url;
     }
 
     /**
@@ -105,11 +106,11 @@ class ControllerServer extends BaseController
         {
             if (routeRequest.responseText && routeRequest.status === 200)
             {
-                var resp = JSON.parse(routeRequest.responseText);
-
-                this.routes = this._mapFromJsonObject(resp.routes);
-                this.serverConfiguration = this._mapFromJsonObject(resp.configuration);
-                this.version = resp.version;
+                this._server = JSON.parse(routeRequest.responseText);
+                for (var routeName in this._server.routes)
+                {
+                    this._server.routes[routeName] = {url: this._server.routes[routeName]};
+                }
                 this._rodanChannel.trigger(Events.EVENT__SERVER_ROUTESLOADED);
             }
             else
@@ -124,34 +125,35 @@ class ControllerServer extends BaseController
         routeRequest.send();
     }
 
+
     /**
-     * Return URL for specified route.
+     * Fetches the OPTIONS (arguments for sorting, filtering, etc).
      */
-    _routeForRouteName(aName)
+    _handleGetRouteOptions()
     {
-        if (this.routes.has(aName))
+        for (var key in this._server.routes)
         {
-            return this.routes.get(aName);
-        }
-        else
-        {
-            return null;
+            // Skip routes that don't have any options.
+            if (Configuration.ROUTES_WITHOUT_OPTIONS.indexOf(key) >= 0)
+            {
+                continue;
+            }
+
+            var ajaxSettings = {success: (result, status, xhr) => this._handleGetRouteOptionsSuccess(result, status, xhr),
+                                type: 'OPTIONS',
+                                url: this._server.routes[key].url,
+                                dataType: 'json'};
+            var request = $.ajax(ajaxSettings); 
+            request.key = key;
         }
     }
 
     /**
-     * Makes map from JSON object.
+     * Handle get route options success.
      */
-    _mapFromJsonObject(JsonObject)
+    _handleGetRouteOptionsSuccess(result, status, xhr)
     {
-        var keyvals = _.pairs(JsonObject);
-        var map = new Map();
-        var x = null;
-        for (x in keyvals)
-        {
-            map.set(keyvals[x][0], keyvals[x][1]);
-        }
-        return map;
+        this._server.routes[xhr.key].options = result;
     }
 
     /**
