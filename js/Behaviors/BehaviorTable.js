@@ -1,6 +1,7 @@
 import _ from 'underscore';
 
 import BaseCollection from '../Collections/BaseCollection';
+import Events from '../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -70,10 +71,20 @@ class BehaviorTable extends Marionette.Behavior
      */
     _handleCollectionEventSync(returnObject, object, request)
     {
-        var pagination = null;
         if (returnObject instanceof BaseCollection)
         {
-            pagination = returnObject.getPagination();
+            // Get options. If they exist, apply filtering and ordering to the template.
+            if (returnObject.route)
+            {
+                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, returnObject.route);
+                if (options)
+                {
+                  //  this._injectFiltering(options.filter_fields);
+                }
+            }
+
+            // Handle pagination.
+            var pagination = returnObject.getPagination();
             if (pagination !== null/* && pagination.get('total') > 1*/)
             {
                 this._injectPagination(pagination);
@@ -92,7 +103,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         if (this.$('#pagination').length === 0)
         {
-            this.$(this.options.table).before($(this.options.template).html());
+            this.$(this.options.table).before($(this.options.templatePagination).html());
         }
 
         // Set buttons.
@@ -107,6 +118,23 @@ class BehaviorTable extends Marionette.Behavior
             this.$('#pagination #pagination-previous').show();
         }
     }
+
+    /**
+     * Injects filtering functionality into template.
+     */
+    _injectFiltering(filterFields)
+    {
+        if (this.$('#filter').length === 0)
+        {
+            // Inject filtering:
+            //
+            // -    icontains: have a text box for searching; should be automatically created
+            // -    if the template has a column marked as 'data-enum', this should tell the app
+            //      that values corresponding to that field can be enumerated
+            //this.$(this.options.table).before($(this.options.templateFilter).html());
+        }
+    }
+
 
     /**
      * Removes pagination.
@@ -183,7 +211,10 @@ BehaviorTable.prototype.events = {
     'click th': '_handleSort'
 };
 BehaviorTable.prototype.defaults = {
-    'template': '#template-pagination',
+    'templatePagination': '#template-pagination',
+    'templateFilter': '#template-filter',
+    'templateFlterText': '#template-filter-text',
+    'templateFilterEnum': '#template-filter-enum',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {

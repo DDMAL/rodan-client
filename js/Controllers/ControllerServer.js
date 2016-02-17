@@ -64,6 +64,7 @@ class ControllerServer extends BaseController
         this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTES, () => this._getRoutes());
         this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
         this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, routeName => this._handleRequestServerRoute(routeName));
+        this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE_OPTIONS, routeName => this._handleRequestServerRouteOptions(routeName));
         this._rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
         this._rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
     }
@@ -74,6 +75,14 @@ class ControllerServer extends BaseController
     _handleRequestServerRoute(routeName)
     {
         return this._server.routes[routeName].url;
+    }
+
+    /**
+     * Returns associated route options.
+     */
+    _handleRequestServerRouteOptions(routeName)
+    {
+        return this._server.routes[routeName].options;
     }
 
     /**

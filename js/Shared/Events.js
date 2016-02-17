@@ -106,6 +106,7 @@ var Events =
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                     // Called when the app suspects that something went wrong.
     EVENT__RODAN_ERROR: 'EVENT__RODAN_ERROR',                       // Triggered on Rodan-based server events. Takes {json: JSON object of error}.
     REQUEST__SERVER_GET_ROUTE_OPTIONS: 'REQUEST__SERVER_GET_ROUTE_OPTIONS',
+    REQUEST__SERVER_ROUTE_OPTIONS: 'REQUEST__SERVER_ROUTE_OPTIONS',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
