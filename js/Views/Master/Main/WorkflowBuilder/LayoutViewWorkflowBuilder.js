@@ -93,7 +93,10 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleClickDataStatus()
     {
-        this._rodanChannel.request(Events.REQUEST__MODAL_SIMPLE_SHOW, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
+        if (this._lastErrorCode !== '' || this._lastErrorDetails !== '')
+        {   
+            this._rodanChannel.request(Events.REQUEST__MODAL_SIMPLE_SHOW, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
+        }
     }
 
     /**

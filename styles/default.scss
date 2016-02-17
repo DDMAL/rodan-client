@@ -199,7 +199,7 @@ div#main_workflowbuilder
     background: $background-color-workflowbuilder-menu;
     color: $text-color-workflowbuilder-menu;
     font: 12px/20px sans-serif;
-    padding: 10px 20px;
+    padding: 0px 10px 0px 10px;
     height: 100%;
     float: right;
 }
@@ -213,7 +213,6 @@ div#main_workflowbuilder
 {
     margin: 0;
     padding: 0;
-    height: 100%;
 }
 
 .menu_horizontal ul 
@@ -221,7 +220,6 @@ div#main_workflowbuilder
     background: gray;
     list-style: none;
     width: 100%;
-    height: 100%;
 }
 
 .menu_horizontal li 
@@ -229,7 +227,6 @@ div#main_workflowbuilder
     float: left;
     position: relative;
     width: auto;
-    height: 100%;
 }
 
 .menu_horizontal a 
@@ -238,7 +235,7 @@ div#main_workflowbuilder
     color: $text-color-workflowbuilder-menu;
     display: block;
     font: 12px/20px sans-serif;
-    padding: 10px 10px 10px 10px;
+    padding: 0px 10px 0px 10px;
     height: 100%;
     text-decoration: none;
     vertical-align: middle;
