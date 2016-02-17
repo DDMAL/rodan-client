@@ -35,8 +35,6 @@ class EventTimer extends Marionette.Object
         this._rodanChannel.reply(Events.REQUEST__SET_TIMED_EVENT, (options) => this._handleSetTimedEvent(options));
         this._rodanChannel.reply(Events.REQUEST__SET_TIMED_REQUEST, (options) => this._handleSetTimedRequest(options));
         this._rodanChannel.reply(Events.REQUEST__CLEAR_TIMED_EVENT, () => this._handleClearTimedEvent());
-        this._rodanChannel.on(Events.EVENT__TIMER_TEST, (options) => this._handleTimerTestEvent(options));
-        this._rodanChannel.reply(Events.REQUEST__TIMER_TEST, (options) => this._handleTimerTestRequest(options));
     }
 
     /**

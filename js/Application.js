@@ -64,11 +64,7 @@ class Application extends Marionette.Application
      * When app is ready, start communicating.
      */
     onStart()
-    {/*
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_EVENT, {event: Events.EVENT__TIMER_TEST, options: {}});
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__TIMER_TEST, 
-                                                                      options: {}, 
-                                                                      callback: (response) => this.timerRequestCallback(response)});*/
+    {
         this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTES);
     }
 

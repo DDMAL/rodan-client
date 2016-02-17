@@ -4,28 +4,22 @@
 var Events = 
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// TIMER
+// Timer
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Called when an Event is to be scheduled. Takes {event: Event string, options: options for the event}.
-    REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Called when a Request is to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
-    REQUEST__CLEAR_TIMED_EVENT: 'REQUEST__CLEAR_TIMED_EVENT',   // Called to clear timed event.
-    EVENT__TIMER_TEST: 'EVENT__TIMER_TEST',                     // DO NOT USE.
-    REQUEST__TIMER_TEST: 'REQUEST__TIMER_TEST',                 // DO NOT USE.
+    REQUEST__CLEAR_TIMED_EVENT: 'REQUEST__CLEAR_TIMED_EVENT',   // Clears timed event.
+    REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Sets a (Radio) Event to be scheduled. Takes {event: Event string, options: options for the event}.
+    REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Sets a (Radio) Request to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__AUTHENTICATION_ERROR_NULL: 'EVENT__AUTHENTICATION_ERROR_NULL',       // Triggered when authentication error occurred with no other info.
+    EVENT__AUTHENTICATION_LOGINREQUIRED: 'EVENT__AUTHENTICATION_LOGINREQUIRED', // Triggered to inform listeners that the user has to login.
+    EVENT__AUTHENTICATION_SUCCESS: 'EVENT__AUTHENTICATION_SUCCESS',             // Triggered on success of authentication check. Takes {user: User}.
+    EVENT__DEAUTHENTICATION_SUCCESS: 'EVENT__DEAUTHENTICATION_SUCCESS',         // Triggered on success of deauthentication.
+    REQUEST__AUTHENTICATION_CHECK: 'REQUEST__AUTHENTICATION_CHECK',
     REQUEST__AUTHENTICATION_LOGIN: 'REQUEST__AUTHENTICATION_LOGIN',
     REQUEST__AUTHENTICATION_LOGOUT: 'REQUEST__AUTHENTICATION_LOGOUT',
-    REQUEST__AUTHENTICATION_CHECK: 'REQUEST__AUTHENTICATION_CHECK',
-    EVENT__AUTHENTICATION_ERROR_400: 'EVENT__AUTHENTICATION_ERROR_400',
-    EVENT__AUTHENTICATION_ERROR_401: 'EVENT__AUTHENTICATION_ERROR_401',
-    EVENT__AUTHENTICATION_ERROR_403: 'EVENT__AUTHENTICATION_ERROR_403',
-    EVENT__AUTHENTICATION_ERROR_NULL: 'EVENT__AUTHENTICATION_ERROR_NULL',
-    EVENT__AUTHENTICATION_ERROR_UNKNOWN: 'EVENT__AUTHENTICATION_ERROR_UNKNOWN',
-    EVENT__AUTHENTICATION_LOGINREQUIRED: 'EVENT__AUTHENTICATION_LOGINREQUIRED', // Called to inform listeners that the user has to login.
-    EVENT__AUTHENTICATION_SUCCESS: 'EVENT__AUTHENTICATION_SUCCESS',             // Called on success of authentication check. Takes {user: User}.
-    EVENT__DEAUTHENTICATION_SUCCESS: 'EVENT__DEAUTHENTICATION_SUCCESS',         // Called on success of deauthentication.
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',
 
 ///////////////////////////////////////////////////////////////////////////////////////

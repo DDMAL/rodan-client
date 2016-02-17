@@ -10,11 +10,12 @@
  * License:
  * - MIT
  */
-export function drawGrid(cellSize, paperScope) 
+export function drawGrid(options, paperScope) 
 {
  
-    this.cellSize = cellSize;
-    this.gridColor = '#a0a0a0';
+    this.cellSize = options.DIMENSION;
+    this.gridColor = options.LINE_COLOR;
+    this.lineWidth = options.LINE_WIDTH;
  
     var self = this;
     this.gridGroup;
@@ -35,7 +36,7 @@ export function drawGrid(cellSize, paperScope)
             var bottomPoint = new paperScope.Point(xPos, boundingRect.bottom);
             var gridLine = new paperScope.Path.Line(topPoint, bottomPoint);
             gridLine.strokeColor = self.gridColor;
-            gridLine.strokeWidth = 1 / paperScope.view.zoom;
+            gridLine.strokeWidth = self.lineWidth / paperScope.view.zoom;
  
             self.gridGroup.addChild(gridLine);
  
@@ -50,7 +51,7 @@ export function drawGrid(cellSize, paperScope)
             var gridLine = new paperScope.Path.Line(leftPoint, rightPoint);
  
             gridLine.strokeColor = self.gridColor;
-            gridLine.strokeWidth = 1 / paperScope.view.zoom;
+            gridLine.strokeWidth = self.lineWidth / paperScope.view.zoom;
  
             self.gridGroup.addChild(gridLine);
         }

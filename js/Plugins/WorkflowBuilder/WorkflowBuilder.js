@@ -110,7 +110,7 @@ class WorkflowBuilder
         paper.setup(canvasElementId);
         paper.view.onFrame = (event) => this._handleFrame(event);
         this.drawGrid = drawGrid;
-        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID_DIMENSION, paper);
+        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID, paper);
         this._handleRequestZoomReset();
     }
 

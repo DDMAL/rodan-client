@@ -5,13 +5,13 @@
 var Configuration = {
 
     // URL of the server to connect to.
-    SERVER_URL: 'http://url.to.server',
+    SERVER_URL: 'http://132.206.14.136',
 
     // Date/time format. See http://momentjs.com/docs/#/displaying/format/
-    DATETIME_FORMAT: 'dddd, MMMM Do YYYY, h:mm:ss a', 
+    DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss', 
 
     // Authentication type. Either 'session' or 'token'.
-    SERVER_AUTHENTICATION_TYPE: 'session',
+    SERVER_AUTHENTICATION_TYPE: 'token',
 
     // Debug flag, boolean. When true, extra output is presented in the
     // Message area (at the bottom) and all messages are also routed
@@ -23,8 +23,8 @@ var Configuration = {
 
     // Client admin info. Leave fields empty if you don't want to be bothered. ;)
     ADMIN_CLIENT: {
-        name: '', // your name
-        email: '' // your email
+        name: 'Ryan Bannon',
+        email: 'ryan.bannon@gmail.com'
     },
 
     // Event timer frequency (ms).
@@ -45,29 +45,38 @@ var Configuration = {
     // Settings for WorkflowBuilder GUI.
     WORKFLOWBUILDER: {
 
-        // Zoom settings. These are percentages of the paper zoom.
-        ZOOM_MAX: 2.0,
-        ZOOM_MIM: 0.1,
-        ZOOM_RATE: 0.1,
+        // Grid parameters.
+        GRID:
+        {
+            DIMENSION: 25,
+            LINE_COLOR: '#606060',
+            LINE_WIDTH: 0.5  
+        },
 
-        // Item sizes. These are percentages of the canvas.
-        WORKFLOWJOB_WIDTH: 0.2,
-        WORKFLOWJOB_HEIGHT: 0.1,
-        PORT_WIDTH: 0.02,
-        PORT_HEIGHT: 0.02,
+        // Zoom settings. These are percentages of the paper zoom.
+        ZOOM_MAX: 3.0,
+        ZOOM_MIN: 1.0,
+        ZOOM_RATE: 0.05,
+        ZOOM_INITIAL: 1.7,
+
+        // Item sizes (pixels).
+        WORKFLOWJOB_WIDTH: 20,
+        WORKFLOWJOB_HEIGHT: 22,
+        PORT_WIDTH: 8,
+        PORT_HEIGHT: 8,
 
         // Appearance parameters.
         OUTPUTPORT_COLOR: '#00ff00',
         INPUTPORT_COLOR_SATISFIED: '#00ff00',
-        INPUTPORT_COLOR_UNSATISFIED: '#ff0000',
+        INPUTPORT_COLOR_UNSATISFIED: '#ff8800',
         STROKE_COLOR: '#000000',
-        FILL_COLOR: '#5555ff',
+        FILL_COLOR: '#ccccff',
         WORKFLOWJOBGROUP_FILL_COLOR: '#8888ff',
-        STROKE_WIDTH: 2,
-        FONT_SIZE: 20,
+        STROKE_WIDTH: 1,
+        FONT_SIZE: 10,
         STROKE_COLOR_SELECTED: '#0000ff',
-        STROKE_WIDTH_SELECTED: 3,
-        CONNECTION_CIRCLE_RADIUS: 10,
+        STROKE_WIDTH_SELECTED: 2,
+        CONNECTION_CIRCLE_RADIUS: 4,
 
         // Hover time. This is the amount of time the mouse must
         // hover over an item for a pop-up to appear in milliseconds.
