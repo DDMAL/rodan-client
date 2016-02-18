@@ -98,7 +98,7 @@ class ControllerServer extends BaseController
      */
     _handleRequestServerVersionRodan()
     {
-        return this.version;
+        return this._server.version;
     }
 
     /*

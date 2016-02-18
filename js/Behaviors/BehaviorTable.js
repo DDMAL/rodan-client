@@ -79,7 +79,7 @@ class BehaviorTable extends Marionette.Behavior
                 var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, returnObject.route);
                 if (options)
                 {
-                  //  this._injectFiltering(options.filter_fields);
+                    this._injectFiltering(options.filter_fields);
                 }
             }
 
@@ -101,37 +101,74 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectPagination(pagination)
     {
-        if (this.$('#pagination').length === 0)
+        if ($(this.el).find('#pagination').length === 0)
         {
-            this.$(this.options.table).before($(this.options.templatePagination).html());
+            $(this.el).find(this.options.table).before($(this.options.templatePagination).html());
         }
 
         // Set buttons.
-        this.$('#pagination #pagination-previous').hide();
-        this.$('#pagination #pagination-next').hide();
+        $(this.el).find('#pagination #pagination-previous').hide();
+        $(this.el).find('#pagination #pagination-next').hide();
         if (pagination.get('current') < pagination.get('total'))
         {
-            this.$('#pagination #pagination-next').show();
+            $(this.el).find('#pagination #pagination-next').show();
         }
         if (pagination.get('current') > 1)
         {
-            this.$('#pagination #pagination-previous').show();
+            $(this.el).find('#pagination #pagination-previous').show();
         }
     }
 
     /**
      * Injects filtering functionality into template.
+     *
+     * - icontains: have a text box for searching; should be automatically created
+     * - if the template has a column marked as 'data-enum', this should tell the app
+     * that values corresponding to that field can be enumerated
      */
     _injectFiltering(filterFields)
     {
-        if (this.$('#filter').length === 0)
+        if ($(this.el).find('#filter').length === 0)
         {
-            // Inject filtering:
-            //
-            // -    icontains: have a text box for searching; should be automatically created
-            // -    if the template has a column marked as 'data-enum', this should tell the app
-            //      that values corresponding to that field can be enumerated
-            //this.$(this.options.table).before($(this.options.templateFilter).html());
+            // Insert parent div. Also bind the form to a dummy function.
+            $(this.el).find(this.options.table).before($(this.options.templateFilter).html());
+            $(this.el).find('form#form-filter').bind('submit', function() {return false;});
+
+            // Get those columns with data names.
+            var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
+            for (var i = 0; i < columns.length; i++)
+            {
+                var column = $(columns[i]);
+                var dataName = column.attr('data-name');
+                var templateID = null;
+                if (filterFields[dataName])
+                {
+                    for (var j = 0; j < filterFields[dataName].length; j++)
+                    {
+                        var filter = filterFields[dataName][j];
+                        switch (filter)
+                        {
+                            case 'icontains':
+                            {
+                                templateID = this.options.templateFilterText;
+                                break;
+                            }
+
+                            default:
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Insert.
+                if (templateID)
+                {
+                    var template = _.template($(templateID).html());
+                    $(this.el).find('div#filter').append(template({label: column.text(), dataname: dataName}));
+                }
+            }
         }
     }
 
@@ -171,6 +208,12 @@ class BehaviorTable extends Marionette.Behavior
      */
     _handleSort(event)
     {
+        // Only use this if the collection has a route.
+        if (!this.view.collection.route)
+        {
+            return;
+        }
+
         var sortField = $(event.currentTarget).attr('data-name');
         if (sortField)
         {
@@ -196,6 +239,28 @@ class BehaviorTable extends Marionette.Behavior
             }
         }
     }
+
+    /**
+     * Handle search.
+     */
+    _handleSearch(event)
+    {
+        // Only use this if the collection has a URL.
+        if (!this.view.collection.route)
+        {
+            return;
+        }
+
+        var values = $(this.el).find('#form-filter').serializeArray();
+        var filters = {};
+        for (var index in values)
+        {
+            var name = values[index].name;
+            var value = values[index].value;
+            filters[name] = value;
+        }
+        this.view.collection.fetchFilter(filters);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -203,17 +268,19 @@ class BehaviorTable extends Marionette.Behavior
 ///////////////////////////////////////////////////////////////////////////////////////
 BehaviorTable.prototype.ui = {
     paginationPrevious: '#pagination-previous',
-    paginationNext: '#pagination-next'
+    paginationNext: '#pagination-next',
+    buttonSearch: '#button-search',
 };
 BehaviorTable.prototype.events = {
     'click @ui.paginationPrevious': '_handlePaginationPrevious',
     'click @ui.paginationNext': '_handlePaginationNext',
-    'click th': '_handleSort'
+    'click th': '_handleSort',
+    'click @ui.buttonSearch': '_handleSearch',
 };
 BehaviorTable.prototype.defaults = {
     'templatePagination': '#template-pagination',
     'templateFilter': '#template-filter',
-    'templateFlterText': '#template-filter-text',
+    'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter-enum',
     'table': 'table'
 };

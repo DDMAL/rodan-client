@@ -19,6 +19,8 @@ class BaseCollection extends Backbone.Collection
         this._pagination = new Pagination();
         this._lastData = {};
         this._initializeRadio();
+        this._filters = {};
+        this._sort = {};
     }
 
     /**
@@ -60,6 +62,8 @@ class BaseCollection extends Backbone.Collection
         options = this._applyResponseHandlers(options);
         options.task = 'fetch';
         this._lastData = options.data ? options.data : {};
+        $.extend(options.data, this._filters);
+        $.extend(options.data, this._sort);
         super.fetch(options);
     }
 
@@ -104,11 +108,33 @@ class BaseCollection extends Backbone.Collection
         {
             this._lastData = options.data;
         }
-        this._lastData.ordering = field;
+
+        this._sort.ordering = field;
         if (!ascending)
         {
-            this._lastData.ordering = '-' + field;
+            this._sort.ordering = '-' + field;
         }
+
+        this.fetch({data: this._lastData, reset: true});
+    }
+
+    /**
+     * Requests a filtered fetch.
+     *
+     * Note that it uses _lastData. We need to keep the last options
+     * data in case we're paginating.
+     *
+     * If options.data IS passed, it will override _lastData.
+     */
+    fetchFilter(filters, options)
+    {
+        if (options && options.data)
+        {
+            this._lastData = options.data;
+        }
+
+        this._filters = filters;
+
         this.fetch({data: this._lastData, reset: true});
     }
 
