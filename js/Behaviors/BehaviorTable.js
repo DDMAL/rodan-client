@@ -24,15 +24,18 @@ class BehaviorTable extends Marionette.Behavior
     /**
      * When a view has rendered, we want to inject the pagination HTML.
      */
-    onRender()
+    onRender(view)
     {
-
         // Not really pretty, but works for now. Marionette calls 'delegateEvents'
         // bevore our custom 'initialize' on the view. However, at that point, the
         // collection is not yet set in the view, so binding doesn't work. This next
         // line is a work around.
         // TODO - fix/find better way
         this.view.delegateEvents();
+        if (view.collection)
+        {
+            this._handleCollectionEventSync(view.collection);
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +72,7 @@ class BehaviorTable extends Marionette.Behavior
     /**
      * Handles collection event.
      */
-    _handleCollectionEventSync(returnObject, object, request)
+    _handleCollectionEventSync(returnObject)
     {
         if (returnObject instanceof BaseCollection)
         {
