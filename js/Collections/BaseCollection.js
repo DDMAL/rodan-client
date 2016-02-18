@@ -21,6 +21,15 @@ class BaseCollection extends Backbone.Collection
         this._initializeRadio();
         this._filters = {};
         this._sort = {};
+        this.enumerations = this.enumerations ? this.enumerations : [];
+    }
+
+    /**
+     * Returns enumerations.
+     */
+    getEnumerations()
+    {
+        return this.enumerations;
     }
 
     /**
@@ -32,6 +41,12 @@ class BaseCollection extends Backbone.Collection
         {
             this._parsePagination(resp);
         }
+
+        if (this.enumerations && this.enumerations.length > 0)
+        {
+            this._populateEnumerations(resp);
+        }
+
         if (resp.hasOwnProperty('results'))
         {
             return resp.results;
@@ -262,6 +277,28 @@ class BaseCollection extends Backbone.Collection
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
         this.rodanChannel.request(Events.REQUEST__DISPLAY_MESSAGE, {text: text});
+    }
+
+    /**
+     * Populates enumerations.
+     */
+    _populateEnumerations(response)
+    {
+        for (var j in this.enumerations)
+        {
+            var field = this.enumerations[j].field;
+            if (!this.enumerations[j].values)
+            {
+                this.enumerations[j].values = [];
+            }
+
+            for (var i in response)
+            {
+                var jobResponse = response[i];
+                this.enumerations[j].values.push(jobResponse[field]);
+            }
+            this.enumerations[j].values = $.unique(this.enumerations[j].values);
+        }
     }
 }
 

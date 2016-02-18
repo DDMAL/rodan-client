@@ -27,6 +27,7 @@ class GlobalJobCollection extends GlobalCollection
         this.route = 'jobs';
         this.loadCommand = Events.REQUEST__GLOBAL_JOBS_LOAD;
         this.requestCommand = Events.REQUEST__GLOBAL_JOB_COLLECTION;
+        this.enumerations = [{field: 'category', label: 'Category'}];
     }
 }
 

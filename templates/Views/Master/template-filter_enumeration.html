@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="<%- dataname %>__exact">Filter by <%- label %>:</label>
+    <select class="form-control input-xs" id="<%- dataname %>__exact" name="<%- dataname %>__exact">
+        <option value="">All</option>
+        <% _(values).each(function(value) { %>
+        <option value="<%= value %>"><%= value %></option>
+        <% }); %>
+    </select>
+</div>

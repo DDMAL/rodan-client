@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
@@ -24,7 +25,6 @@ class GlobalCollection extends BaseCollection
         super(options);
         this._allowPagination = false;
      }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS

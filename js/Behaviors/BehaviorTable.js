@@ -169,6 +169,15 @@ class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('div#filter').append(template({label: column.text(), dataname: dataName}));
                 }
             }
+
+            // Finally, inject enumeration.
+        /*    var enumerations = this.view.collection.getEnumerations();
+            for (var i in enumerations)
+            {
+                var enumeration = enumerations[i];
+                var template = _.template($(this.options.templateFilterEnum).html());
+                $(this.el).find('div#filter').append(template({label: enumeration.label, dataname: enumeration.field, values: enumeration.values}));
+            }*/
         }
     }
 
@@ -281,7 +290,7 @@ BehaviorTable.prototype.defaults = {
     'templatePagination': '#template-pagination',
     'templateFilter': '#template-filter',
     'templateFilterText': '#template-filter_text',
-    'templateFilterEnum': '#template-filter-enum',
+    'templateFilterEnum': '#template-filter_enumeration',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {
