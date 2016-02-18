@@ -48,7 +48,7 @@ var Configuration = {
         // Grid parameters.
         GRID:
         {
-            DIMENSION: 25,
+            DIMENSION: 20,
             LINE_COLOR: '#606060',
             LINE_WIDTH: 0.5  
         },
@@ -81,7 +81,13 @@ var Configuration = {
         // Hover time. This is the amount of time the mouse must
         // hover over an item for a pop-up to appear in milliseconds.
         HOVER_TIME: 1000
-    }
+    },
+
+///////////////////////////////////////////////////////////////////////////////////////
+// DON'T EDIT BELOW THIS LINE (unless you know what you're doing)
+///////////////////////////////////////////////////////////////////////////////////////
+    // Routes without OPTIONS. if the route name is in here, the client won't try to grab them.
+    ROUTES_WITHOUT_OPTIONS: ['auth-reset-token', 'taskqueue-status', 'auth-change-password', 'auth-register', 'taskqueue-scheduled', 'taskqueue-active', 'auth-token']
 };
 
 export default Configuration;
