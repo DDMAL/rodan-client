@@ -45,17 +45,17 @@ class WorkflowJobGroupItem extends BaseItem
     /**
      * Adds input port item.
      */
-    addInputPortItem(aInputPortItem)
+    addInputPortItem(inputPortItem)
     {
-        this._paperGroupInputPorts.addChild(aInputPortItem);
+        this._paperGroupInputPorts.addChild(inputPortItem);
     }
 
     /**
      * Adds output port item.
      */
-    addOutputPortItem(aOutputPortItem)
+    addOutputPortItem(outputPortItem)
     {
-        this._paperGroupOutputPorts.addChild(aOutputPortItem);
+        this._paperGroupOutputPorts.addChild(outputPortItem);
     }
 
     /**

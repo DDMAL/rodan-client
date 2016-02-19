@@ -80,12 +80,12 @@ class BaseModel extends Backbone.Model
     /**
      * Parses ID out of resource type URL.
      */
-    parseIdFromUrl(aUrl)
+    parseIdFromUrl(url)
     {
-        var lastSlash = aUrl.lastIndexOf('/');
-        var subString = aUrl.substring(0, lastSlash);
+        var lastSlash = url.lastIndexOf('/');
+        var subString = url.substring(0, lastSlash);
         var secondLastSlash = subString.lastIndexOf('/');
-        return aUrl.substring(secondLastSlash + 1, lastSlash);
+        return url.substring(secondLastSlash + 1, lastSlash);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

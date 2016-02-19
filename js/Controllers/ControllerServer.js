@@ -61,12 +61,12 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTES, () => this._getRoutes());
-        this._rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
-        this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, routeName => this._handleRequestServerRoute(routeName));
-        this._rodanChannel.reply(Events.REQUEST__SERVER_ROUTE_OPTIONS, routeName => this._handleRequestServerRouteOptions(routeName));
-        this._rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
-        this._rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTES, () => this._getRoutes());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, routeName => this._handleRequestServerRoute(routeName));
+        this.rodanChannel.reply(Events.REQUEST__SERVER_ROUTE_OPTIONS, routeName => this._handleRequestServerRouteOptions(routeName));
+        this.rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
     }
 
     /**
@@ -120,7 +120,7 @@ class ControllerServer extends BaseController
                 {
                     this._server.routes[routeName] = {url: this._server.routes[routeName]};
                 }
-                this._rodanChannel.trigger(Events.EVENT__SERVER_ROUTESLOADED);
+                this.rodanChannel.trigger(Events.EVENT__SERVER_ROUTESLOADED);
             }
             else
             {
@@ -229,7 +229,7 @@ class ControllerServer extends BaseController
     _sendWaitingNotification()
     {
         this._waitingEventTriggered = true;
-        this._rodanChannel.trigger(Events.EVENT__SERVER_WAITING);
+        this.rodanChannel.trigger(Events.EVENT__SERVER_WAITING);
     }
 
     /**
@@ -238,7 +238,7 @@ class ControllerServer extends BaseController
     _sendIdleNotification()
     {
         this._waitingEventTriggered = false;
-        this._rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
+        this.rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
     }
 
     /**
@@ -246,7 +246,7 @@ class ControllerServer extends BaseController
      */
     _sendPanicNotification()
     {
-        this._rodanChannel.trigger(Events.EVENT__SERVER_PANIC);
+        this.rodanChannel.trigger(Events.EVENT__SERVER_PANIC);
     }
 }
 

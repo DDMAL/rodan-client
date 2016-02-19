@@ -19,7 +19,7 @@ class ViewResource extends Marionette.CompositeView
     {
         this.model = options.resource;
         this._initializeRadio();
-        this.collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+        this.collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         this.collection.each(function(model) { model.unset('selected'); });
         var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});
         resourceType.set('selected', 'selected');
@@ -50,7 +50,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -58,7 +58,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        this._rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model,
+        this.rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model,
                                                                    resource_type: this.ui.selectResourceType.val(),
                                                                    name: this.ui.resourceName.val(),
                                                                    description: this.ui.resourceDescription.val()});
@@ -78,7 +78,7 @@ class ViewResource extends Marionette.CompositeView
             var confirmation = confirm('Are you sure you want to delete this Resource?');
             if (confirmation)
             {
-                this._rodanChannel.request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
+                this.rodanChannel.request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
             }
         }
     }

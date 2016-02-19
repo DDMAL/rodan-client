@@ -25,17 +25,17 @@ class LayoutViewWorkflowRun extends Marionette.LayoutView
     /**
      * Show list.
      */
-    showList(aView)
+    showList(view)
     {
-        this.regionList.show(aView);
+        this.regionList.show(view);
     }
 
     /**
      * Show item.
      */
-    showItem(aView)
+    showItem(view)
     {
-        this.regionItem.show(aView);
+        this.regionItem.show(view);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

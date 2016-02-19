@@ -8,7 +8,7 @@ import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 /**
  * Controller for Project views.
  */
-class ProjectController extends BaseController
+class ControllerProject extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -30,16 +30,16 @@ class ProjectController extends BaseController
     _initializeRadio()
     {
         // Events.
-        this._rodanChannel.on(Events.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
-        this._rodanChannel.on(Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+        this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
+        this.rodanChannel.on(Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
 
         // Requests.
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
-        this._rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
-        this._rodanChannel.reply(Events.REQUEST__PROJECTS_SYNC, options => this._handleRequestProjectsSync(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECTS_SYNC, options => this._handleRequestProjectsSync(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -94,13 +94,13 @@ class ProjectController extends BaseController
         this._activeProject.fetch();
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetch({data: {project: this._activeProject.id}});
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
                                                                        options: {collection: workflowRunCollection}, 
                                                                        callback: null});
 
         // Show layout view.
         var layoutView = new LayoutViewProject();
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
 
         // Show the list view with the collection.
         var view = new ViewProject({model: this._activeProject, collection: workflowRunCollection});
@@ -114,14 +114,14 @@ class ProjectController extends BaseController
     {
         // Get appropriate collection. In this case, a list of Projects.
         // Make sure we update it.
-        this._collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
+        this._collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
 
         // Show layout view.
         var layoutView = new LayoutViewProject();
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
 
         // Show the list view with the collection.
         layoutView.showView(new ViewProjectList({collection: this._collection}));
@@ -154,8 +154,8 @@ class ProjectController extends BaseController
      */
     _handleCallbackDeleteSuccess()
     {
-        this._rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
+        this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
     }
 }
 
-export default ProjectController;
+export default ControllerProject;

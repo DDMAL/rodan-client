@@ -13,11 +13,11 @@ class Job extends BaseModel
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this.routeName = 'jobs';
-        this.set('input_port_types', new InputPortTypeCollection(aParameters.input_port_types));
-        this.set('output_port_types', new OutputPortTypeCollection(aParameters.output_port_types));
+        this.set('input_port_types', new InputPortTypeCollection(options.input_port_types));
+        this.set('output_port_types', new OutputPortTypeCollection(options.output_port_types));
     }
 
     defaults()

@@ -11,9 +11,9 @@ class Cookie
         document.cookie = name + "=" + value + "; " + expires;
     }
 
-    constructor(aName)
+    constructor(name)
     {
-        this._cookieName = aName;
+        this._cookieName = name;
         this._cookieValue = this._readCookieValue();
         this._expires = null;
     }

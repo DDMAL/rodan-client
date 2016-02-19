@@ -15,9 +15,9 @@ class ViewSettings extends Marionette.ItemView
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize(options)
     {
-        this.model = aParameters.workflowjob;
+        this.model = options.workflowjob;
         this._initializeRadio();
     }
 
@@ -34,7 +34,7 @@ class ViewSettings extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -46,7 +46,7 @@ class ViewSettings extends Marionette.ItemView
         if ($(element).is(":visible"))
         {
             this.model.set({'job_settings': this._editor.getValue()});
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'workflowjob': this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'workflowjob': this.model});
         }
     }
 
@@ -66,7 +66,7 @@ class ViewSettings extends Marionette.ItemView
         {
             $(element).show();
             var jobUuid = this.model.getJobUuid();
-            var collection = this._rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+            var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
             var job = collection.get(jobUuid);
             var settingsSchema = { 
                 schema: job.get('settings'),

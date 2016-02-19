@@ -30,8 +30,8 @@ class LayoutViewResourceAssignment extends Marionette.LayoutView
      */
     onDestroy()
     {
-        this._rodanChannel.off(null, null, this);
-        this._rodanChannel.stopReplying(null, null, this);
+        this.rodanChannel.off(null, null, this);
+        this.rodanChannel.stopReplying(null, null, this);
     }
 
     onBeforeShow()
@@ -48,7 +48,7 @@ class LayoutViewResourceAssignment extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

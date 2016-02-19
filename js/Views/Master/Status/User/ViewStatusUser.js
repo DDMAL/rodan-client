@@ -14,9 +14,9 @@ class ViewStatusUser extends Marionette.ItemView
     /**
      * TODO docs
      */
-    initialize(aParameters)
+    initialize(options)
     {
-        this.model = aParameters.user;
+        this.model = options.user;
         this.modelEvents = {
             'all': 'render'
         };
@@ -46,7 +46,7 @@ class ViewStatusUser extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -54,7 +54,7 @@ class ViewStatusUser extends Marionette.ItemView
      */
     _handleButton()
     {
-        this._rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
+        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
     }
 }
 

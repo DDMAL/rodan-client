@@ -39,7 +39,7 @@ class LayoutViewProject extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

@@ -54,9 +54,9 @@ class InputPortItem extends BaseItem
     /**
      * Sets associated connection item.
      */
-    setConnectionItem(aItem)
+    setConnectionItem(item)
     {
-        this._connectionItem = aItem;
+        this._connectionItem = item;
     }
 
     /**

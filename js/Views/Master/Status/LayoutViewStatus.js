@@ -56,17 +56,17 @@ class LayoutViewStatus extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, aPass => this._handleAuthenticationSuccess(aPass));
-        this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, options => this._handleAuthenticationSuccess(options));
+        this.rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
      * Handle authentication notification.
      */
-    _handleAuthenticationSuccess(aPass)
+    _handleAuthenticationSuccess(options)
     {
-        this.viewStatusUser = new ViewStatusUser({user: aPass.user});
+        this.viewStatusUser = new ViewStatusUser({user: options.user});
         this.regionStatusUser.show(this.viewStatusUser);
     }
 

@@ -23,9 +23,9 @@ class RunJob extends BaseModel
     /**
      * Return text based on status.
      */
-    _getStatusText(aStatus)
+    _getStatusText(status)
     {
-        switch(aStatus)
+        switch(status)
         {
             case -1:
             {

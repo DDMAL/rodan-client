@@ -9,7 +9,7 @@ import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 /**
  * Controller for WorkflowRun.
  */
-class WorkflowRunController extends BaseController
+class ControllerWorkflowRun extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -29,10 +29,10 @@ class WorkflowRunController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, options => this._handleEventListSelected(options), this);
-        this._rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
+        this.rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, options => this._handleEventListSelected(options), this);
+        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ class WorkflowRunController extends BaseController
         var runJobs = new RunJobCollection();
         runJobs.fetch({data: {workflow_run: options.workflowrun.id}});
         this._viewItem = new LayoutViewIndividualWorkflowRun({collection: runJobs, model: options.workflowrun});
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewItem);
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewItem);
     }
 
     /**
@@ -56,12 +56,12 @@ class WorkflowRunController extends BaseController
     {
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
                                                                        options: {collection: workflowRunCollection}, 
                                                                        callback: null});
 
         this._viewList = new ViewWorkflowRunList({collection: workflowRunCollection});
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewList);
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._viewList);
     }
 
     /**
@@ -89,9 +89,9 @@ class WorkflowRunController extends BaseController
      */
     _handleSuccess(model)
     {
-        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        this._rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: project});
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: project});
     }
 }
 
-export default WorkflowRunController;
+export default ControllerWorkflowRun;

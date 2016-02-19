@@ -5,7 +5,7 @@ import WorkflowJob from '../Models/WorkflowJob';
 /**
  * Controller for WorkflowJobs.
  */
-class WorkflowJobController extends BaseController
+class ControllerWorkflowJob extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initialization
@@ -15,9 +15,9 @@ class WorkflowJobController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_CREATE, options => this._handleRequestCreateWorkflowJob(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleRequestDeleteWorkflowJob(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleRequestSaveWorkflowJob(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_CREATE, options => this._handleRequestCreateWorkflowJob(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleRequestDeleteWorkflowJob(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleRequestSaveWorkflowJob(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -64,12 +64,12 @@ class WorkflowJobController extends BaseController
     _handleWorkflowJobCreationSuccess(model, workflow, addPorts, targetInputPorts)
     {
         workflow.get('workflow_jobs').add(model);
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: model});
         if (addPorts)
         {
             this._addRequiredPorts(model, targetInputPorts);
         }
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -77,8 +77,8 @@ class WorkflowJobController extends BaseController
      */
     _handleWorkflowJobDeletionSuccess(model, workflow)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, {workflowjob: model});
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, {workflowjob: model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -86,7 +86,7 @@ class WorkflowJobController extends BaseController
      */
     _handleWorkflowJobSaveSuccess(model, workflow)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ class WorkflowJobController extends BaseController
      */
     _addRequiredPorts(workflowJob, targetInputPorts)
     {
-        var jobCollection = this._rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(workflowJob.getJobUuid());
         var outputPortTypes = job.get('output_port_types');
         var inputPortTypes = job.get('input_port_types');
@@ -119,7 +119,7 @@ class WorkflowJobController extends BaseController
         {
             for (var i = 0; i < inputPortType.get('minimum');i ++)
             {
-                that._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob});
+                that.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob});
             }
         });
     }
@@ -135,11 +135,11 @@ class WorkflowJobController extends BaseController
         {
             for (var i = 0; i < outputPortType.get('minimum'); i++)
             {
-                that._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
+                that.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
                                            {outputporttype: outputPortType, workflowjob: workflowJob, targetinputports: targetInputPorts});
             }
         });
     }
 }
 
-export default WorkflowJobController;
+export default ControllerWorkflowJob;

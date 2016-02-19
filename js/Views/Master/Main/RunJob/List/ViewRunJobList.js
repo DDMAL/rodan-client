@@ -28,7 +28,7 @@ class ViewRunJobList extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 }
 

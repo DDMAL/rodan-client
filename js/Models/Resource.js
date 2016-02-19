@@ -60,23 +60,23 @@ class Resource extends BaseModel
     /**
      * Override of sync. We do this to allow file uploads.
      */
-    sync(aMethod, aModel, aOptions)
+    sync(method, model, options)
     {
-        if (aMethod === 'create')
+        if (method === 'create')
         {
             var formData = new FormData();
-            formData.append('project', aModel.get('project'));
-            formData.append('files', aModel.get('file'));
+            formData.append('project', model.get('project'));
+            formData.append('files', model.get('file'));
 
             // Set processData and contentType to false so data is sent as FormData
-            _.defaults(aOptions || (aOptions = {}), {
+            _.defaults(options || (options = {}), {
                 url: this.url(),
                 data: formData,
                 processData: false,
                 contentType: false
             });
         }
-        Backbone.sync.call(this, aMethod, aModel, aOptions);
+        Backbone.sync.call(this, method, model, options);
     }
 
     /**

@@ -80,33 +80,33 @@ class WorkflowJobItem extends BaseItem
     /**
      * Adds input port item.
      */
-    addInputPortItem(aInputPortItem)
+    addInputPortItem(inputPortItem)
     {
-        this._paperGroupInputPorts.addChild(aInputPortItem);
+        this._paperGroupInputPorts.addChild(inputPortItem);
     }
 
     /**
      * Adds output port item.
      */
-    addOutputPortItem(aOutputPortItem)
+    addOutputPortItem(outputPortItem)
     {
-        this._paperGroupOutputPorts.addChild(aOutputPortItem);
+        this._paperGroupOutputPorts.addChild(outputPortItem);
     }
 
     /**
      * Deletes input port item.
      */
-    deleteInputPortItem(aInputPortItem)
+    deleteInputPortItem(inputPortItem)
     {
-        this._deletePortItem(this._paperGroupInputPorts, aInputPortItem);
+        this._deletePortItem(this._paperGroupInputPorts, inputPortItem);
     }
 
     /**
      * Deletes output port item.
      */
-    deleteOutputPortItem(aOutputPortItem)
+    deleteOutputPortItem(outputPortItem)
     {
-        this._deletePortItem(this._paperGroupOutputPorts, aOutputPortItem);
+        this._deletePortItem(this._paperGroupOutputPorts, outputPortItem);
     }
 
     /**
@@ -176,13 +176,13 @@ class WorkflowJobItem extends BaseItem
     /**
      * Deletes a port item.
      */
-    _deletePortItem(aGroup, aPortItem)
+    _deletePortItem(group, portItem)
     {
-        for (var i = 0; i < aGroup.children.length; i++)
+        for (var i = 0; i < group.children.length; i++)
         {
-            if (aPortItem === aGroup.children[i])
+            if (portItem === group.children[i])
             {
-                aGroup.removeChildren(i, i + 1);
+                group.removeChildren(i, i + 1);
                 return;
             }
         }

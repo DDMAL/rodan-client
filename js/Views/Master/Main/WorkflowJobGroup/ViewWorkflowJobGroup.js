@@ -28,7 +28,7 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -36,7 +36,7 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -45,7 +45,7 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
     _handleButtonSave()
     {
         this.model.set({name: this.ui.textName.val()});
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
     }
 }
 

@@ -342,7 +342,7 @@ class BaseItem extends paper.Path
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__MODEL_HASCHANGED, aPass => this._handleEventModelUpdated(aPass));
+        this.rodanChannel.on(Events.EVENT__MODEL_HASCHANGED, options => this._handleEventModelUpdated(options));
     }
 
     /**
@@ -401,14 +401,14 @@ class BaseItem extends paper.Path
     /**
      * Handle model update event.
      */
-    _handleEventModelUpdated(aPass)
+    _handleEventModelUpdated(options)
     {
         var model = this._getModel();
-        if (aPass.model !== model)
+        if (options.model !== model)
         {
             return;
         }
-        this._text.content = aPass.model.get('name');
+        this._text.content = options.model.get('name');
     }
 
     /**

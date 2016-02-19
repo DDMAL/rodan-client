@@ -4,30 +4,26 @@ import moment from 'moment';
 import Radio from 'backbone.radio';
 
 import BehaviorTable from './Behaviors/BehaviorTable';
+import ControllerAuthentication from './Controllers/ControllerAuthentication';
+import ControllerModal from './Controllers/ControllerModal';
+import ControllerProject from './Controllers/ControllerProject';
+import ControllerResource from './Controllers/ControllerResource';
+import ControllerRunJob from './Controllers/ControllerRunJob';
+import ControllerServer from './Controllers/ControllerServer';
+import ControllerWorkflow from './Controllers/ControllerWorkflow';
+import ControllerWorkflowBuilder from './Controllers/ControllerWorkflowBuilder';
+import ControllerWorkflowJob from './Controllers/ControllerWorkflowJob';
+import ControllerWorkflowJobGroup from './Controllers/ControllerWorkflowJobGroup';
+import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
-
-import ControllerAuthentication from './Controllers/ControllerAuthentication';
-import ControllerServer from './Controllers/ControllerServer';
-import ControllerModal from './Controllers/ControllerModal';
-import ProjectController from './Controllers/ProjectController';
-import ResourceController from './Controllers/ResourceController';
-import RunJobController from './Controllers/RunJobController';
-import WorkflowController from './Controllers/WorkflowController';
-import WorkflowRunController from './Controllers/WorkflowRunController';
-import WorkflowBuilderController from './Controllers/WorkflowBuilderController';
-import WorkflowJobController from './Controllers/WorkflowJobController';
-import WorkflowJobGroupController from './Controllers/WorkflowJobGroupController';
-import WorkflowBuilderMenuController from './Controllers/WorkflowBuilderMenuController';
-
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
-import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPortTypeCollection';
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
-
+import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 
 /**
@@ -128,15 +124,14 @@ class Application extends Marionette.Application
         this.controllerServer = new ControllerServer();
         this.controllerAuthentication = new ControllerAuthentication(this.controllerServer);
         this.modalController = new ControllerModal();
-        this.projectController = new ProjectController();
-        this.resourceController = new ResourceController();
-        this.runJobController = new RunJobController();
-        this.workflowController = new WorkflowController();
-        this.workflowRunController = new WorkflowRunController();
-        this.workflowBuilderController = new WorkflowBuilderController();
-        this.workflowJobController = new WorkflowJobController();
-        this.workflowJobGroupController = new WorkflowJobGroupController();
-        this.workflowBuilderMenuController = new WorkflowBuilderMenuController();
+        this.projectController = new ControllerProject();
+        this.resourceController = new ControllerResource();
+        this.runJobController = new ControllerRunJob();
+        this.workflowController = new ControllerWorkflow();
+        this.workflowRunController = new ControllerWorkflowRun();
+        this.workflowBuilderController = new ControllerWorkflowBuilder();
+        this.workflowJobController = new ControllerWorkflowJob();
+        this.workflowJobGroupController = new ControllerWorkflowJobGroup();
     }
 
     /**

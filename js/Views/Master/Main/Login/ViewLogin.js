@@ -18,7 +18,7 @@ class ViewLogin extends Marionette.ItemView
     {
         this.model = null;
         this._initializeRadio();
-        this._rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
+        this.rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ class ViewLogin extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -37,7 +37,7 @@ class ViewLogin extends Marionette.ItemView
      */
     _handleButton()
     {
-        this._rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
+        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
     }
 }
 

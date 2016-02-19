@@ -33,6 +33,7 @@ class BehaviorTable extends Marionette.Behavior
         // line is a work around.
         // TODO - fix/find better way
         this.view.delegateEvents();
+
         if (view.collection)
         {
             this._handleCollectionEventSync(view.collection);
@@ -125,10 +126,6 @@ class BehaviorTable extends Marionette.Behavior
 
     /**
      * Injects filtering functionality into template.
-     *
-     * - icontains: have a text box for searching; should be automatically created
-     * - if the template has a column marked as 'data-enum', this should tell the app
-     * that values corresponding to that field can be enumerated
      */
     _injectFiltering(filterFields)
     {
@@ -163,13 +160,13 @@ class BehaviorTable extends Marionette.Behavior
 
                             case 'gt':
                             {
-                            //    this._injectFilterDatetimeGt(column.text(), field);
+                             //   this._injectFilterDatetimeGt(column.text(), field);
                                 break;
                             }
 
                             case 'lt':
                             {
-                            //    this._injectFilterDatetimeLt(column.text(), field);
+                              //  this._injectFilterDatetimeLt(column.text(), field);
                                 break;
                             }
 

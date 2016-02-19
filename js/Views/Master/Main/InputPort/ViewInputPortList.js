@@ -13,7 +13,7 @@ class ViewInputPortList extends Marionette.CompositeView
     /**
      * Initialize.
      */
-    initialize(aParameters)
+    initialize()
     {
         this._initializeRadio();
     }

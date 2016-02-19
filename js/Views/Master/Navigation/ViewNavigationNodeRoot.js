@@ -27,7 +27,7 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -35,7 +35,7 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
+        this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
     }
 }
 

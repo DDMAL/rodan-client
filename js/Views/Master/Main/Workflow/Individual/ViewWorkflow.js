@@ -26,7 +26,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -40,7 +40,7 @@ class ViewWorkflow extends Marionette.ItemView
         }
         else
         {
-            this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
+            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
         }
     }
 
@@ -49,7 +49,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonDeleteWorkflow()
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
     }
 
     /**
@@ -57,7 +57,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonEditWorkflow()
     {
-        this._rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
     }
 
     /**
@@ -74,7 +74,7 @@ class ViewWorkflow extends Marionette.ItemView
     _handleButtonSave()
     {
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
-        this._rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model});
     }
 
     /**
@@ -88,7 +88,7 @@ class ViewWorkflow extends Marionette.ItemView
         }
         else
         {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {model: this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {model: this.model});
         }
     }
 }

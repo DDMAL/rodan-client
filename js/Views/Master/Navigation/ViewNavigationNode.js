@@ -17,8 +17,8 @@ class ViewNavigationNode extends Marionette.CompositeView
      */
     initialize()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.on(Events.EVENT__NAVIGATION_NODE_SELECTED, aEvent => this._handleEventNodeSelected(aEvent));
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__NAVIGATION_NODE_SELECTED, event => this._handleEventNodeSelected(event));
         this._initializeRadio();
     }
 
@@ -36,10 +36,10 @@ class ViewNavigationNode extends Marionette.CompositeView
     /**
      * Sets highlight of this menu entry.
      */
-    _setHighlight(aHighlight)
+    _setHighlight(highlight)
     {
         var node = $(this.$el.find('#node_text')[0]);
-        if (aHighlight)
+        if (highlight)
         {
             // TODO magic number
             node.css('background-color', '#444444');
@@ -53,10 +53,10 @@ class ViewNavigationNode extends Marionette.CompositeView
     /**
      * Handle click.
      */
-    _handleClick(aEvent)
+    _handleClick(event)
     {
         this._toggleSubviews();
-        aEvent.stopPropagation();
+        event.stopPropagation();
         this._sendClickEvents();
     }
 
@@ -113,9 +113,9 @@ class ViewNavigationNode extends Marionette.CompositeView
     /**
      * Does highlighting.
      */
-    _handleEventNodeSelected(aEvent)
+    _handleEventNodeSelected(event)
     {
-        if (this === aEvent.node)
+        if (this === event.node)
         {
             this._setHighlight(true);
             this._expandParent();

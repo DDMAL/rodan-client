@@ -28,8 +28,8 @@ class ErrorHandler extends Marionette.Object
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.reply(Events.REQUEST__HANDLER_ERROR, (options) => this._handleError(options));
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.reply(Events.REQUEST__HANDLER_ERROR, (options) => this._handleError(options));
     }
 
     /**
@@ -105,7 +105,7 @@ class ErrorHandler extends Marionette.Object
      */
     _processRodanError(options)
     {
-        this._rodanChannel.trigger(Events.EVENT__RODAN_ERROR, {json: options.response.responseJSON});
+        this.rodanChannel.trigger(Events.EVENT__RODAN_ERROR, {json: options.response.responseJSON});
     }
 }
 

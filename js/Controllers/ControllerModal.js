@@ -30,14 +30,14 @@ class ControllerModal extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
-        this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
-        this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
-        this._rodanChannel.reply(Events.REQUEST__MODAL_SIMPLE_SHOW, options => this._handleRequestModalSimpleShow(options));
+        this.rodanChannel.reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
+        this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
+        this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
+        this.rodanChannel.reply(Events.REQUEST__MODAL_SIMPLE_SHOW, options => this._handleRequestModalSimpleShow(options));
 
-        this._rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
-        this._rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
-        this._rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
+        this.rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
+        this.rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
+        this.rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if ($modalEl.is(':visible') && this._waiting)
         {
-            this._rodanChannel.request(Events.REQUEST__MODAL_HIDE);
+            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         }
     }
 
@@ -71,7 +71,7 @@ class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if (!$modalEl.is(':visible'))
         {
-            this._rodanChannel.request(Events.REQUEST__MODAL_SHOW_WAITING);
+            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_WAITING);
         }
     }
 

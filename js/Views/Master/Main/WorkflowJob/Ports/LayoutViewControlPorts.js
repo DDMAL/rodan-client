@@ -19,7 +19,7 @@ class LayoutViewControlPorts extends Marionette.LayoutView
     /**
      * Initialize
      */
-    initialize(aParameters)
+    initialize(options)
     {
         this._initializeRadio();
         this.addRegions({
@@ -28,8 +28,8 @@ class LayoutViewControlPorts extends Marionette.LayoutView
             regionControlOutputPortTypes: '#region-main_outputporttypes',
             regionControlOutputPorts: '#region-main_outputports'
         });
-        this._workflowJob = aParameters.workflowjob;
-        this._initializeViews(aParameters);
+        this._workflowJob = options.workflowjob;
+        this._initializeViews(options);
     }
 
     /**

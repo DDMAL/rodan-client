@@ -32,9 +32,9 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
-        this._rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
+        this.rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
     }
 
     /**
@@ -43,7 +43,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleAuthenticationSuccess()
     {
         var model = new Backbone.Model({name: 'Projects'});
-        var object = {model: model, collection: this._rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
+        var object = {model: model, collection: this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
     }
 

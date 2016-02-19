@@ -32,9 +32,9 @@ class ViewNavigationNodeProject extends ViewNavigationNode
     /**
      * Determine child view based on name.
      */
-    getChildView(aModel)
+    getChildView(model)
     {
-        switch (aModel.get('name'))
+        switch (model.get('name'))
         {
             case 'Resources':
             {
@@ -66,7 +66,7 @@ class ViewNavigationNodeProject extends ViewNavigationNode
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__PROJECT_SELECTED, aEvent => this._handleEventProjectSelected(aEvent));
+        this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, event => this._handleEventProjectSelected(event));
     }
 
     /**
@@ -74,17 +74,17 @@ class ViewNavigationNodeProject extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this._rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
+        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 
     /**
      * Handle highlighting.
      */
-    _handleEventProjectSelected(aEvent)
+    _handleEventProjectSelected(event)
     {
-        if (aEvent.project === this.model)
+        if (event.project === this.model)
         {
-            this._rodanChannel.trigger(Events.EVENT__NAVIGATION_NODE_SELECTED, {node: this});
+            this.rodanChannel.trigger(Events.EVENT__NAVIGATION_NODE_SELECTED, {node: this});
         }
     }
 }

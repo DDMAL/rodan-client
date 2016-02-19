@@ -31,10 +31,10 @@ class EventTimer extends Marionette.Object
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.reply(Events.REQUEST__SET_TIMED_EVENT, (options) => this._handleSetTimedEvent(options));
-        this._rodanChannel.reply(Events.REQUEST__SET_TIMED_REQUEST, (options) => this._handleSetTimedRequest(options));
-        this._rodanChannel.reply(Events.REQUEST__CLEAR_TIMED_EVENT, () => this._handleClearTimedEvent());
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.reply(Events.REQUEST__SET_TIMED_EVENT, (options) => this._handleSetTimedEvent(options));
+        this.rodanChannel.reply(Events.REQUEST__SET_TIMED_REQUEST, (options) => this._handleSetTimedRequest(options));
+        this.rodanChannel.reply(Events.REQUEST__CLEAR_TIMED_EVENT, () => this._handleClearTimedEvent());
     }
 
     /**
@@ -75,7 +75,7 @@ class EventTimer extends Marionette.Object
     {
         if (this._event != null)
         {
-            this._rodanChannel.trigger(this._event, this._options);
+            this.rodanChannel.trigger(this._event, this._options);
             this._timer = setTimeout(() => this._fireEvent(), this._frequency);
         }
     }
@@ -87,7 +87,7 @@ class EventTimer extends Marionette.Object
     {
         if (this._event != null)
         {
-            var response = this._rodanChannel.request(this._event, this._options);
+            var response = this.rodanChannel.request(this._event, this._options);
             if (this._callback !== null)
             {
                 this._callback(response);
@@ -118,7 +118,7 @@ class EventTimer extends Marionette.Object
      */
     _setTimerEvent()
     {
-        setInterval(this._rodanChannel.trigger(options.event, options._options), this._frequency);
+        setInterval(this.rodanChannel.trigger(options.event, options._options), this._frequency);
     }
 
     /**
@@ -126,7 +126,7 @@ class EventTimer extends Marionette.Object
      */
     _setTimerRequest()
     {
-        setInterval(this._rodanChannel.request(options.event, options._options), this._frequency);
+        setInterval(this.rodanChannel.request(options.event, options._options), this._frequency);
     }
 
     /**

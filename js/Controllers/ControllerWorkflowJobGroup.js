@@ -7,7 +7,7 @@ import WorkflowJobGroupCollection from '../Collections/WorkflowJobGroupCollectio
 /**
  * Controller for WorkflowJobGroup.
  */
-class WorkflowJobGroupController extends BaseController
+class ControllerWorkflowJobGroup extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -28,11 +28,11 @@ class WorkflowJobGroupController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -130,14 +130,14 @@ class WorkflowJobGroupController extends BaseController
      */
     _deleteWorkflowJobGroup(workflowJobGroup, workflow)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
         var workflowJobURLs = workflowJobGroup.get('workflow_jobs');
         for (var index in workflowJobURLs)
         {
             var workflowJobCollection = workflow.get('workflow_jobs');
             var workflowJobURL = workflowJobURLs[index];
             var workflowJob = workflowJobCollection.findWhere({'url': workflowJobURLs[index]});
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
         }
         this._collection.remove(workflowJobGroup);
         workflowJobGroup.destroy();
@@ -153,13 +153,13 @@ class WorkflowJobGroupController extends BaseController
         // Hide WorkflowJobs.
         for (var index in workflowJobs)
         {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
         }
 
         // Create new stuff.
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
         var exposedPorts = this._getExposedPorts(workflowJobs);
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
                                                                                                           inputports: exposedPorts.inputPorts,
                                                                                                           outputports: exposedPorts.outputPorts});
     }
@@ -242,4 +242,4 @@ class WorkflowJobGroupController extends BaseController
     }
 }
 
-export default WorkflowJobGroupController;
+export default ControllerWorkflowJobGroup;

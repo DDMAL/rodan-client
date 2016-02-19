@@ -36,7 +36,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -44,7 +44,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        this._rodanChannel.request(Events.REQUEST__PROJECT_SAVE, 
+        this.rodanChannel.request(Events.REQUEST__PROJECT_SAVE, 
                                   {project: this.model,
                                    fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
@@ -54,7 +54,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonDelete()
     {
-        this._rodanChannel.request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
+        this.rodanChannel.request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
     }
 
     /**
@@ -62,7 +62,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickResourceCount()
     {
-        this._rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model});
+        this.rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model});
     }
 
     /**
@@ -70,7 +70,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        this._rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
     }
 }
 

@@ -42,11 +42,11 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this.regionResourceList.empty();
 
         // Create Resource views.
-        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._layoutViewResources = new LayoutViewResource({project: project, template: '#template-main_workflowrun_individual_resources'});
-        this._rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
+        this.rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
-        var collection = this._rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
+        var collection = this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
         this._viewResourceList = new ViewResourceList({collection: collection,
                                                        template: '#template-main_workflowrun_individual_resources_list',
                                                        childView: ViewResourceListItem});
@@ -54,7 +54,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
 
         // Create Resource views.
         this._layoutViewRunJobs = new LayoutViewRunJob({project: project, template: '#template-main_workflowrun_individual_runjobs'});
-        this._rodanChannel.request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
+        this.rodanChannel.request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({collection: this._runJobCollection,
                                                    template: '#template-main_runjob_list',
@@ -73,7 +73,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

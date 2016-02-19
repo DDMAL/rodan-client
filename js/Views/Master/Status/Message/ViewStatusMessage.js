@@ -38,8 +38,8 @@ class ViewStatusMessage extends Marionette.CompositeView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
-        this._rodanChannel.reply(Events.REQUEST__DISPLAY_MESSAGE, options => this._processMessage(options));
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.reply(Events.REQUEST__DISPLAY_MESSAGE, options => this._processMessage(options));
     }
 
     /**

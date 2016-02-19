@@ -17,15 +17,15 @@ class LayoutViewResource extends Marionette.LayoutView
     /**
      * Initializer.
      */
-    initialize(aOptions)
+    initialize(options)
     {
         this._initializeRadio();
         this.addRegions({
             regionList: '#region-main_resource_list',
             regionItem: '#region-main_resource_item'
         });
-        this._project = aOptions.project;
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
+        this._project = options.project;
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
                                                                        options: {}, 
                                                                        callback: null});
     }
@@ -33,17 +33,17 @@ class LayoutViewResource extends Marionette.LayoutView
     /**
      * Show view in Resource list region.
      */
-    showList(aView)
+    showList(view)
     {
-        this.regionList.show(aView);
+        this.regionList.show(view);
     }
 
     /**
      * Show view in Resource item region.
      */
-    showItem(aView)
+    showItem(view)
     {
-        this.regionItem.show(aView);
+        this.regionItem.show(view);
     }
 
     /**
@@ -62,7 +62,7 @@ class LayoutViewResource extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
@@ -72,7 +72,7 @@ class LayoutViewResource extends Marionette.LayoutView
     {
         var file = this.ui.fileInput[0].files[0];
         this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
-        this._rodanChannel.request(Events.REQUEST__RESOURCE_CREATE, {project: this._project, file: file});
+        this.rodanChannel.request(Events.REQUEST__RESOURCE_CREATE, {project: this._project, file: file});
     }
 }
 

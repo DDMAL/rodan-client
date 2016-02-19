@@ -14,7 +14,7 @@ class WorkflowJobGroup extends BaseModel
     /**
      * Initialize
      */
-    initialize(aParameters)
+    initialize()
     {
         this.routeName = 'workflowjobgroups';
     }
@@ -23,18 +23,6 @@ class WorkflowJobGroup extends BaseModel
     {
         return {name: 'untitled'};
     }
-
-    /**
-     * Initialize.
-     */
-    parse(resp)
-    {
-        return resp;
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
 
 export default WorkflowJobGroup;

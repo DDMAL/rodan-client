@@ -10,7 +10,7 @@ import WorkflowCollection from '../Collections/WorkflowCollection';
 /**
  * Controller for all Workflow views.
  */
-class WorkflowController extends BaseController
+class ControllerWorkflow extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initialization
@@ -20,14 +20,14 @@ class WorkflowController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
-        this._rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
-        this._rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
+        this.rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
+        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -48,11 +48,11 @@ class WorkflowController extends BaseController
     {
         this._collection = new WorkflowCollection()
         this._collection.fetch({data: {project: options.project.id}});
-        this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
                                                                        options: {}, 
                                                                        callback: null});
         this._layoutView = new LayoutViewWorkflow();
-        this._rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         this._viewList = new ViewWorkflowList({collection: this._collection});
         this._layoutView.showList(this._viewList);
     }
@@ -125,10 +125,10 @@ class WorkflowController extends BaseController
      */
     _handleSuccessWorkflowJobGroupSave(workflow)
     {
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
-        this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
     }
 }
 
-export default WorkflowController;
+export default ControllerWorkflow;

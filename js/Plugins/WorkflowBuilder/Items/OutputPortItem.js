@@ -34,19 +34,19 @@ class OutputPortItem extends BaseItem
     /**
      * Adds associated connection item.
      */
-    addConnectionItem(aItem)
+    addConnectionItem(item)
     {
-        this._connectionItems.push(aItem);
+        this._connectionItems.push(item);
     }
 
     /**
      * Removes connection item.
      */
-    removeConnectionItem(aItem)
+    removeConnectionItem(item)
     {
         for (var i = 0; i < this._connectionItems.length; i++)
         {
-            if (this._connectionItems[i] === aItem)
+            if (this._connectionItems[i] === item)
             {
                 this._connectionItems.splice(i, 1);
             }

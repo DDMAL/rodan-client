@@ -55,7 +55,7 @@ class LayoutViewJobSelection extends Marionette.LayoutView
     {
         this._collection = new WorkflowCollection();
         this._collection.fetch({data: {/*project: project.id, */valid: 'True'}});
-        var project = this._rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this._viewJobList = new ViewJobList();
         this._viewWorkflowList = new ViewWorkflowList({collection: this._collection,
                                                        childView: ViewWorkflowListImportItem,
@@ -67,7 +67,7 @@ class LayoutViewJobSelection extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this._rodanChannel = Radio.channel('rodan');
+        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**

@@ -8,7 +8,7 @@ import ViewRunJobListItem from '../Views/Master/Main/RunJob/List/ViewRunJobListI
 /**
  * Controller for RunJob views.
  */
-class RunJobController extends BaseController
+class ControllerRunJob extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -18,8 +18,8 @@ class RunJobController extends BaseController
      */
     _initializeRadio()
     {
-        this._rodanChannel.reply(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        this._rodanChannel.on(Events.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
+        this.rodanChannel.reply(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        this.rodanChannel.on(Events.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
    }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,4 +42,4 @@ class RunJobController extends BaseController
     }
 }
 
-export default RunJobController;
+export default ControllerRunJob;
