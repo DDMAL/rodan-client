@@ -17,6 +17,19 @@ class Project extends BaseModel
     }
 
     /**
+     * Set the resource type.
+     */
+    parse(resp)
+    {
+        resp = super.parse(resp);
+        if (!resp.workflow_count)
+        {
+            resp.workflow_count = resp.workflows.length;
+        }
+        return resp;
+    }
+
+    /**
      * Return defaults.
      */
     defaults()

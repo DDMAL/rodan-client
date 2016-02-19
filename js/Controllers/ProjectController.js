@@ -91,6 +91,7 @@ class ProjectController extends BaseController
         // So, we want to pass all the WorkflowRuns associated with it.
         // Make sure we update it.
         this._activeProject = options.project;
+        this._activeProject.fetch();
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetch({data: {project: this._activeProject.id}});
         this._rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
