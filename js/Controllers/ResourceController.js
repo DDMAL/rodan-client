@@ -1,10 +1,10 @@
-import BaseController from '../../../../Controllers/BaseController';
-import Events from '../../../../Shared/Events';
-import LayoutViewResource from './LayoutViewResource';
-import ViewResource from './Individual/ViewResource';
-import ViewResourceList from './List/ViewResourceList';
-import ViewResourceListItem from './List/ViewResourceListItem';
-import ResourceCollection from '../../../../Collections/ResourceCollection';
+import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import LayoutViewResource from '../Views/Master/Main/Resource/LayoutViewResource';
+import ViewResource from '../Views/Master/Main/Resource/Individual/ViewResource';
+import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
+import ViewResourceListItem from '../Views/Master/Main/Resource/List/ViewResourceListItem';
+import ResourceCollection from '../Collections/ResourceCollection';
 
 /**
  * Controller for Resource views.

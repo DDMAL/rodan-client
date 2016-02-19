@@ -1,10 +1,10 @@
-import Events from '../../../../Shared/Events';
-import LayoutViewIndividualWorkflowRun from './Individual/LayoutViewIndividualWorkflowRun';
-import ViewWorkflowRunList from './List/ViewWorkflowRunList';
-import BaseController from '../../../../Controllers/BaseController';
-import RunJobCollection from '../../../../Collections/RunJobCollection';
-import WorkflowRun from '../../../../Models/WorkflowRun';
-import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
+import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun';
+import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
+import RunJobCollection from '../Collections/RunJobCollection';
+import WorkflowRun from '../Models/WorkflowRun';
+import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
  * Controller for WorkflowRun.

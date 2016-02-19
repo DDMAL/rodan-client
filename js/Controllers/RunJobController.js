@@ -1,9 +1,9 @@
-import BaseController from '../../../../Controllers/BaseController';
-import Events from '../../../../Shared/Events';
-import LayoutViewRunJob from './LayoutViewRunJob';
-import ViewRunJob from './Individual/ViewRunJob';
-import ViewRunJobList from './List/ViewRunJobList';
-import ViewRunJobListItem from './List/ViewRunJobListItem';
+import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import LayoutViewRunJob from '../Views/Master/Main/RunJob/LayoutViewRunJob';
+import ViewRunJob from '../Views/Master/Main/RunJob/Individual/ViewRunJob';
+import ViewRunJobList from '../Views/Master/Main/RunJob/List/ViewRunJobList';
+import ViewRunJobListItem from '../Views/Master/Main/RunJob/List/ViewRunJobListItem';
 
 /**
  * Controller for RunJob views.

@@ -1,11 +1,11 @@
-import Events from '../../../../Shared/Events';
-import LayoutViewWorkflow from './LayoutViewWorkflow';
-import ViewWorkflow from './Individual/ViewWorkflow';
-import ViewWorkflowList from './List/ViewWorkflowList';
-import Workflow from '../../../../Models/Workflow';
-import BaseController from '../../../../Controllers/BaseController';
-import WorkflowJobGroup from '../../../../Models/WorkflowJobGroup';
-import WorkflowCollection from '../../../../Collections/WorkflowCollection';
+import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import LayoutViewWorkflow from '../Views/Master/Main/Workflow/LayoutViewWorkflow';
+import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
+import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
+import Workflow from '../Models/Workflow';
+import WorkflowJobGroup from '../Models/WorkflowJobGroup';
+import WorkflowCollection from '../Collections/WorkflowCollection';
 
 /**
  * Controller for all Workflow views.

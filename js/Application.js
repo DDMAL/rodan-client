@@ -1,22 +1,22 @@
-import moment from 'moment';
 import _ from 'underscore';
 import Marionette from 'backbone.marionette';
+import moment from 'moment';
 import Radio from 'backbone.radio';
 
 import BehaviorTable from './Behaviors/BehaviorTable';
 import Configuration from './Configuration';
-import ControllerAuthentication from './Controllers/ControllerAuthentication';
-import ControllerServer from './Controllers/ControllerServer';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
 
+import ControllerAuthentication from './Controllers/ControllerAuthentication';
+import ControllerServer from './Controllers/ControllerServer';
 import ControllerModal from './Controllers/ControllerModal';
-import ProjectController from './Views/Master/Main/Project/ProjectController';
-import ResourceController from './Views/Master/Main/Resource/ResourceController';
-import RunJobController from './Views/Master/Main/RunJob/RunJobController';
-import WorkflowController from './Views/Master/Main/Workflow/WorkflowController';
-import WorkflowRunController from './Views/Master/Main/WorkflowRun/WorkflowRunController';
+import ProjectController from './Controllers/ProjectController';
+import ResourceController from './Controllers/ResourceController';
+import RunJobController from './Controllers/RunJobController';
+import WorkflowController from './Controllers/WorkflowController';
+import WorkflowRunController from './Controllers/WorkflowRunController';
 import WorkflowBuilderController from './Controllers/WorkflowBuilderController';
 import WorkflowJobController from './Controllers/WorkflowJobController';
 import WorkflowJobGroupController from './Controllers/WorkflowJobGroupController';
@@ -127,7 +127,6 @@ class Application extends Marionette.Application
     {
         this.controllerServer = new ControllerServer();
         this.controllerAuthentication = new ControllerAuthentication(this.controllerServer);
-
         this.modalController = new ControllerModal();
         this.projectController = new ProjectController();
         this.resourceController = new ResourceController();

@@ -1,9 +1,9 @@
-import BaseController from '../../../../Controllers/BaseController';
-import Events from '../../../../Shared/Events';
-import LayoutViewProject from './LayoutViewProject';
-import ViewProjectList from './List/ViewProjectList';
-import ViewProject from './Individual/ViewProject';
-import WorkflowRunCollection from '../../../../Collections/WorkflowRunCollection';
+import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import LayoutViewProject from '../Views/Master/Main/Project/LayoutViewProject';
+import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
+import ViewProject from '../Views/Master/Main/Project/Individual/ViewProject';
+import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
  * Controller for Project views.
