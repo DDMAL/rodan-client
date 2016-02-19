@@ -287,17 +287,16 @@ class BaseCollection extends Backbone.Collection
         for (var j in this.enumerations)
         {
             var field = this.enumerations[j].field;
-            if (!this.enumerations[j].values)
+            if (!this.enumerations[j].values || this.enumerations[j].values.length === 0)
             {
                 this.enumerations[j].values = [];
+                for (var i in response)
+                {
+                    var jobResponse = response[i];
+                    this.enumerations[j].values.push(jobResponse[field]);
+                }
+                this.enumerations[j].values = $.unique(this.enumerations[j].values);
             }
-
-            for (var i in response)
-            {
-                var jobResponse = response[i];
-                this.enumerations[j].values.push(jobResponse[field]);
-            }
-            this.enumerations[j].values = $.unique(this.enumerations[j].values);
         }
     }
 }
