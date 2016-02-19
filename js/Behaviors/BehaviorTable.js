@@ -174,13 +174,13 @@ class BehaviorTable extends Marionette.Behavior
             }
 
             // Finally, inject enumeration.
-        /*    var enumerations = this.view.collection.getEnumerations();
+            var enumerations = this.view.collection.getEnumerations();
             for (var i in enumerations)
             {
                 var enumeration = enumerations[i];
                 var template = _.template($(this.options.templateFilterEnum).html());
                 $(this.el).find('div#filter').append(template({label: enumeration.label, dataname: enumeration.field, values: enumeration.values}));
-            }*/
+            }
         }
     }
 
