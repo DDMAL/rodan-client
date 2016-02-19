@@ -19,6 +19,16 @@ class ViewJobListItem extends Marionette.ItemView
         this._initializeRadio();
     }
 
+    /**
+     * Set tag attributes.
+     */
+    onRender()
+    {
+        var description = this.model.get('description');
+        description = description === '' ? 'no description available' : description;
+        this.$el.attr('title', description);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

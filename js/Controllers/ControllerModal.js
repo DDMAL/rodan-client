@@ -19,6 +19,7 @@ class ControllerModal extends BaseController
      */
     initialize()
     {
+        this._waiting = true;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -33,11 +34,47 @@ class ControllerModal extends BaseController
         this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         this._rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
         this._rodanChannel.reply(Events.REQUEST__MODAL_SIMPLE_SHOW, options => this._handleRequestModalSimpleShow(options));
+
+        this._rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
+        this._rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
+        this._rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle on server idle.
+     */
+    _handleOnServerIdle()
+    {
+        var $modalEl = $("#modal-generic");
+        if ($modalEl.is(':visible') && this._waiting)
+        {
+            this._rodanChannel.request(Events.REQUEST__MODAL_HIDE);
+        }
+    }
+
+    /**
+     * Handle on server panic.
+     */
+    _handleOnServerPanic()
+    {
+        console.log('server panic');
+    }
+
+    /**
+     * Handle on server waiting.
+     */
+    _handleOnServerWaiting()
+    {
+        var $modalEl = $("#modal-generic");
+        if (!$modalEl.is(':visible'))
+        {
+            this._rodanChannel.request(Events.REQUEST__MODAL_SHOW_WAITING);
+        }
+    }
+
     /**
      * Handle request modal hide.
      */
@@ -45,6 +82,7 @@ class ControllerModal extends BaseController
     {
         var $modalElement = $("#modal-generic");
         $modalElement.modal('hide');
+        this._waiting = false;
     }
 
     /**
@@ -95,13 +133,14 @@ class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if ($modalEl.is(':visible'))
         {
-            $modalEl.modal('hide');
+            return;
         }
         this._layoutViewModal = new LayoutViewMasterModal({template: '#template-modal_waiting'});
         this._layoutViewModal.render();
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.modal({backdrop: 'static', keyboard: false});
+        this._waiting = true;
     }
 }
 

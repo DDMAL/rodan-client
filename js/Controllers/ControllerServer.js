@@ -230,7 +230,6 @@ class ControllerServer extends BaseController
     {
         this._waitingEventTriggered = true;
         this._rodanChannel.trigger(Events.EVENT__SERVER_WAITING);
-        this._rodanChannel.request(Events.REQUEST__MODAL_SHOW_WAITING);
     }
 
     /**
@@ -240,7 +239,6 @@ class ControllerServer extends BaseController
     {
         this._waitingEventTriggered = false;
         this._rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
-        this._rodanChannel.request(Events.REQUEST__MODAL_HIDE);
     }
 
     /**
