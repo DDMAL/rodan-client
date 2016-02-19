@@ -1,12 +1,11 @@
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
+import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
 
 /**
  * This class represents the view of an individual output port type list item.
  */
-class ViewOutputPortTypeListItem extends Marionette.ItemView
+class ViewOutputPortTypeListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,21 +15,12 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
      */
     initialize(options)
     {
-        this._initializeRadio();
         this._workflowJob = options.workflowjob;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Handles output port add.
      */
@@ -43,9 +33,6 @@ class ViewOutputPortTypeListItem extends Marionette.ItemView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewOutputPortTypeListItem.prototype.modelEvents = {
-    'change': 'render'
-};
 ViewOutputPortTypeListItem.prototype.tagName = 'tr';
 ViewOutputPortTypeListItem.prototype.template = '#template-main_outputporttype_list_item';
 ViewOutputPortTypeListItem.prototype.events = {

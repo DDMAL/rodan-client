@@ -158,13 +158,13 @@ class BehaviorTable extends Marionette.Behavior
 
                             case 'gt':
                             {
-                               // this._injectFilterDatetimeGt(column.text(), field);
+                            //    this._injectFilterDatetimeGt(column.text(), field);
                                 break;
                             }
 
                             case 'lt':
                             {
-                               // this._injectFilterDatetimeLt(column.text(), field);
+                            //    this._injectFilterDatetimeLt(column.text(), field);
                                 break;
                             }
 
@@ -202,8 +202,9 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFilterDatetimeLt(label, field)
     {
-    //    var template = _.template($(this.options.templateFilterText).html());
-     //   $(this.el).find('div#filter').append(template({label: label, dataname: field}));
+        this._injectFilterDatetime(label, field);
+        var template = _.template($(this.options.templateFilterDatetimeLt).html());
+        $(this.el).find('div#filter_datetime_' + field).append(template({label: label, field: field}));  
     }
 
     /**
@@ -211,7 +212,9 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFilterDatetimeGt(label, field)
     {
-        
+        this._injectFilterDatetime(label, field);
+        var template = _.template($(this.options.templateFilterDatetimeGt).html());
+        $(this.el).find('div#filter_datetime_' + field).append(template({label: label, field: field}));  
     }
 
     /**
@@ -219,7 +222,7 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFilterDatetime(label, field)
     {
-        if ($(this.el).find('div#filter_datetime_' + field) === 0)
+        if ($(this.el).find('div#filter_datetime_' + field).length === 0)
         {
             var template = _.template($(this.options.templateFilterDatetime).html());
             $(this.el).find('div#filter').append(template({label: label, field: field}));  

@@ -1,8 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
 import Events from '../../../../../Shared/Events';
-import ViewWorkflowRunListItem from './ViewWorkflowRunListItem';
 
 /**
  * This class represents the view for a single Workflow summary.

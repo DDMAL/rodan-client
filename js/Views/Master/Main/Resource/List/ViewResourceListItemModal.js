@@ -1,12 +1,11 @@
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
+import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
 
 /**
  * Resource item View for Collection in modal
  */
-class ViewResourceListItemModal extends Marionette.ItemView
+class ViewResourceListItemModal extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,20 +17,11 @@ class ViewResourceListItemModal extends Marionette.ItemView
     {
         this._inputPort = options.inputport;
         this._assigned = options.assigned;
-        this._initializeRadio();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this._rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Handles double click.
      */
@@ -39,11 +29,11 @@ class ViewResourceListItemModal extends Marionette.ItemView
     {
         if (this._assigned)
         {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
         }
         else
         {
-            this._rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
         }
     }
 }
@@ -51,9 +41,6 @@ class ViewResourceListItemModal extends Marionette.ItemView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewResourceListItemModal.prototype.modelEvents = {
-    'change': 'render'
-};
 ViewResourceListItemModal.prototype.template = '#template-modal_resource_list_item';
 ViewResourceListItemModal.prototype.tagName = 'tr';
 ViewResourceListItemModal.prototype.events = {

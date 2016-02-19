@@ -1,35 +1,15 @@
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
+import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
 
 /**
  * This class represents the view of an individual input port list item.
  */
-class ViewInputPortListItem extends Marionette.ItemView
+class ViewInputPortListItem extends BaseViewListItem
 {
-///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize.
-     */
-    initialize()
-    {
-        this._initializeRadio();
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Handle delete.
      */
@@ -42,9 +22,6 @@ class ViewInputPortListItem extends Marionette.ItemView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewInputPortListItem.prototype.modelEvents = {
-    'change': 'render'
-};
 ViewInputPortListItem.prototype.ui = {
             buttonDelete: '#button-delete'
         };

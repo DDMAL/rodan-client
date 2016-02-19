@@ -1,9 +1,9 @@
-import Marionette from 'backbone.marionette';
+import BaseViewListItem from '../../BaseViewListItem';
 
 /**
  * ResourceType view.
  */
-class ViewResourceTypeListItem extends Marionette.ItemView
+class ViewResourceTypeListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -13,23 +13,18 @@ class ViewResourceTypeListItem extends Marionette.ItemView
      */
     onRender()
     {
+        super.onRender();
         this.$el.attr('value', this.model.get('url'));
         if (this.model.has('selected'))
         {
             this.$el.attr('selected', 'selected');
         }
-        var description = this.model.get('description');
-        description = description === '' ? 'no description available' : description;
-        this.$el.attr('title', description);
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewResourceTypeListItem.prototype.modelEvents = {
-    'change': 'render'
-};
 ViewResourceTypeListItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
 ViewResourceTypeListItem.prototype.tagName = 'option';
 

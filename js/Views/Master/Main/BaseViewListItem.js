@@ -1,21 +1,20 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../../../Shared/Events';
-
 /**
- * This class represents the view of a workflow run.
+ * Base List Item view.
  */
-class ViewWorkflowRunListItem extends Marionette.ItemView
+class BaseViewListItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Constructor.
      */
-    initialize(aParameters)
+    constructor(options)
     {
+        super(options);
         this._initializeRadio();
     }
 
@@ -31,24 +30,24 @@ class ViewWorkflowRunListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles click.
+     * Set description
      */
-    _handleClick()
+    onRender()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
+        var description = 'no description available';
+        if (this.model.has('description') && this.model.get('description') !== '')
+        {
+            description = this.model.get('description');
+        }
+        this.$el.attr('title', description);
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewWorkflowRunListItem.prototype.modelEvents = {
+BaseViewListItem.prototype.modelEvents = {
     'change': 'render'
 };
-ViewWorkflowRunListItem.prototype.template = '#template-main_workflow_individual_workflowrun_list_item';
-ViewWorkflowRunListItem.prototype.tagName = 'tr';
-ViewWorkflowRunListItem.prototype.events = {
-    'click': '_handleClick'
-};
 
-export default ViewWorkflowRunListItem;
+export default BaseViewListItem;
