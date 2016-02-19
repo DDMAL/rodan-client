@@ -18,6 +18,9 @@ class ViewResourceTypeListItem extends Marionette.ItemView
         {
             this.$el.attr('selected', 'selected');
         }
+        var description = this.model.get('description');
+        description = description === '' ? 'no description available' : description;
+        this.$el.attr('title', description);
     }
 }
 

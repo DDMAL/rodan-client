@@ -131,7 +131,7 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFiltering(filterFields)
     {
-        if ($(this.el).find('#filter').length === 0)
+        if ($(this.el).find('div#filter').length === 0)
         {
             // Insert parent div. Also bind the form to a dummy function.
             $(this.el).find(this.options.table).before($(this.options.templateFilter).html());
@@ -142,18 +142,29 @@ class BehaviorTable extends Marionette.Behavior
             for (var i = 0; i < columns.length; i++)
             {
                 var column = $(columns[i]);
-                var dataName = column.attr('data-name');
-                var templateID = null;
-                if (filterFields[dataName])
+                var field = column.attr('data-name');
+                if (filterFields[field])
                 {
-                    for (var j = 0; j < filterFields[dataName].length; j++)
+                    for (var j = 0; j < filterFields[field].length; j++)
                     {
-                        var filter = filterFields[dataName][j];
+                        var filter = filterFields[field][j];
                         switch (filter)
                         {
                             case 'icontains':
                             {
-                                templateID = this.options.templateFilterText;
+                                this._injectFilterText(column.text(), field);
+                                break;
+                            }
+
+                            case 'gt':
+                            {
+                               // this._injectFilterDatetimeGt(column.text(), field);
+                                break;
+                            }
+
+                            case 'lt':
+                            {
+                               // this._injectFilterDatetimeLt(column.text(), field);
                                 break;
                             }
 
@@ -164,13 +175,6 @@ class BehaviorTable extends Marionette.Behavior
                         }
                     }
                 }
-
-                // Insert.
-                if (templateID)
-                {
-                    var template = _.template($(templateID).html());
-                    $(this.el).find('div#filter').append(template({label: column.text(), dataname: dataName}));
-                }
             }
 
             // Finally, inject enumeration.
@@ -179,11 +183,48 @@ class BehaviorTable extends Marionette.Behavior
             {
                 var enumeration = enumerations[i];
                 var template = _.template($(this.options.templateFilterEnum).html());
-                $(this.el).find('div#filter').append(template({label: enumeration.label, dataname: enumeration.field, values: enumeration.values}));
+                $(this.el).find('div#filter').append(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
             }
         }
     }
 
+    /**
+     * Inject text filter.
+     */
+    _injectFilterText(label, field)
+    {
+        var template = _.template($(this.options.templateFilterText).html());
+        $(this.el).find('div#filter').append(template({label: label, field: field}));
+    }
+
+    /**
+     * Inject lt datetime filter.
+     */
+    _injectFilterDatetimeLt(label, field)
+    {
+    //    var template = _.template($(this.options.templateFilterText).html());
+     //   $(this.el).find('div#filter').append(template({label: label, dataname: field}));
+    }
+
+    /**
+     * Inject gt datetime filter.
+     */
+    _injectFilterDatetimeGt(label, field)
+    {
+        
+    }
+
+    /**
+     * Inject master datetime filter template.
+     */
+    _injectFilterDatetime(label, field)
+    {
+        if ($(this.el).find('div#filter_datetime_' + field) === 0)
+        {
+            var template = _.template($(this.options.templateFilterDatetime).html());
+            $(this.el).find('div#filter').append(template({label: label, field: field}));  
+        }
+    }
 
     /**
      * Removes pagination.
@@ -294,6 +335,9 @@ BehaviorTable.prototype.defaults = {
     'templateFilter': '#template-filter',
     'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter_enumeration',
+    'templateFilterDatetime': '#template-filter_datetime',
+    'templateFilterDatetimeLt': '#template-filter_datetime_lt',
+    'templateFilterDatetimeGt': '#template-filter_datetime_gt',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {

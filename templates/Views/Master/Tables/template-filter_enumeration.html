@@ -1,6 +1,6 @@
 <div class="form-group">
-    <label for="<%- dataname %>">Filter by <%- label %>:</label>
-    <select class="form-control input-xs" id="<%- dataname %>" name="<%- dataname %>">
+    <label for="<%- field %>"><%- label %>:</label>
+    <select class="form-control input-xs" id="<%- field %>" name="<%- field %>">
         <option value="">All</option>
         <% _(values).each(function(value) { %>
         <option value="<%= value %>"><%= value %></option>
