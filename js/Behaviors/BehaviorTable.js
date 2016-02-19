@@ -19,6 +19,7 @@ class BehaviorTable extends Marionette.Behavior
     initialize(options)
     {
         this._initializeRadio();
+        this._hasCheckedFiltering = false;
     }
 
     /**
@@ -131,8 +132,11 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFiltering(filterFields)
     {
-        if ($(this.el).find('div#filter').length === 0)
+        if (!this._hasCheckedFiltering)
         {
+            var filtersInserted = false;
+            this._hasCheckedFiltering = true;
+
             // Insert parent div. Also bind the form to a dummy function.
             $(this.el).find(this.options.table).before($(this.options.templateFilter).html());
             $(this.el).find('form#form-filter').bind('submit', function() {return false;});
@@ -152,6 +156,7 @@ class BehaviorTable extends Marionette.Behavior
                         {
                             case 'icontains':
                             {
+                                filtersInserted = true;
                                 this._injectFilterText(column.text(), field);
                                 break;
                             }
@@ -181,9 +186,16 @@ class BehaviorTable extends Marionette.Behavior
             var enumerations = this.view.collection.getEnumerations();
             for (var i in enumerations)
             {
+                filtersInserted = true;
                 var enumeration = enumerations[i];
                 var template = _.template($(this.options.templateFilterEnum).html());
                 $(this.el).find('div#filter').append(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
+            }
+
+            // If nothing was inserted, remove the filter stuff.
+            if (!filtersInserted)
+            {
+                $(this.el).remove('div#filter');
             }
         }
     }
