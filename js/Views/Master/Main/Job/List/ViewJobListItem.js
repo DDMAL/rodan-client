@@ -31,19 +31,10 @@ class ViewJobListItem extends Marionette.ItemView
     }
 
     /**
-     * Handles click.
-     */
-    _handleClick()
-    {
-        this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
-    }
-
-    /**
      * Handle add button.
      */
     _handleClickButtonAdd()
     {
-        this.rodanChannel.trigger(Events.EVENT__JOB_SELECTED, {job: this.model});
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
     }
 }
@@ -60,8 +51,7 @@ ViewJobListItem.prototype.ui = {
     buttonAdd: '#button-main_job_button_add'
 };
 ViewJobListItem.prototype.events = {
-    'click @ui.buttonAdd': '_handleClickButtonAdd',
-    'click': '_handleClick'
+    'click @ui.buttonAdd': '_handleClickButtonAdd'
 };
 
 export default ViewJobListItem;
