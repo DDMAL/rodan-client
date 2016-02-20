@@ -1,33 +1,12 @@
-<div class='row'>
-    <div class='col-lg-4'>
-        <div class='fixed_individual'>
-            <h1>Project</h1>
-            Name: <input type="text" id="text-project_name" value="<%= _.escape(name) %>" style='width: 100%;'><br>
-            Description: <textarea id="text-project_description" rows="10"><%= _.escape(description) %></textarea><br>
-            Creator: <%= creator %> <br>
-            Created on: <%= _.formatFromUTC(created) %><br>
-            Updated on: <%= _.formatFromUTC(updated) %><br>
-            <span id="resource_count">Resources: <%= resource_count%></span><br>
-            <span id="workflow_count">Workflows: <%= workflow_count%></span><br>
-            <button class="btn btn-xs" id="button-save_project">Save</button>
-            <button class="btn btn-xs" id="button-delete_project">Delete</button>
-        </div>
-    </div>
-    <div class='col-lg-8'>
-        <div class="table-responsive">
-            <h2>Workflow Runs</h2>
-            <table class="table table-striped" id="table-workflowruns">
-                <thead>
-                    <tr>
-                        <th data-name="name">Name</th>
-                        <th data-name="created">Created</th>
-                        <th data-name="updated">Updated</th>
-                        <th data-name="status">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="fixed_individual">
+    <h3>Project</h3>
+    Name: <input type="text" id="text-project_name" value="<%= _.escape(name) %>" style='width: 100%;'><br>
+    Description: <textarea id="text-project_description" rows="10"><%= _.escape(description) %></textarea><br>
+    Creator: <%= creator %> <br>
+    Created on: <%= _.formatFromUTC(created) %><br>
+    Updated on: <%= _.formatFromUTC(updated) %><br>
+    <span id="resource_count">Resources: <%= resource_count%></span><br>
+    <span id="workflow_count">Workflows: <%= workflow_count%></span><br>
+    <button class="btn btn-xs" id="button-save_project">Save</button>
+    <button class="btn btn-xs" id="button-delete_project">Delete</button>
 </div>

@@ -24,7 +24,6 @@ class LayoutViewResource extends Marionette.LayoutView
             regionList: '#region-main_resource_list',
             regionItem: '#region-main_resource_item'
         });
-        this._project = options.project;
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
                                                                        options: {}, 
                                                                        callback: null});
@@ -64,27 +63,11 @@ class LayoutViewResource extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
     }
-
-    /**
-     * Handle add button.
-     */
-    _handleClickButtonFile()
-    {
-        var file = this.ui.fileInput[0].files[0];
-        this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
-        this.rodanChannel.request(Events.REQUEST__RESOURCE_CREATE, {project: this._project, file: file});
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewResource.prototype.ui = {
-    fileInput: '#file-main_resource_file'
-};
-LayoutViewResource.prototype.events = {
-    'change @ui.fileInput': '_handleClickButtonFile'
-};
 LayoutViewResource.prototype.template = '#template-main_resource';
 
 export default LayoutViewResource;

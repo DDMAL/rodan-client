@@ -8,9 +8,9 @@ import ViewWorkflowList from '../../Workflow/List/ViewWorkflowList';
 import ViewWorkflowListImportItem from './ViewWorkflowListImportItem';
 
 /**
- * View for listing Jobs and Workflows for import.
+ * View for listing Workflows to import
  */
-class LayoutViewJobSelection extends Marionette.LayoutView
+class LayoutViewWorkflowImport extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -102,14 +102,14 @@ class LayoutViewJobSelection extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewJobSelection.prototype.template = '#template-main_workflowbuilder_job_selection';
-LayoutViewJobSelection.prototype.ui = {
+LayoutViewWorkflowImport.prototype.template = '#template-main_workflowbuilder_job_selection';
+LayoutViewWorkflowImport.prototype.ui = {
     buttonToggleJobs: '#button-jobs_toggle',
     buttonToggleWorkflows: '#button-workflows_toggle'
 };
-LayoutViewJobSelection.prototype.events = {
+LayoutViewWorkflowImport.prototype.events = {
     'click @ui.buttonToggleJobs': '_showJobs',
     'click @ui.buttonToggleWorkflows': '_showWorkflows'
 };
 
-export default LayoutViewJobSelection;
+export default LayoutViewWorkflowImport;

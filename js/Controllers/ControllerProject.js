@@ -3,6 +3,7 @@ import Events from '../Shared/Events';
 import LayoutViewProject from '../Views/Master/Main/Project/LayoutViewProject';
 import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
 import ViewProject from '../Views/Master/Main/Project/Individual/ViewProject';
+import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
@@ -19,6 +20,7 @@ class ControllerProject extends BaseController
     initialize()
     {
         this._activeProject = null;
+        this._collection = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -87,24 +89,17 @@ class ControllerProject extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        // Get appropriate collection. In this case, a single project is being shown.
-        // So, we want to pass all the WorkflowRuns associated with it.
-        // Make sure we update it.
         this._activeProject = options.project;
         this._activeProject.fetch();
-        var workflowRunCollection = new WorkflowRunCollection();
-        workflowRunCollection.fetch({data: {project: this._activeProject.id}});
+        var collection = new WorkflowRunCollection();
+        collection.fetch({data: {project: this._activeProject.id}});
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {collection: workflowRunCollection}, 
+                                                                       options: {collection: collection}, 
                                                                        callback: null});
-
-        // Show layout view.
         var layoutView = new LayoutViewProject();
         this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-
-        // Show the list view with the collection.
-        var view = new ViewProject({model: this._activeProject, collection: workflowRunCollection});
-        layoutView.showView(view);
+        layoutView.showView(new ViewProject({model: this._activeProject}));
+        layoutView.showList(new ViewWorkflowRunList({collection: collection}));
     }
 
     /**
@@ -112,19 +107,11 @@ class ControllerProject extends BaseController
      */
     _handleEventListSelected()
     {
-        // Get appropriate collection. In this case, a list of Projects.
-        // Make sure we update it.
         this._collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
-
-        // Show layout view.
-        var layoutView = new LayoutViewProject();
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-
-        // Show the list view with the collection.
-        layoutView.showView(new ViewProjectList({collection: this._collection}));
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, new ViewProjectList({collection: this._collection}));
     }
 
     /**
@@ -140,10 +127,7 @@ class ControllerProject extends BaseController
      */
     _handleRequestProjectsSync(options)
     {
-        if (options.collection)
-        {
-            options.collection.syncList();
-        }
+        options.collection.syncList();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

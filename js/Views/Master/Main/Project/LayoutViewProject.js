@@ -2,10 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 /**
- * LayoutView for Project controller.
- *
- * This view isn't entirely needed (for now), but having it is consistent with
- * the other views and controllers.
+ * LayoutView for Projects.
  */
 class LayoutViewProject extends Marionette.LayoutView
 {
@@ -17,10 +14,19 @@ class LayoutViewProject extends Marionette.LayoutView
      */
     initialize()
     {
-        this._initializeRadio();
         this.addRegions({
-            regionProject: '#region-main_project_view'
+            regionProject: '#region-main_project_view',
+            regionList: '#region-main_project_workflowruns'
         });
+        this._initializeRadio();
+    }
+
+    /**
+     * Show view in Resource list region.
+     */
+    showList(view)
+    {
+        this.regionList.show(view);
     }
 
     /**

@@ -18,7 +18,6 @@ class LayoutViewWorkflowRun extends Marionette.LayoutView
             regionList: '#region-main_workflowrun_list',
             regionItem: '#region-main_workflowrun_individual'
         });
-        this.template = '#template-main_workflowrun';
         this._initializeRadio();
     }
 
@@ -49,5 +48,10 @@ class LayoutViewWorkflowRun extends Marionette.LayoutView
         this.rodanChannel = Radio.channel('rodan');
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROTOTYPE
+///////////////////////////////////////////////////////////////////////////////////////
+LayoutViewWorkflowRun.prototype.template = '#template-main_workflowrun';
 
 export default LayoutViewWorkflowRun;

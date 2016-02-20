@@ -22,7 +22,7 @@ class Project extends BaseModel
     parse(resp)
     {
         resp = super.parse(resp);
-        if (!resp.workflow_count)
+        if (!resp.hasOwnProperty('workflow_count'))
         {
             resp.workflow_count = resp.workflows.length;
         }

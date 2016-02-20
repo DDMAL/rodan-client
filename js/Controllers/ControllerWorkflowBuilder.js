@@ -16,7 +16,7 @@ import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceLis
 import ViewResourceListItemModal from '../Views/Master/Main/Resource/List/ViewResourceListItemModal';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
-import ViewWorkflowListImportItem from '../Views/Master/Main/WorkflowBuilder/JobSelection/ViewWorkflowListImportItem';
+import ViewWorkflowListImportItem from '../Views/Master/Main/WorkflowBuilder/WorkflowImport/ViewWorkflowListImportItem';
 import Workflow from '../Models/Workflow';
 import WorkflowBuilder from '../Plugins/WorkflowBuilder/WorkflowBuilder';
 import WorkflowCollection from '../Collections/WorkflowCollection';

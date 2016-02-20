@@ -1,8 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
 import Events from '../../../../../Shared/Events';
-import ViewWorkflowRunListItem from '../../WorkflowRun/List/ViewWorkflowRunListItem';
 
 /**
  * Project view.
@@ -18,14 +16,6 @@ class ViewProject extends Marionette.CompositeView
     initialize(options)
     {
         this._initializeRadio();
-    }
-
-    /**
-     * Destroy callback.
-     */
-    onDestroy()
-    {
-        this.collection = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -95,8 +85,5 @@ ViewProject.prototype.events = {
             'click @ui.workflowCount': '_handleClickWorkflowCount'
         };
 ViewProject.prototype.template = '#template-main_project_individual';
-ViewProject.prototype.childView = ViewWorkflowRunListItem;
-ViewProject.prototype.childViewContainer = 'tbody';
-ViewProject.prototype.behaviors = {Table: {'table': '#table-workflowruns'}};
 
 export default ViewProject;

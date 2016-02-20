@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rodan Client</title>
-    <link rel="stylesheet" href="libs/github/twbs/bootstrap@3.3.4/css/bootstrap.css">
-    <link rel="stylesheet" href="/styles/default.css">
-    <!--[if gt IE 8]><!-->
-        <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-    <!--<![endif]-->
-</head>
-<body>
-
-    <div id="app">
-        <div id="region-master"></div>
-    </div>
-
-    {templates}
-
-    <script type="text/javascript" src="libs/system.js"></script>
-    <script type="text/javascript" src="config.js"></script>
-
-    <script>
-        System.import('twbs/bootstrap');
-        System.import('js/Application').then(function(application)
-        {{
-            var Application = application.default;
-            var app = new Application();
-            app.start();
-        }});
-    </script>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rodan Client</title>
+        <link rel="stylesheet" href="libs/github/twbs/bootstrap@3.3.4/css/bootstrap.css">
+        <link rel="stylesheet" href="/styles/default.css">
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <!--<![endif]-->
+    </head>
+    <body>
+        <div id="app">
+            <div id="region-master"></div>
+        </div>
+        {templates}
+        <script type="text/javascript" src="libs/system.js"></script>
+        <script type="text/javascript" src="config.js"></script>
+        <script>
+            System.import('twbs/bootstrap');
+            System.import('js/Application').then(function(application)
+            {{
+                var Application = application.default;
+                var app = new Application();
+                app.start();
+            }});
+        </script>
+    </body>
 </html>
