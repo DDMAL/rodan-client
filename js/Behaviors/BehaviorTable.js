@@ -19,7 +19,6 @@ class BehaviorTable extends Marionette.Behavior
     initialize(options)
     {
         this._initializeRadio();
-        this._hasCheckedFiltering = false;
     }
 
     /**
@@ -126,71 +125,62 @@ class BehaviorTable extends Marionette.Behavior
      */
     _injectFiltering(filterFields)
     {
-        if (!this._hasCheckedFiltering)
+        if ($(this.el).find('form#form-filter').length > 0)
         {
-            var filtersInserted = false;
-            this._hasCheckedFiltering = true;
+            return;
+        }
 
-            // Insert parent div. Also bind the form to a dummy function.
-            $(this.el).find('#filter').prepend($(this.options.templateFilter).html());
-            $(this.el).find('form#form-filter').bind('submit', function() {return false;});
+        // Insert parent div. Also bind the form to a dummy function.
+        $(this.el).find('#filter').prepend($(this.options.templateFilter).html());
+        $(this.el).find('form#form-filter').bind('submit', function() {return false;});
 
-            // Get those columns with data names.
-            var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
-            for (var i = 0; i < columns.length; i++)
+        // Get those columns with data names.
+        var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
+        for (var i = 0; i < columns.length; i++)
+        {
+            var column = $(columns[i]);
+            var field = column.attr('data-name');
+            if (filterFields[field])
             {
-                var column = $(columns[i]);
-                var field = column.attr('data-name');
-                if (filterFields[field])
+                for (var j = 0; j < filterFields[field].length; j++)
                 {
-                    for (var j = 0; j < filterFields[field].length; j++)
+                    var filter = filterFields[field][j];
+                    switch (filter)
                     {
-                        var filter = filterFields[field][j];
-                        switch (filter)
+                        case 'icontains':
                         {
-                            case 'icontains':
-                            {
-                                filtersInserted = true;
-                                this._injectFilterText(column.text(), field);
-                                break;
-                            }
+                            this._injectFilterText(column.text(), field);
+                            break;
+                        }
 
-                            case 'gt':
-                            {
-                             //   this._injectFilterDatetimeGt(column.text(), field);
-                                break;
-                            }
+                        case 'gt':
+                        {
+                         //   this._injectFilterDatetimeGt(column.text(), field);
+                            break;
+                        }
 
-                            case 'lt':
-                            {
-                              //  this._injectFilterDatetimeLt(column.text(), field);
-                                break;
-                            }
+                        case 'lt':
+                        {
+                          //  this._injectFilterDatetimeLt(column.text(), field);
+                            break;
+                        }
 
-                            default:
-                            {
-                                break;
-                            }
+                        default:
+                        {
+                            break;
                         }
                     }
                 }
             }
+        }
 
-            // Finally, inject enumeration.
-            var enumerations = this.view.collection.getEnumerations();
-            for (var i in enumerations)
-            {
-                filtersInserted = true;
-                var enumeration = enumerations[i];
-                var template = _.template($(this.options.templateFilterEnum).html());
-                $(this.el).find('form#form-filter').prepend(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
-            }
-
-            // If nothing was inserted, remove the filter stuff.
-            if (!filtersInserted)
-            {
-                $(this.el).remove('form#form-filter');
-            }
+        // Finally, inject enumeration.
+        var enumerations = this.view.collection.getEnumerations();
+        for (var i in enumerations)
+        {
+            var enumeration = enumerations[i];
+            var template = _.template($(this.options.templateFilterEnum).html());
+            $(this.el).find('form#form-filter').prepend(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
         }
     }
 

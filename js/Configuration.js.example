@@ -4,28 +4,20 @@
  */
 var Configuration = {
 
+///////////////////////////////////////////////////////////////////////////////////////
+// Server parameters
+///////////////////////////////////////////////////////////////////////////////////////
     // URL of the server to connect to.
     SERVER_URL: 'http://132.206.14.136',
-
-    // Date/time format. See http://momentjs.com/docs/#/displaying/format/
-    DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss', 
 
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: 'token',
 
-    // Debug flag, boolean. When true, extra output is presented in the
-    // Message area (at the bottom) and all messages are also routed
-    // to the console.
-    DEBUG: true,
-
-    // Identifier for this client.
-    USER_AGENT: 'rodan-standard',
-
-    // Client admin info. Leave fields empty if you don't want to be bothered. ;)
-    ADMIN_CLIENT: {
-        name: 'Ryan Bannon',
-        email: 'ryan.bannon@gmail.com'
-    },
+///////////////////////////////////////////////////////////////////////////////////////
+// General behavior parameters
+///////////////////////////////////////////////////////////////////////////////////////
+    // Date/time format. See http://momentjs.com/docs/#/displaying/format/
+    DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss',
 
     // Event timer frequency (ms).
     EVENT_TIMER_FREQUENCY: 3000,
@@ -42,8 +34,13 @@ var Configuration = {
     // their category set to the value of RESOURCE_DISTRIBUTOR_CATEGORY.
     RESOURCE_DISTRIBUTOR_CATEGORY: 'Resource Distributor',
 
-    // Settings for WorkflowBuilder GUI.
+///////////////////////////////////////////////////////////////////////////////////////
+// WorkflowBuilder GUI parameters
+///////////////////////////////////////////////////////////////////////////////////////
     WORKFLOWBUILDER: {
+
+        // Identifier for this client.
+        USER_AGENT: 'rodan-standard',
 
         // Grid parameters.
         GRID:
@@ -87,7 +84,13 @@ var Configuration = {
 // DON'T EDIT BELOW THIS LINE (unless you know what you're doing)
 ///////////////////////////////////////////////////////////////////////////////////////
     // Routes without OPTIONS. if the route name is in here, the client won't try to grab them.
-    ROUTES_WITHOUT_OPTIONS: ['auth-reset-token', 'taskqueue-status', 'auth-change-password', 'auth-register', 'taskqueue-scheduled', 'taskqueue-active', 'auth-token']
+    ROUTES_WITHOUT_OPTIONS: ['auth-reset-token', 'taskqueue-status', 'auth-change-password', 'auth-register', 'taskqueue-scheduled', 'taskqueue-active', 'auth-token'],
+
+    // Client admin info. Leave fields empty if you don't want to be bothered. ;)
+    ADMIN_CLIENT: {
+        name: 'Ryan Bannon',
+        email: 'ryan.bannon@gmail.com'
+    }
 };
 
 export default Configuration;

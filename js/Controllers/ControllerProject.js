@@ -111,7 +111,8 @@ class ControllerProject extends BaseController
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
                                                                        options: {collection: this._collection}, 
                                                                        callback: null});
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, new ViewProjectList({collection: this._collection}));
+        var view = new ViewProjectList({collection: this._collection})
+        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, view);
     }
 
     /**

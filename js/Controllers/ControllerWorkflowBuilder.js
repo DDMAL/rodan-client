@@ -16,7 +16,7 @@ import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceLis
 import ViewResourceListItemModal from '../Views/Master/Main/Resource/List/ViewResourceListItemModal';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
-import ViewWorkflowListImportItem from '../Views/Master/Main/WorkflowBuilder/WorkflowImport/ViewWorkflowListImportItem';
+import ViewWorkflowListImportItem from '../Views/Master/Main/Workflow/List/ViewWorkflowListImportItem';
 import Workflow from '../Models/Workflow';
 import WorkflowBuilder from '../Plugins/WorkflowBuilder/WorkflowBuilder';
 import WorkflowCollection from '../Collections/WorkflowCollection';
@@ -471,7 +471,8 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowJobListView(options)
     {
-        var view = new ViewJobList();
+        var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var view = new ViewJobList({collection: collection});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'Jobs'});
     }
 

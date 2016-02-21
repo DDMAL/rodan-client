@@ -1,42 +1,6 @@
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-import Events from '../../../../Shared/Events';
+import BaseViewList from '../BaseViewList';
 
-/**
- * This class represents a list of input ports.
- */
-class ViewInputPortList extends Marionette.CompositeView
-{
-///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize.
-     */
-    initialize()
-    {
-        this._initializeRadio();
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
-ViewInputPortList.prototype.modelEvents = {
-    'all': 'render'
-};
+class ViewInputPortList extends BaseViewList {}
 ViewInputPortList.prototype.template = '#template-main_inputport_list';
-ViewInputPortList.prototype.childViewContainer = 'tbody';
 
 export default ViewInputPortList;

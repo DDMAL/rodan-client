@@ -199,7 +199,7 @@ class BaseItem extends paper.Path
         var name = this.coordinateSetInfo['class'];
         var options = {};
         options[this.coordinateSetInfo['url']] = model.get('url');
-        options['user_agent'] = Configuration.USER_AGENT;
+        options['user_agent'] = Configuration.WORKFLOWBUILDER.USER_AGENT;
         this._coordinateSetModel = new name(options);
         this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
     }

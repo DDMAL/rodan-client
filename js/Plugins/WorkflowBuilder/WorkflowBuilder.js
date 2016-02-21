@@ -352,7 +352,7 @@ class WorkflowBuilder
     _handleRequestClear()
     {
         paper.project.clear();
-        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID_DIMENSION, paper);
+        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID, paper);
     }
     /**
      * Hides the context menu.
