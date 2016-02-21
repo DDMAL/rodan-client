@@ -1,6 +1,6 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
-import LayoutViewProject from '../Views/Master/Main/Project/LayoutViewProject';
+import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
 import ViewProject from '../Views/Master/Main/Project/Individual/ViewProject';
 import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
@@ -96,9 +96,9 @@ class ControllerProject extends BaseController
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
                                                                        options: {collection: collection}, 
                                                                        callback: null});
-        var layoutView = new LayoutViewProject();
+        var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
         this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
-        layoutView.showView(new ViewProject({model: this._activeProject}));
+        layoutView.showItem(new ViewProject({model: this._activeProject}));
         layoutView.showList(new ViewWorkflowRunList({collection: collection}));
     }
 
