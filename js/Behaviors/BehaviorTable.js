@@ -77,7 +77,7 @@ class BehaviorTable extends Marionette.Behavior
     /**
      * Inject control.
      */
-    _injectControl(collection)
+    _injectControl()
     {
         if (this.$el.find('.table-control').length === 0)
         {
@@ -129,7 +129,7 @@ class BehaviorTable extends Marionette.Behavior
         {
             return;
         }
-
+        
         // Insert parent div. Also bind the form to a dummy function.
         $(this.el).find('#filter').prepend($(this.options.templateFilter).html());
         $(this.el).find('form#form-filter').bind('submit', function() {return false;});

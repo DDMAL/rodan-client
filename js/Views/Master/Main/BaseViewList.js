@@ -23,7 +23,7 @@ class BaseViewList extends Marionette.CompositeView
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 BaseViewList.prototype.modelEvents = { 'all': 'render' };
-BaseViewList.prototype.collectionEvents = { 'all': 'render' };
+//BaseViewList.prototype.collectionEvents = { 'all': 'render' };
 BaseViewList.prototype.childViewContainer = 'tbody';
 
 export default BaseViewList;
