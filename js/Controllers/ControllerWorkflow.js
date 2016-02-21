@@ -1,6 +1,6 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
-import LayoutViewWorkflow from '../Views/Master/Main/Workflow/LayoutViewWorkflow';
+import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
 import Workflow from '../Models/Workflow';
@@ -51,7 +51,7 @@ class ControllerWorkflow extends BaseController
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
                                                                        options: {}, 
                                                                        callback: null});
-        this._layoutView = new LayoutViewWorkflow();
+        this._layoutView = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         this._viewList = new ViewWorkflowList({collection: this._collection});
         this._layoutView.showList(this._viewList);
