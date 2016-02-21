@@ -24,7 +24,6 @@ class LayoutViewRunJob extends Marionette.LayoutView
             regionList: '#region-main_runjob_list',
             regionItem: '#region-main_runjob_item'
         });
-        this._project = options.project;
     }
 
     /**

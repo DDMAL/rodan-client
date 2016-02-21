@@ -24,9 +24,6 @@ class LayoutViewResource extends Marionette.LayoutView
             regionList: '#region-main_resource_list',
             regionItem: '#region-main_resource_item'
         });
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
-                                                                       options: {}, 
-                                                                       callback: null});
     }
 
     /**

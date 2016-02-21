@@ -46,6 +46,9 @@ class ControllerResource extends BaseController
     _handleEventListSelected(options)
     {
         this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: options.project.id}});
+        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
+                                                                       options: {}, 
+                                                                       callback: null});
         this._layoutView = new LayoutViewResource({model: options.project});
         this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         var view = new ViewResourceList({collection: this._collection,
