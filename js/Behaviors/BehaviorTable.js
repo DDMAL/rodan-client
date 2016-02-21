@@ -34,6 +34,10 @@ class BehaviorTable extends Marionette.Behavior
         // TODO - fix/find better way
         this.view.delegateEvents();
 
+        // Inject control.
+        this._injectControl();
+
+        // Inject the controls.
         if (view.collection)
         {
             this._handleCollectionEventSync(view.collection);
@@ -72,6 +76,17 @@ class BehaviorTable extends Marionette.Behavior
     }
 
     /**
+     * Inject control.
+     */
+    _injectControl(collection)
+    {
+        if (this.$el.find('.table-control').length === 0)
+        {
+            this.$el.find(this.options.table).before($(this.options.templateControl).html());
+        }
+    }
+
+    /**
      * Handles collection event.
      */
     _handleCollectionEventSync(returnObject)
@@ -90,37 +105,19 @@ class BehaviorTable extends Marionette.Behavior
 
             // Handle pagination.
             var pagination = returnObject.getPagination();
+            $(this.el).find('.table-control #pagination-previous').hide();
+            $(this.el).find('.table-control #pagination-next').hide();
             if (pagination !== null/* && pagination.get('total') > 1*/)
             {
-                this._injectPagination(pagination);
+                if (pagination.get('current') < pagination.get('total'))
+                {
+                    $(this.el).find('.table-control #pagination-next').show();
+                }
+                if (pagination.get('current') > 1)
+                {
+                    $(this.el).find('.table-control #pagination-previous').show();
+                }
             }
-            else
-            {
-                this._removePagination();
-            }
-        }
-    }
-
-    /**
-     * Injects pagination functionality into view/template.
-     */
-    _injectPagination(pagination)
-    {
-        if ($(this.el).find('#pagination').length === 0)
-        {
-            $(this.el).find(this.options.table).before($(this.options.templatePagination).html());
-        }
-
-        // Set buttons.
-        $(this.el).find('#pagination #pagination-previous').hide();
-        $(this.el).find('#pagination #pagination-next').hide();
-        if (pagination.get('current') < pagination.get('total'))
-        {
-            $(this.el).find('#pagination #pagination-next').show();
-        }
-        if (pagination.get('current') > 1)
-        {
-            $(this.el).find('#pagination #pagination-previous').show();
         }
     }
 
@@ -135,7 +132,7 @@ class BehaviorTable extends Marionette.Behavior
             this._hasCheckedFiltering = true;
 
             // Insert parent div. Also bind the form to a dummy function.
-            $(this.el).find(this.options.table).before($(this.options.templateFilter).html());
+            $(this.el).find('#filter').prepend($(this.options.templateFilter).html());
             $(this.el).find('form#form-filter').bind('submit', function() {return false;});
 
             // Get those columns with data names.
@@ -186,13 +183,13 @@ class BehaviorTable extends Marionette.Behavior
                 filtersInserted = true;
                 var enumeration = enumerations[i];
                 var template = _.template($(this.options.templateFilterEnum).html());
-                $(this.el).find('div#filter').append(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
+                $(this.el).find('form#form-filter').prepend(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
             }
 
             // If nothing was inserted, remove the filter stuff.
             if (!filtersInserted)
             {
-                $(this.el).remove('div#filter');
+                $(this.el).remove('form#form-filter');
             }
         }
     }
@@ -203,7 +200,7 @@ class BehaviorTable extends Marionette.Behavior
     _injectFilterText(label, field)
     {
         var template = _.template($(this.options.templateFilterText).html());
-        $(this.el).find('div#filter').append(template({label: label, field: field}));
+        $(this.el).find('form#form-filter').prepend(template({label: label, field: field}));
     }
 
     /**
@@ -213,7 +210,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         this._injectFilterDatetime(label, field);
         var template = _.template($(this.options.templateFilterDatetimeLt).html());
-        $(this.el).find('div#filter_datetime_' + field).append(template({label: label, field: field}));  
+        $(this.el).find('div#filter_datetime_' + field).prepend(template({label: label, field: field}));  
     }
 
     /**
@@ -223,7 +220,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         this._injectFilterDatetime(label, field);
         var template = _.template($(this.options.templateFilterDatetimeGt).html());
-        $(this.el).find('div#filter_datetime_' + field).append(template({label: label, field: field}));  
+        $(this.el).find('div#filter_datetime_' + field).prepend(template({label: label, field: field}));  
     }
 
     /**
@@ -236,14 +233,6 @@ class BehaviorTable extends Marionette.Behavior
             var template = _.template($(this.options.templateFilterDatetime).html());
             $(this.el).find('div#filter').append(template({label: label, field: field}));  
         }
-    }
-
-    /**
-     * Removes pagination.
-     */
-    _removePagination()
-    {
-        $(this.el).remove('#pagination');
     }
 
     /**
@@ -343,7 +332,7 @@ BehaviorTable.prototype.events = {
     'click @ui.buttonSearch': '_handleSearch',
 };
 BehaviorTable.prototype.defaults = {
-    'templatePagination': '#template-pagination',
+    'templateControl': '#template-table_control',
     'templateFilter': '#template-filter',
     'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter_enumeration',

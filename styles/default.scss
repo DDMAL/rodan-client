@@ -309,34 +309,34 @@ li:hover ul#submenu
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Paginated tables
+// Table controls
 ///////////////////////////////////////////////////////////////////////////////////////
-div#pagination
+div.table-control
 {
    width: 100%;
 
 }
 
-div#pagination span
+div.table-control span
 {
     display:inline-block;
     font-size: $size-font;
     font-weight: bold;
 }
 
-div#pagination span
+div.table-control span
 {
     display:inline-block; 
     width: 50%;
 }
 
-div#pagination span.align-right
+div.table-control span.align-right
 {
     text-align: right;
     padding-right: 25px;
 }
 
-div#pagination p
+div.table-control p
 {
     font-size:0; /* Fixes inline block spacing */  
 }
