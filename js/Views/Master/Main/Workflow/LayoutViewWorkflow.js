@@ -60,26 +60,11 @@ class LayoutViewWorkflow extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
     }
-
-    /**
-     * Handle button new workflow.
-     */
-    _handleButtonNewWorkflow()
-    {
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-        var workflow = this.rodanChannel.request(Events.REQUEST__WORKFLOW_ADD, {project: project});
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewWorkflow.prototype.template = '#template-main_workflow';
-LayoutViewWorkflow.prototype.ui = {
-    newWorkflowButton: '#button-new_workflow'
-};
-LayoutViewWorkflow.prototype.events = {
-    'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
-};
 
 export default LayoutViewWorkflow;
