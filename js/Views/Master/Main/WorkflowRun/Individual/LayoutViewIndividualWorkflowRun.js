@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 import Events from '../../../../../Shared/Events';
 import LayoutViewResource from '../../Resource/LayoutViewResource';
-import LayoutViewRunJob from '../../RunJob/LayoutViewRunJob';
+import LayoutViewModel from '../../LayoutViewModel';
 import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewResourceList from '../../Resource/List/ViewResourceList';
 import ViewResourceListItem from '../../Resource/List/ViewResourceListItem';
@@ -53,7 +53,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this._layoutViewResources.showList(this._viewResourceList);
 
         // Create Resource views.
-        this._layoutViewRunJobs = new LayoutViewRunJob({template: '#template-main_workflowrun_individual_runjobs'});
+        this._layoutViewRunJobs = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({collection: this._runJobCollection,
