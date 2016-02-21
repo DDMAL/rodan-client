@@ -1,6 +1,6 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
-import LayoutViewResource from '../Views/Master/Main/Resource/LayoutViewResource';
+import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import ViewResource from '../Views/Master/Main/Resource/Individual/ViewResource';
 import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
 import ViewResourceListItem from '../Views/Master/Main/Resource/List/ViewResourceListItem';
@@ -49,7 +49,7 @@ class ControllerResource extends BaseController
         this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
                                                                        options: {}, 
                                                                        callback: null});
-        this._layoutView = new LayoutViewResource({model: options.project});
+        this._layoutView = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
         var view = new ViewResourceList({collection: this._collection,
                                          template: '#template-main_resource_list',
