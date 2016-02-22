@@ -36,56 +36,9 @@ $height-gui: 88; // % of vertical space in GUI viewport
 $height-gui_menu: 4; // % of vertical space in GUI viewport for menu
 $size-font: 12px; // pixels
 
-.vertical-center {
-    height: $height-top + %; //fallback
-    height: $height-top + vh;
-    display: flex;
-    align-items: center;
-}
-
-.horizontal-center
-{
-    width: 100%;
-    text-align: center;
-}
-
-body
-{
-    overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: $size-font;
-}
-
-textarea {
-    width: 100%;
-    resize: none
-}
-
-div.fixed_individual {
-    position: fixed;
-    width: 25%;
-}
-
-div.top {
-    height: $height-top + %; //fallback
-    height: $height-top + vh;
-}
-
-div.bottom {
-    height: $height-bottom + %; //fallback
-    height: $height-bottom + vh;
-}
-
-div.gui {
-    height: $height-gui + %; //fallback
-    height: $height-gui + vh;
-}
-
-div.gui_menu {
-    height: $height-gui_menu + %; //fallback
-    height: $height-gui_menu + vh;
-}
-
+///////////////////////////////////////////////////////////////////////////////////////
+// Navigation region
+///////////////////////////////////////////////////////////////////////////////////////
 div#region-navigation 
 {
     background: $background-color-navigation;
@@ -102,11 +55,9 @@ div#region-navigation ul
     padding-left: 10px;
 }
 
-button#button-navigation_logout
-{
-    color: $text-color-navigation-logout;
-}
-
+///////////////////////////////////////////////////////////////////////////////////////
+// Status region
+///////////////////////////////////////////////////////////////////////////////////////
 div#region-status
 {
     background: $background-color-status;
@@ -131,15 +82,22 @@ div#region-status_server
     color: $text-color-status-server;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// Main region
+///////////////////////////////////////////////////////////////////////////////////////
 div#region-main
 {
     background-image: url("resources/rodan.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// Canvas
+///////////////////////////////////////////////////////////////////////////////////////
 div#canvas-wrap
 {
     height: 100%;
@@ -169,10 +127,70 @@ canvas#canvas-workspace
     padding: 0px;
 }
 
-div#region-main_workflowbuilder_control
+
+
+
+
+
+
+
+
+
+
+
+.vertical-center {
+    height: $height-top + %; //fallback
+    height: $height-top + vh;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-center
 {
-    background-color: $background-color-workflowbuilder-control;
-    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+body
+{
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $size-font;
+}
+
+textarea {
+    width: 100%;
+    resize: none
+}
+
+div.fixed_individual {
+    //position: fixed;
+    width: 100%;
+}
+
+div.top {
+    height: $height-top + %; //fallback
+    height: $height-top + vh;
+}
+
+div.bottom {
+    height: $height-bottom + %; //fallback
+    height: $height-bottom + vh;
+}
+
+div.gui {
+    height: $height-gui + %; //fallback
+    height: $height-gui + vh;
+}
+
+div.gui_menu {
+    height: $height-gui_menu + %; //fallback
+    height: $height-gui_menu + vh;
+}
+
+button#button-navigation_logout
+{
+    color: $text-color-navigation-logout;
 }
 
 div#main_workflowbuilder
@@ -194,6 +212,8 @@ div#main_workflowbuilder
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Horizontal Menu
+//
+// Could have used Bootstrap, but this seems to work better.
 ///////////////////////////////////////////////////////////////////////////////////////
 .info-workflow_validity
 {
