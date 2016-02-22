@@ -4,6 +4,7 @@ import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/In
 import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import RunJobCollection from '../Collections/RunJobCollection';
 import WorkflowRun from '../Models/WorkflowRun';
+import Resource from '../Models/Resource';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
@@ -68,7 +69,13 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunCreate(options)
     {
-        var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), resource_assignments: options.assignments});
+        var name = options.workflow.get('name');
+        var description = 'Run of Workflow "' + name + '"\n\n';
+        description += this._getResourceAssignmentDescription(options.assignments);
+        var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), 
+                                           resource_assignments: options.assignments,
+                                           name: name,
+                                           description: description});
         workflowRun.save({}, {success: (model) => this._handleSuccess(model)});
     }
 
@@ -92,6 +99,29 @@ class ControllerWorkflowRun extends BaseController
     {
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
         this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: project});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Given resource assignments, provides descriptive info.
+     */
+    _getResourceAssignmentDescription(assignments)
+    {
+        var text = '';
+        for (var inputPortUrl in assignments)
+        {
+            var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: inputPortUrl});
+            text += 'Input Port: ' + inputPort.get('label') + '\n----------\n';
+            var resourceUrls = assignments[inputPortUrl];
+            for (var index in resourceUrls)
+            {
+                text += '- ' + resourceUrls[index] + '\n';
+            }
+            text += '\n';
+        }
+        return text;
     }
 }
 

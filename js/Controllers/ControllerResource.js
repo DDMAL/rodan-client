@@ -19,13 +19,10 @@ class ControllerResource extends BaseController
      */
     _initializeRadio()
     {
-        // Commands.
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_CREATE, options => this._handleRequestResourceCreate(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_DELETE, options => this._handleCommandResourceDelete(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-
-        // Requests.
         this.rodanChannel.on(Events.EVENT__RESOURCES_SELECTED, options => this._handleEventListSelected(options));
         this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCES_SYNC, options => this._handleRequestResourcesSync(options));
