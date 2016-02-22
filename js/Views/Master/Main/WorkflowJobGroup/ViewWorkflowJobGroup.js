@@ -36,7 +36,17 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
+        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
+    }
+
+    /**
+     * Handle button ungroup.
+     */
+    _handleButtonUngroup()
+    {
+        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -56,11 +66,13 @@ ViewWorkflowJobGroup.prototype.template = '#template-main_workflowjobgroup';
 ViewWorkflowJobGroup.prototype.ui = {
     buttonSave: '#button-save_workflowjobgroup_data',
     buttonDelete: '#button-delete_workflowjobgroup',
-    textName: '#text-workflowjobgroup_name',
+    buttonUngroup: '#button-ungroup_workflowjobgroup',
+    textName: '#text-workflowjobgroup_name'
 };
 ViewWorkflowJobGroup.prototype.events = {
     'click @ui.buttonSave': '_handleButtonSave',
-    'click @ui.buttonDelete': '_handleButtonDelete'
+    'click @ui.buttonDelete': '_handleButtonDelete',
+    'click @ui.buttonUngroup': '_handleButtonUngroup'
 };
 
 export default ViewWorkflowJobGroup;

@@ -65,7 +65,7 @@ class ControllerWorkflowBuilder extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, options => this._handleCommandDeleteInputPort(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, options => this._handleCommandDeleteOutputPort(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupDelete(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
@@ -85,6 +85,7 @@ class ControllerWorkflowBuilder extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options => this._handleRequestShowWorkflowJobSettingsView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options => this._handleRequestShowWorkflowJobGroupView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, options => this._handleRequestUnassignResource(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupUngroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
     }
 
@@ -217,6 +218,14 @@ class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
+     * Handle command delete WorkflowJobGroup.
+     */
+    _handleRequestDeleteWorkflowJobGroup(options)
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: options.model, workflow: this._workflow});
+    }
+
+    /**
      * Handle request delete Connection.
      */
     _handleRequestDeleteConnection(options)
@@ -237,6 +246,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestImportWorkflow(options)
     {
+        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         this.rodanChannel.request(Events.REQUEST__WORKFLOW_IMPORT, {origin: options.workflow, target: this._workflow});
     }
 
@@ -391,11 +401,11 @@ class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
-     * Handle request WorkflowJobGroup delete.
+     * Handle request WorkflowJobGroup ungroup.
      */
-    _handleRequestWorkflowJobGroupDelete(options)
+    _handleRequestWorkflowJobGroupUngroup(options)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: options.model, workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: options.model, workflow: this._workflow});
     }
 
     /**

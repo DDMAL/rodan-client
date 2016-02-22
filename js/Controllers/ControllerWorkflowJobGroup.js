@@ -29,10 +29,11 @@ class ControllerWorkflowJobGroup extends BaseController
     _initializeRadio()
     {
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, (options) => this._handleRequestUngroupWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -47,11 +48,11 @@ class ControllerWorkflowJobGroup extends BaseController
     }
 
     /**
-     * Handle WorkflowJobGroup deletion.
+     * Handle WorkflowJobGroup ungroup.
      */
-    _handleRequestDeleteWorkflowJobGroup(options)
+    _handleRequestUngroupWorkflowJobGroup(options)
     {
-        this._deleteWorkflowJobGroup(options.workflowjobgroup, options.workflow);
+        this._ungroupWorkflowJobGroup(options.workflowjobgroup, options.workflow, false);
     }
 
     /**
@@ -76,6 +77,14 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleRequestWorkflowJobGroup(options)
     {
         return this._collection.findWhere({url: options.url});
+    }
+
+    /**
+     * Handle WorkflowJobGroup delete.
+     */
+    _handleRequestDeleteWorkflowJobGroup(options)
+    {
+        this._ungroupWorkflowJobGroup(options.workflowjobgroup, options.workflow, true);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +117,19 @@ class ControllerWorkflowJobGroup extends BaseController
         }
     }
 
+    /**
+     * Handle ungroup success.
+     */
+    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup, workflow)
+    {
+        var workflowJobs = workflowJobGroup.get('workflow_jobs');
+        for (var index in workflowJobs)
+        {
+            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobs[index]});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob, workflow: workflow});
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -126,9 +148,9 @@ class ControllerWorkflowJobGroup extends BaseController
     }
 
     /**
-     * Deletes a WorkflowJobGroup
+     * Ungroups a WorkflowJobGroup
      */
-    _deleteWorkflowJobGroup(workflowJobGroup, workflow)
+    _ungroupWorkflowJobGroup(workflowJobGroup, workflow, deleteWorkflowJobs)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
         var workflowJobURLs = workflowJobGroup.get('workflow_jobs');
@@ -140,7 +162,15 @@ class ControllerWorkflowJobGroup extends BaseController
             this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
         }
         this._collection.remove(workflowJobGroup);
-        workflowJobGroup.destroy();
+
+        if (deleteWorkflowJobs)
+        {
+            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model, workflow)});
+        }
+        else
+        {
+            workflowJobGroup.destroy();
+        }
     }
 
     /**
