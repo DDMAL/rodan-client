@@ -23,6 +23,7 @@ class ControllerWorkflowRun extends BaseController
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +70,16 @@ class ControllerWorkflowRun extends BaseController
     {
         var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), resource_assignments: options.assignments});
         workflowRun.save({}, {success: (model) => this._handleSuccess(model)});
+    }
+
+    /**
+     * Handle request save WorkflowRun.
+     */
+    _handleRequestWorkflowRunSave(options)
+    {
+        options.model.save({name: options.model.get('name'),
+                            description: options.model.get('description')},
+                           {patch: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

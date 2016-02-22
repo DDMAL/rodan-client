@@ -32,9 +32,9 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     }
 
     /**
-     * Insert views before show.
+     * Insert views before render.
      */
-    onBeforeShow()
+    onRender()
     {
         // Empty regions.
         this.regionRunJobList.empty();
@@ -102,6 +102,15 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
             this.regionRunJobList.$el.toggle('fast');
         }
     }
+
+    /**
+     * Handle save button.
+     */
+    _handleButtonSave()
+    {
+        this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_SAVE, {model: this.model});
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -112,11 +121,16 @@ LayoutViewIndividualWorkflowRun.prototype.modelEvents = {
 };
 LayoutViewIndividualWorkflowRun.prototype.ui = {
     buttonShowResources: '#button-resources_show',
-    buttonShowRunJobs: '#button-runjobs_show'
+    buttonShowRunJobs: '#button-runjobs_show',
+    buttonSave: '#button-save_workflowrun',
+    textName: '#text-workflowrun_name',
+    textDescription: '#text-workflowrun_description'
 };
 LayoutViewIndividualWorkflowRun.prototype.events = {
     'click @ui.buttonShowResources': '_showResources',
-    'click @ui.buttonShowRunJobs': '_showRunJobs'
+    'click @ui.buttonShowRunJobs': '_showRunJobs',
+    'click @ui.buttonSave': '_handleButtonSave'
+
 };
 LayoutViewIndividualWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
 

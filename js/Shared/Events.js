@@ -222,6 +222,7 @@ var Events =
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on WorkflowRun selection. Takes {workflowrun: WorkflowRun}.
     EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
     REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',         // Create WorkflowRun. Takes {workflow: Workflow, assignments: [string (Resource URL)] (index by InputPort URLs)}.
+    REQUEST__WORKFLOWRUN_SAVE: 'REQUEST__WORKFLOWRUN_SAVE',             // Save/update WorkflowRun. Takes {model: WorkflowRun}.
     REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC'            // Updates the WorkflowRuns collection without resetting.
 };
 
