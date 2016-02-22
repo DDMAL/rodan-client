@@ -1,12 +1,15 @@
 <div class="fixed_individual">
     <h3>Resource</h3>
-    Name: <input type="text" id="text-resource_name" value="<%= _.escape(name) %>" style="width: 100%"><br>
-    Description: <textarea id="text-resource_description" rows="10" style="width: 100%; resize: none"><%= _.escape(description) %></textarea><br>
+    <label for="text-resource_name">Name:</label>
+    <input type="text" class="form-control input-sm" id="text-resource_name" value="<%= _.escape(name) %>" name="text-resource_name">
+    <label for="text-resource_description">Description:</label>
+    <textarea type="text" class="form-control input-sm" id="text-resource_description" name="text-resource_description"><%= _.escape(description) %></textarea>
     Creator: <%= creator %><br>
     Created: <%= _.formatFromUTC(created) %><br>
     Updated: <%= _.formatFromUTC(updated) %><br>
     Type: <select id="select-resourcetype"></select><br>
-    <button class="btn btn-xs" id="button-main_resource_individual_save">Save</button>
-    <form style="display: inline" action="<%= viewer_url %>" method="get"><button class="btn btn-xs">View/Download</button></form>
-    <button class="btn btn-xs" id="button-main_resource_individual_delete">Delete</button>
+    <br>
+    <button class="btn btn-xs  btn-warning" id="button-main_resource_individual_save">Save</button>
+    <form style="display: inline" action="<%= viewer_url %>" method="get"><button class="btn btn-xs btn-primary">View/Download</button></form>
+    <button class="btn btn-xs btn-danger" id="button-main_resource_individual_delete">Delete</button>
 </div>

@@ -1,4 +1,5 @@
-Name: <input type="text" id="text-workflowjob_name" value="<%= _.escape(name) %>" style="width: 100%"><br/>
+<label for="text-workflowjob_name">Name:</label>
+<input type="text" class="form-control input-sm" id="text-workflowjob_name" value="<%= _.escape(name) %>" name="text-workflowjob_name">
 Job: <%= job_name %><br/>
 <button class="btn btn-xs" id="button-save_workflowjob_data">Save</button>
-<button class="btn btn-xs" id="button-delete_workflowjob">Delete</button>
+<button class="btn btn-xs btn-danger" id="button-delete_workflowjob">Delete</button>

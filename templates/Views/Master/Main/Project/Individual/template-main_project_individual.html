@@ -1,12 +1,14 @@
 <div class="fixed_individual">
     <h3>Project</h3>
-    Name: <input type="text" id="text-project_name" value="<%= _.escape(name) %>" style='width: 100%;'><br>
-    Description: <textarea id="text-project_description" rows="10"><%= _.escape(description) %></textarea><br>
+    <label for="text-project_name">Name:</label>
+    <input type="text" class="form-control input-sm" id="text-project_name" value="<%= _.escape(name) %>" name="text-project_name">
+    <label for="text-project_description">Description:</label>
+    <textarea type="text" class="form-control input-sm" id="text-project_description" name="text-project_description"><%= _.escape(description) %></textarea>
     Creator: <%= creator %> <br>
     Created on: <%= _.formatFromUTC(created) %><br>
     Updated on: <%= _.formatFromUTC(updated) %><br>
-    <span id="resource_count">Resources: <%= resource_count%></span><br>
-    <span id="workflow_count">Workflows: <%= workflow_count%></span><br>
-    <button class="btn btn-xs" id="button-save_project">Save</button>
-    <button class="btn btn-xs" id="button-delete_project">Delete</button>
+    <button class="btn btn-xs btn-success" id="resource_count">Resources: <%= resource_count%></button>
+    <button class="btn btn-xs btn-success" id="workflow_count">Workflows: <%= workflow_count%></button>
+    <button class="btn btn-xs btn-warning" id="button-save_project">Save</button>
+    <button class="btn btn-xs btn-danger" id="button-delete_project">Delete</button>
 </div>
