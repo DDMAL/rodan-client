@@ -61,7 +61,14 @@ class BehaviorTable extends Marionette.Behavior
     {
         var pagination = this.view.collection.getPagination();
         var data = this._getURLQueryParameters(pagination.get('previous'));
-        this.view.collection.fetch({data: data, reset: true});
+        if (data.page)
+        {
+            this.view.collection.fetchPage({page: data.page});
+        }
+        else
+        {
+            this.view.collection.fetchPage({}); 
+        }
     }
 
     /**
@@ -71,7 +78,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         var pagination = this.view.collection.getPagination();
         var data = this._getURLQueryParameters(pagination.get('next'));
-        this.view.collection.fetch({data: data, reset: true});
+        this.view.collection.fetchPage({page: data.page});
     }
 
     /**

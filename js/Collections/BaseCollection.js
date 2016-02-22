@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 
@@ -21,6 +22,7 @@ class BaseCollection extends Backbone.Collection
         this._initializeRadio();
         this._filters = {};
         this._sort = {};
+        this._page = {};
         this.enumerations = this.enumerations ? this.enumerations : [];
     }
 
@@ -74,12 +76,29 @@ class BaseCollection extends Backbone.Collection
      */
     fetch(options)
     {
+        // Apply handlers.
         options = this._applyResponseHandlers(options);
+
+        // Set task.
         options.task = 'fetch';
+
+        // Save last data.
         this._lastData = options.data ? options.data : {};
-        $.extend(options.data, this._filters);
-        $.extend(options.data, this._sort);
-        super.fetch(options);
+
+        // Build final options.
+        var finalOptions = {};
+        finalOptions.error = options.error ? options.error : {};
+        finalOptions.reset = options.reset ? options.reset : {};
+        finalOptions.success = options.success ? options.success : {};
+        finalOptions.task = options.task ? options.task : {};
+        finalOptions.data = {};
+        $.extend(finalOptions.data, this._filters);
+        $.extend(finalOptions.data, this._sort);
+        $.extend(finalOptions.data, this._page);
+        $.extend(finalOptions.data, options.data);
+
+        // Fech.
+        super.fetch(finalOptions);
     }
 
     /**
@@ -109,10 +128,9 @@ class BaseCollection extends Backbone.Collection
     /**
      * Requests a sorted fetch.
      *
-     * Note that it uses _lastData. We need to keep the last options
-     * data in case we're paginating.
+     * Note that it uses _lastData. We need to keep the last options.
      *
-     * If options.data IS passed, it will override _lastData.
+     * Note that it uses _lastData. We need to keep the last options for the base parameters.
      *
      * IMPORTANT: this is not called "sort" because backbone already has
      * a "sort" method for the Collection (but don't use it)
@@ -123,21 +141,19 @@ class BaseCollection extends Backbone.Collection
         {
             this._lastData = options.data;
         }
-
         this._sort.ordering = field;
         if (!ascending)
         {
             this._sort.ordering = '-' + field;
         }
-
         this.fetch({data: this._lastData, reset: true});
     }
 
     /**
      * Requests a filtered fetch.
      *
-     * Note that it uses _lastData. We need to keep the last options
-     * data in case we're paginating.
+     * Note that it uses _lastData. We need to keep the last options for the base parameters.
+     * Also note that this will clear the page parameters (as the page may be out of range of the result).
      *
      * If options.data IS passed, it will override _lastData.
      */
@@ -147,9 +163,25 @@ class BaseCollection extends Backbone.Collection
         {
             this._lastData = options.data;
         }
-
         this._filters = filters;
+        this._page = {};
+        this.fetch({data: this._lastData, reset: true});
+    }
 
+    /**
+     * Requests a filtered fetch.
+     *
+     * Note that it uses _lastData. We need to keep the last options for the base parameters.
+     *
+     * If options.data IS passed, it will override _lastData.
+     */
+    fetchPage(page, options)
+    {
+        if (options && options.data)
+        {
+            this._lastData = options.data;
+        }
+        this._page = page;
         this.fetch({data: this._lastData, reset: true});
     }
 

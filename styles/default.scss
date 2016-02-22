@@ -336,10 +336,16 @@ li:hover ul#submenu
 ///////////////////////////////////////////////////////////////////////////////////////
 // Table controls
 ///////////////////////////////////////////////////////////////////////////////////////
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th 
+{
+    background-color: #93DB70;
+}
+
 div.table-control
 {
    width: 100%;
-
+   padding-left: 10px;
+   padding-right: 10px;
 }
 
 div.table-control span
@@ -358,7 +364,6 @@ div.table-control span
 div.table-control span.align-right
 {
     text-align: right;
-    padding-right: 25px;
 }
 
 div.table-control p
