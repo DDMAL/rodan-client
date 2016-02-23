@@ -178,7 +178,7 @@ div.top {
     height: $height-top + vh;
 }
 
-div.bottom {
+div.row-bottom {
     height: $height-bottom + %; //fallback
     height: $height-bottom + vh;
 }

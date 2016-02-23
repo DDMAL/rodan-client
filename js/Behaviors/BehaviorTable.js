@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import datetimepicker from 'datetimepicker';
 
 import BaseCollection from '../Collections/BaseCollection';
 import Events from '../Shared/Events';
@@ -19,6 +20,7 @@ class BehaviorTable extends Marionette.Behavior
     initialize(options)
     {
         this._initializeRadio();
+        this._filtersInjected = false;
     }
 
     /**
@@ -44,7 +46,7 @@ class BehaviorTable extends Marionette.Behavior
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS - initialization
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize Radio.
@@ -54,33 +56,9 @@ class BehaviorTable extends Marionette.Behavior
         this.rodanChannel = Radio.channel('rodan');
     }
 
-    /**
-     * Handle pagination previous.
-     */
-    _handlePaginationPrevious()
-    {
-        var pagination = this.view.collection.getPagination();
-        var data = this._getURLQueryParameters(pagination.get('previous'));
-        if (data.page)
-        {
-            this.view.collection.fetchPage({page: data.page});
-        }
-        else
-        {
-            this.view.collection.fetchPage({}); 
-        }
-    }
-
-    /**
-     * Handle pagination next.
-     */
-    _handlePaginationNext()
-    {
-        var pagination = this.view.collection.getPagination();
-        var data = this._getURLQueryParameters(pagination.get('next'));
-        this.view.collection.fetchPage({page: data.page});
-    }
-
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - injectors
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Inject control.
      */
@@ -88,42 +66,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         if (this.$el.find('.table-control').length === 0)
         {
-            this.$el.find(this.options.table).before($(this.options.templateControl).html());
-        }
-    }
-
-    /**
-     * Handles collection event.
-     */
-    _handleCollectionEventSync(returnObject)
-    {
-        if (returnObject instanceof BaseCollection)
-        {
-            // Get options. If they exist, apply filtering and ordering to the template.
-            if (returnObject.route)
-            {
-                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, returnObject.route);
-                if (options)
-                {
-                    this._injectFiltering(options.filter_fields);
-                }
-            }
-
-            // Handle pagination.
-            var pagination = returnObject.getPagination();
-            $(this.el).find('.table-control #pagination-previous').hide();
-            $(this.el).find('.table-control #pagination-next').hide();
-            if (pagination !== null/* && pagination.get('total') > 1*/)
-            {
-                if (pagination.get('current') < pagination.get('total'))
-                {
-                    $(this.el).find('.table-control #pagination-next').show();
-                }
-                if (pagination.get('current') > 1)
-                {
-                    $(this.el).find('.table-control #pagination-previous').show();
-                }
-            }
+            this.$el.find('div.table-responsive').before($(this.options.templateControl).html());
         }
     }
 
@@ -142,11 +85,15 @@ class BehaviorTable extends Marionette.Behavior
         $(this.el).find('form#form-filter').bind('submit', function() {return false;});
 
         // Get those columns with data names.
+        var filters = [];
+        var datetimepickerElements = [];
         var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
         for (var i = 0; i < columns.length; i++)
         {
             var column = $(columns[i]);
             var field = column.attr('data-name');
+            var datetimeLtFilter = null;
+            var datetimeGtFilter = null;
             if (filterFields[field])
             {
                 for (var j = 0; j < filterFields[field].length; j++)
@@ -156,19 +103,19 @@ class BehaviorTable extends Marionette.Behavior
                     {
                         case 'icontains':
                         {
-                            this._injectFilterText(column.text(), field);
+                            filters.push(this._getFilterText(column.text(), field));
                             break;
                         }
 
                         case 'gt':
                         {
-                         //   this._injectFilterDatetimeGt(column.text(), field);
+                            datetimeGtFilter = this._getFilterDatetimeGt(column.text(), field);
                             break;
                         }
 
                         case 'lt':
                         {
-                          //  this._injectFilterDatetimeLt(column.text(), field);
+                            datetimeLtFilter = this._getFilterDatetimeLt(column.text(), field);
                             break;
                         }
 
@@ -178,77 +125,123 @@ class BehaviorTable extends Marionette.Behavior
                         }
                     }
                 }
+
+                // Check for datetime filters.
+                if (datetimeGtFilter || datetimeLtFilter)
+                {
+                    var $datetimeFilter = $(this._getFilterDatetime(column.text(), field));
+                    var needTo = false;
+                    if (datetimeGtFilter)
+                    {
+                        needTo = true;
+                        $datetimeFilter.append(datetimeGtFilter);
+                        var elementId = '#' + field + '__gt';
+                        datetimepickerElements.push(elementId);
+                    }
+                    if (datetimeLtFilter)
+                    {
+                        $datetimeFilter.append('to');
+                        $datetimeFilter.append(datetimeLtFilter);
+                        var elementId = '#' + field + '__lt';
+                        datetimepickerElements.push(elementId);
+                    }
+                    filters.push($datetimeFilter.html());
+                }
             }
         }
 
-        // Finally, inject enumeration.
+        // Finally, get enumerations.
         var enumerations = this.view.collection.getEnumerations();
         for (var i in enumerations)
         {
             var enumeration = enumerations[i];
             var template = _.template($(this.options.templateFilterEnum).html());
-            $(this.el).find('form#form-filter').prepend(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
+            filters.push(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
+        }
+
+        // Inject.
+        if (filters.length > 0)
+        {
+            // Inject filters.
+            for (var index in filters)
+            {
+                $(this.el).find('form#form-filter').prepend(filters[index]);
+            }
+
+            // Setup datetimepickers.
+            for (var index in datetimepickerElements)
+            {
+                var elementId = datetimepickerElements[index];
+                $(elementId).datetimepicker();
+            }
+        }
+        else
+        {
+            $(this.el).find('form#form-filter').hide();
         }
     }
 
     /**
-     * Inject text filter.
+     * Get text filter.
      */
-    _injectFilterText(label, field)
+    _getFilterText(label, field)
     {
         var template = _.template($(this.options.templateFilterText).html());
-        $(this.el).find('form#form-filter').prepend(template({label: label, field: field}));
+        return template({label: label, field: field});
     }
 
     /**
-     * Inject lt datetime filter.
+     * Get lt datetime filter.
      */
-    _injectFilterDatetimeLt(label, field)
+    _getFilterDatetimeLt(label, field)
     {
-        this._injectFilterDatetime(label, field);
         var template = _.template($(this.options.templateFilterDatetimeLt).html());
-        $(this.el).find('div#filter_datetime_' + field).prepend(template({label: label, field: field}));  
+        var elementId = '#' + field + '__lt';
+        return template({label: label, field: field});
     }
 
     /**
-     * Inject gt datetime filter.
+     * Get gt datetime filter.
      */
-    _injectFilterDatetimeGt(label, field)
+    _getFilterDatetimeGt(label, field)
     {
-        this._injectFilterDatetime(label, field);
         var template = _.template($(this.options.templateFilterDatetimeGt).html());
-        $(this.el).find('div#filter_datetime_' + field).prepend(template({label: label, field: field}));  
+        var elementId = '#' + field + '__gt';
+        return template({label: label, field: field});
     }
 
     /**
-     * Inject master datetime filter template.
+     * Get master datetime filter template.
      */
-    _injectFilterDatetime(label, field)
+    _getFilterDatetime(label, field)
     {
-        if ($(this.el).find('div#filter_datetime_' + field).length === 0)
+        var template = _.template($(this.options.templateFilterDatetime).html());
+        return template({label: label, field: field});  
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Event handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle search.
+     */
+    _handleSearch(event)
+    {
+        // Only use this if the collection has a URL.
+        if (!this.view.collection.route)
         {
-            var template = _.template($(this.options.templateFilterDatetime).html());
-            $(this.el).find('div#filter').append(template({label: label, field: field}));  
+            return;
         }
-    }
 
-    /**
-     * Returns query parameters from passed URL string.
-     *
-     * TODO: move this out of here...
-     */
-    _getURLQueryParameters(string)
-    {
-        var queryString = string.substr(string.indexOf('?') + 1),
-            match,
-            pl     = /\+/g,  // Regex for replacing addition symbol with a space
-            search = /([^&=]+)=?([^&]*)/g,
-            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
-
-        var urlParams = {};
-        while (match = search.exec(queryString))
-            urlParams[decode(match[1])] = decode(match[2]);
-        return urlParams;
+        var values = $(this.el).find('#form-filter').serializeArray();
+        var filters = {};
+        for (var index in values)
+        {
+            var name = values[index].name;
+            var value = values[index].value;
+            filters[name] = value;
+        }
+        this.view.collection.fetchFilter(filters);
     }
 
     /**
@@ -292,25 +285,88 @@ class BehaviorTable extends Marionette.Behavior
     }
 
     /**
-     * Handle search.
+     * Handle pagination previous.
      */
-    _handleSearch(event)
+    _handlePaginationPrevious()
     {
-        // Only use this if the collection has a URL.
-        if (!this.view.collection.route)
+        var pagination = this.view.collection.getPagination();
+        var data = this._getURLQueryParameters(pagination.get('previous'));
+        if (data.page)
         {
-            return;
+            this.view.collection.fetchPage({page: data.page});
         }
+        else
+        {
+            this.view.collection.fetchPage({}); 
+        }
+    }
 
-        var values = $(this.el).find('#form-filter').serializeArray();
-        var filters = {};
-        for (var index in values)
+    /**
+     * Handle pagination next.
+     */
+    _handlePaginationNext()
+    {
+        var pagination = this.view.collection.getPagination();
+        var data = this._getURLQueryParameters(pagination.get('next'));
+        this.view.collection.fetchPage({page: data.page});
+    }
+
+    /**
+     * Handles collection event.
+     */
+    _handleCollectionEventSync(returnObject)
+    {
+        if (returnObject instanceof BaseCollection)
         {
-            var name = values[index].name;
-            var value = values[index].value;
-            filters[name] = value;
+            // Get options. If they exist and filters haven't been injected, inject.
+            if (returnObject.route && !this._filtersInjected)
+            {
+                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, returnObject.route);
+                if (options)
+                {
+                    this._filtersInjected = true;
+                    this._injectFiltering(options.filter_fields);
+                }
+            }
+
+            // Handle pagination.
+            var pagination = returnObject.getPagination();
+            $(this.el).find('.table-control #pagination-previous').hide();
+            $(this.el).find('.table-control #pagination-next').hide();
+            if (pagination !== null/* && pagination.get('total') > 1*/)
+            {
+                if (pagination.get('current') < pagination.get('total'))
+                {
+                    $(this.el).find('.table-control #pagination-next').show();
+                }
+                if (pagination.get('current') > 1)
+                {
+                    $(this.el).find('.table-control #pagination-previous').show();
+                }
+            }
         }
-        this.view.collection.fetchFilter(filters);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns query parameters from passed URL string.
+     *
+     * TODO: move this out of here...
+     */
+    _getURLQueryParameters(string)
+    {
+        var queryString = string.substr(string.indexOf('?') + 1),
+            match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+
+        var urlParams = {};
+        while (match = search.exec(queryString))
+            urlParams[decode(match[1])] = decode(match[2]);
+        return urlParams;
     }
 }
 
