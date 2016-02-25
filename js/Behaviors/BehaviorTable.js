@@ -45,6 +45,18 @@ class BehaviorTable extends Marionette.Behavior
         }
     }
 
+    /**
+     * We need to detach listeners of all datetimepickers.
+     */
+    onDestroy()
+    {
+        var datetimePickerElementIds = $(this.el).find(":data(DateTimePicker)").map(function(){return $(this).attr("id");}).get();
+        for (var index in datetimePickerElementIds)
+        {
+            $(this.el).find('#' + datetimePickerElementIds[index]).data("DateTimePicker").destroy();
+        }
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - initialization
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +184,7 @@ class BehaviorTable extends Marionette.Behavior
             for (var index in datetimepickerElements)
             {
                 var elementId = datetimepickerElements[index];
-                $(elementId).datetimepicker();
+                $(this.el).find(elementId).datetimepicker();
             }
         }
         else
@@ -314,23 +326,24 @@ class BehaviorTable extends Marionette.Behavior
     /**
      * Handles collection event.
      */
-    _handleCollectionEventSync(returnObject)
+    _handleCollectionEventSync(collection)
     {
-        if (returnObject instanceof BaseCollection)
+        if (collection instanceof BaseCollection)
         {
             // Get options. If they exist and filters haven't been injected, inject.
-            if (returnObject.route && !this._filtersInjected)
+            if ($(this.el).find(this.options.table).length > 0 &&
+                collection.route 
+                && !this._filtersInjected)
             {
-                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, returnObject.route);
+                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, collection.route);
                 if (options)
                 {
-                    this._filtersInjected = true;
                     this._injectFiltering(options.filter_fields);
                 }
             }
 
             // Handle pagination.
-            var pagination = returnObject.getPagination();
+            var pagination = collection.getPagination();
             $(this.el).find('.table-control #pagination-previous').hide();
             $(this.el).find('.table-control #pagination-next').hide();
             if (pagination !== null/* && pagination.get('total') > 1*/)
