@@ -2,6 +2,7 @@ import _ from 'underscore';
 import datetimepicker from 'datetimepicker';
 
 import BaseCollection from '../Collections/BaseCollection';
+import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -21,6 +22,7 @@ class BehaviorTable extends Marionette.Behavior
     {
         this._initializeRadio();
         this._filtersInjected = false;
+        this._datetimepickerElements = [];
     }
 
     /**
@@ -35,8 +37,9 @@ class BehaviorTable extends Marionette.Behavior
         // TODO - fix/find better way
         this.view.delegateEvents();
 
-        // Inject control.
+        // Inject controls and initialize.
         this._injectControl();
+        this._processPagination(null);
 
         // Inject the controls.
         if (view.collection)
@@ -83,29 +86,20 @@ class BehaviorTable extends Marionette.Behavior
     }
 
     /**
-     * Injects filtering functionality into template.
+     * Collects the filters for the associated table.
      */
-    _injectFiltering(filterFields)
+    _getFilters(collection, filterFields)
     {
-        if ($(this.el).find('form#form-filter').length > 0)
-        {
-            return;
-        }
-        
-        // Insert parent div. Also bind the form to a dummy function.
-        $(this.el).find('#filter').prepend($(this.options.templateFilter).html());
-        $(this.el).find('form#form-filter').bind('submit', function() {return false;});
-
         // Get those columns with data names.
         var filters = [];
-        var datetimepickerElements = [];
+        this._datetimepickerElements = [];
         var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
         for (var i = 0; i < columns.length; i++)
         {
             var column = $(columns[i]);
             var field = column.attr('data-name');
-            var datetimeLtFilter = null;
-            var datetimeGtFilter = null;
+            var datetimeLtFilter = false;
+            var datetimeGtFilter = false;
             if (filterFields[field])
             {
                 for (var j = 0; j < filterFields[field].length; j++)
@@ -121,13 +115,13 @@ class BehaviorTable extends Marionette.Behavior
 
                         case 'gt':
                         {
-                            datetimeGtFilter = this._getFilterDatetimeGt(column.text(), field);
+                            datetimeGtFilter = true
                             break;
                         }
 
                         case 'lt':
                         {
-                            datetimeLtFilter = this._getFilterDatetimeLt(column.text(), field);
+                            datetimeLtFilter = true;
                             break;
                         }
 
@@ -141,56 +135,65 @@ class BehaviorTable extends Marionette.Behavior
                 // Check for datetime filters.
                 if (datetimeGtFilter || datetimeLtFilter)
                 {
-                    var $datetimeFilter = $(this._getFilterDatetime(column.text(), field));
-                    var needTo = false;
                     if (datetimeGtFilter)
                     {
-                        needTo = true;
-                        $datetimeFilter.append(datetimeGtFilter);
                         var elementId = '#' + field + '__gt';
-                        datetimepickerElements.push(elementId);
+                        this._datetimepickerElements.push(elementId);
                     }
                     if (datetimeLtFilter)
                     {
-                        $datetimeFilter.append('to');
-                        $datetimeFilter.append(datetimeLtFilter);
                         var elementId = '#' + field + '__lt';
-                        datetimepickerElements.push(elementId);
+                        this._datetimepickerElements.push(elementId);
                     }
-                    filters.push($datetimeFilter.html());
+                    filters.push(this._getFilterDatetime(column.text(), field));
                 }
             }
         }
 
         // Finally, get enumerations.
-        var enumerations = this.view.collection.getEnumerations();
+        var enumerations = collection.getEnumerations();
         for (var i in enumerations)
         {
             var enumeration = enumerations[i];
-            var template = _.template($(this.options.templateFilterEnum).html());
-            filters.push(template({label: enumeration.label, field: enumeration.field, values: enumeration.values}));
+            var templateChoice = _.template($(this.options.templateFilterChoice).html());
+            var templateInput = _.template($(this.options.templateFilterEnum).html());
+            var htmlChoice = templateChoice({label: enumeration.label, field: enumeration.field});
+            var htmlInput = templateInput({label: enumeration.label, field: enumeration.field, values: enumeration.values});
+            var filterObject = {listItem: htmlChoice, input: htmlInput};
+            filters.push(filterObject);
         }
 
-        // Inject.
-        if (filters.length > 0)
-        {
-            // Inject filters.
-            for (var index in filters)
-            {
-                $(this.el).find('form#form-filter').prepend(filters[index]);
-            }
+        return filters;
+    }
 
-            // Setup datetimepickers.
-            for (var index in datetimepickerElements)
-            {
-                var elementId = datetimepickerElements[index];
-                $(this.el).find(elementId).datetimepicker();
-            }
-        }
-        else
+    /**
+     * Injects filtering functionality into template.
+     */
+    _injectFiltering(filterFields)
+    {
+        var filters = this._getFilters(this.view.collection, filterFields);
+        for (var index in filters)
         {
-            $(this.el).find('form#form-filter').hide();
+            var $listItem = $(filters[index].listItem);
+            var $formInput = $(filters[index].input);
+            $listItem.click((event) => this._handleFilterClick(event));
+            $(this.el).find('#filter-menu ul').append($listItem);
+            $(this.el).find('#filter-inputs').append($formInput);
         }
+
+        // Setup datetimepickers.
+        for (var index in this._datetimepickerElements)
+        {
+            var elementId = this._datetimepickerElements[index];
+            $(this.el).find(elementId).datetimepicker();
+            $(this.el).find(elementId).data("DateTimePicker").format(Configuration.DATETIME_FORMAT);
+            $(this.el).find(elementId).on('dp.change', () => this._handleSearch());
+        }
+
+        $(this.el).find('#filter-inputs input').on('change keyup paste mouseup', () => this._handleSearch());
+
+        this._filtersInjected = true;
+        this._hideFormElements();
     }
 
     /**
@@ -198,28 +201,11 @@ class BehaviorTable extends Marionette.Behavior
      */
     _getFilterText(label, field)
     {
-        var template = _.template($(this.options.templateFilterText).html());
-        return template({label: label, field: field});
-    }
-
-    /**
-     * Get lt datetime filter.
-     */
-    _getFilterDatetimeLt(label, field)
-    {
-        var template = _.template($(this.options.templateFilterDatetimeLt).html());
-        var elementId = '#' + field + '__lt';
-        return template({label: label, field: field});
-    }
-
-    /**
-     * Get gt datetime filter.
-     */
-    _getFilterDatetimeGt(label, field)
-    {
-        var template = _.template($(this.options.templateFilterDatetimeGt).html());
-        var elementId = '#' + field + '__gt';
-        return template({label: label, field: field});
+        var templateChoice = _.template($(this.options.templateFilterChoice).html());
+        var templateInput = _.template($(this.options.templateFilterText).html());
+        var htmlChoice = templateChoice({label: label, field: field});
+        var htmlInput = templateInput({label: label, field: field});
+        return {listItem: htmlChoice, input: htmlInput};
     }
 
     /**
@@ -227,17 +213,33 @@ class BehaviorTable extends Marionette.Behavior
      */
     _getFilterDatetime(label, field)
     {
-        var template = _.template($(this.options.templateFilterDatetime).html());
-        return template({label: label, field: field});  
+        var templateChoice = _.template($(this.options.templateFilterChoice).html());
+        var templateInput = _.template($(this.options.templateFilterDatetime).html());
+        var htmlChoice = templateChoice({label: label, field: field});
+        var htmlInput = templateInput({label: label, field: field});
+        return {listItem: htmlChoice, input: htmlInput};  
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Event handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
+     * Handles filter click.
+     */
+    _handleFilterClick(event)
+    {
+        var data = $(event.target).data();
+        //this._hideFormElements();
+        if (data.id)
+        {
+            this._showFormElement(data.id);
+        }
+    }
+
+    /**
      * Handle search.
      */
-    _handleSearch(event)
+    _handleSearch()
     {
         // Only use this if the collection has a URL.
         if (!this.view.collection.route)
@@ -245,7 +247,7 @@ class BehaviorTable extends Marionette.Behavior
             return;
         }
 
-        var values = $(this.el).find('#form-filter').serializeArray();
+        var values = $(this.el).find('form').serializeArray();
         var filters = {};
         for (var index in values)
         {
@@ -330,10 +332,11 @@ class BehaviorTable extends Marionette.Behavior
     {
         if (collection instanceof BaseCollection)
         {
-            // Get options. If they exist and filters haven't been injected, inject.
+            // We only inject if: the table exists, a route exists, we haven't injected yet, and the table has items.
             if ($(this.el).find(this.options.table).length > 0 &&
                 collection.route 
-                && !this._filtersInjected)
+                && !this._filtersInjected
+                && collection.length > 0)
             {
                 var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, collection.route);
                 if (options)
@@ -343,21 +346,28 @@ class BehaviorTable extends Marionette.Behavior
             }
 
             // Handle pagination.
-            var pagination = collection.getPagination();
-            $(this.el).find('.table-control #pagination-previous').hide();
-            $(this.el).find('.table-control #pagination-next').hide();
-            if (pagination !== null/* && pagination.get('total') > 1*/)
-            {
-                if (pagination.get('current') < pagination.get('total'))
-                {
-                    $(this.el).find('.table-control #pagination-next').show();
-                }
-                if (pagination.get('current') > 1)
-                {
-                    $(this.el).find('.table-control #pagination-previous').show();
-                }
-            }
+            this._processPagination(collection);
         }
+    }
+
+    /**
+     * Handle button remove.
+     */
+    _handleButtonRemove(event)
+    {
+        var data = $(event.target).data();
+        this._hideFormElement(data.id);
+        this._handleSearch();
+    }
+
+    /**
+     * Handle button clear all.
+     */
+    _handleButtonClearAll()
+    {
+        var data = $(event.target).data();
+        this._hideFormElements();
+        this._handleSearch();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -381,6 +391,58 @@ class BehaviorTable extends Marionette.Behavior
             urlParams[decode(match[1])] = decode(match[2]);
         return urlParams;
     }
+
+    /**
+     * Hide all form elements for the table control.
+     */
+    _hideFormElements()
+    {
+        $(this.el).find('#filter-inputs div input').val('');
+        $(this.el).find('#filter-inputs').children().hide();
+    }
+
+    /**
+     * Hide form element of given ID.
+     */
+    _hideFormElement(elementId)
+    {
+        $(this.el).find('#filter-inputs div#' + elementId + ' input').val('');
+        $(this.el).find('#filter-inputs div#' + elementId).hide();
+    }
+
+    /**
+     * Shows form element of given ID.
+     */
+    _showFormElement(elementId)
+    {
+        $(this.el).find('#filter-inputs div#' + elementId).show();
+    }
+
+    /**
+     * Process pagination.
+     */
+    _processPagination(collection)
+    {
+        $(this.el).find('.table-control #pagination-previous').prop('disabled', true);
+        $(this.el).find('.table-control #pagination-next').prop('disabled', true);
+        if (collection)
+        {
+            var pagination = collection.getPagination();
+            if (pagination !== null/* && pagination.get('total') > 1*/)
+            {
+                if (pagination.get('current') < pagination.get('total'))
+                {
+                    $(this.el).find('.table-control div#pagination').show();
+                    $(this.el).find('.table-control #pagination-next').prop('disabled', false);
+                }
+                if (pagination.get('current') > 1)
+                {
+                    $(this.el).find('.table-control div#pagination').show();
+                    $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
+                }
+            }
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -390,21 +452,23 @@ BehaviorTable.prototype.ui = {
     paginationPrevious: '#pagination-previous',
     paginationNext: '#pagination-next',
     buttonSearch: '#button-search',
+    buttonRemove: '#button-remove',
+    buttonClearAll: '#button-clearall'
 };
 BehaviorTable.prototype.events = {
     'click @ui.paginationPrevious': '_handlePaginationPrevious',
     'click @ui.paginationNext': '_handlePaginationNext',
     'click th': '_handleSort',
     'click @ui.buttonSearch': '_handleSearch',
+    'click @ui.buttonRemove': '_handleButtonRemove',
+    'click @ui.buttonClearAll': '_handleButtonClearAll'
 };
 BehaviorTable.prototype.defaults = {
     'templateControl': '#template-table_control',
-    'templateFilter': '#template-filter',
+    'templateFilterChoice': '#template-filter_choice',
     'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter_enumeration',
     'templateFilterDatetime': '#template-filter_datetime',
-    'templateFilterDatetimeLt': '#template-filter_datetime_lt',
-    'templateFilterDatetimeGt': '#template-filter_datetime_gt',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {
