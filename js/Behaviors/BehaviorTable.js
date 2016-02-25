@@ -191,6 +191,7 @@ class BehaviorTable extends Marionette.Behavior
         }
 
         $(this.el).find('#filter-inputs input').on('change keyup paste mouseup', () => this._handleSearch());
+        $(this.el).find('#filter-inputs select').on('change keyup paste mouseup', () => this._handleSearch());
 
         this._filtersInjected = true;
         this._hideFormElements();
@@ -398,6 +399,7 @@ class BehaviorTable extends Marionette.Behavior
     _hideFormElements()
     {
         $(this.el).find('#filter-inputs div input').val('');
+        $(this.el).find('#filter-inputs div select').val('');
         $(this.el).find('#filter-inputs').children().hide();
     }
 
@@ -407,6 +409,7 @@ class BehaviorTable extends Marionette.Behavior
     _hideFormElement(elementId)
     {
         $(this.el).find('#filter-inputs div#' + elementId + ' input').val('');
+        $(this.el).find('#filter-inputs div#' + elementId + ' select').val('');
         $(this.el).find('#filter-inputs div#' + elementId).hide();
     }
 
