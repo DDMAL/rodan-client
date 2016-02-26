@@ -11,6 +11,7 @@ import LayoutViewWorkflowBuilder from '../Views/Master/Main/WorkflowBuilder/Layo
 import OutputPort from '../Models/OutputPort';
 import Resource from '../Models/Resource';
 import ResourceCollection from '../Collections/ResourceCollection';
+import ResourceList from '../Models/ResourceList';
 import ViewJobList from '../Views/Master/Main/Job/List/ViewJobList';
 import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
 import ViewResourceListItemModal from '../Views/Master/Main/Resource/List/ViewResourceListItemModal';
@@ -112,16 +113,12 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestCreateWorkflowRun(options)
     {
         var workflow = options.model;
-
-        // Get the known unsatisfied InputPorts for this Workflow.
-        var unsatisfiedInputPorts = workflow.get('workflow_input_ports').clone();
-
-        // Go through the assignments, checking against the InputPort collection.
+        var knownInputPorts = workflow.get('workflow_input_ports').clone();
         var assignments = {};
         for (var inputPortURL in this._resourceAssignments)
         {
             // If our assignments for an InputPort are not needed, we just skip it.
-            var inputPort = unsatisfiedInputPorts.findWhere({url: inputPortURL});
+            var inputPort = knownInputPorts.findWhere({url: inputPortURL});
             if (!inputPort)
             {
                 continue;
@@ -132,28 +129,58 @@ class ControllerWorkflowBuilder extends BaseController
             var collection = this._getResourceAssignments(inputPortURL);
             if (collection.length === 0)
             {
-                alert('There are still unsatisfied InputPorts.');
+                alert('There are still unsatisfied Input Ports.');
                 return;
             }
 
-            // Copy the assignments. 
+            // Assign.
             for (var i = 0; i < collection.length; i++)
             {
                 var resource = collection.at(i);
                 assignments[inputPortURL].push(resource.get('url'));
-            }
+            } 
 
             // Finally, remove the InputPort from the cloned Collection.
-            unsatisfiedInputPorts.remove(inputPort);
+            knownInputPorts.remove(inputPort);
         }
 
         // If we have anything left oveer in our cloned Collection, something is wrong.
-        if (unsatisfiedInputPorts.length > 0)
+        if (knownInputPorts.length > 0)
         {
-            alert('There are still unsatisfied InputPorts.');
+            alert('There are still unsatisfied Input Ports.');
         }
         else
         {
+/*            // TODO - this is temporary
+            //
+            // Right now Rodan ports can use either Resources or ResourceLists. In the future, it would be wise to move just to 
+            // ResourceLists. But for now we have to allow both.
+            //
+            // This code checks the InputPortType to see if it expects a list or not. If not, fine. If it DOES, we have to:
+            // - create the ResourceList model
+            // - populate it
+            // - save it
+            // - WAIT FOR THE SERVER RESPONSE!
+            //
+            // The problem is waiting for the server response. We have to wait for all the necessary ResourceLists to be saved 
+            // on the server. So, for now, we create an array of InputPortType URLs that need ResourceLists. When an InputPortType's
+            // associated ResourceList is saved, we knock it out of the array. When all are done, we create the WorkflowRun.
+            var inputPortTypes = this.rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION);
+            knownInputPorts = workflow.get('workflow_input_ports').clone();
+            for (var inputPortUrl in assignments)
+            {
+                var inputPort = knownInputPorts.findWhere({url: inputPortUrl});
+                var inputPortType = inputPortTypes.findWhere({url: inputPort.get('input_port_type')});
+          //      if (inputPortType.get('is_list'))
+                {
+                    var resourceList = new ResourceList();
+                    var resourceCollection = this._resourceAssignments[inputPortUrl];
+                    var resource = resourceCollection.at(0);
+                    var resourceType = resource.get('resource_type');
+                    resourceList.set({resources: assignments[inputPortUrl], resource_type: resourceType});
+                    assignments[inputPortUrl] = ['http://132.206.14.136/resourcelist/571307dc-8b70-42a4-bd49-478ed26e36e5/'];
+                }
+            }*/
             this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, {workflow: options.model, assignments: assignments});
         }
     }
@@ -920,12 +947,12 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _getInputPortURLWithMultipleAssignments()
     {
-        for (var url in this._resourceAssignments)
+        for (var inputPortUrl in this._resourceAssignments)
         {
-            var resourceAssignments = this._getResourceAssignments(url);
+            var resourceAssignments = this._getResourceAssignments(inputPortUrl);
             if (resourceAssignments.length > 1)
             {
-                return url;
+                return inputPortUrl;
             }
         }
         return null;
@@ -934,25 +961,25 @@ class ControllerWorkflowBuilder extends BaseController
     /**
      * Returns resource assignment for given InputPort url.
      */
-    _getResourceAssignments(url)
+    _getResourceAssignments(inputPortUrl)
     {
-        if (!this._resourceAssignments[url])
+        if (!this._resourceAssignments[inputPortUrl])
         {
-            this._resourceAssignments[url] = new BaseCollection(null, {model: Resource});
+            this._resourceAssignments[inputPortUrl] = new BaseCollection(null, {model: Resource});
         }
-        return this._resourceAssignments[url];
+        return this._resourceAssignments[inputPortUrl];
     }
 
     /**
      * Returns resources available for given InputPort url.
      */
-    _getResourcesAvailable(url)
+    _getResourcesAvailable(inputPortUrl)
     {
-        if (!this._resourcesAvailable[url])
+        if (!this._resourcesAvailable[inputPortUrl])
         {
             var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
-            var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: url});
-            var resourceTypeURLs = this._getCompatibleResourceTypeURLs(url);
+            var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: inputPortUrl});
+            var resourceTypeURLs = this._getCompatibleResourceTypeURLs(inputPortUrl);
             var data = {project: project.id, resource_type__in: ''};
             var globalResourceTypes = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
             var first = true;
@@ -970,11 +997,11 @@ class ControllerWorkflowBuilder extends BaseController
                 }
                 data.resource_type__in = data.resource_type__in + idString;
             }
-            this._resourcesAvailable[url] = new ResourceCollection();
-            this._resourcesAvailable[url].fetch({data: data});
+            this._resourcesAvailable[inputPortUrl] = new ResourceCollection();
+            this._resourcesAvailable[inputPortUrl].fetch({data: data});
         }
-        this._resourcesAvailable[url].syncList();
-        return this._resourcesAvailable[url];
+        this._resourcesAvailable[inputPortUrl].syncList();
+        return this._resourcesAvailable[inputPortUrl];
     }
 }
 
