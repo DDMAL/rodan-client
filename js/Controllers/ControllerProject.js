@@ -1,8 +1,8 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
 import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
-import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
 import ViewProject from '../Views/Master/Main/Project/Individual/ViewProject';
+import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
 import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 

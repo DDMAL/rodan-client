@@ -1,10 +1,9 @@
 import $ from 'jquery';
-
+import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
 import Cookie from '../Shared/Cookie';
 import Events from '../Shared/Events';
 import User from '../Models/User';
-import BaseController from '../Controllers/BaseController';
 
 /**
  * Controls authentication.

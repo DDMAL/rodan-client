@@ -24,7 +24,6 @@ class ControllerWorkflow extends BaseController
         this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
@@ -33,14 +32,6 @@ class ControllerWorkflow extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle show LayoutView.
-     */
-    _handleCommandShowLayoutView(options)
-    {
-        this._layoutView = options.layoutView;
-    }
-
     /**
      * Handle list selection.
      */

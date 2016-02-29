@@ -113,7 +113,6 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Workflow
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOW_SHOWLAYOUTVIEW: 'REQUEST__WORKFLOW_SHOWLAYOUTVIEW',   // Called when a LayoutView wishes to be used for showing Workflows (outside of the primary Workflows view). This tells the ControllerWorkflow which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__WORKFLOW_ADD: 'REQUEST__WORKFLOW_ADD',                         // Called when Workflow needs to be added. Takes {project: Project}.
     REQUEST__WORKFLOW_SAVE: 'REQUEST__WORKFLOW_SAVE',                       // Called when a Workflow needs to be saved. This is different from the builder save as it only saves the name and description. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
