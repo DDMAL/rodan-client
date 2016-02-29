@@ -562,7 +562,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleResourceListCreationError()
     {
-        debugger;
+        // todo - need something here
     }
 
     /**

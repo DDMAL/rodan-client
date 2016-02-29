@@ -4,7 +4,6 @@ import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/In
 import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import RunJobCollection from '../Collections/RunJobCollection';
 import WorkflowRun from '../Models/WorkflowRun';
-import Resource from '../Models/Resource';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
