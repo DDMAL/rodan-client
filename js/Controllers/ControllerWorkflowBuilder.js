@@ -40,8 +40,9 @@ class ControllerWorkflowBuilder extends BaseController
     initialize()
     {
         this._workspace = new WorkflowBuilder();
-        this._resourceAssignments = [];
-        this._resourcesAvailable = [];
+        this._resourceAssignments = []; // this helps manage the list of resource assignments while building the resource
+        this._resourcesAvailable = []; // this is just a cache for resources that will work with a given input port
+        this._workflowRunOptions = {};
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -112,33 +113,50 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestCreateWorkflowRun(options)
     {
-        var workflow = options.model;
-        var knownInputPorts = workflow.get('workflow_input_ports').clone();
-        var assignments = {};
-        for (var inputPortURL in this._resourceAssignments)
+        this._workflowRunOptions = {workflow: options.model, assignments: {}};
+        var inputPortTypes = this.rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION);
+        var knownInputPorts = this._workflowRunOptions.workflow.get('workflow_input_ports').clone();
+        for (var inputPortUrl in this._resourceAssignments)
         {
             // If our assignments for an InputPort are not needed, we just skip it.
-            var inputPort = knownInputPorts.findWhere({url: inputPortURL});
+            var inputPort = knownInputPorts.findWhere({url: inputPortUrl});
             if (!inputPort)
             {
                 continue;
             }
 
             // If there is nothing for a given InputPort, error.
-            assignments[inputPortURL] = [];
-            var collection = this._getResourceAssignments(inputPortURL);
+            this._workflowRunOptions.assignments[inputPortUrl] = [];
+            var collection = this._getResourceAssignments(inputPortUrl);
             if (collection.length === 0)
             {
                 alert('There are still unsatisfied Input Ports.');
                 return;
             }
 
-            // Assign.
+            // Get URLs.
+            var resourceUrls = [];
             for (var i = 0; i < collection.length; i++)
             {
                 var resource = collection.at(i);
-                assignments[inputPortURL].push(resource.get('url'));
+                resourceUrls.push(resource.get('url'));
             } 
+
+            // If the InputPort requires a ResourceList, we'll have to create one.
+            // Else, just get the Resource URLs.
+            var inputPortType = inputPortTypes.findWhere({url: inputPort.get('input_port_type')});
+            if (inputPortType.get('is_list'))
+            {
+                var resource = collection.at(0);
+                var resourceType = resource.get('resource_type');
+                var resourceList = new ResourceList();
+                resourceList.set({resources: resourceUrls, resource_type: resourceType});
+                this._workflowRunOptions.assignments[inputPortUrl] = resourceList;
+            }
+            else
+            {
+                this._workflowRunOptions.assignments[inputPortUrl] = resourceUrls;
+            }
 
             // Finally, remove the InputPort from the cloned Collection.
             knownInputPorts.remove(inputPort);
@@ -151,37 +169,7 @@ class ControllerWorkflowBuilder extends BaseController
         }
         else
         {
-/*            // TODO - this is temporary
-            //
-            // Right now Rodan ports can use either Resources or ResourceLists. In the future, it would be wise to move just to 
-            // ResourceLists. But for now we have to allow both.
-            //
-            // This code checks the InputPortType to see if it expects a list or not. If not, fine. If it DOES, we have to:
-            // - create the ResourceList model
-            // - populate it
-            // - save it
-            // - WAIT FOR THE SERVER RESPONSE!
-            //
-            // The problem is waiting for the server response. We have to wait for all the necessary ResourceLists to be saved 
-            // on the server. So, for now, we create an array of InputPortType URLs that need ResourceLists. When an InputPortType's
-            // associated ResourceList is saved, we knock it out of the array. When all are done, we create the WorkflowRun.
-            var inputPortTypes = this.rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION);
-            knownInputPorts = workflow.get('workflow_input_ports').clone();
-            for (var inputPortUrl in assignments)
-            {
-                var inputPort = knownInputPorts.findWhere({url: inputPortUrl});
-                var inputPortType = inputPortTypes.findWhere({url: inputPort.get('input_port_type')});
-          //      if (inputPortType.get('is_list'))
-                {
-                    var resourceList = new ResourceList();
-                    var resourceCollection = this._resourceAssignments[inputPortUrl];
-                    var resource = resourceCollection.at(0);
-                    var resourceType = resource.get('resource_type');
-                    resourceList.set({resources: assignments[inputPortUrl], resource_type: resourceType});
-                    assignments[inputPortUrl] = ['http://132.206.14.136/resourcelist/571307dc-8b70-42a4-bd49-478ed26e36e5/'];
-                }
-            }*/
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, {workflow: options.model, assignments: assignments});
+            this._attemptWorkflowRunCreation();
         }
     }
 
@@ -560,6 +548,23 @@ class ControllerWorkflowBuilder extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST response handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle ResourceList creation success.
+     */
+    _handleResourceListCreationSuccess(model, inputPortUrl)
+    {
+        this._workflowRunOptions.assignments[inputPortUrl] = [model.get('url')];
+        this._attemptWorkflowRunCreation();
+    }
+
+    /**
+     * Handle ResourceList creation error.
+     */
+    _handleResourceListCreationError()
+    {
+        debugger;
+    }
+
     /**
      * Handle InputPort creation success.
      */
@@ -1002,6 +1007,34 @@ class ControllerWorkflowBuilder extends BaseController
         }
         this._resourcesAvailable[inputPortUrl].syncList();
         return this._resourcesAvailable[inputPortUrl];
+    }
+
+    /**
+     * Check WorkflowRun Resource assignments.
+     *
+     * This method checks if any Resource assignments are ResourceLists.
+     * If there are and the ResourceList has no ID, it saves the list and waits for a response.
+     * If it has an ID, it replaces the object with the URL for that ResourceList.
+     * If a reference is just to an array of REsource refs, it is ignored.
+     *
+     * If everything checks out create the WorkflowRun and return true. Else return false.
+     */
+    _attemptWorkflowRunCreation()
+    {
+        for (var inputPortUrl in this._workflowRunOptions.assignments)
+        {
+            var assignments = this._workflowRunOptions.assignments[inputPortUrl];
+            if (assignments instanceof ResourceList && !assignments.id)
+            {
+                // TODO - shitty way to do this; once I do a "save", I don't do another; this ensures that 'inputPortUrl'
+                // doesn't get set to the last one in the loop
+                assignments.save({}, {success: (model) => this._handleResourceListCreationSuccess(model, inputPortUrl),
+                                       error: () => this._handleResourceListCreationError()});
+                return false;
+            }
+        }
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_CREATE, this._workflowRunOptions);
+        return true;
     }
 }
 
