@@ -60,7 +60,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model});
     }
 }
 

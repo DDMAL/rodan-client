@@ -90,20 +90,20 @@ class ControllerAuthentication extends BaseController
                 this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
                 break;
             case 400:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 401:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request,
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request,
                                                                            message: 'Incorrect username/password.'});
                 this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 403:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             default:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }
@@ -125,16 +125,16 @@ class ControllerAuthentication extends BaseController
                 this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
                 break;
             case 400:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 401:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 403:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             default:
-                this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
+                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }

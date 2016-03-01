@@ -27,6 +27,9 @@ var Events =
     REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                         // Update the ResourceCollection without resetting.
     EVENT__SERVER_WENTAWAY: 'EVENT__SERVER_WENTAWAY',                           // Called on server disconnect. No pass.
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                                 // Called when the app suspects that something went wrong.
+    REQUEST__SYSTEM_DISPLAY_MESSAGE: 'REQUEST__SYSTEM_DISPLAY_MESSAGE', // Request message to be displayed in status bar. Takes {text: string}.
+    REQUEST__SYSTEM_HANDLE_ERROR: 'REQUEST__SYSTEM_HANDLE_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
+    REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
@@ -88,7 +91,7 @@ var Events =
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                       // Triggered when the user selects an individual Resource. Sends {resource: Resource}.
-    EVENT__RESOURCE_SELECTED_COLLECTION: 'EVENT__RESOURCE_SELECTED_COLLECTION', // Triggered when the user selects to see all available Resources.
+    EVENT__RESOURCE_SELECTED_COLLECTION: 'EVENT__RESOURCE_SELECTED_COLLECTION', // Triggered when the user selects to see all available Resources. Sends {project: Project (Project associated with ResourceCollection)}.
     REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                       // Request a Resource be created. Takes {project: Project, file: JavaScript File object}.
     REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                       // Request a Resource be deleted. Takes {resource: Resource}.
     REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                           // Request a Resource be saved/updated. Takes {resource: Resource, fields: {object with attributes to change}}.
@@ -114,33 +117,21 @@ var Events =
     REQUEST__SERVER_LOAD_ROUTE_OPTIONS: 'REQUEST__SERVER_LOAD_ROUTE_OPTIONS',   // Request the client to load all options for routes. Must authenticate prior to making this request.
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// System
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__DISPLAY_MESSAGE: 'REQUEST__DISPLAY_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
-    REQUEST__HANDLER_ERROR: 'REQUEST__HANDLER_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
-    EVENT__APPLICATION_READY: 'EVENT__APPLICATION_READY',   // Called when app is ready.
-
-///////////////////////////////////////////////////////////////////////////////////////
 // Timer
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__TIMER_CLEAR: 'REQUEST__TIMER_CLEAR',               // Clears timed event. Takes nothing.
-    REQUEST__TIMER_SET_EVENT: 'REQUEST__TIMER_SET_EVENT',       // Sets a (Radio) Event to be scheduled.
-                                                                // Takes {event: Event string,
-                                                                //        options: options for the event that will be passed to listeners}.
-    REQUEST__TIMER_SET_REQUEST: 'REQUEST__TIMER_SET_REQUEST',   // Sets a (Radio) Request to be scheduled. 
-                                                                // Takes {event: Event string,
-                                                                //        options: options for the event that will be passed to listeners}.
+    REQUEST__TIMER_CLEAR: 'REQUEST__TIMER_CLEAR',               // Request the Timer to clear timed event. Takes nothing.
+    REQUEST__TIMER_SET_EVENT: 'REQUEST__TIMER_SET_EVENT',       // Request a (Radio) Event to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}.
+    REQUEST__TIMER_SET_REQUEST: 'REQUEST__TIMER_SET_REQUEST',   // Request a (Radio) Request to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Workflow
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOW_ADD: 'REQUEST__WORKFLOW_ADD',                         // Called when Workflow needs to be added. Takes {project: Project}.
-    REQUEST__WORKFLOW_SAVE: 'REQUEST__WORKFLOW_SAVE',                       // Called when a Workflow needs to be saved. This is different from the builder save as it only saves the name and description. Takes {workflow: Workflow}.
-    REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
-    REQUEST__WORKFLOW_DELETE: 'REQUEST__WORKFLOW_DELETE',                   // Called when Workflow needs to be deleted. Takes {workflow: Workflow}.
-    EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED',                   // Called on Workflow selection. Takes {workflow: Workflow}.
-    EVENT__WORKFLOWS_SELECTED: 'EVENT__WORKFLOWS_SELECTED',                 // Called on Workflows selection.
-    REQUEST__WORKFLOW_IMPORT: 'REQUEST__WORKFLOW_IMPORT',                     // Imports Workflow into another. Takes {target: Workflow, origin: Workflow}. 'origin' is imported into 'target'.
+    EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED',                       // Triggered when the user selects an individual Workflow. Sends {workflow: Workflow}.
+    EVENT__WORKFLOW_SELECTED_COLLECTION: 'EVENT__WORKFLOW_SELECTED_COLLECTION', // Triggered when the user selects to see all available Workflows. Sends {project: Project (Project associated with WorkflowCollection)}.
+    REQUEST__WORKFLOW_CREATE: 'REQUEST__WORKFLOW_CREATE',                       // Request a Workflow be created. Takes {project: Project}.
+    REQUEST__WORKFLOW_DELETE: 'REQUEST__WORKFLOW_DELETE',                       // Request a Workflow be deleted. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOW_IMPORT: 'REQUEST__WORKFLOW_IMPORT',                       // Request a Workflow (origin) be imported into another Workflow (target). Takes {target: Workflow, origin: Workflow}.
+    REQUEST__WORKFLOW_SAVE: 'REQUEST__WORKFLOW_SAVE',                           // Request a Workflow be saved/updated. Takes {workflow: Workflow, fields: {object with attributes to change}}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder

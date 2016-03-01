@@ -73,8 +73,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
 
     /**

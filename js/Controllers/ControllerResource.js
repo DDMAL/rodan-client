@@ -85,10 +85,7 @@ class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
-        options.resource.save({resource_type: options.resource_type,
-                                name: options.name,
-                                description: options.description},
-                               {patch: true, success: () => this._handleRequestResourcesSync()});
+        options.resource.save(options.fields, {patch: true, success: () => this._handleRequestResourcesSync()});
     }
 
     /**

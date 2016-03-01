@@ -294,7 +294,7 @@ class BaseCollection extends Backbone.Collection
         var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        this.rodanChannel.request(Events.REQUEST__DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});
     }
 
     /**
@@ -302,13 +302,13 @@ class BaseCollection extends Backbone.Collection
      */
     _handleErrorResponse(collection, response, options)
     {
-        this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {collection: collection,
+        this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
                                                                   response: response,
                                                                   options: options});
         var text = 'Unsuccessful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        this.rodanChannel.request(Events.REQUEST__DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});
     }
 
     /**

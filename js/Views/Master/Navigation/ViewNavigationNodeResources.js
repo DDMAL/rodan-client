@@ -14,7 +14,7 @@ class ViewNavigationNodeResources extends ViewNavigationNode
      */
     _initializeRadio()
     {
-        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, event => this._handleEventResourcesSelected(event));
+        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventResourcesSelected(options));
     }
 
     /**
@@ -29,9 +29,9 @@ class ViewNavigationNodeResources extends ViewNavigationNode
     /**
      * Handle highlighting.
      */
-    _handleEventResourcesSelected(event)
+    _handleEventResourcesSelected(options)
     {
-        if (event.project === this.model.get('project'))
+        if (options.project === this.model.get('project'))
         {
             this.rodanChannel.trigger(Events.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }

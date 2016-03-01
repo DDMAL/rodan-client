@@ -58,10 +58,9 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        this.rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model,
-                                                                   resource_type: this.ui.selectResourceType.val(),
-                                                                   name: this.ui.resourceName.val(),
-                                                                   description: this.ui.resourceDescription.val()});
+        this.rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
+                                                                                                 name: this.ui.resourceName.val(),
+                                                                                                 description: this.ui.resourceDescription.val()}});
     }
 
     /**

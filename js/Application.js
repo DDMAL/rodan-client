@@ -173,9 +173,6 @@ class Application extends Marionette.Application
         // Render layout views.
         this.regionMaster.show(this._layoutViewMaster);
 
-        // Send event that the app has started.
-        this.rodanChannel.trigger(Events.EVENT__APPLICATION_READY);
-
         // Check authentication.
         this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_CHECK); 
     }

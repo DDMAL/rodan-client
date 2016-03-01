@@ -29,7 +29,7 @@ class ErrorHandler extends Marionette.Object
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__HANDLER_ERROR, (options) => this._handleError(options));
+        this.rodanChannel.reply(Events.REQUEST__SYSTEM_HANDLE_ERROR, (options) => this._handleError(options));
     }
 
     /**

@@ -20,11 +20,11 @@ class ControllerWorkflow extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, options => this._handleEventListSelected(options));
+        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
         this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_ADD, options => this._handleCommandAddWorkflow(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
     }
@@ -104,7 +104,7 @@ class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
-        options.workflow.save({name: options.workflow.get('name'), description: options.workflow.get('description')}, {patch: true});
+        options.workflow.save(options.fields, {patch: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

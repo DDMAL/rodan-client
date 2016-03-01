@@ -14,7 +14,7 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
      */
     _initializeRadio()
     {
-        this.rodanChannel.on(Events.EVENT__WORKFLOWS_SELECTED, event => this._handleEventWorkflowsSelected(event));
+        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventWorkflowsSelected(options));
     }
 
     /**
@@ -23,15 +23,15 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
     _sendClickEvents()
     {
         this.rodanChannel.request(Events.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWS_SELECTED, {project: this.model.get('project')});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model.get('project')});
     }
 
     /**
      * Handle highlighting.
      */
-    _handleEventWorkflowsSelected(event)
+    _handleEventWorkflowsSelected(options)
     {
-        if (event.project === this.model.get('project'))
+        if (options.project === this.model.get('project'))
         {
             this.rodanChannel.trigger(Events.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }
