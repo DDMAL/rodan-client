@@ -35,7 +35,7 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
+        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 }
 

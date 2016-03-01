@@ -32,8 +32,8 @@ class LayoutViewMain extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, view => this._handleCommandShow(view));
-        this.rodanChannel.on(Events.EVENT__DEAUTHENTICATION_SUCCESS, () => this._handleDeauthenticationSuccess());
+        this.rodanChannel.reply(Events.REQUEST__MAINREGION_SHOW_VIEW, options => this._handleCommandShow(options));
+        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
     }
 
@@ -43,15 +43,15 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleAuthenticationLoginRequired()
     {
         this.loginView = new ViewLogin();
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this.loginView);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
     }
 
     /**
      * Handle show.
      */
-    _handleCommandShow(view)
+    _handleCommandShow(options)
     {
-        this.region.show(view);
+        this.region.show(options.view);
     }
 
     /**
@@ -60,7 +60,7 @@ class LayoutViewMain extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.loginView = new ViewLogin();
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this.loginView);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
     }
 }
 

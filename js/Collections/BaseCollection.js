@@ -198,7 +198,7 @@ class BaseCollection extends Backbone.Collection
      */
     url()
     {
-        return this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
+        return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
     }
 
     /**

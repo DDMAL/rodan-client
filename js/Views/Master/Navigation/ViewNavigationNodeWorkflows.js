@@ -33,7 +33,7 @@ class ViewNavigationNodeWorkflows extends ViewNavigationNode
     {
         if (event.project === this.model.get('project'))
         {
-            this.rodanChannel.trigger(Events.EVENT__NAVIGATION_NODE_SELECTED, {node: this});
+            this.rodanChannel.trigger(Events.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }
     }
 }

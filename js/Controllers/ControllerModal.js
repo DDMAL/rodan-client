@@ -32,7 +32,7 @@ class ControllerModal extends BaseController
         this.rodanChannel.reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
-        this.rodanChannel.reply(Events.REQUEST__MODAL_SIMPLE_SHOW, options => this._handleRequestModalSimpleShow(options));
+        this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
 
         this.rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
         this.rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
@@ -120,7 +120,7 @@ class ControllerModal extends BaseController
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $modalEl.draggable({handle: ".modal-header"});
-        $('.modal-title').text(options.description);
+        $('.modal-title').text(options.title);
         $modalEl.modal({backdrop: 'static'});
     }
 

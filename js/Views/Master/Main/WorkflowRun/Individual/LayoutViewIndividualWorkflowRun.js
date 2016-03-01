@@ -41,7 +41,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this.regionResourceList.empty();
 
         // Create Resource views.
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
         this._layoutViewResources = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);

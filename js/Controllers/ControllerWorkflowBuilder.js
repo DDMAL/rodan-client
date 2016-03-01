@@ -104,7 +104,7 @@ class ControllerWorkflowBuilder extends BaseController
         this._resourcesAvailable = [];
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': options.workflow});
         this._layoutView = new LayoutViewWorkflowBuilder({workflow: options.workflow});
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._workspace.initialize('canvas-workspace', this._workflow);
     }
 
@@ -193,7 +193,7 @@ class ControllerWorkflowBuilder extends BaseController
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'InputPort'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'InputPort'});
     }
 
     /**
@@ -478,7 +478,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowView(options)
     {
         var view = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: options.model});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'Workflow: ' + options.model.getDescription()});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'Workflow: ' + options.model.getDescription()});
     }
 
     /**
@@ -488,7 +488,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
         var view = new ViewControlWorkflowJob({workflowjob: workflowJob});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJob: ' + workflowJob.getDescription()});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob: ' + workflowJob.getDescription()});
     }
 
     /**
@@ -498,7 +498,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var view = new ViewJobList({collection: collection});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'Jobs'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'Jobs'});
     }
 
     /**
@@ -508,11 +508,11 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var collection = new WorkflowCollection();
         collection.fetch({data: {/*project: project.id, */valid: 'True'}});
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
         var view = new ViewWorkflowList({collection: collection,
                                                        childView: ViewWorkflowListImportItem,
                                                        template: '#template-main_workflow_list_import'});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'Workflows'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'Workflows'});
     }
 
     /**
@@ -522,7 +522,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var workflowJobGroup = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {url: options.url});
         var view = new ViewWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: workflowJobGroup});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJobGroup'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJobGroup'});
     }
 
     /**
@@ -532,7 +532,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
         var view = new LayoutViewControlPorts({workflowjob: workflowJob});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJob Ports'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Ports'});
     }
 
     /**
@@ -542,7 +542,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
         var view = new ViewSettings({workflowjob: workflowJob});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, description: 'WorkflowJob Settings'});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Settings'});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -982,7 +982,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         if (!this._resourcesAvailable[inputPortUrl])
         {
-            var project = this.rodanChannel.request(Events.REQUEST__PROJECT_ACTIVE);
+            var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
             var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: inputPortUrl});
             var resourceTypeURLs = this._getCompatibleResourceTypeURLs(inputPortUrl);
             var data = {project: project.id, resource_type__in: ''};

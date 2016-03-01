@@ -18,7 +18,7 @@ class ViewLogin extends Marionette.ItemView
     {
         this.model = null;
         this._initializeRadio();
-        this.rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
+        this.rodanChannel.request(Events.REQUEST__TIMER_CLEAR);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

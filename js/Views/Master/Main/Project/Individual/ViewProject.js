@@ -52,7 +52,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickResourceCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__RESOURCES_SELECTED, {project: this.model});
+        this.rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model});
     }
 
     /**

@@ -61,12 +61,12 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTES, () => this._getRoutes());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_ROUTE, routeName => this._handleRequestServerRoute(routeName));
-        this.rodanChannel.reply(Events.REQUEST__SERVER_ROUTE_OPTIONS, routeName => this._handleRequestServerRouteOptions(routeName));
-        this.rodanChannel.reply(Events.REQUEST__SERVER_HOSTNAME, () => this._handleRequestServerHostname());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_VERSION_RODAN, () => this._handleRequestServerVersionRodan());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
+        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
     }
 
     /**
@@ -80,9 +80,9 @@ class ControllerServer extends BaseController
     /**
      * Returns associated route options.
      */
-    _handleRequestServerRouteOptions(routeName)
+    _handleRequestServerRouteOptions(options)
     {
-        return this._server.routes[routeName].options;
+        return this._server.routes[options.route].options;
     }
 
     /**

@@ -3,105 +3,115 @@
  */
 var Events = 
 {
-///////////////////////////////////////////////////////////////////////////////////////
-// Timer
-///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__CLEAR_TIMED_EVENT: 'REQUEST__CLEAR_TIMED_EVENT',   // Clears timed event.
-    REQUEST__SET_TIMED_EVENT: 'REQUEST__SET_TIMED_EVENT',       // Sets a (Radio) Event to be scheduled. Takes {event: Event string, options: options for the event}.
-    REQUEST__SET_TIMED_REQUEST: 'REQUEST__SET_TIMED_REQUEST',   // Sets a (Radio) Request to be scheduled.  Takes {event: Event string, options: options for the event, callback: callback function that takes the response of the request; may be null}.
+// todo
+// make sure Events can only be listened to and requests can only be requested
+
+
+// TODO - in final docs, explain
+// 
+//  server errors (json)
+//  explain options for route
+//  data: {query parameters}
+//  explain the "Global" collections
+//  difference between events and requests
+//  fields: {object with attributes to change}
+//  naming convention of Events and Requests
+// how configuration.js is used for some events
+//  why we use "Collection" and not "List"
+//  mark some of these as "hidden" or try to remove them 
+    REQUEST__PROJECT_SYNC_COLLECTION: 'REQUEST__PROJECT_SYNC_COLLECTION',   // Request the GlobalProjectCollection be updated without a reset.
+    EVENT__NAVIGATION_SELECTED_NODE: 'EVENT__NAVIGATION_SELECTED_NODE', // Triggered when the user clicks on a navigation element in the vertical menu. Sends {node: ViewNavigationNode or one of its descendants}.
+    REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Request special modal window to show/open. This modal window disables all input and informs the user that the client is waiting on the server. If another modal is currently open the request will not show. 
+    REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                         // Update the ResourceCollection without resetting.
+    EVENT__SERVER_WENTAWAY: 'EVENT__SERVER_WENTAWAY',                           // Called on server disconnect. No pass.
+    EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                                 // Called when the app suspects that something went wrong.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__AUTHENTICATION_ERROR_NULL: 'EVENT__AUTHENTICATION_ERROR_NULL',       // Triggered when authentication error occurred with no other info.
-    EVENT__AUTHENTICATION_LOGINREQUIRED: 'EVENT__AUTHENTICATION_LOGINREQUIRED', // Triggered to inform listeners that the user has to login.
-    EVENT__AUTHENTICATION_SUCCESS: 'EVENT__AUTHENTICATION_SUCCESS',             // Triggered on success of authentication check. Takes {user: User}.
-    EVENT__DEAUTHENTICATION_SUCCESS: 'EVENT__DEAUTHENTICATION_SUCCESS',         // Triggered on success of deauthentication.
-    REQUEST__AUTHENTICATION_CHECK: 'REQUEST__AUTHENTICATION_CHECK',
-    REQUEST__AUTHENTICATION_LOGIN: 'REQUEST__AUTHENTICATION_LOGIN',
-    REQUEST__AUTHENTICATION_LOGOUT: 'REQUEST__AUTHENTICATION_LOGOUT',
-    REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',
+    EVENT__AUTHENTICATION_ERROR_NULL: 'EVENT__AUTHENTICATION_ERROR_NULL',           // Triggered when authentication error occurred with no other info.
+    EVENT__AUTHENTICATION_LOGIN_SUCCESS: 'EVENT__AUTHENTICATION_LOGIN_SUCCESS',     // Triggered on success of authentication check. Sends {user: User}.
+    EVENT__AUTHENTICATION_LOGINREQUIRED: 'EVENT__AUTHENTICATION_LOGINREQUIRED',     // Triggered after authentication attempt; user must log in.
+    EVENT__AUTHENTICATION_LOGOUT_SUCCESS: 'EVENT__AUTHENTICATION_LOGOUT_SUCCESS',   // Triggered on success of deauthentication.
+    REQUEST__AUTHENTICATION_CHECK: 'REQUEST__AUTHENTICATION_CHECK',                 // Request check of authentication status. The client will make a request to the Rodan server. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
+    REQUEST__AUTHENTICATION_LOGIN: 'REQUEST__AUTHENTICATION_LOGIN',                 // Request login authentication. Takes {username: string, password: string}. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
+    REQUEST__AUTHENTICATION_LOGOUT: 'REQUEST__AUTHENTICATION_LOGOUT',               // Request logout for currently logged in user. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
+    REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',                   // Request currently logged in User. Returns User or null.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections
 //
 // The 'LOAD' commands are not meant for general use. They are called on startup.
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION',   // Returns InputPortTypes.
-    REQUEST__GLOBAL_INPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_INPUTPORTTYPES_LOAD',             // Load InputPortTypes from server. Takes {data: {query parameters}}.
-    REQUEST__GLOBAL_JOB_COLLECTION: 'REQUEST__GLOBAL_JOB_COLLECTION',                       // Returns Jobs.
-    REQUEST__GLOBAL_JOBS_LOAD: 'REQUEST__GLOBAL_JOBS_LOAD',                                 // Load Jobs from server. Takes {data: {query parameters}}.
-    REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION', // Returns OutputPortTypes.
-    REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD',           // Load OutputPortTypes from server. Takes {data: {query parameters}}.
-    REQUEST__GLOBAL_PROJECT_COLLECTION: 'REQUEST__GLOBAL_PROJECT_COLLECTION',               // Returns Projects.
-    REQUEST__GLOBAL_PROJECTS_LOAD: 'REQUEST__GLOBAL_PROJECTS_LOAD',                         // Load Projects from server. Takes {data: {query parameters}}.
-    REQUEST__GLOBAL_RESOURCETYPE_COLLECTION: 'REQUEST__GLOBAL_RESOURCETYPE_COLLECTION',     // Returns ResourceTypes.
-    REQUEST__GLOBAL_RESOURCETYPES_LOAD: 'REQUEST__GLOBAL_RESOURCETYPES_LOAD',               // Load ResourceTypes from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION',   // Request all InputPortTypes. Returns GlobalInputPortTypeCollection.
+    REQUEST__GLOBAL_INPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_INPUTPORTTYPES_LOAD',             // Request load of InputPortTypes from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_JOB_COLLECTION: 'REQUEST__GLOBAL_JOB_COLLECTION',                       // Request all Jobs. Returns GlobalJobCollection.
+    REQUEST__GLOBAL_JOBS_LOAD: 'REQUEST__GLOBAL_JOBS_LOAD',                                 // Request load of Jobs from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION: 'REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION', // Request all OutputPortTypes. Returns GlobalOutputPortTypeCollection.
+    REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD: 'REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD',           // Request load of OutputPortTypes from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_PROJECT_COLLECTION: 'REQUEST__GLOBAL_PROJECT_COLLECTION',               // Request all Projects. Returns GlobalProjectCollection.
+    REQUEST__GLOBAL_PROJECTS_LOAD: 'REQUEST__GLOBAL_PROJECTS_LOAD',                         // Request load of Projects from server. Takes {data: {query parameters}}.
+    REQUEST__GLOBAL_RESOURCETYPE_COLLECTION: 'REQUEST__GLOBAL_RESOURCETYPE_COLLECTION',     // Request all ResourceTypes. Returns GlobalResourceTypeCollection.
+    REQUEST__GLOBAL_RESOURCETYPES_LOAD: 'REQUEST__GLOBAL_RESOURCETYPES_LOAD',               // Request load of ResourceTypes from server. Takes {data: {query parameters}}.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Main Region
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__MAINREGION_SHOW_VIEW: 'REQUEST__MAINREGION_SHOW_VIEW', // Request main region be filled with provided Marionette View. Takes {view: Marionette.View}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Modal
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__MODAL_HIDE: 'REQUEST__MODAL_HIDE',                 // Hide modal.
-    REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Show modal. Takes {view: Marionette.View, description: string}.
-    REQUEST__MODAL_SIMPLE_SHOW: 'REQUEST__MODAL_SIMPLE_SHOW',   // Show modal without view. Takes {title: string, text: string}.
-    REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Show special modal for waiting on server/whatever.
+    REQUEST__MODAL_HIDE: 'REQUEST__MODAL_HIDE',                 // Request modal window to hide/close.
+    REQUEST__MODAL_SHOW: 'REQUEST__MODAL_SHOW',                 // Request modal window to show/open with provided Marionette View. If another modal is currently open the request will not show. Takes {view: Marionette.View, title: string}.
+    REQUEST__MODAL_SHOW_SIMPLE: 'REQUEST__MODAL_SHOW_SIMPLE',   // Request modal window to show/open without view. If another modal is currently open the request will not show. Takes {title: string, text: string}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Model
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Called when a model has changed (bound to 'hasChanged' in Backbone). Takes {model: BaseModel};
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Navigation/UI
-///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__NAVIGATION_NODE_SELECTED: 'EVENT__NAVIGATION_NODE_SELECTED',         // Informs of node selection. Takes {node: ViewNavigationNode}.
-    REQUEST__NAVIGATION_LAYOUTVIEW_SHOW: 'REQUEST__NAVIGATION_LAYOUTVIEW_SHOW',
+    EVENT__MODEL_HASCHANGED: 'EVENT__MODEL_HASCHANGED', // Triggered when an instance of BaseModel (or one of its descendants) model has changed (bound to 'hasChanged' in Backbone). Sends {model: BaseModel or one of its descendants};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Project
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',         // Called on Project selection. Takes {project: Project}.
-    EVENT__PROJECTS_SELECTED: 'EVENT__PROJECTS_SELECTED',       // Called on Project selection.
-    REQUEST__PROJECT_ACTIVE: 'REQUEST__PROJECT_ACTIVE',         // Returns currently active Project.
-    REQUEST__PROJECT_CREATE: 'REQUEST__PROJECT_CREATE',         // Create Project. Takes {creator: User}.
-    REQUEST__PROJECT_DELETE: 'REQUEST__PROJECT_DELETE',         // Delete Project. Takes {project: Project}.
-    REQUEST__PROJECT_SAVE: 'REQUEST__PROJECT_SAVE',             // Save Project. Takes {project: Project, fields: {object with attributes to change}}.
-    REQUEST__PROJECT_SET_ACTIVE: 'REQUEST__PROJECT_SET_ACTIVE', // Set active Project. Takes {project: Project}.
-    REQUEST__PROJECTS_SYNC: 'REQUEST__PROJECTS_SYNC',           // Updates the ProjectCollection without resetting.
+    EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',                         // Triggered when the user selects an individual Project. Sends {project: Project}.
+    EVENT__PROJECT_SELECTED_COLLECTION: 'EVENT__PROJECT_SELECTED_COLLECTION',   // Triggered when the user selects to see all available Projects.
+    REQUEST__PROJECT_CREATE: 'REQUEST__PROJECT_CREATE',                         // Request a Project be created. Takes {creator: User}.
+    REQUEST__PROJECT_DELETE: 'REQUEST__PROJECT_DELETE',                         // Request a Project be deleted. Takes {project: Project}.
+    REQUEST__PROJECT_GET_ACTIVE: 'REQUEST__PROJECT_GET_ACTIVE',                 // Request currently active/open Project. Returns Project (or null).
+    REQUEST__PROJECT_SAVE: 'REQUEST__PROJECT_SAVE',                             // Request a Project be saved/updated. Takes {project: Project, fields: {object with attributes to change}}.
+    REQUEST__PROJECT_SET_ACTIVE: 'REQUEST__PROJECT_SET_ACTIVE',                 // Request a Project be set as active Project. Takes {project: Project}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                   // Called on Resource selection. Takes {resource: Resource}.
-    EVENT__RESOURCES_SELECTED: 'EVENT__RESOURCES_SELECTED',                 // Called on Resources selection. Takes (project: Project}.
-    REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                   // Create Resource. Takes {project: Project, file: JavaScript File object}.
-    REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                   // Delete Resource. Takes {resource: Resource}.
-    REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                       // Save Resource. Takes {resource: Resource, fields: {object with attributes to change}}.
-    REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
-    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                     // Load Resources from server. Takes {data: Object (query parameters)}. The ControllerResource will manage/update to the ResourceCollection.
-    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                     // Update the ResourceCollection without resetting.
+    EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                       // Triggered when the user selects an individual Resource. Sends {resource: Resource}.
+    EVENT__RESOURCE_SELECTED_COLLECTION: 'EVENT__RESOURCE_SELECTED_COLLECTION', // Triggered when the user selects to see all available Resources.
+    REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                       // Request a Resource be created. Takes {project: Project, file: JavaScript File object}.
+    REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                       // Request a Resource be deleted. Takes {resource: Resource}.
+    REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                           // Request a Resource be saved/updated. Takes {resource: Resource, fields: {object with attributes to change}}.
+    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                         // Request a ResourceCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceCollection. Once loaded, ControllerResource sync the Collection every X seconds (depending on configuration).
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',                   // Called on RunJob selection. Takes {runjob: RunJob}.
-    REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
+    EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',   // Triggered when the user selects an individual RunJob. Sends {runjob: RunJob}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__SERVER_ROUTE: 'REQUEST__SERVER_ROUTE', // Returns server route. Pass associated string.
-    REQUEST__SERVER_HOSTNAME: 'REQUEST__SERVER_HOSTNAME', // Returns server hostname. No pass.
-    REQUEST__SERVER_VERSION_RODAN: 'REQUEST__SERVER_VERSION_RODAN', // Returns server version (Rodan). No pass.
-    EVENT__SERVER_WENT_AWAY: 'EVENT__SERVER_WENT_AWAY', // Called on server disconnect. No pass.
-    EVENT__SERVER_ROUTESLOADED: 'EVENT__SERVER_ROUTESLOADED', // Called when routes loaded. No pass.
-    REQUEST__SERVER_GET_ROUTES: 'REQUEST__SERVER_GET_ROUTES',
-    EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',             // Fired when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
-    EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                   // Fired when server no longer waiting. Only happens if a EVENT__SERVER_WAITING had previously been fired.
-    EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                     // Called when the app suspects that something went wrong.
-    EVENT__RODAN_ERROR: 'EVENT__RODAN_ERROR',                       // Triggered on Rodan-based server events. Takes {json: JSON object of error}.
-    REQUEST__SERVER_GET_ROUTE_OPTIONS: 'REQUEST__SERVER_GET_ROUTE_OPTIONS',
-    REQUEST__SERVER_ROUTE_OPTIONS: 'REQUEST__SERVER_ROUTE_OPTIONS',
+    EVENT__SERVER_ERROR: 'EVENT__SERVER_ERROR',                                 // Triggered on Rodan-based server errors. Sends {json: JSON object of error}.
+    EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                                   // Triggered when the client has no pending HTTP requests waiting to complete. Only fires if EVENT__SERVER_WAITING had previously been fired.
+    EVENT__SERVER_ROUTESLOADED: 'EVENT__SERVER_ROUTESLOADED',                   // Triggered when server routes have been loaded.
+    EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',                             // Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
+    REQUEST__SERVER_GET_HOSTNAME: 'REQUEST__SERVER_GET_HOSTNAME',               // Request server hostname. Returns string (hostname).
+    REQUEST__SERVER_GET_ROUTE: 'REQUEST__SERVER_GET_ROUTE',                     // Request server URL for route. Takes {route: string}. Returns string (URL).
+    REQUEST__SERVER_GET_ROUTE_OPTIONS: 'REQUEST__SERVER_GET_ROUTE_OPTIONS',     // Request options for server route. Takes {route: string}. Returns Javascript object with all options for route.
+    REQUEST__SERVER_GET_VERSION: 'REQUEST__SERVER_GET_VERSION',                 // Request version of server. Returns string.
+    REQUEST__SERVER_LOAD_ROUTES: 'REQUEST__SERVER_LOAD_ROUTES',                 // Request the client to load all routes. EVENT__SERVER_ROUTESLOADED is triggered on success.
+    REQUEST__SERVER_LOAD_ROUTE_OPTIONS: 'REQUEST__SERVER_LOAD_ROUTE_OPTIONS',   // Request the client to load all options for routes. Must authenticate prior to making this request.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // System
@@ -109,6 +119,17 @@ var Events =
     REQUEST__DISPLAY_MESSAGE: 'REQUEST__DISPLAY_MESSAGE',   // Sends messages to the status bar. Takes {text: string}.
     REQUEST__HANDLER_ERROR: 'REQUEST__HANDLER_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
     EVENT__APPLICATION_READY: 'EVENT__APPLICATION_READY',   // Called when app is ready.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Timer
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__TIMER_CLEAR: 'REQUEST__TIMER_CLEAR',               // Clears timed event. Takes nothing.
+    REQUEST__TIMER_SET_EVENT: 'REQUEST__TIMER_SET_EVENT',       // Sets a (Radio) Event to be scheduled.
+                                                                // Takes {event: Event string,
+                                                                //        options: options for the event that will be passed to listeners}.
+    REQUEST__TIMER_SET_REQUEST: 'REQUEST__TIMER_SET_REQUEST',   // Sets a (Radio) Request to be scheduled. 
+                                                                // Takes {event: Event string,
+                                                                //        options: options for the event that will be passed to listeners}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Workflow

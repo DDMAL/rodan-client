@@ -33,15 +33,15 @@ class ControllerProject extends BaseController
     {
         // Events.
         this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
-        this.rodanChannel.on(Events.EVENT__PROJECTS_SELECTED, () => this._handleEventListSelected());
+        this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventListSelected());
 
         // Requests.
-        this.rodanChannel.reply(Events.REQUEST__PROJECT_ACTIVE, () => this._handleRequestProjectActive());
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_GET_ACTIVE, () => this._handleRequestProjectActive());
         this.rodanChannel.reply(Events.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
         this.rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
         this.rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
         this.rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
-        this.rodanChannel.reply(Events.REQUEST__PROJECTS_SYNC, options => this._handleRequestProjectsSync(options));
+        this.rodanChannel.reply(Events.REQUEST__PROJECT_SYNC_COLLECTION, options => this._handleRequestProjectsSync(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -93,11 +93,10 @@ class ControllerProject extends BaseController
         this._activeProject.fetch();
         var collection = new WorkflowRunCollection();
         collection.fetch({data: {project: this._activeProject.id}});
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {collection: collection}, 
-                                                                       callback: null});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
+                                                                       options: {collection: collection}});
         var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, layoutView);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
         layoutView.showList(new ViewWorkflowRunList({collection: collection}));
     }
@@ -108,11 +107,10 @@ class ControllerProject extends BaseController
     _handleEventListSelected()
     {
         this._collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__PROJECTS_SYNC, 
-                                                                       options: {collection: this._collection}, 
-                                                                       callback: null});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__PROJECT_SYNC_COLLECTION, 
+                                                                       options: {collection: this._collection}});
         var view = new ViewProjectList({collection: this._collection})
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, view);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 
     /**
@@ -139,7 +137,7 @@ class ControllerProject extends BaseController
      */
     _handleCallbackDeleteSuccess()
     {
-        this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED);
+        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 }
 

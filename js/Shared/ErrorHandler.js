@@ -105,7 +105,7 @@ class ErrorHandler extends Marionette.Object
      */
     _processRodanError(options)
     {
-        this.rodanChannel.trigger(Events.EVENT__RODAN_ERROR, {json: options.response.responseJSON});
+        this.rodanChannel.trigger(Events.EVENT__SERVER_ERROR, {json: options.response.responseJSON});
     }
 }
 

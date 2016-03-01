@@ -61,7 +61,7 @@ class Application extends Marionette.Application
      */
     onStart()
     {
-        this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTES);
+        this.rodanChannel.request(Events.REQUEST__SERVER_LOAD_ROUTES);
     }
 
     /**
@@ -113,7 +113,7 @@ class Application extends Marionette.Application
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__SERVER_ROUTESLOADED, () => this._handleEventRoutesLoaded());
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_SUCCESS, () => this._handleAuthenticationSuccess());
+        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleAuthenticationSuccess());
     }
 
     /**
@@ -186,13 +186,13 @@ class Application extends Marionette.Application
     _handleAuthenticationSuccess()
     {
         var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS);
+        this.rodanChannel.request(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS);
         this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {data: {user: user.get('uuid')}});
         this.rodanChannel.request(Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD);
         this.rodanChannel.request(Events.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
         this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
         this.rodanChannel.request(Events.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
-        this.rodanChannel.trigger(Events.EVENT__PROJECTS_SELECTED); 
+        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION); 
     }
 }
 

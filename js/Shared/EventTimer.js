@@ -32,9 +32,9 @@ class EventTimer extends Marionette.Object
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__SET_TIMED_EVENT, (options) => this._handleSetTimedEvent(options));
-        this.rodanChannel.reply(Events.REQUEST__SET_TIMED_REQUEST, (options) => this._handleSetTimedRequest(options));
-        this.rodanChannel.reply(Events.REQUEST__CLEAR_TIMED_EVENT, () => this._handleClearTimedEvent());
+        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
+        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
+        this.rodanChannel.reply(Events.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
     }
 
     /**
@@ -56,7 +56,6 @@ class EventTimer extends Marionette.Object
         this._clearTimer();
         this._event = options.request;
         this._options = options.options;
-        this._callback = options.callback;
         this._timer = setTimeout(() => this._fireRequest(), this._frequency);
     }
 
@@ -88,10 +87,6 @@ class EventTimer extends Marionette.Object
         if (this._event != null)
         {
             var response = this.rodanChannel.request(this._event, this._options);
-            if (this._callback !== null)
-            {
-                this._callback(response);
-            }
             this._timer = setTimeout(() => this._fireRequest(), this._frequency);
         }
     }

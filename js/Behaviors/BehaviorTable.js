@@ -339,7 +339,7 @@ class BehaviorTable extends Marionette.Behavior
                 && !this._filtersInjected
                 && collection.length > 0)
             {
-                var options = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE_OPTIONS, collection.route);
+                var options = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: collection.route});
                 if (options)
                 {
                     this._injectFiltering(options.filter_fields);

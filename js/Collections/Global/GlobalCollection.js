@@ -61,7 +61,7 @@ class GlobalCollection extends BaseCollection
         }
         options.data = data;
         options = this._applyResponseHandlers(options);
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.route);
+        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
         this.fetch(options);
     }
 }

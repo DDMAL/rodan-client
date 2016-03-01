@@ -32,8 +32,8 @@ class ViewStatusServer extends Marionette.CompositeView
      */
     _template()
     {
-        var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_HOSTNAME);
-        var version = this.rodanChannel.request(Events.REQUEST__SERVER_VERSION_RODAN);
+        var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
+        var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
         if (Configuration.ADMIN_CLIENT.name === '' || Configuration.ADMIN_CLIENT.email === '')
         {
             return _.template($('#template-status_server').html())({hostname: hostname, version: version});

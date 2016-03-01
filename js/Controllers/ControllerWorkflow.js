@@ -39,11 +39,10 @@ class ControllerWorkflow extends BaseController
     {
         this._collection = new WorkflowCollection()
         this._collection.fetch({data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__SET_TIMED_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
-                                                                       options: {}, 
-                                                                       callback: null});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
+                                                                       options: {}});
         this._layoutView = new LayoutViewModel();
-        this.rodanChannel.request(Events.REQUEST__NAVIGATION_LAYOUTVIEW_SHOW, this._layoutView);
+        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._viewList = new ViewWorkflowList({collection: this._collection});
         this._layoutView.showList(this._viewList);
     }

@@ -87,7 +87,7 @@ class ControllerAuthentication extends BaseController
                 var parsed = JSON.parse(request.responseText);
                 this._user = new User(parsed);
                 this._processAuthenticationData();
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_SUCCESS, {user: this._user});
+                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
                 break;
             case 400:
                 this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
@@ -122,7 +122,7 @@ class ControllerAuthentication extends BaseController
         switch (request.status)
         {
             case 200:
-                this.rodanChannel.trigger(Events.EVENT__DEAUTHENTICATION_SUCCESS);
+                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
                 break;
             case 400:
                 this.rodanChannel.request(Events.REQUEST__HANDLER_ERROR, {response: request});
@@ -144,7 +144,7 @@ class ControllerAuthentication extends BaseController
      */
     _handleTimeout(event)
     {
-        this.rodanChannel.trigger(Events.EVENT__SERVER_WENT_AWAY, {event: event});
+        this.rodanChannel.trigger(Events.EVENT__SERVER_WENTAWAY, {event: event});
     }
 
     /**
@@ -160,7 +160,7 @@ class ControllerAuthentication extends BaseController
         }
         else
         {
-            var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-me');
+            var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-me');
             var request = new XMLHttpRequest();
             request.onload = (event) => this._handleAuthenticationResponse(event);
             request.ontimeout = (event) => this._handleTimeout(event);
@@ -196,7 +196,7 @@ class ControllerAuthentication extends BaseController
      */
     _logout()
     {
-        var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-reset-token');
+        var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
         var authType = Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (event) => this._handleDeauthenticationResponse(event);
@@ -271,12 +271,12 @@ class ControllerAuthentication extends BaseController
         {
             case 'session':
             {
-                return this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'session-auth');
+                return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'session-auth');
             }
 
             case 'token':
             {
-                return this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, 'auth-token');
+                return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-token');
             }
 
             default:

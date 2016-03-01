@@ -7,7 +7,7 @@ class ViewProjectList extends BaseViewList
     _handleButtonNewProject()
     {
         var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.rodanChannel.request(Events.REQUEST__PROJECT_CREATE, {user: user});
+        this.rodanChannel.request(Events.REQUEST__PROJECT_CREATE, {creator: user});
     }
 }
 

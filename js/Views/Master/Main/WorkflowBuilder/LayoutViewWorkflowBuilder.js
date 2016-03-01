@@ -17,7 +17,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     initialize(options)
     {
         this._initializeRadio();
-        this.rodanChannel.request(Events.REQUEST__CLEAR_TIMED_EVENT);
+        this.rodanChannel.request(Events.REQUEST__TIMER_CLEAR);
         this._lastErrorCode = '';
         this._lastErrorDetails = '';
     }
@@ -42,7 +42,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_ADDPORTS, () => this._handleRequestGetAddPorts(), this); 
-        this.rodanChannel.on(Events.EVENT__RODAN_ERROR, options => this._handleEventRodanError(options), this);
+        this.rodanChannel.on(Events.EVENT__SERVER_ERROR, options => this._handleEventRodanError(options), this);
         this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED, () => this._handleEventWorkflowValidated(), this);
     }
 
@@ -95,7 +95,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         if (this._lastErrorCode !== '' || this._lastErrorDetails !== '')
         {   
-            this.rodanChannel.request(Events.REQUEST__MODAL_SIMPLE_SHOW, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
+            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
         }
     }
 

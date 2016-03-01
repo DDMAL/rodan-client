@@ -30,7 +30,7 @@ class BaseModel extends Backbone.Model
      */
     url()
     {
-        var original_url = this.rodanChannel.request(Events.REQUEST__SERVER_ROUTE, this.routeName);
+        var original_url = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.routeName);
         if (typeof this.get('uuid') !== 'undefined')
         {
             original_url = this.get('url');
