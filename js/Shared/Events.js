@@ -5,7 +5,7 @@ var Events =
 {
 // todo
 // make sure Events can only be listened to and requests can only be requested
-
+// CONTROLLERS: workflow, workflowjob, workflowjobgroup, workflowrun: they all message the builder and they shouldn't
 
 // TODO - in final docs, explain
 // 
@@ -21,20 +21,16 @@ var Events =
 // how configuration.js is used for some events
 //  why we use "Collection" and not "List"
 //  mark some of these as "hidden" or try to remove them 
-    REQUEST__PROJECT_SYNC_COLLECTION: 'REQUEST__PROJECT_SYNC_COLLECTION',   // Request the GlobalProjectCollection be updated without a reset.
     EVENT__NAVIGATION_SELECTED_NODE: 'EVENT__NAVIGATION_SELECTED_NODE', // Triggered when the user clicks on a navigation element in the vertical menu. Sends {node: ViewNavigationNode or one of its descendants}.
     REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Request special modal window to show/open. This modal window disables all input and informs the user that the client is waiting on the server. If another modal is currently open the request will not show. 
     REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
-    REQUEST__RESOURCES_SYNC: 'REQUEST__RESOURCES_SYNC',                         // Update the ResourceCollection without resetting.
     EVENT__SERVER_WENTAWAY: 'EVENT__SERVER_WENTAWAY',                           // Called on server disconnect. No pass.
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                                 // Called when the app suspects that something went wrong.
     REQUEST__SYSTEM_DISPLAY_MESSAGE: 'REQUEST__SYSTEM_DISPLAY_MESSAGE', // Request message to be displayed in status bar. Takes {text: string}.
     REQUEST__SYSTEM_HANDLE_ERROR: 'REQUEST__SYSTEM_HANDLE_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
-    REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
     REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',   // Called when WorkflowJobGroups are to be imported for given Workflow. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWJOBGROUP',
-    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC',            // Updates the WorkflowRuns collection without resetting.
 
     // these two really require an event system
     REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',
@@ -105,7 +101,7 @@ var Events =
     REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                       // Request a Resource be created. Takes {project: Project, file: JavaScript File object}.
     REQUEST__RESOURCE_DELETE: 'REQUEST__RESOURCE_DELETE',                       // Request a Resource be deleted. Takes {resource: Resource}.
     REQUEST__RESOURCE_SAVE: 'REQUEST__RESOURCE_SAVE',                           // Request a Resource be saved/updated. Takes {resource: Resource, fields: {object with attributes to change}}.
-    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                         // Request a ResourceCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceCollection. Once loaded, ControllerResource sync the Collection every X seconds (depending on configuration).
+    REQUEST__RESOURCES_LOAD: 'REQUEST__RESOURCES_LOAD',                         // Request a ResourceCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceCollection.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob
@@ -131,6 +127,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     REQUEST__TIMER_CLEAR: 'REQUEST__TIMER_CLEAR',               // Request the Timer to clear timed event. Takes nothing.
     REQUEST__TIMER_SET_EVENT: 'REQUEST__TIMER_SET_EVENT',       // Request a (Radio) Event to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}.
+    REQUEST__TIMER_SET_FUNCTION: 'REQUEST__TIMER_SET_FUNCTION', // Request a function to be scheduled. Takes {function: function callback}. It is recommended that you use ES6 "fat arrow" notation to preserver scope and pass arguments to the function.
     REQUEST__TIMER_SET_REQUEST: 'REQUEST__TIMER_SET_REQUEST',   // Request a (Radio) Request to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}.
 
 ///////////////////////////////////////////////////////////////////////////////////////

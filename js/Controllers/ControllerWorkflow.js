@@ -26,7 +26,6 @@ class ControllerWorkflow extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWS_SYNC, options => this._handleRequestWorkflowsSync(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,8 +38,7 @@ class ControllerWorkflow extends BaseController
     {
         this._collection = new WorkflowCollection()
         this._collection.fetch({data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__WORKFLOWS_SYNC, 
-                                                                       options: {}});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._viewList = new ViewWorkflowList({collection: this._collection});
@@ -89,14 +87,6 @@ class ControllerWorkflow extends BaseController
         var originWorkflow = options.origin;
         var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
         newGroup.save({}, {success: () => this._handleSuccessWorkflowJobGroupSave(workflow)});
-    }
-
-    /**
-     * Handle request Workflows sync.
-     */
-    _handleRequestWorkflowsSync(options)
-    {
-        this._collection.syncList();
     }
 
     /**

@@ -19,6 +19,7 @@ class EventTimer extends Marionette.Object
         this._initializeRadio();
         this._event = null;
         this._options = null;
+        this._function
         this._frequency = options.frequency;
         this._timer = null;
     }
@@ -34,6 +35,7 @@ class EventTimer extends Marionette.Object
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
         this.rodanChannel.reply(Events.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
+        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_FUNCTION, (options) => this._handleSetTimedFunction(options));
         this.rodanChannel.reply(Events.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
     }
 
@@ -57,6 +59,16 @@ class EventTimer extends Marionette.Object
         this._event = options.request;
         this._options = options.options;
         this._timer = setTimeout(() => this._fireRequest(), this._frequency);
+    }
+
+    /**
+     * Handles call to set timed function.
+     */
+    _handleSetTimedFunction(options)
+    {
+        this._clearTimer();
+        this._function = options.function;
+        this._timer = setTimeout(() => this._fireFunction(), this._frequency);
     }
 
     /**
@@ -92,6 +104,18 @@ class EventTimer extends Marionette.Object
     }
 
     /**
+     * Fires the function.
+     */
+    _fireFunction()
+    {
+        if (this._function != null)
+        {
+            var response = this._function();
+            this._timer = setTimeout(() => this._fireFunction(), this._frequency);
+        }
+    }
+
+    /**
      * Handle timer test event.
      */
     _handleTimerTestEvent(options)
@@ -109,22 +133,6 @@ class EventTimer extends Marionette.Object
     }
 
     /**
-     * Set the timer to an Event.
-     */
-    _setTimerEvent()
-    {
-        setInterval(this.rodanChannel.trigger(options.event, options._options), this._frequency);
-    }
-
-    /**
-     * Set the timer to a Request.
-     */
-    _setTimerRequest()
-    {
-        setInterval(this.rodanChannel.request(options.event, options._options), this._frequency);
-    }
-
-    /**
      * Clears the timer.
      */
     _clearTimer()
@@ -135,7 +143,7 @@ class EventTimer extends Marionette.Object
         }
         this._event = null;
         this._options = null;
-        this._callback = null;
+        this._function = null;
     }
 }
 

@@ -41,7 +41,6 @@ class ControllerProject extends BaseController
         this.rodanChannel.reply(Events.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
         this.rodanChannel.reply(Events.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
         this.rodanChannel.reply(Events.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
-        this.rodanChannel.reply(Events.REQUEST__PROJECT_SYNC_COLLECTION, options => this._handleRequestProjectsSync(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -93,8 +92,7 @@ class ControllerProject extends BaseController
         this._activeProject.fetch();
         var collection = new WorkflowRunCollection();
         collection.fetch({data: {project: this._activeProject.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {collection: collection}});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => collection.syncList()});
         var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
         this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
@@ -107,8 +105,7 @@ class ControllerProject extends BaseController
     _handleEventListSelected()
     {
         this._collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION);
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__PROJECT_SYNC_COLLECTION, 
-                                                                       options: {collection: this._collection}});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         var view = new ViewProjectList({collection: this._collection})
         this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }

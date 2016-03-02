@@ -25,7 +25,6 @@ class ControllerResource extends BaseController
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
         this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
-        this.rodanChannel.reply(Events.REQUEST__RESOURCES_SYNC, options => this._handleRequestResourcesSync(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
    }
    
@@ -43,8 +42,7 @@ class ControllerResource extends BaseController
     _handleEventListSelected(options)
     {
         this.rodanChannel.request(Events.REQUEST__RESOURCES_LOAD, {data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__RESOURCES_SYNC, 
-                                                                       options: {}});
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewResourceList({collection: this._collection,
@@ -85,15 +83,7 @@ class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
-        options.resource.save(options.fields, {patch: true, success: () => this._handleRequestResourcesSync()});
-    }
-
-    /**
-     * Handle add success.
-     */
-    _handleRequestResourcesSync()
-    {
-        this._collection.syncList();
+        options.resource.save(options.fields, {patch: true, success: () => this._collection.syncList()});
     }
 
     /**

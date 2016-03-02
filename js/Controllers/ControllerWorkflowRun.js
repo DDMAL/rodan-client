@@ -21,7 +21,6 @@ class ControllerWorkflowRun extends BaseController
     {
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
     }
@@ -47,19 +46,9 @@ class ControllerWorkflowRun extends BaseController
     {
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_REQUEST, {request: Events.REQUEST__WORKFLOWRUNS_SYNC, 
-                                                                       options: {collection: workflowRunCollection}});
-
+        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
         this._viewList = new ViewWorkflowRunList({collection: workflowRunCollection});
         this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewList});
-    }
-
-    /**
-     * handle request WorkflowRuns sync.
-     */
-    _handleRequestWorkflowRunsSync(options)
-    {
-        options.collection.syncList();
     }
 
     /**
