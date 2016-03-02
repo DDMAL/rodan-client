@@ -109,7 +109,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
     _handleButtonSave()
     {
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_SAVE, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
     }
 }
 

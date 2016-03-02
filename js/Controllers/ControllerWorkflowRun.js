@@ -19,7 +19,7 @@ class ControllerWorkflowRun extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUNS_SELECTED, options => this._handleEventListSelected(options), this);
+        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUNS_SYNC, options => this._handleRequestWorkflowRunsSync(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
@@ -82,9 +82,7 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunSave(options)
     {
-        options.model.save({name: options.model.get('name'),
-                            description: options.model.get('description')},
-                           {patch: true});
+        options.workflowrun.save(options.workflowrun.changed, {patch: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +94,7 @@ class ControllerWorkflowRun extends BaseController
     _handleSuccess(model)
     {
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUNS_SELECTED, {project: project});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

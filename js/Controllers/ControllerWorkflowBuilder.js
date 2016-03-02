@@ -229,7 +229,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.model, workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.model});
     }
 
     /**
@@ -253,7 +253,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: options.workflowjob, workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: options.workflowjob});
     }
 
     /**
@@ -390,7 +390,14 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestValidateWorkflow(options)
     {
-        this._validateWorkflow(options.workflow);
+        if (options && options.workflow)
+        {
+            this._validateWorkflow(options.workflow);  
+        }
+        else
+        {
+            this._validateWorkflow(this._workflow); 
+        }
     }
 
     /**

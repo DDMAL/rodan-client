@@ -45,8 +45,7 @@ class ViewSettings extends Marionette.ItemView
         var element = this._getJQueryElement();
         if ($(element).is(":visible"))
         {
-            this.model.set({'job_settings': this._editor.getValue()});
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, {'workflowjob': this.model});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model});
         }
     }
 

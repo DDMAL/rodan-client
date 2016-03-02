@@ -44,7 +44,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        options.workflowjob.destroy({success: (model) => this._handleWorkflowJobDeletionSuccess(model, options.workflow)});
+        options.workflowjob.destroy({success: (model) => this._handleWorkflowJobDeletionSuccess(model)});
     }
 
     /**
@@ -52,7 +52,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model, options.workflow)});
+        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model)});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -69,24 +69,24 @@ class ControllerWorkflowJob extends BaseController
         {
             this._addRequiredPorts(model, targetInputPorts);
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
     /**
      * Handle WorkflowJob deletion success.
      */
-    _handleWorkflowJobDeletionSuccess(model, workflow)
+    _handleWorkflowJobDeletionSuccess(model)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, {workflowjob: model});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
     /**
      * Handle WorkflowJob save success.
      */
-    _handleWorkflowJobSaveSuccess(model, workflow)
+    _handleWorkflowJobSaveSuccess(model)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

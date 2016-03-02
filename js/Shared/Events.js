@@ -9,6 +9,8 @@ var Events =
 
 // TODO - in final docs, explain
 // 
+//  make model saves like workflowjob controller; only specify the "changed" fields
+//  after creating workflowjob, ports, etc...validation should happen based on an event, not via the controllers
 //  server errors (json)
 //  explain options for route
 //  data: {query parameters}
@@ -30,6 +32,14 @@ var Events =
     REQUEST__SYSTEM_DISPLAY_MESSAGE: 'REQUEST__SYSTEM_DISPLAY_MESSAGE', // Request message to be displayed in status bar. Takes {text: string}.
     REQUEST__SYSTEM_HANDLE_ERROR: 'REQUEST__SYSTEM_HANDLE_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
     REQUEST__WORKFLOWS_SYNC: 'REQUEST__WORKFLOWS_SYNC',                     // Updates the Workflows collection without resetting.
+    REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',   // Called when WorkflowJobGroups are to be imported for given Workflow. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWJOBGROUP',
+    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC',            // Updates the WorkflowRuns collection without resetting.
+
+    // these two really require an event system
+    REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',
+    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
@@ -214,29 +224,23 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOB_CREATE: 'REQUEST__WORKFLOWJOB_CREATE', // Called when WorkflowJob needs to be created. Takes {job: Job, workflow: Workflow, addports: boolean, targetintputports: [InputPort] (optional)}.
-                                                                // If targetintputports is provided and only one OutputPort was auto created, will connect that OutputPort to the provided InputPorts. Only works if only one OutputPort was created.
-    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Called when WorkflowJob needs to be deleted. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Called when WorkflowJob needs to be saved. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWJOB_CREATE: 'REQUEST__WORKFLOWJOB_CREATE', // Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created iff addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) iff the WorkflowJob created has one and only one OutputPort.
+    REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Request a WorkflowJob be deleted. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Request a WorkflowJob be saved/updated. Takes {workflowjob: WorkflowJob}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__WORKFLOWJOBGROUP_CREATE: 'REQUEST__WORKFLOWJOBGROUP_CREATE',                 
-    REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',
-    REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',
-    REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',   // Called when WorkflowJobGroups are to be imported for given Workflow. Takes {workflow: Workflow}.
-    REQUEST__WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWJOBGROUP',                 // ...
-    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
+    REQUEST__WORKFLOWJOBGROUP_CREATE: 'REQUEST__WORKFLOWJOBGROUP_CREATE',   // Request a WorkflowJobGroup be created. Takes {workflowjobs: [WorkflowJob], workflow: Workflow}.
+    REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',       // Request a WorkflowJobGroup be saved/updated. Takes {workflowjobgroup: WorkflowJobGroup}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',         // Called on WorkflowRun selection. Takes {workflowrun: WorkflowRun}.
-    EVENT__WORKFLOWRUNS_SELECTED: 'EVENT__WORKFLOWRUNS_SELECTED',       // Called on workflow runs selection. No pass.
-    REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',         // Create WorkflowRun. Takes {workflow: Workflow, assignments: [string (Resource URL)] (index by InputPort URLs)}.
-    REQUEST__WORKFLOWRUN_SAVE: 'REQUEST__WORKFLOWRUN_SAVE',             // Save/update WorkflowRun. Takes {model: WorkflowRun}.
-    REQUEST__WORKFLOWRUNS_SYNC: 'REQUEST__WORKFLOWRUNS_SYNC'            // Updates the WorkflowRuns collection without resetting.
+    EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',                         // Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}.
+    EVENT__WORKFLOWRUN_SELECTED_COLLECTION: 'EVENT__WORKFLOWRUN_SELECTED_COLLECTION',   // Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}.
+    REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',                         // Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}.
+    REQUEST__WORKFLOWRUN_SAVE: 'REQUEST__WORKFLOWRUN_SAVE'                              // Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}.
 };
 
 export default Events;

@@ -60,7 +60,7 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestSaveWorkflowJobGroup(options)
     {
-        this._saveWorkflowJobGroup(options.workflowjobgroup);
+        options.workflowjobgroup.save(options.workflowjobgroup.changed, {patch: true});
     }
 
     /**
@@ -120,13 +120,13 @@ class ControllerWorkflowJobGroup extends BaseController
     /**
      * Handle ungroup success.
      */
-    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup, workflow)
+    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup)
     {
         var workflowJobs = workflowJobGroup.get('workflow_jobs');
         for (var index in workflowJobs)
         {
             var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobs[index]});
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob, workflow: workflow});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob});
         }
     }
 
@@ -165,7 +165,7 @@ class ControllerWorkflowJobGroup extends BaseController
 
         if (deleteWorkflowJobs)
         {
-            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model, workflow)});
+            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model)});
         }
         else
         {
