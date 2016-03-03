@@ -210,6 +210,122 @@ class ItemController
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Initializers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel('rodan');
+
+        this.rodanChannel.on(Events.EVENT__COLLECTION_ADD, options => this._handleEventModelSync(options));
+        this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
+
+        // Only these are remaining.
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
+    }
+
+    /**
+     * Create segment definitions.
+     */
+    _createSegments()
+    {
+        var canvasWidth = paper.view.viewSize.width;
+        var canvasHeight = paper.view.viewSize.height;
+        var workflowJobItemWidth = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
+        var workflowJobItemHeight = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
+        var portItemWidth = Configuration.WORKFLOWBUILDER.PORT_WIDTH;
+        var portItemHeight = Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
+        this._segments = {
+            workflowJobItem: [
+                new paper.Point(0, 0), 
+                new paper.Point(workflowJobItemWidth, 0), 
+                new paper.Point(workflowJobItemWidth, workflowJobItemHeight), 
+                new paper.Point(0, workflowJobItemHeight), 
+                new paper.Point(0, 0)
+            ],
+            portItem: [
+                new paper.Point(0, 0), 
+                new paper.Point(portItemWidth, 0), 
+                new paper.Point(portItemWidth, portItemHeight), 
+                new paper.Point(0, portItemHeight), 
+                new paper.Point(0, 0)
+            ],
+            connection: [new paper.Point(0, 0), new paper.Point(1, 0)]
+        };
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - REST handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event model sync.
+     *
+     * We check if an item exists for this model. If it does, don't do anything - the
+     * model will take care of itself. If it doesn't, we create a new model.
+     */
+    _handleEventModelSync(options)
+    {
+        if (options.model)
+        {
+            var item = BaseItem.getAssociatedItem(options.model.get('url'));
+            if (!item)
+            {
+                switch (options.model.constructor.name)
+                {
+                    case 'WorkflowJob':
+                    {
+                        var item = new WorkflowJobItem({segments: this._segments.workflowJobItem, model: options.model, text: true});
+                        var position = new paper.Point(paper.view.size.width * paper.view.zoom / 2, paper.view.size.height * paper.view.zoom / 2);
+                        item.setPosition(position);
+                        break;
+                    }
+
+                    case 'InputPort':
+                    {
+                        var item = new InputPortItem({segments: this._segments.portItem, model: options.model, workflowjoburl: options.model.get('workflow_job')});
+                        break;
+                    }
+
+                    case 'OutputPort':
+                    {
+                        var item = new OutputPortItem({segments: this._segments.portItem, model: options.model, workflowjoburl: options.model.get('workflow_job')});
+                        break;
+                    }
+
+                    case 'Connection':
+                    {
+                        var item = new ConnectionItem({segments: this._segments.connection,
+                                                       model: options.model, 
+                                                       inputporturl: options.model.get('input_port'), 
+                                                       outputporturl: options.model.get('output_port')});
+                        break;
+                    }
+
+                    case 'WorkflowJobGroup':
+                    {
+                        var item = new WorkflowJobGroupItem({segments: this._segments.workflowJobItem, model: options.model, text: true});
+                        var position = new paper.Point(paper.view.size.width * paper.view.zoom / 2, paper.view.size.height * paper.view.zoom / 2);
+                        item.setPosition(position);
+                        break;
+                    }
+
+                    default:
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (options.options.task === 'destroy')
+            {
+                this.unselectItem(item);
+            }
+        }
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - MouseEvent handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -295,174 +411,8 @@ class ItemController
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Initializers
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, options => this._handleRequestAddWorkflowJobItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, options => this._handleRequestAddConnection(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, options => this._handleRequestAddInputPortItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, options => this._handleRequestAddOutputPortItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, options => this._handleRequestDeleteInputPortItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, options => this._handleRequestDeleteOutputPortItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJobItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, (options) => this._handleRequestHideWorkflowJob(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, (options) => this._handleRequestShowWorkflowJob(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, (options) => this._handleRequestAddWorkflowJobGroupItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, (options) => this._handleRequestPortsWorkflowJobGroupItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroupItem(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_CONNECTION, options => this._handleRequestDeleteConnectionItem(options));
-    }
-
-    /**
-     * Create segment definitions.
-     */
-    _createSegments()
-    {
-        var canvasWidth = paper.view.viewSize.width;
-        var canvasHeight = paper.view.viewSize.height;
-        var workflowJobItemWidth = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
-        var workflowJobItemHeight = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
-        var portItemWidth = Configuration.WORKFLOWBUILDER.PORT_WIDTH;
-        var portItemHeight = Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
-        this._segments = {
-            workflowJobItem: [
-                new paper.Point(0, 0), 
-                new paper.Point(workflowJobItemWidth, 0), 
-                new paper.Point(workflowJobItemWidth, workflowJobItemHeight), 
-                new paper.Point(0, workflowJobItemHeight), 
-                new paper.Point(0, 0)
-            ],
-            portItem: [
-                new paper.Point(0, 0), 
-                new paper.Point(portItemWidth, 0), 
-                new paper.Point(portItemWidth, portItemHeight), 
-                new paper.Point(0, portItemHeight), 
-                new paper.Point(0, 0)
-            ],
-            connection: [new paper.Point(0, 0), new paper.Point(1, 0)]
-        };
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle add.
-     */
-    _handleRequestAddWorkflowJobItem(options)
-    {
-        var item = this._createWorkflowJobItem(options.workflowjob);
-
-        // Set position if coordinates provided.
-        var position = new paper.Point(paper.view.size.width * paper.view.zoom / 2,
-                                       paper.view.size.height * paper.view.zoom / 2);
-        if (options.hasOwnProperty('x'))
-        {
-            position.x = options.x * paper.view.size.width;
-        }
-        if (options.hasOwnProperty('y'))
-        {
-            position.y = options.y * paper.view.size.height;
-        }
-        item.setPosition(position);
-    }
-
-    /**
-     * Handle add WorkflowJobGroupItem.
-     */
-    _handleRequestAddWorkflowJobGroupItem(options)
-    {
-        var item = this._createWorkflowJobGroupItem(options.workflowjobgroup);
-
-        // Set position if coordinates provided.
-        var position = new paper.Point(paper.view.size.width * paper.view.zoom  / 2,
-                                       paper.view.size.height * paper.view.zoom  / 2);
-        if (options.hasOwnProperty('x'))
-        {
-            position.x = options.x * paper.view.size.width;
-        }
-        if (options.hasOwnProperty('y'))
-        {
-            position.y = options.y * paper.view.size.height;
-        }
-        item.setPosition(position);
-    }
-
-    /**
-     * Handle add input port item.
-     */
-    _handleRequestAddInputPortItem(options)
-    {
-        this._createInputPortItem(options.workflowjob, options.inputport);
-    }
-
-    /**
-     * Handle add output port item.
-     */
-    _handleRequestAddOutputPortItem(options)
-    {
-        this._createOutputPortItem(options.workflowjob, options.outputport);
-    }
-
-    /**
-     * Handle delete input port item.
-     */
-    _handleRequestDeleteInputPortItem(options)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
-        var inputPortItem = BaseItem.getAssociatedItem(options.inputport.id);
-        workflowJobItem.deleteInputPortItem(inputPortItem);
-        this.unselectItem(inputPortItem);
-        inputPortItem.destroy();
-    }
-
-    /**
-     * Handle delete output port item.
-     */
-    _handleRequestDeleteOutputPortItem(options)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
-        var outputPortItem = BaseItem.getAssociatedItem(options.outputport.id);
-        workflowJobItem.deleteOutputPortItem(outputPortItem);
-        this.unselectItem(outputPortItem);
-        outputPortItem.destroy();
-    }
-
-    /**
-     * Handle delete WorkflowJobItem.
-     */
-    _handleRequestDeleteWorkflowJobItem(options)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
-        this.unselectItem(workflowJobItem);
-        workflowJobItem.destroy();
-    }
-
-    /**
-     * Handle delete Connection.
-     */
-    _handleRequestDeleteConnectionItem(options)
-    {
-        var connectionItem = BaseItem.getAssociatedItem(options.connection.id);
-        this.unselectItem(connectionItem);
-        connectionItem.destroy();
-    }
-
-    /**
-     * Handle connection add.
-     */
-    _handleRequestAddConnection(options)
-    {
-        this._createConnectionItem(options.connection, options.inputport, options.outputport);
-    }
-
     /**
      * Handle request for all selected WorkflowJob IDs.
      */
@@ -474,54 +424,6 @@ class ItemController
             workflowJobs.push(this._selectedItems[itemIndex].getModelID());
         }
         return workflowJobs;
-    }
-
-    /**
-     * Handle request to hide WorkflowJob.
-     */
-    _handleRequestHideWorkflowJob(options)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
-        workflowJobItem.setVisible(false);
-    }
-
-    /**
-     * Handle request to show WorkflowJob.
-     */
-    _handleRequestShowWorkflowJob(options)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(options.workflowjob.id);
-        workflowJobItem.setVisible(true);
-    }
-
-    /**
-     * Associates the given port items with the given WorkflowJobGroup.
-     */
-    _handleRequestPortsWorkflowJobGroupItem(options)
-    {
-        var workflowJobGroupItem = BaseItem.getAssociatedItem(options.workflowjobgroup.id);
-        for (var index in options.inputports)
-        {
-            var inputPortItem = BaseItem.getAssociatedItem(options.inputports[index].id);
-            inputPortItem.disassociate();
-            workflowJobGroupItem.addInputPortItem(inputPortItem);
-        }
-
-        for (var index in options.outputports)
-        {
-            var outputPortItem = BaseItem.getAssociatedItem(options.outputports[index].id);
-            outputPortItem.disassociate();
-            workflowJobGroupItem.addOutputPortItem(outputPortItem);
-        }
-    }
-
-    /**
-     * Handle request delete WorkflowJobGroupItem.
-     */
-    _handleRequestDeleteWorkflowJobGroupItem(options)
-    {
-        var workflowJobGroupItem = BaseItem.getAssociatedItem(options.workflowjobgroup.id);
-        workflowJobGroupItem.destroy();
     }
 
     /**
@@ -560,55 +462,6 @@ class ItemController
             }
         }
         return itemType;
-    }
-
-    /**
-     * Creates a workflow job item.
-     */
-    _createWorkflowJobItem(model)
-    {
-        var item = new WorkflowJobItem({segments: this._segments.workflowJobItem, model: model, text: true});
-        return item;
-    }
-    /**
-     * Creates a WorkflowJobGroupItem.
-     */
-    _createWorkflowJobGroupItem(model)
-    {
-        var item = new WorkflowJobGroupItem({segments: this._segments.workflowJobItem, model: model, text: true});
-        return item;
-    }
-
-    /**
-     * Creates an input port item for the associated workflow job.
-     */
-    _createInputPortItem(workflowJob, model)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(workflowJob.id);
-        var item = new InputPortItem({segments: this._segments.portItem, model: model, workflowjobitem: workflowJobItem});
-        workflowJobItem.addInputPortItem(item);
-    }
-
-    /**
-     * Creates an output port item for the associated workflow job.
-     */
-    _createOutputPortItem(workflowJob, model)
-    {
-        var workflowJobItem = BaseItem.getAssociatedItem(workflowJob.id);
-        var item = new OutputPortItem({segments: this._segments.portItem, model: model, workflowjobitem: workflowJobItem});
-        workflowJobItem.addOutputPortItem(item);
-    }
-
-    /**
-     * Creates a connection.
-     */
-    _createConnectionItem(model, inputPort, outputPort)
-    {
-        var inputPortItem = BaseItem.getAssociatedItem(inputPort.id);
-        var outputPortItem = BaseItem.getAssociatedItem(outputPort.id);
-        var item = new ConnectionItem({segments: this._segments.connection, model: model, inputportitem: inputPortItem, outputportitem: outputPortItem});
-        inputPortItem.setConnectionItem(item);
-        outputPortItem.addConnectionItem(item);
     }
 }
 

@@ -39,8 +39,6 @@ class WorkflowJobItem extends BaseItem
     {
         super(options);
 
-        // Get getter Event.
-        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB;
         this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {url: this.getModelURL()}},
                           {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {url: this.getModelURL()}},
                           {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {url: this.getModelURL()}},
@@ -67,14 +65,17 @@ class WorkflowJobItem extends BaseItem
      */
     update()
     {
-        this.bounds.width = this._text.bounds.width + 10;
-        this._text.position = this.bounds.center;
-        this._paperGroupInputPorts.position = this.bounds.topCenter;
-        this._paperGroupOutputPorts.position = this.bounds.bottomCenter;
-        this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
-        this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
-        this._updatePortItems(this._paperGroupInputPorts);
-        this._updatePortItems(this._paperGroupOutputPorts);
+        if (this.visible)
+        {
+            this.bounds.width = this._text.bounds.width + 10;
+            this._text.position = this.bounds.center;
+            this._paperGroupInputPorts.position = this.bounds.topCenter;
+            this._paperGroupOutputPorts.position = this.bounds.bottomCenter;
+            this._positionPortItems(this._paperGroupInputPorts, this.bounds.top);
+            this._positionPortItems(this._paperGroupOutputPorts, this.bounds.bottom);
+        }
+        this._updatePortItemVisibility(this._paperGroupInputPorts);
+        this._updatePortItemVisibility(this._paperGroupOutputPorts);
     }
 
     /**
@@ -163,12 +164,13 @@ class WorkflowJobItem extends BaseItem
     }
 
     /**
-     * Updates port items.
+     * Updates port item visibility.
      */
-    _updatePortItems(group)
+    _updatePortItemVisibility(group)
     {
         for (var i = 0; i < group.children.length; i++)
         {
+            var port = group.children[i];
             group.children[i].setVisible(this.visible);
         }
     }
@@ -186,7 +188,6 @@ class WorkflowJobItem extends BaseItem
                 return;
             }
         }
-        console.error('TODO - ERROR HERE!!!!!');
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

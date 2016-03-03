@@ -1,11 +1,11 @@
-import BaseItem from './BaseItem';
+import BasePortItem from './BasePortItem';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 
 /**
  * OutputPort item.
  */
-class OutputPortItem extends BaseItem
+class OutputPortItem extends BasePortItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,19 +16,8 @@ class OutputPortItem extends BaseItem
     constructor(options)
     {
         super(options);
-        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT;
-        //this.deleteModelEvent = Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT;
         this.fillColor = Configuration.WORKFLOWBUILDER.OUTPUTPORT_COLOR;
         this._connectionItems = [];
-        this._workflowJobItem = options.workflowjobitem;
-    }
-
-    /**
-     * Return true iff this item can be moved by itself.
-     */
-    isMoveable()
-    {
-        return false;
     }
 
     /**
@@ -54,35 +43,28 @@ class OutputPortItem extends BaseItem
     }
 
     /**
-     * Update (dummy).
-     */
-    update()
-    {
-    }
-
-    /**
-     * Disassociate self with WorkflowJobItem.
-     */
-    disassociate()
-    {
-        this._workflowJobItem.deleteOutputPortItem(this);
-    }
-
-    /**
-     * Reassociates itself with WorkflowJobItem.
-     */
-    reassociate()
-    {
-        this._workflowJobItem.addOutputPortItem(this);
-    }
-
-    /**
      * Destroy cleanup.
      */
     destroy()
     {
         this._destroyConnections();
         super.destroy();
+    }
+
+    /**
+     * Override.
+     */
+    addToOwner(ownerItem)
+    {
+        ownerItem.addOutputPortItem(this);
+    }
+
+    /**
+     * Override.
+     */
+    removeFromOwner(ownerItem)
+    {
+        ownerItem.deleteOutputPortItem(this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -24,6 +24,7 @@ class BaseCollection extends Backbone.Collection
         this._sort = {};
         this._page = {};
         this.enumerations = this.enumerations ? this.enumerations : [];
+        this.on('add', (model, collection, options) => this._onAdd(model, collection, options));
     }
 
     /**
@@ -330,6 +331,14 @@ class BaseCollection extends Backbone.Collection
                 this.enumerations[j].values = $.unique(this.enumerations[j].values);
             }
         }
+    }
+
+    /**
+     * Handle backbone add event.
+     */
+    _onAdd(model, collection, options)
+    {
+        this.rodanChannel.trigger(Events.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
     }
 }
 

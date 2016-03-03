@@ -16,7 +16,25 @@ class WorkflowJobGroupCollection extends BaseCollection
     {
         this.model = WorkflowJobGroup;
         this.route = 'workflowjobgroups';
+
+        // TODO - doing a fetch on a collection isn't firing events, so I need to do this.
+        this.on('sync', (collection, response, options) => this._onSync(collection, response, options));
     }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * Every sync, just save each model.
+	 */
+	_onSync(collection, response, options)
+	{
+		for (var i = 0; i < collection.length; i++)
+		{
+			var model = collection.at(i);
+			model.save();
+		}
+	}
 }
 
 export default WorkflowJobGroupCollection;

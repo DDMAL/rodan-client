@@ -18,13 +18,13 @@ class ConnectionItem extends BaseItem
     {
         super(options);
 
-        // Get getter Event.
-        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION;
         this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options: {model: options.model}}];
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
-        this._associatedInputPortItem = options.inputportitem;
-        this._associatedOutputPortItem = options.outputportitem;
+        this._inputPortItem = null;
+        this._outputPortItem = null;
+        this._inputPortUrl = options.inputporturl;
+        this._outputPortUrl = options.outputporturl;
 
         // We'll put a small circle in the middle of our connection so it's easier to select.
         var circleCenter = new paper.Point(0, 0);
@@ -51,13 +51,36 @@ class ConnectionItem extends BaseItem
      */
     update()
     {
-        this._circle.visible = this.visible;
-        this.firstSegment.point.x = this._associatedOutputPortItem.position.x;
-        this.firstSegment.point.y = this._associatedOutputPortItem.bounds.bottom;
-        this.lastSegment.point.x = this._associatedInputPortItem.position.x;
-        this.lastSegment.point.y = this._associatedInputPortItem.bounds.top;
-        this._circle.position.x = this.firstSegment.point.x + ((this.lastSegment.point.x - this.firstSegment.point.x) / 2);
-        this._circle.position.y = this.firstSegment.point.y + ((this.lastSegment.point.y - this.firstSegment.point.y) / 2);
+        // We do this in case the InputPortItem was created AFTER this ConnectionItem.
+        if (!this._inputPortItem)
+        {
+            this._inputPortItem = BaseItem.getAssociatedItem(this._inputPortUrl);
+            if (this._inputPortItem)
+            {
+                this._inputPortItem.setConnectionItem(this);
+            }
+        }
+
+        // We do this in case the OutputPortItem was created AFTER this port.
+        if (!this._outputPortItem)
+        {
+            this._outputPortItem = BaseItem.getAssociatedItem(this._outputPortUrl);
+            if (this._outputPortItem)
+            {
+                this._outputPortItem.addConnectionItem(this);
+            }
+        }
+
+        if (this._inputPortItem && this._outputPortItem)
+        {
+            this._circle.visible = this.visible;
+            this.firstSegment.point.x = this._outputPortItem.position.x;
+            this.firstSegment.point.y = this._outputPortItem.bounds.bottom;
+            this.lastSegment.point.x = this._inputPortItem.position.x;
+            this.lastSegment.point.y = this._inputPortItem.bounds.top;
+            this._circle.position.x = this.firstSegment.point.x + ((this.lastSegment.point.x - this.firstSegment.point.x) / 2);
+            this._circle.position.y = this.firstSegment.point.y + ((this.lastSegment.point.y - this.firstSegment.point.y) / 2);
+        }
     }
 
     /**
@@ -66,10 +89,16 @@ class ConnectionItem extends BaseItem
     destroy()
     {
         this._circle.remove();
-        this._associatedInputPortItem.setConnectionItem(null);
-        this._associatedInputPortItem = null;
-        this._associatedOutputPortItem.removeConnectionItem(this);
-        this._associatedOutputPortItem = null;
+        if (this._inputPortItem)
+        {
+            this._inputPortItem.setConnectionItem(null);
+        }
+        this._inputPortItem = null;
+        if (this._outputPortItem)
+        {
+            this._outputPortItem.removeConnectionItem(this);
+        }
+        this._outputPortItem = null;
         super.destroy();
     }
 

@@ -18,8 +18,12 @@ class WorkflowJob extends BaseModel
      */
     initialize(options)
     {
-        this.set('input_ports', new InputPortCollection(options.input_ports));
-        this.set('output_ports', new OutputPortCollection(options.output_ports));
+        var inputPortCollection = new InputPortCollection();
+        var outputPortCollection = new OutputPortCollection();
+        inputPortCollection.set(options.input_ports);
+        outputPortCollection.set(options.output_ports);
+        this.set('input_ports', inputPortCollection);
+        this.set('output_ports', outputPortCollection);
         this.routeName = 'workflowjobs';
     }
 

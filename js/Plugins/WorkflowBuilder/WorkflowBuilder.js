@@ -26,7 +26,8 @@ class WorkflowBuilder
      * The element associated with the canvas ID MUST be available at this time.
      */
     initialize(canvasElementId, workflow)
-    {        
+    { 
+        BaseItem.clearMap();
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
         
@@ -59,7 +60,6 @@ class WorkflowBuilder
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR, () => this._handleRequestClear());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
     }
@@ -346,14 +346,6 @@ class WorkflowBuilder
         paper.view.zoom = Configuration.WORKFLOWBUILDER.ZOOM_INITIAL;
     }
 
-    /**
-     * Handle request clear.
-     */
-    _handleRequestClear()
-    {
-        paper.project.clear();
-        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID, paper);
-    }
     /**
      * Hides the context menu.
      */

@@ -262,7 +262,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestImportWorkflow(options)
     {
         this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOW_IMPORT, {origin: options.workflow, target: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, {origin: options.workflow, target: this._workflow});
     }
 
     /**
@@ -579,7 +579,6 @@ class ControllerWorkflowBuilder extends BaseController
     {
         workflow.get('workflow_input_ports').add(model);
         workflowJob.get('input_ports').add(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -590,7 +589,6 @@ class ControllerWorkflowBuilder extends BaseController
     {
         workflow.get('workflow_output_ports').add(model);
         workflowJob.get('output_ports').add(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         this._validateWorkflow(workflow);
 
         // Create Connections (if any).
@@ -608,7 +606,6 @@ class ControllerWorkflowBuilder extends BaseController
         workflow.get('connections').add(model);
         inputPort.fetch(); // to get populated Connection array
         outputPort.fetch(); // to get populated Connection array
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: model, inputport: inputPort, outputport: outputPort});
         this._validateWorkflow(workflow);
     }
 
@@ -618,7 +615,6 @@ class ControllerWorkflowBuilder extends BaseController
     _handleInputPortDeletionSuccess(model, workflow, workflowJob)
     {
         workflowJob.get('input_ports').remove(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -628,7 +624,6 @@ class ControllerWorkflowBuilder extends BaseController
     _handleOutputPortDeletionSuccess(model, workflow, workflowJob)
     {
         workflowJob.get('output_ports').remove(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
         this._validateWorkflow(workflow);
     }
 
@@ -638,7 +633,6 @@ class ControllerWorkflowBuilder extends BaseController
     _handleConnectionDeletionSuccess(model, workflow)
     {
         workflow.get('connections').remove(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_CONNECTION, {connection: model});
         this._validateWorkflow(workflow);
     }
 
@@ -762,7 +756,6 @@ class ControllerWorkflowBuilder extends BaseController
             {
                 // Create WorkflowJob item then process connections.
                 var workflowJob = workflowJobs.at(i);
-                this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: workflowJob});
                 var tempConnections = this._processWorkflowJob(workflowJob);
 
                 // For the connections returned, merge them into our master list.
@@ -797,13 +790,10 @@ class ControllerWorkflowBuilder extends BaseController
             connectionModel.set({uuid: connectionId});
             connectionModel.fetch();
             workflow.get('connections').add(connectionModel);
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_CONNECTION, {connection: connectionModel, 
-                                                                                                inputport: connection.inputPort,
-                                                                                                outputport: connection.outputPort});
         }
 
         // Finally inport the WorkflowJobGroups. 
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, {workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION, {workflow: this._workflow});
     }
 
     /**
@@ -821,7 +811,6 @@ class ControllerWorkflowBuilder extends BaseController
             for (var i = 0; i < inputPorts.length; i++)
             {
                 var inputPort = inputPorts.at(i);
-                this._processInputPort(inputPort, model);
 
                 // Get connections.
                 var inputPortConnections = inputPort.get('connections');
@@ -840,7 +829,6 @@ class ControllerWorkflowBuilder extends BaseController
             for (var j = 0; j < outputPorts.length; j++)
             {
                 var outputPort = outputPorts.at(j);
-                this._processOutputPort(outputPort, model);
 
                 // Get connections.
                 var outputPortConnections = outputPort.get('connections');
@@ -853,22 +841,6 @@ class ControllerWorkflowBuilder extends BaseController
         }
 
         return connections;
-    }
-
-    /**
-     * Process input port for GUI.
-     */
-    _processInputPort(model, workflowJob)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_INPUTPORT, {workflowjob: workflowJob, inputport: model});
-    }
-
-    /**
-     * Process output port for GUI.
-     */
-    _processOutputPort(model, workflowJob)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_OUTPUTPORT, {workflowjob: workflowJob, outputport: model});
     }
 
     /**

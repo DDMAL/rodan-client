@@ -20,6 +20,7 @@ class BaseModel extends Backbone.Model
         this.idAttribute = 'uuid';
         this._initializeRadio();
         this.on('change', event => this._onChange(event));
+        this.on('sync', (model, response, options) => this._onSync(model, response, options));
     }
 
     /**
@@ -102,9 +103,19 @@ class BaseModel extends Backbone.Model
     /**
      * On change handler.
      */
-    _onChange()
+    _onChange(model, response, options)
     {
-        this.rodanChannel.trigger(Events.EVENT__MODEL_HASCHANGED, {model: this});
+        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE, {model: model, response: response, options: options});
+        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE + model.get('url'), {model: model, response: response, options: options});
+    }
+
+    /**
+     * On sync handler.
+     */
+    _onSync(model, response, options)
+    {
+        this.rodanChannel.trigger(Events.EVENT__MODEL_SYNC, {model: model, response: response, options: options});
+        this.rodanChannel.trigger(Events.EVENT__MODEL_SYNC + model.get('url'), {model: model, response: response, options: options});
     }
 
     /**

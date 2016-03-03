@@ -25,7 +25,6 @@ class ControllerWorkflow extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_IMPORT, options => this._handleRequestImportWorkflow(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -79,35 +78,11 @@ class ControllerWorkflow extends BaseController
     }
 
     /**
-     * Handle request import Workflow.
-     */
-    _handleRequestImportWorkflow(options)
-    {
-        var workflow = options.target;
-        var originWorkflow = options.origin;
-        var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
-        newGroup.save({}, {success: () => this._handleSuccessWorkflowJobGroupSave(workflow)});
-    }
-
-    /**
      * Handle save workflow.
      */
     _handleRequestSaveWorkflow(options)
     {
         options.workflow.save(options.fields, {patch: true});
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - REST handlers
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Requests a GUI clear and loads the given Workflow.
-     */
-    _handleSuccessWorkflowJobGroupSave(workflow)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_CLEAR);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
     }
 }
 

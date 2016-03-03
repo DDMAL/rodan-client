@@ -19,8 +19,9 @@ class WorkflowJobGroupItem extends BaseItem
     {
         super(options);
 
-        // Get getter Event.
-        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP;
+        // First, collect the WorkflowJob URLs. When we update we'll need to make sure these guys are hidden.
+        this._workflowJobUrls = options.model.get('workflow_jobs');
+
         this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options: {url: this.getModelURL()}},
                           {label: 'Ungroup', radiorequest: Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options: {model: options.model}},
                           {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options: {model: options.model}}];
@@ -41,6 +42,8 @@ class WorkflowJobGroupItem extends BaseItem
         this.loadCoordinates();
 
         this.onDoubleClick = event => this._handleDoubleClick(event);
+
+        this._gotPorts = false;
     }
 
     /**
@@ -64,6 +67,16 @@ class WorkflowJobGroupItem extends BaseItem
      */
     update()
     {
+        // Make sure WorkflowJobItems are hidden.
+        this._setWorkflowJobVisibility(false);
+
+        // We need to get the associated ports.
+        if (!this._gotPorts)
+        {
+            this._getAssociatedPorts();
+        }
+
+        // Do updates.
         this.bounds.width = this._text.bounds.width + 10;
         this._text.position = this.bounds.center;
         this._paperGroupInputPorts.position = this.bounds.topCenter;
@@ -79,16 +92,19 @@ class WorkflowJobGroupItem extends BaseItem
      */
     destroy()
     {
+        // Make sure WorkflowJobItems are shown.
+        this._setWorkflowJobVisibility(true);
+
         // Reassociate ports.
         var inputPortItems = this._removeInputPortItems();
         for (var index in inputPortItems)
         {
-            inputPortItems[index].reassociate();
+            inputPortItems[index].resetOwner();
         }
         var outputPortItems = this._removeOutputPortItems();
         for (var index in outputPortItems)
         {
-            outputPortItems[index].reassociate();
+            outputPortItems[index].resetOwner();
         }
 
         if (this._paperGroupInputPorts.children.length > 0 || this._paperGroupOutputPorts.children.length > 0)
@@ -165,6 +181,44 @@ class WorkflowJobGroupItem extends BaseItem
     _handleDoubleClick(mouseEvent)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {url: this.getModelURL()});
+    }
+
+    /**
+     * Set visibility of associated WorkflowJobItems.
+     */
+    _setWorkflowJobVisibility(visible)
+    {
+        for (var index in this._workflowJobUrls)
+        {
+            var item = BaseItem.getAssociatedItem(this._workflowJobUrls[index]);
+            if (item)
+            {
+                item.setVisible(visible);
+            }
+        }  
+    }
+
+    /**
+     * Get associated ports.
+     */
+    _getAssociatedPorts()
+    {
+        var ports = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, {url: this._modelURL});
+        if (ports)
+        {
+            for (var index in ports.inputports)
+            {
+                var inputPortItem = BaseItem.getAssociatedItem(ports.inputports[index].get('url'));
+                inputPortItem.setOwner(this._modelURL);
+            }
+
+            for (var index in ports.outputports)
+            {
+                var outputPortItem = BaseItem.getAssociatedItem(ports.outputports[index].get('url'));
+                outputPortItem.setOwner(this._modelURL);
+            }
+            this._gotPorts = true;
+        }
     }
 }
 

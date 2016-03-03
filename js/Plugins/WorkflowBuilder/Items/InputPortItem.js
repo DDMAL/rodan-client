@@ -1,11 +1,11 @@
-import BaseItem from './BaseItem';
+import BasePortItem from './BasePortItem';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 
 /**
  * InputPort item.
  */
-class InputPortItem extends BaseItem
+class InputPortItem extends BasePortItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC STATIC METHODS
@@ -37,18 +37,7 @@ class InputPortItem extends BaseItem
     constructor(options)
     {
         super(options);
-        this.getModelEvent = Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT;
         this._connectionItem = null;
-        this._workflowJobItem = options.workflowjobitem;
-        this.onDoubleClick = event => this._handleDoubleClick(event);
-    }
-
-    /**
-     * Return true iff this item can be moved by itself.
-     */
-    isMoveable()
-    {
-        return false;
     }
 
     /**
@@ -81,28 +70,13 @@ class InputPortItem extends BaseItem
      */
     update()
     {
+        super.update();
         this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_SATISFIED : 
                                               Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
         if (this._connectionItem !== null)
         {
             this._connectionItem.setVisible(this.visible);
         }
-    }
-
-    /**
-     * Disassociate self with WorkflowJobItem.
-     */
-    disassociate()
-    {
-        this._workflowJobItem.deleteInputPortItem(this);
-    }
-
-    /**
-     * Reassociates itself with WorkflowJobItem.
-     */
-    reassociate()
-    {
-        this._workflowJobItem.addInputPortItem(this);
     }
 
     /**
@@ -130,6 +104,22 @@ class InputPortItem extends BaseItem
             menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {url: this.getModelURL()}});
         }
         return menuItems;
+    }
+
+    /**
+     * Override.
+     */
+    addToOwner(ownerItem)
+    {
+        ownerItem.addInputPortItem(this);
+    }
+
+    /**
+     * Override.
+     */
+    removeFromOwner(ownerItem)
+    {
+        ownerItem.deleteInputPortItem(this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

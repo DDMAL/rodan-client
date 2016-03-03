@@ -28,12 +28,14 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, (options) => this._handleRequestUngroupWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, (options) => this._handleRequestGetPorts(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION, (options) => this._handleRequestWorkflowJobGroupLoadCollection(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, (options) => this._handleRequestUngroupWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +46,15 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestCreateWorkflowJobGroup(options)
     {
-        this._createWorkflowJobGroup(options.workflowjobs, options.workflow);
+        var urls = [];
+        var workflowJobs = options.workflowjobs;
+        var workflow = options.workflow;
+        for (var index in workflowJobs)
+        {
+            urls.push(workflowJobs[index].get('url'));
+        }
+        var workflowJobGroup = new WorkflowJobGroup({workflow_jobs: urls, workflow: workflow});
+        workflowJobGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflow)});
     }
 
     /**
@@ -64,11 +74,11 @@ class ControllerWorkflowJobGroup extends BaseController
     }
 
     /**
-     * Handle WorkflowJobGroup import.
+     * Handle WorkflowJobGroup load.
      */
-    _handleRequestImportWorkflowJobGroup(options)
+    _handleRequestWorkflowJobGroupLoadCollection(options)
     {
-        this._collection.fetch({data: {'workflow': options.workflow.get('uuid')}, success: () => this._handleWorkflowJobGroupImportSuccess(options.workflow)});
+        this._collection.fetch({data: {'workflow': options.workflow.get('uuid')}});
     }
 
     /**
@@ -87,34 +97,36 @@ class ControllerWorkflowJobGroup extends BaseController
         this._ungroupWorkflowJobGroup(options.workflowjobgroup, options.workflow, true);
     }
 
+    /**
+     * Handle request import Workflow.
+     */
+    _handleRequestImportWorkflowJobGroup(options)
+    {
+        var workflow = options.target;
+        var originWorkflow = options.origin;
+        var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
+        newGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflow)});
+    }
+
+    /**
+     * Handle request get ports.
+     */
+    _handleRequestGetPorts(options)
+    {
+        var workflowJobGroup = this._collection.findWhere({url: options.url});
+        return this._getExposedPorts(workflowJobGroup);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle WorkflowJobGroup creation success.
-     */
-    _handleWorkflowJobGroupCreationSuccess(model, workflowJobs)
-    {
-        this._processWorkflowJobGroup(model, workflowJobs);
-    }
-
-    /**
      * Handle import success.
      */
-    _handleWorkflowJobGroupImportSuccess(workflow)
+    _handleWorkflowJobGroupCreationSuccess(model, workflow)
     {
-        for (var i = 0; i < this._collection.length; i++)
-        {
-            var workflowJobGroup = this._collection.at(i);
-            var workflowJobs = [];
-            for (var j = 0; j < workflowJobGroup.get('workflow_jobs').length; j++)
-            {
-                var workflowJobUrl = workflowJobGroup.get('workflow_jobs')[j];
-                var workflowJob = workflow.get('workflow_jobs').findWhere({'url': workflowJobUrl});
-                workflowJobs.push(workflowJob)
-            }
-            this._processWorkflowJobGroup(workflowJobGroup, workflowJobs);
-        }
+        this._collection.set(model, {remove: false});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -134,35 +146,11 @@ class ControllerWorkflowJobGroup extends BaseController
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Creates and returns a WorkflowJobGroup.
-     */
-    _createWorkflowJobGroup(workflowJobs, workflow)
-    {
-        var urls = [];
-        for (var index in workflowJobs)
-        {
-            urls.push(workflowJobs[index].get('url'));
-        }
-        var workflowJobGroup = new WorkflowJobGroup({workflow_jobs: urls, workflow: workflow});
-        workflowJobGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflowJobs)});
-    }
-
-    /**
      * Ungroups a WorkflowJobGroup
      */
     _ungroupWorkflowJobGroup(workflowJobGroup, workflow, deleteWorkflowJobs)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
-        var workflowJobURLs = workflowJobGroup.get('workflow_jobs');
-        for (var index in workflowJobURLs)
-        {
-            var workflowJobCollection = workflow.get('workflow_jobs');
-            var workflowJobURL = workflowJobURLs[index];
-            var workflowJob = workflowJobCollection.findWhere({'url': workflowJobURLs[index]});
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_WORKFLOWJOB, {workflowjob: workflowJob});
-        }
         this._collection.remove(workflowJobGroup);
-
         if (deleteWorkflowJobs)
         {
             workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model)});
@@ -171,27 +159,6 @@ class ControllerWorkflowJobGroup extends BaseController
         {
             workflowJobGroup.destroy();
         }
-    }
-
-    /**
-     * Processes the WorkflowJobGroup.
-     */
-    _processWorkflowJobGroup(workflowJobGroup, workflowJobs)
-    {
-        this._collection.set(workflowJobGroup, {remove: false});
-
-        // Hide WorkflowJobs.
-        for (var index in workflowJobs)
-        {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_WORKFLOWJOB, {workflowjob: workflowJobs[index]});
-        }
-
-        // Create new stuff.
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup});
-        var exposedPorts = this._getExposedPorts(workflowJobs);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_PORT_ITEMS_WITH_WORKFLOWJOBGROUP, {workflowjobgroup: workflowJobGroup,
-                                                                                                          inputports: exposedPorts.inputPorts,
-                                                                                                          outputports: exposedPorts.outputPorts});
     }
 
     /**
@@ -209,21 +176,29 @@ class ControllerWorkflowJobGroup extends BaseController
      * - it does not have an associated Connection
      * - it is connected to a port outside of the WorkflowJobs
      */
-    _getExposedPorts(workflowJobs)
+    _getExposedPorts(workflowJobGroup)
     {
-        var object = {inputPorts: {}, outputPorts: {}};
+        var object = {inputports: {}, outputports: {}};
         var connections = {};
+        var workflowJobUrls = workflowJobGroup.get('workflow_jobs');
 
         // Go through the WorkflowJobs. For each InputPort:
         // - add it to the return list
         // - if it has Connections, add that Connection and the associated InputPort to the Connections list
-        for (var workflowJobIndex in workflowJobs)
+        for (var index in workflowJobUrls)
         {
-            var inputPorts = workflowJobs[workflowJobIndex].get('input_ports');
+            var workflowJobUrl = workflowJobUrls[index];
+            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobUrl});
+            if (!workflowJob)
+            {
+                return null;
+            }
+
+            var inputPorts = workflowJob.get('input_ports');
             for (var i = 0; i < inputPorts.length; i++)
             {
                 var inputPort = inputPorts.at(i);
-                object.inputPorts[inputPort.get('url')] = inputPort;
+                object.inputports[inputPort.get('url')] = inputPort;
                 if (inputPort.get('connections').length !== 0)
                 {
                     var connection = inputPort.get('connections')[0];
@@ -238,16 +213,19 @@ class ControllerWorkflowJobGroup extends BaseController
         // -- if the Connection exists in the Connection list, remove the InputPort from reeturn list and 
         //    remove the Connection from the Connection list
         // -- else, the OutputPort is added to the return list
-        for (var workflowJobIndex in workflowJobs)
+        for (var index in workflowJobUrls)
         {
+            var workflowJobUrl = workflowJobUrls[index];
+            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobUrl});
+
             // Get unsatisfied OutputPorts and also collect OutputPorts with Connections.
-            var outputPorts = workflowJobs[workflowJobIndex].get('output_ports');
+            var outputPorts = workflowJob.get('output_ports');
             for (var i = 0; i < outputPorts.length; i++)
             {
                 var outputPort = outputPorts.at(i);
                 if (outputPort.get('connections').length === 0)
                 {
-                    object.outputPorts[outputPort.get('url')] = outputPort;
+                    object.outputports[outputPort.get('url')] = outputPort;
                     continue;
                 }
                 else
@@ -257,12 +235,12 @@ class ControllerWorkflowJobGroup extends BaseController
                         var connection = outputPort.get('connections')[j];
                         if (connection in connections)
                         {
-                            delete object.inputPorts[connections[connection].inputPort.get('url')];
+                            delete object.inputports[connections[connection].inputPort.get('url')];
                             delete connections[connection];
                         }
                         else
                         {
-                            object.outputPorts[outputPort.get('url')] = outputPort;
+                            object.outputports[outputPort.get('url')] = outputPort;
                         }
                     }
                 }

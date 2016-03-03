@@ -16,41 +16,41 @@ class BaseItem extends paper.Path
 // PUBLIC STATIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Returns associated item given an ID.
+     * Returns associated item given a URL.
      */
-    static getAssociatedItem(id)
+    static getAssociatedItem(url)
     {
         if (!itemMap)
         {
             itemMap = {};
         }
-        return itemMap[id];
+        return itemMap[url];
     }
 
     /**
-     * Associates given item with ID.
+     * Associates given item with URL.
      */
-    static associateItemWithID(item, id)
+    static associateItemWithUrl(item, url)
     {
         if (!itemMap)
         {
             itemMap = {};
         }
-        itemMap[id] = item;
+        itemMap[url] = item;
     }
 
     /**
-     * Removes item from map witht he provided ID.
+     * Removes item from map witht he provided URL.
      */
-    static removeItemFromMap(id)
+    static removeItemFromMap(url)
     {
         if (!itemMap)
         {
             itemMap = {};
         }
-        if (itemMap[id])
+        if (itemMap[url])
         {
-            delete itemMap[id];
+            delete itemMap[url];
         }
     }
 
@@ -63,11 +63,19 @@ class BaseItem extends paper.Path
         {
             itemMap = {};
         }
-        for (var id in itemMap)
+        for (var url in itemMap)
         {
-            var item = itemMap[id];
+            var item = itemMap[url];
             item.update();
         }
+    }
+
+    /**
+     * Clears the map.
+     */
+    static clearMap()
+    {
+        itemMap = {};
     }
 
     /**
@@ -154,7 +162,7 @@ class BaseItem extends paper.Path
      */
     destroy()
     {
-        BaseItem.removeItemFromMap(this._modelId);
+        BaseItem.removeItemFromMap(this._modelURL);
         this._text.remove();
         this.remove();
     }
@@ -188,8 +196,7 @@ class BaseItem extends paper.Path
     {
         // Create query.
         var query = {};
-        var model = this._getModel();
-        query[this.coordinateSetInfo['url']] = model.id;
+        query[this.coordinateSetInfo['url']] = this._modelId;
         query['user_agent'] = Configuration.USER_AGENT;
 
         // Create callback.
@@ -198,7 +205,7 @@ class BaseItem extends paper.Path
         // Create model and fetch.
         var name = this.coordinateSetInfo['class'];
         var options = {};
-        options[this.coordinateSetInfo['url']] = model.get('url');
+        options[this.coordinateSetInfo['url']] = this._modelURL;
         options['user_agent'] = Configuration.WORKFLOWBUILDER.USER_AGENT;
         this._coordinateSetModel = new name(options);
         this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
@@ -234,10 +241,9 @@ class BaseItem extends paper.Path
      */
     getDescription()
     {
-        var model = this._getModel();
-        if (model)
+        if (this._description && this._description !== '')
         {
-            return model.getDescription();
+            return this._description;
         }
         else
         {
@@ -255,6 +261,36 @@ class BaseItem extends paper.Path
     {
         // TODO - better way to do abstract methods
         console.error('This must be defined in sub-class.');
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - Backbone event handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event model sync.
+     */
+    _handleEventModelSync(options)
+    {
+        switch (options.options.task)
+        {
+            case 'save':
+            {
+                this._text.content = options.model.get('name');
+                this._description = options.model.getDescription();
+                break;
+            }
+
+            case 'destroy':
+            {
+                this.destroy();
+                break;
+            }
+
+            default:
+            {
+                break;
+            }
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -286,11 +322,9 @@ class BaseItem extends paper.Path
     _initializeModelBinding(options)
     {
         this._modelId = options.model ? options.model.id : null;
-        this._modelURL= options.model ? options.model.get('url') : null;
-        BaseItem.associateItemWithID(this, this._modelId);
-
-        // Getter event for the model. Need to set this.
-        this.getModelEvent = null;
+        this._modelURL = options.model ? options.model.get('url') : null;
+        this._description = options.model.getDescription();
+        BaseItem.associateItemWithUrl(this, this._modelURL);
 
         // This is the coordinate set model settings. Should be overridden if want to save.
         this.coordinateSetInfo = null;
@@ -339,22 +373,13 @@ class BaseItem extends paper.Path
     /**
      * Initialize radio.
      */
-    _initializeRadio()
+    _initializeRadio(options)
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__MODEL_HASCHANGED, options => this._handleEventModelUpdated(options));
-    }
-
-    /**
-     * Gets the associated model.
-     */
-    _getModel()
-    {
-        if (this.getModelEvent !== null)
+        if (options && options.model)
         {
-            return this.rodanChannel.request(this.getModelEvent, {'url': this.getModelURL()});
+            this.rodanChannel.on(Events.EVENT__MODEL_SYNC + options.model.get('url'), options => this._handleEventModelSync(options));
         }
-        return null;
     }
 
     /**
@@ -396,19 +421,6 @@ class BaseItem extends paper.Path
         {
             $('div#canvas-tooltip').css('visibility', 'hidden');
         }
-    }
-
-    /**
-     * Handle model update event.
-     */
-    _handleEventModelUpdated(options)
-    {
-        var model = this._getModel();
-        if (options.model !== model)
-        {
-            return;
-        }
-        this._text.content = options.model.get('name');
     }
 
     /**

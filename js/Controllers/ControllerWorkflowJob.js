@@ -64,7 +64,6 @@ class ControllerWorkflowJob extends BaseController
     _handleWorkflowJobCreationSuccess(model, workflow, addPorts, targetInputPorts)
     {
         workflow.get('workflow_jobs').add(model);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_ITEM_WORKFLOWJOB, {workflowjob: model});
         if (addPorts)
         {
             this._addRequiredPorts(model, targetInputPorts);
@@ -77,7 +76,6 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleWorkflowJobDeletionSuccess(model)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_DELETE_ITEM_WORKFLOWJOB, {workflowjob: model});
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
     }
 
