@@ -1,6 +1,6 @@
 import Radio from 'backbone.radio';
 import paper from 'paper';
-
+import { drawGrid } from './Utilities/PaperUtilities';
 import BaseItem from './Items/BaseItem';
 import Configuration from '../../Configuration';
 import ConnectionItem from './Items/ConnectionItem';
@@ -9,10 +9,11 @@ import Events from '../../Shared/Events';
 import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './ItemController';
+import LayoutViewWorkflowBuilder from './Views/LayoutViewWorkflowBuilder';
 import OutputPortItem from './Items/OutputPortItem';
-import { drawGrid} from './Utilities/PaperUtilities';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
+
 
 /**
  * Main WorkflowBuilder class.
@@ -26,12 +27,15 @@ class WorkflowBuilder
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
-    initialize(canvasElementId, workflow)
+    initialize(workflow)
     { 
+        var view = new LayoutViewWorkflowBuilder({workflow: workflow});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
+
         BaseItem.clearMap();
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
-        
+
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
         this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {model: workflow}},
@@ -40,7 +44,7 @@ class WorkflowBuilder
                            {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {model: workflow}}];
 
         this._initializeStateMachine();
-        this._initializePaper(canvasElementId);
+        this._initializePaper('canvas-workspace');
         this._initializeRadio();
         this._initializeInterface();
         this._initializeGlobalTool();
@@ -60,11 +64,9 @@ class WorkflowBuilder
         this.guiChannel = Radio.channel('rodan-client_gui');
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
-
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
     }
 
     /**

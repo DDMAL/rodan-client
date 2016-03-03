@@ -7,7 +7,6 @@ import Events from '../Shared/Events';
 import InputPort from '../Models/InputPort';
 import ViewControlWorkflowJob from '../Views/Master/Main/WorkflowJob/ViewControlWorkflowJob';
 import LayoutViewResourceAssignment from '../Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment';
-import LayoutViewWorkflowBuilder from '../Views/Master/Main/WorkflowBuilder/LayoutViewWorkflowBuilder';
 import OutputPort from '../Models/OutputPort';
 import Resource from '../Models/Resource';
 import ResourceCollection from '../Collections/ResourceCollection';
@@ -102,10 +101,8 @@ class ControllerWorkflowBuilder extends BaseController
         this._workflow = options.workflow;
         this._resourceAssignments = [];
         this._resourcesAvailable = [];
+        this._workspace.initialize(this._workflow);
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': options.workflow});
-        this._layoutView = new LayoutViewWorkflowBuilder({workflow: options.workflow});
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
-        this._workspace.initialize('canvas-workspace', this._workflow);
     }
 
     /**

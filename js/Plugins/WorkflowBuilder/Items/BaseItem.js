@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import Radio from 'backbone.radio';
 import paper from 'paper';
-
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 import GUI_EVENTS from '../Shared/Events';

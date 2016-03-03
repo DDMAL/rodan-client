@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events';
+import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
 
 /**
  * This class represents the controller for editing a Workflow.
@@ -41,6 +41,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
+        this.guiChannel = Radio.channel('rodan-client_gui');
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_ADDPORTS, () => this._handleRequestGetAddPorts(), this); 
         this.rodanChannel.on(Events.EVENT__SERVER_ERROR, options => this._handleEventRodanError(options), this);
         this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED, () => this._handleEventWorkflowValidated(), this);
@@ -51,7 +52,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomIn()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN);
+        this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN);
     }
     
     /**
@@ -59,7 +60,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomOut()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT);
+        this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT);
     }
     
     /**
@@ -67,7 +68,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonZoomReset()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET);
+        this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
 
     /**

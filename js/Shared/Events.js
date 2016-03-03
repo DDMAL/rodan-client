@@ -35,11 +35,6 @@ var Events =
     REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',
     REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
 
-    // Need to move these to the plugin.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN',                                                   // Called when request workspace zoom in.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT',                                                 // Called when request workspace zoom out.
-    REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET',                                             // Called when request workspace zoom reset.
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -84,10 +79,18 @@ var Events =
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Model
+//
+// In addition to the three events below, each model will fire its own custom events:
+//  - EVENT__MODEL_CHANGE<model_url>
+//  - EVENT__MODEL_SYNC<model_url>
+//
+// These events are fired on the 'rodan' Radio channel. These are useful if you wish
+// to listen only for events by specific models, but regardless of the encapsulating
+// Backbone object.
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__COLLECTION_ADD: 'EVENT__COLLECTION_ADD',
-    EVENT__MODEL_CHANGE: 'EVENT__MODEL_CHANGE', // Triggered when an instance of BaseModel model has changed (bound to 'change' event in Backbone). Sends {model: BaseModel}.
-    EVENT__MODEL_SYNC: 'EVENT__MODEL_SYNC',     // Triggered when an instance of BaseModel model has been synced (bound to 'sync' event in Backbone). Sends {model: BaseModel}.
+    EVENT__COLLECTION_ADD: 'EVENT__COLLECTION_ADD', // Triggered when an instance of BaseModel has been added to a Backbone.Collection. Sends {model: BaseModel, collection: BaseCollection, options: Javascript object}).
+    EVENT__MODEL_CHANGE: 'EVENT__MODEL_CHANGE',     // Triggered when an instance of BaseModel has changed (bound to 'change' event in Backbone). Sends {model: BaseModel, response: XMLHTTPRequest, options: Javascript object}.
+    EVENT__MODEL_SYNC: 'EVENT__MODEL_SYNC',         // Triggered when an instance of BaseModel has been synced (bound to 'sync' event in Backbone). Sends {model: BaseModel, response: XMLHTTPRequest, options: Javascript object}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Project
