@@ -435,8 +435,8 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestAddWorkflowJobGroup(options)
     {
-        var workflowJobIDs = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS);
         var workflowJobs = [];
+        var workflowJobIDs = options.workflowjobids;
         for (var i in workflowJobIDs)
         {
             var workflowJobID = workflowJobIDs[i];

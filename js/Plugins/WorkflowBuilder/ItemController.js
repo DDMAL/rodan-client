@@ -5,6 +5,7 @@ import BaseItem from './Items/BaseItem';
 import ConnectionItem from './Items/ConnectionItem';
 import Configuration from '../../Configuration';
 import Events from '../../Shared/Events';
+import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import LineItem from './Items/LineItem';
 import OutputPortItem from './Items/OutputPortItem';
@@ -217,14 +218,13 @@ class ItemController
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
+        this.guiChannel = Radio.channel('rodan-client_gui');
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
 
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__COLLECTION_ADD, options => this._handleEventModelSync(options));
         this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
-
-        // Only these are remaining.
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
     }
 
     /**
@@ -404,9 +404,9 @@ class ItemController
 
         if (contextMenuData.length > 0)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, 
-                                                                                             top: mouseEvent.event.y,
-                                                                                             left: mouseEvent.event.x});
+            this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, 
+                                                                                               top: mouseEvent.event.y,
+                                                                                               left: mouseEvent.event.x});
         }
     }
 

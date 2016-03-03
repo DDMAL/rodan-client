@@ -4,6 +4,7 @@ import paper from 'paper';
 
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
 
 let itemMap = null;
 
@@ -83,7 +84,7 @@ class BaseItem extends paper.Path
      */
     static getContextMenuDataMultiple()
     {
-        return [{label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
+        return [{channel: 'rodan-client_gui', label: 'Cancel', radiorequest: GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -375,6 +376,7 @@ class BaseItem extends paper.Path
      */
     _initializeRadio(options)
     {
+        this.guiChannel = Radio.channel('rodan-client_gui');
         this.rodanChannel = Radio.channel('rodan');
         if (options && options.model)
         {

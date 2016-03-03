@@ -1,7 +1,10 @@
 import paper from 'paper';
+import Radio from 'backbone.radio';
+
 import BaseItem from './BaseItem';
-import Events from '../../../Shared/Events';
 import Configuration from '../../../Configuration';
+import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
 /**
@@ -26,7 +29,8 @@ class WorkflowJobItem extends BaseItem
      */
     static getContextMenuDataMultiple()
     {
-        return [{label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP}];
+        var workflowJobIds = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS);
+        return [{channel: 'rodan', label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options: {workflowjobids: workflowJobIds}}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

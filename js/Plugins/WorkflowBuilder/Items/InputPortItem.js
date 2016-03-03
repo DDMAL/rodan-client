@@ -1,6 +1,7 @@
 import BasePortItem from './BasePortItem';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
 
 /**
  * InputPort item.
@@ -24,8 +25,7 @@ class InputPortItem extends BasePortItem
      */
     static getContextMenuDataMultiple()
     {
-        return [{label: 'Create Resource Distributor', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR},
-                {label: 'Cancel', radiorequest: Events.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU}];
+        return [{channel: 'rodan-client_gui', label: 'Create Resource Distributor', radiorequest: GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
