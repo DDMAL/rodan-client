@@ -206,7 +206,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleWorkflowLoadSuccess(workflow)
     {
-        this._processWorkflow(workflow);debugger;
+        this._processWorkflow(workflow);
         this._validateWorkflow(this._workflow);
     }
 
