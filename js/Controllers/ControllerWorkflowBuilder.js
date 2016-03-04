@@ -70,13 +70,11 @@ class ControllerWorkflowBuilder extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOW, () => this._handleRequestGetWorkflow(), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, options => this._handleRequestGetResourceAssignments(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options => this._handleRequestShowJobListView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestShowResourceAssignmentView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options => this._handleRequestShowWorkflowListView(options), this);
@@ -203,14 +201,6 @@ class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
-     * Handle request get Workflow.
-     */
-    _handleRequestGetWorkflow()
-    {
-        return this._workflow;
-    }
-
-    /**
      * Handles success of workflow fetch.
      */
     _handleWorkflowLoadSuccess(workflow)
@@ -251,14 +241,6 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestDeleteConnection(options)
     {
         this._deleteConnection(options.model);
-    }
-
-    /**
-     * Handle command save WorkflowJob.
-     */
-    _handleRequestSaveWorkflowJob(options)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: options.workflowjob});
     }
 
     /**
