@@ -23,12 +23,20 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     }
 
     /**
+     * After render.
+     */
+    onRender()
+    {
+        this._handleClickCheckboxAddPorts(); 
+    }
+
+    /**
      * Unbind from events.
      */
     onDestroy()
     {
         this.guiChannel.trigger(GUI_EVENTS.EVENT__WORKFLOWBUILDER_GUI_DESTROY);
-        
+
         this.rodanChannel.off(null, null, this);
         this.rodanChannel.stopReplying(null, null, this);
         this.guiChannel.off(null, null, this);
@@ -45,9 +53,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
         this.guiChannel = Radio.channel('rodan-client_gui');
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_ADDPORTS, () => this._handleRequestGetAddPorts(), this); 
         this.rodanChannel.on(Events.EVENT__SERVER_ERROR, options => this._handleEventRodanError(options), this);
-        this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED, () => this._handleEventWorkflowValidated(), this);
     }
 
     /**
@@ -75,21 +81,12 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     }
 
     /**
-     * Handle request get add ports.
-     */
-    _handleRequestGetAddPorts()
-    {
-        return this.ui.checkboxAddPorts.is(':checked');
-    }
-
-    /**
      * Handle event Workflow updated.
      */
     _handleEventRodanError(options)
     {
         this._lastErrorCode = options.json.error_code;
         this._lastErrorDetails = options.json.details[0];
-        this.ui.dataStatus.text('Workflow is INVALID. Click here for details.'); 
     }
 
     /**
@@ -104,13 +101,29 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     }
 
     /**
-     * Handle event Workflow validated.
+     * Handle click on checkbox.
      */
-    _handleEventWorkflowValidated()
+    _handleClickCheckboxAddPorts()
     {
-        this._lastErrorCode = '';
-        this._lastErrorDetails = '';
-        this.ui.dataStatus.text('Workflow is valid.'); 
+        var checked = this.ui.checkboxAddPorts.is(':checked'); 
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SET_ADDPORTS, {addports: checked});
+    }
+
+    /**
+     * Updates info of Workflow in view.
+     */
+    _updateView(event, model)
+    {
+        if (this.model.get('valid'))
+        {
+            this._lastErrorCode = '';
+            this._lastErrorDetails = '';
+            this.ui.dataStatus.text('Workflow is valid.'); 
+        }
+        else
+        {
+            this.ui.dataStatus.text('Workflow is INVALID. Click here for details.'); 
+        }
     }
 }
 
@@ -129,7 +142,11 @@ LayoutViewWorkflowBuilder.prototype.events = {
     'click @ui.buttonZoomIn': '_handleButtonZoomIn',
     'click @ui.buttonZoomOut': '_handleButtonZoomOut',
     'click @ui.buttonZoomReset': '_handleButtonZoomReset',
-    'click @ui.dataStatus': '_handleClickDataStatus'
+    'click @ui.dataStatus': '_handleClickDataStatus',
+    'change @ui.checkboxAddPorts': '_handleClickCheckboxAddPorts'
+};
+LayoutViewWorkflowBuilder.prototype.modelEvents = {
+    'all': '_updateView'
 };
 
 export default LayoutViewWorkflowBuilder;

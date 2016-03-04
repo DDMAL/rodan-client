@@ -29,7 +29,7 @@ class WorkflowBuilder
      */
     initialize(workflow)
     { 
-        var view = new LayoutViewWorkflowBuilder({workflow: workflow});
+        var view = new LayoutViewWorkflowBuilder({model: workflow});
         Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
 
         BaseItem.clearMap();

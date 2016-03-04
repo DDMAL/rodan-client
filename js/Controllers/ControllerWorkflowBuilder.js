@@ -53,7 +53,7 @@ class ControllerWorkflowBuilder extends BaseController
     _initializeRadio()
     {
         this.rodanChannel.on(Events.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options), this);
-
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SET_ADDPORTS, options => this._handleRequestSetAddPorts(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, options => this._handleCommandAddConnection(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, options => this._handleCommandAddInputPort(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, options => this._handleCommandAddOutputPort(options), this);
@@ -102,7 +102,16 @@ class ControllerWorkflowBuilder extends BaseController
         this._resourceAssignments = [];
         this._resourcesAvailable = [];
         this._workspace.initialize(this._workflow);
+        this._addPorts = true;
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': options.workflow});
+    }
+
+    /**
+     * Handle request set add ports.
+     */
+    _handleRequestSetAddPorts(options)
+    {
+        this._addPorts = options.addports;
     }
 
     /**
@@ -206,7 +215,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleWorkflowLoadSuccess(workflow)
     {
-        this._processWorkflow(workflow);debugger;
+        this._processWorkflow(workflow);
         this._validateWorkflow(this._workflow);
     }
 
@@ -215,10 +224,9 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestAddWorkflowJob(options)
     {
-        var addPorts = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_ADDPORTS);
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_CREATE, {job: options.job, 
                                                                         workflow: this._workflow, 
-                                                                        addports: addPorts});
+                                                                        addports: this._addPorts});
     }
 
     /**
@@ -641,14 +649,6 @@ class ControllerWorkflowBuilder extends BaseController
         model.set({'valid': false});
     }
 
-    /**
-     * Handle validation success.
-     */
-    _handleValidationSuccess(model, response, options)
-    {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_WORKFLOW_VALIDATED);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -846,7 +846,6 @@ class ControllerWorkflowBuilder extends BaseController
     _validateWorkflow(workflow)
     {
         workflow.save({valid: true}, {patch: true,
-                                      success: (model, response, options) => this._handleValidationSuccess(model, response, options),
                                       error: (model, response, options) => this._handleValidationFailure(model, response, options)/*,
                                       use_generic: false*/});
     }
