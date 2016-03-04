@@ -152,10 +152,15 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowBuilder
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                         // Triggered when the user selects an individual Workflow to edit. Sends {workflow: Workflow}.
-    REQUEST__WORKFLOWBUILDER_SET_ADDPORTS: 'REQUEST__WORKFLOWBUILDER_SET_ADDPORTS',             // Request that future WorkflowJob creation automatically adds minimal ports. Takes {addports: boolean}.
-
-
+    EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                                                 // Triggered when the user selects an individual Workflow to edit. Sends {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SET_ADDPORTS: 'REQUEST__WORKFLOWBUILDER_SET_ADDPORTS',                                     // Request that future WorkflowJob creation automatically adds minimal ports. Takes {addports: boolean}.
+    REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW',               // Request a Job collection view be displayed for adding Jobs to the currently loaded Workflow.
+    REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW',     // Request a resource assignment view be displayed for an InputPort. Takes {url: string (URL of InputPort)}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW',     // Request a Workflow collection view be displayed for importing Workflows.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW',       // Request a port view for adding/deleting ports for a WorkflowJob be displayed. Takes {url: string (URL of WorkflowJob)}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW', // Request a WorkflowJob settings view be displayed for a WorkflowJob. Takes {url: string (URL of WorkflowJob)}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW',                   // Request a WorkflowJob data view be displayed for a WorkflowJob. Takes {url: string (URL of WorkflowJob)}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW',         // Request a WorkflowJobGroup data view be displayed for a WorkflowJobGroup. Takes {url: string (URL of WorkflowJobGroup)}.
 
 
 
@@ -185,17 +190,9 @@ var Events =
     REQUEST__WORKFLOWBUILDER_CREATE_DISTRIBUTOR: 'REQUEST__WORKFLOWBUILDER_CREATE_DISTRIBUTOR',   // Called when a resource distributor WorkflowJob should be created. Takes {urls: [{url: string}]}.
     REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE',       
     REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN: 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN',   // Create a WorkflowRun (but do not save). Takes {model: WorkflowRun}.
-    REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES: 'REQUEST__WORKFLOWBUILDER_GET_COMPATIBLE_RESOURCETYPES', // Given an array of InputPort URLs, returns list of ResourceType URLs that would satisfy it. Takes {urls: [string]}.
     REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE',
-    REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW',
     REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP',
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW',
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob

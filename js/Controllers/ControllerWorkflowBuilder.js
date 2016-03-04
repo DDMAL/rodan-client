@@ -77,9 +77,9 @@ class ControllerWorkflowBuilder extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SAVE_WORKFLOWJOB, options => this._handleRequestSaveWorkflowJob(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW, options => this._handleRequestShowJobListView(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options => this._handleRequestShowJobListView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestShowResourceAssignmentView(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW, options => this._handleRequestShowWorkflowListView(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options => this._handleRequestShowWorkflowListView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options => this._handleRequestShowWorkflowView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options => this._handleRequestShowWorkflowJobView(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options => this._handleRequestShowWorkflowJobPortsView(options), this);

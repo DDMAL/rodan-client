@@ -39,8 +39,8 @@ class WorkflowBuilder
         this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
 
         this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {model: workflow}},
-                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOB_LIST_VIEW},
-                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_LIST_VIEW},
+                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW},
+                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW},
                            {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {model: workflow}}];
 
         this._initializeStateMachine();
