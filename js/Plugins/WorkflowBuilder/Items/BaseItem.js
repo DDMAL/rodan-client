@@ -323,7 +323,7 @@ class BaseItem extends paper.Path
     {
         this._modelId = options.model ? options.model.id : null;
         this._modelURL = options.model ? options.model.get('url') : null;
-        this._description = options.model.getDescription();
+        this._description = options.model ? options.model.getDescription() : null;
         BaseItem.associateItemWithUrl(this, this._modelURL);
 
         // This is the coordinate set model settings. Should be overridden if want to save.
