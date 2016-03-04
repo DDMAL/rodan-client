@@ -18,7 +18,7 @@ class ConnectionItem extends BaseItem
     {
         super(options);
 
-        this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options: {model: options.model}}];
+        this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {model: options.model}}];
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
         this._inputPortItem = null;

@@ -15,7 +15,7 @@ class ViewInputPortListItem extends BaseViewListItem
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT, {model: this.model});
     }
 }
 

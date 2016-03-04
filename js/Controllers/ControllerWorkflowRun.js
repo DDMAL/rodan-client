@@ -97,8 +97,6 @@ class ControllerWorkflowRun extends BaseController
         var text = '';
         for (var inputPortUrl in assignments)
         {
-            var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: inputPortUrl});
-            text += 'Input Port: ' + inputPort.get('label') + '\n----------\n';
             var resourceUrls = assignments[inputPortUrl];
             for (var index in resourceUrls)
             {

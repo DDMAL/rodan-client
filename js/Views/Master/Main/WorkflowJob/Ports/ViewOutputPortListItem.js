@@ -15,7 +15,7 @@ class ViewOutputPortListItem extends BaseViewListItem
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, {model: this.model});
     }
 }
 

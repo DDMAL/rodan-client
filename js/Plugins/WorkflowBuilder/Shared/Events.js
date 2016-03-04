@@ -17,7 +17,7 @@ var GUI_EVENTS =
                                                                                                                                     //      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
                                                                                                                                     //      options: Object holding any options for Event
                                                                                                                                     // }
-    REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS: 'REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS'         // Called when request list of all selected WorkflowJob IDs.
+    REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS: 'REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS'         // Called when request list of all selected WorkflowJob IDs.
 };
 
 export default GUI_EVENTS;

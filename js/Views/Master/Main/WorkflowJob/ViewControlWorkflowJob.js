@@ -45,7 +45,7 @@ class ViewControlWorkflowJob extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, {model: this.model});
         this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
     }
 }

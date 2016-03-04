@@ -206,8 +206,8 @@ class ItemController
      */
     createConnection(outputPortItem, inputPortItem)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputporturl: inputPortItem.getModelURL(), 
-                                                                                   outputporturl: outputPortItem.getModelURL()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: inputPortItem.getModel(), 
+                                                                                   outputport: outputPortItem.getModel()});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -219,7 +219,7 @@ class ItemController
     _initializeRadio()
     {
         this.guiChannel = Radio.channel('rodan-client_gui');
-        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS, () => this._handleRequestGetSelectedWorkflowJobIDs());
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS, () => this._handleRequestGetSelectedWorkflowJobs());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
 
         this.rodanChannel = Radio.channel('rodan');
@@ -414,14 +414,14 @@ class ItemController
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle request for all selected WorkflowJob IDs.
+     * Handle request for all selected WorkflowJobs.
      */
-    _handleRequestGetSelectedWorkflowJobIDs()
+    _handleRequestGetSelectedWorkflowJobs()
     {
         var workflowJobs = [];
         for (var itemIndex in this._selectedItems)
         {
-            workflowJobs.push(this._selectedItems[itemIndex].getModelID());
+            workflowJobs.push(this._selectedItems[itemIndex].getModel());
         }
         return workflowJobs;
     }
@@ -438,7 +438,7 @@ class ItemController
             var item = this.getSelectedItem(keys[index]);
             urls.push({'url': item.getModelURL()});
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_DISTRIBUTOR, {urls: urls});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, {urls: urls});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

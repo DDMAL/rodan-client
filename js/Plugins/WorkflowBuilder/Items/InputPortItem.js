@@ -61,7 +61,7 @@ class InputPortItem extends BasePortItem
      */
     isSatisfied()
     {
-        var resourceAssignments = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, {url: this.getModelURL()});
+        var resourceAssignments = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, {inputport: this.getModel()});
         return this.hasConnectionItem() || resourceAssignments.length > 0;
     }
 
@@ -101,7 +101,7 @@ class InputPortItem extends BasePortItem
         var menuItems = [];
         if (!this.hasConnectionItem())
         {
-            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {url: this.getModelURL()}});
+            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {inputport: this.getModel()}});
         }
         return menuItems;
     }
@@ -132,7 +132,7 @@ class InputPortItem extends BasePortItem
     {
         if (!this.hasConnectionItem())
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {url: this.getModelURL()});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {inputport: this.getModel()});
         }
     }
 }

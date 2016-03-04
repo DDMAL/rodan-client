@@ -61,17 +61,13 @@ class ControllerWorkflowBuilder extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options => this._handleRequestAddWorkflowJobGroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, options => this._handleRequestAssignResource(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options => this._handleRequestCreateWorkflowRun(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_CREATE_DISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_INPUTPORT, options => this._handleCommandDeleteInputPort(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_OUTPUTPORT, options => this._handleCommandDeleteOutputPort(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroup(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_CONNECTION, options => this._handleRequestGetConnection(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, options => this._handleRequestGetInputPort(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_OUTPUTPORT, options => this._handleRequestGetOutputPort(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT, options => this._handleCommandDeleteInputPort(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, options => this._handleCommandDeleteOutputPort(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options => this._handleRequestDeleteWorkflowJob(options), this);
+        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP, options => this._handleRequestDeleteWorkflowJobGroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, options => this._handleRequestGetWorkflowJob(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, options => this._handleRequestGetWorkflowJobGroup(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, options => this._handleRequestGetResourceAssignments(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
@@ -183,9 +179,9 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowResourceAssignmentView(options)
     {
         // Create views.
-        var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: options.url});
-        var assignedResources = this._getResourceAssignments(options.url);
-        var availableResources = this._getResourcesAvailable(options.url);
+        var inputPort = options.inputport;
+        var assignedResources = this._getResourceAssignments(inputPort.get('url'));
+        var availableResources = this._getResourcesAvailable(inputPort.get('url'));
         var assignedResourceView = new ViewResourceList({collection: assignedResources,
                                                          template: '#template-modal_resource_list',
                                                          childView: ViewResourceListItemModal,
@@ -257,9 +253,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleCommandAddConnection(options)
     {
-        var inputPort = this._handleRequestGetInputPort({url: options.inputporturl});
-        var outputPort = this._handleRequestGetOutputPort({url: options.outputporturl});
-        this._createConnection(outputPort, inputPort);
+        this._createConnection(options.outputport, options.inputport);
     }
 
     /**
@@ -321,58 +315,6 @@ class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
-     * Handle request get WorkflowJobGroup.
-     */
-    _handleRequestGetWorkflowJobGroup(options)
-    {
-        return this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP, {url: options.url});
-    }
-
-    /**
-     * Handle request get InputPort.
-     */
-    _handleRequestGetInputPort(options)
-    {
-        var workflowJobs = this._workflow.get('workflow_jobs');
-        for (var i = 0; i < workflowJobs.length; i++)
-        {
-            var workflowJob = workflowJobs.at(i);
-            var port = workflowJob.get('input_ports').findWhere({url: options.url});
-            if (port)
-            {
-                return port;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Handle request get OutputPort.
-     */
-    _handleRequestGetOutputPort(options)
-    {
-        var workflowJobs = this._workflow.get('workflow_jobs');
-        for (var i = 0; i < workflowJobs.length; i++)
-        {
-            var workflowJob = workflowJobs.at(i);
-            var port = workflowJob.get('output_ports').findWhere({url: options.url});
-            if (port)
-            {
-                return port;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Handle request get Connection.
-     */
-    _handleRequestGetConnection(options)
-    {
-        return this._workflow.get('connections').findWhere({url: options.url});
-    }
-
-    /**
      * Handle request validate Workflow.
      */
     _handleRequestValidateWorkflow(options)
@@ -422,15 +364,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestAddWorkflowJobGroup(options)
     {
-        var workflowJobs = [];
-        var workflowJobIDs = options.workflowjobids;
-        for (var i in workflowJobIDs)
-        {
-            var workflowJobID = workflowJobIDs[i];
-            var workflowJob = this._workflow.get('workflow_jobs').get(workflowJobID);
-            workflowJobs.push(workflowJob);
-        }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: workflowJobs, workflow: this._workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, {workflowjobs: options.workflowjobs, workflow: this._workflow});
     }
 
     /**
@@ -463,7 +397,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestGetResourceAssignments(options)
     {
-        return this._getResourceAssignments(options.url);
+        return this._getResourceAssignments(options.inputport.get('url'));
     }
 
     /**
@@ -480,9 +414,8 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowWorkflowJobView(options)
     {
-        var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
-        var view = new ViewControlWorkflowJob({workflowjob: workflowJob});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob: ' + workflowJob.getDescription()});
+        var view = new ViewControlWorkflowJob({workflowjob: options.workflowjob});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: options.workflowjob.get('name')});
     }
 
     /**
@@ -514,8 +447,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowWorkflowJobGroupView(options)
     {
-        var workflowJobGroup = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOBGROUP, {url: options.url});
-        var view = new ViewWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: workflowJobGroup});
+        var view = new ViewWorkflowJobGroup({workflow: this._workflow, workflowjobgroup: options.workflowjobgroup});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJobGroup'});
     }
 
@@ -524,8 +456,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowWorkflowJobPortsView(options)
     {
-        var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
-        var view = new LayoutViewControlPorts({workflowjob: workflowJob});
+        var view = new LayoutViewControlPorts({workflowjob: options.workflowjob});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Ports'});
     }
 
@@ -534,8 +465,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowWorkflowJobSettingsView(options)
     {
-        var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: options.url});
-        var view = new ViewSettings({workflowjob: workflowJob});
+        var view = new ViewSettings({workflowjob: options.workflowjob});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Settings'});
     }
 
@@ -940,7 +870,6 @@ class ControllerWorkflowBuilder extends BaseController
         if (!this._resourcesAvailable[inputPortUrl])
         {
             var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-            var inputPort = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_INPUTPORT, {url: inputPortUrl});
             var resourceTypeURLs = this._getCompatibleResourceTypeURLs(inputPortUrl);
             var data = {project: project.id, resource_type__in: ''};
             var globalResourceTypes = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);

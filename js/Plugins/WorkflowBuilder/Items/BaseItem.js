@@ -103,6 +103,14 @@ class BaseItem extends paper.Path
     }
 
     /**
+     * Returns associated model.
+     */
+    getModel()
+    {
+        return this._model;
+    }
+
+    /**
      * Returns context menu data for single item of this class.
      */
     getContextMenuDataSingle()
@@ -271,12 +279,13 @@ class BaseItem extends paper.Path
      */
     _handleEventModelSync(options)
     {
+        this._model = options.model;
         switch (options.options.task)
         {
             case 'save':
             {
-                this._text.content = options.model.get('name');
-                this._description = options.model.getDescription();
+                this._text.content = this._model.get('name');
+                this._description = this._model.getDescription();
                 break;
             }
 
@@ -321,6 +330,7 @@ class BaseItem extends paper.Path
      */
     _initializeModelBinding(options)
     {
+        this._model = options.model ? options.model: null;
         this._modelId = options.model ? options.model.id : null;
         this._modelURL = options.model ? options.model.get('url') : null;
         this._description = options.model ? options.model.getDescription() : null;

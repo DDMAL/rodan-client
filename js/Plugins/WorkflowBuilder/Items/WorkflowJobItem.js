@@ -29,8 +29,8 @@ class WorkflowJobItem extends BaseWorkflowJobItem
      */
     static getContextMenuDataMultiple()
     {
-        var workflowJobIds = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOB_IDS);
-        return [{channel: 'rodan', label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options: {workflowjobids: workflowJobIds}}];
+        var workflowJobs = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS);
+        return [{channel: 'rodan', label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options: {workflowjobs: workflowJobs}}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,10 +42,10 @@ class WorkflowJobItem extends BaseWorkflowJobItem
     constructor(options)
     {
         super(options);
-        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {url: this.getModelURL()}},
-                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {url: this.getModelURL()}},
-                          {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {url: this.getModelURL()}},
-                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOB, options: {model: options.model}}];
+        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {workflowjob: this.getModel()}},
+                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel()}},
+                          {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {workflowjob: this.getModel()}},
+                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options: {model: options.model}}];
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job';
@@ -81,7 +81,7 @@ class WorkflowJobItem extends BaseWorkflowJobItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, {url: this.getModelURL()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, {workflowjob: this.getModel()});
     }
 }
 

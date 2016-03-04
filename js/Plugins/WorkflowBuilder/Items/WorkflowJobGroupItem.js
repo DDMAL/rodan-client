@@ -20,9 +20,9 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
     {
         super(options);
         this._workflowJobUrls = options.model.get('workflow_jobs');
-        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options: {url: this.getModelURL()}},
+        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options: {workflowjobgroup: this.getModel()}},
                           {label: 'Ungroup', radiorequest: Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options: {model: options.model}},
-                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_DELETE_WORKFLOWJOBGROUP, options: {model: options.model}}];
+                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP, options: {model: options.model}}];
 
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
@@ -76,7 +76,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {url: this.getModelURL()});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {workflowjobgroup: this.getModel()});
     }
 
     /**

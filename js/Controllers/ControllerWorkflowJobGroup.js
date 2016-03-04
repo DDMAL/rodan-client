@@ -28,7 +28,6 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP, (options) => this._handleRequestWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, (options) => this._handleRequestGetPorts(options));
@@ -79,14 +78,6 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleRequestWorkflowJobGroupLoadCollection(options)
     {
         this._collection.fetch({data: {'workflow': options.workflow.get('uuid')}});
-    }
-
-    /**
-     * Handle WorkflowJobGroup request.
-     */
-    _handleRequestWorkflowJobGroup(options)
-    {
-        return this._collection.findWhere({url: options.url});
     }
 
     /**
