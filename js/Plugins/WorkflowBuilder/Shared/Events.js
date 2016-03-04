@@ -3,6 +3,7 @@
  */
 var GUI_EVENTS = 
 {
+    EVENT__WORKFLOWBUILDER_GUI_DESTROY: 'EVENT__WORKFLOWBUILDER_GUI_DESTROY',                           // Called when WorkflowBuilder has been destroyed.
     REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN',                                                   // Called when request workspace zoom in.
     REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT',                                                 // Called when request workspace zoom out.
     REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET: 'REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET',                                             // Called when request workspace zoom reset.

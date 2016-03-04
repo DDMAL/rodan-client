@@ -18,6 +18,7 @@ class WorkflowJobGroupCollection extends BaseCollection
         this.route = 'workflowjobgroups';
 
         // TODO - doing a fetch on a collection isn't firing events, so I need to do this.
+        // See https://github.com/DDMAL/rodan-client/issues/77
         this.on('sync', (collection, response, options) => this._onSync(collection, response, options));
     }
 
