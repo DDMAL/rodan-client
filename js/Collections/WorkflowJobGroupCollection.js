@@ -33,7 +33,7 @@ class WorkflowJobGroupCollection extends BaseCollection
 		for (var i = 0; i < collection.length; i++)
 		{
 			var model = collection.at(i);
-			model.save();
+			model.save({}, {patch: true});
 		}
 	}
 }
