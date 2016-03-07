@@ -17,6 +17,7 @@ class ViewResourceListItemModal extends BaseViewListItem
     {
         this._inputPort = options.inputport;
         this._assigned = options.assigned;
+        this._workflow = options.workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,11 +30,11 @@ class ViewResourceListItemModal extends BaseViewListItem
     {
         if (this._assigned)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
         else
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model}); 
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
     }
 }

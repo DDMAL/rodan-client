@@ -17,7 +17,7 @@ class ViewControlWorkflowJob extends Marionette.ItemView
     initialize(options)
     {
         this._initializeRadio();
-        this.model = options.workflowjob;
+        this._workflow = options.workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ class ViewControlWorkflowJob extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, {workflowjob: this.model, workflow: this._workflow});
         this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
     }
 }

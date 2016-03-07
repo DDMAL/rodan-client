@@ -2,6 +2,7 @@ import paper from 'paper';
 import BaseItem from './BaseItem';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
 
 /**
  * Connection item.
@@ -18,7 +19,8 @@ class ConnectionItem extends BaseItem
     {
         super(options);
 
-        this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {model: options.model}}];
+        var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
+        this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {connection: options.model, workflow: workflow}}];
 
         this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
         this._inputPortItem = null;

@@ -16,6 +16,7 @@ class ViewOutputPortTypeListItem extends BaseViewListItem
     initialize(options)
     {
         this._workflowJob = options.workflowjob;
+        this._workflow = options.workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +27,7 @@ class ViewOutputPortTypeListItem extends BaseViewListItem
      */
     _handleButtonNewOutputPort()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob, workflow: this._workflow});
     }
 }
 

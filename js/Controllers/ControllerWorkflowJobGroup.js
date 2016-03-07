@@ -105,7 +105,7 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleRequestGetPorts(options)
     {
         var workflowJobGroup = this._collection.findWhere({url: options.url});
-        return this._getExposedPorts(workflowJobGroup);
+        return this._getExposedPorts(workflowJobGroup, options.workflow);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -123,13 +123,13 @@ class ControllerWorkflowJobGroup extends BaseController
     /**
      * Handle ungroup success.
      */
-    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup)
+    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup, workflow)
     {
         var workflowJobs = workflowJobGroup.get('workflow_jobs');
         for (var index in workflowJobs)
         {
-            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobs[index]});
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob});
+            var workflowJob = workflow.get('workflow_jobs').findWhere({url: workflowJobs[index]});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob, workflow: workflow});
         }
     }
 
@@ -144,7 +144,7 @@ class ControllerWorkflowJobGroup extends BaseController
         this._collection.remove(workflowJobGroup);
         if (deleteWorkflowJobs)
         {
-            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model)});
+            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model, workflow)});
         }
         else
         {
@@ -167,7 +167,7 @@ class ControllerWorkflowJobGroup extends BaseController
      * - it does not have an associated Connection
      * - it is connected to a port outside of the WorkflowJobs
      */
-    _getExposedPorts(workflowJobGroup)
+    _getExposedPorts(workflowJobGroup, workflow)
     {
         var object = {inputports: {}, outputports: {}};
         var connections = {};
@@ -179,7 +179,7 @@ class ControllerWorkflowJobGroup extends BaseController
         for (var index in workflowJobUrls)
         {
             var workflowJobUrl = workflowJobUrls[index];
-            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobUrl});
+            var workflowJob = workflow.get('workflow_jobs').findWhere({url: workflowJobUrl});
             if (!workflowJob)
             {
                 return null;
@@ -207,7 +207,7 @@ class ControllerWorkflowJobGroup extends BaseController
         for (var index in workflowJobUrls)
         {
             var workflowJobUrl = workflowJobUrls[index];
-            var workflowJob = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB, {url: workflowJobUrl});
+            var workflowJob = workflow.get('workflow_jobs').findWhere({url: workflowJobUrl});
 
             // Get unsatisfied OutputPorts and also collect OutputPorts with Connections.
             var outputPorts = workflowJob.get('output_ports');

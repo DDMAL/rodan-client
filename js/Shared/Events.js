@@ -156,35 +156,34 @@ var Events =
 // WorkflowBuilder
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__WORKFLOWBUILDER_SELECTED: 'EVENT__WORKFLOWBUILDER_SELECTED',                                                 // Triggered when the user selects an individual Workflow to edit. Sends {workflow: Workflow}.
-    REQUEST__WORKFLOWBUILDER_ADD_CONNECTION: 'REQUEST__WORKFLOWBUILDER_ADD_CONNECTION',
-    REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR: 'REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR',
-    REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT',
-    REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT',
-    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB',
-    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP',
-    REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE',       
-    REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN: 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN',
-    REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS: 'REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS',
-    REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_GET_WORKFLOWJOB',
-    REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW',
-    REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW',
-    REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION: 'REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION',
-    REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT',
-    REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT',
-    REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB',
-    REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP',
+    REQUEST__WORKFLOWBUILDER_ADD_CONNECTION: 'REQUEST__WORKFLOWBUILDER_ADD_CONNECTION',                                 // Request a Connection be added to a Workflow between two ports. Takes {inputport: InputPort, outputport: OutputPort, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR: 'REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR',                               // Request a WorkflowJob be created from a Job of category Configuration.RESOURCE_DISTRIBUTOR_CATEGORY that can satisfy the provided InputPorts. Takes {inputports: [InputPort], workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT',                                   // Request an InputPort be added to a WorkflowJob. Takes {inputporttype: InputPortType, workflowjob: WorkflowJob, workflow: Workflow}.          
+    REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT',                                 // Request an OutputPort be added to a WorkflowJob. Takes {outputporttype: InputPortType, workflowjob: WorkflowJob, workflow: Workflow, targetinputports: [InputPort] (optional)}. If targetinputports is provided the WorkflowBuilder will attempt to create Connections between the created OutputPort and those InputPort. 
+    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB',                               // Request a WorkflowJob be created from a Job. Takes {job: Job, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP',                     // Request a WorkflowJobGroup be created for the provided WorkflowJobs. Takes {workflowjobs: [WorkflowJob], workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE',                               // Request a Resource be assigned to an InputPort. Takes {resource: Resource, inputport: InputPort, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN: 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN',                           // Request a WorkflowRun be created. The WorkflowBuilder will use the known Resource assignments that have been made. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS: 'REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS',               // Request the Resources that are currently assigned to an InputPort. Takes {inputport: InputPort}. Returns [Resource].
+    REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW',                               // Request a Workflow (origin) be added to another Workflow (target). Takes {origin: Workflow, target: Workflow}.
+    REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW',                                   // Request a Workflow be fetched and loaded. If no Workflow has yet been loaded in the WorkflowBuilder, or the Workflow to be loaded differs from the one currently loaded in the WorkflowBuilder, the WorkflowBuilder will be initialized with the new Workflow. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION: 'REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION',                           // Request a Connection be removed from a Workflow. Takes {connection: Connection, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT: 'REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT',                             // Request an InputPort be removed from a WorkflowJob. Takes {inputport: InputPort, workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT: 'REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT',                           // Request an OutputPort be removed from a WorkflowJob. Takes {outputport: OutputPort, workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB: 'REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB',                         // Request a WorkflowJob be removed from a Workflow. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP',               // Request a WorkflowJobGroup and all its associated WorkflowJobs be removed from a Workflow. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
     REQUEST__WORKFLOWBUILDER_SET_ADDPORTS: 'REQUEST__WORKFLOWBUILDER_SET_ADDPORTS',                                     // Request that future WorkflowJob creation automatically adds minimal ports. Takes {addports: boolean}.
-    REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW',               // Request a Job collection view be displayed for adding Jobs to the currently loaded Workflow.
-    REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW',     // Request a resource assignment view be displayed for an InputPort. Takes {url: string (URL of InputPort)}.
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW',
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW',     // Request a Workflow collection view be displayed for importing Workflows.
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW',       // Request a port view for adding/deleting ports for a WorkflowJob be displayed. Takes {url: string (URL of WorkflowJob)}.
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW', // Request a WorkflowJob settings view be displayed for a WorkflowJob. Takes {url: string (URL of WorkflowJob)}.
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW',                   // Request a WorkflowJob data view be displayed for a WorkflowJob. Takes {url: string (URL of WorkflowJob)}.
-    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW',         // Request a WorkflowJobGroup data view be displayed for a WorkflowJobGroup. Takes {url: string (URL of WorkflowJobGroup)}.
-    REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE',
-    REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP',
-    REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW',
+    REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW',               // Request a Job collection view be displayed for adding Jobs to the currently loaded Workflow. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW',     // Request a resource assignment view be displayed for an InputPort. Takes {inputport: InputPort, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW',                         // Request a Workflow data view be displayed for a Workflow. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW',     // Request a Workflow collection view be displayed for importing Workflows. Takes {workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW',       // Request a port view for adding/deleting ports for a WorkflowJob be displayed. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW', // Request a WorkflowJob settings view be displayed for a WorkflowJob. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW',                   // Request a WorkflowJob data view be displayed for a WorkflowJob. Takes {workflowjob: WorkflowJob, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW: 'REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW',         // Request a WorkflowJobGroup data view be displayed for a WorkflowJobGroup. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE: 'REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE',                           // Request a Resource be unassigned to an InputPort. Takes {resource: Resource, inputport: InputPort, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP',             // Request a WorkflowJobGroup be removed from a Workflow, but keep all associated WorkflowJobs, ports, and Connections. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
+    REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW: 'REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW',                           // Request a Workflow be validated. Takes {workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
@@ -199,7 +198,7 @@ var Events =
     REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',                   // Request a Workflow (origin) be imported into another Workflow (target) as a WorkflowJobGroup. Takes {target: Workflow, origin: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION: 'REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION', // Request WorkflowJobGroups be loaded for a given Workflow. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',                       // Request a WorkflowJobGroup be saved/updated. Takes {workflowjobgroup: WorkflowJobGroup}.
-    REQUEST__WORKFLOWJOBGROUP_GET_PORTS: 'REQUEST__WORKFLOWJOBGROUP_GET_PORTS',             // Request arrays of InputPort URLs and OutputPort URLs for the given WorkflowJobGroup. Takes {url: string (WorkflowJobGroup URL)}. Returns {inputports: [InputPort], outputports: [OutputPort]}.
+    REQUEST__WORKFLOWJOBGROUP_GET_PORTS: 'REQUEST__WORKFLOWJOBGROUP_GET_PORTS',             // Request arrays of InputPort URLs and OutputPort URLs for the given WorkflowJobGroup. Takes {url: string (WorkflowJobGroup URL), workflow: Workflow}. Returns {inputports: [InputPort], outputports: [OutputPort]}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun

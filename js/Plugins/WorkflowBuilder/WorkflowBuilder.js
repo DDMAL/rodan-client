@@ -24,44 +24,76 @@ class WorkflowBuilder
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
+     * Constructor.
+     */
+    constructor(options)
+    {
+        this._workflow = null;
+    }
+
+    /**
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
     initialize(workflow)
     { 
-        var view = new LayoutViewWorkflowBuilder({model: workflow});
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
-
-        BaseItem.clearMap();
-        this._multipleSelectionKey = Environment.getMultipleSelectionKey();
-        this._line = null;
-
-        this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
-
-        this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {model: workflow}},
-                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW},
-                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW},
-                           {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {model: workflow}}];
-
+        this._workflow = workflow;
+        this._initializeView();
         this._initializeStateMachine();
         this._initializePaper('canvas-workspace');
         this._initializeRadio();
         this._initializeInterface();
         this._initializeGlobalTool();
+        this._initializeGui();
+    }
 
-        this._itemController = new ItemController();
-        paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
+    /**
+     * Return workflow.
+     */
+    getWorkflow()
+    {
+        return this._workflow;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initializers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
+     * Initialize view.
+     */
+    _initializeView()
+    {
+        var view = new LayoutViewWorkflowBuilder({model: this.getWorkflow()});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
+        this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {workflow: this.getWorkflow()}}]; 
+    }
+
+    /**
+     * Initialize GUI.
+     */
+    _initializeGui()
+    {
+        BaseItem.clearMap();
+        this._multipleSelectionKey = Environment.getMultipleSelectionKey();
+        this._line = null;
+        this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
+        this._itemController = new ItemController();
+        paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
+    }
+
+    /**
      * Initialize radio.
      */
     _initializeRadio()
     {
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
+
         this.guiChannel = Radio.channel('rodan-client_gui');
+        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW, () => this.getWorkflow());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
@@ -282,7 +314,7 @@ class WorkflowBuilder
             if (overItem instanceof InputPortItem && !overItem.isSatisfied())
             {
                 var outputPortItem = this._itemController.getOutputPortItemForConnection();
-                this._itemController.createConnection(outputPortItem, overItem);
+                this._itemController.createConnection(outputPortItem, overItem, this.getWorkflow());
             }
 
             // Reset.
@@ -325,6 +357,19 @@ class WorkflowBuilder
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event model sync.
+     *
+     * This guarantees that the WorkflowBuilder always has the latest version of the Workflow.
+     */
+    _handleEventModelSync(options)
+    {
+        if (options.model && options.model.constructor.name === 'Workflow')
+        {
+            this._workflow = options.model;
+        }
+    }
+
     /**
      * Handle zoom in.
      */

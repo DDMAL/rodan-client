@@ -101,7 +101,8 @@ class InputPortItem extends BasePortItem
         var menuItems = [];
         if (!this.hasConnectionItem())
         {
-            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {inputport: this.getModel()}});
+            var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
+            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {inputport: this.getModel(), workflow: workflow}});
         }
         return menuItems;
     }
@@ -132,7 +133,8 @@ class InputPortItem extends BasePortItem
     {
         if (!this.hasConnectionItem())
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {inputport: this.getModel()});
+            var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {inputport: this.getModel(), workflow: workflow});
         }
     }
 }

@@ -8,6 +8,17 @@ import Events from '../../../../../Shared/Events';
 class ViewJobListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize.
+     */
+    initialize(options)
+    {
+        this._workflow = options.workflow;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -15,7 +26,7 @@ class ViewJobListItem extends BaseViewListItem
      */
     _handleClickButtonAdd()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model, workflow: this._workflow});
     }
 }
 

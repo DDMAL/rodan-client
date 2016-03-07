@@ -8,6 +8,18 @@ import Events from '../../../../../Shared/Events';
 class ViewOutputPortListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize.
+     */
+    initialize(options)
+    {
+        this._workflow = options.workflow;
+        this._workflowJob = options.workflowjob;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -15,7 +27,7 @@ class ViewOutputPortListItem extends BaseViewListItem
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, {model: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, {outputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
     }
 }
 

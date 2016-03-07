@@ -8,11 +8,22 @@ import Events from '../../../../../Shared/Events';
 class ViewWorkflowListImportItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize.
+     */
+    initialize(options)
+    {
+        this._workflow = options.workflow;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     _handleButtonImportWorkflow()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {workflow: this.model});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
     }
 }
 

@@ -53,9 +53,10 @@ class LayoutViewControlPorts extends Marionette.LayoutView
     {                                             
         this._inputPortListView = new ViewInputPortList({collection: options.workflowjob.get('input_ports'),
                                                          template: '#template-main_inputport_list',
-                                                         childView: ViewInputPortListItem});
-        this._outputPortListView = new ViewOutputPortList({collection: options.workflowjob.get('output_ports')});
-        
+                                                         childView: ViewInputPortListItem,
+                                                         childViewOptions: options});
+        this._outputPortListView = new ViewOutputPortList({collection: options.workflowjob.get('output_ports'),
+                                                           childViewOptions: options});
         this._inputPortTypeListView = new ViewInputPortTypeList({workflowjob: options.workflowjob,
                                                                  childViewOptions: options});
         this._outputPortTypeListView = new ViewOutputPortTypeList({workflowjob: options.workflowjob,

@@ -204,10 +204,11 @@ class ItemController
     /**
      * Attempts to create a connection.
      */
-    createConnection(outputPortItem, inputPortItem)
+    createConnection(outputPortItem, inputPortItem, workflow)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: inputPortItem.getModel(), 
-                                                                                   outputport: outputPortItem.getModel()});
+                                                                                   outputport: outputPortItem.getModel(),
+                                                                                   workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -432,13 +433,14 @@ class ItemController
     _handleRequestAddResourceDistributor(options)
     {
         var keys = this.getSelectedItemKeys();
-        var urls = [];
+        var inputPorts = [];
         for (var index in keys)
         {
             var item = this.getSelectedItem(keys[index]);
-            urls.push({'url': item.getModelURL()});
+            inputPorts.push(item.getModel());
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, {urls: urls});
+        var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, {inputports: inputPorts, workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

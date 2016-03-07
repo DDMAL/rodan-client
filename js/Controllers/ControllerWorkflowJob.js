@@ -44,7 +44,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        options.workflowjob.destroy({success: (model) => this._handleWorkflowJobDeletionSuccess(model)});
+        options.workflowjob.destroy({success: (model) => this._handleWorkflowJobDeletionSuccess(model, options.workflow)});
     }
 
     /**
@@ -52,7 +52,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model)});
+        options.workflowjob.save(options.workflowjob.changed, {patch: true});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -66,25 +66,17 @@ class ControllerWorkflowJob extends BaseController
         workflow.get('workflow_jobs').add(model);
         if (addPorts)
         {
-            this._addRequiredPorts(model, targetInputPorts);
+            this._addRequiredPorts(model, targetInputPorts, workflow);
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
      * Handle WorkflowJob deletion success.
      */
-    _handleWorkflowJobDeletionSuccess(model)
+    _handleWorkflowJobDeletionSuccess(model, workflow)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
-    }
-
-    /**
-     * Handle WorkflowJob save success.
-     */
-    _handleWorkflowJobSaveSuccess(model)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -96,28 +88,28 @@ class ControllerWorkflowJob extends BaseController
      * The InputPorts in targetInputPorts will be automatically connected to IFF the resulting
      * WorkflowJob has one OutputPort.
      */
-    _addRequiredPorts(workflowJob, targetInputPorts)
+    _addRequiredPorts(workflowJob, targetInputPorts, workflow)
     {
         var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(workflowJob.getJobUuid());
         var outputPortTypes = job.get('output_port_types');
         var inputPortTypes = job.get('input_port_types');
 
-        this._addInputPorts(workflowJob, inputPortTypes);
-        this._addOutputPorts(workflowJob, outputPortTypes, targetInputPorts);
+        this._addInputPorts(workflowJob, inputPortTypes, workflow);
+        this._addOutputPorts(workflowJob, outputPortTypes, targetInputPorts, workflow);
     }
 
     /**
      * Adds InputPorts.
      */
-    _addInputPorts(workflowJob, inputPortTypes)
+    _addInputPorts(workflowJob, inputPortTypes, workflow)
     {
         var that = this;
         inputPortTypes.forEach(function(inputPortType) 
         {
             for (var i = 0; i < inputPortType.get('minimum');i ++)
             {
-                that.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob});
+                that.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob, workflow: workflow});
             }
         });
     }
@@ -125,7 +117,7 @@ class ControllerWorkflowJob extends BaseController
     /**
      * Adds OutputPorts.
      */
-    _addOutputPorts(workflowJob, outputPortTypes, targetInputPorts)
+    _addOutputPorts(workflowJob, outputPortTypes, targetInputPorts, workflow)
     {
         var that = this;
         var sendTargetInputPorts = outputPortTypes.length === 1 && outputPortTypes.at(0).get('minimum') === 1 ? targetInputPorts : [];
@@ -134,7 +126,7 @@ class ControllerWorkflowJob extends BaseController
             for (var i = 0; i < outputPortType.get('minimum'); i++)
             {
                 that.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
-                                           {outputporttype: outputPortType, workflowjob: workflowJob, targetinputports: targetInputPorts});
+                                           {outputporttype: outputPortType, workflowjob: workflowJob, targetinputports: targetInputPorts, workflow: workflow});
             }
         });
     }
