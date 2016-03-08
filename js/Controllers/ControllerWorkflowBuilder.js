@@ -290,11 +290,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleEventLoadWorkflow(options)
     {
-        var oldWorkflow = this._workspace.getWorkflow();
-        if (!oldWorkflow || oldWorkflow.id !== options.workflow.id)
-        {
-            this._workspace.initialize(options.workflow);
-        }
+        this._workspace.initialize(options.workflow);
         options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 
