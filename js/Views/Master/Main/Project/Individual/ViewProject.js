@@ -48,6 +48,14 @@ class ViewProject extends Marionette.CompositeView
     }
 
     /**
+     * Handle RunJob button.
+     */
+    _handleButtonRunJobs()
+    {
+        this.rodanChannel.trigger(Events.EVENT__RUNJOB_SELECTED_COLLECTION, {project: this.model});
+    }
+
+    /**
      * Handle click resource count.
      */
     _handleClickResourceCount()
@@ -75,6 +83,7 @@ ViewProject.prototype.ui = {
             buttonDelete: '#button-delete_project',
             resourceCount: '#resource_count',
             workflowCount: '#workflow_count',
+            buttonRunJobs: '#button-runjobs',
             textName: '#text-project_name',
             textDescription: '#text-project_description'
         };
@@ -82,7 +91,8 @@ ViewProject.prototype.events = {
             'click @ui.buttonSave': '_handleButtonSave',
             'click @ui.buttonDelete': '_handleButtonDelete',
             'click @ui.resourceCount': '_handleClickResourceCount',
-            'click @ui.workflowCount': '_handleClickWorkflowCount'
+            'click @ui.workflowCount': '_handleClickWorkflowCount',
+            'click @ui.buttonRunJobs': '_handleButtonRunJobs'
         };
 ViewProject.prototype.template = '#template-main_project_individual';
 

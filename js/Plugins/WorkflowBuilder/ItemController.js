@@ -254,6 +254,18 @@ class ItemController
                 new paper.Point(0, portItemHeight), 
                 new paper.Point(0, 0)
             ],
+            listInputportItem: [
+                new paper.Point(0, 0), 
+                new paper.Point(portItemWidth, 0), 
+                new paper.Point(portItemWidth / 2, portItemHeight), 
+                new paper.Point(0, 0)
+            ],
+            listOutputPortItem: [
+                new paper.Point(portItemWidth / 2, 0), 
+                new paper.Point(portItemWidth, portItemHeight), 
+                new paper.Point(0, portItemHeight), 
+                new paper.Point(portItemWidth / 2, 0)
+            ],
             connection: [new paper.Point(0, 0), new paper.Point(1, 0)]
         };
     }

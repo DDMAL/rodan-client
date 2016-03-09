@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 
 import Events from '../../../Shared/Events';
+import ViewNavigationNodeRunJobs from './ViewNavigationNodeRunJobs';
 import ViewNavigationNodeResources from './ViewNavigationNodeResources';
 import ViewNavigationNodeWorkflowRuns from './ViewNavigationNodeWorkflowRuns';
 import ViewNavigationNodeWorkflows from './ViewNavigationNodeWorkflows';
@@ -23,10 +24,12 @@ class ViewNavigationNodeProject extends ViewNavigationNode
         this.collection = new Backbone.Collection();
         var resourcesNodeModel = new Backbone.Model({name: 'Resources', project: this.model});
         var workflowBuilderNodeModel = new Backbone.Model({name: 'Workflows', project: this.model});
-        var workflowRunnerNodeModel = new Backbone.Model({name: 'Workflow Runs', project: this.model});
+        var workflowRunsNodeModel = new Backbone.Model({name: 'Workflow Runs', project: this.model});
+        var runJobsNodeModel = new Backbone.Model({name: 'Run Jobs', project: this.model});
         this.collection.add(resourcesNodeModel);
         this.collection.add(workflowBuilderNodeModel);
-        this.collection.add(workflowRunnerNodeModel);
+        this.collection.add(workflowRunsNodeModel);
+        this.collection.add(runJobsNodeModel);
     }
 
     /**
@@ -49,6 +52,11 @@ class ViewNavigationNodeProject extends ViewNavigationNode
             case 'Workflow Runs':
             {
                 return ViewNavigationNodeWorkflowRuns;
+            }
+
+            case 'Run Jobs':
+            {
+                return ViewNavigationNodeRunJobs;
             }
 
             default:

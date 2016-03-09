@@ -56,7 +56,7 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this.rodanChannel.request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({collection: this._runJobCollection,
-                                                   template: '#template-main_runjob_list',
+                                                   template: '#template-main_runjob_list_notitle',
                                                    childView: ViewRunJobListItem});
         this._layoutViewRunJobs.showList(this._viewRunJobList);
 

@@ -28,7 +28,8 @@ class GlobalJobCollection extends GlobalCollection
         this.loadCommand = Events.REQUEST__GLOBAL_JOBS_LOAD;
         this.requestCommand = Events.REQUEST__GLOBAL_JOB_COLLECTION;
         this.enumerations = [{field: 'category', label: 'Category'},
-                             {field: 'interactive', label: 'Interactive', values: ['True', 'False']}];
+                             {field: 'interactive', label: 'Interactive', values: [{value: 'True', label: 'True'},
+                                                                                   {value: 'False', label: 'False'}]}];
     }
 }
 
