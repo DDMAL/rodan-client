@@ -1,6 +1,8 @@
 import Backbone from 'backbone';
+import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
+import NAV_EVENTS from './Events';
 import ViewNavigationNodeRunJobs from './ViewNavigationNodeRunJobs';
 import ViewNavigationNodeResources from './ViewNavigationNodeResources';
 import ViewNavigationNodeWorkflowRuns from './ViewNavigationNodeWorkflowRuns';
@@ -30,6 +32,8 @@ class ViewNavigationNodeProject extends ViewNavigationNode
         this.collection.add(workflowBuilderNodeModel);
         this.collection.add(workflowRunsNodeModel);
         this.collection.add(runJobsNodeModel);
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, event => this._handleEventProjectSelected(event));
     }
 
     /**
@@ -70,14 +74,6 @@ class ViewNavigationNodeProject extends ViewNavigationNode
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, event => this._handleEventProjectSelected(event));
-    }
-
-    /**
      * Send click events.
      */
     _sendClickEvents()
@@ -92,7 +88,7 @@ class ViewNavigationNodeProject extends ViewNavigationNode
     {
         if (event.project === this.model)
         {
-            this.rodanChannel.trigger(Events.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
+            this.navChannel.trigger(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }
     }
 }

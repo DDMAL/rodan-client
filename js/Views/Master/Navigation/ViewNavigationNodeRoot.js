@@ -1,7 +1,8 @@
+import Radio from 'backbone.radio';
+
 import Events from '../../../Shared/Events';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
-import Radio from 'backbone.radio';
 
 /**
  * This class represents a navigation menu node.
@@ -11,6 +12,15 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize.
+     */
+    initialize(options)
+    {
+        super.initialize(options);
+        this.rodanChannel = Radio.channel('rodan');
+    }
+
     /**
      * Initially hide everything.
      */
@@ -22,14 +32,6 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Send click events.
      */

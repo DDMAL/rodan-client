@@ -24,7 +24,6 @@ var Events =
 // how configuration.js is used for some events
 //  why we use "Collection" and not "List"
 //  mark some of these as "hidden" or try to remove them 
-    EVENT__NAVIGATION_SELECTED_NODE: 'EVENT__NAVIGATION_SELECTED_NODE', // Triggered when the user clicks on a navigation element in the vertical menu. Sends {node: ViewNavigationNode or one of its descendants}.
     REQUEST__MODAL_SHOW_WAITING: 'REQUEST__MODAL_SHOW_WAITING', // Request special modal window to show/open. This modal window disables all input and informs the user that the client is waiting on the server. If another modal is currently open the request will not show. 
     REQUEST__RESOURCE_SHOWLAYOUTVIEW: 'REQUEST__RESOURCE_SHOWLAYOUTVIEW',   // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.

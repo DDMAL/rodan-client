@@ -1,4 +1,7 @@
+import Radio from 'backbone.radio';
+
 import Events from '../../../Shared/Events';
+import NAV_EVENTS from './Events';
 import ViewNavigationNode from './ViewNavigationNode';
 
 /**
@@ -7,16 +10,21 @@ import ViewNavigationNode from './ViewNavigationNode';
 class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize radio.
+     * Initialize.
      */
-    _initializeRadio()
+    initialize(options)
     {
+        super.initialize(options);
+        this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, event => this._handleEventWorkflowRunsSelected(event));
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Send click events.
      */
@@ -33,7 +41,7 @@ class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
     {
         if (event.project === this.model.get('project'))
         {
-            this.rodanChannel.trigger(Events.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
+            this.navChannel.trigger(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }
     }
 }

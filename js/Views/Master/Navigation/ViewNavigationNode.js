@@ -3,6 +3,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
+import NAV_EVENTS from './Events';
 
 /**
  * This class represents a navigation menu node.
@@ -17,8 +18,8 @@ class ViewNavigationNode extends Marionette.CompositeView
      */
     initialize()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__NAVIGATION_SELECTED_NODE, event => this._handleEventNodeSelected(event));
+        this.navChannel = Radio.channel('rodan-navigation');
+        this.navChannel.on(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, event => this._handleEventNodeSelected(event));
     }
 
     /**
@@ -129,9 +130,6 @@ class ViewNavigationNode extends Marionette.CompositeView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-ViewNavigationNode.prototype.modelEvents = {
-    'change': 'render'
-};
 ViewNavigationNode.prototype.ui = {
     text: '#node_text'
 };
