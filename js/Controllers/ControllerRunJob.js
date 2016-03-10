@@ -1,4 +1,5 @@
 import BaseController from './BaseController';
+import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import ViewRunJob from '../Views/Master/Main/RunJob/Individual/ViewRunJob';
@@ -12,6 +13,18 @@ import RunJobCollection from '../Collections/RunJobCollection';
 class ControllerRunJob extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize.
+     */
+    initialize(options)
+    {
+        this._runJobLocks = {};
+        setInterval(() => this._reacquire(), Configuration.RUNJOB_ACQUIRE_INTERVAL);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -22,11 +35,9 @@ class ControllerRunJob extends BaseController
         this.rodanChannel.reply(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this.rodanChannel.on(Events.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.on(Events.EVENT__RUNJOB_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
-   }
+        this.rodanChannel.reply(Events.REQUEST__RUNJOB_ACQUIRE, options => this._handleRequestAcquire(options));
+    }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Handle show LayoutView.
      */
@@ -65,6 +76,95 @@ class ControllerRunJob extends BaseController
     _handleTimer(collection)
     {
         this._collection.syncList();
+    }
+
+    /**
+     * Handle request acquire.
+     */
+    _handleRequestAcquire(options)
+    {
+        // Get lock if available. Else, if we already have the lock, simply open the interface.
+        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
+        var runJobUrl = options.runjob.get('url');
+        if (options.runjob.get('available'))
+        {
+            var ajaxOptions = {
+                url: options.runjob.get('interactive_acquire'),
+                type: 'POST',
+                dataType: 'json',
+                success: (response) => this._handleSuccessAcquire(response, runJobUrl, options.runjob.get('interactive_acquire')),
+                error: () => this._removeRunJobLock(runJobUrl)
+            };
+            $.ajax(ajaxOptions);
+        }
+        else if (options.runjob.get('working_user') === user.get('url'))
+        {
+            var workingUrl = this._getWorkingUrl(runJobUrl);
+            var newWindow = window.open(workingUrl, '_blank');
+        }
+    }
+
+    /**
+     * Handle success of interactive acquire.
+     */
+    _handleSuccessAcquire(response, runJobUrl, acquireUrl)
+    {
+        this._registerRunJobForReacquire(response.working_url, runJobUrl, acquireUrl);
+        var newWindow = window.open(response.working_url, '_blank');
+    }
+
+    /**
+     * Registers an interactive job to be relocked.
+     */
+    _registerRunJobForReacquire(runJobUrl, workingUrl, acquireUrl)
+    {
+        var date = new Date();
+        this._runJobLocks[runJobUrl] = {date: date.getTime(), working_url: workingUrl, acquire_url: acquireUrl};
+    }
+
+    /**
+     * Get working URL for acquired RunJob.
+     */
+    _getWorkingUrl(runJobUrl)
+    {
+        var object = this._runJobLocks[runJobUrl];
+        if (object)
+        {
+            return object.url;
+        }
+        return null;
+    }
+
+    /**
+     * Handle reacquire callback.
+     */
+    _reacquire()
+    {
+        var date = new Date();
+        for (var runJobUrl in this._runJobLocks)
+        {
+            var data = this._runJobLocks[runJobUrl];
+            if (data)
+            {
+                var timeElapsed = date.getTime() - data.date;
+                if (timeElapsed < Configuration.RUNJOB_ACQUIRE_DURATION)
+                {
+                    $.ajax({url: data.acquire_url, type: 'POST', dataType: 'json', error: () => this._removeRunJobLock(runJobUrl)});
+                }
+                else
+                {
+                    this._removeRunJobLock(runJobUrl);
+                }
+            }
+        }
+    }
+
+    /**
+     * Remove RunJob lock.
+     */
+    _removeRunJobLock(runJobUrl)
+    {
+        this._runJobLocks[runJobUrl] = null;
     }
 }
 

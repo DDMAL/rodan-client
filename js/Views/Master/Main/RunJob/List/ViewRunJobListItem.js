@@ -17,6 +17,13 @@ class ViewRunJobListItem extends BaseViewListItem
     {
         this.rodanChannel.trigger(Events.EVENT__RUNJOB_SELECTED, {runjob: this.model});
     }
+    /**
+     * Handle double-click.
+     */
+    _handleDoubleClick()
+    {
+        this.rodanChannel.request(Events.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +32,8 @@ class ViewRunJobListItem extends BaseViewListItem
 ViewRunJobListItem.prototype.template = '#template-main_runjob_list_item';
 ViewRunJobListItem.prototype.tagName = 'tr';
 ViewRunJobListItem.prototype.events = {
-    'click': '_handleClick'
+    'click': '_handleClick',
+    'dblclick': '_handleDoubleClick'
 };
 
 export default ViewRunJobListItem;

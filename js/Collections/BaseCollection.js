@@ -317,18 +317,19 @@ class BaseCollection extends Backbone.Collection
      */
     _populateEnumerations(response)
     {
+        var items = response.results ? response.results : response;
         for (var j in this.enumerations)
         {
             var field = this.enumerations[j].field;
             if (!this.enumerations[j].values || this.enumerations[j].values.length === 0)
             {
                 this.enumerations[j].values = [];
-                for (var i in response.results)
+                for (var i in items)
                 {
-                    var result = response.results[i];
-                    this.enumerations[j].values.push(result[field]);
+                    var result = items[i];
+                    this.enumerations[j].values.push({value: result[field], label: result[field]});
                 }
-                this.enumerations[j].values = $.unique(this.enumerations[j].values);
+                this.enumerations[j].values = _.uniq(this.enumerations[j].values, false, function(item) {return item.value;});
             }
         }
     }

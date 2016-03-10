@@ -15,6 +15,7 @@ class RunJob extends BaseModel
     {
         this.routeName = 'runjobs';
         this.set('statusText', this._getStatusText(this.get('status')));
+        this.set('available', this._isAvailableForLock());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +73,14 @@ class RunJob extends BaseModel
                 return 'Unknown status';
             }
         }
+    }
+
+    /**
+     * Returns true iff this is an interactive job waiting for input and has not been locked.
+     */
+    _isAvailableForLock()
+    {
+        return this.get('interactive_acquire') !== null && this.get('working_user') === null;
     }
 }
 
