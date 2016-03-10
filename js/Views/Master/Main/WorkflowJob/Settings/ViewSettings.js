@@ -17,8 +17,8 @@ class ViewSettings extends Marionette.ItemView
      */
     initialize(options)
     {
-        this.model = options.workflowjob;
         this._initializeRadio();
+        this._workflow = options.workflow;
     }
 
     onRender()
@@ -40,12 +40,13 @@ class ViewSettings extends Marionette.ItemView
     /**
      * Save settings.
      */
-    _saveSettings()
+    _handleButtonSave()
     {
         var element = this._getJQueryElement();
         if ($(element).is(":visible"))
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {'workflowjob': this.model});
+            this.model.set('job_settings', this._editor.getValue());
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model, workflow: this._workflow});
         }
     }
 
@@ -79,7 +80,7 @@ class ViewSettings extends Marionette.ItemView
                 form_name_root: ''
             };
             this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
-            this._editor.on('change', () => this._saveSettings());
+            //this._editor.on('change', () => this._saveSettings());
         }
     }
 
@@ -90,7 +91,6 @@ class ViewSettings extends Marionette.ItemView
     {
         return $(this.$el.find('#workflowjob-settings')[0])[0];
     }
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +99,12 @@ class ViewSettings extends Marionette.ItemView
 ViewSettings.prototype.modelEvents = {
     'all': 'render'
 };
+ViewSettings.prototype.ui = {
+    buttonSave: '#button-save_workflowjob_settings'
+        };
+ViewSettings.prototype.events = {
+    'click @ui.buttonSave': '_handleButtonSave'
+        };
 ViewSettings.prototype.template = '#template-main_workflowjob_settings';
 
 export default ViewSettings;

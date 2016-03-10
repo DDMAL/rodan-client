@@ -45,7 +45,7 @@ class WorkflowJobItem extends BaseWorkflowJobItem
         super(options);
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
         this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
-                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel()}},
+                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
                           {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
                           {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options: {workflowjob: this.getModel(), workflow: workflow}}];
         this.coordinateSetInfo = [];

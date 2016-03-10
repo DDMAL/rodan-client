@@ -443,7 +443,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowWorkflowJobSettingsView(options)
     {
-        var view = new ViewSettings({workflowjob: options.workflowjob});
+        var view = new ViewSettings({workflow: options.workflow, model: options.workflowjob});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Settings'});
     }
 

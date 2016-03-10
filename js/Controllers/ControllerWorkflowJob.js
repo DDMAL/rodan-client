@@ -52,7 +52,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        options.workflowjob.save(options.workflowjob.changed, {patch: true});
+        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(options.workflowjob, options.workflow)});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +75,14 @@ class ControllerWorkflowJob extends BaseController
      * Handle WorkflowJob deletion success.
      */
     _handleWorkflowJobDeletionSuccess(model, workflow)
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+    }
+
+    /**
+     * Handle WorkflowJob save success.
+     */
+    _handleWorkflowJobSaveSuccess(model, workflow)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
