@@ -30,8 +30,10 @@ class ViewResource extends Marionette.CompositeView
      */
     onRender()
     {
-        var disabled = this.model.get('origin') !== null;
-        $(this.ui.buttonDelete).attr('disabled', disabled); 
+        var disabledDelete = this.model.get('origin') !== null;
+        $(this.ui.buttonDelete).attr('disabled', disabledDelete); 
+        var disabledDownload = this.model.get('download') === null;
+        $(this.ui.buttonDownload).attr('disabled', disabledDownload); 
     }
 
     /**
@@ -70,6 +72,17 @@ class ViewResource extends Marionette.CompositeView
     {
         this.rodanChannel.request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
     }
+
+    /**
+     * Handle button download.
+     */
+    _handleClickDownload()
+    {
+        var mimetype = this.model.get('resource_type_full').mimetype;
+        var ext = this.model.get('resource_type_full').extension;
+        var filename = this.model.get('name') + '.' + ext;
+        this.rodanChannel.request(Events.REQUEST__DOWNLOADMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: 'image/png'});
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -83,11 +96,13 @@ ViewResource.prototype.ui = {
     buttonDelete: '#button-main_resource_individual_delete',
     selectResourceType: '#select-resourcetype',
     resourceName: '#text-resource_name',
-    resourceDescription: '#text-resource_description'
+    resourceDescription: '#text-resource_description',
+    buttonDownload: '#button-main_resource_individual_download'
 };
 ViewResource.prototype.events = {
     'click @ui.buttonSave': '_handleClickButtonSave',
-    'click @ui.buttonDelete': '_handleClickButtonDelete'
+    'click @ui.buttonDelete': '_handleClickButtonDelete',
+    'click @ui.buttonDownload': '_handleClickDownload'
 };
 ViewResource.prototype.template = '#template-main_resource_individual';
 ViewResource.prototype.childView = ViewResourceTypeListItem;

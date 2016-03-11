@@ -16,6 +16,7 @@ import ControllerWorkflowJob from './Controllers/ControllerWorkflowJob';
 import ControllerWorkflowJobGroup from './Controllers/ControllerWorkflowJobGroup';
 import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
+import DownloadManager from './Managers/DownloadManager';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
@@ -48,6 +49,7 @@ class Application extends Marionette.Application
         this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeCollections();
+        this._initializeManagers();
         
         this._initializeAjaxPrefilters();
         this._initializeViews();
@@ -75,6 +77,14 @@ class Application extends Marionette.Application
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize managers.
+     */
+    _initializeManagers()
+    {
+        this._downloadManager = new DownloadManager();
+    }
+
     /**
      * Initializes various helpers.
      */

@@ -23,6 +23,7 @@ class Resource extends BaseModel
         this.routeName = 'resources';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());
+        this.set('download', this._getDownloadUrl());
 
         // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
         if (this.get('creator') === null)
@@ -109,6 +110,22 @@ class Resource extends BaseModel
             jsonString = this.resourceTypeCollection.get(resourceTypeId).toJSON();
         }
         this.set('resource_type_full', jsonString); 
+    }
+
+    /**
+     * Returns download URL.
+     */
+    _getDownloadUrl()
+    {
+        if (this.get('resource_file'))
+        {
+            return this.get('resource_file');
+        }
+        else if (this.get('compat_resource_file'))
+        {
+            return this.get('compat_resource_file');
+        }
+        return null;
     }
 }
 

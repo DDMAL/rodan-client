@@ -1,16 +1,16 @@
 import Radio from 'backbone.radio';
 import paper from 'paper';
 
-import BaseItem from './Items/BaseItem';
-import ConnectionItem from './Items/ConnectionItem';
-import Configuration from '../../Configuration';
-import Events from '../../Shared/Events';
-import GUI_EVENTS from './Shared/Events';
-import InputPortItem from './Items/InputPortItem';
-import LineItem from './Items/LineItem';
-import OutputPortItem from './Items/OutputPortItem';
-import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
-import WorkflowJobItem from './Items/WorkflowJobItem';
+import BaseItem from '../Items/BaseItem';
+import ConnectionItem from '../Items/ConnectionItem';
+import Configuration from '../../../Configuration';
+import Events from '../../../Shared/Events';
+import GUI_EVENTS from '../Shared/Events';
+import InputPortItem from '../Items/InputPortItem';
+import LineItem from '../Items/LineItem';
+import OutputPortItem from '../Items/OutputPortItem';
+import WorkflowJobGroupItem from '../Items/WorkflowJobGroupItem';
+import WorkflowJobItem from '../Items/WorkflowJobItem';
 
 /**
  * Controls management of items.

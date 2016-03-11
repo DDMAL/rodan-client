@@ -8,7 +8,7 @@ import Environment from '../../Shared/Environment';
 import Events from '../../Shared/Events';
 import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
-import ItemController from './ItemController';
+import ItemController from './Controllers/ItemController';
 import LayoutViewWorkflowBuilder from './Views/LayoutViewWorkflowBuilder';
 import OutputPortItem from './Items/OutputPortItem';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';

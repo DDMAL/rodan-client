@@ -31,13 +31,8 @@ var Events =
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                                 // Called when the app suspects that something went wrong.
     REQUEST__SYSTEM_DISPLAY_MESSAGE: 'REQUEST__SYSTEM_DISPLAY_MESSAGE', // Request message to be displayed in status bar. Takes {text: string}.
     REQUEST__SYSTEM_HANDLE_ERROR: 'REQUEST__SYSTEM_HANDLE_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
-    REQUEST__WORKFLOWJOBGROUP: 'REQUEST__WORKFLOWJOBGROUP',
-
-    // these two really require an event system
-    REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',
-    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',
-
-
+    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',                   // Request a WorkflowJobGroup, and all associated WorkflowJobs within, be deleted. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
+    REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',                 // Request a WorkflowJobGroup be "ungrouped". Same as REQUEST__WORKFLOWJOBGROUP_DELETE only the WorkflowJobs will not be deleted. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Authentication
@@ -50,6 +45,11 @@ var Events =
     REQUEST__AUTHENTICATION_LOGIN: 'REQUEST__AUTHENTICATION_LOGIN',                 // Request login authentication. Takes {username: string, password: string}. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
     REQUEST__AUTHENTICATION_LOGOUT: 'REQUEST__AUTHENTICATION_LOGOUT',               // Request logout for currently logged in user. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',                   // Request currently logged in User. Returns User or null.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Download
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__DOWNLOADMANAGER_DOWNLOAD: 'REQUEST__DOWNLOADMANAGER_DOWNLOAD',         
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections
@@ -196,10 +196,10 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup
 ///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__WORKFLOWJOBGROUP_GET_PORTS: 'REQUEST__WORKFLOWJOBGROUP_GET_PORTS',             // Request arrays of InputPort URLs and OutputPort URLs for the given WorkflowJobGroup. Takes {url: string (WorkflowJobGroup URL), workflow: Workflow}. Returns {inputports: [InputPort], outputports: [OutputPort]}.
     REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',                   // Request a Workflow (origin) be imported into another Workflow (target) as a WorkflowJobGroup. Takes {target: Workflow, origin: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION: 'REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION', // Request WorkflowJobGroups be loaded for a given Workflow. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',                       // Request a WorkflowJobGroup be saved/updated. Takes {workflowjobgroup: WorkflowJobGroup}.
-    REQUEST__WORKFLOWJOBGROUP_GET_PORTS: 'REQUEST__WORKFLOWJOBGROUP_GET_PORTS',             // Request arrays of InputPort URLs and OutputPort URLs for the given WorkflowJobGroup. Takes {url: string (WorkflowJobGroup URL), workflow: Workflow}. Returns {inputports: [InputPort], outputports: [OutputPort]}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
