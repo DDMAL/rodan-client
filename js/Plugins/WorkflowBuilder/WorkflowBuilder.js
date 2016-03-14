@@ -37,6 +37,7 @@ class WorkflowBuilder
      */
     initialize(workflow)
     { 
+        this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
         this._workflow = workflow;
         this._initializeView();
         this._initializeStateMachine();
@@ -93,6 +94,7 @@ class WorkflowBuilder
         this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
 
         this.guiChannel = Radio.channel('rodan-client_gui');
+        this.guiChannel.on(GUI_EVENTS.EVENT__WORKFLOWBUILDER_GUI_DESTROY, () => this._handleGuiDestroy());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW, () => this.getWorkflow());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
@@ -357,6 +359,18 @@ class WorkflowBuilder
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle GUI destroy.
+     */
+    _handleGuiDestroy()
+    {
+        BaseItem.clearMap();
+        //paper.tool.remove();
+        paper.view.remove();
+        paper.handleMouseEvent = null;
+        window.MouseEvent = this._oldMouseEvent;
+    }
+
     /**
      * Handle event model sync.
      *
