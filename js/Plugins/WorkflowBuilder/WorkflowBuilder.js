@@ -365,9 +365,6 @@ class WorkflowBuilder
     _handleGuiDestroy()
     {
         BaseItem.clearMap();
-        //paper.tool.remove();
-        paper.view.remove();
-        paper.handleMouseEvent = null;
         window.MouseEvent = this._oldMouseEvent;
     }
 
