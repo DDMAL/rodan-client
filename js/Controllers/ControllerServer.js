@@ -251,7 +251,7 @@ class ControllerServer extends BaseController
         }
 
         // Get the time.
-        if (options && options.getResponseHeader('Date'))
+        if (options && options.getResponseHeader && options.getResponseHeader('Date'))
         {
             var dateResponse = new Date(options.getResponseHeader('Date'));
             if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
