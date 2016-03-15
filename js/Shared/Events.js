@@ -97,6 +97,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Project
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__PROJECT_CREATE_RESPONSE: 'EVENT__PROJECT_CREATE_RESPONSE',           // Triggered when Project creation has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
+    EVENT__PROJECT_DELETE_RESPONSE: 'EVENT__PROJECT_DELETE_RESPONSE',           // Triggered when Project delete has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
+    EVENT__PROJECT_SAVE_RESPONSE: 'EVENT__PROJECT_SAVE_RESPONSE',               // Triggered when Project save has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',                         // Triggered when the user selects an individual Project. Sends {project: Project}.
     EVENT__PROJECT_SELECTED_COLLECTION: 'EVENT__PROJECT_SELECTED_COLLECTION',   // Triggered when the user selects to see all available Projects.
     REQUEST__PROJECT_CREATE: 'REQUEST__PROJECT_CREATE',                         // Request a Project be created. Takes {creator: User}.
