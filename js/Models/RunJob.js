@@ -1,4 +1,6 @@
+import Radio from 'backbone.radio';
 import BaseModel from './BaseModel';
+import Events from '../Shared/Events';
 
 /**
  * RunJob model.
@@ -9,13 +11,33 @@ class RunJob extends BaseModel
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
         this.routeName = 'runjobs';
         this.set('statusText', this._getStatusText(this.get('status')));
-        this.set('available', this._isAvailableForLock());
+        this.set('available', this.available());
+    }
+
+    /**
+     * Return true iff the current user can lock as a manual RunJob.
+     */
+    available()
+    {
+        var currentUser = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
+        if (this.get('interactive_acquire') !== null)
+        {
+            var serverDate = Radio.channel('rodan').request(Events.REQUEST__SERVER_DATE);
+            var expiryDate = new Date(this.get('working_user_expiry'));
+            if (this.get('working_user') === null
+                || this.get('working_user') === currentUser.get('url')
+                || serverDate.getTime() > expiryDate.getTime())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -73,14 +95,6 @@ class RunJob extends BaseModel
                 return 'Unknown status';
             }
         }
-    }
-
-    /**
-     * Returns true iff this is an interactive job waiting for input and has not been locked.
-     */
-    _isAvailableForLock()
-    {
-        return this.get('interactive_acquire') !== null && this.get('working_user') === null;
     }
 }
 

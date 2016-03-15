@@ -19,7 +19,7 @@ class BaseModel extends Backbone.Model
         super(options);
         this.idAttribute = 'uuid';
         this._initializeRadio();
-        this.on('change', event => this._onChange(event));
+        this.on('change', (model, options) => this._onChange(model, options));
         this.on('sync', (model, response, options) => this._onSync(model, response, options));
     }
 
@@ -105,8 +105,8 @@ class BaseModel extends Backbone.Model
      */
     _onChange(model, response, options)
     {
-        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE, {model: model, response: response, options: options});
-        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE + model.get('url'), {model: model, response: response, options: options});
+        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE, {model: model, options: options});
+        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE + model.get('url'), {model: model, options: options});
     }
 
     /**
@@ -147,28 +147,18 @@ class BaseModel extends Backbone.Model
 
         // Error.
         var genericErrorFunction = (model, response, options) => this._handleErrorResponse(model, response, options);
-        if (!options.hasOwnProperty('error') && (!options.hasOwnProperty('use_generic') || options.use_generic))
+        if (!options.hasOwnProperty('error'))
         {
             options.error = (model, response, options) => this._handleErrorResponse(model, response, options);
         }
         else
         {
             var customErrorFunction = options.error;
-            if (!options.hasOwnProperty('use_generic') || options.use_generic)
+            options.error = function(model, response, options)
             {
-                options.error = function(model, response, options)
-                {
-                    customErrorFunction(model, response, options);
-                    genericErrorFunction(model, response, options);
-                }; 
-            }
-            else
-            {
-                options.error = function(model, response, options)
-                {
-                    customErrorFunction(model, response, options);
-                }; 
-            }
+                customErrorFunction(model, response, options);
+                genericErrorFunction(model, response, options);
+            };
         }
 
         return options;

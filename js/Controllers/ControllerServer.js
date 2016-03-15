@@ -21,6 +21,7 @@ class ControllerServer extends BaseController
      */
     initialize()
     {
+        this._serverDate = null;
         this._server = null;
         this._originalSync = Backbone.sync;
         this._responseTimeout = null;
@@ -32,6 +33,18 @@ class ControllerServer extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Sends dummy request to get server time.
+     */
+    _sendTimeGetterRequest()
+    {
+        var request = new XMLHttpRequest();
+        request.open('HEAD', Configuration.SERVER_URL);
+        request.onreadystatechange = (event) => this._handleTimeRequest(event);
+        request.setRequestHeader("Content-Type", "text/html");
+        request.send('');
+    }
+
     /**
      * Sync override. This is needed if we want to use WebSockets.
      */
@@ -61,12 +74,21 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
+        this.rodanChannel.reply(Events.REQUEST__SERVER_DATE, () => this._handleRequestDate());
         this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
         this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
+    }
+
+    /**
+     * Return server date.
+     */
+    _handleRequestDate()
+    {
+        return this._serverDate;
     }
 
     /**
@@ -202,6 +224,12 @@ class ControllerServer extends BaseController
             };
         }
 
+        // Complete
+        if (!options.hasOwnProperty('complete'))
+        {
+            options.complete = genericResponseFunction;
+        }
+
         return options;
     }
 
@@ -220,6 +248,23 @@ class ControllerServer extends BaseController
             {
                 this._sendIdleNotification();
             }
+        }
+
+        // Get the time.
+        if (options && options.getResponseHeader('Date'))
+        {
+            var dateResponse = new Date(options.getResponseHeader('Date'));
+            if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
+            {
+                this._serverDate = dateResponse;
+                clearInterval(this._timeGetterInterval);
+                this._timeGetterInterval = null;
+            }
+        }
+
+        if (!this._timeGetterInterval)
+        {
+            this._timeGetterInterval = setInterval(() => this._sendTimeGetterRequest(), 5000);
         }
     }
 
@@ -247,6 +292,22 @@ class ControllerServer extends BaseController
     _sendPanicNotification()
     {
         this.rodanChannel.trigger(Events.EVENT__SERVER_PANIC);
+    }
+
+    /**
+     * Handle time getter request response.
+     */
+    _handleTimeRequest(event)
+    {
+        var request = event.currentTarget;
+        if (request && request.getResponseHeader('Date'))
+        {
+            var dateResponse = new Date(request.getResponseHeader('Date'));
+            if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
+            {
+                this._serverDate = dateResponse;
+            }
+        }
     }
 }
 

@@ -86,7 +86,7 @@ class ControllerRunJob extends BaseController
         // Get lock if available. Else, if we already have the lock, simply open the interface.
         var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
         var runJobUrl = options.runjob.get('url');
-        if (options.runjob.get('available'))
+        if (options.runjob.available())
         {
             var ajaxOptions = {
                 url: options.runjob.get('interactive_acquire'),

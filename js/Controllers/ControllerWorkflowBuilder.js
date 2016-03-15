@@ -656,8 +656,7 @@ class ControllerWorkflowBuilder extends BaseController
     _validateWorkflow(workflow)
     {
         workflow.save({valid: true}, {patch: true,
-                                      error: (model, response, options) => this._handleValidationFailure(model, response, options)/*,
-                                      use_generic: false*/});
+                                      error: (model, response, options) => this._handleValidationFailure(model, response, options)});
     }
 
     /**

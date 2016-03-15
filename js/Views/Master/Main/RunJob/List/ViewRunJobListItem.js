@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import Radio from 'backbone.radio';
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
@@ -7,6 +8,18 @@ import Events from '../../../../../Shared/Events';
  */
 class ViewRunJobListItem extends BaseViewListItem
 {
+///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Set a property before render.
+     * TODO - this is a shitty hack to make sure the client shows what runjobs are manual and available
+     */
+    onBeforeRender()
+    {
+        this.model.set('available', this.model.available());
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
