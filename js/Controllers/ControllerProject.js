@@ -32,9 +32,9 @@ class ControllerProject extends BaseController
     _initializeRadio()
     {
         // Events.
-        this.rodanChannel.on(Events.EVENT__PROJECT_CREATE_RESPONSE, options => this._handleEventProjectGenericResponse(options));
-        this.rodanChannel.on(Events.EVENT__PROJECT_DELETE_RESPONSE, options => this._handleEventProjectDeleteResponse(options));
-        this.rodanChannel.on(Events.EVENT__PROJECT_SAVE_RESPONSE, options => this._handleEventProjectGenericResponse(options));
+        this.rodanChannel.on(Events.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
+        this.rodanChannel.on(Events.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
+        this.rodanChannel.on(Events.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
         this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.on(Events.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventListSelected());
 
@@ -54,16 +54,7 @@ class ControllerProject extends BaseController
      */
     _handleEventProjectGenericResponse(options)
     {
-        if (options.status === 'success')
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {});
-        }
-        else
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response.responseText});
-        }
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {});
     }
 
     /**
@@ -71,17 +62,8 @@ class ControllerProject extends BaseController
      */
     _handleEventProjectDeleteResponse(options)
     {
-        if (options.status === 'success')
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {});
-            this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
-        }
-        else
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response});
-        }
+        this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {});
+        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 
     /**
@@ -89,10 +71,7 @@ class ControllerProject extends BaseController
      */
     _handleRequestProjectSave(options)
     {
-        options.project.save(options.fields, {patch: true, 
-                                              success: (model, response, options) => this._handleProjectSaveComplete(model, response, options),
-                                              error: (model, response, options) => this._handleProjectSaveComplete(model, response, options)});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Project', text: 'Please wait...'});
+        options.project.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__PROJECT_SAVED, {project: model})});
     }
 
     /**
@@ -101,9 +80,7 @@ class ControllerProject extends BaseController
     _handleRequestCreateProject(options)
     {
         var project = new Project({creator: options.user});
-        project.save({}, {success: (model, response, options) => this._handleProjectCreateComplete(model, response, options),
-                          error: (model, response, options) => this._handleProjectCreateComplete(model, response, options)});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Project', text: 'Please wait...'});
+        project.save({}, {success: (model) => this.rodanChannel.trigger(Events.EVENT__PROJECT_CREATED, {project: model})});
     }
 
     /**
@@ -111,13 +88,8 @@ class ControllerProject extends BaseController
      */
     _handleRequestProjectDelete(options)
     {
-        var confirmation = confirm('Are you sure you want to delete this project?');
-        if (confirmation)
-        {
-            this._activeProject = null;
-            options.project.destroy({success: (model, response, options) => this._handleProjectDeleteComplete(model, response, options),
-                                     error: (model, response, options) => this._handleProjectDeleteComplete(model, response, options)});
-        }
+        this._activeProject = null;
+        options.project.destroy({success: (model) => this.rodanChannel.trigger(Events.EVENT__PROJECT_DELETED, {project: model})});
     }
 
     /**
@@ -161,48 +133,6 @@ class ControllerProject extends BaseController
     _handleRequestProjectActive()
     {
         return this._activeProject;
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Callback handlers
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle Project creation callback.
-     */
-    _handleProjectCreateComplete(model, response, options)
-    {
-        var returnObject = {status: 'success', response: model};
-        if (options.xhr.status !== 201)
-        {
-            returnObject = {status: 'failed', response: response};
-        }
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_CREATE_RESPONSE, returnObject);
-    }
-
-    /**
-     * Handle Project save callback.
-     */
-    _handleProjectSaveComplete(model, response, options)
-    {
-        var returnObject = {status: 'success', response: model};
-        if (options.xhr.status !== 200)
-        {
-            returnObject = {status: 'failed', response: response};
-        }
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_SAVE_RESPONSE, returnObject);
-    }
-
-    /**
-     * Handle delete callback.
-     */
-    _handleProjectDeleteComplete(model, response, options)
-    {
-        var returnObject = {status: 'success', response: model};
-        if (options.xhr.status !== 204)
-        {
-            returnObject = {status: 'failed', response: response};
-        }
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_DELETE_RESPONSE, returnObject);
     }
 }
 

@@ -97,9 +97,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Project
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__PROJECT_CREATE_RESPONSE: 'EVENT__PROJECT_CREATE_RESPONSE',           // Triggered when Project creation has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
-    EVENT__PROJECT_DELETE_RESPONSE: 'EVENT__PROJECT_DELETE_RESPONSE',           // Triggered when Project delete has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
-    EVENT__PROJECT_SAVE_RESPONSE: 'EVENT__PROJECT_SAVE_RESPONSE',               // Triggered when Project save has completed. Returns {status: String ('success' or 'failed'), response: Project (if success) or response error object if failed}.
+    EVENT__PROJECT_CREATED: 'EVENT__PROJECT_CREATED',                           // Triggered when Project has been created. Sends {project: Project}.
+    EVENT__PROJECT_DELETED: 'EVENT__PROJECT_DELETED',                           // Triggered when Project has been deleted. Sends {project: Project}.
+    EVENT__PROJECT_SAVED: 'EVENT__PROJECT_SAVED',                               // Triggered when Project has been saved. Sends {project: Project}.
     EVENT__PROJECT_SELECTED: 'EVENT__PROJECT_SELECTED',                         // Triggered when the user selects an individual Project. Sends {project: Project}.
     EVENT__PROJECT_SELECTED_COLLECTION: 'EVENT__PROJECT_SELECTED_COLLECTION',   // Triggered when the user selects to see all available Projects.
     REQUEST__PROJECT_CREATE: 'REQUEST__PROJECT_CREATE',                         // Request a Project be created. Takes {creator: User}.
@@ -208,8 +208,8 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
 ///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__WORKFLOWRUN_CREATE_RESPONSE: 'EVENT__WORKFLOWRUN_CREATE_RESPONSE',           // Triggered when WorkflowRun creation has completed. Returns {status: String ('success' or 'failed'), response: WorkflowRun (if success) or response error object if failed}.
-    EVENT__WORKFLOWRUN_SAVE_RESPONSE: 'EVENT__WORKFLOWRUN_SAVE_RESPONSE',               // Triggered when WorkflowRun save has completed. Returns {status: String ('success' or 'failed'), response: WorkflowRun (if success) or response error object if failed}.
+    EVENT__WORKFLOWRUN_CREATED: 'EVENT__WORKFLOWRUN_CREATED',                           // Triggered when WorkflowRun created. Sends {workflowrun: WorkflowRun}.
+    EVENT__WORKFLOWRUN_SAVED: 'EVENT__WORKFLOWRUN_SAVED',                               // Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',                         // Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}.
     EVENT__WORKFLOWRUN_SELECTED_COLLECTION: 'EVENT__WORKFLOWRUN_SELECTED_COLLECTION',   // Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}.
     REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',                         // Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}.

@@ -20,8 +20,8 @@ class ControllerWorkflowRun extends BaseController
     _initializeRadio()
     {
         // Events.
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_CREATE_RESPONSE, options => this._handleEventWorkflowRunCreationResponse(options));
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SAVE_RESPONSE, options => this._handleEventWorkflowRunSaveResponse(options));
+        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
+        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
 
         // Requests.
         this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
@@ -38,17 +38,8 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunCreationResponse(options)
     {
-        if (options.status === 'success')
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
-        }
-        else
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response.responseText});
-        }
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
 
     /**
@@ -56,16 +47,7 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunSaveResponse(options)
     {
-        if (options.status === 'success')
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        }
-        else
-        {
-            this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response.responseText});
-        }
+        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
     }
 
     /**
@@ -102,9 +84,7 @@ class ControllerWorkflowRun extends BaseController
                                            resource_assignments: options.assignments,
                                            name: name,
                                            description: description});
-        workflowRun.save({}, {success: (model, response, options) => this._handleWorkflowRunCreateComplete(model, response, options),
-                              error: (model, response, options) => this._handleWorkflowRunCreateComplete(model, response, options)});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Workflow Run', text: 'Please wait...'});
+        workflowRun.save({}, {success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
     }
 
     /**
@@ -112,39 +92,8 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunSave(options)
     {
-        options.workflowrun.save(options.workflowrun.changed, {patch: true,
-                                                               success: (model, response, options) => this._handleWorkflowRunSaveComplete(model, response, options),
-                                                               error: (model, response, options) => this._handleWorkflowRunSaveComplete(model, response, options)});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Run', text: 'Please wait...'});
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - Callback handlres
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle WorkflowRun creation callback.
-     */
-    _handleWorkflowRunCreateComplete(model, response, options)
-    {
-        var returnObject = {status: 'success', response: model};
-        if (options.xhr.status !== 201)
-        {
-            returnObject = {status: 'failed', response: response};
-        }
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_CREATE_RESPONSE, returnObject);
-    }
-
-    /**
-     * Handle WorkflowRun save callback.
-     */
-    _handleWorkflowRunSaveComplete(model, response, options)
-    {
-        var returnObject = {status: 'success', response: model};
-        if (options.xhr.status !== 200)
-        {
-            returnObject = {status: 'failed', response: response};
-        }
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SAVE_RESPONSE, returnObject);
+        options.workflowrun.save(options.workflowrun.changed,
+                                 {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

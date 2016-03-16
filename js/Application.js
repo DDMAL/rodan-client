@@ -26,6 +26,7 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
+import RadioManager from './Managers/RadioManager';
 
 /**
  * Main app class.
@@ -50,7 +51,7 @@ class Application extends Marionette.Application
         this._initializeRadio();
         this._initializeCollections();
         this._initializeManagers();
-        
+
         this._initializeAjaxPrefilters();
         this._initializeViews();
         this._initializeControllers();
@@ -83,6 +84,7 @@ class Application extends Marionette.Application
     _initializeManagers()
     {
         this._downloadManager = new DownloadManager();
+        this._radioManager = new RadioManager();
     }
 
     /**
