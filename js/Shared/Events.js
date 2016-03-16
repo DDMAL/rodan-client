@@ -3,18 +3,12 @@
  */
 var Events = 
 {
-    // want to give plugins access to:
-    // - builder events
-    // - main region view
-    // - modals
 // todo
-// make sure Events can only be listened to and requests can only be requested
-// CONTROLLERS: workflow, workflowjob, workflowjobgroup, workflowrun: they all message the builder and they shouldn't
+// CONTROLLERS: workflowjob messages the builder and it shouldn't
 
 // TODO - in final docs, explain
 // 
 //  make model saves like workflowjob controller; only specify the "changed" fields
-//  after creating workflowjob, ports, etc...validation should happen based on an event, not via the controllers
 //  server errors (json)
 //  explain options for route
 //  data: {query parameters}
@@ -121,7 +115,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',                       // Triggered when the user selects an individual RunJob. Sends {runjob: RunJob}.
     EVENT__RUNJOB_SELECTED_COLLECTION: 'EVENT__RUNJOB_SELECTED_COLLECTION', // Triggered when the user selects to see RunJobs for a Project.
-    REQUEST__RUNJOB_ACQUIRE: 'REQUEST__RUNJOB_ACQUIRE',
+    REQUEST__RUNJOB_ACQUIRE: 'REQUEST__RUNJOB_ACQUIRE',                     // Request the provided RunJob be locked on the server for the current user. Takes {runjob: RunJob}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server
@@ -149,6 +143,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Workflow
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__WORKFLOW_CREATED: 'EVENT__WORKFLOW_CREATED',                         // Triggered when Workflow has been created. Sends {workflow: Workflow}.
+    EVENT__WORKFLOW_DELETED: 'EVENT__WORKFLOW_DELETED',                         // Triggered when Workflow has been deleted. Sends {workflow: Workflow}.
+    EVENT__WORKFLOW_SAVED: 'EVENT__WORKFLOW_SAVED',                             // Triggered when Workflow has been saved. Sends {workflow: Workflow}.
     EVENT__WORKFLOW_SELECTED: 'EVENT__WORKFLOW_SELECTED',                       // Triggered when the user selects an individual Workflow. Sends {workflow: Workflow}.
     EVENT__WORKFLOW_SELECTED_COLLECTION: 'EVENT__WORKFLOW_SELECTED_COLLECTION', // Triggered when the user selects to see all available Workflows. Sends {project: Project (Project associated with WorkflowCollection)}.
     REQUEST__WORKFLOW_CREATE: 'REQUEST__WORKFLOW_CREATE',                       // Request a Workflow be created. Takes {project: Project}.

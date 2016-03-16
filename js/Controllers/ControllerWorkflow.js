@@ -20,8 +20,11 @@ class ControllerWorkflow extends BaseController
      */
     _initializeRadio()
     {
+        // Events.
         this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
         this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
+
+        // Requests.
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
@@ -59,14 +62,11 @@ class ControllerWorkflow extends BaseController
     _handleCommandDeleteWorkflow(options)
     {
         // Clear the individual view (if there).
-        if (this._viewItem != null && options.workflow == this._viewItem.model)
+        if (this._viewItem !== null && options.workflow === this._viewItem.model)
         {
             this._layoutView.clearItemView();
         }
-
-        // Remove.
-        options.workflow.destroy();
-        this._collection.remove(options.workflow);
+        options.workflow.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
     }
 
     /**
@@ -74,7 +74,8 @@ class ControllerWorkflow extends BaseController
      */
     _handleCommandAddWorkflow(options)
     {
-        return this._collection.create({project: options.project.get('url'), name: 'untitled'});
+        var workflow = new Workflow({project: options.project.get('url'), name: 'untitled'});
+        workflow.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
     }
 
     /**
@@ -82,7 +83,28 @@ class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
-        options.workflow.save(options.fields, {patch: true});
+        options.workflow.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SAVED, {workflow: options.workflow})});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - REST handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle create success.
+     */
+    _handleCreateSuccess(model, collection)
+    {
+        collection.add(model);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_CREATED, {workflow: model})
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleDeleteSuccess(model, collection)
+    {
+        collection.remove(model);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_DELETED, {workflow: model})
     }
 }
 

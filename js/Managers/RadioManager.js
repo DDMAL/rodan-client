@@ -27,6 +27,10 @@ class RadioManager
         this._radioRequestResponseMap[Events.REQUEST__PROJECT_DELETE] = {event: Events.EVENT__PROJECT_DELETED, modalTitle: 'Deleting Project'};
         this._radioRequestResponseMap[Events.REQUEST__PROJECT_SAVE] = {event: Events.EVENT__PROJECT_SAVED, modalTitle: 'Saving Project'};
 
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOW_CREATE] = {event: Events.EVENT__WORKFLOW_CREATED, modalTitle: 'Creating Workflow'};
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOW_DELETE] = {event: Events.EVENT__WORKFLOW_DELETED, modalTitle: 'Deleting Workflow'};
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOW_SAVE] = {event: Events.EVENT__WORKFLOW_SAVED, modalTitle: 'Saving Workflow'};
+
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW] = {event: Events.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, modalTitle: 'Loading Workflow'};
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW] = {event: Events.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, modalTitle: 'Validating Workflow'};
 
