@@ -199,7 +199,8 @@ class ControllerWorkflowBuilder extends BaseController
     _handleWorkflowLoadSuccess(workflow)
     {
         this._processWorkflow(workflow);
-        this._validateWorkflow(workflow);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -239,8 +240,9 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestImportWorkflow(options)
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, {origin: options.origin, target: options.target});
+        this.rodanChannel.once(Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, 
+                               () => this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: options.target}));
     }
 
     /**
@@ -474,7 +476,7 @@ class ControllerWorkflowBuilder extends BaseController
     {
         workflow.get('workflow_input_ports').add(model);
         workflowJob.get('input_ports').add(model);
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -488,7 +490,7 @@ class ControllerWorkflowBuilder extends BaseController
         {
             this._createConnection(model, targetInputPorts[index], workflow);
         }
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -499,7 +501,7 @@ class ControllerWorkflowBuilder extends BaseController
         workflow.get('connections').add(model);
         inputPort.fetch(); // to get populated Connection array
         outputPort.fetch(); // to get populated Connection array
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -508,7 +510,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleInputPortDeletionSuccess(model, workflow, workflowJob)
     {
         workflowJob.get('input_ports').remove(model);
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -517,7 +519,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleOutputPortDeletionSuccess(model, workflow, workflowJob)
     {
         workflowJob.get('output_ports').remove(model);
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -526,7 +528,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleConnectionDeletionSuccess(model, workflow)
     {
         workflow.get('connections').remove(model);
-        this._validateWorkflow(workflow);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
     /**
@@ -535,6 +537,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleValidationFailure(model, response, options)
     {
         model.set({'valid': false});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, {workflow: model});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -656,6 +659,7 @@ class ControllerWorkflowBuilder extends BaseController
     _validateWorkflow(workflow)
     {
         workflow.save({valid: true}, {patch: true,
+                                      success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, {workflow: model}),
                                       error: (model, response, options) => this._handleValidationFailure(model, response, options)});
     }
 

@@ -23,6 +23,7 @@ class ViewWorkflowListImportItem extends BaseViewListItem
 ///////////////////////////////////////////////////////////////////////////////////////
     _handleButtonImportWorkflow()
     {
+        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
     }
 }

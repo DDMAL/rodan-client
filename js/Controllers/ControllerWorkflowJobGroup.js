@@ -28,6 +28,7 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _initializeRadio()
     {
+        // Requests.
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, (options) => this._handleRequestGetPorts(options));
@@ -117,7 +118,7 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleWorkflowJobGroupCreationSuccess(model, workflow)
     {
         this._collection.set(model, {remove: false});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {workflow: workflow});
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, {workflowjobgroup: model});
     }
 
     /**
