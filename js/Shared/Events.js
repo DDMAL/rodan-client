@@ -49,7 +49,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Download
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__DOWNLOADMANAGER_DOWNLOAD: 'REQUEST__DOWNLOADMANAGER_DOWNLOAD',         
+    REQUEST__DOWNLOADMANAGER_DOWNLOAD: 'REQUEST__DOWNLOADMANAGER_DOWNLOAD', // Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections
@@ -208,6 +208,8 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__WORKFLOWRUN_CREATE_RESPONSE: 'EVENT__WORKFLOWRUN_CREATE_RESPONSE',           // Triggered when WorkflowRun creation has completed. Returns {status: String ('success' or 'failed'), response: WorkflowRun (if success) or response error object if failed}.
+    EVENT__WORKFLOWRUN_SAVE_RESPONSE: 'EVENT__WORKFLOWRUN_SAVE_RESPONSE',               // Triggered when WorkflowRun save has completed. Returns {status: String ('success' or 'failed'), response: WorkflowRun (if success) or response error object if failed}.
     EVENT__WORKFLOWRUN_SELECTED: 'EVENT__WORKFLOWRUN_SELECTED',                         // Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}.
     EVENT__WORKFLOWRUN_SELECTED_COLLECTION: 'EVENT__WORKFLOWRUN_SELECTED_COLLECTION',   // Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}.
     REQUEST__WORKFLOWRUN_CREATE: 'REQUEST__WORKFLOWRUN_CREATE',                         // Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}.
