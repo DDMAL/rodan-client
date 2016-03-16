@@ -62,7 +62,7 @@ class ControllerProject extends BaseController
         else
         {
             this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: response});
+            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response.responseText});
         }
     }
 
@@ -80,7 +80,7 @@ class ControllerProject extends BaseController
         else
         {
             this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: response});
+            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error :(', text: options.response});
         }
     }
 
