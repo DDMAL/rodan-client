@@ -28,6 +28,7 @@ class WorkflowBuilder
      */
     constructor(options)
     {
+        this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
         this._workflow = null;
     }
 
@@ -37,7 +38,6 @@ class WorkflowBuilder
      */
     initialize(workflow)
     { 
-        this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
         this._workflow = workflow;
         this._initializeView();
         this._initializeStateMachine();
