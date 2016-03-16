@@ -44,7 +44,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        options.workflowjob.destroy({success: (model) => this._handleWorkflowJobDeletionSuccess(model, options.workflow)});
+        options.workflowjob.destroy({success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_DELETED, {workflowjob: model})});
     }
 
     /**
@@ -52,7 +52,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(options.workflowjob, options.workflow)});
+        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SAVED, {workflowjob: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -64,27 +64,11 @@ class ControllerWorkflowJob extends BaseController
     _handleWorkflowJobCreationSuccess(model, workflow, addPorts, targetInputPorts)
     {
         workflow.get('workflow_jobs').add(model);
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_CREATED, {workflowjob: model});
         if (addPorts)
         {
             this._addRequiredPorts(model, targetInputPorts, workflow);
         }
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
-    }
-
-    /**
-     * Handle WorkflowJob deletion success.
-     */
-    _handleWorkflowJobDeletionSuccess(model, workflow)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
-    }
-
-    /**
-     * Handle WorkflowJob save success.
-     */
-    _handleWorkflowJobSaveSuccess(model, workflow)
-    {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

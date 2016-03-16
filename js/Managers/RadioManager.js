@@ -30,9 +30,13 @@ class RadioManager
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW] = {event: Events.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, modalTitle: 'Loading Workflow'};
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW] = {event: Events.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, modalTitle: 'Validating Workflow'};
 
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOB_CREATE] = {event: Events.EVENT__WORKFLOWJOB_CREATED, modalTitle: 'Creating Workflow Job'};
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOB_DELETE] = {event: Events.EVENT__WORKFLOWJOB_DELETED, modalTitle: 'Deleting Workflow Job'};
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOB_SAVE] = {event: Events.EVENT__WORKFLOWJOB_SAVED, modalTitle: 'Saving Workflow Job'};
+
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOBGROUP_IMPORT] = {event: Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, modalTitle: 'Importing Workflow'};
+        this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOBGROUP_DELETE] = {event: Events.EVENT__WORKFLOWJOBGROUP_DELETED, modalTitle: 'Deleting Workflow Job Group'};
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOBGROUP_SAVE] = {event: Events.EVENT__WORKFLOWJOBGROUP_SAVED, modalTitle: 'Saving Workflow Job Group'};
-        this._radioRequestResponseMap[Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP] = {event: Events.EVENT__WORKFLOWJOBGROUP_UNGROUPED, modalTitle: 'Ungrouping Workflow Job Group'};
 
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWRUN_CREATE] = {event: Events.EVENT__WORKFLOWRUN_CREATED, modalTitle: 'Creating Workflow Run'};
         this._radioRequestResponseMap[Events.REQUEST__WORKFLOWRUN_SAVE] = {event: Events.EVENT__WORKFLOWRUN_SAVED, modalTitle: 'Saving Workflow Run'};
@@ -54,7 +58,6 @@ class RadioManager
                 this._pendingResponses[response.event] = 0;
             }
             this._pendingResponses[response.event] += 1;
-
             this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: response.modalTitle, text: 'Please wait...'});
             this.rodanChannel.once(response.event, () => this._handleRadioEvent(response.event));
         }

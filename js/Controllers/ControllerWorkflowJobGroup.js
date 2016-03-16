@@ -35,7 +35,6 @@ class ControllerWorkflowJobGroup extends BaseController
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION, (options) => this._handleRequestWorkflowJobGroupLoadCollection(options));
         this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, (options) => this._handleRequestUngroupWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -54,15 +53,7 @@ class ControllerWorkflowJobGroup extends BaseController
             urls.push(workflowJobs[index].get('url'));
         }
         var workflowJobGroup = new WorkflowJobGroup({workflow_jobs: urls, workflow: workflow});
-        workflowJobGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflow)});
-    }
-
-    /**
-     * Handle WorkflowJobGroup ungroup.
-     */
-    _handleRequestUngroupWorkflowJobGroup(options)
-    {
-        this._ungroupWorkflowJobGroup(options.workflowjobgroup, options.workflow, false);
+        workflowJobGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model)});
     }
 
     /**
@@ -86,7 +77,7 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestDeleteWorkflowJobGroup(options)
     {
-        this._ungroupWorkflowJobGroup(options.workflowjobgroup, options.workflow, true);
+        options.workflowjobgroup.destroy({success: (model) => this._handleWorkflowJobGroupDeleteSuccess(options.workflowjobgroup)});
     }
 
     /**
@@ -97,7 +88,7 @@ class ControllerWorkflowJobGroup extends BaseController
         var workflow = options.target;
         var originWorkflow = options.origin;
         var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
-        newGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model, workflow)});
+        newGroup.save({}, {success: (model) => this._handleWorkflowJobGroupCreationSuccess(model)});
     }
 
     /**
@@ -115,7 +106,7 @@ class ControllerWorkflowJobGroup extends BaseController
     /**
      * Handle import success.
      */
-    _handleWorkflowJobGroupCreationSuccess(model, workflow)
+    _handleWorkflowJobGroupCreationSuccess(model)
     {
         this._collection.set(model, {remove: false});
         this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, {workflowjobgroup: model});
@@ -124,43 +115,15 @@ class ControllerWorkflowJobGroup extends BaseController
     /**
      * Handle ungroup success.
      */
-    _handleWorkflowJobGroupUngroupSuccess(workflowJobGroup, workflow)
+    _handleWorkflowJobGroupDeleteSuccess(workflowJobGroup)
     {
         this._collection.remove(workflowJobGroup);
-        var workflowJobs = workflowJobGroup.get('workflow_jobs');
-        for (var index in workflowJobs)
-        {
-            var workflowJob = workflow.get('workflow_jobs').findWhere({url: workflowJobs[index]});
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: workflowJob, workflow: workflow});
-        }
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_DELETED, {workflowjobgroup: workflowJobGroup});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Ungroups a WorkflowJobGroup
-     */
-    _ungroupWorkflowJobGroup(workflowJobGroup, workflow, deleteWorkflowJobs)
-    {
-        if (deleteWorkflowJobs)
-        {
-            workflowJobGroup.destroy({success: (model) => this._handleWorkflowJobGroupUngroupSuccess(model, workflow)});
-        }
-        else
-        {
-            workflowJobGroup.destroy({success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_UNGROUPED, {workflowjobgroup: model})});
-        }
-    }
-
-    /**
-     * Save WorkflowJobGroup.
-     */
-    _saveWorkflowJobGroup(workflowJobGroup)
-    {
-        workflowJobGroup.save({name: workflowJobGroup.get('name')}, {patch: true});
-    }
-
     /**
      * Determine which ports should be kept exposed for the provided WorkflowJobs.
      *

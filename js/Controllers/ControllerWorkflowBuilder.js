@@ -209,6 +209,8 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestAddWorkflowJob(options)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_CREATE, {job: options.job, workflow: options.workflow, addports: this._addPorts});
+        this.rodanChannel.once(Events.EVENT__WORKFLOWJOB_CREATED, 
+                               () => this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: options.workflow}));
     }
 
     /**
@@ -217,6 +219,8 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestDeleteWorkflowJob(options)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_DELETE, {workflowjob: options.workflowjob, workflow: options.workflow});
+        this.rodanChannel.once(Events.EVENT__WORKFLOWJOB_DELETED, 
+                               () => this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: options.workflow}));
     }
 
     /**
@@ -225,6 +229,7 @@ class ControllerWorkflowBuilder extends BaseController
     _handleRequestDeleteWorkflowJobGroup(options)
     {
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: options.workflowjobgroup, workflow: options.workflow});
+        this.rodanChannel.once(Events.EVENT__WORKFLOWJOBGROUP_DELETED, () => this._handleEventWorkflowJobGroupDelete(options.workflowjobgroup, options.workflow));
     }
 
     /**
@@ -335,7 +340,7 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestWorkflowJobGroupUngroup(options)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: options.workflowjobgroup, workflow: options.workflow});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: options.workflowjobgroup, workflow: options.workflow});
     }
 
     /**
@@ -447,6 +452,19 @@ class ControllerWorkflowBuilder extends BaseController
     {
         var view = new ViewSettings({workflow: options.workflow, model: options.workflowjob});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Settings'});
+    }
+
+    /**
+     * Handle WorkflowJobGroup delete success. This will remove associated WorkflowJobs.
+     */
+    _handleEventWorkflowJobGroupDelete(workflowJobGroup, workflow)
+    {
+        var workflowJobs = workflowJobGroup.get('workflow_jobs');
+        for (var index in workflowJobs)
+        {
+            var workflowJob = workflow.get('workflow_jobs').findWhere({url: workflowJobs[index]});
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, {workflowjob: workflowJob, workflow: workflow});
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

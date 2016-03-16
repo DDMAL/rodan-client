@@ -193,6 +193,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJob
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__WORKFLOWJOB_CREATED: 'EVENT__WORKFLOWJOB_CREATED',   // Triggered when WorkflowJob created. Sends {workflowjob: WorkflowJob}.
+    EVENT__WORKFLOWJOB_DELETED: 'EVENT__WORKFLOWJOB_DELETED',   // Triggered when WorkflowJob deleted. Sends {workflowjob: WorkflowJob}.
+    EVENT__WORKFLOWJOB_SAVED: 'EVENT__WORKFLOWJOB_SAVED',       // Triggered when WorkflowJob saved. Sends {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_CREATE: 'REQUEST__WORKFLOWJOB_CREATE', // Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created iff addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) iff the WorkflowJob created has one and only one OutputPort.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Request a WorkflowJob be deleted. Takes {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Request a WorkflowJob be saved/updated. Takes {workflowjob: WorkflowJob}.
@@ -201,14 +204,13 @@ var Events =
 // WorkflowJobGroup
 ///////////////////////////////////////////////////////////////////////////////////////
     EVENT__WORKFLOWJOBGROUP_IMPORTED: 'EVENT__WORKFLOWJOBGROUP_IMPORTED',                   // Triggered when WorkflowJobGroup imported. Sends {workflowjobgroup: WorkflowJobGroup}.
+    EVENT__WORKFLOWJOBGROUP_DELETED: 'EVENT__WORKFLOWJOBGROUP_DELETED',                     // Triggered when WorkflowJobGroup has been deleted. Sends {workflowjobgroup: WorkflowJobGroup}.
     EVENT__WORKFLOWJOBGROUP_SAVED: 'EVENT__WORKFLOWJOBGROUP_SAVED',                         // Triggered when WorkflowJobGroup saved. Sends {workflowjobgroup: WorkflowJobGroup}.
-    EVENT__WORKFLOWJOBGROUP_UNGROUPED: 'EVENT__WORKFLOWJOBGROUP_UNGROUPED',                 // Triggered when WorkflowJobGroup has been 'ungrouped'. Sends {workflowjobgroup: WorkflowJobGroup}.
-    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',                   // Request a WorkflowJobGroup, and all associated WorkflowJobs within, be deleted. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
+    REQUEST__WORKFLOWJOBGROUP_DELETE: 'REQUEST__WORKFLOWJOBGROUP_DELETE',                   // Request a WorkflowJobGroup be deleted. Takes {workflowjobgroup: WorkflowJobGroup}.
     REQUEST__WORKFLOWJOBGROUP_GET_PORTS: 'REQUEST__WORKFLOWJOBGROUP_GET_PORTS',             // Request arrays of InputPort URLs and OutputPort URLs for the given WorkflowJobGroup. Takes {url: string (WorkflowJobGroup URL), workflow: Workflow}. Returns {inputports: [InputPort], outputports: [OutputPort]}.
     REQUEST__WORKFLOWJOBGROUP_IMPORT: 'REQUEST__WORKFLOWJOBGROUP_IMPORT',                   // Request a Workflow (origin) be imported into another Workflow (target) as a WorkflowJobGroup. Takes {target: Workflow, origin: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION: 'REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION', // Request WorkflowJobGroups be loaded for a given Workflow. Takes {workflow: Workflow}.
     REQUEST__WORKFLOWJOBGROUP_SAVE: 'REQUEST__WORKFLOWJOBGROUP_SAVE',                       // Request a WorkflowJobGroup be saved/updated. Takes {workflowjobgroup: WorkflowJobGroup}.
-    REQUEST__WORKFLOWJOBGROUP_UNGROUP: 'REQUEST__WORKFLOWJOBGROUP_UNGROUP',                 // Request a WorkflowJobGroup be "ungrouped". Same as REQUEST__WORKFLOWJOBGROUP_DELETE only the WorkflowJobs will not be deleted. Takes {workflowjobgroup: WorkflowJobGroup, workflow: Workflow}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowRun

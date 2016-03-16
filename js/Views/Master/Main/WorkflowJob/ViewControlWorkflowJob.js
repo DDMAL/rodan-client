@@ -36,6 +36,7 @@ class ViewControlWorkflowJob extends Marionette.ItemView
      */
     _handleButtonSave()
     {
+        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
         this.model.set({'name': this.ui.textName.val()});
         this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model});
     }
