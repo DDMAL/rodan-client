@@ -79,7 +79,8 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
      */
     _handleDoubleClick(mouseEvent)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {workflowjobgroup: this.getModel()});
+        var workflow = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {workflowjobgroup: this.getModel(), workflow: workflow});
     }
 
     /**
