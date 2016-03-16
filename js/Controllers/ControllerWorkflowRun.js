@@ -127,7 +127,7 @@ class ControllerWorkflowRun extends BaseController
     _handleWorkflowRunCreateComplete(model, response, options)
     {
         var returnObject = {status: 'success', response: model};
-        if (options.xhr.statusText !== 'CREATED')
+        if (options.xhr.status !== 201)
         {
             returnObject = {status: 'failed', response: response};
         }
@@ -140,7 +140,7 @@ class ControllerWorkflowRun extends BaseController
     _handleWorkflowRunSaveComplete(model, response, options)
     {
         var returnObject = {status: 'success', response: model};
-        if (options.xhr.statusText !== 'OK')
+        if (options.xhr.status !== 200)
         {
             returnObject = {status: 'failed', response: response};
         }

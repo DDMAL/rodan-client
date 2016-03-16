@@ -172,7 +172,7 @@ class ControllerProject extends BaseController
     _handleProjectCreateComplete(model, response, options)
     {
         var returnObject = {status: 'success', response: model};
-        if (options.xhr.statusText !== 'CREATED')
+        if (options.xhr.status !== 201)
         {
             returnObject = {status: 'failed', response: response};
         }
@@ -185,7 +185,7 @@ class ControllerProject extends BaseController
     _handleProjectSaveComplete(model, response, options)
     {
         var returnObject = {status: 'success', response: model};
-        if (options.xhr.statusText !== 'OK')
+        if (options.xhr.status !== 200)
         {
             returnObject = {status: 'failed', response: response};
         }
@@ -198,7 +198,7 @@ class ControllerProject extends BaseController
     _handleProjectDeleteComplete(model, response, options)
     {
         var returnObject = {status: 'success', response: model};
-        if (options.xhr.statusText !== 'NO CONTENT')
+        if (options.xhr.status !== 204)
         {
             returnObject = {status: 'failed', response: response};
         }
