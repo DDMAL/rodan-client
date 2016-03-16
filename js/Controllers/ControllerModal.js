@@ -29,14 +29,16 @@ class ControllerModal extends BaseController
      */
     _initializeRadio()
     {
+        // Events.
+        this.rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
+        this.rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
+        this.rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
+
+        // Requests.
         this.rodanChannel.reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
         this.rodanChannel.reply(Events.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
-
-        this.rodanChannel.on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
-        this.rodanChannel.on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
-        this.rodanChannel.on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
