@@ -142,6 +142,7 @@ class BaseItem extends paper.Path
         {
             this._text.position = this.bounds.center;
         }
+        this._hasMoved = true;
     }
 
     /**
@@ -154,6 +155,7 @@ class BaseItem extends paper.Path
         {
             this._text.position = this.bounds.center;
         }
+        this._hasMoved = true;
     }
 
     /**
@@ -180,7 +182,7 @@ class BaseItem extends paper.Path
      */
     updatePositionToServer()
     {
-        if (this.isMoveable())
+        if (this.isMoveable() && this._hasMoved)
         {
             // If an ID exists, we know it exists on the server, so we can patch it.
             // Else if we haven't tried saving it before, do it. This should create
@@ -193,6 +195,7 @@ class BaseItem extends paper.Path
                 var coordinates = {x: x, y: y};
                 this._coordinateSetModel.set({'data': coordinates});
                 this._coordinateSetModel.save(); 
+                this._hasMoved = false;
             }
         }
     }
