@@ -18,7 +18,6 @@ import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow'
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
 import ViewWorkflowListImportItem from '../Views/Master/Main/Workflow/List/ViewWorkflowListImportItem';
 import Workflow from '../Models/Workflow';
-import WorkflowBuilder from '../Plugins/WorkflowBuilder/WorkflowBuilder';
 import WorkflowCollection from '../Collections/WorkflowCollection';
 import WorkflowJob from '../Models/WorkflowJob';
 import ViewWorkflowJobGroup from '../Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup';
@@ -38,7 +37,6 @@ class ControllerWorkflowBuilder extends BaseController
      */
     initialize()
     {
-        this._workspace = new WorkflowBuilder();
         this._resourceAssignments = []; // this helps manage the list of resource assignments while building the resource
         this._resourcesAvailable = []; // this is just a cache for resources that will work with a given input port
         this._workflowRunOptions = {};
@@ -297,7 +295,6 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleEventLoadWorkflow(options)
     {
-        this._workspace.initialize(options.workflow);
         options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 

@@ -14,7 +14,6 @@ import OutputPortItem from './Items/OutputPortItem';
 import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
 import WorkflowJobItem from './Items/WorkflowJobItem';
 
-
 /**
  * Main WorkflowBuilder class.
  */
@@ -30,15 +29,16 @@ class WorkflowBuilder
     {
         this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
         this._workflow = null;
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWBUILDER_SELECTED, (options) => this.initialize(options));
     }
-
+    
     /**
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
-    initialize(workflow)
+    initialize(options)
     { 
-        this._workflow = workflow;
+        this._workflow = options.workflow;
         this._initializeView();
         this._initializeStateMachine();
         this._initializePaper('canvas-workspace');
@@ -445,5 +445,7 @@ class WorkflowBuilder
         $('#menu-context').show();
     }
 }
+
+var workspace = new WorkflowBuilder();
 
 export default WorkflowBuilder;

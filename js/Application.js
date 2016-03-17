@@ -28,6 +28,8 @@ import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTyp
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import RadioManager from './Managers/RadioManager';
 
+import Plugins from './Plugins';
+
 /**
  * Main app class.
  */
