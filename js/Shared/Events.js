@@ -103,6 +103,9 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resource
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__RESOURCE_CREATED: 'EVENT__RESOURCE_CREATED',                         // Triggered when Resource created. Sends {resource: Resource}.
+    EVENT__RESOURCE_DELETED: 'EVENT__RESOURCE_DELETED',                         // Triggered when Resource deleted. Sends {resource: Resource}.
+    EVENT__RESOURCE_SAVED: 'EVENT__RESOURCE_SAVED',                             // Triggered when Resource saved. Sends {resource: Resource}.
     EVENT__RESOURCE_SELECTED: 'EVENT__RESOURCE_SELECTED',                       // Triggered when the user selects an individual Resource. Sends {resource: Resource}.
     EVENT__RESOURCE_SELECTED_COLLECTION: 'EVENT__RESOURCE_SELECTED_COLLECTION', // Triggered when the user selects to see all available Resources. Sends {project: Project (Project associated with ResourceCollection)}.
     REQUEST__RESOURCE_CREATE: 'REQUEST__RESOURCE_CREATE',                       // Request a Resource be created. Takes {project: Project, file: JavaScript File object}.

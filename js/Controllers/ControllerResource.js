@@ -4,6 +4,7 @@ import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import ViewResource from '../Views/Master/Main/Resource/Individual/ViewResource';
 import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
 import ViewResourceListItem from '../Views/Master/Main/Resource/List/ViewResourceListItem';
+import Resource from '../Models/Resource';
 import ResourceCollection from '../Collections/ResourceCollection';
 
 /**
@@ -19,12 +20,15 @@ class ControllerResource extends BaseController
      */
     _initializeRadio()
     {
+        // Events
+        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
+        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
+
+        // Requests
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_CREATE, options => this._handleRequestResourceCreate(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_DELETE, options => this._handleCommandResourceDelete(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
-        this.rodanChannel.on(Events.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
    }
    
@@ -65,7 +69,8 @@ class ControllerResource extends BaseController
      */
     _handleRequestResourceCreate(options)
     {
-        return this._collection.create({project: options.project.get('url'), file: options.file});
+        var resource = new Resource({project: options.project.get('url'), file: options.file});
+        resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
     }
 
     /**
@@ -94,6 +99,15 @@ class ControllerResource extends BaseController
         this._collection = new ResourceCollection();
         this._collection.fetch(options);
         return this._collection;
+    }
+
+    /**
+     * Handle create success.
+     */
+    _handleCreateSuccess(resource, collection)
+    {
+        collection.add(resource);
+        this.rodanChannel.trigger(Events.EVENT__RESOURCE_CREATED, {resource: resource});
     }
 }
 
