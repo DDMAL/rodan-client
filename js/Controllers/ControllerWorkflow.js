@@ -83,7 +83,7 @@ class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
-        options.workflow.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SAVED, {workflow: options.workflow})});
+        options.workflow.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SAVED, {workflow: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

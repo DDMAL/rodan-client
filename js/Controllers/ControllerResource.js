@@ -79,8 +79,7 @@ class ControllerResource extends BaseController
     _handleCommandResourceDelete(options)
     {
         this._layoutView.clearItemView();
-        options.resource.destroy();
-        this._collection.remove(options.resource);
+        options.resource.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
     }
 
     /**
@@ -88,7 +87,7 @@ class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
-        options.resource.save(options.fields, {patch: true, success: () => this._collection.syncList()});
+        options.resource.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__RESOURCE_SAVED, {resource: model})});
     }
 
     /**
@@ -108,6 +107,15 @@ class ControllerResource extends BaseController
     {
         collection.add(resource);
         this.rodanChannel.trigger(Events.EVENT__RESOURCE_CREATED, {resource: resource});
+    }
+
+    /**
+     * Handle delete success.
+     */
+    _handleDeleteSuccess(model, collection)
+    {
+        collection.remove(model);
+        this.rodanChannel.trigger(Events.EVENT__RESOURCE_DELETED, {resource: model})
     }
 }
 
