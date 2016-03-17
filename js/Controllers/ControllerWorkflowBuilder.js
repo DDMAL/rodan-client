@@ -6,6 +6,7 @@ import Connection from '../Models/Connection';
 import Events from '../Shared/Events';
 import InputPort from '../Models/InputPort';
 import ViewControlWorkflowJob from '../Views/Master/Main/WorkflowJob/ViewControlWorkflowJob';
+import JobCollection from '../Collections/JobCollection';
 import LayoutViewResourceAssignment from '../Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment';
 import OutputPort from '../Models/OutputPort';
 import Resource from '../Models/Resource';
@@ -404,7 +405,8 @@ class ControllerWorkflowBuilder extends BaseController
      */
     _handleRequestShowJobListView(options)
     {
-        var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var collection = new JobCollection();
+        collection.fetch();
         var view = new ViewJobList({collection: collection, childViewOptions: {workflow: options.workflow}});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW, {view: view, title: 'Jobs'});
     }
