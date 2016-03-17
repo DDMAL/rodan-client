@@ -92,7 +92,7 @@ class ControllerRunJob extends BaseController
                 url: options.runjob.get('interactive_acquire'),
                 type: 'POST',
                 dataType: 'json',
-                success: (response) => this._handleSuccessAcquire(response, runJobUrl, options.runjob.get('interactive_acquire')),
+                success: (response) => this._handleSuccessAcquire(response, runJobUrl, options.runjob),
                 error: () => this._removeRunJobLock(runJobUrl)
             };
             $.ajax(ajaxOptions);
@@ -107,9 +107,10 @@ class ControllerRunJob extends BaseController
     /**
      * Handle success of interactive acquire.
      */
-    _handleSuccessAcquire(response, runJobUrl, acquireUrl)
+    _handleSuccessAcquire(response, runJobUrl, runJob)
     {
-        this._registerRunJobForReacquire(response.working_url, runJobUrl, acquireUrl);
+        this._registerRunJobForReacquire(response.working_url, runJobUrl, runJob.get('interactive_acquire'));
+        this.rodanChannel.trigger(Event.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
         var newWindow = window.open(response.working_url, '_blank');
     }
 

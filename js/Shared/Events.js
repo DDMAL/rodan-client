@@ -113,6 +113,7 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // RunJob
 ///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__RUNJOB_ACQUIRED: 'EVENT__RUNJOB_ACQUIRED',                       // Triggered when interactive RunJob has been acquired by the current user. Sends {runjob: RunJob}.
     EVENT__RUNJOB_SELECTED: 'EVENT__RUNJOB_SELECTED',                       // Triggered when the user selects an individual RunJob. Sends {runjob: RunJob}.
     EVENT__RUNJOB_SELECTED_COLLECTION: 'EVENT__RUNJOB_SELECTED_COLLECTION', // Triggered when the user selects to see RunJobs for a Project.
     REQUEST__RUNJOB_ACQUIRE: 'REQUEST__RUNJOB_ACQUIRE',                     // Request the provided RunJob be locked on the server for the current user. Takes {runjob: RunJob}.
