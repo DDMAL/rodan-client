@@ -4,10 +4,10 @@ js/Configuration.js
 Configuration.js
 npm-debug.log
 node_modules/
-web/
-web/libs/
+web/libs
 web/index.html
 web/config.js
-web/styles/
-web/js/
-web/resources/
+web/styles
+web/js
+web/resources
+._*
