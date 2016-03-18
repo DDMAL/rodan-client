@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Configuration from '../../../../../Configuration';
 import Events from '../../../../../Shared/Events';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
 
@@ -34,6 +35,8 @@ class ViewResource extends Marionette.CompositeView
         $(this.ui.buttonDelete).attr('disabled', disabledDelete); 
         var disabledDownload = this.model.get('download') === null;
         $(this.ui.buttonDownload).attr('disabled', disabledDownload); 
+        var disableView = this.model.get('viewer_url') === null;
+        $(this.ui.buttonView).attr('disabled', disableView);
     }
 
     /**
@@ -83,6 +86,14 @@ class ViewResource extends Marionette.CompositeView
         var filename = this.model.get('name') + '.' + ext;
         this.rodanChannel.request(Events.REQUEST__DOWNLOADMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: 'image/png'});
     }
+
+    /**
+     * Handle button view.
+     */
+    _handleClickView()
+    {
+        var newWindow = window.open(this.model.get('viewer_url'));
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -97,12 +108,14 @@ ViewResource.prototype.ui = {
     selectResourceType: '#select-resourcetype',
     resourceName: '#text-resource_name',
     resourceDescription: '#text-resource_description',
-    buttonDownload: '#button-main_resource_individual_download'
+    buttonDownload: '#button-main_resource_individual_download',
+    buttonView: '#button-main_resource_individual_view'
 };
 ViewResource.prototype.events = {
     'click @ui.buttonSave': '_handleClickButtonSave',
     'click @ui.buttonDelete': '_handleClickButtonDelete',
-    'click @ui.buttonDownload': '_handleClickDownload'
+    'click @ui.buttonDownload': '_handleClickDownload',
+    'click @ui.buttonView': '_handleClickView'
 };
 ViewResource.prototype.template = '#template-main_resource_individual';
 ViewResource.prototype.childView = ViewResourceTypeListItem;
