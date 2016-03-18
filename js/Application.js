@@ -154,7 +154,8 @@ class Application extends Marionette.Application
     _initializeAjaxPrefilters()
     {
         var that = this;
-        $.ajaxPrefilter(function(options) {
+        $.ajaxPrefilter(function(options)
+        {
             that.controllerAuthentication.ajaxPrefilter(options);
         });
     }

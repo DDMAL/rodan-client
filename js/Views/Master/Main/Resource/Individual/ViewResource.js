@@ -35,7 +35,7 @@ class ViewResource extends Marionette.CompositeView
         $(this.ui.buttonDelete).attr('disabled', disabledDelete); 
         var disabledDownload = this.model.get('download') === null;
         $(this.ui.buttonDownload).attr('disabled', disabledDownload); 
-        var disableView = this.model.get('viewer_url') === null;
+        var disableView = this.model.get('viewer_url') === null || disabledDownload;
         $(this.ui.buttonView).attr('disabled', disableView);
     }
 

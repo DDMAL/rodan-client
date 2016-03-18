@@ -70,7 +70,7 @@ class ControllerResource extends BaseController
     _handleRequestResourceCreate(options)
     {
         var resource = new Resource({project: options.project.get('url'), file: options.file});
-        resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
+        var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
     }
 
     /**

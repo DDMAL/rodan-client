@@ -57,7 +57,7 @@ class BaseModel extends Backbone.Model
     {
         options = this._applyResponseHandlers(options);
         options.task = 'save';
-        super.save(attributes, options);
+        return super.save(attributes, options);
     }
 
     /**

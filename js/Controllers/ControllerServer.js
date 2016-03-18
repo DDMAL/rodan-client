@@ -6,7 +6,7 @@ import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
 
 var oldsync = Backbone.sync;
-Backbone.sync = function(method, model, options) { oldsync(method, model, options); };
+Backbone.sync = function(method, model, options) { return oldsync(method, model, options); };
 
 /**
  * Server controller.
@@ -66,7 +66,7 @@ class ControllerServer extends BaseController
         options = this._applyResponseHandlers(options);
 
         // Do call.
-        var jqXHR = this._originalSync(method, model, options);
+        return this._originalSync(method, model, options);
     }
 
     /**

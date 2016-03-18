@@ -77,7 +77,7 @@ class Resource extends BaseModel
                 contentType: false
             });
         }
-        Backbone.sync.call(this, method, model, options);
+        return Backbone.sync.call(this, method, model, options);
     }
 
     /**

@@ -39,11 +39,16 @@ class ControllerAuthentication extends BaseController
     ajaxPrefilter(options)
     {
         var that = this;
+        var oldOnBeforeSend = options.beforeSend;
         if (Configuration.SERVER_AUTHENTICATION_TYPE === 'session' && !options.beforeSend) 
         {
             options.xhrFields = { withCredentials: true };
             options.beforeSend = function (xhr) 
             {
+                if (oldOnBeforeSend)
+                {
+                    oldOnBeforeSend(xhr);
+                }
                 xhr.setRequestHeader('X-CSRFToken', that._token.value);
             };
         }
@@ -51,6 +56,10 @@ class ControllerAuthentication extends BaseController
         {
             options.beforeSend = function (xhr)
             {
+                if (oldOnBeforeSend)
+                {
+                    oldOnBeforeSend(xhr);
+                }
                 xhr.setRequestHeader('Authorization', 'Token ' + that._token.value);
             }
         }
