@@ -1,3 +1,4 @@
+import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import saveAs from 'filesaver';
@@ -18,8 +19,9 @@ class TransferManager
     constructor(options)
     {
         this._initializeRadio();
-        this._uploads = {pending: [], failed: [], completed: []};
-        this._totalUploads = 0; // TODO: fix holes in pending array
+        this._uploadsPending = new Backbone.Collection();
+        this._uploadsFailed = new Backbone.Collection();
+        this._uploadsCompleted = new Backbone.Collection();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +34,7 @@ class TransferManager
     {
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
+        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT, () => this._handleRequestGetUploadCount());
         this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
     }
 
@@ -49,14 +52,22 @@ class TransferManager
     }
 
     /**
+     * Return upload count.
+     */
+    _handleRequestGetUploadCount()
+    {
+        return {pending: this._uploadsPending.length, completed: this._uploadsCompleted.length, failed: this._uploadsFailed.length};
+    }
+
+    /**
      * Handle request monitor upload.
      */
     _handleRequestMonitorUpload(options)
     {
         var request = options.request;
-        request.uploadId = this._totalUploads;
-        this._totalUploads++;
-        this._uploads.pending[request.uploadId] = options;
+        request.id = this._getRandomId();
+        options.id = request.id;
+        this._uploadsPending.add(options);
         request.done((response, code, jqXHR) => this._handleUploadSuccess(response, code, jqXHR));
         request.fail((jqXHR, code, error) => this._handleUploadFail(jqXHR, code, error));
     }
@@ -66,10 +77,9 @@ class TransferManager
      */
     _handleUploadSuccess(response, code, jqXHR)
     {
-        var file = this._uploads.pending[jqXHR.uploadId].file;
-        this._uploads.completed.push(this._uploads.pending[jqXHR.uploadId]);
-        delete this._uploads.pending[jqXHR.uploadId];
-        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: jqXHR, file: file});
+        var upload = this._uploadsPending.remove(jqXHR.id);
+        this._uploadsCompleted.add(upload);
+        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**
@@ -77,10 +87,9 @@ class TransferManager
      */
     _handleUploadFail(jqXHR, code, error)
     {
-        var file = this._uploads.pending[jqXHR.uploadId].file;
-        this._uploads.failed.push(this._uploads.pending[jqXHR.uploadId]);
-        delete this._uploads.pending[jqXHR.uploadId];
-        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: jqXHR, file: file});
+        var upload = this._uploadsPending.remove(jqXHR.id);
+        this._uploadsFailed.add(upload);
+        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**
@@ -130,6 +139,14 @@ class TransferManager
      */
     _handleDownloadProgress(event)
     {
+    }
+
+    /**
+     * Returns random 8-digit ID.
+     */
+    _getRandomId()
+    {
+        return Math.floor((1 + Math.random()) * 10000000);
     }
 }
 

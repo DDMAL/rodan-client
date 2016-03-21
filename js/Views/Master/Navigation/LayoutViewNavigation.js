@@ -24,6 +24,14 @@ class LayoutViewNavigation extends Marionette.LayoutView
         });
     }
 
+    /**
+     * On show initialize the transfer info.
+     */
+    onShow()
+    {
+        this._populateUploadCount();
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +43,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
         this.rodanChannel = Radio.channel('rodan');
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleAuthenticationSuccess());
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
+        this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, () => this._populateUploadCount());
+        this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, () => this._populateUploadCount());
     }
 
     /**
@@ -53,6 +63,17 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.regionNavigationTree.reset(); 
+    }
+
+    /**
+     * Populates the upload count.
+     */
+    _populateUploadCount()
+    {
+        var count = this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT);
+        this.$el.find('#navigation-upload_count_pending').text(count.pending);
+        this.$el.find('#navigation-upload_count_completed').text(count.completed);
+        this.$el.find('#navigation-upload_count_failed').text(count.failed);
     }
 }
 

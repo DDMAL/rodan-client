@@ -39,15 +39,6 @@ var Events =
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',                   // Request currently logged in User. Returns User or null.
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Download
-///////////////////////////////////////////////////////////////////////////////////////
-    EVENT__TRANSFERMANAGER_UPLOAD_FAILED: 'EVENT__TRANSFERMANAGER_UPLOAD_FAILED',           // Triggered when file upload fails. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
-    EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED: 'EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED',     // Triggered when file upload succeeds. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
-    REQUEST__TRANSFERMANAGER_DOWNLOAD: 'REQUEST__TRANSFERMANAGER_DOWNLOAD',                 // Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}.
-//    REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT: 'REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT', // Request counts of uploads for this session. Returns {completed: int >= 0, failed:  int >= 0, pending:  int >= 0}.
-    REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD: 'REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD',     // Request the TransferManager to monitor a file upload. Takes {request: jQuery XMLHTTPRequest, file: Javascript file object};
-
-///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections
 //
 // The 'LOAD' commands are not meant for general use. They are called on startup.
@@ -139,6 +130,15 @@ var Events =
     REQUEST__SERVER_GET_VERSION: 'REQUEST__SERVER_GET_VERSION',                 // Request version of server. Returns string.
     REQUEST__SERVER_LOAD_ROUTES: 'REQUEST__SERVER_LOAD_ROUTES',                 // Request the client to load all routes. EVENT__SERVER_ROUTESLOADED is triggered on success.
     REQUEST__SERVER_LOAD_ROUTE_OPTIONS: 'REQUEST__SERVER_LOAD_ROUTE_OPTIONS',   // Request the client to load all options for routes. Must authenticate prior to making this request.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Transfer Manager
+///////////////////////////////////////////////////////////////////////////////////////
+    EVENT__TRANSFERMANAGER_UPLOAD_FAILED: 'EVENT__TRANSFERMANAGER_UPLOAD_FAILED',           // Triggered when file upload fails. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
+    EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED: 'EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED',     // Triggered when file upload succeeds. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
+    REQUEST__TRANSFERMANAGER_DOWNLOAD: 'REQUEST__TRANSFERMANAGER_DOWNLOAD',                 // Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}.
+    REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT: 'REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT', // Request counts of uploads for this session. Returns {completed: int >= 0, failed:  int >= 0, pending:  int >= 0}.
+    REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD: 'REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD',     // Request the TransferManager to monitor a file upload. Takes {request: jQuery XMLHTTPRequest, file: Javascript file object};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Timer
