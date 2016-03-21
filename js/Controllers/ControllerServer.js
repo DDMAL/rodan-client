@@ -316,6 +316,7 @@ class ControllerServer extends BaseController
     _updateServerDate(date)
     {
         this._serverDate = date;
+        this.rodanChannel.trigger(Events.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
     }
 }
 
