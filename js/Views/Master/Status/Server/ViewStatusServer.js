@@ -15,7 +15,7 @@ class ViewStatusServer extends Marionette.CompositeView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {
@@ -58,18 +58,10 @@ class ViewStatusServer extends Marionette.CompositeView
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
         var date = this._serverDate;
-        console.log(date);
-        if (Configuration.ADMIN_CLIENT.name === '' || Configuration.ADMIN_CLIENT.email === '')
-        {
-            return _.template($('#template-status_server').html())({hostname: hostname, version: version});
-        }
-        else
-        {
-            return _.template($('#template-status_server_withadmin').html())({hostname: hostname,
-                                                                              version: version,
-                                                                              name: Configuration.ADMIN_CLIENT.name,
-                                                                              email: Configuration.ADMIN_CLIENT.email});
-        }
+        return _.template($('#template-status_server_withadmin').html())({hostname: hostname,
+                                                                          version: version,
+                                                                          name: Configuration.ADMIN_CLIENT.name,
+                                                                          email: Configuration.ADMIN_CLIENT.email});
     }
 }
 
