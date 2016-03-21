@@ -25,6 +25,8 @@ class ViewStatusServer extends Marionette.CompositeView
         };
         this._initializeRadio();
         this.template = () => this._template();
+        setInterval(() => this._showServerDate(), 10000);
+        this._showServerDate();
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -36,17 +38,17 @@ class ViewStatusServer extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__SERVER_DATE_UPDATED, options => this._showServerTime(options));
     }
 
     /**
      * Show the server time.
      */
-    _showServerTime(options)
+    _showServerDate()
     {
-        if (options.date)
+        var date = this.rodanChannel.request(Events.REQUEST__SERVER_DATE);
+        if (date)
         {
-            this.$el.find('#status-server_date').text(options.date.toString());
+            this.$el.find('#status-server_date').text(date.toString());
         }
     }
 

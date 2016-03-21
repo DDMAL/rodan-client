@@ -122,7 +122,6 @@ var Events =
     EVENT__SERVER_ERROR: 'EVENT__SERVER_ERROR',                                 // Triggered on Rodan-based server errors. Sends {json: JSON object of error}.
     EVENT__SERVER_IDLE: 'EVENT__SERVER_IDLE',                                   // Triggered when the client has no pending HTTP requests waiting to complete. Only fires if EVENT__SERVER_WAITING had previously been fired.
     EVENT__SERVER_ROUTESLOADED: 'EVENT__SERVER_ROUTESLOADED',                   // Triggered when server routes have been loaded.
-    EVENT__SERVER_DATE_UPDATED: 'EVENT__SERVER_DATE_UPDATED',                   // Triggered when server date has been updated. Sends {date: Date}.
     EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',                             // Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
     REQUEST__SERVER_DATE: 'REQUEST__SERVER_DATE',                               // Request last known server date and time. Returns Date.
     REQUEST__SERVER_GET_HOSTNAME: 'REQUEST__SERVER_GET_HOSTNAME',               // Request server hostname. Returns string (hostname).
