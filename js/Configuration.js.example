@@ -13,6 +13,15 @@ var Configuration = {
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: 'token',
 
+    // Interval after which the client will get the server time (ms).
+    // Generally, the client extracts the server time from all responses from the server.
+    // However, if the client has not received a response from the server after this
+    // amount of time, the client will fire an HTTP HEAD request and get the server 
+    // time. This means that the server MUST exposde the 'Date' response header. As
+    // such, it is recommended that this value be greater than the 
+    // EVENT_TIMER_FREQUENCY to reduce traffic.
+    SERVER_REQUEST_TIME_INTERVAL: 8000,
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
 ///////////////////////////////////////////////////////////////////////////////////////

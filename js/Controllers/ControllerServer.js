@@ -264,7 +264,7 @@ class ControllerServer extends BaseController
 
         if (!this._timeGetterInterval)
         {
-            this._timeGetterInterval = setInterval(() => this._sendTimeGetterRequest(), 5000);
+            this._timeGetterInterval = setInterval(() => this._sendTimeGetterRequest(), Configuration.SERVER_REQUEST_TIME_INTERVAL);
         }
     }
 
