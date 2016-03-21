@@ -30,7 +30,7 @@ class ControllerResource extends BaseController
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         this.rodanChannel.reply(Events.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
-   }
+    }
    
     /**
      * Handle show LayoutView.
@@ -71,6 +71,7 @@ class ControllerResource extends BaseController
     {
         var resource = new Resource({project: options.project.get('url'), file: options.file});
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
+        this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
     }
 
     /**

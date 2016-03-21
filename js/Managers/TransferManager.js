@@ -5,9 +5,9 @@ import saveAs from 'filesaver';
 import Events from '../Shared/Events';
 
 /**
- * Download manager.
+ * Transfer manager.
  */
-class DownloadManager
+class TransferManager
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,6 +18,8 @@ class DownloadManager
     constructor(options)
     {
         this._initializeRadio();
+        this._uploads = {pending: [], failed: [], completed: []};
+        this._totalUploads = 0; // TODO: fix holes in pending array
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +31,8 @@ class DownloadManager
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__DOWNLOADMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
+        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
+        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
     }
 
     /**
@@ -43,6 +46,41 @@ class DownloadManager
         request.onreadystatechange = (event) => this._handleStateChange(event, options.filename, options.mimetype);
         request.onprogress = (event) => this._handleDownloadProgress(event);
         request.send();
+    }
+
+    /**
+     * Handle request monitor upload.
+     */
+    _handleRequestMonitorUpload(options)
+    {
+        var request = options.request;
+        request.uploadId = this._totalUploads;
+        this._totalUploads++;
+        this._uploads.pending[request.uploadId] = options;
+        request.done((response, code, jqXHR) => this._handleUploadSuccess(response, code, jqXHR));
+        request.fail((jqXHR, code, error) => this._handleUploadFail(jqXHR, code, error));
+    }
+
+    /**
+     * Handle upload success.
+     */
+    _handleUploadSuccess(response, code, jqXHR)
+    {
+        var file = this._uploads.pending[jqXHR.uploadId].file;
+        this._uploads.completed.push(this._uploads.pending[jqXHR.uploadId]);
+        delete this._uploads.pending[jqXHR.uploadId];
+        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: jqXHR, file: file});
+    }
+
+    /**
+     * Handle upload fail.
+     */
+    _handleUploadFail(jqXHR, code, error)
+    {
+        var file = this._uploads.pending[jqXHR.uploadId].file;
+        this._uploads.failed.push(this._uploads.pending[jqXHR.uploadId]);
+        delete this._uploads.pending[jqXHR.uploadId];
+        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: jqXHR, file: file});
     }
 
     /**
@@ -95,4 +133,4 @@ class DownloadManager
     }
 }
 
-export default DownloadManager;
+export default TransferManager;

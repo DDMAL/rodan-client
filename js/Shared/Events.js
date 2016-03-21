@@ -41,7 +41,11 @@ var Events =
 ///////////////////////////////////////////////////////////////////////////////////////
 // Download
 ///////////////////////////////////////////////////////////////////////////////////////
-    REQUEST__DOWNLOADMANAGER_DOWNLOAD: 'REQUEST__DOWNLOADMANAGER_DOWNLOAD', // Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}.
+    EVENT__TRANSFERMANAGER_UPLOAD_FAILED: 'EVENT__TRANSFERMANAGER_UPLOAD_FAILED',           // Triggered when file upload fails. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
+    EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED: 'EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED',     // Triggered when file upload succeeds. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}.
+    REQUEST__TRANSFERMANAGER_DOWNLOAD: 'REQUEST__TRANSFERMANAGER_DOWNLOAD',                 // Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}.
+//    REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT: 'REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT', // Request counts of uploads for this session. Returns {completed: int >= 0, failed:  int >= 0, pending:  int >= 0}.
+    REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD: 'REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD',     // Request the TransferManager to monitor a file upload. Takes {request: jQuery XMLHTTPRequest, file: Javascript file object};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections

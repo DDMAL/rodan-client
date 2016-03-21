@@ -16,7 +16,6 @@ import ControllerWorkflowJob from './Controllers/ControllerWorkflowJob';
 import ControllerWorkflowJobGroup from './Controllers/ControllerWorkflowJobGroup';
 import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
-import DownloadManager from './Managers/DownloadManager';
 import ErrorHandler from './Shared/ErrorHandler';
 import Events from './Shared/Events';
 import EventTimer from './Shared/EventTimer';
@@ -26,9 +25,9 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
-import RadioManager from './Managers/RadioManager';
-
 import Plugins from './Plugins';
+import RadioManager from './Managers/RadioManager';
+import TransferManager from './Managers/TransferManager';
 
 /**
  * Main app class.
@@ -69,14 +68,6 @@ class Application extends Marionette.Application
         this.rodanChannel.request(Events.REQUEST__SERVER_LOAD_ROUTES);
     }
 
-    /**
-     * Timer request callback test.
-     */
-    timerRequestCallback(response)
-    {
-        console.log('Callback response: ' + response);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +76,7 @@ class Application extends Marionette.Application
      */
     _initializeManagers()
     {
-        this._downloadManager = new DownloadManager();
+        this._transferManager = new TransferManager();
         this._radioManager = new RadioManager();
     }
 
