@@ -68,6 +68,10 @@ class Resource extends BaseModel
             var formData = new FormData();
             formData.append('project', model.get('project'));
             formData.append('files', model.get('file'));
+            if (model.has('resource_type'))
+            {
+                formData.append('type', model.get('resource_type'));
+            }
 
             // Set processData and contentType to false so data is sent as FormData
             _.defaults(options || (options = {}), {

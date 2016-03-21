@@ -69,7 +69,15 @@ class ControllerResource extends BaseController
      */
     _handleRequestResourceCreate(options)
     {
-        var resource = new Resource({project: options.project.get('url'), file: options.file});
+        var resource = null;
+        if (options.resourcetype)
+        {
+            resource = new Resource({project: options.project.get('url'), file: options.file, resource_type: options.resourcetype});
+        }
+        else
+        {
+            resource = new Resource({project: options.project.get('url'), file: options.file});
+        }
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
         this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
     }
