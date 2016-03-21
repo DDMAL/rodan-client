@@ -14,7 +14,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initialize.
      */
     initialize()
     {

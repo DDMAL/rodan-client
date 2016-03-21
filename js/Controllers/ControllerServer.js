@@ -256,7 +256,7 @@ class ControllerServer extends BaseController
             var dateResponse = new Date(options.getResponseHeader('Date'));
             if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
             {
-                this._serverDate = dateResponse;
+                this._updateServerDate(dateResponse);
                 clearInterval(this._timeGetterInterval);
                 this._timeGetterInterval = null;
             }
@@ -305,9 +305,18 @@ class ControllerServer extends BaseController
             var dateResponse = new Date(request.getResponseHeader('Date'));
             if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
             {
-                this._serverDate = dateResponse;
+                this._updateServerDate(dateResponse);
             }
         }
+    }
+
+    /**
+     * Updates recorded server date.
+     */
+    _updateServerDate(date)
+    {
+        this._serverDate = date;
+        this.rodanChannel.trigger(Events.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
     }
 }
 

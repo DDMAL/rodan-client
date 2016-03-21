@@ -27,6 +27,29 @@ class ViewStatusServer extends Marionette.CompositeView
         this.template = () => this._template();
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        this.rodanChannel = Radio.channel('rodan');
+        this.rodanChannel.on(Events.EVENT__SERVER_DATE_UPDATED, options => this._showServerTime(options));
+    }
+
+    /**
+     * Show the server time.
+     */
+    _showServerTime(options)
+    {
+        if (options.date)
+        {
+            this.$el.find('#status-server_date').text(options.date.toString());
+        }
+    }
+
     /**
      * Provide server info with tempalte.
      */
@@ -34,6 +57,8 @@ class ViewStatusServer extends Marionette.CompositeView
     {
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
+        var date = this._serverDate;
+        console.log(date);
         if (Configuration.ADMIN_CLIENT.name === '' || Configuration.ADMIN_CLIENT.email === '')
         {
             return _.template($('#template-status_server').html())({hostname: hostname, version: version});
@@ -45,17 +70,6 @@ class ViewStatusServer extends Marionette.CompositeView
                                                                               name: Configuration.ADMIN_CLIENT.name,
                                                                               email: Configuration.ADMIN_CLIENT.email});
         }
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
     }
 }
 
