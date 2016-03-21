@@ -1,3 +1,4 @@
+import Radio from 'backbone.radio';
 import BaseCollection from './BaseCollection';
 import Events from '../Shared/Events';
 import Job from '../Models/Job';
@@ -15,11 +16,10 @@ class JobCollection extends BaseCollection
      */
     initialize()
     {
+        var globalJobCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         this.model = Job;
         this.route = 'jobs';
-        this.enumerations = [{field: 'category', label: 'Category'},
-                             {field: 'interactive', label: 'Interactive', values: [{value: 'True', label: 'True'},
-                                                                                   {value: 'False', label: 'False'}]}];
+        this.enumerations = globalJobCollection.enumerations; // TODO - not the best way to do this, but works
     }
 }
 
