@@ -1,3 +1,5 @@
+import bootstrap from 'twbs/bootstrap';
+import 'twbs/bootstrap/css/bootstrap.css!';
 import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import moment from 'moment';

@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import datetimepicker from 'datetimepicker';
+import 'jqueryui';
 
 import BaseCollection from '../Collections/BaseCollection';
 import Configuration from '../Configuration';
