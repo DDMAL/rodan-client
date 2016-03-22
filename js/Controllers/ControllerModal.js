@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import jqueryui from 'jqueryui';
 import BaseController from './BaseController';
 import Configuration from '../Configuration';
 import Events from '../Shared/Events';

@@ -22,7 +22,7 @@ class GlobalCollection extends BaseCollection
      */
      initialize(options)
      {
-        super(options);
+        super.initialize(options);
         this._allowPagination = false;
      }
 
