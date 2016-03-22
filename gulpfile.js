@@ -1,4 +1,3 @@
-/* jshint node:true */
 'use strict';
 
 var gulp = require('gulp');
@@ -10,10 +9,12 @@ var gulpjshint = require('gulp-jshint');
 ///////////////////////////////////////////////////////////////////////////////////////
 var PORT = 9002;
 var PORT_LIVERELOAD = 35729;    // Port for Livereload. Best to keep as default.
+var BUILD_DIRECTORY = 'dist';   // Where dist will build files.
 var SOURCE_DIRECTORY = 'js';    // Name of Javascript source directory.
 var WEB_DIRECTORY = 'web';      // Name of directory holding development web app.
                                 // NOTE: this should correspond to where jspm creates
                                 // its config, so it's best to keep it as 'web'.
+var MINIFIED_FILE = 'rodan-client.js.min';  // Name of minified file.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -133,12 +134,42 @@ gulp.task('develop', ['develop:build', 'develop:server'], function()
 // NOTE: this does not start a server. Rather, it simply "builds" the web application
 // such that it can easily be deployed on a web server.
 ///////////////////////////////////////////////////////////////////////////////////////
-//...
+gulp.task('dist', function()
+{
+    var sourcemaps = require('gulp-sourcemaps');
+    var babel = require('gulp-babel');
+    var concat = require('gulp-concat');
+
+    return gulp.src(SOURCE_DIRECTORY + '/**/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel({presets: ['es2015']}))
+        .pipe(concat(MINIFIED_FILE))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(BUILD_DIRECTORY));
+});
+
+/**
+ * Cleans out dist.
+ */
+gulp.task('dist:clean', function(callback)
+{
+    var del = require('del');
+    del([BUILD_DIRECTORY], function() {});
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Detaults
+// Master tasks
 ///////////////////////////////////////////////////////////////////////////////////////
 gulp.task('default', function()
 {
     gulp.start('develop');
+});
+
+/**
+ * Clean everything.
+ */
+gulp.task('clean', function()
+{
+    gulp.start('develop:clean');
+    gulp.start('dist:clean');
 });

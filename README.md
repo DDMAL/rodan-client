@@ -3,7 +3,6 @@
 
 THIS IS JUST A WORKING LIST OF REQS AND NOT A REAL README!
 
-
 dev dependencies - app
 this stuff will exist in the web app
 ==================
@@ -30,7 +29,11 @@ OPTIONAL
 - gulp-jshint: use jshint in gulp
 
 REQUIRED
+- babel-preset-es2015: rules that babel will use to transpile our beautiful source code
 - del: delete stuff
+- gulp-babel: lets us use babel inside a gulp file...how nice
+- gulp-concat: SMUSH THINGS TOGETHER!
+- gulp-sourcemap: create Javascript sourcemap for those debugging types of people
 - gulp-shell: access shell from gulp
 - gulp: gulp...duh
 - gulp-cli: cli for gulp (./node-modules/.bin/gulp)
@@ -64,4 +67,3 @@ jqueryui: lets us do some jquery manipulation in the table behavior file
 "paper": canvas graphics!!!1
 "twbs/bootstrap": STYLISH SHIT!
 "underscore": templates and other helpful things
-
