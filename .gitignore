@@ -4,11 +4,6 @@ js/Configuration.js
 Configuration.js
 npm-debug.log
 node_modules/
-web/
-web/libs
-web/index.html
-web/config.js
-web/styles
-web/js
-web/resources
+dist
+web
 ._*
