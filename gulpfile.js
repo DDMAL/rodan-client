@@ -14,7 +14,7 @@ var RESOURCES_DIRECTORY = 'resources';      // Name of resources directory.
 var WEB_DIRECTORY = 'web';                  // Name of directory holding development web app.
                                             // NOTE: this should correspond to where jspm creates
                                             // its config, so it's best to keep it as 'web'.
-var MINIFIED_FILE = 'rodan-client.js.min';  // Name of minified file.
+var MINIFIED_FILE = 'rodan-client.min.js';  // Name of minified file.
 var BABEL_PRESETS = ['es2015'];             // Babel transpiling presets. Best to leave as is.
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +24,7 @@ var BABEL_PRESETS = ['es2015'];             // Babel transpiling presets. Best t
  * Build templates.
  */
 gulp.task('develop:templates', shell.task([
-    'python support/build-template.py -b templates/index.html -t templates/Views ' + WEB_DIRECTORY
+    'python support/build-template.py -b templates/index-dev.html -t templates/Views ' + WEB_DIRECTORY
 ]));
 
 /**
@@ -127,6 +127,13 @@ gulp.task('dist:mkdir', shell.task([
 ]));
 
 /**
+ * Links JS into web directory. We need to do this so jspm bundle (gulp-jspm) can work.
+ */
+gulp.task('dist:link', shell.task([
+    'cd ' + WEB_DIRECTORY + '; rm -f ' + SOURCE_DIRECTORY + '; ln -sf ../' + SOURCE_DIRECTORY + ' ' + SOURCE_DIRECTORY
+]));
+
+/**
  * Clean dist.
  */
 gulp.task('dist:clean', function()
@@ -162,21 +169,17 @@ gulp.task('dist:styles', ['dist:mkdir'], shell.task([
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:mkdir'], function()
+gulp.task('dist', ['dist:mkdir', 'dist:link'], function()
 {
-    var sourcemaps = require('gulp-sourcemaps');
-    var babel = require('gulp-babel');
-    var concat = require('gulp-concat');
+    var gulp_jspm = require('gulp-jspm');
 
     gulp.start('dist:templates');
     gulp.start('dist:styles');
     gulp.start('dist:resources');
 
-    gulp.src(SOURCE_DIRECTORY + '/**/*.js')
-        .pipe(sourcemaps.init())
-        .pipe(babel({presets: BABEL_PRESETS}))
+    gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
+        .pipe(gulp_jspm({selfExecutingBundle: true, minify: true}))
         .pipe(concat(MINIFIED_FILE))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(DIST_DIRECTORY));
 });
 
