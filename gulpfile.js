@@ -2,12 +2,11 @@
 
 var gulp = require('gulp');
 var shell = require('gulp-shell');
-var gulpjshint = require('gulp-jshint');
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuration
 ///////////////////////////////////////////////////////////////////////////////////////
-var PORT = 9002;
+var PORT = 9002;                            // Port for dev server.
 var PORT_LIVERELOAD = 35729;                // Port for Livereload. Best to keep as default.
 var DIST_DIRECTORY = 'dist';                // Where dist will be dumped.
 var SOURCE_DIRECTORY = 'js';                // Name of Javascript source directory.
@@ -16,6 +15,7 @@ var WEB_DIRECTORY = 'web';                  // Name of directory holding develop
                                             // NOTE: this should correspond to where jspm creates
                                             // its config, so it's best to keep it as 'web'.
 var MINIFIED_FILE = 'rodan-client.js.min';  // Name of minified file.
+var BABEL_PRESETS = ['es2015'];             // Babel transpiling presets. Best to leave as is.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -49,6 +49,7 @@ gulp.task('develop:link', shell.task([
  */
 gulp.task('develop:jshint', function (callback)
 {
+    var gulpjshint = require('gulp-jshint');
     return gulp.src([WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/**/*.js'])
         .pipe(gulpjshint({lookup: true, devel: true}))
         .pipe(gulpjshint.reporter('jshint-stylish'))
@@ -173,7 +174,7 @@ gulp.task('dist', ['dist:mkdir'], function()
 
     gulp.src(SOURCE_DIRECTORY + '/**/*.js')
         .pipe(sourcemaps.init())
-        .pipe(babel({presets: ['es2015']}))
+        .pipe(babel({presets: BABEL_PRESETS}))
         .pipe(concat(MINIFIED_FILE))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(DIST_DIRECTORY));
