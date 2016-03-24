@@ -8,7 +8,7 @@ var Configuration = {
 // Server parameters
 ///////////////////////////////////////////////////////////////////////////////////////
     // URL of the server to connect to.
-    SERVER_URL: 'https://132.206.14.136',
+    SERVER_URL: 'https://132.206.14.136:443',
 
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: 'token',
