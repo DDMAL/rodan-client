@@ -35,6 +35,7 @@ REQUIRED
 - gulp: gulp...duh
 - gulp-cli: cli for gulp (./node-modules/.bin/gulp)
 - gulp-jspm: does jspm bundling for us
+- gulp-rename: rename the bundle file
 
 
 OPTIONAL - TESTING

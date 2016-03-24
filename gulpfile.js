@@ -133,13 +133,6 @@ gulp.task('dist:link', shell.task([
 ]));
 
 /**
- * Move main.bundle.js to different file name.
- */
-gulp.task('dist:rename', shell.task([
-    'mv ' + DIST_DIRECTORY + '/main.bundle.js ' + DIST_DIRECTORY + '/' + BUNDLE_FILE
-]));
-
-/**
  * Clean dist.
  */
 gulp.task('dist:clean', function()
@@ -180,7 +173,7 @@ gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', '
     var gulp_jspm = require('gulp-jspm');
     var rename = require("gulp-rename");
     gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
-        .pipe(gulp_jspm({selfExecutingBundle: true, minify: true}))
+        .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
         .pipe(rename(BUNDLE_FILE))
         .pipe(gulp.dest(DIST_DIRECTORY))
 });
