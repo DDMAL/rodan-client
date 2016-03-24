@@ -107,9 +107,9 @@ gulp.task('develop', ['develop:server'], function()
         WEB_DIRECTORY + '/styles/default.css'
     ]).on('change', livereload.changed);
 
-    gulp.watch('templates/**/*.html', ['build:templates']);
+    gulp.watch('templates/**/*.html', ['develop:templates']);
     gulp.watch(SOURCE_DIRECTORY + '/**/*.js', ['develop:jshint']);
-    gulp.watch('styles/default.scss', ['build:styles']);
+    gulp.watch('styles/default.scss', ['develop:styles']);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
