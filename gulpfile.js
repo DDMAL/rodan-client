@@ -178,9 +178,11 @@ gulp.task('dist:styles', ['dist:mkdir'], shell.task([
 gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', 'dist:resources'], function()
 {
     var gulp_jspm = require('gulp-jspm');
+    var rename = require("gulp-rename");
     gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
         .pipe(gulp_jspm({selfExecutingBundle: true, minify: true}))
-        .pipe(gulp.dest(DIST_DIRECTORY + '/' + BUNDLE_FILE));
+        .pipe(rename(BUNDLE_FILE))
+        .pipe(gulp.dest(DIST_DIRECTORY))
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
