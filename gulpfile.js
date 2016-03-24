@@ -14,8 +14,7 @@ var RESOURCES_DIRECTORY = 'resources';      // Name of resources directory.
 var WEB_DIRECTORY = 'web';                  // Name of directory holding development web app.
                                             // NOTE: this should correspond to where jspm creates
                                             // its config, so it's best to keep it as 'web'.
-var MINIFIED_FILE = 'rodan-client.min.js';  // Name of minified file.
-var BABEL_PRESETS = ['es2015'];             // Babel transpiling presets. Best to leave as is.
+var BUNDLE_FILE = 'rodan-client.min.js';    // Name of bundle file.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -134,6 +133,13 @@ gulp.task('dist:link', shell.task([
 ]));
 
 /**
+ * Move main.bundle.js to different file name.
+ */
+gulp.task('dist:rename', shell.task([
+    'mv ' + DIST_DIRECTORY + '/main.bundle.js ' + DIST_DIRECTORY + '/' + BUNDLE_FILE
+]));
+
+/**
  * Clean dist.
  */
 gulp.task('dist:clean', function()
@@ -169,18 +175,12 @@ gulp.task('dist:styles', ['dist:mkdir'], shell.task([
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:mkdir', 'dist:link'], function()
+gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', 'dist:resources'], function()
 {
     var gulp_jspm = require('gulp-jspm');
-
-    gulp.start('dist:templates');
-    gulp.start('dist:styles');
-    gulp.start('dist:resources');
-
     gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
         .pipe(gulp_jspm({selfExecutingBundle: true, minify: true}))
-        .pipe(concat(MINIFIED_FILE))
-        .pipe(gulp.dest(DIST_DIRECTORY));
+        .pipe(gulp.dest(DIST_DIRECTORY + '/' + BUNDLE_FILE));
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
