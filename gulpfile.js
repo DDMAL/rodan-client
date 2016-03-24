@@ -6,7 +6,7 @@ var shell = require('gulp-shell');
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuration
 ///////////////////////////////////////////////////////////////////////////////////////
-var PORT = 9002;                            // Port for dev server.
+var PORT = 9001;                            // Port for dev server.
 var PORT_LIVERELOAD = 35729;                // Port for Livereload. Best to keep as default.
 var DIST_DIRECTORY = 'dist';                // Where dist will be dumped.
 var SOURCE_DIRECTORY = 'js';                // Name of Javascript source directory.
