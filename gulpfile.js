@@ -29,11 +29,11 @@ gulp.task('develop:templates', shell.task([
 /**
  * Compile SCSS to CSS.
  */
-gulp.task('develop:styles', shell.task([
-    'mkdir -p ' + WEB_DIRECTORY + '/styles',
-    'sassc -m styles/default.scss ' + WEB_DIRECTORY + '/styles/default.css',
-    'cp -rf styles/resources ' + WEB_DIRECTORY + '/styles/'
-]));
+gulp.task('develop:styles', function()
+{
+    var sass = require('gulp-sass');
+    gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(WEB_DIRECTORY));
+});
 
 /**
  * Links build results to web directory.
@@ -159,11 +159,11 @@ gulp.task('dist:templates', ['dist:mkdir'], shell.task([
 /**
  * Compile SCSS to CSS.
  */
-gulp.task('dist:styles', ['dist:mkdir'], shell.task([
-    'mkdir -p ' + DIST_DIRECTORY + '/styles',
-    'sassc -m styles/default.scss ' + DIST_DIRECTORY + '/styles/default.css',
-    'cp -rf styles/resources ' + DIST_DIRECTORY + '/styles/'
-]));
+gulp.task('dist:styles', ['dist:mkdir'], function()
+{
+    var sass = require('gulp-sass');
+    gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(DIST_DIRECTORY));
+});
 
 /**
  * Make distribution.
