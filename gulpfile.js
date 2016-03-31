@@ -146,7 +146,8 @@ gulp.task('dist:clean', function()
  */
 gulp.task('dist:resources', ['dist:mkdir'], shell.task(
 [
-    'cp -r resources ' + DIST_DIRECTORY + '/'
+    'cp -r resources ' + DIST_DIRECTORY + '/',
+    'cd ' + WEB_DIRECTORY + '; cp -Rf --parent libs/github/twbs/*/fonts/ ../' + DIST_DIRECTORY
 ]));
 
 /**
