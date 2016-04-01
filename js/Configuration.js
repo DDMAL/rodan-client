@@ -53,52 +53,6 @@ var Configuration = {
     RUNJOB_ACQUIRE_INTERVAL: 5000,
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// WorkflowBuilder GUI parameters
-///////////////////////////////////////////////////////////////////////////////////////
-    WORKFLOWBUILDER: {
-
-        // Identifier for this client.
-        USER_AGENT: 'rodan-standard',
-
-        // Grid parameters.
-        GRID:
-        {
-            DIMENSION: 20,
-            LINE_COLOR: '#606060',
-            LINE_WIDTH: 0.5  
-        },
-
-        // Zoom settings. These are percentages of the paper zoom.
-        ZOOM_MAX: 3.0,
-        ZOOM_MIN: 1.0,
-        ZOOM_RATE: 0.05,
-        ZOOM_INITIAL: 1.7,
-
-        // Item sizes (pixels).
-        WORKFLOWJOB_WIDTH: 20,
-        WORKFLOWJOB_HEIGHT: 22,
-        PORT_WIDTH: 8,
-        PORT_HEIGHT: 8,
-
-        // Appearance parameters.
-        OUTPUTPORT_COLOR: '#00ff00',
-        INPUTPORT_COLOR_SATISFIED: '#00ff00',
-        INPUTPORT_COLOR_UNSATISFIED: '#ff8800',
-        STROKE_COLOR: '#000000',
-        FILL_COLOR: '#ccccff',
-        WORKFLOWJOBGROUP_FILL_COLOR: '#8888ff',
-        STROKE_WIDTH: 1,
-        FONT_SIZE: 10,
-        STROKE_COLOR_SELECTED: '#0000ff',
-        STROKE_WIDTH_SELECTED: 2,
-        CONNECTION_CIRCLE_RADIUS: 4,
-
-        // Hover time. This is the amount of time the mouse must
-        // hover over an item for a pop-up to appear in milliseconds.
-        HOVER_TIME: 1000
-    },
-
-///////////////////////////////////////////////////////////////////////////////////////
 // DON'T EDIT BELOW THIS LINE (unless you know what you're doing)
 ///////////////////////////////////////////////////////////////////////////////////////
     // Routes without OPTIONS. if the route name is in here, the client won't try to grab them.
@@ -106,8 +60,8 @@ var Configuration = {
 
     // Client admin info. Leave fields empty if you don't want to be bothered. ;)
     ADMIN_CLIENT: {
-        name: '',
-        email: ''
+        NAME: '',
+        EMAIL: ''
     }
 };
 

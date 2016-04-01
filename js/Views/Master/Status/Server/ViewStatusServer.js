@@ -60,8 +60,8 @@ class ViewStatusServer extends Marionette.CompositeView
         var date = this._serverDate;
         return _.template($('#template-status_server_withadmin').html())({hostname: hostname,
                                                                           version: version,
-                                                                          name: Configuration.ADMIN_CLIENT.name,
-                                                                          email: Configuration.ADMIN_CLIENT.email});
+                                                                          name: Configuration.ADMIN_CLIENT.NAME,
+                                                                          email: Configuration.ADMIN_CLIENT.EMAIL});
     }
 }
 
