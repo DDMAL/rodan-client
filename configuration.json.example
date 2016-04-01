@@ -1,0 +1,9 @@
+{
+    "SERVER_URL": "<ABSOLUTE URI HERE>",
+    "SERVER_AUTHENTICATION_TYPE": "<"token" or "session">",
+    "ADMIN_CLIENT": 
+    {
+        "name": "",
+        "email": ""
+    }
+}
