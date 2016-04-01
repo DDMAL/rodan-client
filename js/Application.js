@@ -1,6 +1,7 @@
 import bootstrap from 'twbs/bootstrap';
 import 'twbs/bootstrap/css/bootstrap.css!';
 import _ from 'underscore';
+import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import moment from 'moment';
 import Radio from 'backbone.radio';
@@ -40,9 +41,20 @@ class Application extends Marionette.Application
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize the app.
+     * When app is ready, start communicating.
      */
-    initialize()
+    onStart()
+    {
+        Configuration.loadConfiguration(() => this.startUp());
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Application start-up
+     */
+    startUp()
     {
         this.addRegions({
             regionMaster: '#region-master'
@@ -60,19 +72,11 @@ class Application extends Marionette.Application
         this._initializeControllers();
         this._errorHandler = new ErrorHandler();
         this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
-    }
-
-    /**
-     * When app is ready, start communicating.
-     */
-    onStart()
-    {
+        
         this.rodanChannel.request(Events.REQUEST__SERVER_LOAD_ROUTES);
+
     }
 
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize managers.
      */
