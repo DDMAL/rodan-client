@@ -6,15 +6,16 @@ var shell = require('gulp-shell');
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuration
 ///////////////////////////////////////////////////////////////////////////////////////
-var PORT = 9001;                            // Port for dev server.
-var PORT_LIVERELOAD = 35729;                // Port for Livereload. Best to keep as default.
-var DIST_DIRECTORY = 'dist';                // Where dist will be dumped.
-var SOURCE_DIRECTORY = 'js';                // Name of Javascript source directory.
-var RESOURCES_DIRECTORY = 'resources';      // Name of resources directory.
-var WEB_DIRECTORY = 'web';                  // Name of directory holding development web app.
-                                            // NOTE: this should correspond to where jspm creates
-                                            // its config, so it's best to keep it as 'web'.
-var BUNDLE_FILE = 'rodan-client.min.js';    // Name of bundle file.
+var PORT = 9001;                                // Port for dev server.
+var PORT_LIVERELOAD = 35729;                    // Port for Livereload. Best to keep as default.
+var CONFIGURATION_FILE = 'configuration.json';  // Name of configuration file.
+var DIST_DIRECTORY = 'dist';                    // Where dist will be dumped.
+var SOURCE_DIRECTORY = 'js';                    // Name of Javascript source directory.
+var RESOURCES_DIRECTORY = 'resources';          // Name of resources directory.
+var WEB_DIRECTORY = 'web';                      // Name of directory holding development web app.
+                                                // NOTE: this should correspond to where jspm creates
+                                                // its config, so it's best to keep it as 'web'.
+var BUNDLE_FILE = 'rodan-client.min.js';        // Name of bundle file.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -40,7 +41,8 @@ gulp.task('develop:styles', function()
  */
 gulp.task('develop:link', shell.task([
     'cd ' + WEB_DIRECTORY + '; rm -f ' + SOURCE_DIRECTORY + '; ln -sf ../' + SOURCE_DIRECTORY + ' ' + SOURCE_DIRECTORY,
-    'cd ' + WEB_DIRECTORY + '; rm -f ' + RESOURCES_DIRECTORY + '; ln -sf ../' + RESOURCES_DIRECTORY + ' ' + RESOURCES_DIRECTORY
+    'cd ' + WEB_DIRECTORY + '; rm -f ' + RESOURCES_DIRECTORY + '; ln -sf ../' + RESOURCES_DIRECTORY + ' ' + RESOURCES_DIRECTORY,
+    'cd ' + WEB_DIRECTORY + '; rm -f ' + CONFIGURATION_FILE + '; ln -sf ../' + CONFIGURATION_FILE + ' .'
 ]));
 
 /**
@@ -89,6 +91,7 @@ gulp.task('develop:clean', function(callback)
     del([WEB_DIRECTORY + '/styles',
          WEB_DIRECTORY + '/' + RESOURCES_DIRECTORY,
          WEB_DIRECTORY + '/' + SOURCE_DIRECTORY,
+         WEB_DIRECTORY + '/' + CONFIGURATION_FILE,
          WEB_DIRECTORY + '/index.html'],
         function() {});
 });
@@ -144,8 +147,9 @@ gulp.task('dist:clean', function()
 /**
  * Copy files for dist.
  */
-gulp.task('dist:resources', ['dist:mkdir'], shell.task(
+gulp.task('dist:copy', ['dist:mkdir'], shell.task(
 [
+    'cp ' + CONFIGURATION_FILE + ' ' + DIST_DIRECTORY + '/',
     'cp -r resources ' + DIST_DIRECTORY + '/',
     'cd ' + WEB_DIRECTORY + '; cp -Rf --parent libs/github/twbs/*/fonts/ ../' + DIST_DIRECTORY
 ]));
@@ -169,7 +173,7 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', 'dist:resources'], function()
+gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', 'dist:copy'], function()
 {
     var gulp_jspm = require('gulp-jspm');
     var rename = require("gulp-rename");
