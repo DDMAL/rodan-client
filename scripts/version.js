@@ -77,7 +77,6 @@ function updateVersion()
             cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag v' + nextVersion;
             exec(cmd, function(error, stdout, stderr) 
             {
-                process.stdout.write('Remember to "git push --tags".\n');
                 if (error)
                 {
                     process.stdout.write('\n');
