@@ -76,6 +76,7 @@ function updateVersion()
             process.stdout.write("done.\n");
             process.stdout.write("Commit and tag...");
             cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag ' + nextVersion;
+            console.log(cmd);
             exec(cmd, function(error, stdout, stderr) 
             {
                 if (error)
