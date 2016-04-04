@@ -74,18 +74,14 @@ function updateVersion()
                 return console.error(error);
             }
             process.stdout.write("done.\n");
-            process.stdout.write("Commit and tag...");
-            cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag v' + nextVersion + '; git push --tags';
+            cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag v' + nextVersion;
             exec(cmd, function(error, stdout, stderr) 
             {
+                process.stdout.write('Remember to "git push --tags".\n');
                 if (error)
                 {
                     process.stdout.write('\n');
                     console.log(stderr);
-                }
-                else
-                {
-                    process.stdout.write('done\n');
                 }
             });
             process.stdout.write("\n");
