@@ -8,12 +8,12 @@ exec(cmd, function(error, stdout, stderr)
 {
     var lineCount = stdout.split('\n').length;
     var firstLine = stdout.split('\n')[0];
- /*   if (firstLine !== '## master...origin/master' || lineCount != 2)
+    if (firstLine !== '## master...origin/master' || lineCount != 2)
     {
         process.stdout.write("Must be on master branch with no changes to update version.\n");
         process.exit();
     }
-    else*/
+    else
     {
         updateVersion();
     }
@@ -76,7 +76,6 @@ function updateVersion()
             process.stdout.write("done.\n");
             process.stdout.write("Commit and tag...");
             cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag ' + nextVersion;
-            console.log(cmd);
             exec(cmd, function(error, stdout, stderr) 
             {
                 if (error)
