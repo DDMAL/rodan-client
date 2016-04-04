@@ -204,7 +204,7 @@ var Events =
     EVENT__WORKFLOWJOB_SAVED: 'EVENT__WORKFLOWJOB_SAVED',       // Triggered when WorkflowJob saved. Sends {workflowjob: WorkflowJob}.
     REQUEST__WORKFLOWJOB_CREATE: 'REQUEST__WORKFLOWJOB_CREATE', // Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created iff addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) iff the WorkflowJob created has one and only one OutputPort.
     REQUEST__WORKFLOWJOB_DELETE: 'REQUEST__WORKFLOWJOB_DELETE', // Request a WorkflowJob be deleted. Takes {workflowjob: WorkflowJob}.
-    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Request a WorkflowJob be saved/updated. Takes {workflowjob: WorkflowJob}.
+    REQUEST__WORKFLOWJOB_SAVE: 'REQUEST__WORKFLOWJOB_SAVE',     // Request a WorkflowJob be saved/updated. Takes {workflowjob: WorkflowJob, workflow: Workflow (optional)}. If a Workflow is passed the WorkflowJobController will request a validation for that Workflow after the save has completed.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // WorkflowJobGroup

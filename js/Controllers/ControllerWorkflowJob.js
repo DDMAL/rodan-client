@@ -52,7 +52,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SAVED, {workflowjob: model})});
+        options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model, options.workflow)});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +68,18 @@ class ControllerWorkflowJob extends BaseController
         if (addPorts)
         {
             this._addRequiredPorts(model, targetInputPorts, workflow);
+        }
+    }
+
+    /**
+     * Handle save success.
+     */
+    _handleWorkflowJobSaveSuccess(workflowJob, workflow)
+    {
+        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SAVED, {workflowjob: workflowJob});
+        if (workflow)
+        {
+            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
         }
     }
 
