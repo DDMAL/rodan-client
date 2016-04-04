@@ -6,7 +6,8 @@ var exec = require('child_process').exec;
 var cmd = 'git status --porcelain -b';
 exec(cmd, function(error, stdout, stderr) 
 {
-    if (stdout !== '## master...origin/master')
+    var firstLine = stdout.split('\n')[0];
+    if (firstLine !== '## master...origin/master')
     {
         process.stdout.write("Must be on master branch to update version.\n");
         process.exit();
