@@ -59,29 +59,25 @@ class ViewSettings extends Marionette.ItemView
         var element = this._getJQueryElement();
         $(element).hide();
 
-        // Check if we have settings.
+        // Create settings.
         var startValues = this.model.get('job_settings');
         startValues = $.isEmptyObject(startValues) ? null : startValues;
-        if (startValues !== null)
-        {
-            $(element).show();
-            var jobUuid = this.model.getJobUuid();
-            var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
-            var job = collection.get(jobUuid);
-            var settingsSchema = { 
-                schema: job.get('settings'),
-                theme: 'bootstrap3',
-                disable_collapse: true,
-                disable_edit_json: true,
-                disable_properties: true,
-                no_additional_properties: true,
-                show_errors: 'always',
-                startval: startValues,
-                form_name_root: ''
-            };
-            this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
-            //this._editor.on('change', () => this._saveSettings());
-        }
+        $(element).show();
+        var jobUuid = this.model.getJobUuid();
+        var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var job = collection.get(jobUuid);
+        var settingsSchema = { 
+            schema: job.get('settings'),
+            theme: 'bootstrap3',
+            disable_collapse: true,
+            disable_edit_json: true,
+            disable_properties: true,
+            no_additional_properties: true,
+            show_errors: 'always',
+            startval: startValues,
+            form_name_root: ' '
+        };
+        this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
     }
 
     /**
