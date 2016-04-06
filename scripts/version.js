@@ -39,6 +39,8 @@ function updateVersion()
             case 'm':
             {
                 versionInfo[0]++;
+                versionInfo[1] = 0;
+                versionInfo[2] = 0;
                 break;
             }
 
@@ -46,6 +48,7 @@ function updateVersion()
             case 'i':
             {
                 versionInfo[1]++;
+                versionInfo[2] = 0;
                 break;
             }
 
