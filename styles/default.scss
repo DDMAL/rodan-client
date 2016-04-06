@@ -8,7 +8,6 @@
 /* Navigation area */
 $background-color-navigation: #000000;
 $text-color-navigation: #cccccc;
-$text-color-navigation-logout: #000000;
 
 /* Status area */
 $background-color-status: #000000;
@@ -30,8 +29,7 @@ $background-color-workflowbuilder-control: #ffffff;
 /**************************************************************************************
  * DO NOT TOUCH unless you know what you're doing.
  *************************************************************************************/
-$height-bottom: 8; // % of vertical space in viewport
-$height-top: 92; // % of vertical space in viewport
+$height-top: 100; // % of vertical space in viewport
 $height-gui: 88; // % of vertical space in GUI viewport
 $height-gui_menu: 4; // % of vertical space in GUI viewport for menu
 $size-font: 12px; // pixels
@@ -53,33 +51,6 @@ div#region-navigation ul
     list-style-type: disc;
     margin: 0;
     padding-left: 10px;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Status region
-///////////////////////////////////////////////////////////////////////////////////////
-div#region-status
-{
-    background: $background-color-status;
-    height: 100%;
-}
-
-div#region-status_user 
-{
-    height: 100%;
-    color: $text-color-status-user;
-}
-
-div#region-status_message 
-{
-    height: 100%;
-    color: $text-color-status-user;
-}
-
-div#region-status_server
-{
-    height: 100%;
-    color: $text-color-status-server;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -178,11 +149,6 @@ div.top {
     height: $height-top + vh;
 }
 
-div.row-bottom {
-    height: $height-bottom + %; //fallback
-    height: $height-bottom + vh;
-}
-
 div.gui {
     height: $height-gui + %; //fallback
     height: $height-gui + vh;
@@ -191,11 +157,6 @@ div.gui {
 div.gui_menu {
     height: $height-gui_menu + %; //fallback
     height: $height-gui_menu + vh;
-}
-
-button#button-navigation_logout
-{
-    color: $text-color-navigation-logout;
 }
 
 div#main_workflowbuilder

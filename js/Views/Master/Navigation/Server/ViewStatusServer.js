@@ -36,18 +36,6 @@ class ViewStatusServer extends Marionette.CompositeView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__SERVER_DATE_UPDATED, options => this._showServerTime(options));
-    }
-
-    /**
-     * Show the server time.
-     */
-    _showServerTime(options)
-    {
-        if (options.date)
-        {
-            this.$el.find('#status-server_date').text(options.date.toString());
-        }
     }
 
     /**
@@ -57,11 +45,7 @@ class ViewStatusServer extends Marionette.CompositeView
     {
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
-        var date = this._serverDate;
-        return _.template($('#template-status_server_withadmin').html())({hostname: hostname,
-                                                                          version: version,
-                                                                          name: Configuration.ADMIN_CLIENT.NAME,
-                                                                          email: Configuration.ADMIN_CLIENT.EMAIL});
+        return _.template($('#template-status_server').html())({hostname: hostname, version: version});
     }
 }
 

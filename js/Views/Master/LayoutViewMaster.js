@@ -4,7 +4,6 @@ import Radio from 'backbone.radio';
 import Events from '../../Shared/Events';
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
-import LayoutViewStatus from './Status/LayoutViewStatus';
 
 /**
  * Layout view for master work area.
@@ -21,8 +20,7 @@ class LayoutViewMaster extends Marionette.LayoutView
     {
         this.addRegions({
             regionMain: '#region-main',
-            regionNavigation: '#region-navigation',
-            regionStatus: '#region-status'
+            regionNavigation: '#region-navigation'
         });
         this._initializeRadio();
         this._initializeViews();
@@ -36,7 +34,6 @@ class LayoutViewMaster extends Marionette.LayoutView
     {
         this.regionMain.show(this.layoutViewMain);
         this.regionNavigation.show(this.layoutViewNavigation);
-        this.regionStatus.show(this.layoutViewStatus);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +46,6 @@ class LayoutViewMaster extends Marionette.LayoutView
     {
         this.layoutViewNavigation = new LayoutViewNavigation();
         this.layoutViewMain = new LayoutViewMain();
-        this.layoutViewStatus = new LayoutViewStatus();
     }
 
     /**

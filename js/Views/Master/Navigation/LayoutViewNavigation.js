@@ -4,6 +4,8 @@ import Radio from 'backbone.radio';
 
 import Events from '../../../Shared/Events';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
+import ViewStatusServer from './Server/ViewStatusServer';
+import ViewStatusUser from './User/ViewStatusUser';
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
@@ -20,9 +22,14 @@ class LayoutViewNavigation extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.addRegions({
-            regionNavigationTree: '#region-navigation_tree'
+            regionNavigationTree: '#region-navigation_tree',
+            regionStatusServer: '#region-status_server',
+            regionStatusUser: '#region-status_user'
         });
+        this.viewStatusServer = new ViewStatusServer();
+        this.viewStatusUser = new ViewStatusUser({user: null});
     }
+
 
     /**
      * On show initialize the transfer info.
@@ -30,6 +37,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
     onShow()
     {
         this._populateUploadCount();
+        this.regionStatusServer.show(this.viewStatusServer);
+        this.regionStatusUser.show(this.viewStatusUser);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +50,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleAuthenticationSuccess());
+        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, options => this._handleAuthenticationSuccess(options));
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
         this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, () => this._populateUploadCount());
         this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, () => this._populateUploadCount());
@@ -50,11 +59,15 @@ class LayoutViewNavigation extends Marionette.LayoutView
     /**
      * Handle authentication.
      */
-    _handleAuthenticationSuccess()
+    _handleAuthenticationSuccess(options)
     {
         var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
+
+        this.viewStatusUser = new ViewStatusUser({user: options.user});
+        this.regionStatusUser.show(this.viewStatusUser);
+        this.$el.find('#button-navigation_logout').prop('disabled', false);
     }
 
     /**
@@ -63,6 +76,10 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.regionNavigationTree.reset(); 
+
+        this.viewStatusUser = new ViewStatusUser({user: null});
+        this.regionStatusUser.show(this.viewStatusUser);
+        this.$el.find('#button-navigation_logout').prop('disabled', true);
     }
 
     /**
@@ -75,11 +92,25 @@ class LayoutViewNavigation extends Marionette.LayoutView
         this.$el.find('#navigation-upload_count_completed').text(count.completed);
         this.$el.find('#navigation-upload_count_failed').text(count.failed);
     }
+
+    /**
+     * Handle button.
+     */
+    _handleButton()
+    {
+        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewNavigation.prototype.template = '#template-navigation';
+LayoutViewNavigation.prototype.ui = {
+    buttonLogout: '#button-navigation_logout'
+};
+LayoutViewNavigation.prototype.events = {
+    'click @ui.buttonLogout': '_handleButton'
+};
 
 export default LayoutViewNavigation;
