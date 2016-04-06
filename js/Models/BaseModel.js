@@ -169,11 +169,11 @@ class BaseModel extends Backbone.Model
      */
     _handleSuccessResponse(model, response, options)
     {
-        var text = 'Successful ' + options.task
+ /*       var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + model.constructor.name + ' "' + model.get('name') + '"'
                    + ' (' + model.get('url') + ')';
-        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
     }
 
     /**
@@ -184,10 +184,10 @@ class BaseModel extends Backbone.Model
         this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {model: model,
                                                                   response: response,
                                                                   options: options});
-        var text = 'Unsuccessful ' + options.task
+ /*       var text = 'Unsuccessful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + model.constructor.name + ' "' + model.get('name') + '"';
-        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});
+        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
     }
 }
 BaseModel.prototype.idAttribute = 'uuid';

@@ -1,10 +1,11 @@
+import _ from 'underscore';
 import Backbone from 'backbone';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
+import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
-import ViewStatusServer from './Server/ViewStatusServer';
 import ViewStatusUser from './User/ViewStatusUser';
 
 /**
@@ -23,10 +24,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
         this._initializeRadio();
         this.addRegions({
             regionNavigationTree: '#region-navigation_tree',
-            regionStatusServer: '#region-status_server',
             regionStatusUser: '#region-status_user'
         });
-        this.viewStatusServer = new ViewStatusServer();
         this.viewStatusUser = new ViewStatusUser({user: null});
     }
 
@@ -37,7 +36,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
     onShow()
     {
         this._populateUploadCount();
-        this.regionStatusServer.show(this.viewStatusServer);
         this.regionStatusUser.show(this.viewStatusUser);
     }
 
@@ -54,6 +52,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
         this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
         this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, () => this._populateUploadCount());
         this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, () => this._populateUploadCount());
+        this.rodanChannel.reply(Events.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
+        this.rodanChannel.reply(Events.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
     }
 
     /**
@@ -94,11 +94,53 @@ class LayoutViewNavigation extends Marionette.LayoutView
     }
 
     /**
-     * Handle button.
+     * Handle button logout.
      */
-    _handleButton()
+    _handleButtonLogout()
     {
         this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
+    }
+
+    /**
+     * Handle button about.
+     */
+    _handleButtonAbout()
+    {
+        this.rodanChannel.request(Events.REQUEST__SHOW_ABOUT);
+    }
+
+    /**
+     * Handle button help.
+     */
+    _handleButtonHelp()
+    {
+        this.rodanChannel.request(Events.REQUEST__SHOW_HELP);
+    }
+
+    /**
+     * Handle request show about.
+     */
+    _handleRequestShowAbout()
+    {
+
+        var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
+        var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
+        var serverDate = this.rodanChannel.request(Events.REQUEST__SERVER_DATE);
+        serverDate = serverDate.toString();
+        var html = _.template($('#template-misc_about').html())({hostname: hostname,
+                                                                 version: version,
+                                                                 date: serverDate,
+                                                                 name: Configuration.ADMIN_CLIENT.NAME,
+                                                                 email: Configuration.ADMIN_CLIENT.EMAIL});
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
+    }
+
+    /**
+     * Handle request show help.
+     */
+    _handleRequestShowHelp()
+    {
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'I want to help you, too :(', text: 'Just email ryan.bannon@gmail.com and ask your question'});
     }
 }
 
@@ -107,10 +149,14 @@ class LayoutViewNavigation extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewNavigation.prototype.template = '#template-navigation';
 LayoutViewNavigation.prototype.ui = {
-    buttonLogout: '#button-navigation_logout'
+    buttonLogout: '#button-navigation_logout',
+    buttonAbout: '#button-navigation_about',
+    buttonHelp: '#button-navigation_help'
 };
 LayoutViewNavigation.prototype.events = {
-    'click @ui.buttonLogout': '_handleButton'
+    'click @ui.buttonLogout': '_handleButtonLogout',
+    'click @ui.buttonAbout': '_handleButtonAbout',
+    'click @ui.buttonHelp': '_handleButtonHelp'
 };
 
 export default LayoutViewNavigation;

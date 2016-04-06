@@ -23,7 +23,6 @@ var Events =
     REQUEST__RUNJOB_SHOWLAYOUTVIEW: 'REQUEST__RUNJOB_SHOWLAYOUTVIEW',   // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
     EVENT__SERVER_WENTAWAY: 'EVENT__SERVER_WENTAWAY',                           // Called on server disconnect. No pass.
     EVENT__SERVER_PANIC: 'EVENT__SERVER_PANIC',                                 // Called when the app suspects that something went wrong.
-    REQUEST__SYSTEM_DISPLAY_MESSAGE: 'REQUEST__SYSTEM_DISPLAY_MESSAGE', // Request message to be displayed in status bar. Takes {text: string}.
     REQUEST__SYSTEM_HANDLE_ERROR: 'REQUEST__SYSTEM_HANDLE_ERROR',       // Sends error to error handler. Takes {model: BaseModel, response: HTTP response, option: associated options}.
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +36,12 @@ var Events =
     REQUEST__AUTHENTICATION_LOGIN: 'REQUEST__AUTHENTICATION_LOGIN',                 // Request login authentication. Takes {username: string, password: string}. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
     REQUEST__AUTHENTICATION_LOGOUT: 'REQUEST__AUTHENTICATION_LOGOUT',               // Request logout for currently logged in user. Upon response from the server, the client will fire one of the above AUTHENTICATION events.
     REQUEST__AUTHENTICATION_USER: 'REQUEST__AUTHENTICATION_USER',                   // Request currently logged in User. Returns User or null.
+
+///////////////////////////////////////////////////////////////////////////////////////
+// General
+///////////////////////////////////////////////////////////////////////////////////////
+    REQUEST__SHOW_ABOUT: 'REQUEST__SHOW_ABOUT', // Request "About" information be shown.
+    REQUEST__SHOW_HELP: 'REQUEST__SHOW_HELP',   // Request "Help" page be shown.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Global Collections

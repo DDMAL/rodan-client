@@ -100,7 +100,7 @@ class ControllerModal extends BaseController
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
         $('.modal-title').text(options.title);
-        $('.modal-body').text(options.text);
+        $('.modal-body').append(options.text);
         $modalEl.modal({backdrop: 'static', keyboard: false}); 
     }
 
