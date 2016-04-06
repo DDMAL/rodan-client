@@ -74,6 +74,7 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
+        this.rodanChannel.reply(Events.REQUEST__SERVER_CONFIGURATION, () => this._handleRequestConfiguration());
         this.rodanChannel.reply(Events.REQUEST__SERVER_DATE, () => this._handleRequestDate());
         this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
         this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
@@ -81,6 +82,14 @@ class ControllerServer extends BaseController
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
         this.rodanChannel.reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
+    }
+
+    /**
+     * Return server config.
+     */
+    _handleRequestConfiguration()
+    {
+        return this._server.configuration;
     }
 
     /**

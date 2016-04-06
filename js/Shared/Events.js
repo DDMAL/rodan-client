@@ -129,6 +129,7 @@ var Events =
     EVENT__SERVER_ROUTESLOADED: 'EVENT__SERVER_ROUTESLOADED',                   // Triggered when server routes have been loaded.
     EVENT__SERVER_DATE_UPDATED: 'EVENT__SERVER_DATE_UPDATED',                   // Triggered when server date has been updated. Sends {date: Date}.
     EVENT__SERVER_WAITING: 'EVENT__SERVER_WAITING',                             // Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response).
+    REQUEST__SERVER_CONFIGURATION: 'REQUEST__SERVER_CONFIGURATION',             // Request server configuration. Returns object.
     REQUEST__SERVER_DATE: 'REQUEST__SERVER_DATE',                               // Request last known server date and time. Returns Date.
     REQUEST__SERVER_GET_HOSTNAME: 'REQUEST__SERVER_GET_HOSTNAME',               // Request server hostname. Returns string (hostname).
     REQUEST__SERVER_GET_ROUTE: 'REQUEST__SERVER_GET_ROUTE',                     // Request server URL for route. Takes {route: string}. Returns string (URL).

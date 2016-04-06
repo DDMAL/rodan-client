@@ -122,13 +122,14 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowAbout()
     {
-
+        var serverConfig = this.rodanChannel.request(Events.REQUEST__SERVER_CONFIGURATION);
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
         var serverDate = this.rodanChannel.request(Events.REQUEST__SERVER_DATE);
         serverDate = serverDate.toString();
         var html = _.template($('#template-misc_about').html())({hostname: hostname,
                                                                  version: version,
+                                                                 serverConfiguration: serverConfig,
                                                                  date: serverDate,
                                                                  name: Configuration.ADMIN_CLIENT.NAME,
                                                                  email: Configuration.ADMIN_CLIENT.EMAIL});
