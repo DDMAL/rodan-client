@@ -96,7 +96,7 @@ function updateVersion()
         // Write to client info file.
         var clientInfo = {version: json.version};
         var clientInfoData = JSON.stringify(clientInfo, null, 4);
-        fs.writeFile('info.json', data, function(error)
+        fs.writeFile('info.json', clientInfoData, function(error)
         {
             if (error)
             {
