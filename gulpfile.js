@@ -169,7 +169,9 @@ gulp.task('dist:info', ['dist:mkdir'], function()
 {
     var json = require('./' + PACKAGE_FILE);
     var info = {
-        version: json.version
+        CLIENT: {
+            version: json.version
+        }
     };
     require('fs').writeFileSync(DIST_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
 });
