@@ -45,7 +45,9 @@ gulp.task('develop:info', function()
 {
     var json = require('./' + PACKAGE_FILE);
     var info = {
-        version: json.version + '-DEVELOPMENT'
+        CLIENT: {
+            version: json.version + '-DEVELOPMENT'
+        }
     };
     require('fs').writeFileSync(WEB_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
 });

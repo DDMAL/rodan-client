@@ -18,7 +18,7 @@ var Configuration = {
     // time. This means that the server MUST exposde the 'Date' response header. As
     // such, it is recommended that this value be greater than the 
     // EVENT_TIMER_FREQUENCY to reduce traffic.
-    SERVER_REQUEST_TIME_INTERVAL: 8000,
+    SERVER_REQUEST_TIME_INTERVAL: 60000,
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
@@ -67,23 +67,23 @@ var Configuration = {
 // Loader methods
 ///////////////////////////////////////////////////////////////////////////////////////
 /**
- * Requests 'configuration.json' from the client host. Whatever it gets from the host
+ * Requests filename from the client host. Whatever it gets from the host
  * it will merge with the default configuration.
  *
  * When finished it will fire the provided callback.
  */
-Configuration.load = function(callback)
+Configuration.load = function(filename, callback)
 {
     var request = new XMLHttpRequest();
-    request.open('GET', 'configuration.json', true);
-    request.onreadystatechange = (event) => this._handleStateChange(event, callback);
+    request.open('GET', filename, true);
+    request.onreadystatechange = (event) => this._handleStateChange(event, filename, callback);
     request.send();
 }
 
 /**
  * Handle state change of request.
  */
-Configuration._handleStateChange = function(event, callback)
+Configuration._handleStateChange = function(event, filename, callback)
 {
     var request = event.currentTarget;
     switch (request.readyState)
@@ -122,7 +122,7 @@ Configuration._handleStateChange = function(event, callback)
         default:
         {
             // TODO error
-            console.error('failed to load configuration.json');
+            console.error('failed to load file ' + filename);
             break;
         }
     }

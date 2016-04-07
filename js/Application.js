@@ -27,7 +27,6 @@ import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
 import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPortTypeCollection';
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
-import Info from './Info';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import Plugins from './Plugins';
 import RadioManager from './Managers/RadioManager';
@@ -46,8 +45,7 @@ class Application extends Marionette.Application
      */
     onStart()
     {
-        Info.load();
-        Configuration.load(() => this.startUp());
+        Configuration.load('configuration.json', () => this.startUp());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +56,7 @@ class Application extends Marionette.Application
      */
     startUp()
     {
+        Configuration.load('info.json');
         this.addRegions({
             regionMaster: '#region-master'
         });

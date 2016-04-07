@@ -11,4 +11,9 @@ Job packages:
 </ul>
 <hr>
 <h3>Rodan client</h3>
+<ul>
+<% for(var field in client) { %>
+    <li><%= field %>: <%= client[field] %></li>
+<% } %>
+</ul>
 Client admin: <a href="mailto:<%= email %>"><%= name %></a> (<%= email %>)
