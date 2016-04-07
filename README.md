@@ -28,6 +28,9 @@ OPTIONAL
 - jshint-stylish: gives a nice, colorful jshint report
 - gulp-jshint: use jshint in gulp
 
+OPTIONAL
+- prompt-sync: for scripts/version.js
+
 REQUIRED
 - babel-preset-es2015: rules that babel will use to transpile our beautiful source code
 - del: delete stuff

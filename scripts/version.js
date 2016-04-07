@@ -1,107 +1,112 @@
-process.stdin.resume();
+/**
+ * Script to maintain version of app.
+ */
+
+//////////////////////////////////////////////////////////////////////////////////////
+// MAIN
+//////////////////////////////////////////////////////////////////////////////////////
 process.stdin.setEncoding('utf8');
-var util = require('util');
-
-var exec = require('child_process').exec;
-var cmd = 'git status --porcelain -b';
-exec(cmd, function(error, stdout, stderr) 
+if (!handleGitStatus())
 {
-    var lineCount = stdout.split('\n').length;
-    var firstLine = stdout.split('\n')[0];
-  /*  if (firstLine !== '## master...origin/master' || lineCount != 2)
-    {
-        process.stdout.write("Must be on master branch with no changes to update version.\n");
-        process.exit();
-    }
-    else*/
-    {
-        updateVersion();
-    }
-});
+    process.exit();
+}
 
-
-function updateVersion()
+// Get next version.
+var json = require('../package.json');
+var nextVersion = getNextVersion(json);
+if (!nextVersion)
 {
-    var json = require('../package.json');
+    process.exit();
+}
+console.log('Next version is ' + nextVersion);
+json.version = nextVersion;
+
+// Update and commit.
+updateVersion(json);
+gitCommit(nextVersion);
+console.log('Remember to do "git push && git push --tags"');
+
+//////////////////////////////////////////////////////////////////////////////////////
+// FUNCTIONS
+//////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Handles git status execution.
+ */
+function handleGitStatus()
+{
+    var child_process = require('child_process');
+    var result = child_process.execSync('git status --porcelain -b').toString();
+    var lineCount = result.split('\n').length;
+    var firstLine = result.split('\n')[0];
+    if (firstLine !== '## master...origin/master' || lineCount != 2)
+    {
+        console.log("Must be on master branch with no changes to update version.");
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Gets the next version.
+ */
+function getNextVersion(json)
+{
+    var prompt = require('prompt-sync')();
     var currentVersion = json.version;
     var versionInfo = currentVersion.split('.').map(function(x) { return parseInt(x, 10); });
-    var nextVersion = null;
-
-    process.stdout.write("Current version: " + currentVersion + '\n');
-    process.stdout.write("Next version increment is (m)ajor, m(i)nor, (f)ix: ");
-    process.stdin.on('data', function (text)
+    console.log('Current version: ' + currentVersion);
+    var input = prompt('Next version increment is (m)ajor, m(i)nor, (f)ix: ', 'f');
+    input = input.substring(1, input.length - 3);
+    switch(input)
     {
-        var input = util.inspect(text);
-        input = input.substring(1, input.length - 3);
-        switch(input)
+        case 'M':
+        case 'm':
         {
-            case 'M':
-            case 'm':
-            {
-                versionInfo[0]++;
-                versionInfo[1] = 0;
-                versionInfo[2] = 0;
-                break;
-            }
-
-            case 'I':
-            case 'i':
-            {
-                versionInfo[1]++;
-                versionInfo[2] = 0;
-                break;
-            }
-
-            case 'F':
-            case 'f':
-            {
-                versionInfo[2]++;
-                break;
-            }
-
-            default:
-            {
-                console.error('Input must be m, i, or f. Exiting.')
-                process.exit();
-            }
+            versionInfo[0]++;
+            versionInfo[1] = 0;
+            versionInfo[2] = 0;
+            break;
         }
-        nextVersion = versionInfo.join('.');
-        process.stdout.write("Setting version " + nextVersion + '...');
-        json.version = nextVersion;
 
-        // Write to package.
-        var fs = require('fs');
-        var data = JSON.stringify(json, null, 4);
-        fs.writeFile('package.json', data, function(error)
+        case 'I':
+        case 'i':
         {
-            if (error)
-            {
-                return console.error(error);
-            }
-            process.stdout.write("done.\n");
-            cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag v' + nextVersion;
-            process.stdout.write('Remember to do "git push && git push --tags".\n');
-            exec(cmd, function(error, stdout, stderr) 
-            {
-                if (error)
-                {
-                    process.stdout.write('\n');
-                    console.log(stderr);
-                }
-            });
-            process.stdout.write("\n");
-//            process.exit();
-        });
+            versionInfo[1]++;
+            versionInfo[2] = 0;
+            break;
+        }
 
-        // Write to client info file.
-        var clientInfo = {version: json.version};
-        var clientInfoData = JSON.stringify(clientInfo, null, 4);
-        fs.writeFile('info.json', clientInfoData, function(error)
+        case 'F':
+        case 'f':
         {
-            if (error)
-            {
-                return console.error(error);
-            }
-        });
-    });
+            versionInfo[2]++;
+            break;
+        }
+
+        default:
+        {
+            console.log('Input must be m, i, or f.')
+            return false;
+        }
+    }
+    return versionInfo.join('.');
+}
+
+/**
+ * Updates version in package.json.
+ */
+function updateVersion(json)
+{
+    var data = JSON.stringify(json, null, 4);
+    require('fs').writeFileSync('package.json', data);
+}
+
+/**
+ * Does commit.
+ */
+function gitCommit(nextVersion)
+{
+    var child_process = require('child_process');
+    var cmd = 'git commit -a -m "Release ' + nextVersion + '"; git tag v' + nextVersion;
+    child_process.execSync(cmd).toString();
 }
