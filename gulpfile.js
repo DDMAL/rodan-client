@@ -17,6 +17,7 @@ var WEB_DIRECTORY = 'web';                      // Name of directory holding dev
                                                 // its config, so it's best to keep it as 'web'.
 var BUNDLE_FILE = 'rodan-client.min.js';        // Name of bundle file.
 var PACKAGE_FILE = 'package.json';              // Name of package file.
+var INFO_FILE = 'info.json';                    // Name of info file (client info).
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -35,6 +36,18 @@ gulp.task('develop:styles', function()
 {
     var sass = require('gulp-sass');
     gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(WEB_DIRECTORY));
+});
+
+/**
+ * Creates info.json. This holds client data, such as version.
+ */
+gulp.task('develop:info', function()
+{
+    var json = require('./' + PACKAGE_FILE);
+    var info = {
+        version: json.version + '-DEVELOPMENT'
+    };
+    require('fs').writeFileSync(WEB_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
 });
 
 /**
@@ -61,7 +74,7 @@ gulp.task('develop:jshint', function (callback)
 /**
  * Start the development server.
  */
-gulp.task('develop:server', ['develop:link', 'develop:templates', 'develop:styles'], function()
+gulp.task('develop:server', ['develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function()
 {
     var serveStatic = require('serve-static');
     var serveIndex = require('serve-index');
@@ -93,6 +106,8 @@ gulp.task('develop:clean', function(callback)
          WEB_DIRECTORY + '/' + RESOURCES_DIRECTORY,
          WEB_DIRECTORY + '/' + SOURCE_DIRECTORY,
          WEB_DIRECTORY + '/' + CONFIGURATION_FILE,
+         WEB_DIRECTORY + '/' + INFO_FILE,
+         WEB_DIRECTORY + '/*.css',
          WEB_DIRECTORY + '/index.html'],
         function() {});
 });
@@ -146,6 +161,18 @@ gulp.task('dist:clean', function()
 });
 
 /**
+ * Creates info.json. This holds client data, such as version.
+ */
+gulp.task('dist:info', ['dist:mkdir'], function()
+{
+    var json = require('./' + PACKAGE_FILE);
+    var info = {
+        version: json.version
+    };
+    require('fs').writeFileSync(DIST_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
+});
+
+/**
  * Copy files for dist.
  */
 gulp.task('dist:copy', ['dist:mkdir'], shell.task(
@@ -174,7 +201,7 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:mkdir', 'dist:link', 'dist:templates', 'dist:styles', 'dist:copy'], function()
+gulp.task('dist', ['dist:mkdir', 'dist:info', 'dist:link', 'dist:templates', 'dist:styles', 'dist:copy'], function()
 {
     var gulp_jspm = require('gulp-jspm');
     var rename = require("gulp-rename");

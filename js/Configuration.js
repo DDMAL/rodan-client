@@ -1,8 +1,6 @@
 /**
- * This is a sample configuration file.
- * Make sure to make a copy and rename it to 'Configuration.js'.
+ * Client configuration object.
  */
-
 var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server parameters
@@ -74,7 +72,7 @@ var Configuration = {
  *
  * When finished it will fire the provided callback.
  */
-Configuration.loadConfiguration = function(callback)
+Configuration.load = function(callback)
 {
     var request = new XMLHttpRequest();
     request.open('GET', 'configuration.json', true);
