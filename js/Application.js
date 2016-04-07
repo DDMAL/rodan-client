@@ -55,7 +55,7 @@ class Application extends Marionette.Application
      * Application start-up
      */
     startUp()
-    {
+    {debugger;
         this.addRegions({
             regionMaster: '#region-master'
         });

@@ -16,6 +16,7 @@ var WEB_DIRECTORY = 'web';                      // Name of directory holding dev
                                                 // NOTE: this should correspond to where jspm creates
                                                 // its config, so it's best to keep it as 'web'.
 var BUNDLE_FILE = 'rodan-client.min.js';        // Name of bundle file.
+var PACKAGE_FILE = 'package.json';              // Name of package file.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks

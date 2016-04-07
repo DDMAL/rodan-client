@@ -8,12 +8,12 @@ exec(cmd, function(error, stdout, stderr)
 {
     var lineCount = stdout.split('\n').length;
     var firstLine = stdout.split('\n')[0];
-    if (firstLine !== '## master...origin/master' || lineCount != 2)
+  /*  if (firstLine !== '## master...origin/master' || lineCount != 2)
     {
         process.stdout.write("Must be on master branch with no changes to update version.\n");
         process.exit();
     }
-    else
+    else*/
     {
         updateVersion();
     }
@@ -68,6 +68,8 @@ function updateVersion()
         nextVersion = versionInfo.join('.');
         process.stdout.write("Setting version " + nextVersion + '...');
         json.version = nextVersion;
+
+        // Write to package.
         var fs = require('fs');
         var data = JSON.stringify(json, null, 4);
         fs.writeFile('package.json', data, function(error)
@@ -88,7 +90,18 @@ function updateVersion()
                 }
             });
             process.stdout.write("\n");
-            process.exit();
+//            process.exit();
+        });
+
+        // Write to client info file.
+        var clientInfo = {version: json.version};
+        var clientInfoData = JSON.stringify(clientInfo, null, 4);
+        fs.writeFile('info.json', data, function(error)
+        {
+            if (error)
+            {
+                return console.error(error);
+            }
         });
     });
 }
