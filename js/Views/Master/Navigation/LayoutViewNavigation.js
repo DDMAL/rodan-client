@@ -126,8 +126,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
                                                                  name: name,
                                                                  serverConfiguration: serverConfig,
                                                                  date: serverDate,
-                                                                 name: Configuration.ADMIN_CLIENT.NAME,
-                                                                 email: Configuration.ADMIN_CLIENT.EMAIL,
                                                                  client: Configuration.CLIENT});
         this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
     }
