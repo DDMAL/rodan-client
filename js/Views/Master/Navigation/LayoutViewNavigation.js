@@ -6,7 +6,6 @@ import Radio from 'backbone.radio';
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
-import ViewStatusUser from './User/ViewStatusUser';
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
@@ -23,10 +22,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
     {
         this._initializeRadio();
         this.addRegions({
-            regionNavigationTree: '#region-navigation_tree',
-            regionStatusUser: '#region-status_user'
+            regionNavigationTree: '#region-navigation_tree'
         });
-        this.viewStatusUser = new ViewStatusUser({user: null});
     }
 
 
@@ -36,7 +33,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
     onShow()
     {
         this._populateUploadCount();
-        this.regionStatusUser.show(this.viewStatusUser);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -64,9 +60,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
         var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
-
-        this.viewStatusUser = new ViewStatusUser({user: options.user});
-        this.regionStatusUser.show(this.viewStatusUser);
         this.$el.find('#button-navigation_logout').prop('disabled', false);
     }
 
@@ -76,9 +69,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleDeauthenticationSuccess()
     {
         this.regionNavigationTree.reset(); 
-
-        this.viewStatusUser = new ViewStatusUser({user: null});
-        this.regionStatusUser.show(this.viewStatusUser);
         this.$el.find('#button-navigation_logout').prop('disabled', true);
     }
 
@@ -122,13 +112,18 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowAbout()
     {
+        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
         var serverConfig = this.rodanChannel.request(Events.REQUEST__SERVER_CONFIGURATION);
         var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
         var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
         var serverDate = this.rodanChannel.request(Events.REQUEST__SERVER_DATE);
         serverDate = serverDate.toString();
+        var username = user ? user.get('username') : 'no user';
+        var name = user ? user.get('first_name') + ' ' + user.get('last_name') : 'no user';
         var html = _.template($('#template-misc_about').html())({hostname: hostname,
                                                                  version: version,
+                                                                 username: username,
+                                                                 name: name,
                                                                  serverConfiguration: serverConfig,
                                                                  date: serverDate,
                                                                  name: Configuration.ADMIN_CLIENT.NAME,
@@ -142,7 +137,8 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowHelp()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'I want to help you, too :(', text: 'Just email ryan.bannon@gmail.com and ask your question'});
+        var text = 'Client admin: ' + Configuration.ADMIN_CLIENT.NAME + ' (' + Configuration.ADMIN_CLIENT.EMAIL + ')';
+        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
     }
 }
 
