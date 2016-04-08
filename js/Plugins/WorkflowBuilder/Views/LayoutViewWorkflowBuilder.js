@@ -79,6 +79,38 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET);
     }
+    
+    /**
+     * Handle button edit.
+     */
+    _handleButtonEdit()
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, {workflow: this.model});
+    }
+    
+    /**
+     * Handle button add job.
+     */
+    _handleButtonAddJob()
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, {workflow: this.model});
+    }
+    
+    /**
+     * Handle button import workflow.
+     */
+    _handleButtonImportWorkflow()
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, {workflow: this.model});
+    }
+    
+    /**
+     * Handle button run.
+     */
+    _handleButtonRun()
+    {
+        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
+    }
 
     /**
      * Handle event Workflow updated.
@@ -118,11 +150,11 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
         {
             this._lastErrorCode = '';
             this._lastErrorDetails = '';
-            this.ui.dataStatus.text('Workflow is valid.'); 
+            this.ui.dataStatus.text('Workflow "' + this.model.get('name') + '" is valid'); 
         }
         else
         {
-            this.ui.dataStatus.text('Workflow is INVALID. Click here for details.'); 
+            this.ui.dataStatus.text('Workflow "' + this.model.get('name') + '" is INVALID (click here for details)'); 
         }
     }
 }
@@ -136,14 +168,22 @@ LayoutViewWorkflowBuilder.prototype.ui = {
     buttonZoomOut: '#button-zoom_out',
     buttonZoomReset: '#button-zoom_reset',
     checkboxAddPorts: '#checkbox-add_ports',
-    dataStatus: '#data-workflow_status'
+    dataStatus: '#data-workflow_status',
+    buttonEdit: '#button-edit',
+    buttonAddJob: '#button-add_job',
+    buttonImportWorkflow: '#button-import_workflow',
+    buttonRun: '#button-run'
 };
 LayoutViewWorkflowBuilder.prototype.events = {
     'click @ui.buttonZoomIn': '_handleButtonZoomIn',
     'click @ui.buttonZoomOut': '_handleButtonZoomOut',
     'click @ui.buttonZoomReset': '_handleButtonZoomReset',
     'click @ui.dataStatus': '_handleClickDataStatus',
-    'change @ui.checkboxAddPorts': '_handleClickCheckboxAddPorts'
+    'change @ui.checkboxAddPorts': '_handleClickCheckboxAddPorts',
+    'click @ui.buttonEdit': '_handleButtonEdit',
+    'click @ui.buttonAddJob': '_handleButtonAddJob',
+    'click @ui.buttonImportWorkflow': '_handleButtonImportWorkflow',
+    'click @ui.buttonRun': '_handleButtonRun'
 };
 LayoutViewWorkflowBuilder.prototype.modelEvents = {
     'all': '_updateView'

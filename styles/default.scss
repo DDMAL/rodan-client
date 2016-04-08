@@ -154,11 +154,6 @@ div.gui {
     height: $height-gui + vh;
 }
 
-div.gui_menu {
-    height: $height-gui_menu + %; //fallback
-    height: $height-gui_menu + vh;
-}
-
 div#main_workflowbuilder
 {
     background-color: white;
@@ -174,105 +169,6 @@ div#main_workflowbuilder
 :disabled
 {
     background: #dddddd;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Horizontal Menu
-//
-// Could have used Bootstrap, but this seems to work better.
-///////////////////////////////////////////////////////////////////////////////////////
-.info-workflow_validity
-{
-    background: $background-color-workflowbuilder-menu;
-    color: $text-color-workflowbuilder-menu;
-    font: 12px/20px sans-serif;
-    padding: 0px 10px 0px 10px;
-    height: 100%;
-    float: right;
-}
-
-.gui_menu
-{
-    background: $background-color-workflowbuilder-menu;
-}
-
-.menu_horizontal ul, .menu_horizontal li 
-{
-    margin: 0;
-    padding: 0;
-}
-
-.menu_horizontal ul 
-{
-    background: gray;
-    list-style: none;
-    width: 100%;
-}
-
-.menu_horizontal li 
-{
-    float: left;
-    position: relative;
-    width: auto;
-}
-
-.menu_horizontal a 
-{ 
-    background: $background-color-workflowbuilder-menu;
-    color: $text-color-workflowbuilder-menu;
-    display: block;
-    font: 12px/20px sans-serif;
-    padding: 0px 10px 0px 10px;
-    height: 100%;
-    text-decoration: none;
-    vertical-align: middle;
-
-    -webkit-transition: all .25s ease;
-    -moz-transition: all .25s ease;
-    -ms-transition: all .25s ease;
-    -o-transition: all .25s ease;
-    transition: all .25s ease;
-} 
-
-.menu_horizontal li:hover a 
-{
-    background: #DF4B05;
-}
-
-#submenu 
-{
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    visibility: hidden;
-    z-index: 1;
-}
-
-li:hover ul#submenu 
-{
-    opacity: 1;
-    visibility: visible;
-    min-width: 100%; /* at least the size of the header */
-    width:auto; /* size the block automatically */
-}
-
-#submenu li 
-{
-    float: none;
-    width: 100%;
-    white-space: nowrap;
-}
-
-#submenu a:hover 
-{
-    background: #DF4B05;
-}
-
-#submenu a 
-{
-    background-color: $background-color-workflowbuilder-menu;
-    width: 100%;
-    padding: 10px 10px 10px 10px;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
