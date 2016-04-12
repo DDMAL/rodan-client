@@ -74,17 +74,19 @@ var Configuration = {
  */
 Configuration.load = function(filename, callback)
 {
+    'use strict';
     var request = new XMLHttpRequest();
     request.open('GET', filename, true);
     request.onreadystatechange = (event) => this._handleStateChange(event, filename, callback);
     request.send();
-}
+};
 
 /**
  * Handle state change of request.
  */
 Configuration._handleStateChange = function(event, filename, callback)
 {
+    'use strict';
     var request = event.currentTarget;
     switch (request.readyState)
     {
@@ -126,6 +128,6 @@ Configuration._handleStateChange = function(event, filename, callback)
             break;
         }
     }
-}
+};
 
 export default Configuration;

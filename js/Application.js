@@ -115,7 +115,7 @@ class Application extends Marionette.Application
         Marionette.Behaviors.behaviorsLookup = function()
         {
             return {'Table': BehaviorTable};
-        }
+        };
     }
 
     /**

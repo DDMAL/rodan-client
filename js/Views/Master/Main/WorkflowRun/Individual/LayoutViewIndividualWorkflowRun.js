@@ -1,10 +1,8 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import _ from 'underscore';
 
 import Events from '../../../../../Shared/Events';
 import LayoutViewModel from '../../LayoutViewModel';
-import WorkflowRun from '../../../../../Models/WorkflowRun';
 import ViewResourceList from '../../Resource/List/ViewResourceList';
 import ViewResourceListItem from '../../Resource/List/ViewResourceListItem';
 import ViewRunJobList from '../../RunJob/List/ViewRunJobList';
@@ -41,7 +39,6 @@ class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
         this.regionResourceList.empty();
 
         // Create Resource views.
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
         this._layoutViewResources = new LayoutViewModel();
         this.rodanChannel.request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);

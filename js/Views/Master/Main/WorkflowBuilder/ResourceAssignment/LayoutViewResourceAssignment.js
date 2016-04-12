@@ -1,8 +1,5 @@
-import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../../Shared/Events';
 
 /**
  * ResourceAssignment view.

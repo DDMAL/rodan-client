@@ -6,7 +6,7 @@ import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
 
 var oldsync = Backbone.sync;
-Backbone.sync = function(method, model, options) { return oldsync(method, model, options); };
+Backbone.sync = function(method, model, options) { 'use strict'; return oldsync(method, model, options); };
 
 /**
  * Server controller.

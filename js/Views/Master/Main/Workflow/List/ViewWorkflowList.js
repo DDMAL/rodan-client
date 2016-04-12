@@ -7,7 +7,7 @@ class ViewWorkflowList extends BaseViewList
     _handleButtonNewWorkflow()
     {
         var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        var workflow = this.rodanChannel.request(Events.REQUEST__WORKFLOW_CREATE, {project: project});
+        this.rodanChannel.request(Events.REQUEST__WORKFLOW_CREATE, {project: project});
     }
 }
 ViewWorkflowList.prototype.template = '#template-main_workflow_list';

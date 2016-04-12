@@ -84,7 +84,7 @@ class ViewResource extends Marionette.CompositeView
         var mimetype = this.model.get('resource_type_full').mimetype;
         var ext = this.model.get('resource_type_full').extension;
         var filename = this.model.get('name') + '.' + ext;
-        this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: 'image/png'});
+        this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
     }
 
     /**

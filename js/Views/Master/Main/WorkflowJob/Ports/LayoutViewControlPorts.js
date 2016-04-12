@@ -6,7 +6,6 @@ import ViewInputPortListItem from './ViewInputPortListItem';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';
 import ViewOutputPortTypeList from './ViewOutputPortTypeList';
-import Events from '../../../../../Shared/Events';
 
 /**
  * This class represents the view for editing ports.

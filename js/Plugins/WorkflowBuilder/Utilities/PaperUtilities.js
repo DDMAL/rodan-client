@@ -12,7 +12,7 @@
  */
 export function drawGrid(options, paperScope) 
 {
- 
+    'use strict';
     this.cellSize = options.DIMENSION;
     this.gridColor = options.LINE_COLOR;
     this.lineWidth = options.LINE_WIDTH;

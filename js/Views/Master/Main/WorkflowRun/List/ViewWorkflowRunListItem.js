@@ -1,4 +1,3 @@
-import Radio from 'backbone.radio';
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
 
