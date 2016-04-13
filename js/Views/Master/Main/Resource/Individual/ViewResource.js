@@ -1,7 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Configuration from '../../../../../Configuration';
 import Events from '../../../../../Shared/Events';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
 
@@ -92,7 +91,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickView()
     {
-        var newWindow = window.open(this.model.get('viewer_url'));
+        window.open(this.model.get('viewer_url'));
     }
 }
 

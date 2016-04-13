@@ -1,4 +1,3 @@
-import Configuration from '../Configuration';
 import Events from '../Shared/Events';
 import BaseController from './BaseController';
 import WorkflowJobGroup from '../Models/WorkflowJobGroup';

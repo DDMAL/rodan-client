@@ -1,6 +1,4 @@
-import Backbone from 'backbone';
 import Radio from 'backbone.radio';
-import _ from 'underscore';
 
 import BaseModel from './BaseModel';
 import Events from '../Shared/Events';

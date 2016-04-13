@@ -1,8 +1,5 @@
-import paper from 'paper';
 import Radio from 'backbone.radio';
-import BaseItem from './BaseItem';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
-import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
@@ -59,7 +56,6 @@ class WorkflowJobItem extends BaseWorkflowJobItem
      */
     destroy()
     {
-        // Delete ports.
         var inputPortItems = this._paperGroupInputPorts.removeChildren();
         var outputPortItems = this._paperGroupOutputPorts.removeChildren();
         for (var index in inputPortItems)
@@ -67,9 +63,9 @@ class WorkflowJobItem extends BaseWorkflowJobItem
             var port = inputPortItems[index];
             port.destroy();
         }
-        for (var index in outputPortItems)
+        for (index in outputPortItems)
         {
-            var port = outputPortItems[index];
+            port = outputPortItems[index];
             port.destroy();
         }
         super.destroy();

@@ -19,7 +19,7 @@ class BehaviorTable extends Marionette.Behavior
     /**
      * Initialize.
      */
-    initialize(options)
+    initialize()
     {
         this._initializeRadio();
         this._filtersInjected = false;
@@ -54,10 +54,10 @@ class BehaviorTable extends Marionette.Behavior
      */
     onDestroy()
     {
-        var datetimePickerElementIds = $(this.el).find(":data(DateTimePicker)").map(function(){return $(this).attr("id");}).get();
+        var datetimePickerElementIds = $(this.el).find(':data(DateTimePicker)').map(function(){return $(this).attr('id');}).get();
         for (var index in datetimePickerElementIds)
         {
-            $(this.el).find('#' + datetimePickerElementIds[index]).data("DateTimePicker").destroy();
+            $(this.el).find('#' + datetimePickerElementIds[index]).data('DateTimePicker').destroy();
         }
     }
 
@@ -116,7 +116,7 @@ class BehaviorTable extends Marionette.Behavior
 
                         case 'gt':
                         {
-                            datetimeGtFilter = true
+                            datetimeGtFilter = true;
                             break;
                         }
 
@@ -143,7 +143,7 @@ class BehaviorTable extends Marionette.Behavior
                     }
                     if (datetimeLtFilter)
                     {
-                        var elementId = '#' + field + '__lt';
+                        elementId = '#' + field + '__lt';
                         this._datetimepickerElements.push(elementId);
                     }
                     filters.push(this._getFilterDatetime(column.text(), field));
@@ -153,7 +153,7 @@ class BehaviorTable extends Marionette.Behavior
 
         // Finally, get enumerations.
         var enumerations = collection.getEnumerations();
-        for (var i in enumerations)
+        for (i in enumerations)
         {
             var enumeration = enumerations[i];
             var templateChoice = _.template($(this.options.templateFilterChoice).html());
@@ -183,11 +183,11 @@ class BehaviorTable extends Marionette.Behavior
         }
 
         // Setup datetimepickers.
-        for (var index in this._datetimepickerElements)
+        for (index in this._datetimepickerElements)
         {
             var elementId = this._datetimepickerElements[index];
             $(this.el).find(elementId).datetimepicker();
-            $(this.el).find(elementId).data("DateTimePicker").format(Configuration.DATETIME_FORMAT);
+            $(this.el).find(elementId).data('DateTimePicker').format(Configuration.DATETIME_FORMAT);
             $(this.el).find(elementId).on('dp.change', () => this._handleSearch());
         }
 
@@ -336,9 +336,9 @@ class BehaviorTable extends Marionette.Behavior
         {
             // We only inject if: the table exists, a route exists, we haven't injected yet, and the table has items.
             if ($(this.el).find(this.options.table).length > 0 &&
-                collection.route 
-                && !this._filtersInjected
-                && collection.length > 0)
+                collection.route &&
+                !this._filtersInjected &&
+                collection.length > 0)
             {
                 var options = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: collection.route});
                 if (options)

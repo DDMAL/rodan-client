@@ -1,5 +1,4 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 
 /**
  * Layout view master modals

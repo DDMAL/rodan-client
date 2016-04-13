@@ -55,7 +55,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
     /**
      * Handle authentication.
      */
-    _handleAuthenticationSuccess(options)
+    _handleAuthenticationSuccess()
     {
         var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};

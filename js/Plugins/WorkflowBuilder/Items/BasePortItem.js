@@ -1,6 +1,4 @@
 import BaseItem from './BaseItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
 
 /**
  * BasePortItem item.

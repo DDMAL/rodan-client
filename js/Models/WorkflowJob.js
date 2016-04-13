@@ -1,7 +1,4 @@
 import BaseModel from './BaseModel';
-import Events from '../Shared/Events';
-import InputPort from './InputPort';
-import OutputPort from './OutputPort';
 import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 

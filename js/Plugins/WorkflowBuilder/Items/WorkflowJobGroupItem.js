@@ -1,4 +1,3 @@
-import paper from 'paper';
 import Radio from 'backbone.radio';
 import BaseItem from './BaseItem';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
@@ -113,7 +112,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
                 inputPortItem.setOwner(this._modelURL);
             }
 
-            for (var index in ports.outputports)
+            for (index in ports.outputports)
             {
                 var outputPortItem = BaseItem.getAssociatedItem(ports.outputports[index].get('url'));
                 outputPortItem.setOwner(this._modelURL);

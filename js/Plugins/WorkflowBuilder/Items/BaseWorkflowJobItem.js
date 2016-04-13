@@ -1,10 +1,5 @@
 import paper from 'paper';
-import Radio from 'backbone.radio';
 import BaseItem from './BaseItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
-import GUI_EVENTS from '../Shared/Events';
-import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
 /**
  * BaseWorkflowJob item. 

@@ -1,7 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../Shared/Events';
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
 

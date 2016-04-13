@@ -3,16 +3,12 @@ import paper from 'paper';
 import { drawGrid } from './Utilities/PaperUtilities';
 import BaseItem from './Items/BaseItem';
 import Configuration from '../../Configuration';
-import ConnectionItem from './Items/ConnectionItem';
 import Environment from '../../Shared/Environment';
 import Events from '../../Shared/Events';
 import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './Controllers/ItemController';
 import LayoutViewWorkflowBuilder from './Views/LayoutViewWorkflowBuilder';
-import OutputPortItem from './Items/OutputPortItem';
-import WorkflowJobGroupItem from './Items/WorkflowJobGroupItem';
-import WorkflowJobItem from './Items/WorkflowJobItem';
 
 /**
  * Main WorkflowBuilder class.

@@ -1,7 +1,4 @@
 import BaseModel from './BaseModel';
-import Events from '../Shared/Events';
-import InputPortCollection from '../Collections/InputPortCollection';
-import OutputPortCollection from '../Collections/OutputPortCollection';
 
 /**
  * Represents a WorkflowJobGroup.

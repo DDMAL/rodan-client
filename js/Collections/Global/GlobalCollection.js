@@ -1,10 +1,6 @@
-import _ from 'underscore';
-import $ from 'jquery';
-import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 
 import BaseCollection from '../BaseCollection';
-import Pagination from '../../Models/Pagination';
 import Events from '../../Shared/Events';
 
 /**

@@ -13,7 +13,7 @@ class ViewProject extends Marionette.CompositeView
     /**
      * Initialize.
      */
-    initialize(options)
+    initialize()
     {
         this._initializeRadio();
     }

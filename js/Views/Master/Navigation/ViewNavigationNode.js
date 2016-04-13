@@ -2,7 +2,6 @@ import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from '../../../Shared/Events';
 import NAV_EVENTS from './Events';
 
 /**

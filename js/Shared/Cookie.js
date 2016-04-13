@@ -7,8 +7,8 @@ class Cookie
     {
         var date = new Date();
         date.setTime(date.getTime() + (days * 86400000));
-        var expires = "expires=" + date.toUTCString();
-        document.cookie = name + "=" + value + "; " + expires;
+        var expires = 'expires=' + date.toUTCString();
+        document.cookie = name + '=' + value + '; ' + expires;
     }
 
     constructor(name)

@@ -1,6 +1,5 @@
 import BasePortItem from './BasePortItem';
 import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
 
 /**
  * OutputPort item.
