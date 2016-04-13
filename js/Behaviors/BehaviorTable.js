@@ -1,7 +1,6 @@
 import _ from 'underscore';
 import datetimepicker from 'datetimepicker';
 import 'jqueryui';
-
 import BaseCollection from '../Collections/BaseCollection';
 import Configuration from '../Configuration';
 import Events from '../Shared/Events';
@@ -9,25 +8,27 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 /**
- * This class represents the table Behavior for views.
+ * A Marionette Behavior for tables. This class defines sorting and filtering.
  */
-class BehaviorTable extends Marionette.Behavior
+export default class BehaviorTable extends Marionette.Behavior
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
-        this._initializeRadio();
+        this._rodanChannel = Radio.channel('rodan');
         this._filtersInjected = false;
         this._datetimepickerElements = [];
     }
 
     /**
-     * When a view has rendered, we want to inject the pagination HTML.
+     * Delegate events and inject table controls after render.
+     *
+     * @param {Marionette.View} view View from which the Behavior will get events
      */
     onRender(view)
     {
@@ -50,7 +51,7 @@ class BehaviorTable extends Marionette.Behavior
     }
 
     /**
-     * We need to detach listeners of all datetimepickers.
+     * Destroy instance. This takes care of destroying any known DateTimePicker instances before moving to the next View.
      */
     onDestroy()
     {
@@ -62,21 +63,10 @@ class BehaviorTable extends Marionette.Behavior
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS - initialization
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - injectors
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Inject control.
+     * Injects control template.
      */
     _injectControl()
     {
@@ -87,7 +77,7 @@ class BehaviorTable extends Marionette.Behavior
     }
 
     /**
-     * Collects the filters for the associated table.
+     * Returns the filters for the associated Collection.
      */
     _getFilters(collection, filterFields)
     {
@@ -340,7 +330,7 @@ class BehaviorTable extends Marionette.Behavior
                 !this._filtersInjected &&
                 collection.length > 0)
             {
-                var options = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: collection.route});
+                var options = this._rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: collection.route});
                 if (options)
                 {
                     this._injectFiltering(options.filter_fields);
@@ -478,5 +468,3 @@ BehaviorTable.prototype.defaults = {
 BehaviorTable.prototype.collectionEvents = {
     'sync': '_handleCollectionEventSync'
 }
-
-export default BehaviorTable;

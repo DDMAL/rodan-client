@@ -1,20 +1,19 @@
-import Radio from 'backbone.radio';
-
 import BaseCollection from '../BaseCollection';
 import Events from '../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * Global collections that should be loaded on startup.
- * These are not expected to change during the lifetime of a session.
- * They are also customized to get non-paginated results.
+ * Global Collections that should be loaded on startup. These are not expected to change during the lifetime of a session. They are also customized to get non-paginated results.
  */
-class GlobalCollection extends BaseCollection
+export default class GlobalCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options initialization parameters for Backbone.Collection
      */
      initialize(options)
      {
@@ -30,9 +29,8 @@ class GlobalCollection extends BaseCollection
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(this.loadCommand, options => this._retrieveList(options));
-        this.rodanChannel.reply(this.requestCommand, () => this._handleRequestInstance());
+        Radio.channel('rodan').reply(this.loadCommand, options => this._retrieveList(options));
+        Radio.channel('rodan').reply(this.requestCommand, () => this._handleRequestInstance());
     }
 
     /**
@@ -57,9 +55,8 @@ class GlobalCollection extends BaseCollection
         }
         options.data = data;
         options = this._applyResponseHandlers(options);
-        this.url = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
+        /** @ignore */
+        this.url = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
         this.fetch(options);
     }
 }
-
-export default GlobalCollection;

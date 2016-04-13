@@ -1,18 +1,24 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
+import Events from '../Shared/Events';
+import Pagination from '../Models/Pagination';
 import Radio from 'backbone.radio';
 
-import Pagination from '../Models/Pagination';
-import Events from '../Shared/Events';
-
-class BaseCollection extends Backbone.Collection
+/**
+ * Subclass of Backbone.Collection.
+ *
+ * Some functionality of Backbone.Collection is overridden to facilitate server-based pagination, filtering, and sorting.
+ */
+export default class BaseCollection extends Backbone.Collection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Constructor.
+     *
+     * @param {object} options initialization parameters for Backbone.Collection
      */
     constructor(options)
     {
@@ -28,7 +34,7 @@ class BaseCollection extends Backbone.Collection
     }
 
     /**
-     * Returns enumerations.
+     * Returns enumerations of this Collection. These are custom-defined in the subclasses.
      */
     getEnumerations()
     {
@@ -342,5 +348,3 @@ class BaseCollection extends Backbone.Collection
         this.rodanChannel.trigger(Events.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
     }
 }
-
-export default BaseCollection;

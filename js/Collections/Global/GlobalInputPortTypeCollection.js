@@ -5,16 +5,17 @@ import InputPortType from '../../Models/InputPortType';
 let _instance = null;
 
 /**
- * Global Collection of InputPortType models.
- * This uses a pseudo-singleton model so we can inherit from BaseCollection.
+ * Global Collection of InputPortType models. This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalInputPortTypeCollection extends GlobalCollection
+export default class GlobalInputPortTypeCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance. As this class is a singleton, an Error will be thrown if called more than once.
+     *
+     * @throws {Error} thrown iff called more than once
      */
     initialize()
     {
