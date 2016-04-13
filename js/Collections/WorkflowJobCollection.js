@@ -4,19 +4,18 @@ import WorkflowJob from '../Models/WorkflowJob';
 /**
  * Collection of WorkflowJob models.
  */
-class WorkflowJobCollection extends BaseCollection
+export default class WorkflowJobCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = WorkflowJob;
-        this.route = 'workflowjobs';
+        this._route = 'workflowjobs';
     }
 }
-
-export default WorkflowJobCollection;

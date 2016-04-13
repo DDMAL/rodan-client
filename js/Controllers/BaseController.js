@@ -4,17 +4,20 @@ import Radio from 'backbone.radio';
 /**
  * Base controller.
  */
-class BaseController extends Marionette.Object
+export default class BaseController extends Marionette.Object
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Constructor.
+     *
+     * @param {object} options Marionette.Object options object
      */
     constructor(options)
     {
         super(options);
+        /** @ignore */
         this.rodanChannel = Radio.channel('rodan');
         this._initializeViews();
         this._initializeRadio();
@@ -36,7 +39,6 @@ class BaseController extends Marionette.Object
      */
     _initializeViews()
     {
+        throw new Error('this method must be defined by the inheriting class');
     }
 }
-
-export default BaseController;

@@ -8,13 +8,15 @@ let _instance = null;
  * Global Collection of Project models.
  * This uses a pseudo-singleton model so we can inherit from BaseCollection.
  */
-class GlobalProjectCollection extends GlobalCollection
+export default class GlobalProjectCollection extends GlobalCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @throws {Error} thrown iff called more than once
      */
     initialize()
     {
@@ -23,12 +25,11 @@ class GlobalProjectCollection extends GlobalCollection
             throw new Error('only one instance of this class may exist');
         }
         _instance = this;
+        /** @ignore */
         this.model = Project;
-        this.route = 'projects';
+        this._route = 'projects';
         this._allowPagination = true;
-        this.loadCommand = Events.REQUEST__GLOBAL_PROJECTS_LOAD;
-        this.requestCommand = Events.REQUEST__GLOBAL_PROJECT_COLLECTION;
+        this._loadCommand = Events.REQUEST__GLOBAL_PROJECTS_LOAD;
+        this._requestCommand = Events.REQUEST__GLOBAL_PROJECT_COLLECTION;
     }
 }
-
-export default GlobalProjectCollection;

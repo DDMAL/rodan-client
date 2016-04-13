@@ -24,11 +24,10 @@ export default class GlobalInputPortTypeCollection extends GlobalCollection
             throw new Error('only one instance of this class may exist');
         }
         _instance = this;
+        /** @ignore */
         this.model = InputPortType;
-        this.route = 'inputporttypes';
-        this.loadCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD;
-        this.requestCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION;
+        this._route = 'inputporttypes';
+        this._loadCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD;
+        this._requestCommand = Events.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION;
     }
 }
-
-export default GlobalInputPortTypeCollection;

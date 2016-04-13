@@ -4,19 +4,15 @@ import Connection from '../Models/Connection';
 /**
  * Collection of Connection models.
  */
-class ConnectionCollection extends BaseCollection
+export default class ConnectionCollection extends BaseCollection
 {
-///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = Connection;
-        this.route = 'connections';
+        this._route = 'connections';
     }
 }
-
-export default ConnectionCollection;

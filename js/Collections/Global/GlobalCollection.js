@@ -14,6 +14,7 @@ export default class GlobalCollection extends BaseCollection
      * Initializes the instance.
      *
      * @param {object} options initialization parameters for Backbone.Collection
+     * @throws {Error} thrown iff called more than once
      */
      initialize(options)
      {
@@ -29,12 +30,14 @@ export default class GlobalCollection extends BaseCollection
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(this.loadCommand, options => this._retrieveList(options));
-        Radio.channel('rodan').reply(this.requestCommand, () => this._handleRequestInstance());
+        Radio.channel('rodan').reply(this._loadCommand, options => this._retrieveList(options));
+        Radio.channel('rodan').reply(this._requestCommand, () => this._handleRequestInstance());
     }
 
     /**
      * Returns this instance.
+     *
+     * @return {GlobalCollection} this instance
      */
     _handleRequestInstance()
     {
@@ -56,7 +59,7 @@ export default class GlobalCollection extends BaseCollection
         options.data = data;
         options = this._applyResponseHandlers(options);
         /** @ignore */
-        this.url = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
+        this.url = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, this._route);
         this.fetch(options);
     }
 }

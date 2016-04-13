@@ -8,7 +8,7 @@ import ViewRunJobListItem from '../Views/Master/Main/RunJob/List/ViewRunJobListI
 import RunJobCollection from '../Collections/RunJobCollection';
 
 /**
- * Controller for RunJob views.
+ * Controller for RunJobs.
  */
 class ControllerRunJob extends BaseController
 {
@@ -16,7 +16,7 @@ class ControllerRunJob extends BaseController
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize(options)
     {

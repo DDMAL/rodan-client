@@ -1,9 +1,10 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
+import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
 import Events from '../Shared/Events';
-import BaseController from '../Controllers/BaseController';
+import Radio from 'backbone.radio';
 
 var oldsync = Backbone.sync;
 Backbone.sync = function(method, model, options) { 'use strict'; return oldsync(method, model, options); };
@@ -17,7 +18,7 @@ class ControllerServer extends BaseController
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {

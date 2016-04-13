@@ -4,19 +4,18 @@ import InputPortType from '../Models/InputPortType';
 /**
  * Collection of InputPortType models.
  */
-class InputPortTypeCollection extends BaseCollection
+export default class InputPortTypeCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = InputPortType;
-        this.route = 'inputporttypes';
+        this._route = 'inputporttypes';
     }
 }
-
-export default InputPortTypeCollection;

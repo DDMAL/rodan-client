@@ -4,19 +4,18 @@ import Resource from '../Models/Resource';
 /**
  * Collection of Resource models.
  */
-class ResourceCollection extends BaseCollection
+export default class ResourceCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = Resource;
-        this.route = 'resources';
+        this._route = 'resources';
     }
 }
-
-export default ResourceCollection;

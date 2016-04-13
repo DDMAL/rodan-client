@@ -29,42 +29,61 @@ export default class BaseCollection extends Backbone.Collection
         this._filters = {};
         this._sort = {};
         this._page = {};
-        this.enumerations = this.enumerations ? this.enumerations : [];
+        this._enumerations = this._enumerations ? this._enumerations : [];
         this.on('add', (model, collection, options) => this._onAdd(model, collection, options));
     }
 
     /**
      * Returns enumerations of this Collection. These are custom-defined in the subclasses.
+     *
+     * Enumerations should be defined in subclasses as follows:
+     * - [{field: string, label: string, values: [{value: primitive type, label: string}] (optional)}]
+     *
+     * In the above:
+     * - "field" is a property of the associated Model in the Collection
+     * - "label" is a string that will appear in the table header
+     * - "values" is optional; populate this array with explicit "value"/"label"s if desired, else BaseCollection will determine the values for enumeration based on the contents of the Collection
+     * 
+     * @todo Rodan server should provide explicit enumerations
+     *
+     * @return {array} enumerations
      */
     getEnumerations()
     {
-        return this.enumerations;
+        return this._enumerations;
     }
 
     /**
      * Parse results.
+     *
+     * @param {object} response JSON object
+     * @return {object} JSON object
      */
-    parse(resp)
+    parse(response)
     {
-        if (resp.count)
+        if (response.count)
         {
-            this._parsePagination(resp);
+            this._parsePagination(response);
         }
 
-        if (this.enumerations && this.enumerations.length > 0)
+        if (this._enumerations && this._enumerations.length > 0)
         {
-            this._populateEnumerations(resp);
+            this._populateEnumerations(response);
         }
 
-        if (resp.hasOwnProperty('results'))
+        if (response.hasOwnProperty('results'))
         {
-            return resp.results;
+            return response.results;
         }
-        return resp;
+        return response;
     }
 
     /**
-     * Parses ID out of resource type URL.
+     * Parses ID out of URL.
+     *
+     * @param {string} url URL
+     * @return {string} string representing UUID of Collection
+     * @todo this should be moved to a utility class
      */
     parseIdFromUrl(url)
     {
@@ -80,6 +99,8 @@ export default class BaseCollection extends Backbone.Collection
      * Note that we save the data options. This is in case we do a create
      * and have to reload/fetch the previous collection. We need to preserve
      * the fetch parameters.
+     *
+     * @param {object} options Backbone.Collection.fetch options object
      */
     fetch(options)
     {
@@ -117,6 +138,9 @@ export default class BaseCollection extends Backbone.Collection
      * to update the Collection. The fetch is called in the custom success handler for creation.
      *
      * There's also the case if this Collection is local and not associated with a DB Collection.
+     *
+     * @param {object} options Backbone.Collection.create options object
+     * @return {Backbone.Model} instance of Backbone.Model or subclass of Backbone.Model
      */
     create(options)
     {
@@ -133,14 +157,14 @@ export default class BaseCollection extends Backbone.Collection
     }
 
     /**
-     * Requests a sorted fetch.
+     * Requests a sorted fetch. This is not called "sort" because backbone already has
+     * a sort method for the Collection.
      *
-     * Note that it uses _lastData. We need to keep the last options.
+     * If no options.data is passed, the options.data from the last fetch are used.
      *
-     * Note that it uses _lastData. We need to keep the last options for the base parameters.
-     *
-     * IMPORTANT: this is not called "sort" because backbone already has
-     * a "sort" method for the Collection (but don't use it)
+     * @param {boolean} ascending results will return in ascending order iff true
+     * @param {string} field name of field to sort by
+     * @param {object} options Backbone.Collection.fetch options object
      */
     fetchSort(ascending, field, options)
     {
@@ -159,10 +183,11 @@ export default class BaseCollection extends Backbone.Collection
     /**
      * Requests a filtered fetch.
      *
-     * Note that it uses _lastData. We need to keep the last options for the base parameters.
-     * Also note that this will clear the page parameters (as the page may be out of range of the result).
+     * If no options.data is passed, the options.data from the last fetch are used.
      *
-     * If options.data IS passed, it will override _lastData.
+     * @param {array} filters array of objects; {name: string, value: primitive}; what filters can be used is defined in Rodan
+     * @param {object} options Backbone.Collection.fetch options object
+     * @todo give more info on filters
      */
     fetchFilter(filters, options)
     {
@@ -176,11 +201,12 @@ export default class BaseCollection extends Backbone.Collection
     }
 
     /**
-     * Requests a filtered fetch.
+     * Requests a page to be fetched.
      *
-     * Note that it uses _lastData. We need to keep the last options for the base parameters.
+     * If no options.data is passed, the options.data from the last fetch are used.
      *
-     * If options.data IS passed, it will override _lastData.
+     * @param {integer} page non-negative page number to retrieve from server
+     * @param {object} options Backbone.Collection.fetch options object
      */
     fetchPage(page, options)
     {
@@ -193,7 +219,10 @@ export default class BaseCollection extends Backbone.Collection
     }
 
     /**
-     * Returns pagination.
+     * Returns pagination object for this Collection.
+     *
+     * @return {object} pagination object
+     * @todo point to pagination info on Rodan server
      */
     getPagination()
     {
@@ -201,17 +230,19 @@ export default class BaseCollection extends Backbone.Collection
     }
 
     /**
-     * Return the URL.
+     * Returns the URL associated with this Collection.
+     *
+     * @return {string} URL associated with this Collection
      */
     url()
     {
-        return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.route);
+        return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this._route);
     }
 
     /**
-     * Syncs list.
+     * Syncs the Collection while preserving the last used fetch options.data.
      */
-    syncList(options)
+    syncList()
     {
         this.fetch({data: this._lastData});
     }
@@ -224,6 +255,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     _initializeRadio()
     {
+        /** @ignore */
         this.rodanChannel = Radio.channel('rodan');
     }
 
@@ -312,10 +344,6 @@ export default class BaseCollection extends Backbone.Collection
         this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
                                                                   response: response,
                                                                   options: options});
-/*        var text = 'Unsuccessful ' + options.task
-                   + ' (' + options.xhr.status + '): ' 
-                   + collection.constructor.name;
-        this.rodanChannel.request(Events.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
     }
 
     /**
@@ -324,18 +352,18 @@ export default class BaseCollection extends Backbone.Collection
     _populateEnumerations(response)
     {
         var items = response.results ? response.results : response;
-        for (var j in this.enumerations)
+        for (var j in this._enumerations)
         {
-            var field = this.enumerations[j].field;
-            if (!this.enumerations[j].values || this.enumerations[j].values.length === 0)
+            var field = this._enumerations[j].field;
+            if (!this._enumerations[j].values || this._enumerations[j].values.length === 0)
             {
-                this.enumerations[j].values = [];
+                this._enumerations[j].values = [];
                 for (var i in items)
                 {
                     var result = items[i];
-                    this.enumerations[j].values.push({value: result[field], label: result[field]});
+                    this._enumerations[j].values.push({value: result[field], label: result[field]});
                 }
-                this.enumerations[j].values = _.uniq(this.enumerations[j].values, false, function(item) {return item.value;});
+                this._enumerations[j].values = _.uniq(this._enumerations[j].values, false, function(item) {return item.value;});
             }
         }
     }

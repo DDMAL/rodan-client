@@ -4,21 +4,20 @@ import WorkflowJobGroup from '../Models/WorkflowJobGroup';
 /**
  * Collection of WorkflowJobGroup models.
  */
-class WorkflowJobGroupCollection extends BaseCollection
+export default class WorkflowJobGroupCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     * @todo doing a fetch on a collection isn't firing events, so I need to do this. See https://github.com/DDMAL/rodan-client/issues/77
      */
     initialize()
     {
+        /** @ignore */
         this.model = WorkflowJobGroup;
-        this.route = 'workflowjobgroups';
-
-        // TODO - doing a fetch on a collection isn't firing events, so I need to do this.
-        // See https://github.com/DDMAL/rodan-client/issues/77
+        this._route = 'workflowjobgroups';
         this.on('sync', (collection, response, options) => this._onSync(collection, response, options));
     }
 
@@ -37,5 +36,3 @@ class WorkflowJobGroupCollection extends BaseCollection
 		}
 	}
 }
-
-export default WorkflowJobGroupCollection;

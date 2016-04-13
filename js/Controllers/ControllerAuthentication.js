@@ -3,18 +3,21 @@ import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
 import Cookie from '../Shared/Cookie';
 import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 import User from '../Models/User';
 
 /**
  * Controls authentication.
  */
-class ControllerAuthentication extends BaseController
+export default class ControllerAuthentication extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * How authentication behaves depends on Configuration.SERVER_AUTHENTICATION_TYPE.
      */
     initialize()
     {
@@ -29,12 +32,16 @@ class ControllerAuthentication extends BaseController
         }
         else
         {
-            // todo error
+            /** @todo throw error if bad authentication type. */
         }
     }
 
     /**
-     * AJAx prefilter associated with authentication.
+     * AJAX prefilter associated with authentication.
+     *
+     * This will make sure that the appropriate request headers for authentication are set on all AJAX requests to the server.
+     *
+     * @param {object} options object.beforeSend (optional) is a function that takes in the XmlHTTPRequest before sending; this may be useful for doing pre-processing of AJAX requests
      */
     ajaxPrefilter(options)
     {
@@ -73,10 +80,10 @@ class ControllerAuthentication extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
-        this.rodanChannel.reply(Events.REQUEST__AUTHENTICATION_LOGIN, options => this._login(options));
-        this.rodanChannel.reply(Events.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
-        this.rodanChannel.reply(Events.REQUEST__AUTHENTICATION_LOGOUT, () => this._logout());
+        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
+        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_LOGIN, options => this._login(options));
+        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**
@@ -87,7 +94,7 @@ class ControllerAuthentication extends BaseController
         var request = event.currentTarget;
         if (request.responseText === null)
         {
-            this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
         }
         
         switch (request.status)
@@ -96,23 +103,23 @@ class ControllerAuthentication extends BaseController
                 var parsed = JSON.parse(request.responseText);
                 this._user = new User(parsed);
                 this._processAuthenticationData();
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
+                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
                 break;
             case 400:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 401:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request,
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request,
                                                                            message: 'Incorrect username/password.'});
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 403:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             default:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }
@@ -125,25 +132,25 @@ class ControllerAuthentication extends BaseController
         var request = event.currentTarget;
         if (request.responseText === null)
         {
-            this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
         }
 
         switch (request.status)
         {
             case 200:
-                this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
+                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
                 break;
             case 400:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 401:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 403:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             default:
-                this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }
@@ -153,7 +160,7 @@ class ControllerAuthentication extends BaseController
      */
     _handleTimeout(event)
     {
-        this.rodanChannel.trigger(Events.EVENT__SERVER_WENTAWAY, {event: event});
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_WENTAWAY, {event: event});
     }
 
     /**
@@ -165,11 +172,11 @@ class ControllerAuthentication extends BaseController
         // If we don't, trigger an event to inform of login require.
         if (this._token.value === '')
         {
-            this.rodanChannel.trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
         }
         else
         {
-            var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-me');
+            var authRoute = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-me');
             var request = new XMLHttpRequest();
             request.onload = (event) => this._handleAuthenticationResponse(event);
             request.ontimeout = (event) => this._handleTimeout(event);
@@ -205,7 +212,7 @@ class ControllerAuthentication extends BaseController
      */
     _logout()
     {
-        var authRoute = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
+        var authRoute = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
         var authType = Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (event) => this._handleDeauthenticationResponse(event);
@@ -280,12 +287,12 @@ class ControllerAuthentication extends BaseController
         {
             case 'session':
             {
-                return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'session-auth');
+                return Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'session-auth');
             }
 
             case 'token':
             {
-                return this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-token');
+                return Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-token');
             }
 
             default:
@@ -296,5 +303,3 @@ class ControllerAuthentication extends BaseController
         }
     }
 }
-
-export default ControllerAuthentication;

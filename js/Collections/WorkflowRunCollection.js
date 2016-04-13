@@ -4,19 +4,18 @@ import WorkflowRun from '../Models/WorkflowRun';
 /**
  * Collection of WorkflowRun models.
  */
-class WorkflowRunCollection extends BaseCollection
+export default class WorkflowRunCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = WorkflowRun;
-        this.route = 'workflowruns';
+        this._route = 'workflowruns';
     }
 }
-
-export default WorkflowRunCollection;

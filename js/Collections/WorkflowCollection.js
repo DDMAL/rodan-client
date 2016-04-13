@@ -4,19 +4,18 @@ import Workflow from '../Models/Workflow';
 /**
  * Collection of Workflow models.
  */
-class WorkflowCollection extends BaseCollection
+export default class WorkflowCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = Workflow;
-        this.route = 'workflows';
+        this._route = 'workflows';
     }
 }
-
-export default WorkflowCollection;

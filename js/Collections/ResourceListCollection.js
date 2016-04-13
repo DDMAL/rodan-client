@@ -4,19 +4,18 @@ import ResourceList from '../Models/ResourceList';
 /**
  * Collection of ResourceList models.
  */
-class ResourceListCollection extends BaseCollection
+export default class ResourceListCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = ResourceList;
-        this.route = 'resourcelists';
+        this._route = 'resourcelists';
     }
 }
-
-export default ResourceListCollection;

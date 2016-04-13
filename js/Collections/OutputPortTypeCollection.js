@@ -4,19 +4,18 @@ import OutputPortType from '../Models/OutputPortType';
 /**
  * Collection of OutputPortType models.
  */
-class OutputPortTypeCollection extends BaseCollection
+export default class OutputPortTypeCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
+        /** @ignore */
         this.model = OutputPortType;
-        this.route = 'outputporttypes';
+        this._route = 'outputporttypes';
     }
 }
-
-export default OutputPortTypeCollection;

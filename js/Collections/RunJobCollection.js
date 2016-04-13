@@ -4,19 +4,20 @@ import RunJob from '../Models/RunJob';
 /**
  * Collection of RunJob models.
  */
-class RunJobCollection extends BaseCollection
+export default class RunJobCollection extends BaseCollection
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance. This will create custom enumerations for known RunJob states.
      */
     initialize()
     {
+        /** @ignore */
         this.model = RunJob;
-        this.route = 'runjobs';
-        this.enumerations = [{field: 'status', label: 'Status', values: [{value: -1, label: 'Failed'},
+        this._route = 'runjobs';
+        this._enumerations = [{field: 'status', label: 'Status', values: [{value: -1, label: 'Failed'},
                                                                          {value: 0, label: 'Scheduled'},
                                                                          {value: 1, label: 'Processing'},
                                                                          {value: 2, label: 'Waiting for input'},
@@ -26,5 +27,3 @@ class RunJobCollection extends BaseCollection
                                                                          {value: 11, label: 'Retrying'}]}];
     }
 }
-
-export default RunJobCollection;
