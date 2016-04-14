@@ -1,11 +1,12 @@
-import Events from '../Shared/Events';
 import BaseController from '../Controllers/BaseController';
+import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 import WorkflowJob from '../Models/WorkflowJob';
 
 /**
  * Controller for WorkflowJobs.
  */
-class ControllerWorkflowJob extends BaseController
+export default class ControllerWorkflowJob extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initialization
@@ -15,9 +16,9 @@ class ControllerWorkflowJob extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_CREATE, options => this._handleRequestCreateWorkflowJob(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleRequestDeleteWorkflowJob(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleRequestSaveWorkflowJob(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOB_CREATE, options => this._handleRequestCreateWorkflowJob(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOB_DELETE, options => this._handleRequestDeleteWorkflowJob(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOB_SAVE, options => this._handleRequestSaveWorkflowJob(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +45,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        options.workflowjob.destroy({success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_DELETED, {workflowjob: model})});
+        options.workflowjob.destroy({success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOB_DELETED, {workflowjob: model})});
     }
 
     /**
@@ -64,7 +65,7 @@ class ControllerWorkflowJob extends BaseController
     _handleWorkflowJobCreationSuccess(model, workflow, addPorts, targetInputPorts)
     {
         workflow.get('workflow_jobs').add(model);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_CREATED, {workflowjob: model});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOB_CREATED, {workflowjob: model});
         if (addPorts)
         {
             this._addRequiredPorts(model, targetInputPorts, workflow);
@@ -76,10 +77,10 @@ class ControllerWorkflowJob extends BaseController
      */
     _handleWorkflowJobSaveSuccess(workflowJob, workflow)
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOB_SAVED, {workflowjob: workflowJob});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOB_SAVED, {workflowjob: workflowJob});
         if (workflow)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
+            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: workflow});
         }
     }
 
@@ -94,7 +95,7 @@ class ControllerWorkflowJob extends BaseController
      */
     _addRequiredPorts(workflowJob, targetInputPorts, workflow)
     {
-        var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var jobCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(workflowJob.getJobUuid());
         var outputPortTypes = job.get('output_port_types');
         var inputPortTypes = job.get('input_port_types');
@@ -135,5 +136,3 @@ class ControllerWorkflowJob extends BaseController
         });
     }
 }
-
-export default ControllerWorkflowJob;

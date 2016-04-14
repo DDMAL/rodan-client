@@ -1,15 +1,16 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
 import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun';
-import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
+import Radio from 'backbone.radio';
 import RunJobCollection from '../Collections/RunJobCollection';
+import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import WorkflowRun from '../Models/WorkflowRun';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
 
 /**
  * Controller for WorkflowRun.
  */
-class ControllerWorkflowRun extends BaseController
+export default class ControllerWorkflowRun extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initialize
@@ -20,14 +21,14 @@ class ControllerWorkflowRun extends BaseController
     _initializeRadio()
     {
         // Events.
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
 
         // Requests.
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -38,8 +39,8 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunCreationResponse(options)
     {
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
+        var project = Radio.channel('rodan').request(Events.REQUEST__PROJECT_GET_ACTIVE);
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
 
     /**
@@ -47,7 +48,7 @@ class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunSaveResponse(options)
     {
-        var project = this.rodanChannel.request(Events.REQUEST__PROJECT_GET_ACTIVE);
+        var project = Radio.channel('rodan').request(Events.REQUEST__PROJECT_GET_ACTIVE);
     }
 
     /**
@@ -58,7 +59,7 @@ class ControllerWorkflowRun extends BaseController
         var runJobs = new RunJobCollection();
         runJobs.fetch({data: {workflow_run: options.workflowrun.id}});
         this._viewItem = new LayoutViewIndividualWorkflowRun({collection: runJobs, model: options.workflowrun});
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewItem});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewItem});
     }
 
     /**
@@ -68,9 +69,9 @@ class ControllerWorkflowRun extends BaseController
     {
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
+        Radio.channel('rodan').request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
         var view = new ViewWorkflowRunList({collection: workflowRunCollection});
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 
     /**
@@ -84,7 +85,7 @@ class ControllerWorkflowRun extends BaseController
                                            resource_assignments: options.assignments,
                                            name: name,
                                            description: description});
-        workflowRun.save({}, {success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
+        workflowRun.save({}, {success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
     }
 
     /**
@@ -93,7 +94,7 @@ class ControllerWorkflowRun extends BaseController
     _handleRequestWorkflowRunSave(options)
     {
         options.workflowrun.save(options.workflowrun.changed,
-                                 {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
+                                 {patch: true, success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -117,5 +118,3 @@ class ControllerWorkflowRun extends BaseController
         return text;
     }
 }
-
-export default ControllerWorkflowRun;

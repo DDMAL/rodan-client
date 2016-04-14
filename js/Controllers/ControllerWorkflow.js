@@ -1,6 +1,7 @@
 import BaseController from './BaseController';
 import Events from '../Shared/Events';
 import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
+import Radio from 'backbone.radio';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
 import Workflow from '../Models/Workflow';
@@ -8,9 +9,9 @@ import WorkflowJobGroup from '../Models/WorkflowJobGroup';
 import WorkflowCollection from '../Collections/WorkflowCollection';
 
 /**
- * Controller for all Workflow views.
+ * Controller for Workflows.
  */
-class ControllerWorkflow extends BaseController
+export default class ControllerWorkflow extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Initialization
@@ -21,13 +22,13 @@ class ControllerWorkflow extends BaseController
     _initializeRadio()
     {
         // Events.
-        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
-        this.rodanChannel.on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
 
         // Requests.
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -40,9 +41,9 @@ class ControllerWorkflow extends BaseController
     {
         this._collection = new WorkflowCollection()
         this._collection.fetch({data: {project: options.project.id}});
-        this.rodanChannel.request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
+        Radio.channel('rodan').request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._viewList = new ViewWorkflowList({collection: this._collection});
         this._layoutView.showList(this._viewList);
     }
@@ -83,7 +84,7 @@ class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
-        options.workflow.save(options.fields, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SAVED, {workflow: model})});
+        options.workflow.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOW_SAVED, {workflow: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +96,7 @@ class ControllerWorkflow extends BaseController
     _handleCreateSuccess(model, collection)
     {
         collection.add(model);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_CREATED, {workflow: model})
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOW_CREATED, {workflow: model})
     }
 
     /**
@@ -104,8 +105,6 @@ class ControllerWorkflow extends BaseController
     _handleDeleteSuccess(model, collection)
     {
         collection.remove(model);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_DELETED, {workflow: model})
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOW_DELETED, {workflow: model})
     }
 }
-
-export default ControllerWorkflow;

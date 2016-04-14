@@ -1,18 +1,19 @@
-import Events from '../Shared/Events';
 import BaseController from './BaseController';
+import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 import WorkflowJobGroup from '../Models/WorkflowJobGroup';
 import WorkflowJobGroupCollection from '../Collections/WorkflowJobGroupCollection';
 
 /**
- * Controller for WorkflowJobGroup.
+ * Controller for WorkflowJobGroups.
  */
-class ControllerWorkflowJobGroup extends BaseController
+export default class ControllerWorkflowJobGroup extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
@@ -28,12 +29,12 @@ class ControllerWorkflowJobGroup extends BaseController
     _initializeRadio()
     {
         // Requests.
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, (options) => this._handleRequestGetPorts(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION, (options) => this._handleRequestWorkflowJobGroupLoadCollection(options));
-        this.rodanChannel.reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, (options) => this._handleRequestGetPorts(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_IMPORT, (options) => this._handleRequestImportWorkflowJobGroup(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_LOAD_COLLECTION, (options) => this._handleRequestWorkflowJobGroupLoadCollection(options));
+        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, (options) => this._handleRequestSaveWorkflowJobGroup(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +61,7 @@ class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestSaveWorkflowJobGroup(options)
     {
-        options.workflowjobgroup.save(options.workflowjobgroup.changed, {patch: true, success: (model) => this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_SAVED, {workflowjobgroup: model})});
+        options.workflowjobgroup.save(options.workflowjobgroup.changed, {patch: true, success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOBGROUP_SAVED, {workflowjobgroup: model})});
     }
 
     /**
@@ -108,7 +109,7 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleWorkflowJobGroupCreationSuccess(model)
     {
         this._collection.set(model, {remove: false});
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, {workflowjobgroup: model});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOBGROUP_IMPORTED, {workflowjobgroup: model});
     }
 
     /**
@@ -117,7 +118,7 @@ class ControllerWorkflowJobGroup extends BaseController
     _handleWorkflowJobGroupDeleteSuccess(workflowJobGroup)
     {
         this._collection.remove(workflowJobGroup);
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWJOBGROUP_DELETED, {workflowjobgroup: workflowJobGroup});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWJOBGROUP_DELETED, {workflowjobgroup: workflowJobGroup});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -203,5 +204,3 @@ class ControllerWorkflowJobGroup extends BaseController
         return object;
     }
 }
-
-export default ControllerWorkflowJobGroup;

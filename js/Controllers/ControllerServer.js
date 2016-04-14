@@ -12,7 +12,7 @@ Backbone.sync = function(method, model, options) { 'use strict'; return oldsync(
 /**
  * Server controller.
  */
-class ControllerServer extends BaseController
+export default class ControllerServer extends BaseController
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -75,14 +75,14 @@ class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
-        this.rodanChannel.reply(Events.REQUEST__SERVER_CONFIGURATION, () => this._handleRequestConfiguration());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_DATE, () => this._handleRequestDate());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
-        this.rodanChannel.reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_CONFIGURATION, () => this._handleRequestConfiguration());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_DATE, () => this._handleRequestDate());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
+        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
     }
 
     /**
@@ -152,7 +152,7 @@ class ControllerServer extends BaseController
                 {
                     this._server.routes[routeName] = {url: this._server.routes[routeName]};
                 }
-                this.rodanChannel.trigger(Events.EVENT__SERVER_ROUTESLOADED);
+                Radio.channel('rodan').trigger(Events.EVENT__SERVER_ROUTESLOADED);
             }
             else
             {
@@ -284,7 +284,7 @@ class ControllerServer extends BaseController
     _sendWaitingNotification()
     {
         this._waitingEventTriggered = true;
-        this.rodanChannel.trigger(Events.EVENT__SERVER_WAITING);
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_WAITING);
     }
 
     /**
@@ -293,7 +293,7 @@ class ControllerServer extends BaseController
     _sendIdleNotification()
     {
         this._waitingEventTriggered = false;
-        this.rodanChannel.trigger(Events.EVENT__SERVER_IDLE);
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_IDLE);
     }
 
     /**
@@ -301,7 +301,7 @@ class ControllerServer extends BaseController
      */
     _sendPanicNotification()
     {
-        this.rodanChannel.trigger(Events.EVENT__SERVER_PANIC);
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_PANIC);
     }
 
     /**
@@ -326,8 +326,6 @@ class ControllerServer extends BaseController
     _updateServerDate(date)
     {
         this._serverDate = date;
-        this.rodanChannel.trigger(Events.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
     }
 }
-
-export default ControllerServer;
