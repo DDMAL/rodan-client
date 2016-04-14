@@ -59,7 +59,7 @@ gulp.task('develop:link', shell.task([
     'cd ' + WEB_DIRECTORY + '; rm -f ' + SOURCE_DIRECTORY + '; ln -sf ../' + SOURCE_DIRECTORY + ' ' + SOURCE_DIRECTORY,
     'cd ' + WEB_DIRECTORY + '; rm -f ' + RESOURCES_DIRECTORY + '; ln -sf ../' + RESOURCES_DIRECTORY + ' ' + RESOURCES_DIRECTORY,
     'cd ' + WEB_DIRECTORY + '; rm -f ' + CONFIGURATION_FILE + '; ln -sf ../' + CONFIGURATION_FILE + ' .',
-    'cd ' + WEB_DIRECTORY + '; ln -sf ../plugins .'
+    'cd ' + WEB_DIRECTORY + '; rm -f plugins; ln -sf ../plugins .'
 ]));
 
 /**
@@ -210,10 +210,12 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
 gulp.task('dist', ['dist:mkdir', 'dist:info', 'dist:link', 'dist:templates', 'dist:styles', 'dist:copy'], function()
 {
     // Main code.
+    var babel = require('gulp-babel');
     var gulp_jspm = require('gulp-jspm');
     var rename = require("gulp-rename");
     gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
-        .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
+        .pipe(babel({presets: ['es2015']}))
+	.pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
         .pipe(rename(BUNDLE_FILE))
         .pipe(gulp.dest(DIST_DIRECTORY));
 
@@ -222,6 +224,7 @@ gulp.task('dist', ['dist:mkdir', 'dist:info', 'dist:link', 'dist:templates', 'di
     for (var i = 0; i < plugins.length; i++)
     {
     	gulp.src(WEB_DIRECTORY + '/plugins/' + plugins[i] + '/js/' + plugins[i] + '.js')
+	    .pipe(babel({presets: ['es2015']}))
 	    .pipe(gulp_jspm())
 	    .pipe(rename(plugins[i] + '.js'))
   	    .pipe(gulp.dest(DIST_DIRECTORY + '/plugins/' + plugins[i] + '/js'));
