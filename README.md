@@ -52,6 +52,9 @@ OPTIONAL - TESTING
 "karma-phantomjs-launcher": "^0.1.4",
 "karma-sinon": "^1.0.4",
 
+OPTIONAL - DOCS
+esdoc - ES6 doc generator
+
 JSPM
 ============
 
