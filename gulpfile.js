@@ -26,7 +26,7 @@ var INFO_FILE = 'info.json';                    // Name of info file (client inf
  * Build templates.
  */
 gulp.task('develop:templates', shell.task([
-    'python support/build-template.py -b templates/index-dev.html -t templates/Views ' + WEB_DIRECTORY
+    'python scripts/build-template.py -b templates/index-dev.html -t templates/Views ' + WEB_DIRECTORY
 ]));
 
 /**
