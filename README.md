@@ -40,7 +40,7 @@ REQUIRED
 - gulp-jspm: does jspm bundling for us
 - gulp-rename: rename the bundle file
 - gulp-sass: compile sass
-
+- path: allows path manipulation
 
 OPTIONAL - TESTING
 "karma-babel-preprocessor": "^4.0.0",

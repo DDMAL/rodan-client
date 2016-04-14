@@ -185,7 +185,7 @@ gulp.task('dist:copy', ['dist:mkdir'], shell.task(
     'cp ' + CONFIGURATION_FILE + ' ' + DIST_DIRECTORY + '/',
     'cp -r resources ' + DIST_DIRECTORY + '/',
     'cd ' + WEB_DIRECTORY + '; cp -Rf --parent libs/github/twbs/*/fonts/ ../' + DIST_DIRECTORY,
-    'cp -r plugins ' + DIST_DIRECTORY + '/',
+    'cd ' + WEB_DIRECTORY + '; cp -f --parent libs/system.js ../' + DIST_DIRECTORY
 ]));
 
 /**
@@ -209,12 +209,23 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
  */
 gulp.task('dist', ['dist:mkdir', 'dist:info', 'dist:link', 'dist:templates', 'dist:styles', 'dist:copy'], function()
 {
+    // Main code.
     var gulp_jspm = require('gulp-jspm');
     var rename = require("gulp-rename");
     gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
         .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
         .pipe(rename(BUNDLE_FILE))
-        .pipe(gulp.dest(DIST_DIRECTORY))
+        .pipe(gulp.dest(DIST_DIRECTORY));
+
+    // Now for the plugins.
+    var plugins = getDirectories(WEB_DIRECTORY + '/plugins');
+    for (var i = 0; i < plugins.length; i++)
+    {
+    	gulp.src(WEB_DIRECTORY + '/plugins/' + plugins[i] + '/js/' + plugins[i] + '.js')
+	    .pipe(gulp_jspm())
+	    .pipe(rename(plugins[i] + '.js'))
+  	    .pipe(gulp.dest(DIST_DIRECTORY + '/plugins/' + plugins[i] + '/js'));
+    }
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -233,3 +244,20 @@ gulp.task('clean', function()
     gulp.start('dist:clean');
     gulp.start('develop:clean');
 });
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Utilities
+///////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Gets directories within provided directory.
+ */
+function getDirectories(directory)
+{
+    var path = require('path');
+    var fs = require('fs');
+    return fs.readdirSync(directory).filter(function(file)
+    {
+	return fs.statSync(path.join(directory, file)).isDirectory();
+    });
+}
