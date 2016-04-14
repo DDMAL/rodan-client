@@ -1,5 +1,5 @@
 import BasePortItem from './BasePortItem';
-import Configuration from '../../../Configuration';
+import Configuration from 'js/Configuration';
 
 /**
  * OutputPort item.
@@ -15,7 +15,7 @@ class OutputPortItem extends BasePortItem
     constructor(options)
     {
         super(options);
-        this.fillColor = Configuration.WORKFLOWBUILDER.OUTPUTPORT_COLOR;
+        this.fillColor = Configuration.WORKFLOWBUILDERGUI.OUTPUTPORT_COLOR;
         this._connectionItems = [];
     }
 

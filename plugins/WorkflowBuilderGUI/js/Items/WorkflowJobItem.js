@@ -1,6 +1,6 @@
 import Radio from 'backbone.radio';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
-import Events from '../../../Shared/Events';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 

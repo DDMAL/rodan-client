@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Radio from 'backbone.radio';
 import paper from 'paper';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 
 let itemMap = null;
@@ -217,7 +217,7 @@ class BaseItem extends paper.Path
         var name = this.coordinateSetInfo['class'];
         var options = {};
         options[this.coordinateSetInfo['url']] = this._modelURL;
-        options['user_agent'] = Configuration.WORKFLOWBUILDER.USER_AGENT;
+        options['user_agent'] = Configuration.WORKFLOWBUILDERGUI.USER_AGENT;
         this._coordinateSetModel = new name(options);
         this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
     }
@@ -243,8 +243,8 @@ class BaseItem extends paper.Path
      */
     setHighlight(highlighted)
     {
-        this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDER.STROKE_COLOR;
-        this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDER.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+        this.strokeColor = highlighted ? Configuration.WORKFLOWBUILDERGUI.STROKE_COLOR_SELECTED : Configuration.WORKFLOWBUILDERGUI.STROKE_COLOR;
+        this.strokeWidth = highlighted ? Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH_SELECTED :Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH;
     }
 
     /**
@@ -322,10 +322,10 @@ class BaseItem extends paper.Path
      */
     _initializeAppearance(options)
     {
-        this.strokeColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this.strokeColor = Configuration.WORKFLOWBUILDERGUI.STROKE_COLOR;
         this.strokeJoin = 'round';
-        this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
-        this.fillColor = Configuration.WORKFLOWBUILDER.FILL_COLOR;
+        this.strokeWidth = Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH;
+        this.fillColor = Configuration.WORKFLOWBUILDERGUI.FILL_COLOR;
     }
 
     /**
@@ -372,8 +372,8 @@ class BaseItem extends paper.Path
         this._useText = (options.hasOwnProperty('text') && options.text === true);
         this._text = new paper.PointText(new paper.Point(0, 0));
         this._text.justification = 'center';
-        this._text.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
-        this._text.fontSize = Configuration.WORKFLOWBUILDER.FONT_SIZE;
+        this._text.fillColor = Configuration.WORKFLOWBUILDERGUI.STROKE_COLOR;
+        this._text.fontSize = Configuration.WORKFLOWBUILDERGUI.FONT_SIZE;
         this._text.content = '';
         this._text.position = this.bounds.center;
         this.addChild(this._text);
@@ -450,7 +450,7 @@ class BaseItem extends paper.Path
         {
             case 'mouseenter':
             {
-                this._timerEvent = setTimeout(() => this._showPopup(event), Configuration.WORKFLOWBUILDER.HOVER_TIME);
+                this._timerEvent = setTimeout(() => this._showPopup(event), Configuration.WORKFLOWBUILDERGUI.HOVER_TIME);
                 paper.handleMouseEvent(event);
                 break;
             }
@@ -500,7 +500,7 @@ class BaseItem extends paper.Path
      */
     _handleMouseEnter(mouseEvent)
     {
-        this._timerEvent = setTimeout(() => this._showPopup(mouseEvent), Configuration.WORKFLOWBUILDER.HOVER_TIME);
+        this._timerEvent = setTimeout(() => this._showPopup(mouseEvent), Configuration.WORKFLOWBUILDERGUI.HOVER_TIME);
         paper.handleMouseEvent(mouseEvent);
     }
 

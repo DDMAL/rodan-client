@@ -1,8 +1,8 @@
 import Radio from 'backbone.radio';
 import BaseItem from './BaseItem';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
 
@@ -30,7 +30,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
         this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job_group';
         this.loadCoordinates();
-        this.fillColor = Configuration.WORKFLOWBUILDER.WORKFLOWJOBGROUP_FILL_COLOR;
+        this.fillColor = Configuration.WORKFLOWBUILDERGUI.WORKFLOWJOBGROUP_FILL_COLOR;
         this._gotPorts = false;
     }
 

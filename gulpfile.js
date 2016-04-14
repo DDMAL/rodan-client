@@ -26,7 +26,7 @@ var INFO_FILE = 'info.json';                    // Name of info file (client inf
  * Build templates.
  */
 gulp.task('develop:templates', shell.task([
-    'python scripts/build-template.py -b templates/index-dev.html -t templates/Views ' + WEB_DIRECTORY
+    'python scripts/build-template.py -b templates/index-dev.html -t plugins,templates/Views ' + WEB_DIRECTORY
 ]));
 
 /**
@@ -58,7 +58,8 @@ gulp.task('develop:info', function()
 gulp.task('develop:link', shell.task([
     'cd ' + WEB_DIRECTORY + '; rm -f ' + SOURCE_DIRECTORY + '; ln -sf ../' + SOURCE_DIRECTORY + ' ' + SOURCE_DIRECTORY,
     'cd ' + WEB_DIRECTORY + '; rm -f ' + RESOURCES_DIRECTORY + '; ln -sf ../' + RESOURCES_DIRECTORY + ' ' + RESOURCES_DIRECTORY,
-    'cd ' + WEB_DIRECTORY + '; rm -f ' + CONFIGURATION_FILE + '; ln -sf ../' + CONFIGURATION_FILE + ' .'
+    'cd ' + WEB_DIRECTORY + '; rm -f ' + CONFIGURATION_FILE + '; ln -sf ../' + CONFIGURATION_FILE + ' .',
+    'cd ' + WEB_DIRECTORY + '; ln -sf ../plugins .'
 ]));
 
 /**
@@ -183,14 +184,15 @@ gulp.task('dist:copy', ['dist:mkdir'], shell.task(
 [
     'cp ' + CONFIGURATION_FILE + ' ' + DIST_DIRECTORY + '/',
     'cp -r resources ' + DIST_DIRECTORY + '/',
-    'cd ' + WEB_DIRECTORY + '; cp -Rf --parent libs/github/twbs/*/fonts/ ../' + DIST_DIRECTORY
+    'cd ' + WEB_DIRECTORY + '; cp -Rf --parent libs/github/twbs/*/fonts/ ../' + DIST_DIRECTORY,
+    'cp -r plugins ' + DIST_DIRECTORY + '/',
 ]));
 
 /**
  * Build templates.
  */
 gulp.task('dist:templates', ['dist:mkdir'], shell.task([
-    'python support/build-template.py -b templates/index.html -t templates/Views ' + DIST_DIRECTORY
+    'python scripts/build-template.py -b templates/index.html -t plugins,templates/Views ' + DIST_DIRECTORY
 ]));
 
 /**

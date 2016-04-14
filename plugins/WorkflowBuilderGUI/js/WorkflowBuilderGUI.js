@@ -2,18 +2,18 @@ import Radio from 'backbone.radio';
 import paper from 'paper';
 import { drawGrid } from './Utilities/PaperUtilities';
 import BaseItem from './Items/BaseItem';
-import Configuration from '../../Configuration';
-import Environment from '../../Shared/Environment';
-import Events from '../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Environment from 'js/Shared/Environment';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './Controllers/ItemController';
 import LayoutViewWorkflowBuilder from './Views/LayoutViewWorkflowBuilder';
 
 /**
- * Main WorkflowBuilder class.
+ * Main WorkflowBuilderGUI class.
  */
-class WorkflowBuilder
+class WorkflowBuilderGUI
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -76,7 +76,7 @@ class WorkflowBuilder
         BaseItem.clearMap();
         this._multipleSelectionKey = Environment.getMultipleSelectionKey();
         this._line = null;
-        this._zoomRate = Configuration.WORKFLOWBUILDER.ZOOM_RATE;
+        this._zoomRate = Configuration.WORKFLOWBUILDERGUI.ZOOM_RATE;
         this._itemController = new ItemController();
         paper.handleMouseEvent = event => this._itemController.handleMouseEvent(event);
     }
@@ -145,7 +145,7 @@ class WorkflowBuilder
         paper.setup(canvasElementId);
         paper.view.onFrame = (event) => this._handleFrame(event);
         this.drawGrid = drawGrid;
-        this.drawGrid(Configuration.WORKFLOWBUILDER.GRID, paper);
+        this.drawGrid(Configuration.WORKFLOWBUILDERGUI.GRID, paper);
         this._handleRequestZoomReset();
     }
 
@@ -382,8 +382,8 @@ class WorkflowBuilder
      */
     _handleRequestZoomIn()
     {
-        var zoom = paper.view.zoom + Configuration.WORKFLOWBUILDER.ZOOM_RATE;
-        paper.view.zoom = zoom < Configuration.WORKFLOWBUILDER.ZOOM_MAX ? zoom : Configuration.WORKFLOWBUILDER.ZOOM_MAX;
+        var zoom = paper.view.zoom + Configuration.WORKFLOWBUILDERGUI.ZOOM_RATE;
+        paper.view.zoom = zoom < Configuration.WORKFLOWBUILDERGUI.ZOOM_MAX ? zoom : Configuration.WORKFLOWBUILDERGUI.ZOOM_MAX;
     }
 
     /**
@@ -391,8 +391,8 @@ class WorkflowBuilder
      */
     _handleRequestZoomOut()
     {
-        var zoom = paper.view.zoom - Configuration.WORKFLOWBUILDER.ZOOM_RATE;
-        paper.view.zoom = zoom > Configuration.WORKFLOWBUILDER.ZOOM_MIN ? zoom : Configuration.WORKFLOWBUILDER.ZOOM_MIN;    
+        var zoom = paper.view.zoom - Configuration.WORKFLOWBUILDERGUI.ZOOM_RATE;
+        paper.view.zoom = zoom > Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN ? zoom : Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN;    
     }
 
     /**
@@ -400,7 +400,7 @@ class WorkflowBuilder
      */
     _handleRequestZoomReset()
     {
-        paper.view.zoom = Configuration.WORKFLOWBUILDER.ZOOM_INITIAL;
+        paper.view.zoom = Configuration.WORKFLOWBUILDERGUI.ZOOM_INITIAL;
     }
 
     /**
@@ -442,6 +442,4 @@ class WorkflowBuilder
     }
 }
 
-var workspace = new WorkflowBuilder();
-
-export default WorkflowBuilder;
+var workspace = new WorkflowBuilderGUI();
