@@ -1,12 +1,11 @@
-import Radio from 'backbone.radio';
-
 import BaseModel from './BaseModel';
 import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * ResourceList model.
+ * ResourceList.
  */
-class ResourceList extends BaseModel
+export default class ResourceList extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,9 +15,6 @@ class ResourceList extends BaseModel
      */
     initialize()
     {
-        this.rodanChannel = Radio.channel('rodan'); // TODO - this is a hack; need to find better way of managing radio channels in general
-        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
-        this.routeName = 'resourcelists';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());
 
@@ -30,21 +26,24 @@ class ResourceList extends BaseModel
     }
 
     /**
-     * Set the resource type.
+     * Override of Backbone.Model.parse. If the 'creator' is null it gets set to 'generated result'.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
      */
-    parse(resp)
+    parse(response)
     {
-        // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
-        // TODO not sure why this is just happening here...
-        if (resp.creator === null)
+        if (response.creator === null)
         {
-            resp.creator = 'generated result';
+            response.creator = 'generated result';
         }
-        return resp;
+        return response;
     }
 
     /**
-     * Defaults
+     * Returns defaults.
+     *
+     * @return {object} object holding default values
      */
     defaults()
     {
@@ -57,6 +56,8 @@ class ResourceList extends BaseModel
 
     /**
      * Returns UUID of associated ResourceType.
+     *
+     * @return {string} UUID of associated ResourceType; null if DNE
      */
     getResourceTypeUuid()
     {
@@ -82,10 +83,10 @@ class ResourceList extends BaseModel
         var jsonString = {};
         if (resourceTypeId !== null)
         {
-            jsonString = this.resourceTypeCollection.get(resourceTypeId).toJSON();
+            var resourceTypeCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+            jsonString = resourceTypeCollection.get(resourceTypeId).toJSON();
         }
         this.set('resource_type_full', jsonString); 
     }
 }
-
-export default ResourceList;
+ResourceList.prototype.routeName = 'resourcelists';

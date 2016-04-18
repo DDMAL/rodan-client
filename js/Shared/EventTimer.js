@@ -1,18 +1,19 @@
+import Events from './Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
-import Events from './Events';
-
 /**
- * Timer that fires an event every X seconds.
+ * Timer that fires an event every X milliseconds.
  */
-class EventTimer extends Marionette.Object
+export default class EventTimer extends Marionette.Object
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize.
+     *
+     * @param {object} options options for EventTimer; options.frequency sets the frequency (in milliseconds) that a registered event will be fired
      */
     initialize(options)
     {
@@ -32,11 +33,10 @@ class EventTimer extends Marionette.Object
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
-        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
-        this.rodanChannel.reply(Events.REQUEST__TIMER_SET_FUNCTION, (options) => this._handleSetTimedFunction(options));
-        this.rodanChannel.reply(Events.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
+        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
+        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
+        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_FUNCTION, (options) => this._handleSetTimedFunction(options));
+        Radio.channel('rodan').reply(Events.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
     }
 
     /**
@@ -86,7 +86,7 @@ class EventTimer extends Marionette.Object
     {
         if (this._event != null)
         {
-            this.rodanChannel.trigger(this._event, this._options);
+            Radio.channel('rodan').trigger(this._event, this._options);
             this._timer = setTimeout(() => this._fireEvent(), this._frequency);
         }
     }
@@ -98,7 +98,7 @@ class EventTimer extends Marionette.Object
     {
         if (this._event != null)
         {
-            var response = this.rodanChannel.request(this._event, this._options);
+            var response = Radio.channel('rodan').request(this._event, this._options);
             this._timer = setTimeout(() => this._fireRequest(), this._frequency);
         }
     }
@@ -146,5 +146,3 @@ class EventTimer extends Marionette.Object
         this._function = null;
     }
 }
-
-export default EventTimer;

@@ -5,7 +5,7 @@ import Events from '../Shared/Events';
 /**
  * Radio manager.
  */
-class RadioManager
+export default class RadioManager
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -13,9 +13,8 @@ class RadioManager
     /**
      * Constructor.
      */
-    constructor(options)
+    constructor()
     {
-        this.rodanChannel = Radio.channel('rodan');
         Radio.tuneIn('rodan');
         this._originalRadioLog = Radio.log;
         Radio.log = (channelName, eventName, options) => this._handleRadioRequest(channelName, eventName, options);
@@ -66,8 +65,8 @@ class RadioManager
                 this._pendingResponses[response.event] = 0;
             }
             this._pendingResponses[response.event] += 1;
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: response.modalTitle, text: 'Please wait...'});
-            this.rodanChannel.once(response.event, () => this._handleRadioEvent(response.event));
+            Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: response.modalTitle, text: 'Please wait...'});
+            Radio.channel('rodan').once(response.event, () => this._handleRadioEvent(response.event));
         }
     }
     /**
@@ -75,13 +74,11 @@ class RadioManager
      */
     _handleRadioEvent(eventName)
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
         this._pendingResponses[eventName] -= 1;
         if (this._pendingResponses[eventName] > 0)
         {
-            this.rodanChannel.once(eventName, () => this._handleRadioEvent(eventName));
+            Radio.channel('rodan').once(eventName, () => this._handleRadioEvent(eventName));
         }
     }
 }
-
-export default RadioManager;

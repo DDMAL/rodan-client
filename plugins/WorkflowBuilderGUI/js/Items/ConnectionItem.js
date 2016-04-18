@@ -1,7 +1,7 @@
 import paper from 'paper';
 import BaseItem from './BaseItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 
 /**
@@ -22,7 +22,7 @@ class ConnectionItem extends BaseItem
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
         this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {connection: options.model, workflow: workflow}}];
 
-        this.strokeWidth = Configuration.WORKFLOWBUILDER.STROKE_WIDTH;
+        this.strokeWidth = Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH;
         this._inputPortItem = null;
         this._outputPortItem = null;
         this._inputPortUrl = options.inputporturl;
@@ -30,8 +30,8 @@ class ConnectionItem extends BaseItem
 
         // We'll put a small circle in the middle of our connection so it's easier to select.
         var circleCenter = new paper.Point(0, 0);
-        this._circle = new paper.Shape.Circle(circleCenter, Configuration.WORKFLOWBUILDER.CONNECTION_CIRCLE_RADIUS);
-        this._circle.fillColor = Configuration.WORKFLOWBUILDER.STROKE_COLOR;
+        this._circle = new paper.Shape.Circle(circleCenter, Configuration.WORKFLOWBUILDERGUI.CONNECTION_CIRCLE_RADIUS);
+        this._circle.fillColor = Configuration.WORKFLOWBUILDERGUI.STROKE_COLOR;
         this._circle.onMouseDown = event => this._handleMouseEvent(event);
         this._circle.onMouseUp = event => this._handleMouseEvent(event);
         this._circle.onClick = event => this._handleMouseEvent(event);

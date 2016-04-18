@@ -1,8 +1,27 @@
-/*
+/**
  * ES6 Port of the Cappuccino CPCookie Class.
- **/
-class Cookie
+ */
+export default class Cookie
 {
+    /**
+     * Constructor.
+     *
+     * @param {string} name name of cookie
+     */
+    constructor(name)
+    {
+        this._cookieName = name;
+        this._cookieValue = this._readCookieValue();
+        this._expires = null;
+    }
+
+    /**
+     * Saves provided info as cookie.
+     *
+     * @param {string} name name of cookie
+     * @param {string} value value of cookie
+     * @param {integer} days days until expiration of cookie
+     */
     static saveCookie(name, value, days)
     {
         var date = new Date();
@@ -11,28 +30,41 @@ class Cookie
         document.cookie = name + '=' + value + '; ' + expires;
     }
 
-    constructor(name)
-    {
-        this._cookieName = name;
-        this._cookieValue = this._readCookieValue();
-        this._expires = null;
-    }
-
+    /**
+     * Returns name.
+     *
+     * @return {string} name
+     */
     get name()
     {
         return this._cookieName;
     }
 
+    /**
+     * Returns value.
+     *
+     * @return {string} value
+     */
     get value()
     {
         return this._cookieValue;
     }
 
+    /**
+     * Returns expiration date.
+     *
+     * @return {Date} expiration date
+     */
     get expires()
     {
         return this._expires;
     }
 
+    /**
+     * Returns value of cookie.
+     *
+     * @return {string} value of cookie
+     */
     _readCookieValue()
     {
         var name = this._cookieName + '=',
@@ -54,5 +86,3 @@ class Cookie
         return '';
     }
 }
-
-export default Cookie;

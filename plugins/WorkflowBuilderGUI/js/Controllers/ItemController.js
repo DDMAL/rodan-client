@@ -3,8 +3,8 @@ import paper from 'paper';
 
 import BaseItem from '../Items/BaseItem';
 import ConnectionItem from '../Items/ConnectionItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 import InputPortItem from '../Items/InputPortItem';
 import LineItem from '../Items/LineItem';
@@ -235,10 +235,10 @@ class ItemController
     {
         var canvasWidth = paper.view.viewSize.width;
         var canvasHeight = paper.view.viewSize.height;
-        var workflowJobItemWidth = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_WIDTH;
-        var workflowJobItemHeight = Configuration.WORKFLOWBUILDER.WORKFLOWJOB_HEIGHT;
-        var portItemWidth = Configuration.WORKFLOWBUILDER.PORT_WIDTH;
-        var portItemHeight = Configuration.WORKFLOWBUILDER.PORT_HEIGHT;
+        var workflowJobItemWidth = Configuration.WORKFLOWBUILDERGUI.WORKFLOWJOB_WIDTH;
+        var workflowJobItemHeight = Configuration.WORKFLOWBUILDERGUI.WORKFLOWJOB_HEIGHT;
+        var portItemWidth = Configuration.WORKFLOWBUILDERGUI.PORT_WIDTH;
+        var portItemHeight = Configuration.WORKFLOWBUILDERGUI.PORT_HEIGHT;
         this._segments = {
             workflowJobItem: [
                 new paper.Point(0, 0), 

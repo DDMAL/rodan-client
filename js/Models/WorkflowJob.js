@@ -3,15 +3,17 @@ import InputPortCollection from '../Collections/InputPortCollection';
 import OutputPortCollection from '../Collections/OutputPortCollection';
 
 /**
- * Represents a WorkflowJob.
+ * WorkflowJob.
  */
-class WorkflowJob extends BaseModel
+export default class WorkflowJob extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize.
+     *
+     * @param {object} options Backbone.Model options object
      */
     initialize(options)
     {
@@ -21,16 +23,23 @@ class WorkflowJob extends BaseModel
         outputPortCollection.set(options.output_ports);
         this.set('input_ports', inputPortCollection);
         this.set('output_ports', outputPortCollection);
-        this.routeName = 'workflowjobs';
     }
 
+    /**
+     * Returns defaults.
+     *
+     * @return {object} object holding default values
+     */
     defaults()
     {
         return {input_ports: null, output_ports: null, job_name: null, job_description: null};
     }
 
     /**
-     * Initialize.
+     * Override of Backbone.Model.parse. This will populate 'input_ports' and 'output_ports' with associated models.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
      */
     parse(response)
     {
@@ -54,7 +63,9 @@ class WorkflowJob extends BaseModel
     }
 
     /**
-     * Returns UUID of associated job.
+     * Returns UUID of associated Job.
+     *
+     * @return {string} UUID of associated Job
      */
     getJobUuid()
     {
@@ -66,16 +77,13 @@ class WorkflowJob extends BaseModel
 
     /**
      * Returns human-readable descriptive text.
+     *
+     * @return {string} 'name' and 'job_description' (from associated Job)
      */
     getDescription()
     {
         var string = this.get('name') + ': ' + this.get('job_description');
         return string;
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
-
-export default WorkflowJob;
+WorkflowJob.prototype.routeName = 'workflowjobs';

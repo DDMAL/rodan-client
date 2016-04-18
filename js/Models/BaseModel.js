@@ -1,37 +1,37 @@
 import Backbone from 'backbone';
-import Radio from 'backbone.radio';
-
 import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
  * Base model.
  */
-class BaseModel extends Backbone.Model
+export default class BaseModel extends Backbone.Model
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Constructor.
+     *
+     * @param {object} options initialization parameters for Backbone.Model
      */
     constructor(options)
     {
         super(options);
-        this.idAttribute = 'uuid';
-        this._initializeRadio();
         this.on('change', (model, options) => this._onChange(model, options));
         this.on('sync', (model, response, options) => this._onSync(model, response, options));
     }
 
     /**
-     * URL override to add trailing slash.
-     * Also, the URL will depend if this model instance has been saved or not.
+     * URL override to add trailing slash. Also, the URL will depend if this model instance has been saved or not. 
      * If not saved, we have to use the plural route for the model to save it.
      * That's the way Rodan works. :)
+     *
+     * @return {string} URL of Resource with trailing slash
      */
     url()
     {
-        var original_url = this.rodanChannel.request(Events.REQUEST__SERVER_GET_ROUTE, this.routeName);
+        var original_url = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, this.routeName);
         if (typeof this.get('uuid') !== 'undefined')
         {
             original_url = this.get('url');
@@ -42,6 +42,8 @@ class BaseModel extends Backbone.Model
 
     /**
      * Override of destroy to allow for generic handling.
+     *
+     * @param {object} options Backbone.Model.destroy options object
      */
     destroy(options)
     {
@@ -52,6 +54,9 @@ class BaseModel extends Backbone.Model
 
     /**
      * Override of save to allow for generic handling.
+     *
+     * @param {object} attributes attributes to change in model
+     * @param {object} options Backbone.Model.save options object
      */
     save(attributes, options)
     {
@@ -62,6 +67,8 @@ class BaseModel extends Backbone.Model
 
     /**
      * Override of fetch to allow for generic handling.
+     *
+     * @param {object} options Backbone.Model.fetch options object
      */
     fetch(options)
     {
@@ -72,6 +79,8 @@ class BaseModel extends Backbone.Model
 
     /**
      * Returns descriptive string for model. This should be overridden by sub-classes.
+     *
+     * @return {string} returns 'no description available' unless overridden by subclass
      */
     getDescription()
     {
@@ -80,6 +89,10 @@ class BaseModel extends Backbone.Model
 
     /**
      * Parses ID out of resource type URL.
+     *
+     * @param {string} url URL with UUID at end
+     * @return {string} UUID
+     * @todo this should be in a utility file
      */
     parseIdFromUrl(url)
     {
@@ -93,20 +106,12 @@ class BaseModel extends Backbone.Model
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
      * On change handler.
      */
     _onChange(model, response, options)
     {
-        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE, {model: model, options: options});
-        this.rodanChannel.trigger(Events.EVENT__MODEL_CHANGE + model.get('url'), {model: model, options: options});
+        Radio.channel('rodan').trigger(Events.EVENT__MODEL_CHANGE, {model: model, options: options});
+        Radio.channel('rodan').trigger(Events.EVENT__MODEL_CHANGE + model.get('url'), {model: model, options: options});
     }
 
     /**
@@ -114,8 +119,8 @@ class BaseModel extends Backbone.Model
      */
     _onSync(model, response, options)
     {
-        this.rodanChannel.trigger(Events.EVENT__MODEL_SYNC, {model: model, response: response, options: options});
-        this.rodanChannel.trigger(Events.EVENT__MODEL_SYNC + model.get('url'), {model: model, response: response, options: options});
+        Radio.channel('rodan').trigger(Events.EVENT__MODEL_SYNC, {model: model, response: response, options: options});
+        Radio.channel('rodan').trigger(Events.EVENT__MODEL_SYNC + model.get('url'), {model: model, response: response, options: options});
     }
 
     /**
@@ -176,11 +181,9 @@ class BaseModel extends Backbone.Model
      */
     _handleErrorResponse(model, response, options)
     {
-        this.rodanChannel.request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {model: model,
+        Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {model: model,
                                                                   response: response,
                                                                   options: options});
     }
 }
 BaseModel.prototype.idAttribute = 'uuid';
-
-export default BaseModel;

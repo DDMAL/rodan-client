@@ -6,9 +6,9 @@ import saveAs from 'filesaver';
 import Events from '../Shared/Events';
 
 /**
- * Transfer manager.
+ * File transfer manager. This manages all file (i.e. Resource) uploads and downloads.
  */
-class TransferManager
+export default class TransferManager
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,7 +16,7 @@ class TransferManager
     /**
      * Constructor.
      */
-    constructor(options)
+    constructor()
     {
         this._initializeRadio();
         this._uploadsPending = new Backbone.Collection();
@@ -32,10 +32,9 @@ class TransferManager
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
-        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT, () => this._handleRequestGetUploadCount());
-        this.rodanChannel.reply(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
+        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
+        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT, () => this._handleRequestGetUploadCount());
+        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
     }
 
     /**
@@ -79,7 +78,7 @@ class TransferManager
     {
         var upload = this._uploadsPending.remove(jqXHR.id);
         this._uploadsCompleted.add(upload);
-        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: upload.jqXHR, file: upload.file});
+        Radio.channel('rodan').trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**
@@ -89,7 +88,7 @@ class TransferManager
     {
         var upload = this._uploadsPending.remove(jqXHR.id);
         this._uploadsFailed.add(upload);
-        this.rodanChannel.trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: upload.jqXHR, file: upload.file});
+        Radio.channel('rodan').trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**
@@ -149,5 +148,3 @@ class TransferManager
         return Math.floor((1 + Math.random()) * 10000000);
     }
 }
-
-export default TransferManager;

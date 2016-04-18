@@ -1,9 +1,9 @@
 import BaseModel from './BaseModel';
 
 /**
- * WorkflowRun model.
+ * WorkflowRun.
  */
-class WorkflowRun extends BaseModel
+export default class WorkflowRun extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -13,18 +13,29 @@ class WorkflowRun extends BaseModel
      */
     initialize()
     {
-        this.routeName = 'workflowruns';
         this.set('statusText', this._getStatusText(this.get('status')));
     }
 
+    /**
+     * Returns defaults.
+     *
+     * @return {object} object holding default values
+     */
     defaults()
     {
         return {created: null, updated: null};
     }
 
+    /**
+     * Override of Backbone.Model.parse. This will populate 'statusText' from the existing status.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
+     */
     parse(response)
     {
         this.set('statusText', this._getStatusText(response.status));
+        return response;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -84,5 +95,4 @@ class WorkflowRun extends BaseModel
         }
     }
 }
-
-export default WorkflowRun;
+WorkflowRun.prototype.routeName = 'workflowruns';

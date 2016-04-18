@@ -3,19 +3,16 @@ import BaseModel from './BaseModel';
 /**
  * InputPort.
  */
-class InputPort extends BaseModel
+export default class InputPort extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
-     */
-    initialize()
-    {
-        this.routeName = 'inputports';
-    }
-
+     * Override of Backbone.Model.defaults. Sets default label to null.
+     *
+     * @return {object} defaults
+     */ 
     defaults()
     {
         return {label: null};
@@ -23,15 +20,12 @@ class InputPort extends BaseModel
 
     /**
      * Returns human-readable descriptive text.
+     *
+     * @return {string} 'label' property
      */
     getDescription()
     {
         return this.get('label');
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
-
-export default InputPort;
+InputPort.prototype.routeName = 'inputports';

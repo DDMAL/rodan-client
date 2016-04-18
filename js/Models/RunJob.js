@@ -1,11 +1,11 @@
-import Radio from 'backbone.radio';
 import BaseModel from './BaseModel';
 import Events from '../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * RunJob model.
+ * RunJob.
  */
-class RunJob extends BaseModel
+export default class RunJob extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -15,13 +15,14 @@ class RunJob extends BaseModel
      */
     initialize()
     {
-        this.routeName = 'runjobs';
         this.set('statusText', this._getStatusText(this.get('status')));
         this.set('available', this.available());
     }
 
     /**
      * Return true iff the current user can lock as a manual RunJob.
+     *
+     * @return {boolean} true iff the current user can lock as a manual RunJob
      */
     available()
     {
@@ -97,5 +98,4 @@ class RunJob extends BaseModel
         }
     }
 }
-
-export default RunJob;
+RunJob.prototype.routeName = 'runjobs';

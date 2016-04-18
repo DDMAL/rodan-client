@@ -1,12 +1,11 @@
+import Events from './Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from './Events';
 
 /**
  * General error handler.
  */
-class ErrorHandler extends Marionette.Object
+export default class ErrorHandler extends Marionette.Object
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -24,12 +23,11 @@ class ErrorHandler extends Marionette.Object
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize radio.
+     * Initialize Radio.
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__SYSTEM_HANDLE_ERROR, (options) => this._handleError(options));
+        Radio.channel('rodan').reply(Events.REQUEST__SYSTEM_HANDLE_ERROR, (options) => this._handleError(options));
     }
 
     /**
@@ -105,8 +103,6 @@ class ErrorHandler extends Marionette.Object
      */
     _processRodanError(options)
     {
-        this.rodanChannel.trigger(Events.EVENT__SERVER_ERROR, {json: options.response.responseJSON});
+        Radio.channel('rodan').trigger(Events.EVENT__SERVER_ERROR, {json: options.response.responseJSON});
     }
 }
-
-export default ErrorHandler;

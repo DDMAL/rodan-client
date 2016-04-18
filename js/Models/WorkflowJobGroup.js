@@ -1,25 +1,21 @@
 import BaseModel from './BaseModel';
 
 /**
- * Represents a WorkflowJobGroup.
+ * WorkflowJobGroup.
  */
-class WorkflowJobGroup extends BaseModel
+export default class WorkflowJobGroup extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize
+     * Returns defaults.
+     *
+     * @return {object} object holding default values
      */
-    initialize()
-    {
-        this.routeName = 'workflowjobgroups';
-    }
-
     defaults()
     {
         return {name: 'untitled'};
     }
 }
-
-export default WorkflowJobGroup;
+WorkflowJobGroup.prototype.routeName = 'workflowjobgroups';

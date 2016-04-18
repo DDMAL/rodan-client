@@ -6,9 +6,9 @@ import BaseModel from './BaseModel';
 import Events from '../Shared/Events';
 
 /**
- * Resource model.
+ * Resource.
  */
-class Resource extends BaseModel
+export default class Resource extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -18,9 +18,6 @@ class Resource extends BaseModel
      */
     initialize()
     {
-        this.rodanChannel = Radio.channel('rodan'); // TODO - this is a hack; need to find better way of managing radio channels in general
-        this.resourceTypeCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
-        this.routeName = 'resources';
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());
         this.set('download', this._getDownloadUrl());
@@ -33,21 +30,24 @@ class Resource extends BaseModel
     }
 
     /**
-     * Set the resource type.
+     * Override of Backbone.Model.parse. If the 'creator' is null it gets set to 'generated result'.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
      */
-    parse(resp)
+    parse(response)
     {
-        // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
-        // TODO not sure why this is just happening here...
-        if (resp.creator === null)
+        if (response.creator === null)
         {
-            resp.creator = 'generated result';
+            response.creator = 'generated result';
         }
-        return resp;
+        return response;
     }
 
     /**
-     * Defaults
+     * Returns defaults.
+     *
+     * @return {object} object holding default values
      */
     defaults()
     {
@@ -59,7 +59,12 @@ class Resource extends BaseModel
     }
 
     /**
-     * Override of sync. We do this to allow file uploads.
+     * Override of Backbone.Model.sync. This is done to facilitate file uploads.
+     *
+     * @param {string} method synce method (@see Backbone.sync)
+     * @param {object} model JavaScript object that holds properties for Resource
+     * @param {object} options options to be passed to the AJAX call
+     * @return {object} XmlHttpRequest instance 
      */
     sync(method, model, options)
     {
@@ -86,6 +91,8 @@ class Resource extends BaseModel
 
     /**
      * Returns UUID of associated ResourceType.
+     *
+     * @return {string} UUID of associated ResourceType; null if DNE
      */
     getResourceTypeUuid()
     {
@@ -107,11 +114,12 @@ class Resource extends BaseModel
      */
     _updateResourceTypeFull()
     {
+        var resourceTypeCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         var resourceTypeId = this.getResourceTypeUuid();
         var jsonString = {};
         if (resourceTypeId !== null)
         {
-            jsonString = this.resourceTypeCollection.get(resourceTypeId).toJSON();
+            jsonString = resourceTypeCollection.get(resourceTypeId).toJSON();
         }
         this.set('resource_type_full', jsonString); 
     }
@@ -132,5 +140,4 @@ class Resource extends BaseModel
         return null;
     }
 }
-
-export default Resource;
+Resource.prototype.routeName = 'resources';

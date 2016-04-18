@@ -1,6 +1,6 @@
 import BasePortItem from './BasePortItem';
-import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import Configuration from 'js/Configuration';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 
 /**
@@ -71,8 +71,8 @@ class InputPortItem extends BasePortItem
     update()
     {
         super.update();
-        this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_SATISFIED : 
-                                              Configuration.WORKFLOWBUILDER.INPUTPORT_COLOR_UNSATISFIED;
+        this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_SATISFIED : 
+                                              Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_UNSATISFIED;
         if (this._connectionItem !== null)
         {
             this._connectionItem.setVisible(this.visible);

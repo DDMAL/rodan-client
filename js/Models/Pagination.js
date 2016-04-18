@@ -1,32 +1,21 @@
 import BaseModel from './BaseModel';
 
 /**
- * Pagination.
+ * Pagination. Note that this has no 'routeName' since pagination is stored within a Collection. This model is simply here for convenience.
  */
-class Pagination extends BaseModel
+export default class Pagination extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Constructor.
-     */
-    initialize()
-    {
-        this.routeName = null;
-    }
-
-    /**
      * Set defaults.
+     *
+     * @return {object} default properties
      */
     defaults()
     {
         return {count: 0, next: '#', previous: '#', current: 1, total: 1};
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
-
-export default Pagination;
+Pagination.prototype.routeName = null;

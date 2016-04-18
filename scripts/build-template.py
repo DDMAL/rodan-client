@@ -1,5 +1,6 @@
 import os
 import argparse
+import string
 
 # HEADER_TEMPLATE_DIRECTORY = "templates/"
 # BACKBONE_TEMPLATE_DIRECTORY = "templates/underscore-templates/"
@@ -12,7 +13,7 @@ def format_underscore_template(name, content):
     return '\n<script type="text/template" id="{0}">\n{1}\n</script>\n'.format(name, content)
 
 
-def assemble_templates(base_template_file, template_dir):
+def assemble_templates(base_template_file, template_dirs):
     """
     Assemble the header, the footer, and all backbone templates into one string.
     """
@@ -21,13 +22,14 @@ def assemble_templates(base_template_file, template_dir):
 
     # Attach the backbone templates
     templates = ""
-    for directory, subdir, files in os.walk(template_dir):
-        for f in files:
-            if f.endswith(".html"):
-                name = os.path.splitext(f)[0]
-                content = open(os.path.join(directory, f), "r").read()
-                # It is a template, so add it
-                templates += format_underscore_template(name, content)
+    for template_dir in template_dirs:
+        for directory, subdir, files in os.walk(template_dir):
+            for f in files:
+                if f.endswith(".html"):
+                    name = os.path.splitext(f)[0]
+                    content = open(os.path.join(directory, f), "r").read()
+                    # It is a template, so add it
+                    templates += format_underscore_template(name, content)
     return output.format(templates=templates)
 
 
@@ -46,9 +48,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build Backbone Templates")
     parser.add_argument('builddir', help="Build output directory")
     parser.add_argument('-b', '--base', required=True, help="Path to the base template file")
-    parser.add_argument('-t', '--templates', required=True, help="Path to the template directory")
+    parser.add_argument('-t', '--templates', required=True, help="Path to the template directory. Multiple directories are separated by ','")
     parser.add_argument('-f', '--filename', default="index.html", help="Output filename (defaults to index.html)")
     args = parser.parse_args()
 
-    build_underscore_templates(args.base, args.templates, args.builddir, args.filename)
+    template_dirs = string.split(args.templates, ',')
+
+    build_underscore_templates(args.base, template_dirs, args.builddir, args.filename)
     print("Templates built successfully!")

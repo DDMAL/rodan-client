@@ -3,34 +3,32 @@ import BaseModel from './BaseModel';
 /**
  * Project model.
  */
-class Project extends BaseModel
+export default class Project extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Override of Backbone.Model.parse. This sets the 'workflow_count' if not provided by the server.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
+     * @todo why is it not being provided by the server?
      */
-    initialize()
+    parse(response)
     {
-        this.routeName = 'projects';
-    }
-
-    /**
-     * Set the resource type.
-     */
-    parse(resp)
-    {
-        resp = super.parse(resp);
-        if (!resp.hasOwnProperty('workflow_count'))
+        response = super.parse(response);
+        if (!response.hasOwnProperty('workflow_count'))
         {
-            resp.workflow_count = resp.workflows.length;
+            response.workflow_count = response.workflows.length;
         }
-        return resp;
+        return response;
     }
 
     /**
      * Return defaults.
+     *
+     * @return {object} default properties
      */
     defaults()
     {
@@ -42,5 +40,4 @@ class Project extends BaseModel
                 name: 'untitled'};
     }
 }
-
-export default Project;
+Project.prototype.routeName = 'projects';

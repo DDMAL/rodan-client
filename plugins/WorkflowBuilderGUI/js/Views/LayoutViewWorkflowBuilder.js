@@ -1,6 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import Events from '../../../Shared/Events';
+import Events from 'js/Shared/Events';
 import GUI_EVENTS from '../Shared/Events';
 
 /**

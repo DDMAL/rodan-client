@@ -3,41 +3,44 @@ import InputPortTypeCollection from '../Collections/InputPortTypeCollection';
 import OutputPortTypeCollection from '../Collections/OutputPortTypeCollection';
 
 /**
- * TODO docs.
+ * Job.
  */
-class Job extends BaseModel
+export default class Job extends BaseModel
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initializes the model. Upon initialization the 'input_port_types' and 'output_port_types' will be set as Backbone.Collections.
      */
-    initialize(options)
+    initialize()
     {
-        this.routeName = 'jobs';
         this.set('input_port_types', new InputPortTypeCollection(options.input_port_types));
         this.set('output_port_types', new OutputPortTypeCollection(options.output_port_types));
     }
 
+    /**
+     * Override of Backbone.Model.defaults. Sets 'input_port_types' and 'output_port_types' to null.
+     *
+     * @todo is this needed?
+     * @return {object} default properties
+     */ 
     defaults()
     {
         return {input_port_types: null, output_port_types: null};
     }
 
     /**
-     * TODO docs
+     * Override of Backbone.Model.parse. The 'input_port_types' and 'output_port_types' will be set as Backbone.Collections.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
      */
-    parse(resp)
+    parse(response)
     {
-        resp.input_port_types = new InputPortTypeCollection(resp.input_port_types);
-        resp.output_port_types = new OutputPortTypeCollection(resp.output_port_types);
-        return resp;
+        response.input_port_types = new InputPortTypeCollection(response.input_port_types);
+        response.output_port_types = new OutputPortTypeCollection(response.output_port_types);
+        return response;
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
 }
-
-export default Job;
+OutputPortType.prototype.routeName = 'jobs';

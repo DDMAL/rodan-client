@@ -3,13 +3,18 @@ let _os = null;
 let _keyMultipleSelection = null;
 
 /**
- * Global environment constants
+ * Global environment constants.
  */
-class Environment
+export default class Environment
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS - Static
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns string denoting detected operating system.
+     *
+     * @return {string} 'Windows', 'MacOS', 'UNIX', 'Linux', or 'Unknown OS'
+     */
     static getOS()
     {
         if (_os === null)
@@ -26,6 +31,8 @@ class Environment
 
     /**
      * Get multiple selection key.
+     *
+     * @return {string} returns 'contol' or 'command', depending on OS
      */
     static getMultipleSelectionKey()
     {
@@ -66,6 +73,4 @@ class Environment
         }
         return _keyMultipleSelection;
     }
-};
-
-export default Environment;
+}
