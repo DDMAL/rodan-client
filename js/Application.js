@@ -28,6 +28,7 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
+import Plugins from './Plugins';
 import RadioManager from './Managers/RadioManager';
 import TransferManager from './Managers/TransferManager';
 
@@ -61,7 +62,6 @@ class Application extends Marionette.Application
         });
 
         // Non-network and non-GUI inits. Do these first.
-        this._importPlugins();
         this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
@@ -76,17 +76,6 @@ class Application extends Marionette.Application
         
         this.rodanChannel.request(Events.REQUEST__SERVER_LOAD_ROUTES);
 
-    }
-
-    /**
-     * Import all plugins.
-     */
-    _importPlugins()
-    {
-        for (var i = 0; i < Configuration.PLUGINS.length; i++)
-        {
-            System.import('plugins/' + Configuration.PLUGINS[i]); 
-        }
     }
 
     /**

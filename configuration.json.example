@@ -6,7 +6,6 @@
         "NAME": "",
         "EMAIL": ""
     },
-    "PLUGINS": ["WorkflowBuilderGUI/js/WorkflowBuilderGUI"],
     "WORKFLOWBUILDER":
     {
         "USER_AGENT": "rodan-standard",

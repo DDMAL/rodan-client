@@ -31,8 +31,8 @@ var WEB_DIRECTORY = 'web';                      // Name of directory holding dev
 var BUNDLE_FILE = 'rodan-client.min.js';        // Name of bundle file.
 var PACKAGE_FILE = 'package.json';              // Name of package file.
 var INFO_FILE = 'info.json';                    // Name of info file (client info).
-var BUILD_DIRECTORY = 'build';                  // Name of build directory.
 var PLUGINS_DIRECTORY = 'plugins';              // Name of plugins directory.
+var BUNDLE_DIRECTORY = 'bundle';                // Name of bundle directory.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Development tasks
@@ -117,69 +117,49 @@ gulp.task('develop', ['develop:link', 'develop:templates', 'develop:styles', 'de
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Build tasks
+// Bundle tasks
+//
+// This will bundle whatever exists in WEB_DIRECTORY and throw the file into
+// BUNDLE_DIRECTORY.
 ///////////////////////////////////////////////////////////////////////////////////////
 /**
- * Cleans out build.
+ * Cleans out bundle.
  */
-gulp.task('build:clean', function()
+gulp.task('bundle:clean', function()
 {
-    return del([BUILD_DIRECTORY]);
+    return del([BUNDLE_DIRECTORY]);
 });
 
 /**
- * Make build directory.
+ * Make bundle directory.
  */
-gulp.task('build:mkdir', ['build:clean'], function()
+gulp.task('bundle:mkdir', ['bundle:clean'], function()
 {
-    return fs.mkdir(BUILD_DIRECTORY);
+    return fs.mkdir(BUNDLE_DIRECTORY);
 });
 
 /**
- * Copy all files to build.
+ * Links JS to web directory.
  */
-gulp.task('build:copy', ['build:mkdir'], function() 
+gulp.task('bundle:link', function(callback)
 {
-    return gulp.src([WEB_DIRECTORY + '/libs/*', WEB_DIRECTORY + '/config.js'], {base: WEB_DIRECTORY})
-               .pipe(gulp.dest(BUILD_DIRECTORY));
+    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
+               .pipe(symlink([WEB_DIRECTORY + '/' + SOURCE_DIRECTORY, WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
 });
 
 /**
- * Transpile source JS.
+ * Bundles source JS that exists in the web directory.
  */
-gulp.task('build:source', ['build:mkdir'], function()
+gulp.task('bundle', ['bundle:link', 'bundle:mkdir'], function()
 {
-    return gulp.src(SOURCE_DIRECTORY + '/**/*.js')
-               .pipe(babel({presets: ['es2015']}))
-               .pipe(gulp.dest(BUILD_DIRECTORY + '/' + SOURCE_DIRECTORY));
-});
-
-/**
- * Transpile plugins JS.
- */
-gulp.task('build:plugins', ['build:mkdir'], function()
-{
-    var plugins = getDirectories(PLUGINS_DIRECTORY);
-    var pluginsGlobbed = [];
-    for (var i = 0; i < plugins.length; i++)
-    {
-        pluginsGlobbed.push(PLUGINS_DIRECTORY + '/' + plugins[i] + '/**/*.js');
-    }
-    return gulp.src(pluginsGlobbed, {base: PLUGINS_DIRECTORY})
-               .pipe(babel({presets: ['es2015']}))
-               .pipe(gulp.dest(BUILD_DIRECTORY + '/' + PLUGINS_DIRECTORY));
-});
-
-/**
- * Does the transpiling.
- */
-gulp.task('build', ['build:copy', 'build:source', 'build:plugins'], function(callback)
-{
-    callback();
+    return gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
+               .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
+               .pipe(rename(BUNDLE_FILE))
+               .pipe(gulp.dest(BUNDLE_DIRECTORY));
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Production tasks
+// Distribution tasks
 //
 // NOTE: this does not start a server. Rather, it simply "dists" the web application
 // such that it can easily be deployed on a web server.
@@ -228,16 +208,14 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
  */
 gulp.task('dist:templates', ['dist:mkdir'], function(callback)
 {
-    execSync('python scripts/build-template.py -b templates/index-dev.html -t plugins,templates/Views ' + DIST_DIRECTORY);
+    execSync('python scripts/build-template.py -b templates/index.html -t plugins,templates/Views ' + DIST_DIRECTORY);
     callback();
 });
 
 /**
-
-/**
  * Copy files for dist.
  */
-gulp.task('dist:copy', ['dist:mkdir'], function() 
+gulp.task('dist:copy:config', ['dist:mkdir'], function() 
 {
     return gulp.src([CONFIGURATION_FILE, 'resources/*'], {base: './'})
                .pipe(gulp.dest(DIST_DIRECTORY));
@@ -253,56 +231,42 @@ gulp.task('dist:copy:web', ['dist:mkdir'], function()
 });
 
 /**
- * Links build results to web directory.
+ * Copies necessary files to DIST_DIRECTORY. This does NOT copy JS bundle.
  */
-gulp.task('dist:link', ['build'], function(callback)
-{
-    return gulp.src([BUILD_DIRECTORY + '/' + SOURCE_DIRECTORY, BUILD_DIRECTORY + '/' + PLUGINS_DIRECTORY])
-               .pipe(symlink([WEB_DIRECTORY + '/' + SOURCE_DIRECTORY, WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
-});
-
-/**
- * Bundles source JS.
- */
-gulp.task('dist:bundle:source', ['dist:link'], function()
-{
-    return gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
-               .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
-               .pipe(rename(BUNDLE_FILE))
-               .pipe(gulp.dest(DIST_DIRECTORY));
-});
-
-/**
- * Bundles plugins JS.
- */
-gulp.task('dist:bundle:plugins', ['dist:link'], function(callback)
-{
-    var plugins = getDirectories(WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY);
-    var pluginsGlobbed = [];
-    for (var i = 0; i < plugins.length; i++)
-    {
-        pluginsGlobbed.push(WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY + '/' + plugins[i] + '/js/' + plugins[i] + '.js');
-    }
-    return gulp.src(pluginsGlobbed, {base: WEB_DIRECTORY})
-               .pipe(gulp_jspm())
-               .pipe(rename(function(path) { path.basename = path.basename.substring(0, path.basename.length - 7); }))
-               .pipe(gulp.dest(DIST_DIRECTORY));
-});
-
-/**
- * Bundles JS.
- */
-gulp.task('dist:bundle', ['dist:bundle:source', 'dist:bundle:plugins'], function(callback)
+gulp.task('dist:copy', ['dist:copy:config', 'dist:copy:web'], function(callback)
 {
     callback();
+});
+
+/**
+ * Creates the JS bundle, transpiles, and copies to DIST_DIRECTORY.
+ */
+gulp.task('dist:build', ['dist:mkdir', 'bundle'], function()
+{
+    return gulp.src(BUNDLE_DIRECTORY + '/' + BUNDLE_FILE)
+//               .pipe(babel({presets: ['es2015']}))
+               .pipe(gulp.dest(DIST_DIRECTORY));
 });
 
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:bundle', 'dist:styles', 'dist:info', 'dist:templates', 'dist:copy', 'dist:copy:web'], function(callback)
+gulp.task('dist', ['dist:build', 'dist:styles', 'dist:info', 'dist:templates', 'dist:copy'], function(callback)
 {
     callback();
+});
+
+/**
+ * Test the dist in a server.
+ */
+gulp.task('dist:server', ['dist'], function(callback)
+{
+    var serveStatic = require('serve-static');
+    var serveIndex = require('serve-index');
+    var app = require('connect')()
+        .use(serveStatic(DIST_DIRECTORY))
+        .use(serveIndex(DIST_DIRECTORY));
+    require('http').createServer(app).listen(PORT);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -319,12 +283,11 @@ gulp.task('default', function(callback)
  */
 gulp.task('clean', function(callback)
 {
-    gulp.start('build:clean');
+    gulp.start('bundle:clean');
     gulp.start('develop:clean');
     gulp.start('dist:clean');
     callback();
 });
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Utilities
