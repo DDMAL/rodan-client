@@ -1,5 +1,5 @@
 import Marionette from 'backbone.marionette';
-import Events from '../../../Shared/Events';
+import RODAN_EVENTS from '../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewLogin from './Login/ViewLogin';
 
@@ -30,9 +30,9 @@ export default class LayoutViewMain extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__MAINREGION_SHOW_VIEW, options => this._handleCommandShow(options));
-        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
-        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, options => this._handleCommandShow(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
     }
 
     /**
@@ -40,7 +40,7 @@ export default class LayoutViewMain extends Marionette.LayoutView
      */
     _handleAuthenticationLoginRequired()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
     }
 
     /**
@@ -57,7 +57,7 @@ export default class LayoutViewMain extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
     }
 }
 LayoutViewMain.prototype.template = '#template-empty';

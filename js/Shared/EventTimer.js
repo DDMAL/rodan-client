@@ -1,4 +1,4 @@
-import Events from './Events';
+import RODAN_EVENTS from './RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -33,10 +33,10 @@ export default class EventTimer extends Marionette.Object
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
-        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
-        Radio.channel('rodan').reply(Events.REQUEST__TIMER_SET_FUNCTION, (options) => this._handleSetTimedFunction(options));
-        Radio.channel('rodan').reply(Events.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TIMER_SET_EVENT, (options) => this._handleSetTimedEvent(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TIMER_SET_REQUEST, (options) => this._handleSetTimedRequest(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, (options) => this._handleSetTimedFunction(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TIMER_CLEAR, () => this._handleClearTimedEvent());
     }
 
     /**

@@ -1,5 +1,5 @@
 import BaseViewListItem from '../../BaseViewListItem';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -32,11 +32,11 @@ export default class ViewResourceListItemModal extends BaseViewListItem
     {
         if (this._assigned)
         {
-            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
         else
         {
-            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
     }
 }

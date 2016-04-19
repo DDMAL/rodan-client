@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Configuration from '../../../Configuration';
-import Events from '../../../Shared/Events';
+import RODAN_EVENTS from '../../../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
@@ -33,10 +33,10 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, options => this._handleAuthenticationSuccess(options));
-        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
-        Radio.channel('rodan').reply(Events.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
-        Radio.channel('rodan').reply(Events.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGIN_SUCCESS, options => this._handleAuthenticationSuccess(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
     }
 
     /**
@@ -45,7 +45,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     _handleAuthenticationSuccess()
     {
         var model = new Backbone.Model({name: 'Projects'});
-        var object = {model: model, collection: Radio.channel('rodan').request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
+        var object = {model: model, collection: Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
         this.$el.find('#button-navigation_logout').prop('disabled', false);
     }
@@ -64,7 +64,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleButtonLogout()
     {
-        Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_LOGOUT);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_LOGOUT);
     }
 
     /**
@@ -72,7 +72,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleButtonAbout()
     {
-        Radio.channel('rodan').request(Events.REQUEST__SHOW_ABOUT);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_ABOUT);
     }
 
     /**
@@ -80,7 +80,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleButtonHelp()
     {
-        Radio.channel('rodan').request(Events.REQUEST__SHOW_HELP);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_HELP);
     }
 
     /**
@@ -88,11 +88,11 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowAbout()
     {
-        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
-        var serverConfig = Radio.channel('rodan').request(Events.REQUEST__SERVER_CONFIGURATION);
-        var hostname = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_HOSTNAME);
-        var version = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_VERSION);
-        var serverDate = Radio.channel('rodan').request(Events.REQUEST__SERVER_DATE);
+        var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
+        var serverConfig = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_CONFIGURATION);
+        var hostname = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_HOSTNAME);
+        var version = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION);
+        var serverDate = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_DATE);
         serverDate = serverDate.toString();
         var username = user ? user.get('username') : 'no user';
         var name = user ? user.get('first_name') + ' ' + user.get('last_name') : 'no user';
@@ -103,7 +103,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
                                                                  serverConfiguration: serverConfig,
                                                                  date: serverDate,
                                                                  client: Configuration.CLIENT});
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
     }
 
     /**
@@ -112,7 +112,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     _handleRequestShowHelp()
     {
         var text = 'Client admin: ' + Configuration.ADMIN_CLIENT.NAME + ' (' + Configuration.ADMIN_CLIENT.EMAIL + ')';
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
     }
 }
 LayoutViewNavigation.prototype.template = '#template-navigation';

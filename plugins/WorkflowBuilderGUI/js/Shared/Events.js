@@ -15,7 +15,7 @@ var GUI_EVENTS =
                                                                                                                                     // Objects in items should be:
                                                                                                                                     // {
                                                                                                                                     //      label: [string] // The text that should appear
-                                                                                                                                    //      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
+                                                                                                                                    //      radiorequest: RODAN_EVENTS.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
                                                                                                                                     //      options: Object holding any options for Event
                                                                                                                                     // }
     REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS: 'REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS'         // Called when request list of all selected WorkflowJob IDs.

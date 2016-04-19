@@ -1,4 +1,4 @@
-import Events from '../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -30,8 +30,8 @@ export default class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonDelete()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -41,8 +41,8 @@ export default class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonUngroup()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -50,9 +50,9 @@ export default class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         this.model.set({name: this.ui.textName.val()});
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
     }
 }
 ViewWorkflowJobGroup.prototype.template = '#template-main_workflowjobgroup';

@@ -1,5 +1,5 @@
 import BaseViewListItem from '../../BaseViewListItem';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -29,7 +29,7 @@ export default class ViewOutputPortListItem extends BaseViewListItem
      */
     _handleButtonDelete()
     {
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, {outputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT, {outputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
     }
 }
 ViewOutputPortListItem.prototype.ui = {

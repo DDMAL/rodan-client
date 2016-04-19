@@ -1,5 +1,5 @@
 import Marionette from 'backbone.marionette';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
 
@@ -18,7 +18,7 @@ export default class ViewInputPortTypeList extends Marionette.CompositeView
      */
     initialize(options)
     {
-        var jobCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var jobCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(options.workflowjob.getJobUuid());
         /** @ignore */
         this.collection = job.get('input_port_types');

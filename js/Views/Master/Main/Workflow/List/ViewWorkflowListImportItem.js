@@ -1,5 +1,5 @@
 import BaseViewListItem from '../../BaseViewListItem';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -25,8 +25,8 @@ export default class ViewWorkflowListImportItem extends BaseViewListItem
 ///////////////////////////////////////////////////////////////////////////////////////
     _handleButtonImportWorkflow()
     {
-        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
     }
 }
 ViewWorkflowListImportItem.prototype.template = '#template-main_workflowbuilder_workflow_list_item_import';

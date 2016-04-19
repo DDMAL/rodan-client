@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import BaseController from './BaseController';
 import Configuration from '../Configuration';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -30,15 +30,15 @@ export default class ControllerModal extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(Events.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
-        Radio.channel('rodan').on(Events.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
-        Radio.channel('rodan').on(Events.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_WAITING, () => this._handleOnServerWaiting());
 
         // Requests.
-        Radio.channel('rodan').reply(Events.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
-        Radio.channel('rodan').reply(Events.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
-        Radio.channel('rodan').reply(Events.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
-        Radio.channel('rodan').reply(Events.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if ($modalEl.is(':visible') && this._waiting)
         {
-            Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         }
     }
 
@@ -72,7 +72,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if (!$modalEl.is(':visible'))
         {
-            Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_WAITING);
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_WAITING);
         }
     }
 

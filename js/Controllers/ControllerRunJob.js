@@ -1,6 +1,6 @@
 import BaseController from './BaseController';
 import Configuration from '../Configuration';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
 import RunJobCollection from '../Collections/RunJobCollection';
@@ -33,10 +33,10 @@ export default class ControllerRunJob extends BaseController
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        Radio.channel('rodan').on(Events.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
-        Radio.channel('rodan').on(Events.EVENT__RUNJOB_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
-        Radio.channel('rodan').reply(Events.REQUEST__RUNJOB_ACQUIRE, options => this._handleRequestAcquire(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, options => this._handleRequestAcquire(options));
     }
 
     /**
@@ -62,9 +62,9 @@ export default class ControllerRunJob extends BaseController
     {
         this._collection = new RunJobCollection();
         this._collection.fetch({data: {project: options.project.id}});
-        Radio.channel('rodan').request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleTimer()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleTimer()});
         this._layoutView = new LayoutViewModel();
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewRunJobList({collection: this._collection,
                                        template: '#template-main_runjob_list',
                                        childView: ViewRunJobListItem});
@@ -85,7 +85,7 @@ export default class ControllerRunJob extends BaseController
     _handleRequestAcquire(options)
     {
         // Get lock if available. Else, if we already have the lock, simply open the interface.
-        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
+        var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
         var runJobUrl = options.runjob.get('url');
         if (options.runjob.available())
         {

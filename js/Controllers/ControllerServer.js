@@ -3,7 +3,7 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 var oldsync = Backbone.sync;
@@ -75,14 +75,14 @@ export default class ControllerServer extends BaseController
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_CONFIGURATION, () => this._handleRequestConfiguration());
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_DATE, () => this._handleRequestDate());
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
-        Radio.channel('rodan').reply(Events.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_CONFIGURATION, () => this._handleRequestConfiguration());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_DATE, () => this._handleRequestDate());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES, () => this._getRoutes());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTE_OPTIONS, () => this._handleGetRouteOptions());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, routeName => this._handleRequestServerRoute(routeName));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
     }
 
     /**
@@ -152,7 +152,7 @@ export default class ControllerServer extends BaseController
                 {
                     this._server.routes[routeName] = {url: this._server.routes[routeName]};
                 }
-                Radio.channel('rodan').trigger(Events.EVENT__SERVER_ROUTESLOADED);
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_ROUTESLOADED);
             }
             else
             {
@@ -284,7 +284,7 @@ export default class ControllerServer extends BaseController
     _sendWaitingNotification()
     {
         this._waitingEventTriggered = true;
-        Radio.channel('rodan').trigger(Events.EVENT__SERVER_WAITING);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_WAITING);
     }
 
     /**
@@ -293,7 +293,7 @@ export default class ControllerServer extends BaseController
     _sendIdleNotification()
     {
         this._waitingEventTriggered = false;
-        Radio.channel('rodan').trigger(Events.EVENT__SERVER_IDLE);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_IDLE);
     }
 
     /**
@@ -301,7 +301,7 @@ export default class ControllerServer extends BaseController
      */
     _sendPanicNotification()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__SERVER_PANIC);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_PANIC);
     }
 
     /**
@@ -326,6 +326,6 @@ export default class ControllerServer extends BaseController
     _updateServerDate(date)
     {
         this._serverDate = date;
-        Radio.channel('rodan').trigger(Events.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
     }
 }

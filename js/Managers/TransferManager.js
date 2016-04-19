@@ -3,7 +3,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import saveAs from 'filesaver';
 
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 
 /**
  * File transfer manager. This manages all file (i.e. Resource) uploads and downloads.
@@ -32,9 +32,9 @@ export default class TransferManager
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
-        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT, () => this._handleRequestGetUploadCount());
-        Radio.channel('rodan').reply(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_DOWNLOAD, options => this._handleRequestDownload(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT, () => this._handleRequestGetUploadCount());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, options => this._handleRequestMonitorUpload(options));
     }
 
     /**
@@ -78,7 +78,7 @@ export default class TransferManager
     {
         var upload = this._uploadsPending.remove(jqXHR.id);
         this._uploadsCompleted.add(upload);
-        Radio.channel('rodan').trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: upload.jqXHR, file: upload.file});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**
@@ -88,7 +88,7 @@ export default class TransferManager
     {
         var upload = this._uploadsPending.remove(jqXHR.id);
         this._uploadsFailed.add(upload);
-        Radio.channel('rodan').trigger(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: upload.jqXHR, file: upload.file});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, {request: upload.jqXHR, file: upload.file});
     }
 
     /**

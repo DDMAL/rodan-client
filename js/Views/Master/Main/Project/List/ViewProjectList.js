@@ -1,5 +1,5 @@
 import BaseViewList from '../../BaseViewList';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewProjectListItem from './ViewProjectListItem';
 
@@ -10,8 +10,8 @@ export default class ViewProjectList extends BaseViewList
 {
     _handleButtonNewProject()
     {
-        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
-        Radio.channel('rodan').request(Events.REQUEST__PROJECT_CREATE, {creator: user});
+        var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_CREATE, {creator: user});
     }
 }
 

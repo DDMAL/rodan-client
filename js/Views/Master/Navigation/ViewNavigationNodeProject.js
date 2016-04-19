@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import Events from '../../../Shared/Events';
+import RODAN_EVENTS from '../../../Shared/RODAN_EVENTS';
 import NAV_EVENTS from './Events';
 import Radio from 'backbone.radio';
 import ViewNavigationNodeRunJobs from './ViewNavigationNodeRunJobs';
@@ -34,7 +34,7 @@ export default class ViewNavigationNodeProject extends ViewNavigationNode
         this.collection.add(workflowBuilderNodeModel);
         this.collection.add(workflowRunsNodeModel);
         this.collection.add(runJobsNodeModel);
-        Radio.channel('rodan').on(Events.EVENT__PROJECT_SELECTED, event => this._handleEventProjectSelected(event));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED, event => this._handleEventProjectSelected(event));
     }
 
     /**
@@ -82,7 +82,7 @@ export default class ViewNavigationNodeProject extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 
     /**

@@ -15,14 +15,21 @@
 //  why we use "Collection" and not "List"
 //  mark some of these as "hidden" or try to remove them 
 
+let _instance = null;
+
 /**
- * Backbone.Radio events use in the client.
+ * Backbone.Radio events use in the client. Do not instantiate this class.
  */
-class Events
+class RODAN_EVENTS
 {
     /** @ignore */
     constructor()
     {
+        if (_instance)
+        {
+            throw new Error('this class cannot be instantiated more than once');
+        }
+
         /** @ignore */
         this.REQUEST__MODAL_SHOW_WAITING = 'REQUEST__MODAL_SHOW_WAITING';            // Request special modal window to show/open. This modal window disables all input and informs the user that the client is waiting on the server. If another modal is currently open the request will not show. */
         /** @ignore */
@@ -378,4 +385,4 @@ class Events
     }
 }
 /** @ignore */
-export default new Events();
+export default new RODAN_EVENTS();

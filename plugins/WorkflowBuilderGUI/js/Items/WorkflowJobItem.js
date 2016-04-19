@@ -1,6 +1,6 @@
 import Radio from 'backbone.radio';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
@@ -20,7 +20,7 @@ class WorkflowJobItem extends BaseWorkflowJobItem
      *
      * {
      *      label: [string] // The text that should appear
-     *      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
+     *      radiorequest: RODAN_EVENTS.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
      *      options: Object holding any options for Event
      * }
      */
@@ -28,7 +28,7 @@ class WorkflowJobItem extends BaseWorkflowJobItem
     {
         var workflowJobs = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_SELECTED_WORKFLOWJOBS);
         var workflow = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        return [{channel: 'rodan', label: 'Group', radiorequest: Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options: {workflowjobs: workflowJobs, workflow: workflow}}];
+        return [{channel: 'rodan', label: 'Group', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options: {workflowjobs: workflowJobs, workflow: workflow}}];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,10 +41,10 @@ class WorkflowJobItem extends BaseWorkflowJobItem
     {
         super(options);
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
-                          {label: 'Settings', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
-                          {label: 'Ports', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
-                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options: {workflowjob: this.getModel(), workflow: workflow}}];
+        this.menuItems = [{label: 'Edit', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
+                          {label: 'Settings', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
+                          {label: 'Ports', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
+                          {label: 'Delete', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options: {workflowjob: this.getModel(), workflow: workflow}}];
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job';
@@ -80,7 +80,7 @@ class WorkflowJobItem extends BaseWorkflowJobItem
     _handleDoubleClick(mouseEvent)
     {
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, {workflowjob: this.getModel(), workflow: workflow});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, {workflowjob: this.getModel(), workflow: workflow});
     }
 }
 

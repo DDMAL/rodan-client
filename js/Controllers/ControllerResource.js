@@ -1,5 +1,5 @@
 import BaseController from './BaseController';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
 import Resource from '../Models/Resource';
@@ -22,15 +22,15 @@ export default class ControllerResource extends BaseController
     _initializeRadio()
     {
         // Events
-        Radio.channel('rodan').on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
-        Radio.channel('rodan').on(Events.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
 
         // Requests
-        Radio.channel('rodan').reply(Events.REQUEST__RESOURCE_CREATE, options => this._handleRequestResourceCreate(options));
-        Radio.channel('rodan').reply(Events.REQUEST__RESOURCE_DELETE, options => this._handleCommandResourceDelete(options));
-        Radio.channel('rodan').reply(Events.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
-        Radio.channel('rodan').reply(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
-        Radio.channel('rodan').reply(Events.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, options => this._handleRequestResourceCreate(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_DELETE, options => this._handleCommandResourceDelete(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
     }
    
     /**
@@ -46,10 +46,10 @@ export default class ControllerResource extends BaseController
      */
     _handleEventListSelected(options)
     {
-        Radio.channel('rodan').request(Events.REQUEST__RESOURCES_LOAD, {data: {project: options.project.id}});
-        Radio.channel('rodan').request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {project: options.project.id}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewResourceList({collection: this._collection,
                                          template: '#template-main_resource_list',
                                          childView: ViewResourceListItem,
@@ -80,7 +80,7 @@ export default class ControllerResource extends BaseController
             resource = new Resource({project: options.project.get('url'), file: options.file});
         }
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
-        Radio.channel('rodan').request(Events.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
     }
 
     /**
@@ -97,7 +97,7 @@ export default class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
-        options.resource.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SAVED, {resource: model})});
+        options.resource.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SAVED, {resource: model})});
     }
 
     /**
@@ -116,7 +116,7 @@ export default class ControllerResource extends BaseController
     _handleCreateSuccess(resource, collection)
     {
         collection.add(resource);
-        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_CREATED, {resource: resource});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_CREATED, {resource: resource});
     }
 
     /**
@@ -125,7 +125,7 @@ export default class ControllerResource extends BaseController
     _handleDeleteSuccess(model, collection)
     {
         collection.remove(model);
-        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_DELETED, {resource: model})
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_DELETED, {resource: model})
     }
 }
 

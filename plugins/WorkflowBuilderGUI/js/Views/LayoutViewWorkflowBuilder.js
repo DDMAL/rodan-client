@@ -1,6 +1,6 @@
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 
 /**
@@ -17,7 +17,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     initialize()
     {
         this._initializeRadio();
-        this.rodanChannel.request(Events.REQUEST__TIMER_CLEAR);
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__TIMER_CLEAR);
         this._lastErrorCode = '';
         this._lastErrorDetails = '';
     }
@@ -53,7 +53,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         this.rodanChannel = Radio.channel('rodan');
         this.guiChannel = Radio.channel('rodan-client_gui');
-        this.rodanChannel.on(Events.EVENT__SERVER_ERROR, options => this._handleEventRodanError(options), this);
+        this.rodanChannel.on(RODAN_EVENTS.EVENT__SERVER_ERROR, options => this._handleEventRodanError(options), this);
     }
 
     /**
@@ -85,7 +85,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonEdit()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, {workflow: this.model});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, {workflow: this.model});
     }
     
     /**
@@ -93,7 +93,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonAddJob()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, {workflow: this.model});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, {workflow: this.model});
     }
     
     /**
@@ -101,7 +101,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonImportWorkflow()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, {workflow: this.model});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, {workflow: this.model});
     }
     
     /**
@@ -109,7 +109,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
      */
     _handleButtonRun()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
     }
 
     /**
@@ -128,7 +128,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     {
         if (this._lastErrorCode !== '' || this._lastErrorDetails !== '')
         {   
-            this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
+            this.rodanChannel.request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
         }
     }
 
@@ -138,7 +138,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     _handleClickCheckboxAddPorts()
     {
         var checked = this.ui.checkboxAddPorts.is(':checked'); 
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SET_ADDPORTS, {addports: checked});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SET_ADDPORTS, {addports: checked});
     }
 
     /**

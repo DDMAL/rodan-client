@@ -1,4 +1,4 @@
-import Events from '../../../Shared/Events';
+import RODAN_EVENTS from '../../../Shared/RODAN_EVENTS';
 import NAV_EVENTS from './Events';
 import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
@@ -19,7 +19,7 @@ export default class ViewNavigationNodeResources extends ViewNavigationNode
     initialize(options)
     {
         super.initialize(options);
-        Radio.channel('rodan').on(Events.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventResourcesSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventResourcesSelected(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@ export default class ViewNavigationNodeResources extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        Radio.channel('rodan').request(Events.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
-        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model.get('project')});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model.get('project')});
     }
 
     /**

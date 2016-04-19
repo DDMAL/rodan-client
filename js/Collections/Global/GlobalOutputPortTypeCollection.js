@@ -1,5 +1,5 @@
 import GlobalCollection from './GlobalCollection';
-import Events from '../../Shared/Events';
+import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
 import OutputPortType from '../../Models/OutputPortType';
 
 let _instance = null;
@@ -28,7 +28,7 @@ export default class GlobalOutputPortTypeCollection extends GlobalCollection
         /** @ignore */
         this.model = OutputPortType;
         this._route = 'outputporttypes';
-        this._loadCommand = Events.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD;
-        this._requestCommand = Events.REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION;
+        this._loadCommand = RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD;
+        this._requestCommand = RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION;
     }
 }

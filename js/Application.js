@@ -20,7 +20,7 @@ import ControllerWorkflowJobGroup from './Controllers/ControllerWorkflowJobGroup
 import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
 import ErrorHandler from './Shared/ErrorHandler';
-import Events from './Shared/Events';
+import RODAN_EVENTS from './Shared/RODAN_EVENTS';
 import EventTimer from './Shared/EventTimer';
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
@@ -74,7 +74,7 @@ export default class Application extends Marionette.Application
         this._errorHandler = new ErrorHandler();
         this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
         
-        Radio.channel('rodan').request(Events.REQUEST__SERVER_LOAD_ROUTES);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
 
     }
 
@@ -123,8 +123,8 @@ export default class Application extends Marionette.Application
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').on(Events.EVENT__SERVER_ROUTESLOADED, () => this._handleEventRoutesLoaded());
-        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleAuthenticationSuccess());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_ROUTESLOADED, () => this._handleEventRoutesLoaded());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleAuthenticationSuccess());
     }
 
     /**
@@ -187,7 +187,7 @@ export default class Application extends Marionette.Application
         this.regionMaster.show(this._layoutViewMaster);
 
         // Check authentication.
-        Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_CHECK); 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK); 
     }
 
     /**
@@ -195,13 +195,13 @@ export default class Application extends Marionette.Application
      */
     _handleAuthenticationSuccess()
     {
-        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
-        Radio.channel('rodan').request(Events.REQUEST__SERVER_LOAD_ROUTE_OPTIONS);
-        Radio.channel('rodan').request(Events.REQUEST__GLOBAL_PROJECTS_LOAD, {data: {user: user.get('uuid')}});
-        Radio.channel('rodan').request(Events.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD);
-        Radio.channel('rodan').request(Events.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
-        Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
-        Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
-        Radio.channel('rodan').trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION); 
+        var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTE_OPTIONS);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECTS_LOAD, {data: {user: user.get('uuid')}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION); 
     }
 }

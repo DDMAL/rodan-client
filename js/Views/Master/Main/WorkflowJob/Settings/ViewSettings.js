@@ -1,4 +1,4 @@
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import JSONEditor from 'json-editor';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -41,7 +41,7 @@ export default class ViewSettings extends Marionette.ItemView
         if ($(element).is(':visible'))
         {
             this.model.set('job_settings', this._editor.getValue());
-            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model, workflow: this._workflow});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model, workflow: this._workflow});
         }
     }
 
@@ -59,7 +59,7 @@ export default class ViewSettings extends Marionette.ItemView
         startValues = $.isEmptyObject(startValues) ? null : startValues;
         $(element).show();
         var jobUuid = this.model.getJobUuid();
-        var collection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = collection.get(jobUuid);
         var settingsSchema = { 
             schema: job.get('settings'),

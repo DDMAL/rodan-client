@@ -1,4 +1,4 @@
-import Events from '../../../Shared/Events';
+import RODAN_EVENTS from '../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
@@ -27,7 +27,7 @@ export default class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 }
 ViewNavigationNodeRoot.prototype.ui = {

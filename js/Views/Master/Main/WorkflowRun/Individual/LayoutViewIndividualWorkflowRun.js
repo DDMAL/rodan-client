@@ -1,4 +1,4 @@
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import LayoutViewModel from '../../LayoutViewModel';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -40,9 +40,9 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
 
         // Create Resource views.
         this._layoutViewResources = new LayoutViewModel();
-        Radio.channel('rodan').request(Events.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
-        var collection = Radio.channel('rodan').request(Events.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
+        var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
         this._viewResourceList = new ViewResourceList({collection: collection,
                                                        template: '#template-main_workflowrun_individual_resources_list',
                                                        childView: ViewResourceListItem});
@@ -50,7 +50,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
 
         // Create Resource views.
         this._layoutViewRunJobs = new LayoutViewModel();
-        Radio.channel('rodan').request(Events.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
         this._viewRunJobList = new ViewRunJobList({collection: this._runJobCollection,
                                                    template: '#template-main_runjob_list_notitle',
@@ -98,7 +98,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
     _handleButtonSave()
     {
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
     }
 }
 LayoutViewIndividualWorkflowRun.prototype.modelEvents = {

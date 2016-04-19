@@ -4,7 +4,7 @@ import paper from 'paper';
 import BaseItem from '../Items/BaseItem';
 import ConnectionItem from '../Items/ConnectionItem';
 import Configuration from 'js/Configuration';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 import InputPortItem from '../Items/InputPortItem';
 import LineItem from '../Items/LineItem';
@@ -206,7 +206,7 @@ class ItemController
      */
     createConnection(outputPortItem, inputPortItem, workflow)
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: inputPortItem.getModel(), 
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: inputPortItem.getModel(), 
                                                                                    outputport: outputPortItem.getModel(),
                                                                                    workflow: workflow});
     }
@@ -224,8 +224,8 @@ class ItemController
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ADD_RESOURCEDISTRIBUTOR, () => this._handleRequestAddResourceDistributor());
 
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__COLLECTION_ADD, options => this._handleEventModelSync(options));
-        this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
+        this.rodanChannel.on(RODAN_EVENTS.EVENT__COLLECTION_ADD, options => this._handleEventModelSync(options));
+        this.rodanChannel.on(RODAN_EVENTS.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
     }
 
     /**
@@ -452,7 +452,7 @@ class ItemController
             inputPorts.push(item.getModel());
         }
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, {inputports: inputPorts, workflow: workflow});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, {inputports: inputPorts, workflow: workflow});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

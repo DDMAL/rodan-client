@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import BaseViewList from '../../BaseViewList';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -17,7 +17,7 @@ export default class ViewResourceList extends BaseViewList
         for (var i = 0; i < this.ui.fileInput[0].files.length; i++)
         {
         	var file = this.ui.fileInput[0].files[i];
-    	    Radio.channel('rodan').request(Events.REQUEST__RESOURCE_CREATE, {project: this.model, file: file, resourcetype: type});
+    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, {project: this.model, file: file, resourcetype: type});
     	}
 	    this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
     }
@@ -28,7 +28,7 @@ export default class ViewResourceList extends BaseViewList
     onRender()
     {
         var templateResourceType = _.template($('#template-main_resource_list_resourcetype_list_item').html());
-        var resourceTypeCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+        var resourceTypeCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         var html = templateResourceType({url: null, mimetype: 'Auto-detect', extension: 'Rodan will attempt to determine the file type based on the file itself'});
         this.$el.find('#select-resourcetype').append(html);
         for (var i = 0; i < resourceTypeCollection.length; i++)

@@ -1,5 +1,5 @@
 import BaseViewList from '../../BaseViewList';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewWorkflowListItem from './ViewWorkflowListItem';
 
@@ -10,8 +10,8 @@ export default class ViewWorkflowList extends BaseViewList
 {
     _handleButtonNewWorkflow()
     {
-        var project = Radio.channel('rodan').request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOW_CREATE, {project: project});
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, {project: project});
     }
 }
 ViewWorkflowList.prototype.template = '#template-main_workflow_list';

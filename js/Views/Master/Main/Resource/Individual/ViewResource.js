@@ -1,4 +1,4 @@
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
@@ -19,7 +19,7 @@ export default class ViewResource extends Marionette.CompositeView
     initialize(options)
     {
         /** @ignore */
-        this.collection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+        this.collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         this.collection.each(function(model) { model.unset('selected'); });
         var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});
         resourceType.set('selected', 'selected');
@@ -54,7 +54,7 @@ export default class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        Radio.channel('rodan').request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, {resource: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
                                                                                                  name: this.ui.resourceName.val(),
                                                                                                  description: this.ui.resourceDescription.val()}});
     }
@@ -64,7 +64,7 @@ export default class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonDelete()
     {
-        Radio.channel('rodan').request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DELETE, {resource: this.model});
     }
 
     /**
@@ -75,7 +75,7 @@ export default class ViewResource extends Marionette.CompositeView
         var mimetype = this.model.get('resource_type_full').mimetype;
         var ext = this.model.get('resource_type_full').extension;
         var filename = this.model.get('name') + '.' + ext;
-        Radio.channel('rodan').request(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
     }
 
     /**

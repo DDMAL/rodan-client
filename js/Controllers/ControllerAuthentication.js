@@ -2,7 +2,7 @@ import $ from 'jquery';
 import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
 import Cookie from '../Shared/Cookie';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import User from '../Models/User';
 
@@ -80,10 +80,10 @@ export default class ControllerAuthentication extends BaseController
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
-        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_LOGIN, options => this._login(options));
-        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
-        Radio.channel('rodan').reply(Events.REQUEST__AUTHENTICATION_LOGOUT, () => this._logout());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_LOGIN, options => this._login(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_LOGOUT, () => this._logout());
     }
 
     /**
@@ -94,7 +94,7 @@ export default class ControllerAuthentication extends BaseController
         var request = event.currentTarget;
         if (request.responseText === null)
         {
-            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_ERROR_NULL);
         }
         
         switch (request.status)
@@ -103,23 +103,23 @@ export default class ControllerAuthentication extends BaseController
                 var parsed = JSON.parse(request.responseText);
                 this._user = new User(parsed);
                 this._processAuthenticationData();
-                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGIN_SUCCESS, {user: this._user});
                 break;
             case 400:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
-                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 401:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request,
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request,
                                                                            message: 'Incorrect username/password.'});
-                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             case 403:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
-                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGINREQUIRED);
                 break;
             default:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }
@@ -132,25 +132,25 @@ export default class ControllerAuthentication extends BaseController
         var request = event.currentTarget;
         if (request.responseText === null)
         {
-            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_ERROR_NULL);
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_ERROR_NULL);
         }
 
         switch (request.status)
         {
             case 200:
-                Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
+                Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
                 break;
             case 400:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 401:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             case 403:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
             default:
-                Radio.channel('rodan').request(Events.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: request});
                 break;
         }
     }
@@ -160,7 +160,7 @@ export default class ControllerAuthentication extends BaseController
      */
     _handleTimeout(event)
     {
-        Radio.channel('rodan').trigger(Events.EVENT__SERVER_WENTAWAY, {event: event});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_WENTAWAY, {event: event});
     }
 
     /**
@@ -172,11 +172,11 @@ export default class ControllerAuthentication extends BaseController
         // If we don't, trigger an event to inform of login require.
         if (this._token.value === '')
         {
-            Radio.channel('rodan').trigger(Events.EVENT__AUTHENTICATION_LOGINREQUIRED);
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGINREQUIRED);
         }
         else
         {
-            var authRoute = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-me');
+            var authRoute = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-me');
             var request = new XMLHttpRequest();
             request.onload = (event) => this._handleAuthenticationResponse(event);
             request.ontimeout = (event) => this._handleTimeout(event);
@@ -212,7 +212,7 @@ export default class ControllerAuthentication extends BaseController
      */
     _logout()
     {
-        var authRoute = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
+        var authRoute = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
         var authType = Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (event) => this._handleDeauthenticationResponse(event);
@@ -287,12 +287,12 @@ export default class ControllerAuthentication extends BaseController
         {
             case 'session':
             {
-                return Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'session-auth');
+                return Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'session-auth');
             }
 
             case 'token':
             {
-                return Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, 'auth-token');
+                return Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-token');
             }
 
             default:

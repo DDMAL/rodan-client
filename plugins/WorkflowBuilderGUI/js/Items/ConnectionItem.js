@@ -1,7 +1,7 @@
 import paper from 'paper';
 import BaseItem from './BaseItem';
 import Configuration from 'js/Configuration';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 
 /**
@@ -20,7 +20,7 @@ class ConnectionItem extends BaseItem
         super(options);
 
         var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.menuItems = [{label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {connection: options.model, workflow: workflow}}];
+        this.menuItems = [{label: 'Delete', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options: {connection: options.model, workflow: workflow}}];
 
         this.strokeWidth = Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH;
         this._inputPortItem = null;

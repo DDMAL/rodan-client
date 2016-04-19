@@ -1,5 +1,5 @@
 import BaseViewListItem from '../../BaseViewListItem';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -15,7 +15,7 @@ export default class ViewResourceListItem extends BaseViewListItem
      */
     _handleClick()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
 }
 ViewResourceListItem.prototype.template = '#template-main_resource_list_item';

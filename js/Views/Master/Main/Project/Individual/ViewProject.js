@@ -1,4 +1,4 @@
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -15,7 +15,7 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        Radio.channel('rodan').request(Events.REQUEST__PROJECT_SAVE, 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_SAVE, 
                                   {project: this.model,
                                    fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
@@ -25,7 +25,7 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleButtonDelete()
     {
-        Radio.channel('rodan').request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_DELETE, {project: this.model});
     }
 
     /**
@@ -33,7 +33,7 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleButtonRunJobs()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__RUNJOB_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_SELECTED_COLLECTION, {project: this.model});
     }
 
     /**
@@ -41,7 +41,7 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleClickResourceCount()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model});
     }
 
     /**
@@ -49,7 +49,7 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model});
     }
 }
 ViewProject.prototype.modelEvents = {

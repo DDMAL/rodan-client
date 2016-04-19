@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Radio from 'backbone.radio';
 import paper from 'paper';
 import Configuration from 'js/Configuration';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 
 let itemMap = null;
@@ -392,7 +392,7 @@ class BaseItem extends paper.Path
         this.rodanChannel = Radio.channel('rodan');
         if (options && options.model)
         {
-            this.rodanChannel.on(Events.EVENT__MODEL_SYNC + options.model.get('url'), options => this._handleEventModelSync(options));
+            this.rodanChannel.on(RODAN_EVENTS.EVENT__MODEL_SYNC + options.model.get('url'), options => this._handleEventModelSync(options));
         }
     }
 

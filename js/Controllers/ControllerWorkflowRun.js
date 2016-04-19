@@ -1,5 +1,5 @@
 import BaseController from './BaseController';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun';
 import Radio from 'backbone.radio';
 import RunJobCollection from '../Collections/RunJobCollection';
@@ -21,14 +21,14 @@ export default class ControllerWorkflowRun extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
-        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
 
         // Requests.
-        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
-        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
-        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
-        Radio.channel('rodan').reply(Events.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,8 +39,8 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunCreationResponse(options)
     {
-        var project = Radio.channel('rodan').request(Events.REQUEST__PROJECT_GET_ACTIVE);
-        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
 
     /**
@@ -48,7 +48,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunSaveResponse(options)
     {
-        var project = Radio.channel('rodan').request(Events.REQUEST__PROJECT_GET_ACTIVE);
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
     }
 
     /**
@@ -59,7 +59,7 @@ export default class ControllerWorkflowRun extends BaseController
         var runJobs = new RunJobCollection();
         runJobs.fetch({data: {workflow_run: options.workflowrun.id}});
         this._viewItem = new LayoutViewIndividualWorkflowRun({collection: runJobs, model: options.workflowrun});
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewItem});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewItem});
     }
 
     /**
@@ -69,9 +69,9 @@ export default class ControllerWorkflowRun extends BaseController
     {
         var workflowRunCollection = new WorkflowRunCollection();
         workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        Radio.channel('rodan').request(Events.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
         var view = new ViewWorkflowRunList({collection: workflowRunCollection});
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 
     /**
@@ -85,7 +85,7 @@ export default class ControllerWorkflowRun extends BaseController
                                            resource_assignments: options.assignments,
                                            name: name,
                                            description: description});
-        workflowRun.save({}, {success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
+        workflowRun.save({}, {success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
     }
 
     /**
@@ -94,7 +94,7 @@ export default class ControllerWorkflowRun extends BaseController
     _handleRequestWorkflowRunSave(options)
     {
         options.workflowrun.save(options.workflowrun.changed,
-                                 {patch: true, success: (model) => Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
+                                 {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

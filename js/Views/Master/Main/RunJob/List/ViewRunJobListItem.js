@@ -1,5 +1,5 @@
 import BaseViewListItem from '../../BaseViewListItem';
-import Events from '../../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -28,14 +28,14 @@ export default class ViewRunJobListItem extends BaseViewListItem
      */
     _handleClick()
     {
-        Radio.channel('rodan').trigger(Events.EVENT__RUNJOB_SELECTED, {runjob: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, {runjob: this.model});
     }
     /**
      * Handle double-click.
      */
     _handleDoubleClick()
     {
-        Radio.channel('rodan').request(Events.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
     }
 }
 ViewRunJobListItem.prototype.template = '#template-main_runjob_list_item';

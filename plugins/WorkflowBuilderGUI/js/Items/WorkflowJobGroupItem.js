@@ -2,7 +2,7 @@ import Radio from 'backbone.radio';
 import BaseItem from './BaseItem';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
 import Configuration from 'js/Configuration';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
 
@@ -22,9 +22,9 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
         super(options);
         this._workflowJobUrls = options.model.get('workflow_jobs');
         var workflow = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.menuItems = [{label: 'Edit', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options: {workflow: workflow, workflowjobgroup: this.getModel()}},
-                          {label: 'Ungroup', radiorequest: Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options: {workflowjobgroup: this.getModel(), workflow: workflow}},
-                          {label: 'Delete', radiorequest: Events.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP, options: {workflow: workflow, workflowjobgroup: this.getModel()}}];
+        this.menuItems = [{label: 'Edit', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, options: {workflow: workflow, workflowjobgroup: this.getModel()}},
+                          {label: 'Ungroup', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options: {workflowjobgroup: this.getModel(), workflow: workflow}},
+                          {label: 'Delete', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP, options: {workflow: workflow, workflowjobgroup: this.getModel()}}];
 
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
@@ -79,7 +79,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
     _handleDoubleClick(mouseEvent)
     {
         var workflow = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {workflowjobgroup: this.getModel(), workflow: workflow});
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOBGROUP_VIEW, {workflowjobgroup: this.getModel(), workflow: workflow});
     }
 
     /**
@@ -103,7 +103,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
     _getAssociatedPorts()
     {
         var workflow = Radio.channel('rodan-client_gui').request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-        var ports = this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, {url: this._modelURL, workflow: workflow});
+        var ports = this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_GET_PORTS, {url: this._modelURL, workflow: workflow});
         if (ports)
         {
             for (var index in ports.inputports)

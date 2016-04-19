@@ -1,4 +1,4 @@
-import Events from '../../../../Shared/Events';
+import RODAN_EVENTS from '../../../../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -15,7 +15,7 @@ export default class ViewLogin extends Marionette.ItemView
      */
     initialize()
     {
-        Radio.channel('rodan').request(Events.REQUEST__TIMER_CLEAR);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_CLEAR);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ export default class ViewLogin extends Marionette.ItemView
      */
     _handleButton()
     {
-        Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
     }
 }
 ViewLogin.prototype.modelEvents = {

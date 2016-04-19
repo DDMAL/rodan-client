@@ -1,6 +1,6 @@
 import Radio from 'backbone.radio';
 import BaseCollection from './BaseCollection';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Job from '../Models/Job';
 
 /**
@@ -18,7 +18,7 @@ export default class JobCollection extends BaseCollection
      */
     initialize()
     {
-        var globalJobCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var globalJobCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOB_COLLECTION);
         /** @ignore */
         this.model = Job;
         this._route = 'jobs';

@@ -1,6 +1,6 @@
 import BasePortItem from './BasePortItem';
 import Configuration from 'js/Configuration';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from '../Shared/Events';
 
 /**
@@ -19,7 +19,7 @@ class InputPortItem extends BasePortItem
      *
      * {
      *      label: [string] // The text that should appear
-     *      radiorequest: Events.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
+     *      radiorequest: RODAN_EVENTS.?  // The Request to make. NOT A RADIO EVENT, rather a REQUEST.
      *      options: Object holding any options for Event
      * }
      */
@@ -61,7 +61,7 @@ class InputPortItem extends BasePortItem
      */
     isSatisfied()
     {
-        var resourceAssignments = this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, {inputport: this.getModel()});
+        var resourceAssignments = this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, {inputport: this.getModel()});
         return this.hasConnectionItem() || resourceAssignments.length > 0;
     }
 
@@ -102,7 +102,7 @@ class InputPortItem extends BasePortItem
         if (!this.hasConnectionItem())
         {
             var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-            menuItems.push({label: 'Assign Resources', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {inputport: this.getModel(), workflow: workflow}});
+            menuItems.push({label: 'Assign Resources', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options: {inputport: this.getModel(), workflow: workflow}});
         }
         return menuItems;
     }
@@ -134,7 +134,7 @@ class InputPortItem extends BasePortItem
         if (!this.hasConnectionItem())
         {
             var workflow = this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW);
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {inputport: this.getModel(), workflow: workflow});
+            this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, {inputport: this.getModel(), workflow: workflow});
         }
     }
 }

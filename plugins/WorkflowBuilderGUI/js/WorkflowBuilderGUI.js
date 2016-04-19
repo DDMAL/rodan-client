@@ -4,7 +4,7 @@ import { drawGrid } from './Utilities/PaperUtilities';
 import BaseItem from './Items/BaseItem';
 import Configuration from 'js/Configuration';
 import Environment from 'js/Shared/Environment';
-import Events from 'js/Shared/Events';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import GUI_EVENTS from './Shared/Events';
 import InputPortItem from './Items/InputPortItem';
 import ItemController from './Controllers/ItemController';
@@ -25,7 +25,7 @@ class WorkflowBuilderGUI
     {
         this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
         this._workflow = null;
-        Radio.channel('rodan').on(Events.EVENT__WORKFLOWBUILDER_SELECTED, (options) => this.initialize(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_SELECTED, (options) => this.initialize(options));
     }
     
     /**
@@ -61,11 +61,11 @@ class WorkflowBuilderGUI
     _initializeView()
     {
         var view = new LayoutViewWorkflowBuilder({model: this.getWorkflow()});
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
-        this._menuItems = [{label: 'Edit Name/Description', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {workflow: this.getWorkflow()}},
-                           {label: 'Add Job', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
-                           {label: 'Import Workflow', radiorequest: Events.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
-                           {label: 'Run', radiorequest: Events.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {workflow: this.getWorkflow()}}]; 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
+        this._menuItems = [{label: 'Edit Name/Description', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Add Job', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Import Workflow', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
+                           {label: 'Run', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {workflow: this.getWorkflow()}}]; 
     }
 
     /**
@@ -87,7 +87,7 @@ class WorkflowBuilderGUI
     _initializeRadio()
     {
         this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
+        this.rodanChannel.on(RODAN_EVENTS.EVENT__MODEL_SYNC, options => this._handleEventModelSync(options));
 
         this.guiChannel = Radio.channel('rodan-client_gui');
         this.guiChannel.on(GUI_EVENTS.EVENT__WORKFLOWBUILDER_GUI_DESTROY, () => this._handleGuiDestroy());

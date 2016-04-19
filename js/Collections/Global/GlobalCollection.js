@@ -1,5 +1,5 @@
 import BaseCollection from '../BaseCollection';
-import Events from '../../Shared/Events';
+import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -59,7 +59,7 @@ export default class GlobalCollection extends BaseCollection
         options.data = data;
         options = this._applyResponseHandlers(options);
         /** @ignore */
-        this.url = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_ROUTE, this._route);
+        this.url = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
         this.fetch(options);
     }
 }

@@ -1,5 +1,5 @@
 import BaseModel from './BaseModel';
-import Events from '../Shared/Events';
+import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
@@ -83,7 +83,7 @@ export default class ResourceList extends BaseModel
         var jsonString = {};
         if (resourceTypeId !== null)
         {
-            var resourceTypeCollection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+            var resourceTypeCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
             jsonString = resourceTypeCollection.get(resourceTypeId).toJSON();
         }
         this.set('resource_type_full', jsonString); 
