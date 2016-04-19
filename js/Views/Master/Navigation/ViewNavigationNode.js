@@ -1,13 +1,12 @@
 import $ from 'jquery';
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import NAV_EVENTS from './Events';
+import Radio from 'backbone.radio';
 
 /**
  * This class represents a navigation menu node.
  */
-class ViewNavigationNode extends Marionette.CompositeView
+export default class ViewNavigationNode extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -17,12 +16,11 @@ class ViewNavigationNode extends Marionette.CompositeView
      */
     initialize()
     {
-        this.navChannel = Radio.channel('rodan-navigation');
-        this.navChannel.on(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, event => this._handleEventNodeSelected(event));
+        Radio.channel('rodan-navigation').on(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, event => this._handleEventNodeSelected(event));
     }
 
     /**
-     * Initially hide everything.
+     * Hide subviews on render (initially).
      */
     onRender()
     {
@@ -125,10 +123,6 @@ class ViewNavigationNode extends Marionette.CompositeView
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewNavigationNode.prototype.ui = {
     text: '#node_text'
 };
@@ -137,5 +131,3 @@ ViewNavigationNode.prototype.events = {
 };
 ViewNavigationNode.prototype.template = '#template-navigation_node';
 ViewNavigationNode.prototype.childViewContainer = 'ul';
-
-export default ViewNavigationNode;

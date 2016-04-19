@@ -1,16 +1,15 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Configuration from '../../../Configuration';
 import Events from '../../../Shared/Events';
+import Marionette from 'backbone.marionette';
+import Radio from 'backbone.radio';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-class LayoutViewNavigation extends Marionette.LayoutView
+export default class LayoutViewNavigation extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -26,15 +25,6 @@ class LayoutViewNavigation extends Marionette.LayoutView
         });
     }
 
-
-    /**
-     * On show initialize the transfer info.
-     */
-    onShow()
-    {
-        this._populateUploadCount();
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,13 +33,10 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, options => this._handleAuthenticationSuccess(options));
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
-        this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_FAILED, () => this._populateUploadCount());
-        this.rodanChannel.on(Events.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED, () => this._populateUploadCount());
-        this.rodanChannel.reply(Events.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
-        this.rodanChannel.reply(Events.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
+        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGIN_SUCCESS, options => this._handleAuthenticationSuccess(options));
+        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
+        Radio.channel('rodan').reply(Events.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
+        Radio.channel('rodan').reply(Events.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
     }
 
     /**
@@ -58,7 +45,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleAuthenticationSuccess()
     {
         var model = new Backbone.Model({name: 'Projects'});
-        var object = {model: model, collection: this.rodanChannel.request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
+        var object = {model: model, collection: Radio.channel('rodan').request(Events.REQUEST__GLOBAL_PROJECT_COLLECTION)};
         this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
         this.$el.find('#button-navigation_logout').prop('disabled', false);
     }
@@ -73,22 +60,11 @@ class LayoutViewNavigation extends Marionette.LayoutView
     }
 
     /**
-     * Populates the upload count.
-     */
-    _populateUploadCount()
-    {
-        var count = this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT);
-        this.$el.find('#navigation-upload_count_pending').text(count.pending);
-        this.$el.find('#navigation-upload_count_completed').text(count.completed);
-        this.$el.find('#navigation-upload_count_failed').text(count.failed);
-    }
-
-    /**
      * Handle button logout.
      */
     _handleButtonLogout()
     {
-        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGOUT);
+        Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_LOGOUT);
     }
 
     /**
@@ -96,7 +72,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleButtonAbout()
     {
-        this.rodanChannel.request(Events.REQUEST__SHOW_ABOUT);
+        Radio.channel('rodan').request(Events.REQUEST__SHOW_ABOUT);
     }
 
     /**
@@ -104,7 +80,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleButtonHelp()
     {
-        this.rodanChannel.request(Events.REQUEST__SHOW_HELP);
+        Radio.channel('rodan').request(Events.REQUEST__SHOW_HELP);
     }
 
     /**
@@ -112,11 +88,11 @@ class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowAbout()
     {
-        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        var serverConfig = this.rodanChannel.request(Events.REQUEST__SERVER_CONFIGURATION);
-        var hostname = this.rodanChannel.request(Events.REQUEST__SERVER_GET_HOSTNAME);
-        var version = this.rodanChannel.request(Events.REQUEST__SERVER_GET_VERSION);
-        var serverDate = this.rodanChannel.request(Events.REQUEST__SERVER_DATE);
+        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
+        var serverConfig = Radio.channel('rodan').request(Events.REQUEST__SERVER_CONFIGURATION);
+        var hostname = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_HOSTNAME);
+        var version = Radio.channel('rodan').request(Events.REQUEST__SERVER_GET_VERSION);
+        var serverDate = Radio.channel('rodan').request(Events.REQUEST__SERVER_DATE);
         serverDate = serverDate.toString();
         var username = user ? user.get('username') : 'no user';
         var name = user ? user.get('first_name') + ' ' + user.get('last_name') : 'no user';
@@ -127,7 +103,7 @@ class LayoutViewNavigation extends Marionette.LayoutView
                                                                  serverConfiguration: serverConfig,
                                                                  date: serverDate,
                                                                  client: Configuration.CLIENT});
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
     }
 
     /**
@@ -136,13 +112,9 @@ class LayoutViewNavigation extends Marionette.LayoutView
     _handleRequestShowHelp()
     {
         var text = 'Client admin: ' + Configuration.ADMIN_CLIENT.NAME + ' (' + Configuration.ADMIN_CLIENT.EMAIL + ')';
-        this.rodanChannel.request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewNavigation.prototype.template = '#template-navigation';
 LayoutViewNavigation.prototype.ui = {
     buttonLogout: '#button-navigation_logout',
@@ -154,5 +126,3 @@ LayoutViewNavigation.prototype.events = {
     'click @ui.buttonAbout': '_handleButtonAbout',
     'click @ui.buttonHelp': '_handleButtonHelp'
 };
-
-export default LayoutViewNavigation;

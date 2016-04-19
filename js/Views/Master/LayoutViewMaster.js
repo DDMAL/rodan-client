@@ -1,19 +1,17 @@
-import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
+import Marionette from 'backbone.marionette';
 
 /**
  * Layout view for master work area.
  */
-class LayoutViewMaster extends Marionette.LayoutView
+export default class LayoutViewMaster extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize
+     * Initializes the view.
      */
     initialize()
     {
@@ -21,18 +19,17 @@ class LayoutViewMaster extends Marionette.LayoutView
             regionMain: '#region-main',
             regionNavigation: '#region-navigation'
         });
-        this._initializeRadio();
         this._initializeViews();
 
     }
 
     /**
-     * Handle rendering.
+     * Shows the main and navigation views.
      */
     onRender()
     {
-        this.regionMain.show(this.layoutViewMain);
-        this.regionNavigation.show(this.layoutViewNavigation);
+        this.regionMain.show(this._layoutViewMain);
+        this.regionNavigation.show(this._layoutViewNavigation);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -43,22 +40,8 @@ class LayoutViewMaster extends Marionette.LayoutView
      */
     _initializeViews()
     {
-        this.layoutViewNavigation = new LayoutViewNavigation();
-        this.layoutViewMain = new LayoutViewMain();
-    }
-
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
+        this._layoutViewNavigation = new LayoutViewNavigation();
+        this._layoutViewMain = new LayoutViewMain();
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewMaster.prototype.template = '#template-master';
-
-export default LayoutViewMaster;

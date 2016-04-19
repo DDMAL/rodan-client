@@ -1,28 +1,18 @@
-import Radio from 'backbone.radio';
-
 import Events from '../../../Shared/Events';
+import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
 import ViewNavigationNodeProject from './ViewNavigationNodeProject';
 
 /**
  * This class represents a navigation menu node.
  */
-class ViewNavigationNodeRoot extends ViewNavigationNode
+export default class ViewNavigationNodeRoot extends ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
-     */
-    initialize(options)
-    {
-        super.initialize(options);
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
-     * Initially hide everything.
+     * This hides all subviews on render (initially).
      */
     onRender()
     {
@@ -37,13 +27,9 @@ class ViewNavigationNodeRoot extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
+        Radio.channel('rodan').trigger(Events.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewNavigationNodeRoot.prototype.ui = {
     text: '#node_text'
 };
@@ -52,5 +38,3 @@ ViewNavigationNodeRoot.prototype.events = {
 };
 ViewNavigationNodeRoot.prototype.template = '#template-navigation_root';
 ViewNavigationNodeRoot.prototype.childView = ViewNavigationNodeProject;
-
-export default ViewNavigationNodeRoot;

@@ -1,25 +1,25 @@
-import Radio from 'backbone.radio';
-
 import Events from '../../../Shared/Events';
 import NAV_EVENTS from './Events';
+import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
 
 /**
  * This class represents a navigation menu node for a WorkflowRun list.
  */
-class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
+export default class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
         super.initialize(options);
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, event => this._handleEventWorkflowRunsSelected(event));
+        Radio.channel('rodan').on(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, event => this._handleEventWorkflowRunsSelected(event));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@ class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
      */
     _sendClickEvents()
     {
-        this.rodanChannel.request(Events.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: this.model.get('project')});
+        Radio.channel('rodan').request(Events.REQUEST__PROJECT_SET_ACTIVE, {project: this.model.get('project')});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: this.model.get('project')});
     }
 
     /**
@@ -45,10 +45,4 @@ class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewNavigationNodeWorkflowRuns.prototype.template = '#template-navigation_workflowruns';
-
-export default ViewNavigationNodeWorkflowRuns;
