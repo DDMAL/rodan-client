@@ -31,7 +31,6 @@ export default class BaseController extends Marionette.Object
      */
     _initializeRadio()
     {
-        throw new Error('this method must be defined by the inheriting class');
     }
 
     /**
@@ -39,6 +38,5 @@ export default class BaseController extends Marionette.Object
      */
     _initializeViews()
     {
-        throw new Error('this method must be defined by the inheriting class');
     }
 }

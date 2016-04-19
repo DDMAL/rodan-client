@@ -41,7 +41,7 @@ export default class ViewNavigationNodeRunJobs extends ViewNavigationNode
     {
         if (options.project === this.model.get('project'))
         {
-            this.navChannel.trigger(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
+            Radio.channel('rodan-navigation').trigger(NAV_EVENTS.EVENT__NAVIGATION_SELECTED_NODE, {node: this});
         }
     }
 }

@@ -1,5 +1,6 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
  * View for Jot item in Job list.

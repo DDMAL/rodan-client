@@ -36,11 +36,13 @@ export default class ViewWorkflowJobGroup extends Marionette.ItemView
 
     /**
      * Handle button ungroup.
+     *
+     * @todo this shouldn't be calling the workflowbuilder
      */
     _handleButtonUngroup()
     {
         Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**

@@ -10,8 +10,8 @@ export default class ViewProjectList extends BaseViewList
 {
     _handleButtonNewProject()
     {
-        var user = this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_USER);
-        this.rodanChannel.request(Events.REQUEST__PROJECT_CREATE, {creator: user});
+        var user = Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_USER);
+        Radio.channel('rodan').request(Events.REQUEST__PROJECT_CREATE, {creator: user});
     }
 }
 

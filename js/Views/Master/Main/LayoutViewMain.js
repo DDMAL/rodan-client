@@ -40,8 +40,7 @@ export default class LayoutViewMain extends Marionette.LayoutView
      */
     _handleAuthenticationLoginRequired()
     {
-        this._loginView = new ViewLogin();
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
     }
 
     /**
@@ -58,8 +57,7 @@ export default class LayoutViewMain extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        this._loginView = new ViewLogin();
-        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
     }
 }
 LayoutViewMain.prototype.template = '#template-empty';

@@ -2,6 +2,7 @@ import $ from 'jquery';
 import BaseController from './BaseController';
 import Configuration from '../Configuration';
 import Events from '../Shared/Events';
+import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 /**
@@ -95,7 +96,7 @@ export default class ControllerModal extends BaseController
         {
             return;
         }
-        this._layoutViewModal = new LayoutView({template: '#template-modal_simple'});
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
         this._layoutViewModal.render();
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
@@ -114,7 +115,7 @@ export default class ControllerModal extends BaseController
         {
             return;
         }
-        this._layoutViewModal = new LayoutView({template: '#template-modal'});
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal'});
         this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
         this._layoutViewModal.render();
         this._layoutViewModal.getRegion('modal_body').show(options.view);
@@ -135,7 +136,7 @@ export default class ControllerModal extends BaseController
         {
             return;
         }
-        this._layoutViewModal = new LayoutView({template: '#template-modal_waiting'});
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
         this._layoutViewModal.render();
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);

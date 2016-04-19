@@ -22,7 +22,6 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     initialize(options)
     {
-        this._initializeRadio();
         this._runJobCollection = options.collection;
         this.addRegions({
             regionRunJobList: '#region-main_workflowrun_individual_runjobs',

@@ -12,8 +12,10 @@ export default class Job extends BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initializes the model. Upon initialization the 'input_port_types' and 'output_port_types' will be set as Backbone.Collections.
+     *
+     * @param {object} options Backbone.Model options object; 'options.input_port_types' and 'options.output_port_types' may be given
      */
-    initialize()
+    initialize(options)
     {
         this.set('input_port_types', new InputPortTypeCollection(options.input_port_types));
         this.set('output_port_types', new OutputPortTypeCollection(options.output_port_types));
@@ -43,4 +45,4 @@ export default class Job extends BaseModel
         return response;
     }
 }
-OutputPortType.prototype.routeName = 'jobs';
+Job.prototype.routeName = 'jobs';

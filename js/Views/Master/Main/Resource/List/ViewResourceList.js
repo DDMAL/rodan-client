@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import BaseViewList from '../../BaseViewList';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
  * View for Resource list.
