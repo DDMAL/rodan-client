@@ -19,8 +19,6 @@ export default class ViewResource extends Marionette.CompositeView
     initialize(options)
     {
         /** @ignore */
-        this.model = options.resource;
-        /** @ignore */
         this.collection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         this.collection.each(function(model) { model.unset('selected'); });
         var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});

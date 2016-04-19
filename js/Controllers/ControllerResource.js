@@ -62,7 +62,7 @@ export default class ControllerResource extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._layoutView.showItem(new ViewResource(options));
+        this._layoutView.showItem(new ViewResource({model: options.resource}));
     }
 
     /**

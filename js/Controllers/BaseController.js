@@ -18,7 +18,6 @@ export default class BaseController extends Marionette.Object
     {
         super(options);
         /** @ignore */
-        this.rodanChannel = Radio.channel('rodan');
         this._initializeViews();
         this._initializeRadio();
     }

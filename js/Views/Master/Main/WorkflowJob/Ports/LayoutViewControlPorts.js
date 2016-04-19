@@ -16,7 +16,7 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.workflowjob' (WorkflowJob) must also be provided
      */
     initialize(options)
     {

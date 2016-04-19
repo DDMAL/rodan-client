@@ -13,7 +13,7 @@ export default class ViewInputPortTypeListItem extends BaseViewListItem
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.workflowjob' (WorkflowJob) and 'options.workflow' (Workflow) must also be provided
      */
     initialize(options)
     {

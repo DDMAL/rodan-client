@@ -13,7 +13,7 @@ export default class WorkflowJob extends BaseModel
     /**
      * Initialize.
      *
-     * @param {object} options Backbone.Model options object
+     * @param {object} options Backbone.Model options object; 'options.input_ports' (InputPortCollection or associated Backbone.Collection raw-object representation) and 'options.output_ports' (OutputPortCollection or associated Backbone.Collection raw-object representation) must also be provided
      */
     initialize(options)
     {

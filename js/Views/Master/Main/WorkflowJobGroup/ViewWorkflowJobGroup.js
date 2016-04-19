@@ -13,7 +13,7 @@ export default class ViewWorkflowJobGroup extends Marionette.ItemView
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.workflow' (Workflow) and 'options.workflowjobgroup' (WorkflowJobGroup) must also be provided
      */
     initialize(options)
     {

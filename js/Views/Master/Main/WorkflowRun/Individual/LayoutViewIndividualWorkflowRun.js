@@ -18,7 +18,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.collection' (RunJobCollection) must also be provided
      */
     initialize(options)
     {

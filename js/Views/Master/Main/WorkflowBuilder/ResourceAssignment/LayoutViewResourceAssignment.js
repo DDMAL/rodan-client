@@ -12,7 +12,7 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.viewavailableresources' and 'options.viewassignedresources' must also be provided (each being Marionette.Views)
      */
     initialize(options)
     {

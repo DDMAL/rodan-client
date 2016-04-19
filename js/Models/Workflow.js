@@ -16,7 +16,7 @@ export default class Workflow extends BaseModel
     /**
      * Initialize
      *
-     * @param {object} options Backbone.Model options object
+     * @param {object} options Backbone.Model options object; 'options.connections' (ConnectionCollection or associated Backbone.Collection raw-object representation), 'options.workflow_input_ports' (InputPortCollection or associated Backbone.Collection raw-object representation), 'options.workflow_output_ports' (OutputPortCollection or associated Backbone.Collection raw-object representation), 'options.workflow_jobs' (WorkflowJobCollection or associated Backbone.Collection raw-object representation), and 'options.workflow_runs' (WorkflowRunCollection or associated Backbone.Collection raw-object representation) must also be provided
      */
     initialize(options)
     {

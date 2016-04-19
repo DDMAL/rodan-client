@@ -13,7 +13,7 @@ export default class ViewResourceListItemModal extends BaseViewListItem
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object
+     * @param {object} options Marionette.View options object; 'options.inputport' (InputPort), 'options.assigned' (boolean; is this item assigned for a WorkflowRun), and 'options.workflow' (Workflow) must also be provided
      */
     initialize(options)
     {
