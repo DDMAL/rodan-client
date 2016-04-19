@@ -1,8 +1,12 @@
 import BaseViewList from '../../BaseViewList';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 import ViewProjectListItem from './ViewProjectListItem';
 
-class ViewProjectList extends BaseViewList
+/**
+ * Project list view.
+ */
+export default class ViewProjectList extends BaseViewList
 {
     _handleButtonNewProject()
     {
@@ -20,5 +24,3 @@ ViewProjectList.prototype.events = {
 ViewProjectList.prototype.template = '#template-main_project_list';
 ViewProjectList.prototype.childView = ViewProjectListItem;
 ViewProjectList.prototype.behaviors = {Table: {'table': '#table-projects'}};
-
-export default ViewProjectList;

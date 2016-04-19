@@ -1,19 +1,18 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../Shared/Events';
+import Radio from 'backbone.radio';
 import ViewLogin from './Login/ViewLogin';
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-class LayoutViewMain extends Marionette.LayoutView
+export default class LayoutViewMain extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initializes the instance.
      */
     initialize()
     {
@@ -31,10 +30,9 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     _initializeRadio()
     {
-        this.rodanChannel = Radio.channel('rodan');
-        this.rodanChannel.reply(Events.REQUEST__MAINREGION_SHOW_VIEW, options => this._handleCommandShow(options));
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
-        this.rodanChannel.on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
+        Radio.channel('rodan').reply(Events.REQUEST__MAINREGION_SHOW_VIEW, options => this._handleCommandShow(options));
+        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleDeauthenticationSuccess());
+        Radio.channel('rodan').on(Events.EVENT__AUTHENTICATION_LOGINREQUIRED, () => this._handleAuthenticationLoginRequired());
     }
 
     /**
@@ -42,8 +40,8 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     _handleAuthenticationLoginRequired()
     {
-        this.loginView = new ViewLogin();
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
+        this._loginView = new ViewLogin();
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
     }
 
     /**
@@ -51,6 +49,7 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     _handleCommandShow(options)
     {
+        /** @ignore */
         this.region.show(options.view);
     }
 
@@ -59,14 +58,8 @@ class LayoutViewMain extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        this.loginView = new ViewLogin();
-        this.rodanChannel.request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
+        this._loginView = new ViewLogin();
+        Radio.channel('rodan').request(Events.REQUEST__MAINREGION_SHOW_VIEW, {view: this.loginView});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewMain.prototype.template = '#template-empty';
-
-export default LayoutViewMain;

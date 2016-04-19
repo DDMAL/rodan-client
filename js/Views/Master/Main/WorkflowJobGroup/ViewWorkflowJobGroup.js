@@ -1,22 +1,24 @@
+import Events from '../../../../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import Events from '../../../../Shared/Events';
 
 /**
- * This class represents the view for editing WorkflowJobGroups.
+ * WorkflowJobGroup view.
  */
-class ViewWorkflowJobGroup extends Marionette.ItemView
+export default class ViewWorkflowJobGroup extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
-        this._initializeRadio();
         this._workflow = options.workflow;
+        /** @ignore */
         this.model = options.workflowjobgroup;
     }
 
@@ -24,20 +26,12 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
      * Handle button delete.
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_DELETE, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -45,8 +39,8 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonUngroup()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_UNGROUP, {workflowjobgroup: this.model, workflow: this._workflow});
     }
 
     /**
@@ -54,15 +48,11 @@ class ViewWorkflowJobGroup extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
         this.model.set({name: this.ui.textName.val()});
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowJobGroup.prototype.template = '#template-main_workflowjobgroup';
 ViewWorkflowJobGroup.prototype.ui = {
     buttonSave: '#button-save_workflowjobgroup_data',
@@ -75,5 +65,3 @@ ViewWorkflowJobGroup.prototype.events = {
     'click @ui.buttonDelete': '_handleButtonDelete',
     'click @ui.buttonUngroup': '_handleButtonUngroup'
 };
-
-export default ViewWorkflowJobGroup;

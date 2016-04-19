@@ -1,49 +1,34 @@
+import Events from '../../../../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../Shared/Events';
 
 /**
  * Login view.
  */
-class ViewLogin extends Marionette.ItemView
+export default class ViewLogin extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
      */
     initialize()
     {
-        this.model = null;
-        this._initializeRadio();
-        this.rodanChannel.request(Events.REQUEST__TIMER_CLEAR);
+        Radio.channel('rodan').request(Events.REQUEST__TIMER_CLEAR);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
      * Handle login button.
      */
     _handleButton()
     {
-        this.rodanChannel.request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
+        Radio.channel('rodan').request(Events.REQUEST__AUTHENTICATION_LOGIN, {username: this.ui.textUsername.val(), password: this.ui.textPassword.val()}); 
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewLogin.prototype.modelEvents = {
     'all': 'render'
 };
@@ -56,5 +41,3 @@ ViewLogin.prototype.events = {
     'click @ui.buttonLogin': '_handleButton'
 };
 ViewLogin.prototype.template = '#template-main_login';
-
-export default ViewLogin;

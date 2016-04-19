@@ -52,7 +52,7 @@ export default class ControllerRunJob extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._layoutView.showItem(new ViewRunJob(options));
+        this._layoutView.showItem(new ViewRunJob({model: options.runjob}));
     }
 
     /**

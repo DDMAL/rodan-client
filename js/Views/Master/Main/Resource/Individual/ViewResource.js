@@ -1,32 +1,34 @@
+import Events from '../../../../../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../../Shared/Events';
 import ViewResourceTypeListItem from './ViewResourceTypeListItem';
 
 /**
  * Resource view.
  */
-class ViewResource extends Marionette.CompositeView
+export default class ViewResource extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
+        /** @ignore */
         this.model = options.resource;
-        this._initializeRadio();
-        this.collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
+        /** @ignore */
+        this.collection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         this.collection.each(function(model) { model.unset('selected'); });
         var resourceType = this.collection.findWhere({url: this.model.get('resource_type')});
         resourceType.set('selected', 'selected');
     }
 
     /**
-     * Post-render.
+     * Initialize buttons after render.
      */
     onRender()
     {
@@ -50,19 +52,11 @@ class ViewResource extends Marionette.CompositeView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
      * Handle button save.
      */
     _handleClickButtonSave()
     {
-        this.rodanChannel.request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
+        Radio.channel('rodan').request(Events.REQUEST__RESOURCE_SAVE, {resource: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
                                                                                                  name: this.ui.resourceName.val(),
                                                                                                  description: this.ui.resourceDescription.val()}});
     }
@@ -72,7 +66,7 @@ class ViewResource extends Marionette.CompositeView
      */
     _handleClickButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
+        Radio.channel('rodan').request(Events.REQUEST__RESOURCE_DELETE, {resource: this.model});
     }
 
     /**
@@ -83,7 +77,7 @@ class ViewResource extends Marionette.CompositeView
         var mimetype = this.model.get('resource_type_full').mimetype;
         var ext = this.model.get('resource_type_full').extension;
         var filename = this.model.get('name') + '.' + ext;
-        this.rodanChannel.request(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
+        Radio.channel('rodan').request(Events.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
     }
 
     /**
@@ -94,10 +88,6 @@ class ViewResource extends Marionette.CompositeView
         window.open(this.model.get('viewer_url'));
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewResource.prototype.modelEvents = {
     'all': 'render'
 };
@@ -119,5 +109,3 @@ ViewResource.prototype.events = {
 ViewResource.prototype.template = '#template-main_resource_individual';
 ViewResource.prototype.childView = ViewResourceTypeListItem;
 ViewResource.prototype.childViewContainer = '#select-resourcetype';
-
-export default ViewResource;

@@ -1,40 +1,21 @@
+import Events from '../../../../../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import Events from '../../../../../Shared/Events';
 
 /**
  * Project view.
  */
-class ViewProject extends Marionette.CompositeView
+export default class ViewProject extends Marionette.CompositeView
 {
-///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize.
-     */
-    initialize()
-    {
-        this._initializeRadio();
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Handle save button.
      */
     _handleButtonSave()
     {
-        this.rodanChannel.request(Events.REQUEST__PROJECT_SAVE, 
+        Radio.channel('rodan').request(Events.REQUEST__PROJECT_SAVE, 
                                   {project: this.model,
                                    fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
@@ -44,7 +25,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
+        Radio.channel('rodan').request(Events.REQUEST__PROJECT_DELETE, {project: this.model});
     }
 
     /**
@@ -52,7 +33,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleButtonRunJobs()
     {
-        this.rodanChannel.trigger(Events.EVENT__RUNJOB_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__RUNJOB_SELECTED_COLLECTION, {project: this.model});
     }
 
     /**
@@ -60,7 +41,7 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickResourceCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SELECTED_COLLECTION, {project: this.model});
     }
 
     /**
@@ -68,13 +49,9 @@ class ViewProject extends Marionette.CompositeView
      */
     _handleClickWorkflowCount()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewProject.prototype.modelEvents = {
             'all': 'render'
         };
@@ -95,5 +72,3 @@ ViewProject.prototype.events = {
             'click @ui.buttonRunJobs': '_handleButtonRunJobs'
         };
 ViewProject.prototype.template = '#template-main_project_individual';
-
-export default ViewProject;

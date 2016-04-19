@@ -1,48 +1,33 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
 
 /**
- * This class represents a list of input port types.
+ * InputPortType list view.
  */
-class ViewInputPortTypeList extends Marionette.CompositeView
+export default class ViewInputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * TODO docs
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
         this._initializeRadio();
         var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(options.workflowjob.getJobUuid());
+        /** @ignore */
         this.collection = job.get('input_port_types');
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewInputPortTypeList.prototype.modelEvents = {
     'all': 'render'
 };
 ViewInputPortTypeList.prototype.template = '#template-main_inputporttype_list';
 ViewInputPortTypeList.prototype.childView = ViewInputPortTypeListItem;
 ViewInputPortTypeList.prototype.childViewContainer = 'tbody';
-
-export default ViewInputPortTypeList;

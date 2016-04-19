@@ -4,13 +4,15 @@ import Radio from 'backbone.radio';
 /**
  * ResourceAssignment view.
  */
-class LayoutViewResourceAssignment extends Marionette.LayoutView
+export default class LayoutViewResourceAssignment extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -27,35 +29,17 @@ class LayoutViewResourceAssignment extends Marionette.LayoutView
      */
     onDestroy()
     {
-        this.rodanChannel.off(null, null, this);
-        this.rodanChannel.stopReplying(null, null, this);
+        Radio.channel('rodan').off(null, null, this);
+        Radio.channel('rodan').stopReplying(null, null, this);
     }
 
+    /**
+     * Before the view shows we make sure the subviews are shown.
+     */
     onBeforeShow()
     {
         this.regionAvailableResources.show(this._viewAvailableResources);
         this.regionassignedResources.show(this._viewAssignedResources);
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewResourceAssignment.prototype.template = '#template-main_workflowbuilder_resourceassignment';
-LayoutViewResourceAssignment.prototype.ui = {
-};
-LayoutViewResourceAssignment.prototype.events = {
-};
-
-export default LayoutViewResourceAssignment;

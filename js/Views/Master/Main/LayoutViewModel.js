@@ -1,5 +1,4 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 
 /**
  * This is a layout to help render a Collection and a single item.
@@ -7,13 +6,13 @@ import Radio from 'backbone.radio';
  * that would be associated with the CompositveView is not initially known, so it can't
  * rerender.
  */
-class LayoutViewModel extends Marionette.LayoutView
+export default class LayoutViewModel extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initializer.
+     * Initializes the instance.
      */
     initialize()
     {
@@ -21,11 +20,12 @@ class LayoutViewModel extends Marionette.LayoutView
             regionList: '#region-main_layoutview_model_list',
             regionItem: '#region-main_layoutview_model_item'
         });
-        this.rodanChannel = Radio.channel('rodan');
     }
 
     /**
      * Show a list view.
+     *
+     * @param {Marionette.View} view list view to show
      */
     showList(view)
     {
@@ -34,6 +34,8 @@ class LayoutViewModel extends Marionette.LayoutView
 
     /**
      * Show an item view.
+     *
+     * @param {Marionette.View} view item view to show
      */
     showItem(view)
     {
@@ -48,10 +50,4 @@ class LayoutViewModel extends Marionette.LayoutView
         this.regionItem.empty();
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewModel.prototype.template = '#template-main_layoutview_model';
-
-export default LayoutViewModel;

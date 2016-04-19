@@ -1,16 +1,19 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
  * Workflow list item for importing into another Workflow.
  */
-class ViewWorkflowListImportItem extends BaseViewListItem
+export default class ViewWorkflowListImportItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -22,14 +25,10 @@ class ViewWorkflowListImportItem extends BaseViewListItem
 ///////////////////////////////////////////////////////////////////////////////////////
     _handleButtonImportWorkflow()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowListImportItem.prototype.template = '#template-main_workflowbuilder_workflow_list_item_import';
 ViewWorkflowListImportItem.prototype.tagName = 'tr';
 ViewWorkflowListImportItem.prototype.ui = {
@@ -38,5 +37,3 @@ ViewWorkflowListImportItem.prototype.ui = {
 ViewWorkflowListImportItem.prototype.events = {
     'click @ui.buttonImportWorkflow': '_handleButtonImportWorkflow'
 };
-
-export default ViewWorkflowListImportItem;

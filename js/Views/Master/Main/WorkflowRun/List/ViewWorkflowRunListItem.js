@@ -1,10 +1,11 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view (and controller) for the workflowrun item.
+ * WorkflowRun list item view.
  */
-class ViewWorkflowRunListItem extends BaseViewListItem
+export default class ViewWorkflowRunListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -14,17 +15,11 @@ class ViewWorkflowRunListItem extends BaseViewListItem
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowRunListItem.prototype.template = '#template-main_workflowrun_list_item';
 ViewWorkflowRunListItem.prototype.tagName = 'tr';
 ViewWorkflowRunListItem.prototype.events = {
     'click': '_handleClick'
 };
-
-export default ViewWorkflowRunListItem;

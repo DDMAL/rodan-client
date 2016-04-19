@@ -1,10 +1,11 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view (and controller) for a resource item.
+ * Item view for Resource list.
  */
-class ViewResourceListItem extends BaseViewListItem
+export default class ViewResourceListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -14,17 +15,11 @@ class ViewResourceListItem extends BaseViewListItem
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewResourceListItem.prototype.template = '#template-main_resource_list_item';
 ViewResourceListItem.prototype.tagName = 'tr';
 ViewResourceListItem.prototype.events = {
     'click': '_handleClick'
 };
-
-export default ViewResourceListItem;

@@ -1,34 +1,15 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view for a single Workflow summary.
+ * Workflow view.
  */
-class ViewWorkflow extends Marionette.ItemView
+export default class ViewWorkflow extends Marionette.ItemView
 {
-///////////////////////////////////////////////////////////////////////////////////////
-// PUBLIC METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize
-     */
-    initialize()
-    {
-        this._initializeRadio();
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
     /**
      * Handle button run workflow.
      */
@@ -40,7 +21,7 @@ class ViewWorkflow extends Marionette.ItemView
         }
         else
         {
-            this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
+            Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
         }
     }
 
@@ -49,7 +30,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonDeleteWorkflow()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOW_DELETE, {workflow: this.model});
     }
 
     /**
@@ -57,7 +38,7 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonEditWorkflow()
     {
-        this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
     }
 
     /**
@@ -73,14 +54,10 @@ class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonSave()
     {
-        this.rodanChannel.request(Events.REQUEST__MODAL_HIDE);
-        this.rodanChannel.request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
+        Radio.channel('rodan').request(Events.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflow.prototype.modelEvents = {
             'all': 'render'
         };
@@ -103,5 +80,3 @@ ViewWorkflow.prototype.events = {
     'click @ui.buttonSave': '_handleButtonSave'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';
-
-export default ViewWorkflow;

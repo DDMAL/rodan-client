@@ -2,15 +2,17 @@ import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
 
 /**
- * This class represents the view (and controller) for the job item.
+ * View for Jot item in Job list.
  */
-class ViewJobListItem extends BaseViewListItem
+export default class ViewJobListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -25,13 +27,9 @@ class ViewJobListItem extends BaseViewListItem
      */
     _handleClickButtonAdd()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model, workflow: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model, workflow: this._workflow});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewJobListItem.prototype.template = '#template-main_job_list_item';
 ViewJobListItem.prototype.tagName = 'tr';
 ViewJobListItem.prototype.ui = {
@@ -40,5 +38,3 @@ ViewJobListItem.prototype.ui = {
 ViewJobListItem.prototype.events = {
     'click @ui.buttonAdd': '_handleClickButtonAdd'
 };
-
-export default ViewJobListItem;

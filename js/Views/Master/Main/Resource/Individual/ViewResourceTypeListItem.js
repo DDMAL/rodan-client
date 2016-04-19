@@ -3,13 +3,13 @@ import BaseViewListItem from '../../BaseViewListItem';
 /**
  * ResourceType view.
  */
-class ViewResourceTypeListItem extends BaseViewListItem
+export default class ViewResourceTypeListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Set the value of the 'option.value'.
+     * After render, set the value of the 'option.value'.
      */
     onRender()
     {
@@ -21,11 +21,5 @@ class ViewResourceTypeListItem extends BaseViewListItem
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewResourceTypeListItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
 ViewResourceTypeListItem.prototype.tagName = 'option';
-
-export default ViewResourceTypeListItem;

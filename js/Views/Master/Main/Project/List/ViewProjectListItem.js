@@ -1,10 +1,11 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * View for Project list item.
+ * Project list item view.
  */
-class ViewProjectListItem extends BaseViewListItem
+export default class ViewProjectListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -14,17 +15,11 @@ class ViewProjectListItem extends BaseViewListItem
      */
     _handleClick()
     {
-        this.rodanChannel.trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
+        Radio.channel('rodan').trigger(Events.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewProjectListItem.prototype.template = '#template-main_project_list_item';
 ViewProjectListItem.prototype.tagName = 'tr';
 ViewProjectListItem.prototype.events = {
     'click': '_handleClick'
-};
-
-export default ViewProjectListItem;
+}

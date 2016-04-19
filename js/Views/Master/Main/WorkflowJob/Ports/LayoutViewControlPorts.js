@@ -1,6 +1,4 @@
 import Marionette from 'backbone.marionette';
-import Radio from 'backbone.radio';
-
 import ViewInputPortList from '../../InputPort/ViewInputPortList';
 import ViewInputPortListItem from './ViewInputPortListItem';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
@@ -8,19 +6,20 @@ import ViewOutputPortList from './ViewOutputPortList';
 import ViewOutputPortTypeList from './ViewOutputPortTypeList';
 
 /**
- * This class represents the view for editing ports.
+ * View for editing ports.
  */
-class LayoutViewControlPorts extends Marionette.LayoutView
+export default class LayoutViewControlPorts extends Marionette.LayoutView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
-        this._initializeRadio();
         this.addRegions({
             regionControlInputPortTypes: '#region-main_inputporttypes',
             regionControlInputPorts: '#region-main_inputports',
@@ -32,7 +31,7 @@ class LayoutViewControlPorts extends Marionette.LayoutView
     }
 
     /**
-     * Initially show the list.
+     * Show the subviews before showing this view.
      */
     onBeforeShow()
     {
@@ -61,19 +60,5 @@ class LayoutViewControlPorts extends Marionette.LayoutView
         this._outputPortTypeListView = new ViewOutputPortTypeList({workflowjob: options.workflowjob,
                                                                    childViewOptions: options});
     }
-    
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 LayoutViewControlPorts.prototype.template = '#template-main_workflowjob_ports';
-
-export default LayoutViewControlPorts;

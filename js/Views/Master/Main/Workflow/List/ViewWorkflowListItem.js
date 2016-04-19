@@ -1,10 +1,11 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view of an individual workflow list item.
+ * View for Workflow list.
  */
-class ViewWorkflowListItem extends BaseViewListItem
+export default class ViewWorkflowListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -25,15 +26,9 @@ class ViewWorkflowListItem extends BaseViewListItem
         this.rodanChannel.trigger(Events.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewWorkflowListItem.prototype.template = '#template-main_workflow_list_item';
 ViewWorkflowListItem.prototype.tagName = 'tr';
 ViewWorkflowListItem.prototype.events = {
     'click': '_handleClick',
     'dblclick': '_handleDoubleClick'
 };
-
-export default ViewWorkflowListItem;

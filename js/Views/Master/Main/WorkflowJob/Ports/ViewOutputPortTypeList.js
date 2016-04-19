@@ -1,48 +1,32 @@
+import Events from '../../../../../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-
-import Events from '../../../../../Shared/Events';
 import ViewOutputPortTypeListItem from './ViewOutputPortTypeListItem';
 
 /**
- * This class represents a list of output port types.
+ * OutputPortTYpe list view.
  */
-class ViewOutputPortTypeList extends Marionette.CompositeView
+export default class ViewOutputPortTypeList extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
-        this._initializeRadio();
         var jobCollection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = jobCollection.get(options.workflowjob.getJobUuid());
+        /** @ignore */
         this.collection = job.get('output_port_types');
     }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewOutputPortTypeList.prototype.modelEvents = {
     'all': 'render'
 };
 ViewOutputPortTypeList.prototype.template = '#template-main_outputporttype_list';
 ViewOutputPortTypeList.prototype.childView = ViewOutputPortTypeListItem;
 ViewOutputPortTypeList.prototype.childViewContainer = 'tbody';
-
-export default ViewOutputPortTypeList;

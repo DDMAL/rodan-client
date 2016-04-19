@@ -1,16 +1,19 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * Resource item View for Collection in modal
+ * Resource item View for Collection in modal.
  */
-class ViewResourceListItemModal extends BaseViewListItem
+export default class ViewResourceListItemModal extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -29,22 +32,16 @@ class ViewResourceListItemModal extends BaseViewListItem
     {
         if (this._assigned)
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
+            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
         else
         {
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
+            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, {inputport: this._inputPort, resource: this.model, workflow: this._workflow}); 
         }
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewResourceListItemModal.prototype.template = '#template-modal_resource_list_item';
 ViewResourceListItemModal.prototype.tagName = 'tr';
 ViewResourceListItemModal.prototype.events = {
     'dblclick': '_handleDoubleClick'
 };
-
-export default ViewResourceListItemModal;

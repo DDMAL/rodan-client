@@ -1,16 +1,19 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view of an individual output port type list item.
+ * OutputPortType list item view.
  */
-class ViewOutputPortTypeListItem extends BaseViewListItem
+export default class ViewOutputPortTypeListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -26,13 +29,9 @@ class ViewOutputPortTypeListItem extends BaseViewListItem
      */
     _handleButtonNewOutputPort()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob, workflow: this._workflow});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob, workflow: this._workflow});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewOutputPortTypeListItem.prototype.tagName = 'tr';
 ViewOutputPortTypeListItem.prototype.template = '#template-main_outputporttype_list_item';
 ViewOutputPortTypeListItem.prototype.events = {
@@ -41,5 +40,3 @@ ViewOutputPortTypeListItem.prototype.events = {
 ViewOutputPortTypeListItem.prototype.ui = {
     buttonNewOutputPort: '#button-new_outputport'
 };
-
-export default ViewOutputPortTypeListItem;

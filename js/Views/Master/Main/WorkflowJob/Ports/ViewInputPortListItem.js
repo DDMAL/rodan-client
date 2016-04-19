@@ -1,16 +1,19 @@
 import BaseViewListItem from '../../BaseViewListItem';
 import Events from '../../../../../Shared/Events';
+import Radio from 'backbone.radio';
 
 /**
- * This class represents the view of an individual input port list item.
+ * InputPort list item view.
  */
-class ViewInputPortListItem extends BaseViewListItem
+export default class ViewInputPortListItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -26,13 +29,9 @@ class ViewInputPortListItem extends BaseViewListItem
      */
     _handleButtonDelete()
     {
-        this.rodanChannel.request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT, {inputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
+        Radio.channel('rodan').request(Events.REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT, {inputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewInputPortListItem.prototype.ui = {
             buttonDelete: '#button-delete'
         };
@@ -41,5 +40,3 @@ ViewInputPortListItem.prototype.events = {
         };
 ViewInputPortListItem.prototype.template = '#template-main_inputport_list_item';
 ViewInputPortListItem.prototype.tagName = 'tr';
-
-export default ViewInputPortListItem;

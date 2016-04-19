@@ -1,19 +1,20 @@
+import Events from '../../../../../Shared/Events';
+import JSONEditor from 'json-editor';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import JSONEditor from 'json-editor';
-
-import Events from '../../../../../Shared/Events';
 
 /**
- * This represents settings for a workflow job.
+ * Settings view for WorkflowJob.
  */
-class ViewSettings extends Marionette.ItemView
+export default class ViewSettings extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Initializes the instance.
+     *
+     * @param {object} options Marionette.View options object
      */
     initialize(options)
     {
@@ -21,6 +22,9 @@ class ViewSettings extends Marionette.ItemView
         this._workflow = options.workflow;
     }
 
+    /**
+     * Initialize the settings after render.
+     */
     onRender()
     {
         this._initializeSettingsDisplay();
@@ -30,14 +34,6 @@ class ViewSettings extends Marionette.ItemView
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        this.rodanChannel = Radio.channel('rodan');
-    }
-
-    /**
      * Save settings.
      */
     _handleButtonSave()
@@ -46,7 +42,7 @@ class ViewSettings extends Marionette.ItemView
         if ($(element).is(':visible'))
         {
             this.model.set('job_settings', this._editor.getValue());
-            this.rodanChannel.request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model, workflow: this._workflow});
+            Radio.channel('rodan').request(Events.REQUEST__WORKFLOWJOB_SAVE, {workflowjob: this.model, workflow: this._workflow});
         }
     }
 
@@ -64,7 +60,7 @@ class ViewSettings extends Marionette.ItemView
         startValues = $.isEmptyObject(startValues) ? null : startValues;
         $(element).show();
         var jobUuid = this.model.getJobUuid();
-        var collection = this.rodanChannel.request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
+        var collection = Radio.channel('rodan').request(Events.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = collection.get(jobUuid);
         var settingsSchema = { 
             schema: job.get('settings'),
@@ -88,10 +84,6 @@ class ViewSettings extends Marionette.ItemView
         return $(this.$el.find('#workflowjob-settings')[0])[0];
     }
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// PROTOTYPE
-///////////////////////////////////////////////////////////////////////////////////////
 ViewSettings.prototype.modelEvents = {
     'all': 'render'
 };
@@ -102,5 +94,3 @@ ViewSettings.prototype.events = {
     'click @ui.buttonSave': '_handleButtonSave'
         };
 ViewSettings.prototype.template = '#template-main_workflowjob_settings';
-
-export default ViewSettings;
