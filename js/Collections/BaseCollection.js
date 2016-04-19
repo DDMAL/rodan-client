@@ -34,6 +34,16 @@ export default class BaseCollection extends Backbone.Collection
     }
 
     /**
+     * Returns route.
+     *
+     * @return {string} route
+     */
+    get route()
+    {
+        return this._route;
+    }
+
+    /**
      * Returns enumerations of this Collection. These are custom-defined in the subclasses.
      *
      * Enumerations should be defined in subclasses as follows:
