@@ -246,7 +246,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     url()
     {
-        return Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
+        return Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
     }
 
     /**
@@ -342,7 +342,7 @@ export default class BaseCollection extends Backbone.Collection
 /*        var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
     }
 
     /**
@@ -350,7 +350,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     _handleErrorResponse(collection, response, options)
     {
-        Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
                                                                   response: response,
                                                                   options: options});
     }
@@ -382,6 +382,6 @@ export default class BaseCollection extends Backbone.Collection
      */
     _onAdd(model, collection, options)
     {
-        Rodan.channel('rodan').trigger(RODAN_EVENTS.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
     }
 }
