@@ -6,7 +6,7 @@
         "NAME": "",
         "EMAIL": ""
     },
-    "WORKFLOWBUILDER":
+    "WORKFLOWBUILDERGUI":
     {
         "USER_AGENT": "rodan-standard",
         "GRID":

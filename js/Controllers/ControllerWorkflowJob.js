@@ -114,7 +114,7 @@ export default class ControllerWorkflowJob extends BaseController
         {
             for (var i = 0; i < inputPortType.get('minimum');i ++)
             {
-                that.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob, workflow: workflow});
+                Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: inputPortType, workflowjob: workflowJob, workflow: workflow});
             }
         });
     }
@@ -130,7 +130,7 @@ export default class ControllerWorkflowJob extends BaseController
         {
             for (var i = 0; i < outputPortType.get('minimum'); i++)
             {
-                that.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
+                Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, 
                                            {outputporttype: outputPortType, workflowjob: workflowJob, targetinputports: targetInputPorts, workflow: workflow});
             }
         });
