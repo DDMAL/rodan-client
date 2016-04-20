@@ -246,7 +246,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     url()
     {
-        return this.rodanChannel.request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
+        return Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
     }
 
     /**
@@ -266,7 +266,7 @@ export default class BaseCollection extends Backbone.Collection
     _initializeRadio()
     {
         /** @ignore */
-        this.rodanChannel = Radio.channel('rodan');
+        Rodan.channel('rodan') = Radio.channel('rodan');
     }
 
     /**
@@ -343,7 +343,7 @@ export default class BaseCollection extends Backbone.Collection
 /*        var text = 'Successful ' + options.task
                    + ' (' + options.xhr.status + '): ' 
                    + collection.constructor.name;
-        this.rodanChannel.request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
+        Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
     }
 
     /**
@@ -351,7 +351,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     _handleErrorResponse(collection, response, options)
     {
-        this.rodanChannel.request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
+        Rodan.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
                                                                   response: response,
                                                                   options: options});
     }
@@ -383,6 +383,6 @@ export default class BaseCollection extends Backbone.Collection
      */
     _onAdd(model, collection, options)
     {
-        this.rodanChannel.trigger(RODAN_EVENTS.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
+        Rodan.channel('rodan').trigger(RODAN_EVENTS.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
     }
 }
