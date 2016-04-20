@@ -1,5 +1,5 @@
 {
     "source": "./js",
-    "destination": "./docs",
+    "destination": "./wiki/development/api",
     "package": "./package.json"
 }
