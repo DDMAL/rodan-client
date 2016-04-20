@@ -25,7 +25,6 @@ export default class BaseCollection extends Backbone.Collection
         super(options);
         this._pagination = new Pagination();
         this._lastData = {};
-        this._initializeRadio();
         this._filters = {};
         this._sort = {};
         this._page = {};
@@ -259,15 +258,7 @@ export default class BaseCollection extends Backbone.Collection
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
-///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        /** @ignore */
-        Rodan.channel('rodan') = Radio.channel('rodan');
-    }
+///////////////////////////////////////////////////////////////////////////////////////ƒ
 
     /**
      * Handles a succesful creation. All this does is "properly" reload the collection.
