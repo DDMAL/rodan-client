@@ -60,10 +60,7 @@ var Configuration = {
     ADMIN_CLIENT: {
         NAME: '',
         EMAIL: ''
-    },
-
-    // Plugins placeholder.
-    PLUGINS: [],
+    }
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
