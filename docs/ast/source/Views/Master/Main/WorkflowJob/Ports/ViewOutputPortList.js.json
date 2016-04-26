@@ -1,0 +1,622 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "BaseViewList",
+            "range": [
+              7,
+              19
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            7,
+            19
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../../BaseViewList",
+        "raw": "'../../BaseViewList'",
+        "range": [
+          25,
+          45
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 25
+          },
+          "end": {
+            "line": 1,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        0,
+        46
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "ViewOutputPortListItem",
+            "range": [
+              54,
+              76
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 29
+              }
+            }
+          },
+          "range": [
+            54,
+            76
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 29
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./ViewOutputPortListItem",
+        "raw": "'./ViewOutputPortListItem'",
+        "range": [
+          82,
+          108
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 35
+          },
+          "end": {
+            "line": 2,
+            "column": 61
+          }
+        }
+      },
+      "range": [
+        47,
+        109
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 62
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * OutputPort list view.\n ",
+          "range": [
+            111,
+            143
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ViewOutputPortList",
+          "range": [
+            165,
+            183
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 21
+            },
+            "end": {
+              "line": 7,
+              "column": 39
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "BaseViewList",
+          "range": [
+            192,
+            204
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 48
+            },
+            "end": {
+              "line": 7,
+              "column": 60
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [],
+          "range": [
+            205,
+            207
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 61
+            },
+            "end": {
+              "line": 7,
+              "column": 63
+            }
+          }
+        },
+        "range": [
+          159,
+          207
+        ],
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 15
+          },
+          "end": {
+            "line": 7,
+            "column": 63
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * OutputPort list view.\n ",
+            "range": [
+              111,
+              143
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        144,
+        207
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 63
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * OutputPort list view.\n ",
+          "range": [
+            111,
+            143
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewOutputPortList",
+              "range": [
+                208,
+                226
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 0
+                },
+                "end": {
+                  "line": 8,
+                  "column": 18
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                227,
+                236
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 19
+                },
+                "end": {
+                  "line": 8,
+                  "column": 28
+                }
+              }
+            },
+            "range": [
+              208,
+              236
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 28
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "template",
+            "range": [
+              237,
+              245
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 29
+              },
+              "end": {
+                "line": 8,
+                "column": 37
+              }
+            }
+          },
+          "range": [
+            208,
+            245
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 37
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "#template-main_outputport_list",
+          "raw": "'#template-main_outputport_list'",
+          "range": [
+            248,
+            280
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 40
+            },
+            "end": {
+              "line": 8,
+              "column": 72
+            }
+          }
+        },
+        "range": [
+          208,
+          280
+        ],
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 72
+          }
+        }
+      },
+      "range": [
+        208,
+        281
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 73
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewOutputPortList",
+              "range": [
+                282,
+                300
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 0
+                },
+                "end": {
+                  "line": 9,
+                  "column": 18
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                301,
+                310
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 19
+                },
+                "end": {
+                  "line": 9,
+                  "column": 28
+                }
+              }
+            },
+            "range": [
+              282,
+              310
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 9,
+                "column": 28
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "childView",
+            "range": [
+              311,
+              320
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 29
+              },
+              "end": {
+                "line": 9,
+                "column": 38
+              }
+            }
+          },
+          "range": [
+            282,
+            320
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 38
+            }
+          }
+        },
+        "right": {
+          "type": "Identifier",
+          "name": "ViewOutputPortListItem",
+          "range": [
+            323,
+            345
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 41
+            },
+            "end": {
+              "line": 9,
+              "column": 63
+            }
+          }
+        },
+        "range": [
+          282,
+          345
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 9,
+            "column": 63
+          }
+        }
+      },
+      "range": [
+        282,
+        346
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 64
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    346
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 9,
+      "column": 64
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * OutputPort list view.\n ",
+      "range": [
+        111,
+        143
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    }
+  ]
+}

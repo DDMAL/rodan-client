@@ -1,0 +1,523 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "BaseViewList",
+            "range": [
+              7,
+              19
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            7,
+            19
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../../BaseViewList",
+        "raw": "'../../BaseViewList'",
+        "range": [
+          25,
+          45
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 25
+          },
+          "end": {
+            "line": 1,
+            "column": 45
+          }
+        }
+      },
+      "range": [
+        0,
+        46
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 46
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * RunJob list view.\n ",
+          "range": [
+            48,
+            76
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ViewRunJobList",
+          "range": [
+            98,
+            112
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 21
+            },
+            "end": {
+              "line": 6,
+              "column": 35
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "BaseViewList",
+          "range": [
+            121,
+            133
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 44
+            },
+            "end": {
+              "line": 6,
+              "column": 56
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [],
+          "range": [
+            134,
+            136
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 57
+            },
+            "end": {
+              "line": 6,
+              "column": 59
+            }
+          }
+        },
+        "range": [
+          92,
+          136
+        ],
+        "loc": {
+          "start": {
+            "line": 6,
+            "column": 15
+          },
+          "end": {
+            "line": 6,
+            "column": 59
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * RunJob list view.\n ",
+            "range": [
+              48,
+              76
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 5,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        77,
+        136
+      ],
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 59
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * RunJob list view.\n ",
+          "range": [
+            48,
+            76
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewRunJobList",
+              "range": [
+                137,
+                151
+              ],
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 0
+                },
+                "end": {
+                  "line": 7,
+                  "column": 14
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                152,
+                161
+              ],
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 15
+                },
+                "end": {
+                  "line": 7,
+                  "column": 24
+                }
+              }
+            },
+            "range": [
+              137,
+              161
+            ],
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 24
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "behaviors",
+            "range": [
+              162,
+              171
+            ],
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 25
+              },
+              "end": {
+                "line": 7,
+                "column": 34
+              }
+            }
+          },
+          "range": [
+            137,
+            171
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 34
+            }
+          }
+        },
+        "right": {
+          "type": "ObjectExpression",
+          "properties": [
+            {
+              "type": "Property",
+              "key": {
+                "type": "Identifier",
+                "name": "Table",
+                "range": [
+                  175,
+                  180
+                ],
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 38
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 43
+                  }
+                }
+              },
+              "value": {
+                "type": "ObjectExpression",
+                "properties": [
+                  {
+                    "type": "Property",
+                    "key": {
+                      "type": "Literal",
+                      "value": "table",
+                      "raw": "'table'",
+                      "range": [
+                        183,
+                        190
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 7,
+                          "column": 46
+                        },
+                        "end": {
+                          "line": 7,
+                          "column": 53
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "Literal",
+                      "value": "#table-runjobs",
+                      "raw": "'#table-runjobs'",
+                      "range": [
+                        192,
+                        208
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 7,
+                          "column": 55
+                        },
+                        "end": {
+                          "line": 7,
+                          "column": 71
+                        }
+                      }
+                    },
+                    "kind": "init",
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "range": [
+                      183,
+                      208
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 46
+                      },
+                      "end": {
+                        "line": 7,
+                        "column": 71
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  182,
+                  209
+                ],
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 45
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 72
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                175,
+                209
+              ],
+              "loc": {
+                "start": {
+                  "line": 7,
+                  "column": 38
+                },
+                "end": {
+                  "line": 7,
+                  "column": 72
+                }
+              }
+            }
+          ],
+          "range": [
+            174,
+            210
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 37
+            },
+            "end": {
+              "line": 7,
+              "column": 73
+            }
+          }
+        },
+        "range": [
+          137,
+          210
+        ],
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 7,
+            "column": 73
+          }
+        }
+      },
+      "range": [
+        137,
+        211
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 74
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    211
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 7,
+      "column": 74
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * RunJob list view.\n ",
+      "range": [
+        48,
+        76
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 5,
+          "column": 3
+        }
+      }
+    }
+  ]
+}
