@@ -1,0 +1,2440 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "BaseViewListItem",
+            "range": [
+              7,
+              23
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 23
+              }
+            }
+          },
+          "range": [
+            7,
+            23
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 23
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../../BaseViewListItem",
+        "raw": "'../../BaseViewListItem'",
+        "range": [
+          29,
+          53
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 29
+          },
+          "end": {
+            "line": 1,
+            "column": 53
+          }
+        }
+      },
+      "range": [
+        0,
+        54
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 54
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "RODAN_EVENTS",
+            "range": [
+              62,
+              74
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            62,
+            74
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../../../../../Shared/RODAN_EVENTS",
+        "raw": "'../../../../../Shared/RODAN_EVENTS'",
+        "range": [
+          80,
+          116
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 25
+          },
+          "end": {
+            "line": 2,
+            "column": 61
+          }
+        }
+      },
+      "range": [
+        55,
+        117
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 62
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Radio",
+            "range": [
+              125,
+              130
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 12
+              }
+            }
+          },
+          "range": [
+            125,
+            130
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 12
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "backbone.radio",
+        "raw": "'backbone.radio'",
+        "range": [
+          136,
+          152
+        ],
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 18
+          },
+          "end": {
+            "line": 3,
+            "column": 34
+          }
+        }
+      },
+      "range": [
+        118,
+        153
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 35
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * InputPort list item view.\n ",
+          "range": [
+            155,
+            191
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ViewInputPortListItem",
+          "range": [
+            213,
+            234
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 21
+            },
+            "end": {
+              "line": 8,
+              "column": 42
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "BaseViewListItem",
+          "range": [
+            243,
+            259
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 51
+            },
+            "end": {
+              "line": 8,
+              "column": 67
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "initialize",
+                "range": [
+                  671,
+                  681
+                ],
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "options",
+                    "range": [
+                      682,
+                      689
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 18,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 18,
+                        "column": 22
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              705,
+                              709
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 20,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 20,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "_workflow",
+                            "range": [
+                              710,
+                              719
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 20,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 20,
+                                "column": 22
+                              }
+                            }
+                          },
+                          "range": [
+                            705,
+                            719
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 20,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 20,
+                              "column": 22
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "Identifier",
+                            "name": "options",
+                            "range": [
+                              722,
+                              729
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 20,
+                                "column": 25
+                              },
+                              "end": {
+                                "line": 20,
+                                "column": 32
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "workflow",
+                            "range": [
+                              730,
+                              738
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 20,
+                                "column": 33
+                              },
+                              "end": {
+                                "line": 20,
+                                "column": 41
+                              }
+                            }
+                          },
+                          "range": [
+                            722,
+                            738
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 20,
+                              "column": 25
+                            },
+                            "end": {
+                              "line": 20,
+                              "column": 41
+                            }
+                          }
+                        },
+                        "range": [
+                          705,
+                          738
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 20,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 20,
+                            "column": 41
+                          }
+                        }
+                      },
+                      "range": [
+                        705,
+                        739
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 20,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 42
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              748,
+                              752
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 21,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 21,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "_workflowJob",
+                            "range": [
+                              753,
+                              765
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 21,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 21,
+                                "column": 25
+                              }
+                            }
+                          },
+                          "range": [
+                            748,
+                            765
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 21,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 21,
+                              "column": 25
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "Identifier",
+                            "name": "options",
+                            "range": [
+                              768,
+                              775
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 21,
+                                "column": 28
+                              },
+                              "end": {
+                                "line": 21,
+                                "column": 35
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "workflowjob",
+                            "range": [
+                              776,
+                              787
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 21,
+                                "column": 36
+                              },
+                              "end": {
+                                "line": 21,
+                                "column": 47
+                              }
+                            }
+                          },
+                          "range": [
+                            768,
+                            787
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 21,
+                              "column": 28
+                            },
+                            "end": {
+                              "line": 21,
+                              "column": 47
+                            }
+                          }
+                        },
+                        "range": [
+                          748,
+                          787
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 21,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 21,
+                            "column": 47
+                          }
+                        }
+                      },
+                      "range": [
+                        748,
+                        788
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 21,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 21,
+                          "column": 48
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    695,
+                    794
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 19,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  681,
+                  794
+                ],
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                671,
+                794
+              ],
+              "loc": {
+                "start": {
+                  "line": 18,
+                  "column": 4
+                },
+                "end": {
+                  "line": 22,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    262,
+                    349
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 10,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 10,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PUBLIC METHODS",
+                  "range": [
+                    350,
+                    367
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 11,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 17
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    368,
+                    455
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 12,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 12,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Initializes the instance.\n     *\n     * @param {object} options Marionette.View options object; 'options.workflow' (Workflow) and 'options.workflowjob' (WorkflowJob) must also be provided\n     ",
+                  "range": [
+                    460,
+                    666
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 13,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 17,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    796,
+                    883
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 24,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PRIVATE METHODS",
+                  "range": [
+                    884,
+                    902
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    903,
+                    990
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle delete.\n     ",
+                  "range": [
+                    995,
+                    1028
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_handleButtonDelete",
+                "range": [
+                  1033,
+                  1052
+                ],
+                "loc": {
+                  "start": {
+                    "line": 30,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 23
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  1069,
+                                  1074
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1075,
+                                  1082
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                1069,
+                                1082
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 32,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 32,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1083,
+                                  1090
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1069,
+                              1091
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 32,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 32,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "request",
+                            "range": [
+                              1092,
+                              1099
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 32,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 32,
+                                "column": 38
+                              }
+                            }
+                          },
+                          "range": [
+                            1069,
+                            1099
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 32,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 32,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1100,
+                                1112
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 32,
+                                  "column": 39
+                                },
+                                "end": {
+                                  "line": 32,
+                                  "column": 51
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT",
+                              "range": [
+                                1113,
+                                1154
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 32,
+                                  "column": 52
+                                },
+                                "end": {
+                                  "line": 32,
+                                  "column": 93
+                                }
+                              }
+                            },
+                            "range": [
+                              1100,
+                              1154
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 32,
+                                "column": 39
+                              },
+                              "end": {
+                                "line": 32,
+                                "column": 93
+                              }
+                            }
+                          },
+                          {
+                            "type": "ObjectExpression",
+                            "properties": [
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "inputport",
+                                  "range": [
+                                    1157,
+                                    1166
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 96
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 105
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "ThisExpression",
+                                    "range": [
+                                      1168,
+                                      1172
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 107
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 111
+                                      }
+                                    }
+                                  },
+                                  "property": {
+                                    "type": "Identifier",
+                                    "name": "model",
+                                    "range": [
+                                      1173,
+                                      1178
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 112
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 117
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1168,
+                                    1178
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 107
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 117
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  1157,
+                                  1178
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 96
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 117
+                                  }
+                                }
+                              },
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "workflow",
+                                  "range": [
+                                    1180,
+                                    1188
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 119
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 127
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "ThisExpression",
+                                    "range": [
+                                      1190,
+                                      1194
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 129
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 133
+                                      }
+                                    }
+                                  },
+                                  "property": {
+                                    "type": "Identifier",
+                                    "name": "_workflow",
+                                    "range": [
+                                      1195,
+                                      1204
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 134
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 143
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1190,
+                                    1204
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 129
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 143
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  1180,
+                                  1204
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 119
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 143
+                                  }
+                                }
+                              },
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "workflowjob",
+                                  "range": [
+                                    1206,
+                                    1217
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 145
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 156
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "ThisExpression",
+                                    "range": [
+                                      1219,
+                                      1223
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 158
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 162
+                                      }
+                                    }
+                                  },
+                                  "property": {
+                                    "type": "Identifier",
+                                    "name": "_workflowJob",
+                                    "range": [
+                                      1224,
+                                      1236
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 32,
+                                        "column": 163
+                                      },
+                                      "end": {
+                                        "line": 32,
+                                        "column": 175
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    1219,
+                                    1236
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 32,
+                                      "column": 158
+                                    },
+                                    "end": {
+                                      "line": 32,
+                                      "column": 175
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  1206,
+                                  1236
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 32,
+                                    "column": 145
+                                  },
+                                  "end": {
+                                    "line": 32,
+                                    "column": 175
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1156,
+                              1237
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 32,
+                                "column": 95
+                              },
+                              "end": {
+                                "line": 32,
+                                "column": 176
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1069,
+                          1238
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 32,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 32,
+                            "column": 177
+                          }
+                        }
+                      },
+                      "range": [
+                        1069,
+                        1239
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 32,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 32,
+                          "column": 178
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1059,
+                    1245
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 31,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1052,
+                  1245
+                ],
+                "loc": {
+                  "start": {
+                    "line": 30,
+                    "column": 23
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1033,
+                1245
+              ],
+              "loc": {
+                "start": {
+                  "line": 30,
+                  "column": 4
+                },
+                "end": {
+                  "line": 33,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    796,
+                    883
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 24,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PRIVATE METHODS",
+                  "range": [
+                    884,
+                    902
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    903,
+                    990
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle delete.\n     ",
+                  "range": [
+                    995,
+                    1028
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 29,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            260,
+            1247
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 0
+            },
+            "end": {
+              "line": 34,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          207,
+          1247
+        ],
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 15
+          },
+          "end": {
+            "line": 34,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * InputPort list item view.\n ",
+            "range": [
+              155,
+              191
+            ],
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 0
+              },
+              "end": {
+                "line": 7,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        192,
+        1247
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 34,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * InputPort list item view.\n ",
+          "range": [
+            155,
+            191
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewInputPortListItem",
+              "range": [
+                1248,
+                1269
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 0
+                },
+                "end": {
+                  "line": 35,
+                  "column": 21
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                1270,
+                1279
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 22
+                },
+                "end": {
+                  "line": 35,
+                  "column": 31
+                }
+              }
+            },
+            "range": [
+              1248,
+              1279
+            ],
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 31
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "ui",
+            "range": [
+              1280,
+              1282
+            ],
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 32
+              },
+              "end": {
+                "line": 35,
+                "column": 34
+              }
+            }
+          },
+          "range": [
+            1248,
+            1282
+          ],
+          "loc": {
+            "start": {
+              "line": 35,
+              "column": 0
+            },
+            "end": {
+              "line": 35,
+              "column": 34
+            }
+          }
+        },
+        "right": {
+          "type": "ObjectExpression",
+          "properties": [
+            {
+              "type": "Property",
+              "key": {
+                "type": "Identifier",
+                "name": "buttonDelete",
+                "range": [
+                  1299,
+                  1311
+                ],
+                "loc": {
+                  "start": {
+                    "line": 36,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 24
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "#button-delete",
+                "raw": "'#button-delete'",
+                "range": [
+                  1313,
+                  1329
+                ],
+                "loc": {
+                  "start": {
+                    "line": 36,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 42
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                1299,
+                1329
+              ],
+              "loc": {
+                "start": {
+                  "line": 36,
+                  "column": 12
+                },
+                "end": {
+                  "line": 36,
+                  "column": 42
+                }
+              }
+            }
+          ],
+          "range": [
+            1285,
+            1339
+          ],
+          "loc": {
+            "start": {
+              "line": 35,
+              "column": 37
+            },
+            "end": {
+              "line": 37,
+              "column": 9
+            }
+          }
+        },
+        "range": [
+          1248,
+          1339
+        ],
+        "loc": {
+          "start": {
+            "line": 35,
+            "column": 0
+          },
+          "end": {
+            "line": 37,
+            "column": 9
+          }
+        }
+      },
+      "range": [
+        1248,
+        1340
+      ],
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewInputPortListItem",
+              "range": [
+                1341,
+                1362
+              ],
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 0
+                },
+                "end": {
+                  "line": 38,
+                  "column": 21
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                1363,
+                1372
+              ],
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 22
+                },
+                "end": {
+                  "line": 38,
+                  "column": 31
+                }
+              }
+            },
+            "range": [
+              1341,
+              1372
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 0
+              },
+              "end": {
+                "line": 38,
+                "column": 31
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "events",
+            "range": [
+              1373,
+              1379
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 32
+              },
+              "end": {
+                "line": 38,
+                "column": 38
+              }
+            }
+          },
+          "range": [
+            1341,
+            1379
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 0
+            },
+            "end": {
+              "line": 38,
+              "column": 38
+            }
+          }
+        },
+        "right": {
+          "type": "ObjectExpression",
+          "properties": [
+            {
+              "type": "Property",
+              "key": {
+                "type": "Literal",
+                "value": "click @ui.buttonDelete",
+                "raw": "'click @ui.buttonDelete'",
+                "range": [
+                  1396,
+                  1420
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 36
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "_handleButtonDelete",
+                "raw": "'_handleButtonDelete'",
+                "range": [
+                  1422,
+                  1443
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 38
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 59
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                1396,
+                1443
+              ],
+              "loc": {
+                "start": {
+                  "line": 39,
+                  "column": 12
+                },
+                "end": {
+                  "line": 39,
+                  "column": 59
+                }
+              }
+            }
+          ],
+          "range": [
+            1382,
+            1453
+          ],
+          "loc": {
+            "start": {
+              "line": 38,
+              "column": 41
+            },
+            "end": {
+              "line": 40,
+              "column": 9
+            }
+          }
+        },
+        "range": [
+          1341,
+          1453
+        ],
+        "loc": {
+          "start": {
+            "line": 38,
+            "column": 0
+          },
+          "end": {
+            "line": 40,
+            "column": 9
+          }
+        }
+      },
+      "range": [
+        1341,
+        1454
+      ],
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 10
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewInputPortListItem",
+              "range": [
+                1455,
+                1476
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 0
+                },
+                "end": {
+                  "line": 41,
+                  "column": 21
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                1477,
+                1486
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 22
+                },
+                "end": {
+                  "line": 41,
+                  "column": 31
+                }
+              }
+            },
+            "range": [
+              1455,
+              1486
+            ],
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 0
+              },
+              "end": {
+                "line": 41,
+                "column": 31
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "template",
+            "range": [
+              1487,
+              1495
+            ],
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 32
+              },
+              "end": {
+                "line": 41,
+                "column": 40
+              }
+            }
+          },
+          "range": [
+            1455,
+            1495
+          ],
+          "loc": {
+            "start": {
+              "line": 41,
+              "column": 0
+            },
+            "end": {
+              "line": 41,
+              "column": 40
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "#template-main_inputport_list_item",
+          "raw": "'#template-main_inputport_list_item'",
+          "range": [
+            1498,
+            1534
+          ],
+          "loc": {
+            "start": {
+              "line": 41,
+              "column": 43
+            },
+            "end": {
+              "line": 41,
+              "column": 79
+            }
+          }
+        },
+        "range": [
+          1455,
+          1534
+        ],
+        "loc": {
+          "start": {
+            "line": 41,
+            "column": 0
+          },
+          "end": {
+            "line": 41,
+            "column": 79
+          }
+        }
+      },
+      "range": [
+        1455,
+        1535
+      ],
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 80
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewInputPortListItem",
+              "range": [
+                1536,
+                1557
+              ],
+              "loc": {
+                "start": {
+                  "line": 42,
+                  "column": 0
+                },
+                "end": {
+                  "line": 42,
+                  "column": 21
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                1558,
+                1567
+              ],
+              "loc": {
+                "start": {
+                  "line": 42,
+                  "column": 22
+                },
+                "end": {
+                  "line": 42,
+                  "column": 31
+                }
+              }
+            },
+            "range": [
+              1536,
+              1567
+            ],
+            "loc": {
+              "start": {
+                "line": 42,
+                "column": 0
+              },
+              "end": {
+                "line": 42,
+                "column": 31
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "tagName",
+            "range": [
+              1568,
+              1575
+            ],
+            "loc": {
+              "start": {
+                "line": 42,
+                "column": 32
+              },
+              "end": {
+                "line": 42,
+                "column": 39
+              }
+            }
+          },
+          "range": [
+            1536,
+            1575
+          ],
+          "loc": {
+            "start": {
+              "line": 42,
+              "column": 0
+            },
+            "end": {
+              "line": 42,
+              "column": 39
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "tr",
+          "raw": "'tr'",
+          "range": [
+            1578,
+            1582
+          ],
+          "loc": {
+            "start": {
+              "line": 42,
+              "column": 42
+            },
+            "end": {
+              "line": 42,
+              "column": 46
+            }
+          }
+        },
+        "range": [
+          1536,
+          1582
+        ],
+        "loc": {
+          "start": {
+            "line": 42,
+            "column": 0
+          },
+          "end": {
+            "line": 42,
+            "column": 46
+          }
+        }
+      },
+      "range": [
+        1536,
+        1583
+      ],
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 0
+        },
+        "end": {
+          "line": 42,
+          "column": 47
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    1583
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 42,
+      "column": 47
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * InputPort list item view.\n ",
+      "range": [
+        155,
+        191
+      ],
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        262,
+        349
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 0
+        },
+        "end": {
+          "line": 10,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " PUBLIC METHODS",
+      "range": [
+        350,
+        367
+      ],
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        368,
+        455
+      ],
+      "loc": {
+        "start": {
+          "line": 12,
+          "column": 0
+        },
+        "end": {
+          "line": 12,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Initializes the instance.\n     *\n     * @param {object} options Marionette.View options object; 'options.workflow' (Workflow) and 'options.workflowjob' (WorkflowJob) must also be provided\n     ",
+      "range": [
+        460,
+        666
+      ],
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 4
+        },
+        "end": {
+          "line": 17,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        796,
+        883
+      ],
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " PRIVATE METHODS",
+      "range": [
+        884,
+        902
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        903,
+        990
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Handle delete.\n     ",
+      "range": [
+        995,
+        1028
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 4
+        },
+        "end": {
+          "line": 29,
+          "column": 7
+        }
+      }
+    }
+  ]
+}
