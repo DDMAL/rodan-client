@@ -51,8 +51,8 @@ child_process.execSync('cp -Rf ' + tempDestination + ' ' + destination);
 child_process.execSync('git add docs/*');
 child_process.execSync('git commit -m "Docs v' + version + '"');
 console.log();
-console.log('Don\'t forget "git push".');
-console.log('After that, remember to switch back to a code branch.);
+console.log('Remember to do "git push".');
+console.log('After that, remember to switch back to a code branch.');
 console.log();
 
 //////////////////////////////////////////////////////////////////////////////////////
