@@ -8,7 +8,7 @@
 process.stdin.setEncoding('utf8');
 if (!handleGitStatus())
 {
-//    process.exit();
+    process.exit();
 }
 
 // Get version.
@@ -17,6 +17,15 @@ var version = json.version;
 var destination = 'docs/' + version;
 var tempDestination = 'tmp/' + version;
 console.log('API will be written to "' + destination + '"');
+
+// Remove current temp destination.
+var fs = require('fs');
+try
+{
+    fs.rmdirSync(tempDestination);
+}
+catch (exception)
+{}
 
 // Make the docs.
 var esdoc = require('../node_modules/esdoc/out/src/ESDoc.js');
@@ -30,7 +39,6 @@ var cmd = 'git checkout gh-pages';
 child_process.execSync(cmd);
 
 // Copy. Will overwrite whatever exists. 
-var fs = require('fs');
 try
 {
     fs.rmdirSync(destination);
