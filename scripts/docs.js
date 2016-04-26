@@ -14,7 +14,7 @@ if (!handleGitStatus())
 // Get version.
 var json = require('../package.json');
 var version = json.version;
-var destination = 'docs/' + version;
+var destination = 'developer_manual/api/' + version;
 var tempDestination = 'tmp/' + version;
 console.log('API will be written to "' + destination + '"');
 
@@ -48,8 +48,8 @@ catch (exception)
 child_process.execSync('cp -Rf ' + tempDestination + ' ' + destination);
 
 // Add and commit.
-child_process.execSync('git add docs/*');
-child_process.execSync('git commit -m "Docs v' + version + '"');
+child_process.execSync('git add developer_manual/api'); 
+child_process.execSync('git commit -m "API v' + version + '"');
 console.log();
 console.log('Remember to do "git push".');
 console.log('After that, remember to switch back to a code branch.');
