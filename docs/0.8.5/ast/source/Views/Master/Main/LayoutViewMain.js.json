@@ -1,0 +1,3674 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Marionette",
+            "range": [
+              7,
+              17
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 17
+              }
+            }
+          },
+          "range": [
+            7,
+            17
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 17
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "backbone.marionette",
+        "raw": "'backbone.marionette'",
+        "range": [
+          23,
+          44
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 23
+          },
+          "end": {
+            "line": 1,
+            "column": 44
+          }
+        }
+      },
+      "range": [
+        0,
+        45
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "RODAN_EVENTS",
+            "range": [
+              53,
+              65
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 19
+              }
+            }
+          },
+          "range": [
+            53,
+            65
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "../../../Shared/RODAN_EVENTS",
+        "raw": "'../../../Shared/RODAN_EVENTS'",
+        "range": [
+          71,
+          101
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 25
+          },
+          "end": {
+            "line": 2,
+            "column": 55
+          }
+        }
+      },
+      "range": [
+        46,
+        102
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 56
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Radio",
+            "range": [
+              110,
+              115
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 12
+              }
+            }
+          },
+          "range": [
+            110,
+            115
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 12
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "backbone.radio",
+        "raw": "'backbone.radio'",
+        "range": [
+          121,
+          137
+        ],
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 18
+          },
+          "end": {
+            "line": 3,
+            "column": 34
+          }
+        }
+      },
+      "range": [
+        103,
+        138
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 35
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "ViewLogin",
+            "range": [
+              146,
+              155
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 7
+              },
+              "end": {
+                "line": 4,
+                "column": 16
+              }
+            }
+          },
+          "range": [
+            146,
+            155
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 7
+            },
+            "end": {
+              "line": 4,
+              "column": 16
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./Login/ViewLogin",
+        "raw": "'./Login/ViewLogin'",
+        "range": [
+          161,
+          180
+        ],
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 22
+          },
+          "end": {
+            "line": 4,
+            "column": 41
+          }
+        }
+      },
+      "range": [
+        139,
+        181
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 42
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Layout view for main work area. This is responsible for loading views within the main region.\n ",
+          "range": [
+            183,
+            287
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "LayoutViewMain",
+          "range": [
+            309,
+            323
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 21
+            },
+            "end": {
+              "line": 9,
+              "column": 35
+            }
+          }
+        },
+        "superClass": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "Marionette",
+            "range": [
+              332,
+              342
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 44
+              },
+              "end": {
+                "line": 9,
+                "column": 54
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "LayoutView",
+            "range": [
+              343,
+              353
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 55
+              },
+              "end": {
+                "line": 9,
+                "column": 65
+              }
+            }
+          },
+          "range": [
+            332,
+            353
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 44
+            },
+            "end": {
+              "line": 9,
+              "column": 65
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "initialize",
+                "range": [
+                  603,
+                  613
+                ],
+                "loc": {
+                  "start": {
+                    "line": 17,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              630,
+                              634
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 19,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 19,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "addRegions",
+                            "range": [
+                              635,
+                              645
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 19,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 19,
+                                "column": 23
+                              }
+                            }
+                          },
+                          "range": [
+                            630,
+                            645
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 19,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 19,
+                              "column": 23
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "ObjectExpression",
+                            "properties": [
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "region",
+                                  "range": [
+                                    660,
+                                    666
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 20,
+                                      "column": 12
+                                    },
+                                    "end": {
+                                      "line": 20,
+                                      "column": 18
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "Literal",
+                                  "value": "div",
+                                  "raw": "'div'",
+                                  "range": [
+                                    668,
+                                    673
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 20,
+                                      "column": 20
+                                    },
+                                    "end": {
+                                      "line": 20,
+                                      "column": 25
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  660,
+                                  673
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 20,
+                                    "column": 12
+                                  },
+                                  "end": {
+                                    "line": 20,
+                                    "column": 25
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              646,
+                              683
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 19,
+                                "column": 24
+                              },
+                              "end": {
+                                "line": 21,
+                                "column": 9
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          630,
+                          684
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 21,
+                            "column": 10
+                          }
+                        }
+                      },
+                      "range": [
+                        630,
+                        685
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 19,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 21,
+                          "column": 11
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              694,
+                              698
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 22,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 22,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "_initializeRadio",
+                            "range": [
+                              699,
+                              715
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 22,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 22,
+                                "column": 29
+                              }
+                            }
+                          },
+                          "range": [
+                            694,
+                            715
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 22,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 22,
+                              "column": 29
+                            }
+                          }
+                        },
+                        "arguments": [],
+                        "range": [
+                          694,
+                          717
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 22,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 22,
+                            "column": 31
+                          }
+                        }
+                      },
+                      "range": [
+                        694,
+                        718
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 22,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 22,
+                          "column": 32
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    620,
+                    724
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 18,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  613,
+                  724
+                ],
+                "loc": {
+                  "start": {
+                    "line": 17,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                603,
+                724
+              ],
+              "loc": {
+                "start": {
+                  "line": 17,
+                  "column": 4
+                },
+                "end": {
+                  "line": 23,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    356,
+                    443
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 11,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PUBLIC METHODS",
+                  "range": [
+                    444,
+                    461
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 12,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 12,
+                      "column": 17
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    462,
+                    549
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 13,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Initializes the instance.\n     ",
+                  "range": [
+                    554,
+                    598
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 14,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 16,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    726,
+                    813
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PRIVATE METHODS",
+                  "range": [
+                    814,
+                    832
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    833,
+                    920
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Initialize Radio.\n     ",
+                  "range": [
+                    925,
+                    961
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 28,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 30,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_initializeRadio",
+                "range": [
+                  966,
+                  982
+                ],
+                "loc": {
+                  "start": {
+                    "line": 31,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 20
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  999,
+                                  1004
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 33,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 33,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1005,
+                                  1012
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 33,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 33,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                999,
+                                1012
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 33,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1013,
+                                  1020
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 33,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 33,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              999,
+                              1021
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 33,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "reply",
+                            "range": [
+                              1022,
+                              1027
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 33,
+                                "column": 36
+                              }
+                            }
+                          },
+                          "range": [
+                            999,
+                            1027
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 33,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 33,
+                              "column": 36
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1028,
+                                1040
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 37
+                                },
+                                "end": {
+                                  "line": 33,
+                                  "column": 49
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "REQUEST__MAINREGION_SHOW_VIEW",
+                              "range": [
+                                1041,
+                                1070
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 50
+                                },
+                                "end": {
+                                  "line": 33,
+                                  "column": 79
+                                }
+                              }
+                            },
+                            "range": [
+                              1028,
+                              1070
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 37
+                              },
+                              "end": {
+                                "line": 33,
+                                "column": 79
+                              }
+                            }
+                          },
+                          {
+                            "type": "ArrowFunctionExpression",
+                            "id": null,
+                            "params": [
+                              {
+                                "type": "Identifier",
+                                "name": "options",
+                                "range": [
+                                  1072,
+                                  1079
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 33,
+                                    "column": 81
+                                  },
+                                  "end": {
+                                    "line": 33,
+                                    "column": 88
+                                  }
+                                }
+                              }
+                            ],
+                            "body": {
+                              "type": "CallExpression",
+                              "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                  "type": "ThisExpression",
+                                  "range": [
+                                    1083,
+                                    1087
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 33,
+                                      "column": 92
+                                    },
+                                    "end": {
+                                      "line": 33,
+                                      "column": 96
+                                    }
+                                  }
+                                },
+                                "property": {
+                                  "type": "Identifier",
+                                  "name": "_handleCommandShow",
+                                  "range": [
+                                    1088,
+                                    1106
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 33,
+                                      "column": 97
+                                    },
+                                    "end": {
+                                      "line": 33,
+                                      "column": 115
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1083,
+                                  1106
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 33,
+                                    "column": 92
+                                  },
+                                  "end": {
+                                    "line": 33,
+                                    "column": 115
+                                  }
+                                }
+                              },
+                              "arguments": [
+                                {
+                                  "type": "Identifier",
+                                  "name": "options",
+                                  "range": [
+                                    1107,
+                                    1114
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 33,
+                                      "column": 116
+                                    },
+                                    "end": {
+                                      "line": 33,
+                                      "column": 123
+                                    }
+                                  }
+                                }
+                              ],
+                              "range": [
+                                1083,
+                                1115
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 33,
+                                  "column": 92
+                                },
+                                "end": {
+                                  "line": 33,
+                                  "column": 124
+                                }
+                              }
+                            },
+                            "generator": false,
+                            "expression": true,
+                            "range": [
+                              1072,
+                              1115
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 33,
+                                "column": 81
+                              },
+                              "end": {
+                                "line": 33,
+                                "column": 124
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          999,
+                          1116
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 33,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 33,
+                            "column": 125
+                          }
+                        }
+                      },
+                      "range": [
+                        999,
+                        1117
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 33,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 33,
+                          "column": 126
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  1126,
+                                  1131
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 34,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 34,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1132,
+                                  1139
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 34,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 34,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                1126,
+                                1139
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 34,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 34,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1140,
+                                  1147
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 34,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 34,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1126,
+                              1148
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 34,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 34,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "on",
+                            "range": [
+                              1149,
+                              1151
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 34,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 34,
+                                "column": 33
+                              }
+                            }
+                          },
+                          "range": [
+                            1126,
+                            1151
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 34,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 34,
+                              "column": 33
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1152,
+                                1164
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 34,
+                                  "column": 34
+                                },
+                                "end": {
+                                  "line": 34,
+                                  "column": 46
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "EVENT__AUTHENTICATION_LOGOUT_SUCCESS",
+                              "range": [
+                                1165,
+                                1201
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 34,
+                                  "column": 47
+                                },
+                                "end": {
+                                  "line": 34,
+                                  "column": 83
+                                }
+                              }
+                            },
+                            "range": [
+                              1152,
+                              1201
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 34,
+                                "column": 34
+                              },
+                              "end": {
+                                "line": 34,
+                                "column": 83
+                              }
+                            }
+                          },
+                          {
+                            "type": "ArrowFunctionExpression",
+                            "id": null,
+                            "params": [],
+                            "body": {
+                              "type": "CallExpression",
+                              "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                  "type": "ThisExpression",
+                                  "range": [
+                                    1209,
+                                    1213
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 34,
+                                      "column": 91
+                                    },
+                                    "end": {
+                                      "line": 34,
+                                      "column": 95
+                                    }
+                                  }
+                                },
+                                "property": {
+                                  "type": "Identifier",
+                                  "name": "_handleDeauthenticationSuccess",
+                                  "range": [
+                                    1214,
+                                    1244
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 34,
+                                      "column": 96
+                                    },
+                                    "end": {
+                                      "line": 34,
+                                      "column": 126
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1209,
+                                  1244
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 34,
+                                    "column": 91
+                                  },
+                                  "end": {
+                                    "line": 34,
+                                    "column": 126
+                                  }
+                                }
+                              },
+                              "arguments": [],
+                              "range": [
+                                1209,
+                                1246
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 34,
+                                  "column": 91
+                                },
+                                "end": {
+                                  "line": 34,
+                                  "column": 128
+                                }
+                              }
+                            },
+                            "generator": false,
+                            "expression": true,
+                            "range": [
+                              1203,
+                              1246
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 34,
+                                "column": 85
+                              },
+                              "end": {
+                                "line": 34,
+                                "column": 128
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1126,
+                          1247
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 34,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 34,
+                            "column": 129
+                          }
+                        }
+                      },
+                      "range": [
+                        1126,
+                        1248
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 34,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 34,
+                          "column": 130
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  1257,
+                                  1262
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 35,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 35,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1263,
+                                  1270
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 35,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 35,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                1257,
+                                1270
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 35,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 35,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1271,
+                                  1278
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 35,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 35,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1257,
+                              1279
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 35,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 35,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "on",
+                            "range": [
+                              1280,
+                              1282
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 35,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 35,
+                                "column": 33
+                              }
+                            }
+                          },
+                          "range": [
+                            1257,
+                            1282
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 35,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 35,
+                              "column": 33
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1283,
+                                1295
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 35,
+                                  "column": 34
+                                },
+                                "end": {
+                                  "line": 35,
+                                  "column": 46
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "EVENT__AUTHENTICATION_LOGINREQUIRED",
+                              "range": [
+                                1296,
+                                1331
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 35,
+                                  "column": 47
+                                },
+                                "end": {
+                                  "line": 35,
+                                  "column": 82
+                                }
+                              }
+                            },
+                            "range": [
+                              1283,
+                              1331
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 35,
+                                "column": 34
+                              },
+                              "end": {
+                                "line": 35,
+                                "column": 82
+                              }
+                            }
+                          },
+                          {
+                            "type": "ArrowFunctionExpression",
+                            "id": null,
+                            "params": [],
+                            "body": {
+                              "type": "CallExpression",
+                              "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                  "type": "ThisExpression",
+                                  "range": [
+                                    1339,
+                                    1343
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 35,
+                                      "column": 90
+                                    },
+                                    "end": {
+                                      "line": 35,
+                                      "column": 94
+                                    }
+                                  }
+                                },
+                                "property": {
+                                  "type": "Identifier",
+                                  "name": "_handleAuthenticationLoginRequired",
+                                  "range": [
+                                    1344,
+                                    1378
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 35,
+                                      "column": 95
+                                    },
+                                    "end": {
+                                      "line": 35,
+                                      "column": 129
+                                    }
+                                  }
+                                },
+                                "range": [
+                                  1339,
+                                  1378
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 35,
+                                    "column": 90
+                                  },
+                                  "end": {
+                                    "line": 35,
+                                    "column": 129
+                                  }
+                                }
+                              },
+                              "arguments": [],
+                              "range": [
+                                1339,
+                                1380
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 35,
+                                  "column": 90
+                                },
+                                "end": {
+                                  "line": 35,
+                                  "column": 131
+                                }
+                              }
+                            },
+                            "generator": false,
+                            "expression": true,
+                            "range": [
+                              1333,
+                              1380
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 35,
+                                "column": 84
+                              },
+                              "end": {
+                                "line": 35,
+                                "column": 131
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1257,
+                          1381
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 35,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 35,
+                            "column": 132
+                          }
+                        }
+                      },
+                      "range": [
+                        1257,
+                        1382
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 35,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 35,
+                          "column": 133
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    989,
+                    1388
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 32,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 36,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  982,
+                  1388
+                ],
+                "loc": {
+                  "start": {
+                    "line": 31,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                966,
+                1388
+              ],
+              "loc": {
+                "start": {
+                  "line": 31,
+                  "column": 4
+                },
+                "end": {
+                  "line": 36,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    726,
+                    813
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 25,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": " PRIVATE METHODS",
+                  "range": [
+                    814,
+                    832
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 26,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 18
+                    }
+                  }
+                },
+                {
+                  "type": "Line",
+                  "value": "/////////////////////////////////////////////////////////////////////////////////////",
+                  "range": [
+                    833,
+                    920
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 0
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 87
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "*\n     * Initialize Radio.\n     ",
+                  "range": [
+                    925,
+                    961
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 28,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 30,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handles request for login.\n     ",
+                  "range": [
+                    1394,
+                    1439
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 38,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 40,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_handleAuthenticationLoginRequired",
+                "range": [
+                  1444,
+                  1478
+                ],
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 38
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  1495,
+                                  1500
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 43,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 43,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1501,
+                                  1508
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 43,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 43,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                1495,
+                                1508
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 43,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 43,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1509,
+                                  1516
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 43,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 43,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1495,
+                              1517
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "request",
+                            "range": [
+                              1518,
+                              1525
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 38
+                              }
+                            }
+                          },
+                          "range": [
+                            1495,
+                            1525
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 43,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 43,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1526,
+                                1538
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 43,
+                                  "column": 39
+                                },
+                                "end": {
+                                  "line": 43,
+                                  "column": 51
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "REQUEST__MAINREGION_SHOW_VIEW",
+                              "range": [
+                                1539,
+                                1568
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 43,
+                                  "column": 52
+                                },
+                                "end": {
+                                  "line": 43,
+                                  "column": 81
+                                }
+                              }
+                            },
+                            "range": [
+                              1526,
+                              1568
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 39
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 81
+                              }
+                            }
+                          },
+                          {
+                            "type": "ObjectExpression",
+                            "properties": [
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "view",
+                                  "range": [
+                                    1571,
+                                    1575
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 43,
+                                      "column": 84
+                                    },
+                                    "end": {
+                                      "line": 43,
+                                      "column": 88
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "NewExpression",
+                                  "callee": {
+                                    "type": "Identifier",
+                                    "name": "ViewLogin",
+                                    "range": [
+                                      1581,
+                                      1590
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 43,
+                                        "column": 94
+                                      },
+                                      "end": {
+                                        "line": 43,
+                                        "column": 103
+                                      }
+                                    }
+                                  },
+                                  "arguments": [],
+                                  "range": [
+                                    1577,
+                                    1592
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 43,
+                                      "column": 90
+                                    },
+                                    "end": {
+                                      "line": 43,
+                                      "column": 105
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  1571,
+                                  1592
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 43,
+                                    "column": 84
+                                  },
+                                  "end": {
+                                    "line": 43,
+                                    "column": 105
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1570,
+                              1593
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 83
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 106
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1495,
+                          1594
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 43,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 43,
+                            "column": 107
+                          }
+                        }
+                      },
+                      "range": [
+                        1495,
+                        1595
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 43,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 43,
+                          "column": 108
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1485,
+                    1601
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 42,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 44,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1478,
+                  1601
+                ],
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 38
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1444,
+                1601
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 4
+                },
+                "end": {
+                  "line": 44,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handles request for login.\n     ",
+                  "range": [
+                    1394,
+                    1439
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 38,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 40,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle show.\n     ",
+                  "range": [
+                    1607,
+                    1638
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 46,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_handleCommandShow",
+                "range": [
+                  1643,
+                  1661
+                ],
+                "loc": {
+                  "start": {
+                    "line": 49,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 49,
+                    "column": 22
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "options",
+                    "range": [
+                      1662,
+                      1669
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 49,
+                        "column": 23
+                      },
+                      "end": {
+                        "line": 49,
+                        "column": 30
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "ThisExpression",
+                              "range": [
+                                1708,
+                                1712
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 12
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "region",
+                              "range": [
+                                1713,
+                                1719
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 13
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 19
+                                }
+                              }
+                            },
+                            "range": [
+                              1708,
+                              1719
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 52,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 52,
+                                "column": 19
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "show",
+                            "range": [
+                              1720,
+                              1724
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 52,
+                                "column": 20
+                              },
+                              "end": {
+                                "line": 52,
+                                "column": 24
+                              }
+                            }
+                          },
+                          "range": [
+                            1708,
+                            1724
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 52,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 52,
+                              "column": 24
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "options",
+                              "range": [
+                                1725,
+                                1732
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 25
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 32
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "view",
+                              "range": [
+                                1733,
+                                1737
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 33
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 37
+                                }
+                              }
+                            },
+                            "range": [
+                              1725,
+                              1737
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 52,
+                                "column": 25
+                              },
+                              "end": {
+                                "line": 52,
+                                "column": 37
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1708,
+                          1738
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 52,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 52,
+                            "column": 38
+                          }
+                        }
+                      },
+                      "range": [
+                        1708,
+                        1739
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 52,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 52,
+                          "column": 39
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* @ignore ",
+                          "range": [
+                            1685,
+                            1699
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 51,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 51,
+                              "column": 22
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "range": [
+                    1675,
+                    1745
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 50,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1661,
+                  1745
+                ],
+                "loc": {
+                  "start": {
+                    "line": 49,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 53,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1643,
+                1745
+              ],
+              "loc": {
+                "start": {
+                  "line": 49,
+                  "column": 4
+                },
+                "end": {
+                  "line": 53,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle show.\n     ",
+                  "range": [
+                    1607,
+                    1638
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 46,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle deauthentication success.\n     ",
+                  "range": [
+                    1751,
+                    1802
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 55,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_handleDeauthenticationSuccess",
+                "range": [
+                  1807,
+                  1837
+                ],
+                "loc": {
+                  "start": {
+                    "line": 58,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 34
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  1854,
+                                  1859
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 60,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 60,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  1860,
+                                  1867
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 60,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 60,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                1854,
+                                1867
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 60,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 60,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  1868,
+                                  1875
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 60,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 60,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1854,
+                              1876
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 60,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 60,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "request",
+                            "range": [
+                              1877,
+                              1884
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 60,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 60,
+                                "column": 38
+                              }
+                            }
+                          },
+                          "range": [
+                            1854,
+                            1884
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 60,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 60,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                1885,
+                                1897
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 60,
+                                  "column": 39
+                                },
+                                "end": {
+                                  "line": 60,
+                                  "column": 51
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "REQUEST__MAINREGION_SHOW_VIEW",
+                              "range": [
+                                1898,
+                                1927
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 60,
+                                  "column": 52
+                                },
+                                "end": {
+                                  "line": 60,
+                                  "column": 81
+                                }
+                              }
+                            },
+                            "range": [
+                              1885,
+                              1927
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 60,
+                                "column": 39
+                              },
+                              "end": {
+                                "line": 60,
+                                "column": 81
+                              }
+                            }
+                          },
+                          {
+                            "type": "ObjectExpression",
+                            "properties": [
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "view",
+                                  "range": [
+                                    1930,
+                                    1934
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 60,
+                                      "column": 84
+                                    },
+                                    "end": {
+                                      "line": 60,
+                                      "column": 88
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "NewExpression",
+                                  "callee": {
+                                    "type": "Identifier",
+                                    "name": "ViewLogin",
+                                    "range": [
+                                      1940,
+                                      1949
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 60,
+                                        "column": 94
+                                      },
+                                      "end": {
+                                        "line": 60,
+                                        "column": 103
+                                      }
+                                    }
+                                  },
+                                  "arguments": [],
+                                  "range": [
+                                    1936,
+                                    1951
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 60,
+                                      "column": 90
+                                    },
+                                    "end": {
+                                      "line": 60,
+                                      "column": 105
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  1930,
+                                  1951
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 60,
+                                    "column": 84
+                                  },
+                                  "end": {
+                                    "line": 60,
+                                    "column": 105
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              1929,
+                              1952
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 60,
+                                "column": 83
+                              },
+                              "end": {
+                                "line": 60,
+                                "column": 106
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1854,
+                          1953
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 60,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 60,
+                            "column": 107
+                          }
+                        }
+                      },
+                      "range": [
+                        1854,
+                        1954
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 60,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 60,
+                          "column": 108
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1844,
+                    1960
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 59,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 61,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1837,
+                  1960
+                ],
+                "loc": {
+                  "start": {
+                    "line": 58,
+                    "column": 34
+                  },
+                  "end": {
+                    "line": 61,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1807,
+                1960
+              ],
+              "loc": {
+                "start": {
+                  "line": 58,
+                  "column": 4
+                },
+                "end": {
+                  "line": 61,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle deauthentication success.\n     ",
+                  "range": [
+                    1751,
+                    1802
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 55,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            354,
+            1962
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 0
+            },
+            "end": {
+              "line": 62,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          303,
+          1962
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 15
+          },
+          "end": {
+            "line": 62,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Layout view for main work area. This is responsible for loading views within the main region.\n ",
+            "range": [
+              183,
+              287
+            ],
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        288,
+        1962
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 62,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Layout view for main work area. This is responsible for loading views within the main region.\n ",
+          "range": [
+            183,
+            287
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "LayoutViewMain",
+              "range": [
+                1963,
+                1977
+              ],
+              "loc": {
+                "start": {
+                  "line": 63,
+                  "column": 0
+                },
+                "end": {
+                  "line": 63,
+                  "column": 14
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                1978,
+                1987
+              ],
+              "loc": {
+                "start": {
+                  "line": 63,
+                  "column": 15
+                },
+                "end": {
+                  "line": 63,
+                  "column": 24
+                }
+              }
+            },
+            "range": [
+              1963,
+              1987
+            ],
+            "loc": {
+              "start": {
+                "line": 63,
+                "column": 0
+              },
+              "end": {
+                "line": 63,
+                "column": 24
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "template",
+            "range": [
+              1988,
+              1996
+            ],
+            "loc": {
+              "start": {
+                "line": 63,
+                "column": 25
+              },
+              "end": {
+                "line": 63,
+                "column": 33
+              }
+            }
+          },
+          "range": [
+            1963,
+            1996
+          ],
+          "loc": {
+            "start": {
+              "line": 63,
+              "column": 0
+            },
+            "end": {
+              "line": 63,
+              "column": 33
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "#template-empty",
+          "raw": "'#template-empty'",
+          "range": [
+            1999,
+            2016
+          ],
+          "loc": {
+            "start": {
+              "line": 63,
+              "column": 36
+            },
+            "end": {
+              "line": 63,
+              "column": 53
+            }
+          }
+        },
+        "range": [
+          1963,
+          2016
+        ],
+        "loc": {
+          "start": {
+            "line": 63,
+            "column": 0
+          },
+          "end": {
+            "line": 63,
+            "column": 53
+          }
+        }
+      },
+      "range": [
+        1963,
+        2017
+      ],
+      "loc": {
+        "start": {
+          "line": 63,
+          "column": 0
+        },
+        "end": {
+          "line": 63,
+          "column": 54
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    2017
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 63,
+      "column": 54
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * Layout view for main work area. This is responsible for loading views within the main region.\n ",
+      "range": [
+        183,
+        287
+      ],
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        356,
+        443
+      ],
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " PUBLIC METHODS",
+      "range": [
+        444,
+        461
+      ],
+      "loc": {
+        "start": {
+          "line": 12,
+          "column": 0
+        },
+        "end": {
+          "line": 12,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        462,
+        549
+      ],
+      "loc": {
+        "start": {
+          "line": 13,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Initializes the instance.\n     ",
+      "range": [
+        554,
+        598
+      ],
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 4
+        },
+        "end": {
+          "line": 16,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        726,
+        813
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " PRIVATE METHODS",
+      "range": [
+        814,
+        832
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "/////////////////////////////////////////////////////////////////////////////////////",
+      "range": [
+        833,
+        920
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Initialize Radio.\n     ",
+      "range": [
+        925,
+        961
+      ],
+      "loc": {
+        "start": {
+          "line": 28,
+          "column": 4
+        },
+        "end": {
+          "line": 30,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Handles request for login.\n     ",
+      "range": [
+        1394,
+        1439
+      ],
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 4
+        },
+        "end": {
+          "line": 40,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Handle show.\n     ",
+      "range": [
+        1607,
+        1638
+      ],
+      "loc": {
+        "start": {
+          "line": 46,
+          "column": 4
+        },
+        "end": {
+          "line": 48,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "* @ignore ",
+      "range": [
+        1685,
+        1699
+      ],
+      "loc": {
+        "start": {
+          "line": 51,
+          "column": 8
+        },
+        "end": {
+          "line": 51,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Handle deauthentication success.\n     ",
+      "range": [
+        1751,
+        1802
+      ],
+      "loc": {
+        "start": {
+          "line": 55,
+          "column": 4
+        },
+        "end": {
+          "line": 57,
+          "column": 7
+        }
+      }
+    }
+  ]
+}
