@@ -6,7 +6,6 @@ dist
 web
 bundle
 js/Plugins.js
-docs
 tmp
 configuration.json
 ._*
