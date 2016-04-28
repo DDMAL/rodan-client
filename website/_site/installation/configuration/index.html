@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Rodan Client : A client for Rodan. Dig it.">
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ddmal.github.io/rodan-client/stylesheets/stylesheet.css">
+
+    <title>Rodan Client</title>
+  </head>
+
+  <body>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+    
+              <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/DDMAL/rodan-client">View on GitHub</a>
+
+          <h1 id="project_title">Rodan Client</h1>
+          <h2 id="project_tagline">A client for Rodan. Dig it.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/DDMAL/rodan-client/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/DDMAL/rodan-client/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+          <h1 id="configuration">Configuration</h1>
+
+<p>The following lists all Rodan Client configuration settings. Configuration settings are stored in <code class="highlighter-rouge">configuration.json</code>. The syntax of the file must conform to that of a JSON file.</p>
+
+<h2 id="server">Server</h2>
+<ul>
+  <li><strong><code class="highlighter-rouge">SERVER_URL</code> (required, no default)</strong>: URL of the server to connect to. This includes listing the protocol (http or https), the IP or domain, and the port. Example: <code class="highlighter-rouge">https://123.456.789.1:8080</code>.</li>
+  <li><strong><code class="highlighter-rouge">SERVER_AUTHENTICATION_TYPE</code> (required, no default)</strong>: The authentication type. Either ‘session’ or ‘token’.</li>
+  <li><strong><code class="highlighter-rouge">SERVER_REQUEST_TIME_INTERVAL</code> (default: 60000)</strong>: Interval (in milliseconds) after which the client will get the server time. Generally, the client extracts the server time from all responses from the server. However, if the client has not received a response from the server after this amount of time, the client will fire an HTTP HEAD request and get the server time. This means that the server MUST exposde the ‘Date’ response header. As such, it is recommended that this value be greater than the <code class="highlighter-rouge">EVENT_TIMER_FREQUENCY</code> to reduce traffic.</li>
+</ul>
+
+<h2 id="client-admin">Client Admin</h2>
+<ul>
+  <li><strong><code class="highlighter-rouge">ADMIN_CLIENT.NAME</code> (default: ‘’)</strong>: Name of client admin.</li>
+  <li><strong><code class="highlighter-rouge">ADMIN_CLIENT.EMAIL</code> (default: ‘’)</strong>: Email of client admin.</li>
+</ul>
+
+<p>When setting the following, you must JSON object syntax. For example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ADMIN_CLIENT: {
+    NAME: 'John Doe',
+    EMAIL: 'john@doe.com'
+}
+</code></pre>
+</div>
+
+<h2 id="general">General</h2>
+<ul>
+  <li><strong><code class="highlighter-rouge">DATETIME_FORMAT</code> (default: ‘YYYY-MM-DD HH:mm:ss’)</strong>: Date/time format. See http://momentjs.com/docs/#/displaying/format/.</li>
+  <li><strong><code class="highlighter-rouge">EVENT_TIMER_FREQUENCY</code> (default: 3000)</strong>: Event timer frequency (in milliseconds).</li>
+  <li><strong><code class="highlighter-rouge">SERVER_WAIT_TIMER</code> (default: 500)</strong>: If the client has been continuously waiting for responses from the server for this amount of time (in milliseconds), the client will begin to fire <code class="highlighter-rouge">EVENT__SERVER_WAITING</code> events, which will generally trigger a modal window to lock out the interface. This is used when heavy lifting is going on at the server side, such as a Workflow import.</li>
+  <li><strong><code class="highlighter-rouge">SERVER_PANIC_TIMER</code> (default: 8000)</strong>: Same as <code class="highlighter-rouge">SERVER_WAIT_TIMER</code>, only fires <code class="highlighter-rouge">EVENT__SERVER_PANIC</code>.</li>
+  <li><strong><code class="highlighter-rouge">RESOURCE_DISTRIBUTOR_CATEGORY</code> (default: ‘Resource Distributor’)</strong>: If you have a Job in your Job package meant solely for distributing Resources (i.e. takes in a single Resource and outputs that Resource) you have the option to use a feature that will automatically create a WorkflowJob of the correct Job that satisfies selected InputPorts. (This feature is described in the [[User Manual]]. If this is the case, those Jobs must have their category set to the value of <code class="highlighter-rouge">RESOURCE_DISTRIBUTOR_CATEGORY</code>.</li>
+</ul>
+
+<h2 id="interactive-runjob">Interactive RunJob</h2>
+<p>When a user acquires an interactive RunJob the server locks out all other users from acquiring that RunJob for X milliseconds (as defined by the server). The user’s client will attempt to continuously reacquire this lock every <code class="highlighter-rouge">RUNJOB_ACQUIRE_INTERVAL</code> milliseconds, but it will only do this for <code class="highlighter-rouge">RUNJOB_ACQUIRE_DURATION</code>.</p>
+
+<ul>
+  <li><strong><code class="highlighter-rouge">RUNJOB_ACQUIRE_DURATION</code> (default: 3600000)</strong>: Time (in milliseconds) that the client will attempt to hold a job.</li>
+  <li><strong><code class="highlighter-rouge">RUNJOB_ACQUIRE_INTERVAL</code> (default: 5000)</strong>: Interval (in milliseconds) that the RunJob controller will use to reacquire interactive locks.</li>
+</ul>
+
+
+
+      </section>
+    </div>
+
+        <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rodan Client maintained by <a href="https://github.com/DDMAL">DDMAL</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+
+  </body>
+</html>
