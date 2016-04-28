@@ -1,10 +1,8 @@
 ---
-source: src
-destination: dist
-
 collections:
-    test:
+    development_manual:
         output: true
+        layout: default
     installation:
         output: true
         layout: default
