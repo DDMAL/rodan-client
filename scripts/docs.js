@@ -14,26 +14,23 @@ if (!handleGitStatus())
 
 // Remove current temp destination.
 var fs = require('fs');
+var temp_path = '/tmp/rodan' + Date.now();
 try
 {
-    fs.rmdirSync(tempDestination);
+    fs.rmdirSync(temp_path);
 }
-catch (exception)
-{}
+catch (e) {}
 
-// Ready the directory variables.
-var api = 'website/src/_development_manual/api';
-
-// Make the docs.
-var esdoc = require('../node_modules/esdoc/out/src/ESDoc.js');
-var publisher = require('../node_modules/esdoc/out/src/Publisher/publish.js');
-var config = {source: './js', destination: api};
-esdoc.generate(config, publisher);
-
-// Next, build the website.
-var cmd = 'jekyll build --source website --destination /tmp/website';
+// Build the website.
+var cmd = 'jekyll build --source website --destination ' + temp_path;
 var child_process = require('child_process');
 child_process.execSync(cmd);
+
+// Generate the API in the website.
+var esdoc = require('../node_modules/esdoc/out/src/ESDoc.js');
+var publisher = require('../node_modules/esdoc/out/src/Publisher/publish.js');
+var config = {source: './js', destination: temp_path + '/development_manual/api'};
+esdoc.generate(config, publisher);
 
 // Checkout GitHub pages.
 child_process = require('child_process');
@@ -42,7 +39,7 @@ child_process.execSync(cmd);
 
 // Copy. Will overwrite whatever exists. 
 child_process.execSync('rm -R .');
-child_process.execSync('cp -Rf /tmp/website/* .');
+child_process.execSync('cp -Rf ' + temp_path + '/* .');
 
 process.exit();
 
