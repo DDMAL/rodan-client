@@ -5,7 +5,7 @@ The following are instructions for installing Rodan Client on a Linux environmen
 
 For the instructions below, we'll assume that you are `user` logged on `computer` and working in your `~` (home) directory.
 
-_Note: You can see a description of files and directories that are included in the repository [here](Files)._
+_Note: You can see a description of files and directories that are included in the repository [here](development_manual/Files)._
 
 ### Setup Rodan server for the client
 
