@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Rodan Client : A client for Rodan. Dig it.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>Rodan Client</title>
+  </head>
+
+  <body>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+    
+              <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/DDMAL/rodan-client">View on GitHub</a>
+
+          <h1 id="project_title">Rodan Client</h1>
+          <h2 id="project_tagline">A client for Rodan. Dig it.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/DDMAL/rodan-client/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/DDMAL/rodan-client/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+          <h3 id="environment">Environment</h3>
+<p>The following are instructions for installing Rodan Client on a Linux environment. For Windows or Mac the steps should be relatively similar except for commands such as <code class="highlighter-rouge">git</code> or <code class="highlighter-rouge">npm</code>.</p>
+
+<p>For the instructions below, we’ll assume that you are <code class="highlighter-rouge">user</code> logged on <code class="highlighter-rouge">computer</code> and working in your <code class="highlighter-rouge">~</code> (home) directory.</p>
+
+<p><em>Note: You can see a description of files and directories that are included in the repository <a href="Files">here</a>.</em></p>
+
+<h3 id="setup-rodan-server-for-the-client">Setup Rodan server for the client</h3>
+
+<p>You will most likely have to have the Rodan server administrator whitelist the IP and port you wish to host the client on to enable <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>. Furthermore, you will need the following information from the Rodan server:</p>
+
+<ul>
+  <li>server IP, port, and HTTP protocol (http or https)</li>
+  <li>authentication method (token or session).</li>
+</ul>
+
+<p>This information will be used later in the installation.</p>
+
+<p>You will also need the Rodan server administrator to create an accounts for those users you wish to have access.</p>
+
+<h3 id="install-nodejs">1. Install Node.js</h3>
+<p>Rodan Client uses <a href="https://nodejs.org/en/">Node.js</a> for many of its dependencies. Installation instructions for various platforms can be found <a href="https://nodejs.org/en/download/package-manager/">here</a>.</p>
+
+<h3 id="install-latest-version-of-npm">2. Install latest version of npm</h3>
+<p><a href="https://www.npmjs.com/">npm</a> is a package manager for JavaScript. When Node.js is installed, npm is also installed, but not necessarily the latest version. It is recommended that you install version 3.8.2 or later. Instructions for updating npm can be found <a href="https://docs.npmjs.com/getting-started/installing-node">here</a>.</p>
+
+<h3 id="clone-the-repository">3. Clone the repository</h3>
+<p>The Rodan Client source is hosted on GitHub (which you probably already knew).
+<code class="highlighter-rouge">
+user@computer:~$ git clone https://github.com/DDMAL/rodan-client.git
+</code></p>
+
+<h3 id="install-development-dependencies">4. Install development dependencies</h3>
+<p>Part of the deployment of Rodan Client is the installation of build dependencies. These are declared in the <code class="highlighter-rouge">devDependencies</code> section of <code class="highlighter-rouge">package.json</code>. When <code class="highlighter-rouge">npm install</code> is run from the root repository directory (i.e. <code class="highlighter-rouge">rodan-client</code>), npm downloads and installs each of the development dependencies in <code class="highlighter-rouge">rodan-client/node_modules</code>.
+<code class="highlighter-rouge">
+user@computer:~$ cd rodan-client
+user@computer:~/rodan-client$ npm install
+</code></p>
+
+<p><em>Note: A list of all development dependencies and their purpose can be found <a href="Dependencies">here</a>.</em></p>
+
+<h3 id="install-application-dependencies">5. Install application dependencies.</h3>
+<p>The application dependencies are JavaScript applications that Rodan Client requires when running in a browser. These are managed and installed by <a href="http://jspm.io/">jspm</a>. jspm was installed as a local development dependency in the previous step.</p>
+
+<p>The binaries for locally-install Node.js applications, such as jspm, are located in <code class="highlighter-rouge">rodan-client/node_modules/.bin/</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~/rodan-client$ ./node_modules/.bin/jspm install -y
+</code></pre>
+</div>
+
+<p>The above command will:
+* create a directory <code class="highlighter-rouge">rodan-client/web</code>
+* create a file <code class="highlighter-rouge">rodan-client/web/config.js</code>
+* download and install the application dependencies to <code class="highlighter-rouge">rodan-client/web/libs/</code>.</p>
+
+<p>What jspm is doing is creating a web application directory (i.e. <code class="highlighter-rouge">web</code>) where the application will reside.</p>
+
+<p><em>Note: A list of all application dependencies and their purpose can be found <a href="Dependencies">here</a>.</em></p>
+
+<h3 id="configure">5. Configure</h3>
+<p>Rodan Client requires very little configuration to get started. Only two files need to be managed:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">rodan-client/configuration.json</code></li>
+  <li><code class="highlighter-rouge">rodan-client/js/Plugins.js</code>.</li>
+</ul>
+
+<p>When Rodan Client is cloned, these files do not yet exist. Instead, there is:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">rodan-client/configuration.json.example</code></li>
+  <li><code class="highlighter-rouge">rodan-client/js/Plugins.js.example</code>.</li>
+</ul>
+
+<p>First, we need to copy these files without the <code class="highlighter-rouge">.example</code> extension.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~/rodan-client$ cp configuration.json.example configuration.json
+user@computer:~/rodan-client$ cp js/Plugins.js.example Plugins.js
+</code></pre>
+</div>
+
+<p>Next, we need make small edits to each.</p>
+
+<h5 id="configurationjson"><code class="highlighter-rouge">configuration.json</code></h5>
+<p>At a minimum, we need to set the URL of the Rodan server and the authentication type.</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">SERVER_URL</code>: This is the endpoint of the Rodan server you want the client to interact with. For example, if the server was at IP 123.456.789.1 on port 8080, you would set <code class="highlighter-rouge">"SERVER_URL": "http://123.456.789.1:8080"</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">SERVER_AUTHENTICATION_TYPE</code>: This tells the client which authentication type to use - token or session. Token is recommended, but it depends on the Rodan server. For example, if the server uses token authentication, you would set <code class="highlighter-rouge">"SERVER_AUTHENTICATION_TYPE": "token"</code>.</p>
+  </li>
+</ul>
+
+<p>For a full description of configuration options, please go <a href="Configuration">here</a>.</p>
+
+<p><em>Note: The <code class="highlighter-rouge">WORKFLOWBUILDERGUI</code> settings in <code class="highlighter-rouge">configuration.json</code> are the settings for the Workflow Builder GUI plugin. This plugin is discussed below.</em></p>
+
+<h5 id="jspluginsjs"><code class="highlighter-rouge">js/Plugins.js</code></h5>
+<p>Rodan Client comes with a plugin that allows a user to create and edit Workflows via a GUI, the Workflow Builder GUI. <code class="highlighter-rouge">js/Plugins.js</code> lets Rodan Client know what plugins exist and where the are located. For a standard Rodan Client install, no modifications need to be made to <code class="highlighter-rouge">js/Plugins.js</code>. However, if you wish to add plugins in the future, this file will have to be modified.</p>
+
+<p><em>Note: Information on developing and adding plugins can be found <a href="Plugins">here</a>.</em></p>
+
+<h3 id="deploy">6. Deploy</h3>
+<p>Rodan Client uses <a href="http://gulpjs.com/">Gulp</a> to manage deployment, both for development and production. How Rodan Client can be deployed is defined in <code class="highlighter-rouge">gulpfile.js</code>. Just like jspm, Gulp was installed as a development dependency, so its binary is located in `node_modules/.bin’.</p>
+
+<p>The <code class="highlighter-rouge">gulpfile.js</code> defines three entry points to deploy Rodan Client. Choose the one best suited for your needs.</p>
+
+<h5 id="development">Development</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~/rodan-client$ ./node_modules/.bin/gulp
+</code></pre>
+</div>
+<p>or
+<code class="highlighter-rouge">
+user@computer:~/rodan-client$ ./node_modules/.bin/gulp develop
+</code></p>
+
+<p>The <code class="highlighter-rouge">develop</code> task is the default task in <code class="highlighter-rouge">gulpfile.js</code>. This type of deployment is meant for debugging and development. It will:
+ * link JavaScript source files, resources, styles, and configuration to <code class="highlighter-rouge">rodan-client/web</code>
+ * run <a href="http://jshint.com/">JSHint</a> on the JavaScript source
+ * start a small web server that hosts the application on your machine’s IP at port 9001.</p>
+
+<h5 id="production">Production</h5>
+<div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~/rodan-client$ ./node_modules/.bin/gulp dist
+</code></pre>
+</div>
+<p>The <code class="highlighter-rouge">dist</code> task will create a single JavaScript bundle file for the application and copy only those files required for deployment. This type of deployment is meant for production. All files required are stored in <code class="highlighter-rouge">rodan-client/dist</code>. You will have to setup a web server to statically serve the contents of this directory.</p>
+
+<p>If you wish to test the bundle, you can run:
+<code class="highlighter-rouge">
+user@computer:~/rodan-client$ ./node_modules/.bin/gulp dist:server
+</code></p>
+
+<p>This does the same as the simple <code class="highlighter-rouge">dist</code> task, but also runs a small development server just as the <code class="highlighter-rouge">develop</code> task does on port 9001.</p>
+
+
+      </section>
+    </div>
+
+        <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rodan Client maintained by <a href="https://github.com/DDMAL">DDMAL</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+
+  </body>
+</html>
