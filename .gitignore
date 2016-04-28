@@ -7,5 +7,6 @@ web
 bundle
 js/Plugins.js
 tmp
+website/_site
 configuration.json
 ._*

@@ -14,6 +14,11 @@ defaults:
       values:
         layout: default
     - scope:
+        path: ""
+        type: development_manual
+      values:
+        layout: default
+    - scope:
         path: "index.md"
       values:
         layout: default
