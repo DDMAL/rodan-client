@@ -8,7 +8,7 @@
 process.stdin.setEncoding('utf8');
 if (!handleGitStatus())
 {
-//    process.exit();
+    process.exit();
 }
 
 
@@ -38,10 +38,14 @@ cmd = 'git checkout gh-pages';
 child_process.execSync(cmd);
 
 // Copy. Will overwrite whatever exists. 
-child_process.execSync('rm -R *');
 child_process.execSync('cp -Rf ' + temp_path + '/* .');
 
-process.exit();
+// Remove temp path.
+try
+{
+    fs.rmdirSync(temp_path);
+}
+catch (e) {}
 
 
 // Add and commit.
