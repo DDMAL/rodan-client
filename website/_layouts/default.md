@@ -7,8 +7,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Rodan Client : A client for Rodan. Dig it.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ddmal.github.io/rodan-client/stylesheets/stylesheet.css">
 
     <title>Rodan Client</title>
   </head>
