@@ -1,0 +1,22 @@
+---
+source: src
+destination: dist
+
+collections:
+    test:
+        output: true
+    installation:
+        output: true
+        layout: default
+
+defaults:
+    - scope:
+        path: ""
+        type: installation
+      values:
+        layout: default
+    - scope:
+        path: "index.md"
+      values:
+        layout: default
+---  
