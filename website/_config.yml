@@ -6,8 +6,16 @@ collections:
     installation:
         output: true
         layout: default
+    user_manual:
+        output: true
+        layout: default
 
 defaults:
+    - scope:
+        path: ""
+        type: development_manual
+      values:
+        layout: default
     - scope:
         path: ""
         type: installation
@@ -15,7 +23,7 @@ defaults:
         layout: default
     - scope:
         path: ""
-        type: development_manual
+        type: user_manual
       values:
         layout: default
     - scope:
