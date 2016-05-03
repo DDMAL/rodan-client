@@ -31,7 +31,7 @@ export default class ViewNavigationNodeRoot extends ViewNavigationNode
     }
 }
 ViewNavigationNodeRoot.prototype.ui = {
-    text: '#node_text'
+    text: '.node_text'
 };
 ViewNavigationNodeRoot.prototype.events = {
     'click @ui.text': '_handleClick'
