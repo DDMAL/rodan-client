@@ -44,6 +44,7 @@ div#region-navigation
     color: $text-color-navigation;
     overflow-y: auto;
     overflow-x: hidden;
+    cursor: default;
 }
 
 div#region-navigation ul
@@ -51,6 +52,11 @@ div#region-navigation ul
     list-style-type: disc;
     margin: 0;
     padding-left: 10px;
+}
+ 
+div#region-navigation div.node_text
+{
+    cursor: pointer;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -64,6 +70,7 @@ div#region-main
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    cursor: default;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -35,7 +35,7 @@ export default class ViewNavigationNode extends Marionette.CompositeView
      */
     _setHighlight(highlight)
     {
-        var node = $(this.$el.find('#node_text')[0]);
+        var node = $(this.$el.find('.node_text')[0]);
         if (highlight)
         {
             // TODO magic number
@@ -124,7 +124,7 @@ export default class ViewNavigationNode extends Marionette.CompositeView
     }
 }
 ViewNavigationNode.prototype.ui = {
-    text: '#node_text'
+    text: '.node_text'
 };
 ViewNavigationNode.prototype.events = {
     'click @ui.text': '_handleClick'
