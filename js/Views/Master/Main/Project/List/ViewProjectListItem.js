@@ -11,9 +11,9 @@ export default class ViewProjectListItem extends BaseViewListItem
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handles click.
+     * Handles double click.
      */
-    _handleClick()
+    _handleDoubleClick()
     {
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED, {project: this.model});
     }
@@ -21,5 +21,5 @@ export default class ViewProjectListItem extends BaseViewListItem
 ViewProjectListItem.prototype.template = '#template-main_project_list_item';
 ViewProjectListItem.prototype.tagName = 'tr';
 ViewProjectListItem.prototype.events = {
-    'click': '_handleClick'
+    'dblclick': '_handleDoubleClick'
 }

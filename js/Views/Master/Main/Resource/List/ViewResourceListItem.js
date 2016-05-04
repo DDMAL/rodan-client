@@ -17,9 +17,18 @@ export default class ViewResourceListItem extends BaseViewListItem
     {
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model});
     }
+
+    /**
+     * Handles double click.
+     */
+    _handleDblClick()
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: this.model});
+    }
 }
 ViewResourceListItem.prototype.template = '#template-main_resource_list_item';
 ViewResourceListItem.prototype.tagName = 'tr';
 ViewResourceListItem.prototype.events = {
-    'click': '_handleClick'
+    'click': '_handleClick',
+    'dblclick': '_handleDblClick'
 };

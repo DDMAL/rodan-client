@@ -11,9 +11,9 @@ export default class ViewWorkflowRunListItem extends BaseViewListItem
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handles click.
+     * Handles double click.
      */
-    _handleClick()
+    _handleDoubleClick()
     {
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
@@ -21,5 +21,5 @@ export default class ViewWorkflowRunListItem extends BaseViewListItem
 ViewWorkflowRunListItem.prototype.template = '#template-main_workflowrun_list_item';
 ViewWorkflowRunListItem.prototype.tagName = 'tr';
 ViewWorkflowRunListItem.prototype.events = {
-    'click': '_handleClick'
+    'dblclick': '_handleDoubleClick'
 };

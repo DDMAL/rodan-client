@@ -72,10 +72,7 @@ export default class ViewResource extends Marionette.CompositeView
      */
     _handleClickDownload()
     {
-        var mimetype = this.model.get('resource_type_full').mimetype;
-        var ext = this.model.get('resource_type_full').extension;
-        var filename = this.model.get('name') + '.' + ext;
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: this.model.get('download'), filename: filename, mimetype: mimetype});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: this.model});
     }
 
     /**

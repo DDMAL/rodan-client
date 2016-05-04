@@ -37,5 +37,6 @@ ViewJobListItem.prototype.ui = {
     buttonAdd: '#button-main_job_button_add'
 };
 ViewJobListItem.prototype.events = {
-    'click @ui.buttonAdd': '_handleClickButtonAdd'
+    'click @ui.buttonAdd': '_handleClickButtonAdd',
+    'dblclick': '_handleClickButtonAdd'
 };

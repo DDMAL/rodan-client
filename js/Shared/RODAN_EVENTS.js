@@ -172,6 +172,8 @@ class RODAN_EVENTS
         this.REQUEST__RESOURCE_CREATE = 'REQUEST__RESOURCE_CREATE';
         /** Request a Resource be deleted. Takes {resource: Resource}. */
         this.REQUEST__RESOURCE_DELETE = 'REQUEST__RESOURCE_DELETE';
+        /** Request a Resource be downloaded. Takes {resource: Resource}. */
+        this.REQUEST__RESOURCE_DOWNLOAD = 'REQUEST__RESOURCE_DOWNLOAD';
         /** Request a Resource be saved/updated. Takes {resource: Resource, fields: {object with attributes to change}}. */
         this.REQUEST__RESOURCE_SAVE = 'REQUEST__RESOURCE_SAVE';
         /** Request a ResourceCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceCollection. */

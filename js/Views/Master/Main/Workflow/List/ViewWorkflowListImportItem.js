@@ -35,5 +35,6 @@ ViewWorkflowListImportItem.prototype.ui = {
     buttonImportWorkflow: '#button-main_workflowbuilder_workflow_import'
 };
 ViewWorkflowListImportItem.prototype.events = {
-    'click @ui.buttonImportWorkflow': '_handleButtonImportWorkflow'
+    'click @ui.buttonImportWorkflow': '_handleButtonImportWorkflow',
+    'dblclick': '_handleButtonImportWorkflow'
 };
