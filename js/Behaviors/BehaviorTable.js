@@ -361,6 +361,14 @@ export default class BehaviorTable extends Marionette.Behavior
         this._handleSearch();
     }
 
+    /**
+     * Handle row click.
+     */
+    _handleRowClick(event)
+    {
+        $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -454,7 +462,8 @@ BehaviorTable.prototype.events = {
     'click th': '_handleSort',
     'click @ui.buttonSearch': '_handleSearch',
     'click @ui.buttonRemove': '_handleButtonRemove',
-    'click @ui.buttonClearAll': '_handleButtonClearAll'
+    'click @ui.buttonClearAll': '_handleButtonClearAll',
+    'click tbody tr': '_handleRowClick'
 };
 BehaviorTable.prototype.defaults = {
     'templateControl': '#template-table_control',
