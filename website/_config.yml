@@ -1,6 +1,4 @@
 ---
-exclude: ['configuration.json', '.git', '.gitignore', 'images', 'js', 'node_modules', 'scripts', 'stylesheets', 'web', 'website']
-
 collections:
     development_manual:
         output: true
