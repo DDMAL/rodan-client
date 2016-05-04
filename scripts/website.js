@@ -8,7 +8,7 @@
 process.stdin.setEncoding('utf8');
 if (!handleGitStatus())
 {
-//    process.exit();
+    process.exit();
 }
 
 
@@ -37,15 +37,8 @@ child_process = require('child_process');
 cmd = 'git checkout gh-pages';
 child_process.execSync(cmd);
 
-// Remove existing API.
-try
-{
-    fs.rmdirSync('./development_manual/api');
-}
-catch (e) {}
-
 // Copy. Will overwrite whatever exists. 
-child_process.execSync('cp -Rf ' + temp_path + '/* ./development_manual/api');
+child_process.execSync('cp -Rf ' + temp_path + '/* .');
 
 // Remove temp path.
 try
