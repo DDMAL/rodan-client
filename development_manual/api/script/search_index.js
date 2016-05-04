@@ -1830,12 +1830,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/plugins.js",
-    "file/js/Plugins.js.html",
-    "js/Plugins.js",
-    "file"
-  ],
-  [
     "js/shared/cookie.js",
     "file/js/Shared/Cookie.js.html",
     "js/Shared/Cookie.js",
