@@ -1,1 +1,0 @@
-module.exports = require("npm:backbone.marionette@2.4.5/lib/core/backbone.marionette.js");

@@ -1,1 +1,0 @@
-module.exports = require("npm:paper@0.9.25/dist/paper-full.js");

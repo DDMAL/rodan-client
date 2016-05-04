@@ -1,1 +1,0 @@
-module.exports = require("npm:canvas@1.3.13/lib/canvas.js");

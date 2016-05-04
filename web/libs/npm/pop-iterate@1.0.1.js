@@ -1,1 +1,0 @@
-module.exports = require("npm:pop-iterate@1.0.1/pop-iterate.js");

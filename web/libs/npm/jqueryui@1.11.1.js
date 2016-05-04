@@ -1,1 +1,0 @@
-module.exports = require("npm:jqueryui@1.11.1/jquery-ui.js");

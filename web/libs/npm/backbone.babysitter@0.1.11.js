@@ -1,1 +1,0 @@
-module.exports = require("npm:backbone.babysitter@0.1.11/lib/backbone.babysitter.js");

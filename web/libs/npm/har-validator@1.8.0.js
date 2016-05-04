@@ -1,1 +1,0 @@
-module.exports = require("npm:har-validator@1.8.0/lib/index");
