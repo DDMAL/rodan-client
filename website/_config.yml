@@ -1,4 +1,6 @@
 ---
+exclude: ['web']
+
 collections:
     development_manual:
         output: true
