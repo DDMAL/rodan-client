@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/Collections/BaseCollection.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/ddmal/rodan-client" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Application.js~Application.html">Application</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Configuration">Configuration</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Behaviors</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Behaviors/BehaviorTable.js~BehaviorTable.html">BehaviorTable</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Collections</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/BaseCollection.js~BaseCollection.html">BaseCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/ConnectionCollection.js~ConnectionCollection.html">ConnectionCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/InputPortCollection.js~InputPortCollection.html">InputPortCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/InputPortTypeCollection.js~InputPortTypeCollection.html">InputPortTypeCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/JobCollection.js~JobCollection.html">JobCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/OutputPortCollection.js~OutputPortCollection.html">OutputPortCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/OutputPortTypeCollection.js~OutputPortTypeCollection.html">OutputPortTypeCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/ResourceCollection.js~ResourceCollection.html">ResourceCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/ResourceListCollection.js~ResourceListCollection.html">ResourceListCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/RunJobCollection.js~RunJobCollection.html">RunJobCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/WorkflowCollection.js~WorkflowCollection.html">WorkflowCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/WorkflowJobCollection.js~WorkflowJobCollection.html">WorkflowJobCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/WorkflowJobGroupCollection.js~WorkflowJobGroupCollection.html">WorkflowJobGroupCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/WorkflowRunCollection.js~WorkflowRunCollection.html">WorkflowRunCollection</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Collections/Global</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalCollection.js~GlobalCollection.html">GlobalCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalInputPortTypeCollection.js~GlobalInputPortTypeCollection.html">GlobalInputPortTypeCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalJobCollection.js~GlobalJobCollection.html">GlobalJobCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalOutputPortTypeCollection.js~GlobalOutputPortTypeCollection.html">GlobalOutputPortTypeCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalProjectCollection.js~GlobalProjectCollection.html">GlobalProjectCollection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalResourceTypeCollection.js~GlobalResourceTypeCollection.html">GlobalResourceTypeCollection</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Controllers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/BaseController.js~BaseController.html">BaseController</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerAuthentication.js~ControllerAuthentication.html">ControllerAuthentication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerModal.js~ControllerModal.html">ControllerModal</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerProject.js~ControllerProject.html">ControllerProject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerResource.js~ControllerResource.html">ControllerResource</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerRunJob.js~ControllerRunJob.html">ControllerRunJob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerServer.js~ControllerServer.html">ControllerServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflow.js~ControllerWorkflow.html">ControllerWorkflow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflowBuilder.js~ControllerWorkflowBuilder.html">ControllerWorkflowBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflowJob.js~ControllerWorkflowJob.html">ControllerWorkflowJob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflowJobGroup.js~ControllerWorkflowJobGroup.html">ControllerWorkflowJobGroup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflowRun.js~ControllerWorkflowRun.html">ControllerWorkflowRun</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Managers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Managers/RadioManager.js~RadioManager.html">RadioManager</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Managers/TransferManager.js~TransferManager.html">TransferManager</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Models</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/BaseModel.js~BaseModel.html">BaseModel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Connection.js~Connection.html">Connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/InputPort.js~InputPort.html">InputPort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/InputPortType.js~InputPortType.html">InputPortType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Job.js~Job.html">Job</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/OutputPort.js~OutputPort.html">OutputPort</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/OutputPortType.js~OutputPortType.html">OutputPortType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Pagination.js~Pagination.html">Pagination</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Project.js~Project.html">Project</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Resource.js~Resource.html">Resource</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/ResourceList.js~ResourceList.html">ResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/ResourceType.js~ResourceType.html">ResourceType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/RunJob.js~RunJob.html">RunJob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/User.js~User.html">User</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Workflow.js~Workflow.html">Workflow</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJob.js~WorkflowJob.html">WorkflowJob</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJobGroup.js~WorkflowJobGroup.html">WorkflowJobGroup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowRun.js~WorkflowRun.html">WorkflowRun</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Environment.js~Environment.html">Environment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/ErrorHandler.js~ErrorHandler.html">ErrorHandler</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/EventTimer.js~EventTimer.html">EventTimer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html">RODAN_EVENTS</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/LayoutViewMaster.js~LayoutViewMaster.html">LayoutViewMaster</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewList.js~BaseViewList.html">BaseViewList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html">BaseViewListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/LayoutViewMain.js~LayoutViewMain.html">LayoutViewMain</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel.html">LayoutViewModel</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/InputPort</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/InputPort/ViewInputPortList.js~ViewInputPortList.html">ViewInputPortList</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Job/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Job/List/ViewJobList.js~ViewJobList.html">ViewJobList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Job/List/ViewJobListItem.js~ViewJobListItem.html">ViewJobListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Login</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Login/ViewLogin.js~ViewLogin.html">ViewLogin</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Project/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Project/Individual/ViewProject.js~ViewProject.html">ViewProject</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Project/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Project/List/ViewProjectList.js~ViewProjectList.html">ViewProjectList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Project/List/ViewProjectListItem.js~ViewProjectListItem.html">ViewProjectListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html">ViewResource</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html">ViewResourceTypeListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html">ViewResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html">ViewResourceListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html">ViewResourceListItemModal</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/Individual/ViewRunJob.js~ViewRunJob.html">ViewRunJob</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/List/ViewRunJobList.js~ViewRunJobList.html">ViewRunJobList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js~ViewRunJobListItem.html">ViewRunJobListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Workflow/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Workflow/Individual/ViewWorkflow.js~ViewWorkflow.html">ViewWorkflow</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Workflow/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Workflow/List/ViewWorkflowList.js~ViewWorkflowList.html">ViewWorkflowList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js~ViewWorkflowListImportItem.html">ViewWorkflowListImportItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js~ViewWorkflowListItem.html">ViewWorkflowListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowBuilder/ResourceAssignment</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html">LayoutViewResourceAssignment</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowJob</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/ViewControlWorkflowJob.js~ViewControlWorkflowJob.html">ViewControlWorkflowJob</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowJob/Ports</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts.html">LayoutViewControlPorts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js~ViewInputPortListItem.html">ViewInputPortListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js~ViewInputPortTypeList.html">ViewInputPortTypeList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js~ViewInputPortTypeListItem.html">ViewInputPortTypeListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js~ViewOutputPortList.html">ViewOutputPortList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js~ViewOutputPortListItem.html">ViewOutputPortListItem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js~ViewOutputPortTypeList.html">ViewOutputPortTypeList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js~ViewOutputPortTypeListItem.html">ViewOutputPortTypeListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowJob/Settings</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings.html">ViewSettings</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowJobGroup</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js~ViewWorkflowJobGroup.html">ViewWorkflowJobGroup</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowRun/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun.js~LayoutViewIndividualWorkflowRun.html">LayoutViewIndividualWorkflowRun</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/WorkflowRun/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js~ViewWorkflowRunList.html">ViewWorkflowRunList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js~ViewWorkflowRunListItem.html">ViewWorkflowRunListItem</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Navigation</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/LayoutViewNavigation.js~LayoutViewNavigation.html">LayoutViewNavigation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNode.js~ViewNavigationNode.html">ViewNavigationNode</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeProject.js~ViewNavigationNodeProject.html">ViewNavigationNodeProject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeResources.js~ViewNavigationNodeResources.html">ViewNavigationNodeResources</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeRoot.js~ViewNavigationNodeRoot.html">ViewNavigationNodeRoot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeRunJobs.js~ViewNavigationNodeRunJobs.html">ViewNavigationNodeRunJobs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeWorkflowRuns.js~ViewNavigationNodeWorkflowRuns.html">ViewNavigationNodeWorkflowRuns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Navigation/ViewNavigationNodeWorkflows.js~ViewNavigationNodeWorkflows.html">ViewNavigationNodeWorkflows</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NAV_EVENTS">NAV_EVENTS</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/Collections/BaseCollection.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import $ from &apos;jquery&apos;;
+import _ from &apos;underscore&apos;;
+import Backbone from &apos;backbone&apos;;
+import RODAN_EVENTS from &apos;../Shared/RODAN_EVENTS&apos;;
+import Pagination from &apos;../Models/Pagination&apos;;
+import Radio from &apos;backbone.radio&apos;;
+
+/**
+ * Subclass of Backbone.Collection.
+ *
+ * Some functionality of Backbone.Collection is overridden to facilitate server-based pagination, filtering, and sorting.
+ */
+export default class BaseCollection extends Backbone.Collection
+{
+///////////////////////////////////////////////////////////////////////////////////////
+// PUBLIC METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Constructor.
+     *
+     * @param {object} options initialization parameters for Backbone.Collection
+     */
+    constructor(options)
+    {
+        super(options);
+        this._pagination = new Pagination();
+        this._lastData = {};
+        this._initializeRadio();
+        this._filters = {};
+        this._sort = {};
+        this._page = {};
+        this._enumerations = this._enumerations ? this._enumerations : [];
+        this.on(&apos;add&apos;, (model, collection, options) =&gt; this._onAdd(model, collection, options));
+    }
+
+    /**
+     * Returns route.
+     *
+     * @return {string} route
+     */
+    get route()
+    {
+        return this._route;
+    }
+
+    /**
+     * Returns enumerations of this Collection. These are custom-defined in the subclasses.
+     *
+     * Enumerations should be defined in subclasses as follows:
+     * - [{field: string, label: string, values: [{value: primitive type, label: string}] (optional)}]
+     *
+     * In the above:
+     * - &quot;field&quot; is a property of the associated Model in the Collection
+     * - &quot;label&quot; is a string that will appear in the table header
+     * - &quot;values&quot; is optional; populate this array with explicit &quot;value&quot;/&quot;label&quot;s if desired, else BaseCollection will determine the values for enumeration based on the contents of the Collection
+     * 
+     * @todo Rodan server should provide explicit enumerations
+     *
+     * @return {array} enumerations
+     */
+    getEnumerations()
+    {
+        return this._enumerations;
+    }
+
+    /**
+     * Parse results.
+     *
+     * @param {object} response JSON object
+     * @return {object} JSON object
+     */
+    parse(response)
+    {
+        if (response.count)
+        {
+            this._parsePagination(response);
+        }
+
+        if (this._enumerations &amp;&amp; this._enumerations.length &gt; 0)
+        {
+            this._populateEnumerations(response);
+        }
+
+        if (response.hasOwnProperty(&apos;results&apos;))
+        {
+            return response.results;
+        }
+        return response;
+    }
+
+    /**
+     * Parses ID out of URL.
+     *
+     * @param {string} url URL
+     * @return {string} string representing UUID of Collection
+     * @todo this should be moved to a utility class
+     */
+    parseIdFromUrl(url)
+    {
+        var lastSlash = url.lastIndexOf(&apos;/&apos;);
+        var subString = url.substring(0, lastSlash);
+        var secondLastSlash = subString.lastIndexOf(&apos;/&apos;);
+        return url.substring(secondLastSlash + 1, lastSlash);
+    }
+
+    /**
+     * Override of fetch to allow for generic handling.
+     *
+     * Note that we save the data options. This is in case we do a create
+     * and have to reload/fetch the previous collection. We need to preserve
+     * the fetch parameters.
+     *
+     * @param {object} options Backbone.Collection.fetch options object
+     */
+    fetch(options)
+    {
+        // Apply handlers.
+        options = this._applyResponseHandlers(options);
+
+        // Set task.
+        options.task = &apos;fetch&apos;;
+
+        // Save last data.
+        this._lastData = options.data ? options.data : {};
+
+        // Build final options.
+        var finalOptions = {};
+        finalOptions.error = options.error ? options.error : {};
+        finalOptions.reset = options.reset ? options.reset : {};
+        finalOptions.success = options.success ? options.success : {};
+        finalOptions.task = options.task ? options.task : {};
+        finalOptions.data = {};
+        $.extend(finalOptions.data, this._filters);
+        $.extend(finalOptions.data, this._sort);
+        $.extend(finalOptions.data, this._page);
+        $.extend(finalOptions.data, options.data);
+
+        // Fech.
+        super.fetch(finalOptions);
+    }
+
+    /**
+     * Override of create.
+     *
+     * This override exists because we do NOT want to add it to the collection
+     * by default (as there&apos;s a limit to what the server returns for collections,
+     * and we need to respect that). However, if the save worked, we do want to do a fetch
+     * to update the Collection. The fetch is called in the custom success handler for creation.
+     *
+     * There&apos;s also the case if this Collection is local and not associated with a DB Collection.
+     *
+     * @param {object} options Backbone.Collection.create options object
+     * @return {Backbone.Model} instance of Backbone.Model or subclass of Backbone.Model
+     */
+    create(options)
+    {
+        var instance = new this.model(options);
+        if (this.hasOwnProperty(&apos;url&apos;))
+        {
+            instance.save({}, {success: () =&gt; this._handleCreateSuccess()});
+        }
+        else
+        {
+            instance.save({}, {success: (model) =&gt; this.add(model)});
+        }
+        return instance;
+    }
+
+    /**
+     * Requests a sorted fetch. This is not called &quot;sort&quot; because backbone already has
+     * a sort method for the Collection.
+     *
+     * If no options.data is passed, the options.data from the last fetch are used.
+     *
+     * @param {boolean} ascending results will return in ascending order iff true
+     * @param {string} field name of field to sort by
+     * @param {object} options Backbone.Collection.fetch options object
+     */
+    fetchSort(ascending, field, options)
+    {
+        if (options &amp;&amp; options.data)
+        {
+            this._lastData = options.data;
+        }
+        this._sort.ordering = field;
+        if (!ascending)
+        {
+            this._sort.ordering = &apos;-&apos; + field;
+        }
+        this.fetch({data: this._lastData, reset: true});
+    }
+
+    /**
+     * Requests a filtered fetch.
+     *
+     * If no options.data is passed, the options.data from the last fetch are used.
+     *
+     * @param {array} filters array of objects; {name: string, value: primitive}; what filters can be used is defined in Rodan
+     * @param {object} options Backbone.Collection.fetch options object
+     * @todo give more info on filters
+     */
+    fetchFilter(filters, options)
+    {
+        if (options &amp;&amp; options.data)
+        {
+            this._lastData = options.data;
+        }
+        this._filters = filters;
+        this._page = {};
+        this.fetch({data: this._lastData, reset: true});
+    }
+
+    /**
+     * Requests a page to be fetched.
+     *
+     * If no options.data is passed, the options.data from the last fetch are used.
+     *
+     * @param {integer} page non-negative page number to retrieve from server
+     * @param {object} options Backbone.Collection.fetch options object
+     */
+    fetchPage(page, options)
+    {
+        if (options &amp;&amp; options.data)
+        {
+            this._lastData = options.data;
+        }
+        this._page = page;
+        this.fetch({data: this._lastData, reset: true});
+    }
+
+    /**
+     * Returns pagination object for this Collection.
+     *
+     * @return {object} pagination object
+     * @todo point to pagination info on Rodan server
+     */
+    getPagination()
+    {
+        return this._pagination;
+    }
+
+    /**
+     * Returns the URL associated with this Collection.
+     *
+     * @return {string} URL associated with this Collection
+     */
+    url()
+    {
+        return Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
+    }
+
+    /**
+     * Syncs the Collection while preserving the last used fetch options.data.
+     */
+    syncList()
+    {
+        this.fetch({data: this._lastData});
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Initialize Radio.
+     */
+    _initializeRadio()
+    {
+        // dummy
+    }
+
+    /**
+     * Handles a succesful creation. All this does is &quot;properly&quot; reload the collection.
+     */
+    _handleCreateSuccess()
+    {
+        this.syncList({});
+    }
+
+    /**
+     * Parses pagination parameters from response.
+     */
+    _parsePagination(options)
+    {
+        this._pagination.set({&apos;count&apos;: options.count,
+                              &apos;next&apos;: options.next !== null ? options.next : &apos;#&apos;,
+                              &apos;previous&apos;: options.previous !== null ? options.previous : &apos;#&apos;,
+                              &apos;current&apos;: options.current_page,
+                              &apos;total&apos;: options.total_pages});
+    }
+
+    /**
+     * Applies response handlers.
+     */
+    _applyResponseHandlers(options)
+    {
+        // Check if options are defined.
+        if (options === undefined)
+        {
+            options = {};
+        }
+
+        // Success.
+        var genericSuccessFunction = (collection, response, options) =&gt; this._handleSuccessResponse(collection, response, options);
+        if (!options.hasOwnProperty(&apos;success&apos;))
+        {
+            options.success = (collection, response, options) =&gt; this._handleSuccessResponse(collection, response, options);
+        }
+        else
+        {
+            var customSuccessFunction = options.success;
+            options.success = function(collection, response, options)
+            {
+                customSuccessFunction(collection, response, options);
+                genericSuccessFunction(collection, response, options);
+            };
+        }
+
+        // Error.
+        var genericErrorFunction = (collection, response, options) =&gt; this._handleErrorResponse(collection, response, options);
+        if (!options.hasOwnProperty(&apos;error&apos;))
+        {
+            options.error = (collection, response, options) =&gt; this._handleErrorResponse(collection, response, options);
+        }
+        else
+        {
+            var customErrorFunction = options.error;
+            options.error = function(collection, response, options)
+            {
+                customErrorFunction(collection, response, options);
+                genericErrorFunction(collection, response, options);
+            };
+        }
+
+        return options;
+    }
+
+    /**
+     * Handle success response.
+     */
+    _handleSuccessResponse(collection, response, options)
+    {
+/*        var text = &apos;Successful &apos; + options.task
+                   + &apos; (&apos; + options.xhr.status + &apos;): &apos; 
+                   + collection.constructor.name;
+        Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
+    }
+
+    /**
+     * Handle error response.
+     */
+    _handleErrorResponse(collection, response, options)
+    {
+        Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
+                                                                  response: response,
+                                                                  options: options});
+    }
+
+    /**
+     * Populates enumerations.
+     */
+    _populateEnumerations(response)
+    {
+        var items = response.results ? response.results : response;
+        for (var j in this._enumerations)
+        {
+            var field = this._enumerations[j].field;
+            if (!this._enumerations[j].values || this._enumerations[j].values.length === 0)
+            {
+                this._enumerations[j].values = [];
+                for (var i in items)
+                {
+                    var result = items[i];
+                    this._enumerations[j].values.push({value: result[field], label: result[field]});
+                }
+                this._enumerations[j].values = _.uniq(this._enumerations[j].values, false, function(item) {return item.value;});
+            }
+        }
+    }
+
+    /**
+     * Handle backbone add event.
+     */
+    _onAdd(model, collection, options)
+    {
+        Radio.channel(&apos;rodan&apos;).trigger(RODAN_EVENTS.EVENT__COLLECTION_ADD, {model: model, collection: collection, options: options});
+    }
+}</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.7)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
