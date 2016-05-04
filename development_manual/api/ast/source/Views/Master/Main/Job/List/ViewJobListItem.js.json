@@ -1976,11 +1976,70 @@
                   "column": 50
                 }
               }
+            },
+            {
+              "type": "Property",
+              "key": {
+                "type": "Literal",
+                "value": "dblclick",
+                "raw": "'dblclick'",
+                "range": [
+                  1438,
+                  1448
+                ],
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "_handleClickButtonAdd",
+                "raw": "'_handleClickButtonAdd'",
+                "range": [
+                  1450,
+                  1473
+                ],
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 39
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                1438,
+                1473
+              ],
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 4
+                },
+                "end": {
+                  "line": 41,
+                  "column": 39
+                }
+              }
             }
           ],
           "range": [
             1380,
-            1434
+            1475
           ],
           "loc": {
             "start": {
@@ -1988,14 +2047,14 @@
               "column": 35
             },
             "end": {
-              "line": 41,
+              "line": 42,
               "column": 1
             }
           }
         },
         "range": [
           1345,
-          1434
+          1475
         ],
         "loc": {
           "start": {
@@ -2003,14 +2062,14 @@
             "column": 0
           },
           "end": {
-            "line": 41,
+            "line": 42,
             "column": 1
           }
         }
       },
       "range": [
         1345,
-        1435
+        1476
       ],
       "loc": {
         "start": {
@@ -2018,7 +2077,7 @@
           "column": 0
         },
         "end": {
-          "line": 41,
+          "line": 42,
           "column": 2
         }
       }
@@ -2027,7 +2086,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1435
+    1476
   ],
   "loc": {
     "start": {
@@ -2035,7 +2094,7 @@
       "column": 0
     },
     "end": {
-      "line": 41,
+      "line": 42,
       "column": 2
     }
   },

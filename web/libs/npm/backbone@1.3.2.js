@@ -1,0 +1,1 @@
+module.exports = require("npm:backbone@1.3.2/backbone.js");

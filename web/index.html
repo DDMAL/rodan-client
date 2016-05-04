@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Rodan Client</title>
+        <link rel="stylesheet" href="default.css">
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <!--<![endif]-->
+    </head>
+    <body>
+        <div id="app">
+            <div id="region-master"></div>
+        </div>
+        
+<script type="text/template" id="template-main_workflowbuilder">
+<div class="row gui">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin: 0; position: absolute">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Workflow <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="button-edit">Edit Name/Description</a></li>
+                            <li><a id="button-add_job">Add Job</a></li>
+                            <li><a id="button-import_workflow">Import Workflow</a></li>
+                            <li><a id="button-run">Run</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="button-zoom_in">Zoom in</a></li>
+                            <li><a id="button-zoom_out">Zoom out</a></li>
+                            <li><a id="button-zoom_reset">Reset</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a>Automatically add ports to job  <input type="checkbox" checked="checked" id="checkbox-add_ports"/></a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a><span id="data-workflow_status"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="canvas-wrap" class="col-xs-12">
+        <canvas id="canvas-workspace"></canvas>
+        <div id="canvas-tooltip"></div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="template-master">
+<div class="container-fluid">
+    <div class="row top">
+        <div id="region-navigation" class="col-xs-2"></div>
+        <div id="region-main" class="col-xs-10"></div>
+    </div>
+</div>
+
+<!-- Generic modal -->
+<div id="modal-generic" class="modal" role="dialog"></div>
+
+<!-- Generic dropdown -->
+<ul id="menu-context" class="dropdown-menu" role="menu" style="display:none" ></ul>
+</script>
+
+<script type="text/template" id="template-empty">
+<div></div>
+</script>
+
+<script type="text/template" id="template-navigation_root">
+<li>
+    <div class="node_text"><%= name %></div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-navigation_resources">
+<li>
+    <div class="node_text">Resources</div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-navigation_workflowruns">
+<li>
+    <div class="node_text">Workflow Runs</div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-navigation_node">
+<li>
+    <div class="node_text"><%= name %></div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-navigation_runjobs">
+<li>
+    <div class="node_text">Run Jobs</div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-navigation">
+<h3>Rodan</h3>
+<button class="btn btn-xs btn-primary" id="button-navigation_about">About</button>
+<button class="btn btn-xs btn-primary" id="button-navigation_help">Help</button>
+<!--<button class="btn btn-xs btn-primary" id="" disabled>Preferences</button>-->
+<button class="btn btn-xs btn-danger" id="button-navigation_logout" disabled>Logout</button>
+<br>
+<!--
+Uploads pending: <span id="navigation-upload_count_pending"></span><br>
+Uploads completed: <span id="navigation-upload_count_completed"></span><br>
+Uploads failed: <span id="navigation-upload_count_failed"></span>-->
+<hr>
+<nav>
+    <ul id="region-navigation_tree"></ul>
+</nav>
+</script>
+
+<script type="text/template" id="template-navigation_workflows">
+<li>
+    <div class="node_text">Workflows</div>
+    <ul></ul>
+</li>
+
+</script>
+
+<script type="text/template" id="template-main_layoutview_model_inverse">
+<div class="row">
+    <div id="region-main_layoutview_model_item" class="col-xs-4"></div>
+    <div id="region-main_layoutview_model_list" class="col-xs-8"></div>
+</div>
+</script>
+
+<script type="text/template" id="template-main_layoutview_model">
+<div class="row">
+    <div id="region-main_layoutview_model_list" class="col-xs-8"></div>
+    <div id="region-main_layoutview_model_item" class="col-xs-4"></div>
+</div>
+</script>
+
+<script type="text/template" id="template-main_resource_list">
+<h3>Resources</h3>
+<input id="file-main_resource_file" type="file" name="fileInput" multiple>
+<br>
+Type: <select id="select-resourcetype"></select>
+<hr/>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed scrol" id="table-resources">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="resource_type">Type</th>
+                <th>File exists</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_resource_list_item">
+<td><%= name %></td>
+<td><%= creator %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
+<td><%= resource_type_full.mimetype %></td>
+<td><%= !_.isNull(download) %></td>
+</script>
+
+<script type="text/template" id="template-modal_resource_list">
+<div class="table-responsive">
+    <table class="table table-hover table-condensed scroll" id="table-resources">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="resource_type">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_resource_list_resourcetype_list_item">
+<option value="<%= url %>"><%= mimetype %> (<%= extension %>)</option>
+</script>
+
+<script type="text/template" id="template-modal_resource_list_item">
+<td><%= name %></td>
+<td><%= creator %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= resource_type_full.mimetype %></td>
+</script>
+
+<script type="text/template" id="template-main_resource_individual_resourcetype_list_item">
+<%= mimetype %> (<%= extension %>)
+</script>
+
+<script type="text/template" id="template-main_resource_individual">
+<div class="fixed_individual">
+    <h3>Resource</h3>
+    <label for="text-resource_name">Name:</label>
+    <input type="text" class="form-control input-sm" id="text-resource_name" value="<%= _.escape(name) %>" name="text-resource_name">
+    <label for="text-resource_description">Description:</label>
+    <textarea type="text" class="form-control input-sm" id="text-resource_description" name="text-resource_description"><%= _.escape(description) %></textarea>
+    Creator: <%= creator %><br>
+    Created: <%= _.formatFromUTC(created) %><br>
+    Updated: <%= _.formatFromUTC(updated) %><br>
+    Type: <select id="select-resourcetype"></select><br>
+    <br>
+    <button class="btn btn-xs  btn-warning" id="button-main_resource_individual_save">Save</button>
+    <button class="btn btn-xs btn-primary" id="button-main_resource_individual_view">View</button>
+    <button class="btn btn-xs btn-primary" id="button-main_resource_individual_download">Download</button>
+    <button class="btn btn-xs btn-danger" id="button-main_resource_individual_delete">Delete</button><br>
+    <br>
+    <p class="instruction">Note: opening the Resource "View" (if available) may require authentication, but no authentication is required for "Download".</p>
+</div>
+</script>
+
+<script type="text/template" id="template-main_job_list_item">
+<td><%= category %></td>
+<td><%= name %></td>
+<td><%= interactive %></td>
+<td><button class="btn btn-xs btn-warning" id="button-main_job_button_add">Add</button></td>
+</script>
+
+<script type="text/template" id="template-main_job_list">
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-jobs">
+        <thead>
+            <tr>
+                <th data-name="category">Category</th>
+                <th data-name="name">Name</th>
+                <th data-name="interactive">Interactive</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_workflowjob_settings">
+<div id="workflowjob-settings"></div>
+<button class="btn btn-xs btn-warning" id="button-save_workflowjob_settings">Save</button>
+</script>
+
+<script type="text/template" id="template-main_workflowjob">
+<label for="text-workflowjob_name">Name:</label>
+<input type="text" class="form-control input-sm" id="text-workflowjob_name" value="<%= _.escape(name) %>" name="text-workflowjob_name">
+Job: <%= job_name %><br/>
+<button class="btn btn-xs btn-warning" id="button-save_workflowjob_data">Save</button>
+<button class="btn btn-xs btn-danger" id="button-delete_workflowjob">Delete</button>
+</script>
+
+<script type="text/template" id="template-main_workflowjob_ports">
+<div id="region-main_inputporttypes"></div>
+<div id="region-main_inputports"></div>
+<div id="region-main_outputporttypes"></div>
+<div id="region-main_outputports"></div>
+</script>
+
+<script type="text/template" id="template-main_login">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="vertical-center">
+            <div class="horizontal-center">
+        		<form class="form-inline" role="form" action="javascript:void(0);">
+                    <div class="form-group">
+                        <label for="text-login_username">Username:</label>
+                        <input type="text" class="form-control" id="text-login_username">
+                    </div>
+                    <div class="form-group">
+                        <label for="text-login_password">Password:</label>
+                        <input type="password" class="form-control" id="text-login_password">
+                    </div>
+                    <button type="submit" class="btn btn-xs btn-success" id="button-login">Login</button>
+        		</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</script>
+
+<script type="text/template" id="template-main_workflow_list">
+<h3>Workflows</h3>
+<button class="btn btn-xs btn-primary" id="button-new_workflow">Create new Workflow</button>
+<hr/>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-workflows">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="valid">Valid</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_workflow_list_item">
+<td><%= name %></td>
+<td><%= creator %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
+<td><%= valid %></td>
+</script>
+
+<script type="text/template" id="template-main_workflow_individual">
+<div class="fixed_individual">
+    <h3>Workflow</h3>
+    <label for="text-workflow_name">Name:</label>
+    <input type="text" class="form-control input-sm" id="text-workflow_name" value="<%= _.escape(name) %>" name="text-workflow_name">
+    <label for="text-workflow_description">Description:</label>
+    <textarea type="text" class="form-control input-sm" id="text-workflow_description" name="text-workflow_description"><%= _.escape(description) %></textarea>
+    Creator: <%= creator %><br>
+    Created: <%= _.formatFromUTC(created) %><br>
+    Updated: <%= _.formatFromUTC(updated) %><br>
+    Valid: <%= valid %><br>
+    <button class="btn btn-xs btn-warning" id="button-save_workflow">Save</button>
+ <!--   <button class="btn btn-xs" id="button-run_workflow">Run</button>-->
+    <button class="btn btn-xs" id="button-copy_workflow">Copy</button>
+    <button class="btn btn-xs btn-warning" id="button-edit_workflow">Edit</button>
+    <button class="btn btn-xs btn-danger" id="button-delete_workflow">Delete</button>
+</div>
+</script>
+
+<script type="text/template" id="template-main_workflow_individual_workflowrun_list_item">
+<td><%= name%></td>
+<td><%= _.formatFromUTC(created) %></td>
+</script>
+
+<script type="text/template" id="template-main_workflow_individual_edit">
+<label for="text-workflow_name">Name:</label>
+<input type="text" class="form-control input-sm" id="text-workflow_name" value="<%= _.escape(name) %>" name="text-workflow_name">
+<label for="text-workflow_description">Description:</label>
+<textarea type="text" class="form-control input-sm" id="text-workflow_description" name="text-workflow_description"><%= _.escape(description) %></textarea>
+<br>
+<button class="btn btn-xs btn-warning" id="button-save_workflow_data">Save</button>
+</script>
+
+<script type="text/template" id="template-main_runjob_list_item">
+<td><%= job_name %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
+<td><%= statusText %></td>
+<td><%= available %></td>
+</script>
+
+<script type="text/template" id="template-main_runjob_list">
+<h3>Run Jobs</h3>
+<hr/>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-runjobs">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="status">Status</th>
+                <th>Available</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_runjob_list_notitle">
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-runjobs">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="status">Status</th>
+                <th>Available</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_runjob_individual">
+<div class="fixed_individual">
+    <h3>Run Job</h3>
+    Name: <%= job_name %><br/>
+    Created: <%= _.formatFromUTC(created) %><br/>
+    Updated: <%= _.formatFromUTC(updated) %><br/>
+    Status: <%= statusText %><br/>
+    Error summary: <%= error_summary %><br/>
+    Error details:<br/>
+    <textarea rows='10' readonly='readonly' style='width: 100%; resize: none;'><%= _.escape(error_details) %></textarea>
+</div>
+</script>
+
+<script type="text/template" id="template-main_outputport_list_item">
+<td><%= label %></td>
+<td><button class="btn btn-xs btn-danger" id="button-delete">Delete</button></td>
+</script>
+
+<script type="text/template" id="template-main_outputport_list">
+<h3>Output Ports</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Label</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_inputporttype_list">
+<h3>Input Port Types</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Min</th>
+                <th>Max</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_inputporttype_list_item">
+<td><%= name %></td>
+<td><%= minimum %></td>
+<td><%= maximum %></td>
+<td><button class="btn btn-xs btn-warning" id="button-new_inputport">Add</button></td>
+</script>
+
+<script type="text/template" id="template-main_workflow_list_import">
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-workflows">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="valid">Valid</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_workflowbuilder_workflow_list_item_import">
+<td><%= name %></td>
+<td><%= creator %></td>
+<td><%= valid %></td>
+<td><button class="btn btn-xs btn-warning" id="button-main_workflowbuilder_workflow_import">Import</button></td>
+</script>
+
+<script type="text/template" id="template-main_workflowbuilder_resourceassignment">
+<div class="row">
+    <div class="col-xs-6">
+        <h3>Available Resources</h3>
+        <div id="region-main_workflowbuilder_resourceassignment_availableresources"></div>
+    </div>
+    <div class="col-xs-6">
+        <h3>Assigned Resources</h3>
+        <div id="region-main_workflowbuilder_resourceassignment_assignedresources"></div>
+    </div>
+</div>
+
+</script>
+
+<script type="text/template" id="template-main_workflowrun_list">
+<h3>Workflow Runs</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-workflowruns">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+		<th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+</script>
+
+<script type="text/template" id="template-main_workflowrun_list_item">
+<td><%= name %></td>
+<td><%= creator %></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
+<td><%= statusText %></td>
+
+</script>
+
+<script type="text/template" id="template-main_workflowrun_individual">
+<div class="row">
+    <div class="col-xs-6">
+        <h3>Workflow Run</h3>
+        <label for="text-workflowrun_name">Name:</label>
+        <input type="text" class="form-control input-sm" id="text-workflowrun_name" value="<%= _.escape(name) %>" name="text-workflowrun_name">
+        <label for="text-workflowrun_description">Description:</label>
+        <textarea type="text" class="form-control input-sm" id="text-workflowrun_description" name="text-workflowrun_description"><%= _.escape(description) %></textarea>
+	Creator: <%= creator %><br/>
+        Created on: <%= _.formatFromUTC(created) %><br/>
+        Updated on: <%= _.formatFromUTC(updated) %><br/>
+        Status: <%= statusText %><br/>
+        <button class="btn btn-xs btn-warning" id="button-save_workflowrun">Save</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h3><span id="button-resources_show">Resources</span> | <span id="button-runjobs_show">Run Jobs</span></h3>
+        <div id="region-main_workflowrun_individual_resources"></div>
+        <div id="region-main_workflowrun_individual_runjobs"></div>
+    </div>
+</div>
+
+</script>
+
+<script type="text/template" id="template-main_workflowrun_individual_resources_list">
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-resources">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th data-name="resource_type">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_project_list">
+<h3>Projects</h3>
+<button class="btn btn-xs  btn-primary" id="button-new_project">Create new Project</button>
+<hr/>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed" id="table-projects">
+        <thead>
+            <tr>
+                <th data-name="name">Name</th>
+                <th data-name="creator">Creator</th>
+                <th data-name="created">Created</th>
+                <th data-name="updated">Updated</th>
+                <th>Workflows</th>
+                <th>Resources</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_project_list_item">
+<td><%= name%></td>
+<td><%= creator%></td>
+<td><%= _.formatFromUTC(created) %></td>
+<td><%= _.formatFromUTC(updated) %></td>
+<td><%= workflow_count%></td>
+<td><%= resource_count%></td>
+</script>
+
+<script type="text/template" id="template-main_project_individual">
+<div class="fixed_individual">
+    <h3>Project</h3>
+    <label for="text-project_name">Name:</label>
+    <input type="text" class="form-control input-sm" id="text-project_name" value="<%= _.escape(name) %>" name="text-project_name">
+    <label for="text-project_description">Description:</label>
+    <textarea type="text" class="form-control input-sm" id="text-project_description" name="text-project_description"><%= _.escape(description) %></textarea>
+    Creator: <%= creator %> <br>
+    Created on: <%= _.formatFromUTC(created) %><br>
+    Updated on: <%= _.formatFromUTC(updated) %><br>
+    <button class="btn btn-xs btn-success" id="resource_count">Resources: <%= resource_count%></button>
+    <button class="btn btn-xs btn-success" id="workflow_count">Workflows: <%= workflow_count%></button>
+    <button class="btn btn-xs btn-success" id="button-runjobs">Run Jobs</button>
+    <button class="btn btn-xs btn-warning" id="button-save_project">Save</button>
+    <button class="btn btn-xs btn-danger" id="button-delete_project">Delete</button>
+</div>
+</script>
+
+<script type="text/template" id="template-main_outputporttype_list">
+<h3>Output Port Types</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Min</th>
+                <th>Max</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-main_outputporttype_list_item">
+<td><%= name %></td>
+<td><%= minimum %></td>
+<td><%= maximum %></td>
+<td><button class="btn btn-xs btn-warning" id="button-new_outputport">Add</button></td>
+</script>
+
+<script type="text/template" id="template-main_workflowjobgroup">
+<label for="text-workflowjobgroup_name">Name:</label>
+<input type="text" class="form-control input-sm" id="text-workflowjobgroup_name" value="<%= _.escape(name) %>" name="text-workflowjobgroup_name">
+<br>
+<button class="btn btn-xs btn-warning" id="button-save_workflowjobgroup_data">Save</button> <button class="btn btn-xs btn-warning" id="button-ungroup_workflowjobgroup">Ungroup</button> <button class="btn btn-xs btn-danger" id="button-delete_workflowjobgroup">Delete</button>
+</script>
+
+<script type="text/template" id="template-main_inputport_list_item">
+<td><%= label %></td>
+<td><button class="btn btn-xs btn-danger" id="button-delete">Delete</button></td>
+</script>
+
+<script type="text/template" id="template-main_inputport_list">
+<h3>Input Ports</h3>
+<div class="table-responsive">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Label</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</script>
+
+<script type="text/template" id="template-modal_waiting">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <p>Waiting on the server...</p>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="template-modal">
+<div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body" id="region-modal_body">
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="template-modal_simple">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/template" id="template-misc_about">
+<h3>Rodan server</h3>
+Version: <%= version %><br>
+URI: <%= hostname %><br>
+Server date/time: <%= date %><br>
+Pagination length: <%= serverConfiguration.page_length %><br>
+Job packages:
+<ul>
+<% for(var package in serverConfiguration.job_packages) { %>
+    <li><%= package %> (<%= serverConfiguration.job_packages[package] %>)</li>
+<% } %>
+</ul>
+<hr>
+<h3>Rodan client</h3>
+<ul>
+<% for(var field in client) { %>
+    <li><%= field %>: <%= client[field] %></li>
+<% } %>
+</ul>
+<hr>
+<h3>User</h3>
+Username: <%= username %><br>
+Name: <%= name %>
+
+</script>
+
+<script type="text/template" id="template-table_control">
+<div class="table-control">
+	<div class=" panel panel-default">
+		<div class="panel-header">
+		    <div class="btn-group" role="group" aria-label="...">
+				<div class="btn-group" role="group" id="filter-menu">
+					<button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add filter</button>
+					<ul class="dropdown-menu">
+						<!-- Filter choices are injected here. -->
+					</ul>
+				</div>
+				<button type="button" class="btn btn-xs btn-success" id="button-clearall">Clear all filters</button>
+			</div>
+		</div>
+		<div class="panel-body">
+
+			<form class="form-inline" id="filter-inputs">
+				<!-- Filters will appear here. -->
+			</form>
+
+		</div>
+	</div>
+    <div class="btn-group" role="group" aria-label="...">
+		<button type="button" class="btn btn-success btn-xs" id="pagination-previous">Previous</button>
+		<button type="button" class="btn btn-success btn-xs" id="pagination-next">Next</button>
+	</div>
+</div>
+</script>
+
+<script type="text/template" id="template-filter_text">
+<div class="form-group" id="filter_<%- field %>">
+    <label for="<%- field %>__icontains"><%- label %>:</label>
+    <input type="text" class="form-control input-sm" id="<%- field %>__icontains" name="<%- field %>__icontains">
+	<button type="button" class="btn btn-warning btn-xs" id="button-remove" data-id="filter_<%- field %>">&times;</button>
+</div>
+</script>
+
+<script type="text/template" id="template-filter_datetime">
+<div class="form-group" id="filter_<%- field %>">
+    <label><%- label %>:</label>
+    <div class="form-group" id="filter_gt_<%- field %>">
+	    <input type="text" class="form-control input-sm" id="<%- field %>__gt" name="<%- field %>__gt">
+	</div>
+	<div class="form-group" id="filter_lt_<%- field %>">
+    	<input type="text" class="form-control input-sm" id="<%- field %>__lt" name="<%- field %>__lt">
+	</div>
+	<button type="button" class="btn btn-warning btn-xs" id="button-remove" data-id="filter_<%- field %>">&times;</button>
+</div>
+</script>
+
+<script type="text/template" id="template-filter_enumeration">
+<div class="form-group" id="filter_<%- field %>">
+    <label for="<%- field %>"><%- label %>:</label>
+    <select class="form-control input-sm" id="<%- field %>" name="<%- field %>">
+        <option value="">All</option>
+        <% _(values).each(function(value) { %>
+        <option value="<%= value.value %>"><%= value.label %></option>
+        <% }); %>
+    </select>
+	<button type="button" class="btn btn-warning btn-xs" id="button-remove" data-id="filter_<%- field %>">&times;</button>
+</div>
+</script>
+
+<script type="text/template" id="template-filter">
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+      <input type="text" class="form-control" aria-label="...">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+</script>
+
+<script type="text/template" id="template-filter_choice">
+<li><a data-id="filter_<%- field %>"><%- label %></a></li>
+</script>
+
+        <script type="text/javascript" src="libs/system.js"></script>
+        <script type="text/javascript" src="config.js"></script>
+        <script>
+            System.import('twbs/bootstrap');
+            System.import('js/Application').then(function(application)
+            {
+                var Application = application.default;
+                var app = new Application();
+                app.start();
+            });
+        </script>
+    </body>
+</html>

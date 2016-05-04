@@ -287,10 +287,10 @@
               "type": "MethodDefinition",
               "key": {
                 "type": "Identifier",
-                "name": "_handleClick",
+                "name": "_handleDoubleClick",
                 "range": [
-                  495,
-                  507
+                  502,
+                  520
                 ],
                 "loc": {
                   "start": {
@@ -299,7 +299,7 @@
                   },
                   "end": {
                     "line": 16,
-                    "column": 16
+                    "column": 22
                   }
                 }
               },
@@ -326,8 +326,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  524,
-                                  529
+                                  537,
+                                  542
                                 ],
                                 "loc": {
                                   "start": {
@@ -344,8 +344,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  530,
-                                  537
+                                  543,
+                                  550
                                 ],
                                 "loc": {
                                   "start": {
@@ -359,8 +359,8 @@
                                 }
                               },
                               "range": [
-                                524,
-                                537
+                                537,
+                                550
                               ],
                               "loc": {
                                 "start": {
@@ -379,8 +379,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  538,
-                                  545
+                                  551,
+                                  558
                                 ],
                                 "loc": {
                                   "start": {
@@ -395,8 +395,8 @@
                               }
                             ],
                             "range": [
-                              524,
-                              546
+                              537,
+                              559
                             ],
                             "loc": {
                               "start": {
@@ -413,8 +413,8 @@
                             "type": "Identifier",
                             "name": "trigger",
                             "range": [
-                              547,
-                              554
+                              560,
+                              567
                             ],
                             "loc": {
                               "start": {
@@ -428,8 +428,8 @@
                             }
                           },
                           "range": [
-                            524,
-                            554
+                            537,
+                            567
                           ],
                           "loc": {
                             "start": {
@@ -450,8 +450,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                555,
-                                567
+                                568,
+                                580
                               ],
                               "loc": {
                                 "start": {
@@ -468,8 +468,8 @@
                               "type": "Identifier",
                               "name": "EVENT__PROJECT_SELECTED",
                               "range": [
-                                568,
-                                591
+                                581,
+                                604
                               ],
                               "loc": {
                                 "start": {
@@ -483,8 +483,8 @@
                               }
                             },
                             "range": [
-                              555,
-                              591
+                              568,
+                              604
                             ],
                             "loc": {
                               "start": {
@@ -506,8 +506,8 @@
                                   "type": "Identifier",
                                   "name": "project",
                                   "range": [
-                                    594,
-                                    601
+                                    607,
+                                    614
                                   ],
                                   "loc": {
                                     "start": {
@@ -526,8 +526,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      603,
-                                      607
+                                      616,
+                                      620
                                     ],
                                     "loc": {
                                       "start": {
@@ -544,8 +544,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      608,
-                                      613
+                                      621,
+                                      626
                                     ],
                                     "loc": {
                                       "start": {
@@ -559,8 +559,8 @@
                                     }
                                   },
                                   "range": [
-                                    603,
-                                    613
+                                    616,
+                                    626
                                   ],
                                   "loc": {
                                     "start": {
@@ -578,8 +578,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  594,
-                                  613
+                                  607,
+                                  626
                                 ],
                                 "loc": {
                                   "start": {
@@ -594,8 +594,8 @@
                               }
                             ],
                             "range": [
-                              593,
-                              614
+                              606,
+                              627
                             ],
                             "loc": {
                               "start": {
@@ -610,8 +610,8 @@
                           }
                         ],
                         "range": [
-                          524,
-                          615
+                          537,
+                          628
                         ],
                         "loc": {
                           "start": {
@@ -625,8 +625,8 @@
                         }
                       },
                       "range": [
-                        524,
-                        616
+                        537,
+                        629
                       ],
                       "loc": {
                         "start": {
@@ -641,8 +641,8 @@
                     }
                   ],
                   "range": [
-                    514,
-                    622
+                    527,
+                    635
                   ],
                   "loc": {
                     "start": {
@@ -658,13 +658,13 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  507,
-                  622
+                  520,
+                  635
                 ],
                 "loc": {
                   "start": {
                     "line": 16,
-                    "column": 16
+                    "column": 22
                   },
                   "end": {
                     "line": 19,
@@ -675,8 +675,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                495,
-                622
+                502,
+                635
               ],
               "loc": {
                 "start": {
@@ -745,10 +745,10 @@
                 },
                 {
                   "type": "Block",
-                  "value": "*\n     * Handles click.\n     ",
+                  "value": "*\n     * Handles double click.\n     ",
                   "range": [
                     457,
-                    490
+                    497
                   ],
                   "loc": {
                     "start": {
@@ -767,7 +767,7 @@
           ],
           "range": [
             256,
-            624
+            637
           ],
           "loc": {
             "start": {
@@ -782,7 +782,7 @@
         },
         "range": [
           205,
-          624
+          637
         ],
         "loc": {
           "start": {
@@ -818,7 +818,7 @@
       },
       "range": [
         190,
-        624
+        637
       ],
       "loc": {
         "start": {
@@ -866,8 +866,8 @@
               "type": "Identifier",
               "name": "ViewProjectListItem",
               "range": [
-                625,
-                644
+                638,
+                657
               ],
               "loc": {
                 "start": {
@@ -884,8 +884,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                645,
-                654
+                658,
+                667
               ],
               "loc": {
                 "start": {
@@ -899,8 +899,8 @@
               }
             },
             "range": [
-              625,
-              654
+              638,
+              667
             ],
             "loc": {
               "start": {
@@ -917,8 +917,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              655,
-              663
+              668,
+              676
             ],
             "loc": {
               "start": {
@@ -932,8 +932,8 @@
             }
           },
           "range": [
-            625,
-            663
+            638,
+            676
           ],
           "loc": {
             "start": {
@@ -951,8 +951,8 @@
           "value": "#template-main_project_list_item",
           "raw": "'#template-main_project_list_item'",
           "range": [
-            666,
-            700
+            679,
+            713
           ],
           "loc": {
             "start": {
@@ -966,8 +966,8 @@
           }
         },
         "range": [
-          625,
-          700
+          638,
+          713
         ],
         "loc": {
           "start": {
@@ -981,8 +981,8 @@
         }
       },
       "range": [
-        625,
-        701
+        638,
+        714
       ],
       "loc": {
         "start": {
@@ -1010,8 +1010,8 @@
               "type": "Identifier",
               "name": "ViewProjectListItem",
               "range": [
-                702,
-                721
+                715,
+                734
               ],
               "loc": {
                 "start": {
@@ -1028,8 +1028,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                722,
-                731
+                735,
+                744
               ],
               "loc": {
                 "start": {
@@ -1043,8 +1043,8 @@
               }
             },
             "range": [
-              702,
-              731
+              715,
+              744
             ],
             "loc": {
               "start": {
@@ -1061,8 +1061,8 @@
             "type": "Identifier",
             "name": "tagName",
             "range": [
-              732,
-              739
+              745,
+              752
             ],
             "loc": {
               "start": {
@@ -1076,8 +1076,8 @@
             }
           },
           "range": [
-            702,
-            739
+            715,
+            752
           ],
           "loc": {
             "start": {
@@ -1095,8 +1095,8 @@
           "value": "tr",
           "raw": "'tr'",
           "range": [
-            742,
-            746
+            755,
+            759
           ],
           "loc": {
             "start": {
@@ -1110,8 +1110,8 @@
           }
         },
         "range": [
-          702,
-          746
+          715,
+          759
         ],
         "loc": {
           "start": {
@@ -1125,8 +1125,8 @@
         }
       },
       "range": [
-        702,
-        747
+        715,
+        760
       ],
       "loc": {
         "start": {
@@ -1154,8 +1154,8 @@
               "type": "Identifier",
               "name": "ViewProjectListItem",
               "range": [
-                748,
-                767
+                761,
+                780
               ],
               "loc": {
                 "start": {
@@ -1172,8 +1172,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                768,
-                777
+                781,
+                790
               ],
               "loc": {
                 "start": {
@@ -1187,8 +1187,8 @@
               }
             },
             "range": [
-              748,
-              777
+              761,
+              790
             ],
             "loc": {
               "start": {
@@ -1205,8 +1205,8 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              778,
-              784
+              791,
+              797
             ],
             "loc": {
               "start": {
@@ -1220,8 +1220,8 @@
             }
           },
           "range": [
-            748,
-            784
+            761,
+            797
           ],
           "loc": {
             "start": {
@@ -1241,11 +1241,11 @@
               "type": "Property",
               "key": {
                 "type": "Literal",
-                "value": "click",
-                "raw": "'click'",
+                "value": "dblclick",
+                "raw": "'dblclick'",
                 "range": [
-                  793,
-                  800
+                  806,
+                  816
                 ],
                 "loc": {
                   "start": {
@@ -1254,26 +1254,26 @@
                   },
                   "end": {
                     "line": 24,
-                    "column": 11
+                    "column": 14
                   }
                 }
               },
               "value": {
                 "type": "Literal",
-                "value": "_handleClick",
-                "raw": "'_handleClick'",
+                "value": "_handleDoubleClick",
+                "raw": "'_handleDoubleClick'",
                 "range": [
-                  802,
-                  816
+                  818,
+                  838
                 ],
                 "loc": {
                   "start": {
                     "line": 24,
-                    "column": 13
+                    "column": 16
                   },
                   "end": {
                     "line": 24,
-                    "column": 27
+                    "column": 36
                   }
                 }
               },
@@ -1282,8 +1282,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                793,
-                816
+                806,
+                838
               ],
               "loc": {
                 "start": {
@@ -1292,14 +1292,14 @@
                 },
                 "end": {
                   "line": 24,
-                  "column": 27
+                  "column": 36
                 }
               }
             }
           ],
           "range": [
-            787,
-            818
+            800,
+            840
           ],
           "loc": {
             "start": {
@@ -1313,8 +1313,8 @@
           }
         },
         "range": [
-          748,
-          818
+          761,
+          840
         ],
         "loc": {
           "start": {
@@ -1328,8 +1328,8 @@
         }
       },
       "range": [
-        748,
-        818
+        761,
+        840
       ],
       "loc": {
         "start": {
@@ -1346,7 +1346,7 @@
   "sourceType": "module",
   "range": [
     0,
-    818
+    840
   ],
   "loc": {
     "start": {
@@ -1433,10 +1433,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n     * Handles click.\n     ",
+      "value": "*\n     * Handles double click.\n     ",
       "range": [
         457,
-        490
+        497
       ],
       "loc": {
         "start": {

@@ -2158,11 +2158,70 @@
                   "column": 67
                 }
               }
+            },
+            {
+              "type": "Property",
+              "key": {
+                "type": "Literal",
+                "value": "dblclick",
+                "raw": "'dblclick'",
+                "range": [
+                  1602,
+                  1612
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 14
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "_handleButtonImportWorkflow",
+                "raw": "'_handleButtonImportWorkflow'",
+                "range": [
+                  1614,
+                  1643
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 16
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 45
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                1602,
+                1643
+              ],
+              "loc": {
+                "start": {
+                  "line": 39,
+                  "column": 4
+                },
+                "end": {
+                  "line": 39,
+                  "column": 45
+                }
+              }
             }
           ],
           "range": [
             1527,
-            1598
+            1645
           ],
           "loc": {
             "start": {
@@ -2170,14 +2229,14 @@
               "column": 46
             },
             "end": {
-              "line": 39,
+              "line": 40,
               "column": 1
             }
           }
         },
         "range": [
           1481,
-          1598
+          1645
         ],
         "loc": {
           "start": {
@@ -2185,14 +2244,14 @@
             "column": 0
           },
           "end": {
-            "line": 39,
+            "line": 40,
             "column": 1
           }
         }
       },
       "range": [
         1481,
-        1599
+        1646
       ],
       "loc": {
         "start": {
@@ -2200,7 +2259,7 @@
           "column": 0
         },
         "end": {
-          "line": 39,
+          "line": 40,
           "column": 2
         }
       }
@@ -2209,7 +2268,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1599
+    1646
   ],
   "loc": {
     "start": {
@@ -2217,7 +2276,7 @@
       "column": 0
     },
     "end": {
-      "line": 39,
+      "line": 40,
       "column": 2
     }
   },

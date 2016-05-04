@@ -1830,6 +1830,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/plugins.js",
+    "file/js/Plugins.js.html",
+    "js/Plugins.js",
+    "file"
+  ],
+  [
     "js/shared/cookie.js",
     "file/js/Shared/Cookie.js.html",
     "js/Shared/Cookie.js",
@@ -2337,6 +2343,12 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__resource_delete",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCE_DELETE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCE_DELETE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resource_download",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCE_DOWNLOAD",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCE_DOWNLOAD",
     "member"
   ],
   [

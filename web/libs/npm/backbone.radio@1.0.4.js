@@ -1,0 +1,1 @@
+module.exports = require("npm:backbone.radio@1.0.4/build/backbone.radio.js");

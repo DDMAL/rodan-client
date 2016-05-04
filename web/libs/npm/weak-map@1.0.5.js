@@ -1,0 +1,1 @@
+module.exports = require("npm:weak-map@1.0.5/weak-map.js");

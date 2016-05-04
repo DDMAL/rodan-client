@@ -1,0 +1,1 @@
+module.exports = require("npm:whatwg-url@2.0.1/lib/public-api.js");

@@ -1359,8 +1359,8 @@
                                   "arguments": [
                                     {
                                       "type": "Literal",
-                                      "value": "#node_text",
-                                      "raw": "'#node_text'",
+                                      "value": ".node_text",
+                                      "raw": "'.node_text'",
                                       "range": [
                                         1111,
                                         1123
@@ -5856,8 +5856,8 @@
               },
               "value": {
                 "type": "Literal",
-                "value": "#node_text",
-                "raw": "'#node_text'",
+                "value": ".node_text",
+                "raw": "'.node_text'",
                 "range": [
                   2909,
                   2921

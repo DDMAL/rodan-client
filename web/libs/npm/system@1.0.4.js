@@ -1,0 +1,1 @@
+module.exports = require("npm:system@1.0.4/system.js");

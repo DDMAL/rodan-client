@@ -1,0 +1,1 @@
+module.exports = require("github:jdorn/json-editor@0.7.25/dist/jsoneditor.js");
