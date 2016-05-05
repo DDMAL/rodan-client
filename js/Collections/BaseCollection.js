@@ -122,10 +122,15 @@ export default class BaseCollection extends Backbone.Collection
 
         // Build final options.
         var finalOptions = {};
-        finalOptions.error = options.error ? options.error : null;
-        finalOptions.reset = options.reset ? options.reset : {};
-        finalOptions.success = options.success ? options.success : null;
-        finalOptions.task = options.task ? options.task : {};
+        if (options.error)
+        {
+            finalOptions.error = options.error;
+        }
+        if (options.success)
+        {
+            finalOptions.success = options.success;
+        }
+        finalOptions.reset = options.reset ? options.reset : false;
         finalOptions.data = {};
         $.extend(finalOptions.data, this._filters);
         $.extend(finalOptions.data, this._sort);
