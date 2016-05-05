@@ -57,7 +57,6 @@ export default class GlobalCollection extends BaseCollection
             data.disable_pagination = true;
         }
         options.data = data;
-        options = this._applyResponseHandlers(options);
         /** @ignore */
         this.url = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
         this.fetch(options);

@@ -114,9 +114,6 @@ export default class BaseCollection extends Backbone.Collection
      */
     fetch(options)
     {
-        // Apply handlers.
-        options = this._applyResponseHandlers(options);
-
         // Set task.
         options.task = 'fetch';
 
@@ -125,9 +122,9 @@ export default class BaseCollection extends Backbone.Collection
 
         // Build final options.
         var finalOptions = {};
-        finalOptions.error = options.error ? options.error : {};
+        finalOptions.error = options.error ? options.error : null;
         finalOptions.reset = options.reset ? options.reset : {};
-        finalOptions.success = options.success ? options.success : {};
+        finalOptions.success = options.success ? options.success : null;
         finalOptions.task = options.task ? options.task : {};
         finalOptions.data = {};
         $.extend(finalOptions.data, this._filters);
@@ -286,73 +283,6 @@ export default class BaseCollection extends Backbone.Collection
                               'previous': options.previous !== null ? options.previous : '#',
                               'current': options.current_page,
                               'total': options.total_pages});
-    }
-
-    /**
-     * Applies response handlers.
-     */
-    _applyResponseHandlers(options)
-    {
-        // Check if options are defined.
-        if (options === undefined)
-        {
-            options = {};
-        }
-
-        // Success.
-        var genericSuccessFunction = (collection, response, options) => this._handleSuccessResponse(collection, response, options);
-        if (!options.hasOwnProperty('success'))
-        {
-            options.success = (collection, response, options) => this._handleSuccessResponse(collection, response, options);
-        }
-        else
-        {
-            var customSuccessFunction = options.success;
-            options.success = function(collection, response, options)
-            {
-                customSuccessFunction(collection, response, options);
-                genericSuccessFunction(collection, response, options);
-            };
-        }
-
-        // Error.
-        var genericErrorFunction = (collection, response, options) => this._handleErrorResponse(collection, response, options);
-        if (!options.hasOwnProperty('error'))
-        {
-            options.error = (collection, response, options) => this._handleErrorResponse(collection, response, options);
-        }
-        else
-        {
-            var customErrorFunction = options.error;
-            options.error = function(collection, response, options)
-            {
-                customErrorFunction(collection, response, options);
-                genericErrorFunction(collection, response, options);
-            };
-        }
-
-        return options;
-    }
-
-    /**
-     * Handle success response.
-     */
-    _handleSuccessResponse(collection, response, options)
-    {
-/*        var text = 'Successful ' + options.task
-                   + ' (' + options.xhr.status + '): ' 
-                   + collection.constructor.name;
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_DISPLAY_MESSAGE, {text: text});*/
-    }
-
-    /**
-     * Handle error response.
-     */
-    _handleErrorResponse(collection, response, options)
-    {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {collection: collection,
-                                                                  response: response,
-                                                                  options: options});
     }
 
     /**
