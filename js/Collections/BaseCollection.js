@@ -114,6 +114,11 @@ export default class BaseCollection extends Backbone.Collection
      */
     fetch(options)
     {
+        if (!options)
+        {
+            options = {};
+        }
+
         // Set task.
         options.task = 'fetch';
 
