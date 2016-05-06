@@ -3,6 +3,7 @@ import datetimepicker from 'datetimepicker';
 import 'jqueryui';
 import BaseCollection from '../Collections/BaseCollection';
 import Configuration from '../Configuration';
+import Environment from '../Shared/Environment';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
@@ -22,6 +23,9 @@ export default class BehaviorTable extends Marionette.Behavior
     {
         this._filtersInjected = false;
         this._datetimepickerElements = [];
+        this._lastTarget = null;
+        this._multipleSelectionKey = Environment.getMultipleSelectionKey();
+        this._rangeSelectionKey = Environment.getRangeSelectionKey();
     }
 
     /**
@@ -32,7 +36,7 @@ export default class BehaviorTable extends Marionette.Behavior
     onRender(view)
     {
         // Not really pretty, but works for now. Marionette calls 'delegateEvents'
-        // bevore our custom 'initialize' on the view. However, at that point, the
+        // before our custom 'initialize' on the view. However, at that point, the
         // collection is not yet set in the view, so binding doesn't work. This next
         // line is a work around.
         // TODO - fix/find better way
@@ -51,6 +55,7 @@ export default class BehaviorTable extends Marionette.Behavior
 
     /**
      * Destroy instance. This takes care of destroying any known DateTimePicker instances before moving to the next View.
+     * Also reset last target.
      */
     onDestroy()
     {
@@ -59,6 +64,7 @@ export default class BehaviorTable extends Marionette.Behavior
         {
             $(this.el).find('#' + datetimePickerElementIds[index]).data('DateTimePicker').destroy();
         }
+        this._lastTarget = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -366,7 +372,41 @@ export default class BehaviorTable extends Marionette.Behavior
      */
     _handleRowClick(event)
     {
-        $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');
+        if (this.view.allowMultipleSelection)
+        {
+            // Wipe everything if ctrl key not selected.
+            if (!event[this._multipleSelectionKey])
+            {
+                $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');  
+            }
+            else
+            {
+                $(event.currentTarget).toggleClass('active');
+            }
+
+            // If shift down, select range.
+            if (event[this._rangeSelectionKey])
+            {
+                $(this._lastTarget).addClass('active clickable-row')
+                if ($(this._lastTarget).index() <= $(event.currentTarget).index())
+                {
+                    $(this._lastTarget).nextUntil(event.currentTarget).addClass('active clickable-row');
+                }
+                else
+                {
+                    $(event.currentTarget).nextUntil(this._lastTarget).addClass('active clickable-row');
+                }
+            }
+            else
+            {
+                this._lastTarget = event.currentTarget;
+            }
+        }
+        else
+        {
+            $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');  
+            this._lastTarget = event.currentTarget;
+        }
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

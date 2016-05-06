@@ -335,7 +335,7 @@ class WorkflowBuilderGUI
      */
     _handleEventKeyDown(event)
     {
-        if (event.key === this._multipleSelectionKey)
+        if (event.event[this._multipleSelectionKey])
         {
             this._itemController.setSelectingMultiple(true);
         }
@@ -346,7 +346,7 @@ class WorkflowBuilderGUI
      */
     _handleEventKeyUp(event)
     {
-        if (event.key === this._multipleSelectionKey)
+        if (!event.event[this._multipleSelectionKey])
         {
             this._itemController.setSelectingMultiple(false);
         }

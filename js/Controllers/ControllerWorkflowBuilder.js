@@ -182,10 +182,12 @@ export default class ControllerWorkflowBuilder extends BaseController
         var assignedResourceView = new ViewResourceList({collection: assignedResources,
                                                          template: '#template-modal_resource_list',
                                                          childView: ViewResourceListItemModal,
+                                                         allowMultipleSelection: true,
                                                          childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
         var resourceListView = new ViewResourceList({collection: availableResources,
                                                      template: '#template-modal_resource_list',
                                                      childView: ViewResourceListItemModal,
+                                                     allowMultipleSelection: true,
                                                      childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
 
         // Show the layout view.
