@@ -66,6 +66,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "rodan-client/js/controllers/controllercontextmenu.js~controllercontextmenu",
+    "class/js/Controllers/ControllerContextMenu.js~ControllerContextMenu.html",
+    "<span>ControllerContextMenu</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerContextMenu.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/controllers/controllermodal.js~controllermodal",
     "class/js/Controllers/ControllerModal.js~ControllerModal.html",
     "<span>ControllerModal</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerModal.js</span>",
@@ -513,6 +519,18 @@ window.esdocSearchIndex = [
     "rodan-client/js/views/master/main/resource/list/viewresourcelist.js~viewresourcelist",
     "class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html",
     "<span>ViewResourceList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceList.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/resource/list/viewresourcelistassigned.js~viewresourcelistassigned",
+    "class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html",
+    "<span>ViewResourceListAssigned</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/resource/list/viewresourcelistavailable.js~viewresourcelistavailable",
+    "class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html",
+    "<span>ViewResourceListAvailable</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js</span>",
     "class"
   ],
   [
@@ -1362,6 +1380,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/controllers/controllercontextmenu.js",
+    "file/js/Controllers/ControllerContextMenu.js.html",
+    "js/Controllers/ControllerContextMenu.js",
+    "file"
+  ],
+  [
     "js/controllers/controllermodal.js",
     "file/js/Controllers/ControllerModal.js.html",
     "js/Controllers/ControllerModal.js",
@@ -1830,6 +1854,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/plugins.js",
+    "file/js/Plugins.js.html",
+    "js/Plugins.js",
+    "file"
+  ],
+  [
     "js/shared/cookie.js",
     "file/js/Shared/Cookie.js.html",
     "js/Shared/Cookie.js",
@@ -1881,6 +1911,12 @@ window.esdocSearchIndex = [
     "js/shared/environment.js~environment.getos",
     "class/js/Shared/Environment.js~Environment.html#static-method-getOS",
     "js/Shared/Environment.js~Environment.getOS",
+    "method"
+  ],
+  [
+    "js/shared/environment.js~environment.getrangeselectionkey",
+    "class/js/Shared/Environment.js~Environment.html#static-method-getRangeSelectionKey",
+    "js/Shared/Environment.js~Environment.getRangeSelectionKey",
     "method"
   ],
   [
@@ -2205,6 +2241,18 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__authentication_user",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__AUTHENTICATION_USER",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__AUTHENTICATION_USER",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__contextmenu_hide",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__CONTEXTMENU_HIDE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__CONTEXTMENU_HIDE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__contextmenu_show",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__CONTEXTMENU_SHOW",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__CONTEXTMENU_SHOW",
     "member"
   ],
   [
@@ -2884,6 +2932,18 @@ window.esdocSearchIndex = [
     "class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html#instance-method-onRender",
     "js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList#onRender",
     "method"
+  ],
+  [
+    "js/views/master/main/resource/list/viewresourcelistassigned.js",
+    "file/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js.html",
+    "js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/resource/list/viewresourcelistavailable.js",
+    "file/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js.html",
+    "js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js",
+    "file"
   ],
   [
     "js/views/master/main/resource/list/viewresourcelistitem.js",

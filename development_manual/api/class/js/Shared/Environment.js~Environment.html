@@ -57,6 +57,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalResourceTypeCollection.js~GlobalResourceTypeCollection.html">GlobalResourceTypeCollection</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Controllers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/BaseController.js~BaseController.html">BaseController</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerAuthentication.js~ControllerAuthentication.html">ControllerAuthentication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerContextMenu.js~ControllerContextMenu.html">ControllerContextMenu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerModal.js~ControllerModal.html">ControllerModal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerProject.js~ControllerProject.html">ControllerProject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerResource.js~ControllerResource.html">ControllerResource</a></span></span></li>
@@ -107,6 +108,8 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html">ViewResource</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html">ViewResourceTypeListItem</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html">ViewResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html">ViewResourceListAssigned</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html">ViewResourceListAvailable</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html">ViewResourceListItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html">ViewResourceListItemModal</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/Individual/ViewRunJob.js~ViewRunJob.html">ViewRunJob</a></span></span></li>
@@ -145,13 +148,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Environment from &apos;<span><a href="file/js/Shared/Environment.js.html#lineNumber8">rodan-client/js/Shared/Environment.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Environment from &apos;<span><a href="file/js/Shared/Environment.js.html#lineNumber28">rodan-client/js/Shared/Environment.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/js/Shared/Environment.js.html#lineNumber8">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/js/Shared/Environment.js.html#lineNumber28">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -240,6 +243,32 @@
       
     </td>
   </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/js/Shared/Environment.js~Environment.html#static-method-getRangeSelectionKey">getRangeSelectionKey</a></span></span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Get range selection key.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
 </tbody>
 </table>
 </div>
@@ -263,7 +292,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Shared/Environment.js.html#lineNumber37">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Shared/Environment.js.html#lineNumber56">source</a></span></span>
     </span>
   </h3>
 
@@ -315,7 +344,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Shared/Environment.js.html#lineNumber18">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Shared/Environment.js.html#lineNumber38">source</a></span></span>
     </span>
   </h3>
 
@@ -336,6 +365,58 @@
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
         <td class="return-desc" data-ice="returnDescription"><p>&apos;Windows&apos;, &apos;MacOS&apos;, &apos;UNIX&apos;, &apos;Linux&apos;, or &apos;Unknown OS&apos;</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getRangeSelectionKey">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    <span data-ice="name">getRangeSelectionKey</span><span data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/js/Shared/Environment.js.html#lineNumber66">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Get range selection key.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>returns range selection key (e.g. &apos;shift&apos;), depending on OS</p>
 </td>
       </tr>
     </table>

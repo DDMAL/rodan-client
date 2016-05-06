@@ -57,6 +57,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalResourceTypeCollection.js~GlobalResourceTypeCollection.html">GlobalResourceTypeCollection</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Controllers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/BaseController.js~BaseController.html">BaseController</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerAuthentication.js~ControllerAuthentication.html">ControllerAuthentication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerContextMenu.js~ControllerContextMenu.html">ControllerContextMenu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerModal.js~ControllerModal.html">ControllerModal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerProject.js~ControllerProject.html">ControllerProject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerResource.js~ControllerResource.html">ControllerResource</a></span></span></li>
@@ -107,6 +108,8 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html">ViewResource</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html">ViewResourceTypeListItem</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html">ViewResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html">ViewResourceListAssigned</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html">ViewResourceListAvailable</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html">ViewResourceListItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html">ViewResourceListItemModal</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/Individual/ViewRunJob.js~ViewRunJob.html">ViewRunJob</a></span></span></li>
@@ -163,7 +166,8 @@ import ResourceCollection from &apos;../Collections/ResourceCollection&apos;;
 import ResourceList from &apos;../Models/ResourceList&apos;;
 import ViewJobList from &apos;../Views/Master/Main/Job/List/ViewJobList&apos;;
 import ViewResourceList from &apos;../Views/Master/Main/Resource/List/ViewResourceList&apos;;
-import ViewResourceListItemModal from &apos;../Views/Master/Main/Resource/List/ViewResourceListItemModal&apos;;
+import ViewResourceListAssigned from &apos;../Views/Master/Main/Resource/List/ViewResourceListAssigned&apos;;
+import ViewResourceListAvailable from &apos;../Views/Master/Main/Resource/List/ViewResourceListAvailable&apos;;
 import ViewWorkflow from &apos;../Views/Master/Main/Workflow/Individual/ViewWorkflow&apos;;
 import ViewWorkflowList from &apos;../Views/Master/Main/Workflow/List/ViewWorkflowList&apos;;
 import ViewWorkflowListImportItem from &apos;../Views/Master/Main/Workflow/List/ViewWorkflowListImportItem&apos;;
@@ -326,14 +330,10 @@ export default class ControllerWorkflowBuilder extends BaseController
         var inputPort = options.inputport;
         var assignedResources = this._getResourceAssignments(inputPort.get(&apos;url&apos;));
         var availableResources = this._getResourcesAvailable(inputPort);
-        var assignedResourceView = new ViewResourceList({collection: assignedResources,
-                                                         template: &apos;#template-modal_resource_list&apos;,
-                                                         childView: ViewResourceListItemModal,
-                                                         childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
-        var resourceListView = new ViewResourceList({collection: availableResources,
-                                                     template: &apos;#template-modal_resource_list&apos;,
-                                                     childView: ViewResourceListItemModal,
-                                                     childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
+        var assignedResourceView = new ViewResourceListAssigned({collection: assignedResources,
+                                                                 childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
+        var resourceListView = new ViewResourceListAvailable({collection: availableResources,
+                                                              childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});

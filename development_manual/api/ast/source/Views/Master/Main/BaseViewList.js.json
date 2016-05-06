@@ -605,12 +605,156 @@
           "column": 52
         }
       }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "BaseViewList",
+              "range": [
+                268,
+                280
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 0
+                },
+                "end": {
+                  "line": 9,
+                  "column": 12
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                281,
+                290
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 13
+                },
+                "end": {
+                  "line": 9,
+                  "column": 22
+                }
+              }
+            },
+            "range": [
+              268,
+              290
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 9,
+                "column": 22
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "allowMultipleSelection",
+            "range": [
+              291,
+              313
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 23
+              },
+              "end": {
+                "line": 9,
+                "column": 45
+              }
+            }
+          },
+          "range": [
+            268,
+            313
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 45
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": false,
+          "raw": "false",
+          "range": [
+            316,
+            321
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 48
+            },
+            "end": {
+              "line": 9,
+              "column": 53
+            }
+          }
+        },
+        "range": [
+          268,
+          321
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 9,
+            "column": 53
+          }
+        }
+      },
+      "range": [
+        268,
+        322
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 54
+        }
+      }
     }
   ],
   "sourceType": "module",
   "range": [
     0,
-    266
+    322
   ],
   "loc": {
     "start": {
@@ -618,8 +762,8 @@
       "column": 0
     },
     "end": {
-      "line": 8,
-      "column": 52
+      "line": 9,
+      "column": 54
     }
   },
   "comments": [

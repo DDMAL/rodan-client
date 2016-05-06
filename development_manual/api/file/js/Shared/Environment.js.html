@@ -57,6 +57,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalResourceTypeCollection.js~GlobalResourceTypeCollection.html">GlobalResourceTypeCollection</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Controllers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/BaseController.js~BaseController.html">BaseController</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerAuthentication.js~ControllerAuthentication.html">ControllerAuthentication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerContextMenu.js~ControllerContextMenu.html">ControllerContextMenu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerModal.js~ControllerModal.html">ControllerModal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerProject.js~ControllerProject.html">ControllerProject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerResource.js~ControllerResource.html">ControllerResource</a></span></span></li>
@@ -107,6 +108,8 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html">ViewResource</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html">ViewResourceTypeListItem</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html">ViewResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html">ViewResourceListAssigned</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html">ViewResourceListAvailable</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html">ViewResourceListItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html">ViewResourceListItemModal</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/Individual/ViewRunJob.js~ViewRunJob.html">ViewRunJob</a></span></span></li>
@@ -145,9 +148,29 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/Shared/Environment.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
-let _os = null;
-let _keyMultipleSelection = null;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">let _os = null;
+let _keyControls = {
+    &apos;Windows&apos;: {
+        &apos;range&apos;: &apos;shiftKey&apos;,
+        &apos;multiple&apos;: &apos;ctrlKey&apos;
+    },
+    &apos;MacOS&apos;: {
+        &apos;range&apos;: &apos;shiftKey&apos;,
+        &apos;multiple&apos;: &apos;metaKey&apos;
+    },
+    &apos;Linux&apos;: {
+        &apos;range&apos;: &apos;shiftKey&apos;,
+        &apos;multiple&apos;: &apos;ctrlKey&apos;
+    },
+    &apos;UNIX&apos;: {
+        &apos;range&apos;: &apos;shiftKey&apos;,
+        &apos;multiple&apos;: &apos;ctrlKey&apos;
+    },
+    &apos;Unknown OS&apos;: {
+        &apos;range&apos;: &apos;shiftKey&apos;,
+        &apos;multiple&apos;: &apos;ctrlKey&apos;
+    }
+};
 
 /**
  * Global environment constants.
@@ -166,14 +189,13 @@ export default class Environment
     {
         if (_os === null)
         {
-            _os=&quot;Unknown OS&quot;;
-            if (navigator.appVersion.indexOf(&quot;Win&quot;)!=-1) _os=&quot;Windows&quot;;
-            if (navigator.appVersion.indexOf(&quot;Mac&quot;)!=-1) _os=&quot;MacOS&quot;;
-            if (navigator.appVersion.indexOf(&quot;X11&quot;)!=-1) _os=&quot;UNIX&quot;;
-            if (navigator.appVersion.indexOf(&quot;Linux&quot;)!=-1) _os=&quot;Linux&quot;;
+            _os=&apos;Unknown OS&apos;;
+            if (navigator.appVersion.indexOf(&apos;Win&apos;)!=-1) _os=&apos;Windows&apos;;
+            if (navigator.appVersion.indexOf(&apos;Mac&apos;)!=-1) _os=&apos;MacOS&apos;;
+            if (navigator.appVersion.indexOf(&apos;X11&apos;)!=-1) _os=&apos;UNIX&apos;;
+            if (navigator.appVersion.indexOf(&apos;Linux&apos;)!=-1) _os=&apos;Linux&apos;;
         }
         return _os;
-        //Configuration.OS = OSName;
     }
 
     /**
@@ -183,42 +205,17 @@ export default class Environment
      */
     static getMultipleSelectionKey()
     {
-        if (_keyMultipleSelection === null)
-        {
-            switch (Environment.getOS())
-            {
-                case &quot;Windows&quot;:
-                {
-                    _keyMultipleSelection = &quot;control&quot;;
-                    break;
-                }
+        return _keyControls[Environment.getOS()][&apos;multiple&apos;];
+    }
 
-                case &quot;MacOS&quot;:
-                {
-                    _keyMultipleSelection = &quot;command&quot;;
-                    break;
-                }
-
-                case &quot;Linux&quot;:
-                {
-                    _keyMultipleSelection = &quot;control&quot;;
-                    break;
-                }
-
-                case &quot;UNIX&quot;:
-                {
-                    _keyMultipleSelection = &quot;control&quot;;
-                    break;
-                }
-
-                default:
-                {
-                    _keyMultipleSelection = &quot;control&quot;;
-                    break;
-                }
-            }
-        }
-        return _keyMultipleSelection;
+    /**
+     * Get range selection key.
+     *
+     * @return {string} returns range selection key (e.g. &apos;shift&apos;), depending on OS
+     */
+    static getRangeSelectionKey()
+    {
+        return _keyControls[Environment.getOS()][&apos;range&apos;];
     }
 }</code></pre>
 

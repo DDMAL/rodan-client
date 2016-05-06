@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 381,
-  "actualCount": 381,
+  "expectCount": 387,
+  "actualCount": 387,
   "files": {
     "js/Application.js": {
       "expectCount": 2,
@@ -56,6 +56,11 @@
     "js/Controllers/ControllerAuthentication.js": {
       "expectCount": 3,
       "actualCount": 3,
+      "undocumentLines": []
+    },
+    "js/Controllers/ControllerContextMenu.js": {
+      "expectCount": 1,
+      "actualCount": 1,
       "undocumentLines": []
     },
     "js/Controllers/ControllerModal.js": {
@@ -114,13 +119,13 @@
       "undocumentLines": []
     },
     "js/Shared/RODAN_EVENTS.js": {
-      "expectCount": 133,
-      "actualCount": 133,
+      "expectCount": 135,
+      "actualCount": 135,
       "undocumentLines": []
     },
     "js/Shared/Environment.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 4,
+      "actualCount": 4,
       "undocumentLines": []
     },
     "js/Shared/ErrorHandler.js": {
@@ -431,6 +436,16 @@
     "js/Views/Master/Main/Resource/List/ViewResourceList.js": {
       "expectCount": 2,
       "actualCount": 2,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js": {
+      "expectCount": 1,
+      "actualCount": 1,
       "undocumentLines": []
     },
     "js/Views/Master/Main/Resource/List/ViewResourceListItem.js": {

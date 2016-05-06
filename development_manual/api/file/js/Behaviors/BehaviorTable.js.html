@@ -57,6 +57,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Collections/Global/GlobalResourceTypeCollection.js~GlobalResourceTypeCollection.html">GlobalResourceTypeCollection</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Controllers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/BaseController.js~BaseController.html">BaseController</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerAuthentication.js~ControllerAuthentication.html">ControllerAuthentication</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerContextMenu.js~ControllerContextMenu.html">ControllerContextMenu</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerModal.js~ControllerModal.html">ControllerModal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerProject.js~ControllerProject.html">ControllerProject</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerResource.js~ControllerResource.html">ControllerResource</a></span></span></li>
@@ -107,6 +108,8 @@
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html">ViewResource</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html">ViewResourceTypeListItem</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/Resource/List</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html">ViewResourceList</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html">ViewResourceListAssigned</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html">ViewResourceListAvailable</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html">ViewResourceListItem</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html">ViewResourceListItemModal</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main/RunJob/Individual</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/RunJob/Individual/ViewRunJob.js~ViewRunJob.html">ViewRunJob</a></span></span></li>
@@ -150,6 +153,7 @@ import datetimepicker from &apos;datetimepicker&apos;;
 import &apos;jqueryui&apos;;
 import BaseCollection from &apos;../Collections/BaseCollection&apos;;
 import Configuration from &apos;../Configuration&apos;;
+import Environment from &apos;../Shared/Environment&apos;;
 import Marionette from &apos;backbone.marionette&apos;;
 import Radio from &apos;backbone.radio&apos;;
 import RODAN_EVENTS from &apos;../Shared/RODAN_EVENTS&apos;;
@@ -169,6 +173,9 @@ export default class BehaviorTable extends Marionette.Behavior
     {
         this._filtersInjected = false;
         this._datetimepickerElements = [];
+        this._lastTarget = null;
+        this._multipleSelectionKey = Environment.getMultipleSelectionKey();
+        this._rangeSelectionKey = Environment.getRangeSelectionKey();
     }
 
     /**
@@ -179,7 +186,7 @@ export default class BehaviorTable extends Marionette.Behavior
     onRender(view)
     {
         // Not really pretty, but works for now. Marionette calls &apos;delegateEvents&apos;
-        // bevore our custom &apos;initialize&apos; on the view. However, at that point, the
+        // before our custom &apos;initialize&apos; on the view. However, at that point, the
         // collection is not yet set in the view, so binding doesn&apos;t work. This next
         // line is a work around.
         // TODO - fix/find better way
@@ -198,6 +205,7 @@ export default class BehaviorTable extends Marionette.Behavior
 
     /**
      * Destroy instance. This takes care of destroying any known DateTimePicker instances before moving to the next View.
+     * Also reset last target.
      */
     onDestroy()
     {
@@ -206,6 +214,7 @@ export default class BehaviorTable extends Marionette.Behavior
         {
             $(this.el).find(&apos;#&apos; + datetimePickerElementIds[index]).data(&apos;DateTimePicker&apos;).destroy();
         }
+        this._lastTarget = null;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -508,6 +517,62 @@ export default class BehaviorTable extends Marionette.Behavior
         this._handleSearch();
     }
 
+    /**
+     * Handle row left click.
+     */
+    _handleLeftClickRow(event)
+    {
+        if (this.view.allowMultipleSelection)
+        {
+            // Wipe everything if ctrl key not selected.
+            if (!event[this._multipleSelectionKey])
+            {
+                $(event.currentTarget).addClass(&apos;active clickable-row&apos;).siblings().removeClass(&apos;active&apos;);  
+            }
+            else
+            {
+                $(event.currentTarget).toggleClass(&apos;active&apos;);
+            }
+
+            // If shift down, select range.
+            if (event[this._rangeSelectionKey])
+            {
+                $(this._lastTarget).addClass(&apos;active clickable-row&apos;)
+                if ($(this._lastTarget).index() &lt;= $(event.currentTarget).index())
+                {
+                    $(this._lastTarget).nextUntil(event.currentTarget).addClass(&apos;active clickable-row&apos;);
+                }
+                else
+                {
+                    $(event.currentTarget).nextUntil(this._lastTarget).addClass(&apos;active clickable-row&apos;);
+                }
+            }
+            else
+            {
+                this._lastTarget = event.currentTarget;
+            }
+        }
+        else
+        {
+            $(event.currentTarget).addClass(&apos;active clickable-row&apos;).siblings().removeClass(&apos;active&apos;);  
+            this._lastTarget = event.currentTarget;
+        }
+    }
+
+    /**
+     * Handles right click on row.
+     */
+    _handleRowRightClick(event)
+    {
+        if (this.view.contextMenu)
+        {
+            Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW, {top: event.pageY,
+                                                                                    left: event.pageX,
+                                                                                    items: this.view.contextMenu});
+        }
+        return false;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -601,7 +666,9 @@ BehaviorTable.prototype.events = {
     &apos;click th&apos;: &apos;_handleSort&apos;,
     &apos;click @ui.buttonSearch&apos;: &apos;_handleSearch&apos;,
     &apos;click @ui.buttonRemove&apos;: &apos;_handleButtonRemove&apos;,
-    &apos;click @ui.buttonClearAll&apos;: &apos;_handleButtonClearAll&apos;
+    &apos;click @ui.buttonClearAll&apos;: &apos;_handleButtonClearAll&apos;,
+    &apos;click tbody tr&apos;: &apos;_handleLeftClickRow&apos;,
+    &apos;contextmenu tbody tr&apos;: &apos;_handleRowRightClick&apos;
 };
 BehaviorTable.prototype.defaults = {
     &apos;templateControl&apos;: &apos;#template-table_control&apos;,
