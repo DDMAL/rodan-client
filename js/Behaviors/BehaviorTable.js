@@ -368,9 +368,9 @@ export default class BehaviorTable extends Marionette.Behavior
     }
 
     /**
-     * Handle row click.
+     * Handle row left click.
      */
-    _handleRowClick(event)
+    _handleLeftClickRow(event)
     {
         if (this.view.allowMultipleSelection)
         {
@@ -407,6 +407,15 @@ export default class BehaviorTable extends Marionette.Behavior
             $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');  
             this._lastTarget = event.currentTarget;
         }
+    }
+
+    /**
+     * Handles right click on row.
+     */
+    _handleRowRightClick(event)
+    {
+        // If a context menu exists, show it.
+        
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -503,7 +512,8 @@ BehaviorTable.prototype.events = {
     'click @ui.buttonSearch': '_handleSearch',
     'click @ui.buttonRemove': '_handleButtonRemove',
     'click @ui.buttonClearAll': '_handleButtonClearAll',
-    'click tbody tr': '_handleRowClick'
+    'click tbody tr': '_handleLeftClickRow',
+    'contextmenu tbody tr': '_handleRowRightClick'
 };
 BehaviorTable.prototype.defaults = {
     'templateControl': '#template-table_control',
