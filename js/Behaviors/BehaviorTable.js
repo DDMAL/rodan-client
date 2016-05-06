@@ -413,9 +413,12 @@ export default class BehaviorTable extends Marionette.Behavior
      * Handles right click on row.
      */
     _handleRowRightClick(event)
-    {
-        // If a context menu exists, show it.
-        
+    {/*
+        var test = {channel: 'rodan', request: '', label: 'TEST'};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW, {top: event.pageY,
+                                                                                left: event.pageX,
+                                                                                items: [test]});*/
+        return false;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

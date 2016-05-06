@@ -417,9 +417,9 @@ class ItemController
 
         if (contextMenuData.length > 0)
         {
-            this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, {items: contextMenuData, 
-                                                                                               top: mouseEvent.event.y,
-                                                                                               left: mouseEvent.event.x});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW, {items: contextMenuData, 
+                                                                                    top: mouseEvent.event.y,
+                                                                                    left: mouseEvent.event.x});
         }
     }
 

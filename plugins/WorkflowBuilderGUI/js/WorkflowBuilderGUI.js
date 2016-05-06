@@ -92,8 +92,6 @@ class WorkflowBuilderGUI
         this.guiChannel = Radio.channel('rodan-client_gui');
         this.guiChannel.on(GUI_EVENTS.EVENT__WORKFLOWBUILDER_GUI_DESTROY, () => this._handleGuiDestroy());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_GET_WORKFLOW, () => this.getWorkflow());
-        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU, () => this._handleRequestHideContextMenu());
-        this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU, (options) => this._handleRequestShowContextMenu(options));
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_IN, () => this._handleRequestZoomIn());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_OUT, () => this._handleRequestZoomOut());
         this.guiChannel.reply(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_ZOOM_RESET, () => this._handleRequestZoomReset());
@@ -234,7 +232,6 @@ class WorkflowBuilderGUI
             this._firstEntry = false;
             if (!this._itemController.getMouseOverItem())
             {
-                this._handleRequestHideContextMenu();
                 this._itemController.clearSelected();
                 
                 // If right-click, open context menu.
@@ -401,44 +398,6 @@ class WorkflowBuilderGUI
     _handleRequestZoomReset()
     {
         paper.view.zoom = Configuration.WORKFLOWBUILDERGUI.ZOOM_INITIAL;
-    }
-
-    /**
-     * Hides the context menu.
-     */
-    _handleRequestHideContextMenu()
-    {
-        $("#menu-context").hide();
-    }
-
-    /**
-     * Handle show context menu.
-     */
-    _handleRequestShowContextMenu(options)
-    {
-        $('#menu-context').empty();
-        for (var index in options.items)
-        {
-            var listItemData = options.items[index];
-            var callOptions = listItemData.options ? listItemData.options : {};
-            var label = listItemData.label;
-            var channel = listItemData.channel ? listItemData.channel : 'rodan';
-            var radiorequest = listItemData.radiorequest;
-
-            var functionCall = (event) => {
-                var data = $(event.currentTarget).data('radio');
-                this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_HIDE_CONTEXTMENU);
-                Radio.channel(channel).request(data.request, data.options);
-            };
-
-            var anchor = $('<a>' + label + '</a>');
-            anchor.data('radio', {request: radiorequest, options: callOptions});
-            anchor.click(functionCall);
-            $('#menu-context').append($('<li></li>').append(anchor));
-        }
-        $('#menu-context').css('top', options.top);
-        $('#menu-context').css('left', options.left);
-        $('#menu-context').show();
     }
 }
 

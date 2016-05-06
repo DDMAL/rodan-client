@@ -64,6 +64,14 @@ class RODAN_EVENTS
         this.REQUEST__AUTHENTICATION_USER = 'REQUEST__AUTHENTICATION_USER';
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        // Context Menu
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** Request context menu be hidden. */
+        this.REQUEST__CONTEXTMENU_HIDE = 'REQUEST__CONTEXTMENU_HIDE';
+        /** Request context menu be shown. Takes {items: [{label: string, channel: string (Radio channel; default: 'rodan'), request: string (Radio request name), options: object (optional; options sent to Radio request)}], top: float (coordinate), left: float (coordinate)}. */
+        this.REQUEST__CONTEXTMENU_SHOW = 'REQUEST__CONTEXTMENU_SHOW';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         // General
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Request "About" information be shown. */
