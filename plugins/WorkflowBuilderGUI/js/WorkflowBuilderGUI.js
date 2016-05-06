@@ -237,7 +237,7 @@ class WorkflowBuilderGUI
                 // If right-click, open context menu.
                 if (event.event.button === 2)
                 {
-                    this.guiChannel.request(GUI_EVENTS.REQUEST__WORKFLOWBUILDER_GUI_SHOW_CONTEXTMENU,
+                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW,
                                               {items: this._menuItems, top: event.event.y, left: event.event.x});
                 }
             }

@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import BaseViewList from '../../BaseViewList';
-import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
+import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
 import ViewResourceList from './ViewResourceList';
 import ViewResourceListItemModal from './ViewResourceListItemModal';
 
