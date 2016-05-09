@@ -150,6 +150,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Marionette from &apos;backbone.marionette&apos;;
 import Radio from &apos;backbone.radio&apos;;
+import RODAN_EVENTS from &apos;../../../../../Shared/RODAN_EVENTS&apos;;
 
 /**
  * ResourceAssignment view.
@@ -162,16 +163,18 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object; &apos;options.viewavailableresources&apos; and &apos;options.viewassignedresources&apos; must also be provided (each being Marionette.Views)
+     * @param {object} options Marionette.View options object; &apos;options.viewavailableresources&apos; and &apos;options.viewassignedresources&apos; must be provided (each being Marionette.Views); also required is &apos;options.workflow&apos; (Workflow) and &apos;options.inputport&apos; (InputPort)
      */
     initialize(options)
     {
         this.addRegions({
             regionAvailableResources: &apos;#region-main_workflowbuilder_resourceassignment_availableresources&apos;,
-            regionassignedResources: &apos;#region-main_workflowbuilder_resourceassignment_assignedresources&apos;
+            regionAssignedResources: &apos;#region-main_workflowbuilder_resourceassignment_assignedresources&apos;
         });
         this._viewAvailableResources = options.viewavailableresources;
         this._viewAssignedResources = options.viewassignedresources;
+        this._workflow = options.workflow;
+        this._inputPort = options.inputport;
     }
 
     /**
@@ -189,10 +192,52 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
     onBeforeShow()
     {
         this.regionAvailableResources.show(this._viewAvailableResources);
-        this.regionassignedResources.show(this._viewAssignedResources);
+        this.regionAssignedResources.show(this._viewAssignedResources);
+    }
+
+    /**
+     * Handle button add all.
+     */
+    _handleButtonAddAll()
+    {
+    }
+
+    /**
+     * Handle button add selected.
+     */
+    _handleButtonAddSelected()
+    {
+        $(this.regionAvailableResources.el).find(&apos;tr.active&apos;).trigger(&apos;dblclick&apos;);
+    }
+
+    /**
+     * Handle button remove all.
+     */
+    _handleButtonRemoveAll()
+    {
+    }
+
+    /**
+     * Handle button remove selected.
+     */
+    _handleButtonRemoveSelected()
+    {
+        $(this.regionAssignedResources.el).find(&apos;tr.active&apos;).trigger(&apos;dblclick&apos;);
     }
 }
-LayoutViewResourceAssignment.prototype.template = &apos;#template-main_workflowbuilder_resourceassignment&apos;;</code></pre>
+LayoutViewResourceAssignment.prototype.template = &apos;#template-main_workflowbuilder_resourceassignment&apos;;
+LayoutViewResourceAssignment.prototype.ui = {
+    buttonAddAll: &apos;#button-add_all&apos;,
+    buttonAddSelected: &apos;#button-add_selected&apos;,
+    buttonRemoveAll: &apos;#button-remove_all&apos;,
+    buttonRemoveSelected: &apos;#button-remove_selected&apos;
+};
+LayoutViewResourceAssignment.prototype.events = {
+    &apos;click @ui.buttonAddAll&apos;: &apos;_handleButtonAddAll&apos;,
+    &apos;click @ui.buttonAddSelected&apos;: &apos;_handleButtonAddSelected&apos;,
+    &apos;click @ui.buttonRemoveAll&apos;: &apos;_handleButtonRemoveAll&apos;,
+    &apos;click @ui.buttonRemoveSelected&apos;: &apos;_handleButtonRemoveSelected&apos;
+};</code></pre>
 
 </div>
 
