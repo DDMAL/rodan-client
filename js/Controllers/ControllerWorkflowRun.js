@@ -56,9 +56,13 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        var runJobs = new RunJobCollection();
-        runJobs.fetch({data: {workflow_run: options.workflowrun.id}});
-        this._viewItem = new LayoutViewIndividualWorkflowRun({collection: runJobs, model: options.workflowrun});
+        // Get required collections.
+        var runJobs = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOBS_LOAD, {data: {workflow_run: options.workflowrun.id}});
+        var resources = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: options.workflowrun.id}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleSyncWorkflowRun(runJobs, resources)});
+
+        // Create view and show.
+        this._viewItem = new LayoutViewIndividualWorkflowRun({runjobs: runJobs, resources: resources, model: options.workflowrun});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._viewItem});
     }
 
@@ -116,5 +120,14 @@ export default class ControllerWorkflowRun extends BaseController
             text += '\n';
         }
         return text;
+    }
+
+    /**
+     * Handle sync of WorkflowRun elements.
+     */
+    _handleSyncWorkflowRun(runJobs, resources)
+    {
+        runJobs.syncList();
+        resources.syncList();
     }
 }

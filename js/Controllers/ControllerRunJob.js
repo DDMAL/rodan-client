@@ -37,6 +37,7 @@ export default class ControllerRunJob extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, options => this._handleEventItemSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, options => this._handleRequestAcquire(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RUNJOBS_LOAD, options => this._handleRequestRunJobs(options));
     }
 
     /**
@@ -177,5 +178,15 @@ export default class ControllerRunJob extends BaseController
     _removeRunJobLock(runJobUrl)
     {
         this._runJobLocks[runJobUrl] = null;
+    }
+
+    /**
+     * Handle request RunJobs.
+     */
+    _handleRequestRunJobs(options)
+    {
+        this._collection = new RunJobCollection();
+        this._collection.fetch(options);
+        return this._collection;
     }
 }

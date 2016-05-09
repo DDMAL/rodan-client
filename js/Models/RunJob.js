@@ -41,6 +41,18 @@ export default class RunJob extends BaseModel
         return false;
     }
 
+    /**
+     * Override of Backbone.Model.parse. Sets the 'statusText' field.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
+     */
+    parse(response)
+    {
+        response.statusText = this._getStatusText(response.status);
+        return response;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////

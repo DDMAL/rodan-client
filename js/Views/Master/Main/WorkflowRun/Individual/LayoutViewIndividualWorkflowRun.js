@@ -18,11 +18,12 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object; 'options.collection' (RunJobCollection) must also be provided
+     * @param {object} options Marionette.View options object; 'options.runjobs' (RunJobCollection) and 'options.resources' (ResourceCollection) must also be provided
      */
     initialize(options)
     {
-        this._runJobCollection = options.collection;
+        this._runJobs = options.runjobs;
+        this._resources = options.resources;
         this.addRegions({
             regionRunJobList: '#region-main_workflowrun_individual_runjobs',
             regionResourceList: '#region-main_workflowrun_individual_resources'
@@ -38,21 +39,20 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this.regionRunJobList.empty();
         this.regionResourceList.empty();
 
-        // Create Resource views.
+        // Create Resource list view.
         this._layoutViewResources = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
-        var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: this.model.id}});
-        this._viewResourceList = new ViewResourceList({collection: collection,
+        this._viewResourceList = new ViewResourceList({collection: this._resources,
                                                        template: '#template-main_workflowrun_individual_resources_list',
                                                        childView: ViewResourceListItem});
         this._layoutViewResources.showList(this._viewResourceList);
 
-        // Create Resource views.
+        // Create RunJob list view.
         this._layoutViewRunJobs = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.regionRunJobList.show(this._layoutViewRunJobs);
-        this._viewRunJobList = new ViewRunJobList({collection: this._runJobCollection,
+        this._viewRunJobList = new ViewRunJobList({collection: this._runJobs,
                                                    template: '#template-main_runjob_list_notitle',
                                                    childView: ViewRunJobListItem});
         this._layoutViewRunJobs.showList(this._viewRunJobList);
