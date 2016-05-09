@@ -110,8 +110,8 @@ export default class ControllerRunJob extends BaseController
      */
     _handleSuccessAcquire(response, runJobUrl, runJob)
     {
-        this._registerRunJobForReacquire(response.working_url, runJobUrl, runJob.get('interactive_acquire'));
-        Radio.channel('rodan').trigger(Event.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
+        this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get('interactive_acquire'));
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
         var newWindow = window.open(response.working_url, '_blank');
     }
 
@@ -132,7 +132,7 @@ export default class ControllerRunJob extends BaseController
         var object = this._runJobLocks[runJobUrl];
         if (object)
         {
-            return object.url;
+            return object.working_url;
         }
         return null;
     }
@@ -145,18 +145,28 @@ export default class ControllerRunJob extends BaseController
         var date = new Date();
         for (var runJobUrl in this._runJobLocks)
         {
-            var data = this._runJobLocks[runJobUrl];
-            if (data)
+            var runJob = this._collection.findWhere({url: runJobUrl});
+
+            // If the RunJob is available, renew. Else, get rid of the lock.
+            if (runJob.available())
             {
-                var timeElapsed = date.getTime() - data.date;
-                if (timeElapsed < Configuration.RUNJOB_ACQUIRE_DURATION)
+                var data = this._runJobLocks[runJobUrl];
+                if (data)
                 {
-                    $.ajax({url: data.acquire_url, type: 'POST', dataType: 'json', error: () => this._removeRunJobLock(runJobUrl)});
+                    var timeElapsed = date.getTime() - data.date;
+                    if (timeElapsed < Configuration.RUNJOB_ACQUIRE_DURATION)
+                    {
+                        $.ajax({url: data.acquire_url, type: 'POST', dataType: 'json', error: () => this._removeRunJobLock(runJobUrl)});
+                    }
+                    else
+                    {
+                        this._removeRunJobLock(runJobUrl);
+                    }
                 }
-                else
-                {
-                    this._removeRunJobLock(runJobUrl);
-                }
+            }
+            else
+            {
+                this._removeRunJobLock(runJobUrl);
             }
         }
     }

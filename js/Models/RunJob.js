@@ -27,7 +27,7 @@ export default class RunJob extends BaseModel
     available()
     {
         var currentUser = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
-        if (this.get('interactive_acquire') !== null)
+        if (this.get('interactive_acquire') !== null && this.get('status') === 2)
         {
             var serverDate = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_DATE);
             var expiryDate = new Date(this.get('working_user_expiry'));
