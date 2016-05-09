@@ -1752,6 +1752,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/models/runjob.js~runjob#parse",
+    "class/js/Models/RunJob.js~RunJob.html#instance-method-parse",
+    "js/Models/RunJob.js~RunJob#parse",
+    "method"
+  ],
+  [
     "js/models/user.js",
     "file/js/Models/User.js.html",
     "js/Models/User.js",
@@ -1852,6 +1858,12 @@ window.esdocSearchIndex = [
     "class/js/Models/WorkflowRun.js~WorkflowRun.html#instance-method-parse",
     "js/Models/WorkflowRun.js~WorkflowRun#parse",
     "method"
+  ],
+  [
+    "js/plugins.js",
+    "file/js/Plugins.js.html",
+    "js/Plugins.js",
+    "file"
   ],
   [
     "js/shared/cookie.js",
@@ -2391,6 +2403,12 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__resource_save",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCE_SAVE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCE_SAVE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__runjobs_load",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RUNJOBS_LOAD",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RUNJOBS_LOAD",
     "member"
   ],
   [

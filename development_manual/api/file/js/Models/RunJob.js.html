@@ -177,7 +177,7 @@ export default class RunJob extends BaseModel
     available()
     {
         var currentUser = Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
-        if (this.get(&apos;interactive_acquire&apos;) !== null)
+        if (this.get(&apos;interactive_acquire&apos;) !== null &amp;&amp; this.get(&apos;status&apos;) === 2)
         {
             var serverDate = Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__SERVER_DATE);
             var expiryDate = new Date(this.get(&apos;working_user_expiry&apos;));
@@ -189,6 +189,18 @@ export default class RunJob extends BaseModel
             }
         }
         return false;
+    }
+
+    /**
+     * Override of Backbone.Model.parse. Sets the &apos;statusText&apos; field.
+     *
+     * @param {object} response JSON response from server
+     * @return {object} response object
+     */
+    parse(response)
+    {
+        response.statusText = this._getStatusText(response.status);
+        return response;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

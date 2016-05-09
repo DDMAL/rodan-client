@@ -187,6 +187,7 @@ export default class ControllerRunJob extends BaseController
         Radio.channel(&apos;rodan&apos;).on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, options =&gt; this._handleEventItemSelected(options));
         Radio.channel(&apos;rodan&apos;).on(RODAN_EVENTS.EVENT__RUNJOB_SELECTED_COLLECTION, options =&gt; this._handleEventCollectionSelected(options));
         Radio.channel(&apos;rodan&apos;).reply(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, options =&gt; this._handleRequestAcquire(options));
+        Radio.channel(&apos;rodan&apos;).reply(RODAN_EVENTS.REQUEST__RUNJOBS_LOAD, options =&gt; this._handleRequestRunJobs(options));
     }
 
     /**
@@ -260,8 +261,8 @@ export default class ControllerRunJob extends BaseController
      */
     _handleSuccessAcquire(response, runJobUrl, runJob)
     {
-        this._registerRunJobForReacquire(response.working_url, runJobUrl, runJob.get(&apos;interactive_acquire&apos;));
-        Radio.channel(&apos;rodan&apos;).trigger(Event.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
+        this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get(&apos;interactive_acquire&apos;));
+        Radio.channel(&apos;rodan&apos;).trigger(RODAN_EVENTS.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
         var newWindow = window.open(response.working_url, &apos;_blank&apos;);
     }
 
@@ -282,7 +283,7 @@ export default class ControllerRunJob extends BaseController
         var object = this._runJobLocks[runJobUrl];
         if (object)
         {
-            return object.url;
+            return object.working_url;
         }
         return null;
     }
@@ -295,18 +296,28 @@ export default class ControllerRunJob extends BaseController
         var date = new Date();
         for (var runJobUrl in this._runJobLocks)
         {
-            var data = this._runJobLocks[runJobUrl];
-            if (data)
+            var runJob = this._collection.findWhere({url: runJobUrl});
+
+            // If the RunJob is available, renew. Else, get rid of the lock.
+            if (runJob.available())
             {
-                var timeElapsed = date.getTime() - data.date;
-                if (timeElapsed &lt; Configuration.RUNJOB_ACQUIRE_DURATION)
+                var data = this._runJobLocks[runJobUrl];
+                if (data)
                 {
-                    $.ajax({url: data.acquire_url, type: &apos;POST&apos;, dataType: &apos;json&apos;, error: () =&gt; this._removeRunJobLock(runJobUrl)});
+                    var timeElapsed = date.getTime() - data.date;
+                    if (timeElapsed &lt; Configuration.RUNJOB_ACQUIRE_DURATION)
+                    {
+                        $.ajax({url: data.acquire_url, type: &apos;POST&apos;, dataType: &apos;json&apos;, error: () =&gt; this._removeRunJobLock(runJobUrl)});
+                    }
+                    else
+                    {
+                        this._removeRunJobLock(runJobUrl);
+                    }
                 }
-                else
-                {
-                    this._removeRunJobLock(runJobUrl);
-                }
+            }
+            else
+            {
+                this._removeRunJobLock(runJobUrl);
             }
         }
     }
@@ -317,6 +328,16 @@ export default class ControllerRunJob extends BaseController
     _removeRunJobLock(runJobUrl)
     {
         this._runJobLocks[runJobUrl] = null;
+    }
+
+    /**
+     * Handle request RunJobs.
+     */
+    _handleRequestRunJobs(options)
+    {
+        this._collection = new RunJobCollection();
+        this._collection.fetch(options);
+        return this._collection;
     }
 }</code></pre>
 

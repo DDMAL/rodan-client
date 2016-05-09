@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 387,
-  "actualCount": 387,
+  "expectCount": 389,
+  "actualCount": 389,
   "files": {
     "js/Application.js": {
       "expectCount": 2,
@@ -119,8 +119,8 @@
       "undocumentLines": []
     },
     "js/Shared/RODAN_EVENTS.js": {
-      "expectCount": 135,
-      "actualCount": 135,
+      "expectCount": 136,
+      "actualCount": 136,
       "undocumentLines": []
     },
     "js/Shared/Environment.js": {
@@ -299,8 +299,8 @@
       "undocumentLines": []
     },
     "js/Models/RunJob.js": {
-      "expectCount": 3,
-      "actualCount": 3,
+      "expectCount": 4,
+      "actualCount": 4,
       "undocumentLines": []
     },
     "js/Collections/RunJobCollection.js": {

@@ -348,6 +348,8 @@ class RODAN_EVENTS
         this.EVENT__RUNJOB_SELECTED_COLLECTION = &apos;EVENT__RUNJOB_SELECTED_COLLECTION&apos;;
         /** Request the provided RunJob be locked on the server for the current user. Takes {runjob: RunJob}. */
         this.REQUEST__RUNJOB_ACQUIRE = &apos;REQUEST__RUNJOB_ACQUIRE&apos;;
+        /** Request a RunJobCollection to be loaded. Takes {data: Object (query parameters)}. Returns RunJobCollection. */
+        this.REQUEST__RUNJOBS_LOAD = &apos;REQUEST__RUNJOBS_LOAD&apos;;
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Server
