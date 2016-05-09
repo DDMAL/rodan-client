@@ -473,6 +473,23 @@ export default class BehaviorTable extends Marionette.Behavior
     }
 
     /**
+     * Handle pagination first.
+     */
+    _handlePaginationFirst()
+    {
+        this.view.collection.fetchPage({page: 1});
+    }
+
+    /**
+     * Handle pagination last.
+     */
+    _handlePaginationLast()
+    {
+        var pagination = this.view.collection.getPagination();
+        this.view.collection.fetchPage({page: pagination.get(&apos;total&apos;)});
+    }
+
+    /**
      * Handles collection event.
      */
     _handleCollectionEventSync(collection)
@@ -630,20 +647,24 @@ export default class BehaviorTable extends Marionette.Behavior
     {
         $(this.el).find(&apos;.table-control #pagination-previous&apos;).prop(&apos;disabled&apos;, true);
         $(this.el).find(&apos;.table-control #pagination-next&apos;).prop(&apos;disabled&apos;, true);
+        $(this.el).find(&apos;.table-control #pagination-first&apos;).prop(&apos;disabled&apos;, true);
+        $(this.el).find(&apos;.table-control #pagination-last&apos;).prop(&apos;disabled&apos;, true);
         if (collection)
         {
             var pagination = collection.getPagination();
-            if (pagination !== null/* &amp;&amp; pagination.get(&apos;total&apos;) &gt; 1*/)
+            if (pagination !== null)
             {
                 if (pagination.get(&apos;current&apos;) &lt; pagination.get(&apos;total&apos;))
                 {
                     $(this.el).find(&apos;.table-control div#pagination&apos;).show();
                     $(this.el).find(&apos;.table-control #pagination-next&apos;).prop(&apos;disabled&apos;, false);
+                    $(this.el).find(&apos;.table-control #pagination-last&apos;).prop(&apos;disabled&apos;, false);
                 }
                 if (pagination.get(&apos;current&apos;) &gt; 1)
                 {
                     $(this.el).find(&apos;.table-control div#pagination&apos;).show();
                     $(this.el).find(&apos;.table-control #pagination-previous&apos;).prop(&apos;disabled&apos;, false);
+                    $(this.el).find(&apos;.table-control #pagination-first&apos;).prop(&apos;disabled&apos;, false);
                 }
             }
         }
@@ -656,6 +677,8 @@ export default class BehaviorTable extends Marionette.Behavior
 BehaviorTable.prototype.ui = {
     paginationPrevious: &apos;#pagination-previous&apos;,
     paginationNext: &apos;#pagination-next&apos;,
+    paginationFirst: &apos;#pagination-first&apos;,
+    paginationLast: &apos;#pagination-last&apos;,
     buttonSearch: &apos;#button-search&apos;,
     buttonRemove: &apos;#button-remove&apos;,
     buttonClearAll: &apos;#button-clearall&apos;
@@ -663,6 +686,8 @@ BehaviorTable.prototype.ui = {
 BehaviorTable.prototype.events = {
     &apos;click @ui.paginationPrevious&apos;: &apos;_handlePaginationPrevious&apos;,
     &apos;click @ui.paginationNext&apos;: &apos;_handlePaginationNext&apos;,
+    &apos;click @ui.paginationFirst&apos;: &apos;_handlePaginationFirst&apos;,
+    &apos;click @ui.paginationLast&apos;: &apos;_handlePaginationLast&apos;,
     &apos;click th&apos;: &apos;_handleSort&apos;,
     &apos;click @ui.buttonSearch&apos;: &apos;_handleSearch&apos;,
     &apos;click @ui.buttonRemove&apos;: &apos;_handleButtonRemove&apos;,
