@@ -177,7 +177,7 @@ export default class BaseCollection extends Backbone.Collection
         this._lastData = {};
         this._initializeRadio();
         this._filters = {};
-        this._sort = {};
+        this._sort = {ordering: &apos;-created&apos;};
         this._page = {};
         this._enumerations = this._enumerations ? this._enumerations : [];
         this.on(&apos;add&apos;, (model, collection, options) =&gt; this._onAdd(model, collection, options));

@@ -167,6 +167,9 @@ export default class ResourceCollection extends BaseCollection
         /** @ignore */
         this.model = Resource;
         this._route = &apos;resources&apos;;
+        this._enumerations = [{field: &apos;uploaded&apos;, 
+                               label: &apos;Uploaded or generated&apos;, 
+                               values: [{value: &apos;False&apos;, label: &apos;Generated&apos;}, {value: &apos;True&apos;, label: &apos;User&apos;}]}];
     }
 }</code></pre>
 
