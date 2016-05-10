@@ -29,6 +29,7 @@ class ItemController
         this._selectingMultiple = false;
         this._overItem = null;
         this._outputPortItem = null;
+        this._candidateInputPortItems = null;
         
         this._initializeRadio();
         this._createSegments();
@@ -209,6 +210,39 @@ class ItemController
         this.rodanChannel.request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, {inputport: inputPortItem.getModel(), 
                                                                                    outputport: outputPortItem.getModel(),
                                                                                    workflow: workflow});
+    }
+
+    /**
+     * Given InputPort URLs, sets them as candidates for satisfying OutputPort.
+     */
+    setInputPortCandidates(inputPortUrls)
+    {
+        this.clearInputPortCandidates();
+        if (inputPortUrls)
+        {
+            for (var i = 0; i < inputPortUrls.length; i++)
+            {
+                var item = BaseItem.getAssociatedItem(inputPortUrls[i]);
+                item.setTemporaryColor(Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_CANDIDATE);
+                this._candidateInputPortItems.push(item);
+            }
+        }
+    }
+
+    /**
+     * Clears candidate InputPortItems.
+     */
+    clearInputPortCandidates()
+    {
+        if (this._candidateInputPortItems)
+        {
+            for (var i = 0; i < this._candidateInputPortItems.length; i++)
+            {
+                var item = this._candidateInputPortItems[i];
+                item.clearTemporaryColor();
+            }
+        }
+        this._candidateInputPortItems = [];
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

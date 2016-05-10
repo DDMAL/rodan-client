@@ -82,6 +82,7 @@ export default class ControllerWorkflowBuilder extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE, options => this._handleRequestUnassignResource(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNGROUP_WORKFLOWJOBGROUP, options => this._handleRequestWorkflowJobGroupUngroup(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, options => this._handleRequestValidateWorkflow(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_GET_SATISFYING_INPUTPORTS, options => this._handleRequestGetSatisfyingInputPorts(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -464,6 +465,16 @@ export default class ControllerWorkflowBuilder extends BaseController
         }
     }
 
+    /**
+     * Handle request get satisfying InputPorts.
+     */
+    _handleRequestGetSatisfyingInputPorts(options)
+    {
+        var outputPort = options.outputport;
+        var workflow = options.workflow;
+        return this._getSatisfiableInputPorts(outputPort, workflow);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST response handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -705,6 +716,19 @@ export default class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
+     * Given an OutputPort, returns an array of ResourceType URLs that would satisfy it.
+     */
+    _getOutputPortResourceTypeURLs(outputPort)
+    {
+        var resourceTypes = [];
+        var outputPortTypes = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPE_COLLECTION);
+        var outputPortTypeURL = outputPort.get('output_port_type');
+        var outputPortType = outputPortTypes.findWhere({url: outputPortTypeURL});
+        var outputPortResourceTypes = outputPortType.get('resource_types');
+        return outputPortResourceTypes;
+    }
+
+    /**
      * Given an array of ResourceType URLs, finds jobs that both give at least one and take at least
      * one of the ResourceTypes. The returned array {job: Job, inputporttypes: URL strings, outputporttypes: URL string}.
      * The port types are those ports of the associated Job that will satisfy the resource requirements.
@@ -826,5 +850,54 @@ export default class ControllerWorkflowBuilder extends BaseController
         }
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_CREATE, this._workflowRunOptions);
         return true;
+    }
+
+    /**
+     * Given a WorkflowJob, returns array of all InputPorts.
+     */
+    _getInputPorts(workflowJobs)
+    {
+        var inputPorts = [];
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            var workflowJob = workflowJobs[i];
+            inputPorts.push(workflowJob.get('input_ports').models());
+        }
+        return inputPorts;
+    }
+
+    /**
+     * Given an OutputPort, return an array of those InputPort URLs that would be satisfied by the OutputPort.
+     */
+    _getSatisfiableInputPorts(outputPort, workflow)
+    {
+        var outputPortResourceTypes = this._getOutputPortResourceTypeURLs(outputPort);
+        var inputPortTypes = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_INPUTPORTTYPE_COLLECTION);
+        var inputPorts = [];
+        var workflowJobs = workflow.get('workflow_jobs').models;
+        for (var i = 0; i < workflowJobs.length; i++)
+        {
+            // Get WorkflowJob.
+            var workflowJob = workflowJobs[i];
+            if (workflowJob.get('url') === outputPort.get('workflow_job'))
+            {
+                continue;
+            }
+
+            // For each InputPort, get ResourceType URL.
+            var possibleInputPorts = workflowJob.get('input_ports').models;
+            for (var j = 0; j < possibleInputPorts.length; j++)
+            {
+                var inputPort = possibleInputPorts[j];
+                var inputPortType = inputPortTypes.findWhere({url: inputPort.get('input_port_type')});
+                var inputPortResourceTypes = inputPortType.get('resource_types');
+                var resourceTypes = _.intersection(outputPortResourceTypes, inputPortResourceTypes);
+                if (resourceTypes.length > 0)
+                {
+                    inputPorts.push(inputPort.get('url'));
+                }
+            }
+        }
+        return inputPorts;
     }
 }

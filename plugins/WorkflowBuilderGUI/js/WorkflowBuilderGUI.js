@@ -288,12 +288,20 @@ class WorkflowBuilderGUI
         if (this._firstEntry)
         {
             this._firstEntry = false;
+
+            // Create line.
             if (this._line === null)
             {
                 var item = this._itemController.getOutputPortItemForConnection();
                 var startPoint = new Point(item.position.x, item.bounds.bottom);
                 this._line = this._itemController.createLineItem(startPoint);
             }
+
+            // Get satisfiable InputPorts.
+            var outputPortItem = this._itemController.getOutputPortItemForConnection();
+            var candidateInputPortUrls = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_GET_SATISFYING_INPUTPORTS,
+                                                                     {workflow: this._workflow, outputport: outputPortItem.getModel()});
+            this._itemController.setInputPortCandidates(candidateInputPortUrls);
         }
 
         if (event.type === 'mousemove')
@@ -321,6 +329,7 @@ class WorkflowBuilderGUI
                 this._line = null;
             }
             this._itemController.clearSelected();
+            this._itemController.clearInputPortCandidates();
         }
     }
 

@@ -262,6 +262,22 @@ class BaseItem extends paper.Path
         }
     }
 
+    /**
+     * Sets temporary color.
+     */
+    setTemporaryColor(color)
+    {
+        this._temporaryColor = color;
+    }
+
+    /**
+     * Clears temporary color.
+     */
+    clearTemporaryColor()
+    {
+        this._temporaryColor = null;
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // ABSTRACT METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -326,6 +342,7 @@ class BaseItem extends paper.Path
         this.strokeJoin = 'round';
         this.strokeWidth = Configuration.WORKFLOWBUILDERGUI.STROKE_WIDTH;
         this.fillColor = Configuration.WORKFLOWBUILDERGUI.FILL_COLOR;
+        this._temporaryColor = null;
     }
 
     /**

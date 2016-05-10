@@ -71,8 +71,15 @@ class InputPortItem extends BasePortItem
     update()
     {
         super.update();
-        this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_SATISFIED : 
-                                              Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_UNSATISFIED;
+        if (this._temporaryColor)
+        {
+            this.fillColor = this._temporaryColor;
+        }
+        else
+        {
+            this.fillColor = this.isSatisfied() ? Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_SATISFIED : 
+                                                  Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_UNSATISFIED;
+        }
         if (this._connectionItem !== null)
         {
             this._connectionItem.setVisible(this.visible);

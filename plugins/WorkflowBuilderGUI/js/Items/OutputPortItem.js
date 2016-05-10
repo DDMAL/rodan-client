@@ -80,6 +80,15 @@ class OutputPortItem extends BasePortItem
         } 
         this._connectionItems = [];
     }
+
+    /**
+     * Handle click.
+     */
+    _handleClick(event)
+    {
+        super._handleClick(event);
+        console.log('adsadf');
+    }
 }
 
 export default OutputPortItem;
