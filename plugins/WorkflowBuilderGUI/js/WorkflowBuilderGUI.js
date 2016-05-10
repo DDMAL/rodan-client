@@ -314,7 +314,7 @@ class WorkflowBuilderGUI
         else if (event.type === 'mouseup')
         {
             var overItem = this._itemController.getMouseOverItem();
-            if (overItem instanceof InputPortItem && !overItem.isSatisfied())
+            if (overItem instanceof InputPortItem && !overItem.isSatisfied() && this._itemController.isInputPortCandidate(overItem))
             {
                 var outputPortItem = this._itemController.getOutputPortItemForConnection();
                 this._itemController.createConnection(outputPortItem, overItem, this.getWorkflow());

@@ -29,7 +29,7 @@ class ItemController
         this._selectingMultiple = false;
         this._overItem = null;
         this._outputPortItem = null;
-        this._candidateInputPortItems = null;
+        this._candidateInputPortItems = {};
         
         this._initializeRadio();
         this._createSegments();
@@ -224,9 +224,18 @@ class ItemController
             {
                 var item = BaseItem.getAssociatedItem(inputPortUrls[i]);
                 item.setTemporaryColor(Configuration.WORKFLOWBUILDERGUI.INPUTPORT_COLOR_CANDIDATE);
-                this._candidateInputPortItems.push(item);
+                this._candidateInputPortItems[inputPortUrls[i]] = item;
             }
         }
+    }
+
+    /**
+     * Returns true iff provided InputPortItem represents a candidate InputPort.
+     */
+    isInputPortCandidate(item)
+    {
+        var url = item.getModel().get('url');
+        return this._candidateInputPortItems.hasOwnProperty(url);
     }
 
     /**
@@ -234,15 +243,13 @@ class ItemController
      */
     clearInputPortCandidates()
     {
-        if (this._candidateInputPortItems)
+        var keys = Object.keys(this._candidateInputPortItems);
+        for (var i = 0; i < keys.length; i++)
         {
-            for (var i = 0; i < this._candidateInputPortItems.length; i++)
-            {
-                var item = this._candidateInputPortItems[i];
-                item.clearTemporaryColor();
-            }
+            var item = this._candidateInputPortItems[keys[i]];
+            item.clearTemporaryColor();
         }
-        this._candidateInputPortItems = [];
+        this._candidateInputPortItems = {};
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
