@@ -590,6 +590,14 @@ export default class BehaviorTable extends Marionette.Behavior
         return false;
     }
 
+    /**
+     * Handle pagination change.
+     */
+    _handlePaginationSelect(event)
+    {
+        this.view.collection.fetchPage({page: parseInt(event.currentTarget.value)});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -645,15 +653,21 @@ export default class BehaviorTable extends Marionette.Behavior
      */
     _processPagination(collection)
     {
+        // Initialize pagination controls.
         $(this.el).find(&apos;.table-control #pagination-previous&apos;).prop(&apos;disabled&apos;, true);
         $(this.el).find(&apos;.table-control #pagination-next&apos;).prop(&apos;disabled&apos;, true);
         $(this.el).find(&apos;.table-control #pagination-first&apos;).prop(&apos;disabled&apos;, true);
         $(this.el).find(&apos;.table-control #pagination-last&apos;).prop(&apos;disabled&apos;, true);
+        $(this.el).find(&apos;.table-control #pagination-select&apos;).prop(&apos;disabled&apos;, true);
+        $(this.el).find(&apos;.table-control #pagination-select&apos;).empty();
+
+        // If collection, setup pagination.
         if (collection)
         {
             var pagination = collection.getPagination();
             if (pagination !== null)
             {
+                // Setup buttons.
                 if (pagination.get(&apos;current&apos;) &lt; pagination.get(&apos;total&apos;))
                 {
                     $(this.el).find(&apos;.table-control div#pagination&apos;).show();
@@ -665,6 +679,18 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find(&apos;.table-control div#pagination&apos;).show();
                     $(this.el).find(&apos;.table-control #pagination-previous&apos;).prop(&apos;disabled&apos;, false);
                     $(this.el).find(&apos;.table-control #pagination-first&apos;).prop(&apos;disabled&apos;, false);
+                }
+
+                // Handle select.
+                if (pagination.get(&apos;total&apos;) &gt; 1)
+                {
+                    var select = $(this.el).find(&apos;.table-control #pagination-select&apos;);
+                    select.prop(&apos;disabled&apos;, false);
+                    for (var i = 1; i &lt;= pagination.get(&apos;total&apos;); i++)
+                    {
+                        select.append($(&apos;&lt;option&gt;&apos;, {value: i, text: i}));
+                    }
+                    select.val(pagination.get(&apos;current&apos;));
                 }
             }
         }
@@ -681,7 +707,8 @@ BehaviorTable.prototype.ui = {
     paginationLast: &apos;#pagination-last&apos;,
     buttonSearch: &apos;#button-search&apos;,
     buttonRemove: &apos;#button-remove&apos;,
-    buttonClearAll: &apos;#button-clearall&apos;
+    buttonClearAll: &apos;#button-clearall&apos;,
+    paginationSelect: &apos;#pagination-select&apos;
 };
 BehaviorTable.prototype.events = {
     &apos;click @ui.paginationPrevious&apos;: &apos;_handlePaginationPrevious&apos;,
@@ -693,7 +720,8 @@ BehaviorTable.prototype.events = {
     &apos;click @ui.buttonRemove&apos;: &apos;_handleButtonRemove&apos;,
     &apos;click @ui.buttonClearAll&apos;: &apos;_handleButtonClearAll&apos;,
     &apos;click tbody tr&apos;: &apos;_handleLeftClickRow&apos;,
-    &apos;contextmenu tbody tr&apos;: &apos;_handleRowRightClick&apos;
+    &apos;contextmenu tbody tr&apos;: &apos;_handleRowRightClick&apos;,
+    &apos;change @ui.paginationSelect&apos;: &apos;_handlePaginationSelect&apos;
 };
 BehaviorTable.prototype.defaults = {
     &apos;templateControl&apos;: &apos;#template-table_control&apos;,
