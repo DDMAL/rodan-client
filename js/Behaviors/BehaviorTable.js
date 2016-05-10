@@ -440,6 +440,14 @@ export default class BehaviorTable extends Marionette.Behavior
         return false;
     }
 
+    /**
+     * Handle pagination change.
+     */
+    _handlePaginationSelect(event)
+    {
+        this.view.collection.fetchPage({page: parseInt(event.currentTarget.value)});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -495,15 +503,21 @@ export default class BehaviorTable extends Marionette.Behavior
      */
     _processPagination(collection)
     {
+        // Initialize pagination controls.
         $(this.el).find('.table-control #pagination-previous').prop('disabled', true);
         $(this.el).find('.table-control #pagination-next').prop('disabled', true);
         $(this.el).find('.table-control #pagination-first').prop('disabled', true);
         $(this.el).find('.table-control #pagination-last').prop('disabled', true);
+        $(this.el).find('.table-control #pagination-select').prop('disabled', true);
+        $(this.el).find('.table-control #pagination-select').empty();
+
+        // If collection, setup pagination.
         if (collection)
         {
             var pagination = collection.getPagination();
             if (pagination !== null)
             {
+                // Setup buttons.
                 if (pagination.get('current') < pagination.get('total'))
                 {
                     $(this.el).find('.table-control div#pagination').show();
@@ -515,6 +529,18 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('.table-control div#pagination').show();
                     $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
                     $(this.el).find('.table-control #pagination-first').prop('disabled', false);
+                }
+
+                // Handle select.
+                if (pagination.get('total') > 1)
+                {
+                    var select = $(this.el).find('.table-control #pagination-select');
+                    select.prop('disabled', false);
+                    for (var i = 1; i <= pagination.get('total'); i++)
+                    {
+                        select.append($('<option>', {value: i, text: i}));
+                    }
+                    select.val(pagination.get('current'));
                 }
             }
         }
@@ -531,7 +557,8 @@ BehaviorTable.prototype.ui = {
     paginationLast: '#pagination-last',
     buttonSearch: '#button-search',
     buttonRemove: '#button-remove',
-    buttonClearAll: '#button-clearall'
+    buttonClearAll: '#button-clearall',
+    paginationSelect: '#pagination-select'
 };
 BehaviorTable.prototype.events = {
     'click @ui.paginationPrevious': '_handlePaginationPrevious',
@@ -543,7 +570,8 @@ BehaviorTable.prototype.events = {
     'click @ui.buttonRemove': '_handleButtonRemove',
     'click @ui.buttonClearAll': '_handleButtonClearAll',
     'click tbody tr': '_handleLeftClickRow',
-    'contextmenu tbody tr': '_handleRowRightClick'
+    'contextmenu tbody tr': '_handleRowRightClick',
+    'change @ui.paginationSelect': '_handlePaginationSelect'
 };
 BehaviorTable.prototype.defaults = {
     'templateControl': '#template-table_control',
