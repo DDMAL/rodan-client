@@ -35,9 +35,9 @@ export default class RadioManager
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_SAVE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_SAVED, modalTitle: 'Saving Workflow'};
 
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW] = {event: RODAN_EVENTS.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, modalTitle: 'Loading Workflow'};
-        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW] = {event: RODAN_EVENTS.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, modalTitle: 'Validating Workflow'};
+    //    this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW] = {event: RODAN_EVENTS.EVENT__WORKFLOWBUILDER_VALIDATED_WORKFLOW, modalTitle: 'Validating Workflow'};
 
-        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWJOB_CREATE] = {event: RODAN_EVENTS.EVENT__WORKFLOWJOB_CREATED, modalTitle: 'Creating Workflow Job'};
+    //    this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWJOB_CREATE] = {event: RODAN_EVENTS.EVENT__WORKFLOWJOB_CREATED, modalTitle: 'Creating Workflow Job'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWJOB_DELETE] = {event: RODAN_EVENTS.EVENT__WORKFLOWJOB_DELETED, modalTitle: 'Deleting Workflow Job'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWJOB_SAVE] = {event: RODAN_EVENTS.EVENT__WORKFLOWJOB_SAVED, modalTitle: 'Saving Workflow Job'};
 
