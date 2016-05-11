@@ -63,21 +63,13 @@ export default class ControllerRunJob extends BaseController
     {
         this._collection = new RunJobCollection();
         this._collection.fetch({data: {project: options.project.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleTimer()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewRunJobList({collection: this._collection,
                                        template: '#template-main_runjob_list',
                                        childView: ViewRunJobListItem});
         this._layoutView.showList(view);
-    }
-
-    /**
-     * Handle timer.
-     */
-    _handleTimer(collection)
-    {
-        this._collection.syncList();
     }
 
     /**
@@ -101,8 +93,8 @@ export default class ControllerRunJob extends BaseController
         }
         else if (options.runjob.get('working_user') === user.get('url'))
         {
-            var workingUrl = this._getWorkingUrl(runJobUrl);
-            var newWindow = window.open(workingUrl, '_blank');
+            var url = this._getWorkingUrl(runJobUrl);
+            this._openRunJobInterface(url);
         }
     }
 
@@ -113,7 +105,15 @@ export default class ControllerRunJob extends BaseController
     {
         this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get('interactive_acquire'));
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
-        var newWindow = window.open(response.working_url, '_blank');
+        this._openRunJobInterface(response.working_url);
+    }
+
+    /**
+     * Opens interface.
+     */
+    _openRunJobInterface(url)
+    {
+        var newWindow = window.open(url, 'test', '_blank');
     }
 
     /**
