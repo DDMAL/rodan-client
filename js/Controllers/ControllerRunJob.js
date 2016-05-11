@@ -63,21 +63,13 @@ export default class ControllerRunJob extends BaseController
     {
         this._collection = new RunJobCollection();
         this._collection.fetch({data: {project: options.project.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleTimer()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._collection.syncList()});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewRunJobList({collection: this._collection,
                                        template: '#template-main_runjob_list',
                                        childView: ViewRunJobListItem});
         this._layoutView.showList(view);
-    }
-
-    /**
-     * Handle timer.
-     */
-    _handleTimer(collection)
-    {
-        this._collection.syncList();
     }
 
     /**
@@ -101,8 +93,9 @@ export default class ControllerRunJob extends BaseController
         }
         else if (options.runjob.get('working_user') === user.get('url'))
         {
-            var workingUrl = this._getWorkingUrl(runJobUrl);
-            var newWindow = window.open(workingUrl, '_blank');
+            var workerBlob = new Blob(['window.open(' + this._getWorkingUrl(runJobUrl) + ', \'_blank\';']);
+            var workerBlobUrl = window.URL.createObjectURL(workerBlob);
+            var worker = new Worker(workerBlobUrl);
         }
     }
 
