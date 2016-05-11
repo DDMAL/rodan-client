@@ -3,6 +3,7 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
+import EventTimer from '../Shared/EventTimer';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
@@ -28,6 +29,7 @@ export default class ControllerServer extends BaseController
         this._responseTimeout = null;
         this._responsePanic = null;
         this._waitingEventTriggered = false;
+        this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
         Backbone.sync = (method, model, options) => this._sync(method, model, options);
     }
 

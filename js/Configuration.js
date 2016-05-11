@@ -11,6 +11,10 @@ var Configuration = {
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: '',
 
+    // This determines the method to use for loading updates from the server.
+    // Either 'POLL' (default) or 'SOCKET'.
+    SERVER_UPDATE_METHOD: 'POLL',
+
     // Interval after which the client will get the server time (ms).
     // Generally, the client extracts the server time from all responses from the server.
     // However, if the client has not received a response from the server after this
@@ -20,6 +24,13 @@ var Configuration = {
     // EVENT_TIMER_FREQUENCY to reduce traffic.
     SERVER_REQUEST_TIME_INTERVAL: 60000,
 
+    // Milliseconds to wait before the client goes into a 'wait' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
+    SERVER_WAIT_TIMER: 1000,
+
+    // Milliseconds to wait before the client 'panics' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
+    // This should be bigger than SERVER_WAIT_TIMER.
+    SERVER_PANIC_TIMER: 8000,
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -28,13 +39,6 @@ var Configuration = {
 
     // Event timer frequency (ms).
     EVENT_TIMER_FREQUENCY: 3000,
-
-    // Milliseconds to wait before the client goes into a 'wait' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
-    SERVER_WAIT_TIMER: 1000,
-
-    // Milliseconds to wait before the client 'panics' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
-    // This should be bigger than SERVER_WAIT_TIMER.
-    SERVER_PANIC_TIMER: 8000,
 
     // If you have a Job package meant solely for distributing Resources (i.e. takes in a single Resource and outputs that Resource) you have the option to use a 
     // feature that will automatically create a WorkflowJob of the correct Job that satisfies selected InputPorts. If this is the case, those Jobs must have

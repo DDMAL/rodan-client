@@ -71,10 +71,10 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventListSelected(options)
     {
-        var workflowRunCollection = new WorkflowRunCollection();
-        workflowRunCollection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => workflowRunCollection.syncList()});
-        var view = new ViewWorkflowRunList({collection: workflowRunCollection});
+        var collection = new WorkflowRunCollection();
+        collection.fetchSort(false, 'created', {data: {project: options.project.id}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => collection.syncList()});
+        var view = new ViewWorkflowRunList({collection: collection});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 
