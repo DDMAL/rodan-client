@@ -93,9 +93,8 @@ export default class ControllerRunJob extends BaseController
         }
         else if (options.runjob.get('working_user') === user.get('url'))
         {
-            var workerBlob = new Blob(['window.open(' + this._getWorkingUrl(runJobUrl) + ', \'_blank\';']);
-            var workerBlobUrl = window.URL.createObjectURL(workerBlob);
-            var worker = new Worker(workerBlobUrl);
+            var url = this._getWorkingUrl(runJobUrl);
+            this._openRunJobInterface(url);
         }
     }
 
@@ -106,7 +105,17 @@ export default class ControllerRunJob extends BaseController
     {
         this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get('interactive_acquire'));
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
-        var newWindow = window.open(response.working_url, '_blank');
+        this._openRunJobInterface(response.working_url);
+    }
+
+    /**
+     * Opens interface.
+     */
+    _openRunJobInterface(url)
+    {
+        var newWindow = window.open('about:blank');
+        newWindow.document.write('<meta http-equiv="refresh" content="0;url=' + url + '">');
+        newWindow.document.close();
     }
 
     /**
