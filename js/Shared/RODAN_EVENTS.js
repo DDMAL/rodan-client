@@ -64,6 +64,12 @@ class RODAN_EVENTS
         this.REQUEST__AUTHENTICATION_USER = 'REQUEST__AUTHENTICATION_USER';
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        // Configuration
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** Triggered when configuration file has been loaded. */
+        this.EVENT__CONFIGURATION_LOADED = 'EVENT__CONFIGURATION_LOADED';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         // Context Menu
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Request context menu be hidden. */
@@ -204,14 +210,14 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // Server
         ///////////////////////////////////////////////////////////////////////////////////////
+        /** Triggered when server date has been updated. Sends {date: Date}. */
+        this.EVENT__SERVER_DATE_UPDATED = 'EVENT__SERVER_DATE_UPDATED';
         /** Triggered on Rodan-based server errors. Sends {json: JSON object of error}. */
         this.EVENT__SERVER_ERROR = 'EVENT__SERVER_ERROR';
         /** Triggered when the client has no pending HTTP requests waiting to complete. Only fires if EVENT__SERVER_WAITING had previously been fired. */
         this.EVENT__SERVER_IDLE = 'EVENT__SERVER_IDLE';
         /** Triggered when server routes have been loaded. */
         this.EVENT__SERVER_ROUTESLOADED = 'EVENT__SERVER_ROUTESLOADED';
-        /** Triggered when server date has been updated. Sends {date: Date}. */
-        this.EVENT__SERVER_DATE_UPDATED = 'EVENT__SERVER_DATE_UPDATED';
         /** Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response). */
         this.EVENT__SERVER_WAITING = 'EVENT__SERVER_WAITING';
         /** Request server configuration. Returns object. */

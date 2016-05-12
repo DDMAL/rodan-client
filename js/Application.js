@@ -30,6 +30,7 @@ import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTyp
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import Plugins from './Plugins';
 import RadioManager from './Managers/RadioManager';
+import SocketManager from './Managers/SocketManager';
 import TransferManager from './Managers/TransferManager';
 
 /**
@@ -84,6 +85,7 @@ export default class Application extends Marionette.Application
     {
         this._transferManager = new TransferManager();
         this._radioManager = new RadioManager();
+        this._socketManager = new SocketManager();
     }
 
     /**

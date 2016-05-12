@@ -1,3 +1,6 @@
+import Radio from 'backbone.radio';
+import RODAN_EVENTS from './Shared/RODAN_EVENTS';
+
 /**
  * Client configuration object.
  */
@@ -5,15 +8,24 @@ var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server parameters
 ///////////////////////////////////////////////////////////////////////////////////////
-    // URL of the server to connect to.
-    SERVER_URL: '',
+    // Host of server (e.g. 123.456.789.0 or mydomain.com).
+    SERVER_HOST: '',
+
+    // Server port.
+    SERVER_PORT: '',
+
+    // Set to true iff using HTTPS (else HTTP). Default is true.
+    SERVER_HTTPS: true,
+
+    // Set to true iff the server allows socket connections. Default is false.
+    SERVER_SOCKET_AVAILABLE: false,
 
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: '',
 
     // This determines the method to use for loading updates from the server.
     // Either 'POLL' (default) or 'SOCKET'.
-    SERVER_UPDATE_METHOD: 'POLL',
+    SERVER_UPDATE_METHOD: 'SOCKET',
 
     // Interval after which the client will get the server time (ms).
     // Generally, the client extracts the server time from all responses from the server.
@@ -71,6 +83,17 @@ var Configuration = {
 // Loader methods
 ///////////////////////////////////////////////////////////////////////////////////////
 /**
+ * Convenience method to return the URL (I.e. '<http or https>://SERVER_HOST:SERVER_PORT'.)
+ *
+ * @return {string} <http or https>://SERVER_HOST:SERVER_PORT
+ */
+Configuration.getServerURL = function()
+{
+    var url = this.SERVER_HOST + ':' + this.SERVER_PORT;
+    return this.SERVER_HTTPS ? 'https://' + url : 'http://' + url;
+}
+
+/**
  * Requests filename from the client host. Whatever it gets from the host
  * it will merge with the default configuration.
  *
@@ -118,6 +141,7 @@ Configuration._handleStateChange = function(event, filename, callback)
         {
             var configuration = JSON.parse(request.response);
             $.extend(this, configuration);
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__CONFIGURATION_LOADED);
             if (callback)
             {
                 callback();

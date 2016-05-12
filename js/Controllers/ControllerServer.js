@@ -42,7 +42,7 @@ export default class ControllerServer extends BaseController
     _sendTimeGetterRequest()
     {
         var request = new XMLHttpRequest();
-        request.open('HEAD', Configuration.SERVER_URL);
+        request.open('HEAD', Configuration.getServerURL());
         request.onreadystatechange = (event) => this._handleTimeRequest(event);
         request.setRequestHeader("Content-Type", "text/html");
         request.send('');
@@ -124,7 +124,7 @@ export default class ControllerServer extends BaseController
      */
     _handleRequestServerHostname()
     {
-        return Configuration.SERVER_URL;
+        return Configuration.SERVER_HOST;
     }
 
     /**
@@ -163,7 +163,7 @@ export default class ControllerServer extends BaseController
             }
         };
 
-        routeRequest.open('GET', Configuration.SERVER_URL, true);
+        routeRequest.open('GET', Configuration.getServerURL(), true);
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
     }
