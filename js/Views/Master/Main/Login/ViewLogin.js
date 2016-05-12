@@ -15,7 +15,7 @@ export default class ViewLogin extends Marionette.ItemView
      */
     initialize()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_CLEAR);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_CLEAR);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

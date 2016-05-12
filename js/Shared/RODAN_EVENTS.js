@@ -252,12 +252,12 @@ class RODAN_EVENTS
         this.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD = 'REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD';
 
         ///////////////////////////////////////////////////////////////////////////////////////
-        // Timer
+        // Updater
         ///////////////////////////////////////////////////////////////////////////////////////
-        /** Request the Timer to clear timed event. Takes nothing. */
-        this.REQUEST__TIMER_CLEAR = 'REQUEST__TIMER_CLEAR';
-        /** Request a function to be scheduled. Takes {function: function callback}. It is recommended that you use ES6 "fat arrow" notation to preserver scope and pass arguments to the function. */
-        this.REQUEST__TIMER_SET_FUNCTION = 'REQUEST__TIMER_SET_FUNCTION';
+        /** Request the Updater to clear registered update callback. Takes nothing. */
+        this.REQUEST__UPDATER_CLEAR = 'REQUEST__UPDATER_CLEAR';
+        /** Request a function to be scheduled on updates by Updatere. Takes {function: function callback}. It is recommended that you use ES6 "fat arrow" notation to preserver scope and pass arguments to the function. */
+        this.REQUEST__UPDATER_SET_FUNCTION = 'REQUEST__UPDATER_SET_FUNCTION';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Workflow

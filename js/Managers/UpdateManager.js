@@ -1,12 +1,13 @@
 import Configuration from '../Configuration';
-import Marionette from 'backbone.marionette';
+import PollUpdater from '../Shared/PollUpdater';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import SocketUpdater from '../Shared/SocketUpdater';
 
 /**
- * Socket manager. This manages the connection to the server's socket and dispatches related events.
+ * This manages how updates are handled.
  */
-export default class SocketManager
+export default class UpdateManager
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -16,8 +17,10 @@ export default class SocketManager
      */
     constructor()
     {
-        this._webSocket = null;
+        this._updater = null;
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__CONFIGURATION_LOADED, () => this._handleEventConfigurationLoaded());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__UPDATER_SET_FUNCTION, (options) => this._handleRequestUpdateSetFunction(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__UPDATER_CLEAR, () => this._handleRequestUpdateClear());
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -30,33 +33,27 @@ export default class SocketManager
     {
         if (Configuration.SERVER_SOCKET_AVAILABLE)
         {
-            Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGIN_SUCCESS, () => this._handleEventLoginSuccess());
-            Radio.channel('rodan').on(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGOUT_SUCCESS, () => this._handleEventLogoutSuccess());
+            this._updater = new SocketUpdater();
+        }
+        else
+        {
+            this._updater = new PollUpdater({frequency: Configuration.EVENT_TIMER_FREQUENCY});
         }
     }
 
     /**
-     * Handle login success.
+     * Handle request Update set function.
      */
-    _handleEventLoginSuccess()
+    _handleRequestUpdateSetFunction(options)
     {
-        this._webSocket = new WebSocket('ws://' + Configuration.SERVER_HOST + ':' + Configuration.SERVER_PORT + '/ws/rodan?subscribe-broadcast&publish-broadcast&echo');
-        this._webSocket.onmessage = (event) => this._handleSocketMessage(event);
+        this._updater.setFunction(options.function);
     }
 
     /**
-     * Handle login success.
+     * Handle request Update clear.
      */
-    _handleEventLogoutSuccess()
+    _handleRequestUpdateClear(options)
     {
-        console.log('logout');
-    }
-
-    /**
-     * Handle socket message.
-     */
-    _handleSocketMessage(event)
-    {
-        console.log(event);
+        this._updater.clear();
     }
 }

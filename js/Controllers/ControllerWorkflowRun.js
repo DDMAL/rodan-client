@@ -59,7 +59,7 @@ export default class ControllerWorkflowRun extends BaseController
         // Get required collections.
         var runJobs = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOBS_LOAD, {data: {workflow_run: options.workflowrun.id}});
         var resources = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {result_of_workflow_run: options.workflowrun.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => this._handleSyncWorkflowRun(runJobs, resources)});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_FUNCTION, {function: () => this._handleSyncWorkflowRun(runJobs, resources)});
 
         // Create view and show.
         this._viewItem = new LayoutViewIndividualWorkflowRun({runjobs: runJobs, resources: resources, model: options.workflowrun});
@@ -73,7 +73,7 @@ export default class ControllerWorkflowRun extends BaseController
     {
         var collection = new WorkflowRunCollection();
         collection.fetchSort(false, 'created', {data: {project: options.project.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => collection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_FUNCTION, {function: () => collection.syncList()});
         var view = new ViewWorkflowRunList({collection: collection});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
