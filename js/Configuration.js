@@ -46,6 +46,9 @@ var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
 ///////////////////////////////////////////////////////////////////////////////////////
+    // URL for website.
+    WEBSITE_URL: 'http://ddmal.github.io/rodan-client/',
+
     // Date/time format. See http://momentjs.com/docs/#/displaying/format/
     DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss',
 
