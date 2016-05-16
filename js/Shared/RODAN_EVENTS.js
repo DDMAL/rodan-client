@@ -250,12 +250,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Request the Timer to clear timed event. Takes nothing. */
         this.REQUEST__TIMER_CLEAR = 'REQUEST__TIMER_CLEAR';
-        /** Request a (Radio) Event to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}. */
-        this.REQUEST__TIMER_SET_EVENT = 'REQUEST__TIMER_SET_EVENT';
         /** Request a function to be scheduled. Takes {function: function callback}. It is recommended that you use ES6 "fat arrow" notation to preserver scope and pass arguments to the function. */
         this.REQUEST__TIMER_SET_FUNCTION = 'REQUEST__TIMER_SET_FUNCTION';
-        /** Request a (Radio) Request to be scheduled. Takes {event: Event string, options: options for the event that will be passed to listeners}. */
-        this.REQUEST__TIMER_SET_REQUEST = 'REQUEST__TIMER_SET_REQUEST';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Workflow

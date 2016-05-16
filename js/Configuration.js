@@ -23,6 +23,9 @@ var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
 ///////////////////////////////////////////////////////////////////////////////////////
+    // URL for website.
+    WEBSITE_URL: 'http://ddmal.github.io/rodan-client/',
+
     // Date/time format. See http://momentjs.com/docs/#/displaying/format/
     DATETIME_FORMAT: 'YYYY-MM-DD HH:mm:ss',
 
@@ -30,7 +33,7 @@ var Configuration = {
     EVENT_TIMER_FREQUENCY: 3000,
 
     // Milliseconds to wait before the client goes into a 'wait' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
-    SERVER_WAIT_TIMER: 500,
+    SERVER_WAIT_TIMER: 1000,
 
     // Milliseconds to wait before the client 'panics' mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
     // This should be bigger than SERVER_WAIT_TIMER.

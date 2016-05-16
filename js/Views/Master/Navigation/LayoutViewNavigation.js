@@ -111,8 +111,8 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleRequestShowHelp()
     {
-        var text = 'Client admin: ' + Configuration.ADMIN_CLIENT.NAME + ' (' + Configuration.ADMIN_CLIENT.EMAIL + ')';
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: text});
+        var html = _.template($('#template-misc_help').html())({email: Configuration.ADMIN_CLIENT.EMAIL, name: Configuration.ADMIN_CLIENT.NAME, url: Configuration.WEBSITE_URL});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: html});
     }
 }
 LayoutViewNavigation.prototype.template = '#template-navigation';
