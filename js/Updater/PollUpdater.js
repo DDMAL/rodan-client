@@ -1,6 +1,4 @@
 import AbstractUpdater from './AbstractUpdater';
-import Radio from 'backbone.radio';
-import RODAN_EVENTS from './RODAN_EVENTS';
 
 /**
  * Updater that syncs collections by a timer.

@@ -1,7 +1,5 @@
 import AbstractUpdater from './AbstractUpdater';
 import Configuration from '../Configuration';
-import Radio from 'backbone.radio';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 
 /**
  * Updater that uses sockets to trigger collection updates.

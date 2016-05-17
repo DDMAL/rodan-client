@@ -1,6 +1,3 @@
-import Radio from 'backbone.radio';
-import RODAN_EVENTS from './RODAN_EVENTS';
-
 /**
  * Base class for updaters.
  */
