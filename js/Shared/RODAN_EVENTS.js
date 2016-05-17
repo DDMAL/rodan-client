@@ -31,8 +31,6 @@ class RODAN_EVENTS
         }
 
         /** @ignore */
-        this.REQUEST__MODAL_SHOW_WAITING = 'REQUEST__MODAL_SHOW_WAITING';            // Request special modal window to show/open. This modal window disables all input and informs the user that the client is waiting on the server. If another modal is currently open the request will not show. */
-        /** @ignore */
         this.REQUEST__RESOURCE_SHOWLAYOUTVIEW = 'REQUEST__RESOURCE_SHOWLAYOUTVIEW';  // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
         /** @ignore */
         this.REQUEST__RUNJOB_SHOWLAYOUTVIEW = 'REQUEST__RUNJOB_SHOWLAYOUTVIEW';      // Show LayoutView for RunJob control (outside of the primary RunJobs view). This tells the ControllerRunJob which LayoutView to reference upon events. Takes {layoutView: LayoutView}.

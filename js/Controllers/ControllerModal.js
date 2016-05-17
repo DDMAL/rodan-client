@@ -37,8 +37,25 @@ export default class ControllerModal extends BaseController
         // Requests.
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_WAITING, () => this._handleRequestModalShowWaiting());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
+    }
+
+    /**
+     * Show waiting modal.
+     */
+    _showWaitingModal()
+    {
+        var $modalEl = $("#modal-generic");
+        if ($modalEl.is(':visible'))
+        {
+            return;
+        }
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
+        this._layoutViewModal.render();
+        $modalEl.css({top: 0, left: 0, position: 'absolute'});
+        $modalEl.html(this._layoutViewModal.el);
+        $modalEl.modal({backdrop: 'static', keyboard: false});
+        this._waiting = true;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +89,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $("#modal-generic");
         if (!$modalEl.is(':visible'))
         {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_WAITING);
+            this._showWaitingModal();
         }
     }
 
@@ -124,23 +141,5 @@ export default class ControllerModal extends BaseController
         $modalEl.draggable({handle: ".modal-header"});
         $('.modal-title').text(options.title);
         $modalEl.modal({backdrop: 'static'});
-    }
-
-    /**
-     * Handle request modal show waiting.
-     */
-    _handleRequestModalShowWaiting(options)
-    {
-        var $modalEl = $("#modal-generic");
-        if ($modalEl.is(':visible'))
-        {
-            return;
-        }
-        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
-        this._layoutViewModal.render();
-        $modalEl.css({top: 0, left: 0, position: 'absolute'});
-        $modalEl.html(this._layoutViewModal.el);
-        $modalEl.modal({backdrop: 'static', keyboard: false});
-        this._waiting = true;
     }
 }
