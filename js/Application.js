@@ -22,7 +22,6 @@ import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
 import ErrorHandler from './Shared/ErrorHandler';
 import RODAN_EVENTS from './Shared/RODAN_EVENTS';
-import EventTimer from './Shared/EventTimer';
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
 import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPortTypeCollection';
@@ -31,6 +30,7 @@ import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTyp
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import Plugins from './Plugins';
 import RadioManager from './Managers/RadioManager';
+import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';
 
 /**
@@ -73,7 +73,6 @@ export default class Application extends Marionette.Application
         this._initializeViews();
         this._initializeControllers();
         this._errorHandler = new ErrorHandler();
-        this._eventTimer = new EventTimer({frequency: Configuration.EVENT_TIMER_FREQUENCY});
         
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
 
@@ -86,6 +85,7 @@ export default class Application extends Marionette.Application
     {
         this._transferManager = new TransferManager();
         this._radioManager = new RadioManager();
+        this._updateManager = new UpdateManager();
     }
 
     /**

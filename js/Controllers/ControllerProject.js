@@ -110,7 +110,7 @@ export default class ControllerProject extends BaseController
         this._activeProject.fetch();
         var collection = new WorkflowRunCollection();
         collection.fetch({data: {project: this._activeProject.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => collection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
         var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
@@ -123,7 +123,7 @@ export default class ControllerProject extends BaseController
     _handleEventListSelected()
     {
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION);
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TIMER_SET_FUNCTION, {function: () => collection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
         var view = new ViewProjectList({collection: collection})
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }

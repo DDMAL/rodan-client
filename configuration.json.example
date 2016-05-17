@@ -1,6 +1,9 @@
 {
-    "SERVER_URL": "<ABSOLUTE URI HERE>",
-    "SERVER_AUTHENTICATION_TYPE": "<"token" or "session">",
+    "SERVER_HOST": <Example: "123.456.789.0">,
+    "SERVER_PORT": <Example: 443>,
+    "SERVER_HTTPS": <true (default) or false>,
+    "SERVER_SOCKET_AVAILABLE": <true or false (default)>,
+    "SERVER_AUTHENTICATION_TYPE": <"token" or "session">,
     "ADMIN_CLIENT": 
     {
         "NAME": "",
