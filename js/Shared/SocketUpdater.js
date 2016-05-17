@@ -38,7 +38,6 @@ export default class SocketUpdater extends AbstractUpdater
         else
         {
             this.update();
-            //this._processMessage(event);
         }
     }
 
