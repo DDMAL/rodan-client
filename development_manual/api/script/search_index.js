@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "rodan-client/js/shared/abstractupdater.js~abstractupdater",
+    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html",
+    "<span>AbstractUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/AbstractUpdater.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/application.js~application",
     "class/js/Application.js~Application.html",
     "<span>Application</span> <span class=\"search-result-import-path\">rodan-client/js/Application.js</span>",
@@ -147,12 +153,6 @@ window.esdocSearchIndex = [
     "rodan-client/js/shared/errorhandler.js~errorhandler",
     "class/js/Shared/ErrorHandler.js~ErrorHandler.html",
     "<span>ErrorHandler</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/ErrorHandler.js</span>",
-    "class"
-  ],
-  [
-    "rodan-client/js/shared/eventtimer.js~eventtimer",
-    "class/js/Shared/EventTimer.js~EventTimer.html",
-    "<span>EventTimer</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/EventTimer.js</span>",
     "class"
   ],
   [
@@ -306,6 +306,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "rodan-client/js/shared/pollupdater.js~pollupdater",
+    "class/js/Shared/PollUpdater.js~PollUpdater.html",
+    "<span>PollUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/PollUpdater.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/models/project.js~project",
     "class/js/Models/Project.js~Project.html",
     "<span>Project</span> <span class=\"search-result-import-path\">rodan-client/js/Models/Project.js</span>",
@@ -366,9 +372,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "rodan-client/js/shared/socketupdater.js~socketupdater",
+    "class/js/Shared/SocketUpdater.js~SocketUpdater.html",
+    "<span>SocketUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/SocketUpdater.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/managers/transfermanager.js~transfermanager",
     "class/js/Managers/TransferManager.js~TransferManager.html",
     "<span>TransferManager</span> <span class=\"search-result-import-path\">rodan-client/js/Managers/TransferManager.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/managers/updatemanager.js~updatemanager",
+    "class/js/Managers/UpdateManager.js~UpdateManager.html",
+    "<span>UpdateManager</span> <span class=\"search-result-import-path\">rodan-client/js/Managers/UpdateManager.js</span>",
     "class"
   ],
   [
@@ -1506,6 +1524,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/managers/updatemanager.js",
+    "file/js/Managers/UpdateManager.js.html",
+    "js/Managers/UpdateManager.js",
+    "file"
+  ],
+  [
+    "js/managers/updatemanager.js~updatemanager#constructor",
+    "class/js/Managers/UpdateManager.js~UpdateManager.html#instance-constructor-constructor",
+    "js/Managers/UpdateManager.js~UpdateManager#constructor",
+    "method"
+  ],
+  [
     "js/models/basemodel.js",
     "file/js/Models/BaseModel.js.html",
     "js/Models/BaseModel.js",
@@ -1866,6 +1896,30 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "js/shared/abstractupdater.js",
+    "file/js/Shared/AbstractUpdater.js.html",
+    "js/Shared/AbstractUpdater.js",
+    "file"
+  ],
+  [
+    "js/shared/abstractupdater.js~abstractupdater#clear",
+    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-clear",
+    "js/Shared/AbstractUpdater.js~AbstractUpdater#clear",
+    "method"
+  ],
+  [
+    "js/shared/abstractupdater.js~abstractupdater#setcollections",
+    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-setCollections",
+    "js/Shared/AbstractUpdater.js~AbstractUpdater#setCollections",
+    "method"
+  ],
+  [
+    "js/shared/abstractupdater.js~abstractupdater#update",
+    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-update",
+    "js/Shared/AbstractUpdater.js~AbstractUpdater#update",
+    "method"
+  ],
+  [
     "js/shared/cookie.js",
     "file/js/Shared/Cookie.js.html",
     "js/Shared/Cookie.js",
@@ -1938,15 +1992,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/shared/eventtimer.js",
-    "file/js/Shared/EventTimer.js.html",
-    "js/Shared/EventTimer.js",
+    "js/shared/pollupdater.js",
+    "file/js/Shared/PollUpdater.js.html",
+    "js/Shared/PollUpdater.js",
     "file"
   ],
   [
-    "js/shared/eventtimer.js~eventtimer#initialize",
-    "class/js/Shared/EventTimer.js~EventTimer.html#instance-method-initialize",
-    "js/Shared/EventTimer.js~EventTimer#initialize",
+    "js/shared/pollupdater.js~pollupdater#constructor",
+    "class/js/Shared/PollUpdater.js~PollUpdater.html#instance-constructor-constructor",
+    "js/Shared/PollUpdater.js~PollUpdater#constructor",
     "method"
   ],
   [
@@ -1983,6 +2037,12 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#event__collection_add",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__COLLECTION_ADD",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__COLLECTION_ADD",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__configuration_loaded",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__CONFIGURATION_LOADED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__CONFIGURATION_LOADED",
     "member"
   ],
   [
@@ -2478,30 +2538,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/shared/rodan_events.js~rodan_events#request__timer_clear",
-    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TIMER_CLEAR",
-    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TIMER_CLEAR",
-    "member"
-  ],
-  [
-    "js/shared/rodan_events.js~rodan_events#request__timer_set_event",
-    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TIMER_SET_EVENT",
-    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TIMER_SET_EVENT",
-    "member"
-  ],
-  [
-    "js/shared/rodan_events.js~rodan_events#request__timer_set_function",
-    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TIMER_SET_FUNCTION",
-    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TIMER_SET_FUNCTION",
-    "member"
-  ],
-  [
-    "js/shared/rodan_events.js~rodan_events#request__timer_set_request",
-    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TIMER_SET_REQUEST",
-    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TIMER_SET_REQUEST",
-    "member"
-  ],
-  [
     "js/shared/rodan_events.js~rodan_events#request__transfermanager_download",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TRANSFERMANAGER_DOWNLOAD",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TRANSFERMANAGER_DOWNLOAD",
@@ -2517,6 +2553,18 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__transfermanager_monitor_upload",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__updater_clear",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__UPDATER_CLEAR",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__UPDATER_CLEAR",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__updater_set_collections",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__UPDATER_SET_COLLECTIONS",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__UPDATER_SET_COLLECTIONS",
     "member"
   ],
   [
@@ -2770,6 +2818,18 @@ window.esdocSearchIndex = [
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOW_SAVE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOW_SAVE",
     "member"
+  ],
+  [
+    "js/shared/socketupdater.js",
+    "file/js/Shared/SocketUpdater.js.html",
+    "js/Shared/SocketUpdater.js",
+    "file"
+  ],
+  [
+    "js/shared/socketupdater.js~socketupdater#constructor",
+    "class/js/Shared/SocketUpdater.js~SocketUpdater.html#instance-constructor-constructor",
+    "js/Shared/SocketUpdater.js~SocketUpdater#constructor",
+    "method"
   ],
   [
     "js/views/master/layoutviewmaster.js",

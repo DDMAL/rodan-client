@@ -70,6 +70,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Controllers/ControllerWorkflowRun.js~ControllerWorkflowRun.html">ControllerWorkflowRun</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Managers</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Managers/RadioManager.js~RadioManager.html">RadioManager</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Managers/TransferManager.js~TransferManager.html">TransferManager</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Managers/UpdateManager.js~UpdateManager.html">UpdateManager</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Models</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/BaseModel.js~BaseModel.html">BaseModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/Connection.js~Connection.html">Connection</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/InputPort.js~InputPort.html">InputPort</a></span></span></li>
@@ -88,11 +89,13 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJob.js~WorkflowJob.html">WorkflowJob</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJobGroup.js~WorkflowJobGroup.html">WorkflowJobGroup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowRun.js~WorkflowRun.html">WorkflowRun</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/AbstractUpdater.js~AbstractUpdater.html">AbstractUpdater</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Environment.js~Environment.html">Environment</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/ErrorHandler.js~ErrorHandler.html">ErrorHandler</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/EventTimer.js~EventTimer.html">EventTimer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/PollUpdater.js~PollUpdater.html">PollUpdater</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html">RODAN_EVENTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/SocketUpdater.js~SocketUpdater.html">SocketUpdater</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/LayoutViewMaster.js~LayoutViewMaster.html">LayoutViewMaster</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewList.js~BaseViewList.html">BaseViewList</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html">BaseViewListItem</a></span></span></li>
@@ -148,18 +151,34 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">js/Configuration.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Radio from &apos;backbone.radio&apos;;
+import RODAN_EVENTS from &apos;./Shared/RODAN_EVENTS&apos;;
+
+/**
  * Client configuration object.
  */
 var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // Server parameters
 ///////////////////////////////////////////////////////////////////////////////////////
-    // URL of the server to connect to.
-    SERVER_URL: &apos;&apos;,
+    // Host of server (e.g. 123.456.789.0 or mydomain.com).
+    SERVER_HOST: &apos;&apos;,
+
+    // Server port.
+    SERVER_PORT: &apos;&apos;,
+
+    // Set to true iff using HTTPS (else HTTP). Default is true.
+    SERVER_HTTPS: true,
+
+    // Set to true iff the server allows socket connections. Default is false.
+    SERVER_SOCKET_AVAILABLE: false,
 
     // Authentication type. Either &apos;session&apos; or &apos;token&apos;.
     SERVER_AUTHENTICATION_TYPE: &apos;&apos;,
+
+    // This determines the method to use for loading updates from the server.
+    // Either &apos;POLL&apos; (default) or &apos;SOCKET&apos;.
+    SERVER_UPDATE_METHOD: &apos;SOCKET&apos;,
 
     // Interval after which the client will get the server time (ms).
     // Generally, the client extracts the server time from all responses from the server.
@@ -170,21 +189,24 @@ var Configuration = {
     // EVENT_TIMER_FREQUENCY to reduce traffic.
     SERVER_REQUEST_TIME_INTERVAL: 60000,
 
+    // Milliseconds to wait before the client goes into a &apos;wait&apos; mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
+    SERVER_WAIT_TIMER: 1000,
+
+    // Milliseconds to wait before the client &apos;panics&apos; mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
+    // This should be bigger than SERVER_WAIT_TIMER.
+    SERVER_PANIC_TIMER: 8000,
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // General behavior parameters
 ///////////////////////////////////////////////////////////////////////////////////////
+    // URL for website.
+    WEBSITE_URL: &apos;http://ddmal.github.io/rodan-client/&apos;,
+
     // Date/time format. See http://momentjs.com/docs/#/displaying/format/
     DATETIME_FORMAT: &apos;YYYY-MM-DD HH:mm:ss&apos;,
 
     // Event timer frequency (ms).
     EVENT_TIMER_FREQUENCY: 3000,
-
-    // Milliseconds to wait before the client goes into a &apos;wait&apos; mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
-    SERVER_WAIT_TIMER: 500,
-
-    // Milliseconds to wait before the client &apos;panics&apos; mode. This is used in the WorkflowBuilder when heavy lifting is going on, such as a Workflow import.
-    // This should be bigger than SERVER_WAIT_TIMER.
-    SERVER_PANIC_TIMER: 8000,
 
     // If you have a Job package meant solely for distributing Resources (i.e. takes in a single Resource and outputs that Resource) you have the option to use a 
     // feature that will automatically create a WorkflowJob of the correct Job that satisfies selected InputPorts. If this is the case, those Jobs must have
@@ -216,6 +238,17 @@ var Configuration = {
 ///////////////////////////////////////////////////////////////////////////////////////
 // Loader methods
 ///////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Convenience method to return the URL (I.e. &apos;&lt;http or https&gt;://SERVER_HOST:SERVER_PORT&apos;.)
+ *
+ * @return {string} &lt;http or https&gt;://SERVER_HOST:SERVER_PORT
+ */
+Configuration.getServerURL = function()
+{
+    var url = this.SERVER_HOST + &apos;:&apos; + this.SERVER_PORT;
+    return this.SERVER_HTTPS ? &apos;https://&apos; + url : &apos;http://&apos; + url;
+}
+
 /**
  * Requests filename from the client host. Whatever it gets from the host
  * it will merge with the default configuration.
@@ -264,6 +297,7 @@ Configuration._handleStateChange = function(event, filename, callback)
         {
             var configuration = JSON.parse(request.response);
             $.extend(this, configuration);
+            Radio.channel(&apos;rodan&apos;).trigger(RODAN_EVENTS.EVENT__CONFIGURATION_LOADED);
             if (callback)
             {
                 callback();

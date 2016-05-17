@@ -1,8 +1,13 @@
 {
   "coverage": "100%",
-  "expectCount": 390,
-  "actualCount": 390,
+  "expectCount": 397,
+  "actualCount": 397,
   "files": {
+    "js/Shared/AbstractUpdater.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
     "js/Application.js": {
       "expectCount": 2,
       "actualCount": 2,
@@ -119,8 +124,8 @@
       "undocumentLines": []
     },
     "js/Shared/RODAN_EVENTS.js": {
-      "expectCount": 137,
-      "actualCount": 137,
+      "expectCount": 136,
+      "actualCount": 136,
       "undocumentLines": []
     },
     "js/Shared/Environment.js": {
@@ -129,11 +134,6 @@
       "undocumentLines": []
     },
     "js/Shared/ErrorHandler.js": {
-      "expectCount": 2,
-      "actualCount": 2,
-      "undocumentLines": []
-    },
-    "js/Shared/EventTimer.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -263,6 +263,11 @@
       "actualCount": 2,
       "undocumentLines": []
     },
+    "js/Shared/PollUpdater.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
     "js/Models/Project.js": {
       "expectCount": 3,
       "actualCount": 3,
@@ -308,7 +313,17 @@
       "actualCount": 2,
       "undocumentLines": []
     },
+    "js/Shared/SocketUpdater.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
     "js/Managers/TransferManager.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "js/Managers/UpdateManager.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
