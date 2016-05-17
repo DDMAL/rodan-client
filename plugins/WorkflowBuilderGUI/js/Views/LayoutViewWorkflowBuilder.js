@@ -17,7 +17,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
     initialize()
     {
         this._initializeRadio();
-        this.rodanChannel.request(RODAN_EVENTS.REQUEST__TIMER_CLEAR);
+        this.rodanChannel.request(RODAN_EVENTS.REQUEST__UPDATER_CLEAR);
         this._lastErrorCode = '';
         this._lastErrorDetails = '';
     }
