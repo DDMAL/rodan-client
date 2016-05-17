@@ -6,6 +6,9 @@ collections:
     installation:
         output: true
         layout: default
+    configuration:
+        output: true
+        layout: default
     user_manual:
         output: true
         layout: default
@@ -19,6 +22,11 @@ defaults:
     - scope:
         path: ""
         type: installation
+      values:
+        layout: default
+    - scope:
+        path: ""
+        type: configuration
       values:
         layout: default
     - scope:
