@@ -45,4 +45,4 @@ ViewResourceList.prototype.ui = {
 };
 ViewResourceList.prototype.events = {
     'change @ui.fileInput': '_handleClickButtonFile'
-}
+};
