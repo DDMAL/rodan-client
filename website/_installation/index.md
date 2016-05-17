@@ -5,8 +5,6 @@ The following are instructions for installing Rodan Client on a Linux environmen
 
 For the instructions below, we'll assume that you are `user` logged on `computer` and working in your `~` (home) directory.
 
-_Note: You can see a description of files and directories that are included in the repository [here](development_manual/Files)._
-
 ## Setup Rodan server for the client
 
 You will most likely have to have the Rodan server administrator whitelist the IP and port you wish to host the client on to enable [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing). Furthermore, you will need the following information from the Rodan server:
@@ -41,8 +39,6 @@ user@computer:~$ cd rodan-client
 user@computer:~/rodan-client$ npm install
 ```
 
-_Note: A list of all development dependencies and their purpose can be found [here](Dependencies)._
-
 ### 5. Install application dependencies.
 The application dependencies are JavaScript applications that Rodan Client requires when running in a browser. These are managed and installed by [jspm](http://jspm.io/). jspm was installed as a local development dependency in the previous step.
 
@@ -58,8 +54,6 @@ The above command will:
 * download and install the application dependencies to `rodan-client/web/libs/`.
 
 What jspm is doing is creating a web application directory (i.e. `web`) where the application will reside.
-
-_Note: A list of all application dependencies and their purpose can be found [here](Dependencies)._
 
 ### 6. Configure
 Rodan Client requires very little configuration to get started. Only two files need to be managed:
@@ -82,20 +76,20 @@ user@computer:~/rodan-client$ cp js/Plugins.js.example Plugins.js
 Next, we need make small edits to each.
 
 ##### `configuration.json`
-At a minimum, we need to set the URL of the Rodan server and the authentication type.
+At a minimum, we need tell Rodan Client where the Rodan server is and how to connect to it.
 
-* `SERVER_URL`: This is the endpoint of the Rodan server you want the client to interact with. For example, if the server was at IP 123.456.789.1 on port 8080, you would set `"SERVER_URL": "http://123.456.789.1:8080"`.
+* `SERVER_HOST`: This is the host name of the Rodan server you want the client to interact with. For example, if the server was at IP 123.456.789.1, you would set `"SERVER_HOST": "123.456.789.1"`.
+
+* `SERVER_PORT`: This is the port for connecting to the Rodan server.
+
+* `SERVER_HTTPS`: The client will connect to the server using HTTPS iff `SERVER_HTTPS` is `true`. Else, HTTP will be used (not recommended).
 
 * `SERVER_AUTHENTICATION_TYPE`: This tells the client which authentication type to use - token or session. Token is recommended, but it depends on the Rodan server. For example, if the server uses token authentication, you would set `"SERVER_AUTHENTICATION_TYPE": "token"`.
-
-For a full description of configuration options, please go [here](Configuration).
 
 _Note: The `WORKFLOWBUILDERGUI` settings in `configuration.json` are the settings for the Workflow Builder GUI plugin. This plugin is discussed below._
 
 ##### `js/Plugins.js`
 Rodan Client comes with a plugin that allows a user to create and edit Workflows via a GUI, the Workflow Builder GUI. `js/Plugins.js` lets Rodan Client know what plugins exist and where the are located. For a standard Rodan Client install, no modifications need to be made to `js/Plugins.js`. However, if you wish to add plugins in the future, this file will have to be modified.
-
-_Note: Information on developing and adding plugins can be found [here](Plugins)._
 
 ### 7. Deploy
 Rodan Client uses [Gulp](http://gulpjs.com/) to manage deployment, both for development and production. How Rodan Client can be deployed is defined in `gulpfile.js`. Just like jspm, Gulp was installed as a development dependency, so its binary is located in `node_modules/.bin'. 
