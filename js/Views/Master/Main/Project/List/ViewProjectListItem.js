@@ -22,4 +22,4 @@ ViewProjectListItem.prototype.template = '#template-main_project_list_item';
 ViewProjectListItem.prototype.tagName = 'tr';
 ViewProjectListItem.prototype.events = {
     'dblclick': '_handleDoubleClick'
-}
+};

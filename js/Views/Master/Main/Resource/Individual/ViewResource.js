@@ -13,10 +13,8 @@ export default class ViewResource extends Marionette.CompositeView
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initializes the instance.
-     *
-     * @param {object} options Marionette.View options object
      */
-    initialize(options)
+    initialize()
     {
         /** @ignore */
         this.collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);

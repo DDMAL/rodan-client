@@ -17,7 +17,6 @@ export default class BaseController extends Marionette.Object
     constructor(options)
     {
         super(options);
-        /** @ignore */
         this._initializeViews();
         this._initializeRadio();
     }

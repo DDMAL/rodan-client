@@ -23,4 +23,4 @@ export default class BaseViewListItem extends Marionette.ItemView
 }
 BaseViewListItem.prototype.modelEvents = {
     'change': 'render'
-}
+};
