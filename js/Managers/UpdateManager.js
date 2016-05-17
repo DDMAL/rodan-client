@@ -27,7 +27,7 @@ export default class UpdateManager
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle config load. Read the configuration and check for socket setting.
+     * Handle config load. Reads the configuration and check for socket setting.
      */
     _handleEventConfigurationLoaded()
     {

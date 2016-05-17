@@ -3,14 +3,20 @@ import Configuration from '../Configuration';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 
+/**
+ * Updater that uses sockets to trigger collection updates.
+ */
 export default class SocketUpdater extends AbstractUpdater
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    constructor(options)
+    /**
+     * Constructor.
+     */
+    constructor()
     {
-        super(options);
+        super();
         this._webSocket = new WebSocket('ws://' + Configuration.SERVER_HOST + ':' + Configuration.SERVER_PORT + '/ws/rodan?subscribe-broadcast&publish-broadcast&echo');
         this._webSocket.onmessage = (event) => this._handleSocketMessage(event);
     }

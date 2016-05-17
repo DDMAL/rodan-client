@@ -19,7 +19,7 @@ export default class ControllerRunJob extends BaseController
     /**
      * Initializes the instance.
      */
-    initialize(options)
+    initialize()
     {
         this._runJobLocks = {};
         setInterval(() => this._reacquire(), Configuration.RUNJOB_ACQUIRE_INTERVAL);
