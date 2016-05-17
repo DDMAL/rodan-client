@@ -41,7 +41,7 @@ export default class ControllerWorkflow extends BaseController
     {
         this._collection = new WorkflowCollection()
         this._collection.fetch({data: {project: options.project.id}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_FUNCTION, {function: () => this._collection.syncList()});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._viewList = new ViewWorkflowList({collection: this._collection});

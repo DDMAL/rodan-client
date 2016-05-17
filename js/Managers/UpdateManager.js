@@ -19,7 +19,7 @@ export default class UpdateManager
     {
         this._updater = null;
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__CONFIGURATION_LOADED, () => this._handleEventConfigurationLoaded());
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__UPDATER_SET_FUNCTION, (options) => this._handleRequestUpdateSetFunction(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, (options) => this._handleRequestUpdateSetFunction(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__UPDATER_CLEAR, () => this._handleRequestUpdateClear());
     }
 
@@ -46,7 +46,7 @@ export default class UpdateManager
      */
     _handleRequestUpdateSetFunction(options)
     {
-        this._updater.setFunction(options.function);
+        this._updater.setCollections(options.collections);
     }
 
     /**

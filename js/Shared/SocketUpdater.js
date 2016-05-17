@@ -15,14 +15,6 @@ export default class SocketUpdater extends AbstractUpdater
         this._webSocket.onmessage = (event) => this._handleSocketMessage(event);
     }
 
-    setFunction(callbackFunction)
-    {
-    }
-
-    clear()
-    {
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +37,8 @@ export default class SocketUpdater extends AbstractUpdater
         }
         else
         {
-            this._processMessage(event);
+            this.update();
+            //this._processMessage(event);
         }
     }
 
@@ -54,13 +47,5 @@ export default class SocketUpdater extends AbstractUpdater
      */
     _processHeartbeat(event)
     {
-    }
-
-    /**
-     * Process message.
-     */
-    _processMessage(event)
-    {
-        console.log(event.data);
     }
 }
