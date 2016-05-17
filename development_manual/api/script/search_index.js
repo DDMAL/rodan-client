@@ -1890,12 +1890,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/plugins.js",
-    "file/js/Plugins.js.html",
-    "js/Plugins.js",
-    "file"
-  ],
-  [
     "js/shared/abstractupdater.js",
     "file/js/Shared/AbstractUpdater.js.html",
     "js/Shared/AbstractUpdater.js",
