@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BaseController from './BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**

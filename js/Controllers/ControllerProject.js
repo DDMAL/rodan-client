@@ -1,12 +1,12 @@
 import BaseController from './BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
-import Project from '../Models/Project';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
+import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
-import ViewProject from '../Views/Master/Main/Project/Individual/ViewProject';
-import ViewProjectList from '../Views/Master/Main/Project/List/ViewProjectList';
-import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
-import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
+import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
+import ViewProjectList from 'js/Views/Master/Main/Project/List/ViewProjectList';
+import ViewWorkflowRunList from 'js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
+import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
 /**
  * Controller for Projects.

@@ -1,5 +1,5 @@
 import Marionette from 'backbone.marionette';
-import ViewInputPortList from '../../InputPort/ViewInputPortList';
+import ViewInputPortList from 'js/Views/Master/Main/InputPort/ViewInputPortList';
 import ViewInputPortListItem from './ViewInputPortListItem';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';

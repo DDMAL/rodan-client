@@ -1,11 +1,11 @@
-import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
-import LayoutViewModel from '../../LayoutViewModel';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import ViewResourceList from '../../Resource/List/ViewResourceList';
-import ViewResourceListItem from '../../Resource/List/ViewResourceListItem';
-import ViewRunJobList from '../../RunJob/List/ViewRunJobList';
-import ViewRunJobListItem from '../../RunJob/List/ViewRunJobListItem';
+import ViewResourceList from 'js/Views/Master/Main/Resource/List/ViewResourceList';
+import ViewResourceListItem from 'js/Views/Master/Main/Resource/List/ViewResourceListItem';
+import ViewRunJobList from 'js/Views/Master/Main/RunJob/List/ViewRunJobList';
+import ViewRunJobListItem from 'js/Views/Master/Main/RunJob/List/ViewRunJobListItem';
 
 /**
  * WorkflowRun view.

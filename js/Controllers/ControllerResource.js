@@ -1,12 +1,12 @@
 import BaseController from './BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
-import Resource from '../Models/Resource';
-import ResourceCollection from '../Collections/ResourceCollection';
-import ViewResource from '../Views/Master/Main/Resource/Individual/ViewResource';
-import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
-import ViewResourceListItem from '../Views/Master/Main/Resource/List/ViewResourceListItem';
+import Resource from 'js/Models/Resource';
+import ResourceCollection from 'js/Collections/ResourceCollection';
+import ViewResource from 'js/Views/Master/Main/Resource/Individual/ViewResource';
+import ViewResourceList from 'js/Views/Master/Main/Resource/List/ViewResourceList';
+import ViewResourceListItem from 'js/Views/Master/Main/Resource/List/ViewResourceListItem';
 
 /**
  * Controller for Resources.

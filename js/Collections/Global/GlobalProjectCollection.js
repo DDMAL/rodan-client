@@ -1,6 +1,6 @@
 import GlobalCollection from './GlobalCollection';
-import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
-import Project from '../../Models/Project';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import Project from 'js/Models/Project';
 
 let _instance = null;
 

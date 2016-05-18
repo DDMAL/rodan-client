@@ -1,5 +1,5 @@
-import BaseCollection from '../BaseCollection';
-import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
+import BaseCollection from 'js/Collections/BaseCollection';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**

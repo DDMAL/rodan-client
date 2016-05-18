@@ -1,12 +1,12 @@
 import _ from 'underscore';
 import datetimepicker from 'datetimepicker';
 import 'jqueryui';
-import BaseCollection from '../Collections/BaseCollection';
-import Configuration from '../Configuration';
-import Environment from '../Shared/Environment';
+import BaseCollection from 'js/Collections/BaseCollection';
+import Configuration from 'js/Configuration';
+import Environment from 'js/Shared/Environment';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
  * A Marionette Behavior for tables. This class defines sorting and filtering.

@@ -1,9 +1,9 @@
 import BaseModel from './BaseModel';
-import ConnectionCollection from '../Collections/ConnectionCollection';
-import InputPortCollection from '../Collections/InputPortCollection';
-import OutputPortCollection from '../Collections/OutputPortCollection';
-import WorkflowJobCollection from '../Collections/WorkflowJobCollection';
-import WorkflowRunCollection from '../Collections/WorkflowRunCollection';
+import ConnectionCollection from 'js/Collections/ConnectionCollection';
+import InputPortCollection from 'js/Collections/InputPortCollection';
+import OutputPortCollection from 'js/Collections/OutputPortCollection';
+import WorkflowJobCollection from 'js/Collections/WorkflowJobCollection';
+import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
 /**
  * Workflow.

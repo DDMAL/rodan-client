@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import WorkflowJobGroup from '../Models/WorkflowJobGroup';
+import WorkflowJobGroup from 'js/Models/WorkflowJobGroup';
 
 /**
  * Collection of WorkflowJobGroup models.

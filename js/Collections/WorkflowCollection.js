@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import Workflow from '../Models/Workflow';
+import Workflow from 'js/Models/Workflow';
 
 /**
  * Collection of Workflow models.

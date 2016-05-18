@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import InputPortType from '../Models/InputPortType';
+import InputPortType from 'js/Models/InputPortType';
 
 /**
  * Collection of InputPortType models.

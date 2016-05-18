@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import Pagination from '../Models/Pagination';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import Pagination from 'js/Models/Pagination';
 import Radio from 'backbone.radio';
 
 /**

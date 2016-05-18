@@ -1,5 +1,5 @@
 import AbstractUpdater from './AbstractUpdater';
-import Configuration from '../Configuration';
+import Configuration from 'js/Configuration';
 
 /**
  * Updater that uses sockets to trigger collection updates.

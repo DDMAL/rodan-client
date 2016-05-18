@@ -1,11 +1,11 @@
 import BaseController from './BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
-import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
-import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
-import Workflow from '../Models/Workflow';
-import WorkflowCollection from '../Collections/WorkflowCollection';
+import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
+import ViewWorkflowList from 'js/Views/Master/Main/Workflow/List/ViewWorkflowList';
+import Workflow from 'js/Models/Workflow';
+import WorkflowCollection from 'js/Collections/WorkflowCollection';
 
 /**
  * Controller for Workflows.

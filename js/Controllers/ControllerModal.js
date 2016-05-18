@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import BaseController from './BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -39,24 +39,6 @@ export default class ControllerModal extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
     }
 
-    /**
-     * Show waiting modal.
-     */
-    _showWaitingModal()
-    {
-        var $modalEl = $('modal-generic');
-        if ($modalEl.is(':visible'))
-        {
-            return;
-        }
-        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
-        this._layoutViewModal.render();
-        $modalEl.css({top: 0, left: 0, position: 'absolute'});
-        $modalEl.html(this._layoutViewModal.el);
-        $modalEl.modal({backdrop: 'static', keyboard: false});
-        this._waiting = true;
-    }
-
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +59,6 @@ export default class ControllerModal extends BaseController
      */
     _handleOnServerPanic()
     {
-        console.log('server panic');
     }
 
     /**
@@ -88,7 +69,13 @@ export default class ControllerModal extends BaseController
         var $modalEl = $('#modal-generic');
         if (!$modalEl.is(':visible'))
         {
-            this._showWaitingModal();
+            var $modalEl = $('#modal-generic');
+            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
+            this._layoutViewModal.render();
+            $modalEl.css({top: 0, left: 0, position: 'absolute'});
+            $modalEl.html(this._layoutViewModal.el);
+            $modalEl.modal({backdrop: 'static', keyboard: false}); 
+            this._waiting = true;
         }
     }
 

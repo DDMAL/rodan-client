@@ -1,6 +1,6 @@
 import BaseModel from './BaseModel';
-import InputPortCollection from '../Collections/InputPortCollection';
-import OutputPortCollection from '../Collections/OutputPortCollection';
+import InputPortCollection from 'js/Collections/InputPortCollection';
+import OutputPortCollection from 'js/Collections/OutputPortCollection';
 
 /**
  * WorkflowJob.

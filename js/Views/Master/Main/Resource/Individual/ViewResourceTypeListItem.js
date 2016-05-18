@@ -1,4 +1,4 @@
-import BaseViewListItem from '../../BaseViewListItem';
+import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
 
 /**
  * ResourceType view.

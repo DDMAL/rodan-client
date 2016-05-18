@@ -1,5 +1,5 @@
-import BaseViewList from '../../BaseViewList';
-import RODAN_EVENTS from '../../../../../Shared/RODAN_EVENTS';
+import BaseViewList from 'js/Views/Master/Main/BaseViewList';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewWorkflowListItem from './ViewWorkflowListItem';
 

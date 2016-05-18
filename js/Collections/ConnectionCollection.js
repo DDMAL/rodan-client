@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import Connection from '../Models/Connection';
+import Connection from 'js/Models/Connection';
 
 /**
  * Collection of Connection models.

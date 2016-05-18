@@ -3,7 +3,7 @@ import Radio from 'backbone.radio';
 import _ from 'underscore';
 
 import BaseModel from './BaseModel';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
  * Resource.

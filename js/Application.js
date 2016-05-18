@@ -4,6 +4,7 @@ import _ from 'underscore';
 import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import moment from 'moment';
+import './Plugins';
 import Radio from 'backbone.radio';
 
 import BehaviorTable from './Behaviors/BehaviorTable';
@@ -28,7 +29,6 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
-import Plugins from './Plugins';
 import RadioManager from './Managers/RadioManager';
 import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';

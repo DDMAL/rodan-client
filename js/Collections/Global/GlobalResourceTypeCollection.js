@@ -1,6 +1,6 @@
 import GlobalCollection from './GlobalCollection';
-import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
-import ResourceType from '../../Models/ResourceType';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import ResourceType from 'js/Models/ResourceType';
 
 let _instance = null;
 

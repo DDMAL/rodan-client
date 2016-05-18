@@ -1,9 +1,9 @@
-import BaseController from '../Controllers/BaseController';
-import Configuration from '../Configuration';
-import Cookie from '../Shared/Cookie';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import BaseController from 'js/Controllers/BaseController';
+import Configuration from 'js/Configuration';
+import Cookie from 'js/Shared/Cookie';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import User from '../Models/User';
+import User from 'js/Models/User';
 
 /**
  * Controls authentication.

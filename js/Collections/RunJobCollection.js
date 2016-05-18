@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import RunJob from '../Models/RunJob';
+import RunJob from 'js/Models/RunJob';
 
 /**
  * Collection of RunJob models.

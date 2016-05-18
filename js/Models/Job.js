@@ -1,6 +1,6 @@
 import BaseModel from './BaseModel';
-import InputPortTypeCollection from '../Collections/InputPortTypeCollection';
-import OutputPortTypeCollection from '../Collections/OutputPortTypeCollection';
+import InputPortTypeCollection from 'js/Collections/InputPortTypeCollection';
+import OutputPortTypeCollection from 'js/Collections/OutputPortTypeCollection';
 
 /**
  * Job.

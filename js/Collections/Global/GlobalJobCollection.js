@@ -1,6 +1,6 @@
 import GlobalCollection from './GlobalCollection';
-import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
-import Job from '../../Models/Job';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import Job from 'js/Models/Job';
 
 let _instance = null;
 

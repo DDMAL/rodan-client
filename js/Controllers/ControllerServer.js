@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import BaseController from '../Controllers/BaseController';
-import Configuration from '../Configuration';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import BaseController from 'js/Controllers/BaseController';
+import Configuration from 'js/Configuration';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 var oldsync = Backbone.sync;

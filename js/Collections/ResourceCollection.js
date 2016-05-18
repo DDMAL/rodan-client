@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import Resource from '../Models/Resource';
+import Resource from 'js/Models/Resource';
 
 /**
  * Collection of Resource models.

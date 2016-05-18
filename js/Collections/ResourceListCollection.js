@@ -1,5 +1,5 @@
 import BaseCollection from './BaseCollection';
-import ResourceList from '../Models/ResourceList';
+import ResourceList from 'js/Models/ResourceList';
 
 /**
  * Collection of ResourceList models.

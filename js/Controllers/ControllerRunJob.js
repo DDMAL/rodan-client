@@ -1,12 +1,12 @@
 import BaseController from './BaseController';
-import Configuration from '../Configuration';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import LayoutViewModel from '../Views/Master/Main/LayoutViewModel';
+import Configuration from 'js/Configuration';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
-import RunJobCollection from '../Collections/RunJobCollection';
-import ViewRunJob from '../Views/Master/Main/RunJob/Individual/ViewRunJob';
-import ViewRunJobList from '../Views/Master/Main/RunJob/List/ViewRunJobList';
-import ViewRunJobListItem from '../Views/Master/Main/RunJob/List/ViewRunJobListItem';
+import RunJobCollection from 'js/Collections/RunJobCollection';
+import ViewRunJob from 'js/Views/Master/Main/RunJob/Individual/ViewRunJob';
+import ViewRunJobList from 'js/Views/Master/Main/RunJob/List/ViewRunJobList';
+import ViewRunJobListItem from 'js/Views/Master/Main/RunJob/List/ViewRunJobListItem';
 
 /**
  * Controller for RunJobs.

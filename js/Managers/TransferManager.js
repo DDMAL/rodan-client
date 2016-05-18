@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 import Radio from 'backbone.radio';
 import saveAs from 'filesaver';
 
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
  * File transfer manager. This manages all file (i.e. Resource) uploads and downloads.

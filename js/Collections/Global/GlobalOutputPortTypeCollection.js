@@ -1,6 +1,6 @@
 import GlobalCollection from './GlobalCollection';
-import RODAN_EVENTS from '../../Shared/RODAN_EVENTS';
-import OutputPortType from '../../Models/OutputPortType';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import OutputPortType from 'js/Models/OutputPortType';
 
 let _instance = null;
 

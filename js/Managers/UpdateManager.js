@@ -1,8 +1,8 @@
-import Configuration from '../Configuration';
-import PollUpdater from '../Updater/PollUpdater';
+import Configuration from 'js/Configuration';
+import PollUpdater from 'js/Updater/PollUpdater';
 import Radio from 'backbone.radio';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import SocketUpdater from '../Updater/SocketUpdater';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import SocketUpdater from 'js/Updater/SocketUpdater';
 
 /**
  * This manages how updates are handled.

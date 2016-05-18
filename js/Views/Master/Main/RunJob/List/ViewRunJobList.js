@@ -1,4 +1,4 @@
-import BaseViewList from '../../BaseViewList';
+import BaseViewList from 'js/Views/Master/Main/BaseViewList';
 
 /**
  * RunJob list view.

@@ -1,7 +1,7 @@
-import BaseController from '../Controllers/BaseController';
-import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
+import BaseController from 'js/Controllers/BaseController';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import WorkflowJob from '../Models/WorkflowJob';
+import WorkflowJob from 'js/Models/WorkflowJob';
 
 /**
  * Controller for WorkflowJobs.
