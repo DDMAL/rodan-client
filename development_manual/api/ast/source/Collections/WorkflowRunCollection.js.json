@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/WorkflowRun",
-        "raw": "'../Models/WorkflowRun'",
+        "value": "js/Models/WorkflowRun",
+        "raw": "'js/Models/WorkflowRun'",
         "range": [
           71,
           94

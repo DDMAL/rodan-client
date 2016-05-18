@@ -89,13 +89,13 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJob.js~WorkflowJob.html">WorkflowJob</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJobGroup.js~WorkflowJobGroup.html">WorkflowJobGroup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowRun.js~WorkflowRun.html">WorkflowRun</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/AbstractUpdater.js~AbstractUpdater.html">AbstractUpdater</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Environment.js~Environment.html">Environment</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/ErrorHandler.js~ErrorHandler.html">ErrorHandler</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/PollUpdater.js~PollUpdater.html">PollUpdater</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html">RODAN_EVENTS</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/SocketUpdater.js~SocketUpdater.html">SocketUpdater</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Updater</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/AbstractUpdater.js~AbstractUpdater.html">AbstractUpdater</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/PollUpdater.js~PollUpdater.html">PollUpdater</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/SocketUpdater.js~SocketUpdater.html">SocketUpdater</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/LayoutViewMaster.js~LayoutViewMaster.html">LayoutViewMaster</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewList.js~BaseViewList.html">BaseViewList</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html">BaseViewListItem</a></span></span></li>
@@ -208,7 +208,7 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html#instance-method-initialize">initialize</a></span></span><span data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+           <span data-ice="name"><span><a href="class/js/Views/Master/Main/Resource/Individual/ViewResource.js~ViewResource.html#instance-method-initialize">initialize</a></span></span><span data-ice="signature">()</span>
         </p>
       </div>
       <div>
@@ -294,11 +294,11 @@
     
     
     
-    <span data-ice="name">initialize</span><span data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span data-ice="name">initialize</span><span data-ice="signature">()</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber19">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber17">source</a></span></span>
     </span>
   </h3>
 
@@ -310,24 +310,7 @@
 
   
 
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">options</td>
-      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Marionette.View options object</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
+  <div data-ice="properties">
 </div>
 
   
@@ -356,7 +339,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber44">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber42">source</a></span></span>
     </span>
   </h3>
 
@@ -397,7 +380,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/js/Views/Master/Main/Resource/Individual/ViewResource.js.html#lineNumber29">source</a></span></span>
     </span>
   </h3>
 

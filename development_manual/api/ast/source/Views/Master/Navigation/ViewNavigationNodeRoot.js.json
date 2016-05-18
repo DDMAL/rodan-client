@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../../Shared/RODAN_EVENTS",
-        "raw": "'../../../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
           25,
-          55
+          49
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 55
+            "column": 49
           }
         }
       },
       "range": [
         0,
-        56
+        50
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 56
+          "column": 50
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "Radio",
             "range": [
-              64,
-              69
+              58,
+              63
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            64,
-            69
+            58,
+            63
           ],
           "loc": {
             "start": {
@@ -118,8 +118,8 @@
         "value": "backbone.radio",
         "raw": "'backbone.radio'",
         "range": [
-          75,
-          91
+          69,
+          85
         ],
         "loc": {
           "start": {
@@ -133,8 +133,8 @@
         }
       },
       "range": [
-        57,
-        92
+        51,
+        86
       ],
       "loc": {
         "start": {
@@ -156,8 +156,8 @@
             "type": "Identifier",
             "name": "ViewNavigationNode",
             "range": [
-              100,
-              118
+              94,
+              112
             ],
             "loc": {
               "start": {
@@ -171,8 +171,8 @@
             }
           },
           "range": [
-            100,
-            118
+            94,
+            112
           ],
           "loc": {
             "start": {
@@ -191,8 +191,8 @@
         "value": "./ViewNavigationNode",
         "raw": "'./ViewNavigationNode'",
         "range": [
-          124,
-          146
+          118,
+          140
         ],
         "loc": {
           "start": {
@@ -206,8 +206,8 @@
         }
       },
       "range": [
-        93,
-        147
+        87,
+        141
       ],
       "loc": {
         "start": {
@@ -229,8 +229,8 @@
             "type": "Identifier",
             "name": "ViewNavigationNodeProject",
             "range": [
-              155,
-              180
+              149,
+              174
             ],
             "loc": {
               "start": {
@@ -244,8 +244,8 @@
             }
           },
           "range": [
-            155,
-            180
+            149,
+            174
           ],
           "loc": {
             "start": {
@@ -264,8 +264,8 @@
         "value": "./ViewNavigationNodeProject",
         "raw": "'./ViewNavigationNodeProject'",
         "range": [
-          186,
-          215
+          180,
+          209
         ],
         "loc": {
           "start": {
@@ -279,8 +279,8 @@
         }
       },
       "range": [
-        148,
-        216
+        142,
+        210
       ],
       "loc": {
         "start": {
@@ -297,8 +297,8 @@
           "type": "Block",
           "value": "*\n * This class represents a navigation menu node.\n ",
           "range": [
-            218,
-            274
+            212,
+            268
           ],
           "loc": {
             "start": {
@@ -321,8 +321,8 @@
           "type": "Identifier",
           "name": "ViewNavigationNodeRoot",
           "range": [
-            296,
-            318
+            290,
+            312
           ],
           "loc": {
             "start": {
@@ -339,8 +339,8 @@
           "type": "Identifier",
           "name": "ViewNavigationNode",
           "range": [
-            327,
-            345
+            321,
+            339
           ],
           "loc": {
             "start": {
@@ -362,8 +362,8 @@
                 "type": "Identifier",
                 "name": "onRender",
                 "range": [
-                  616,
-                  624
+                  610,
+                  618
                 ],
                 "loc": {
                   "start": {
@@ -393,8 +393,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              641,
-                              645
+                              635,
+                              639
                             ],
                             "loc": {
                               "start": {
@@ -411,8 +411,8 @@
                             "type": "Identifier",
                             "name": "_showSubviews",
                             "range": [
-                              646,
-                              659
+                              640,
+                              653
                             ],
                             "loc": {
                               "start": {
@@ -426,8 +426,8 @@
                             }
                           },
                           "range": [
-                            641,
-                            659
+                            635,
+                            653
                           ],
                           "loc": {
                             "start": {
@@ -442,8 +442,8 @@
                         },
                         "arguments": [],
                         "range": [
-                          641,
-                          661
+                          635,
+                          655
                         ],
                         "loc": {
                           "start": {
@@ -457,8 +457,8 @@
                         }
                       },
                       "range": [
-                        641,
-                        662
+                        635,
+                        656
                       ],
                       "loc": {
                         "start": {
@@ -473,8 +473,8 @@
                     }
                   ],
                   "range": [
-                    631,
-                    668
+                    625,
+                    662
                   ],
                   "loc": {
                     "start": {
@@ -490,8 +490,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  624,
-                  668
+                  618,
+                  662
                 ],
                 "loc": {
                   "start": {
@@ -507,8 +507,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                616,
-                668
+                610,
+                662
               ],
               "loc": {
                 "start": {
@@ -525,8 +525,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    348,
-                    435
+                    342,
+                    429
                   ],
                   "loc": {
                     "start": {
@@ -543,8 +543,8 @@
                   "type": "Line",
                   "value": " PUBLIC METHODS",
                   "range": [
-                    436,
-                    453
+                    430,
+                    447
                   ],
                   "loc": {
                     "start": {
@@ -561,8 +561,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    454,
-                    541
+                    448,
+                    535
                   ],
                   "loc": {
                     "start": {
@@ -579,8 +579,8 @@
                   "type": "Block",
                   "value": "*\n     * This hides all subviews on render (initially).\n     ",
                   "range": [
-                    546,
-                    611
+                    540,
+                    605
                   ],
                   "loc": {
                     "start": {
@@ -599,8 +599,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    670,
-                    757
+                    664,
+                    751
                   ],
                   "loc": {
                     "start": {
@@ -617,8 +617,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    758,
-                    776
+                    752,
+                    770
                   ],
                   "loc": {
                     "start": {
@@ -635,8 +635,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    777,
-                    864
+                    771,
+                    858
                   ],
                   "loc": {
                     "start": {
@@ -653,8 +653,8 @@
                   "type": "Block",
                   "value": "*\n     * Send click events.\n     ",
                   "range": [
-                    869,
-                    906
+                    863,
+                    900
                   ],
                   "loc": {
                     "start": {
@@ -676,8 +676,8 @@
                 "type": "Identifier",
                 "name": "_sendClickEvents",
                 "range": [
-                  911,
-                  927
+                  905,
+                  921
                 ],
                 "loc": {
                   "start": {
@@ -713,8 +713,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  944,
-                                  949
+                                  938,
+                                  943
                                 ],
                                 "loc": {
                                   "start": {
@@ -731,8 +731,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  950,
-                                  957
+                                  944,
+                                  951
                                 ],
                                 "loc": {
                                   "start": {
@@ -746,8 +746,8 @@
                                 }
                               },
                               "range": [
-                                944,
-                                957
+                                938,
+                                951
                               ],
                               "loc": {
                                 "start": {
@@ -766,8 +766,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  958,
-                                  965
+                                  952,
+                                  959
                                 ],
                                 "loc": {
                                   "start": {
@@ -782,8 +782,8 @@
                               }
                             ],
                             "range": [
-                              944,
-                              966
+                              938,
+                              960
                             ],
                             "loc": {
                               "start": {
@@ -800,8 +800,8 @@
                             "type": "Identifier",
                             "name": "trigger",
                             "range": [
-                              967,
-                              974
+                              961,
+                              968
                             ],
                             "loc": {
                               "start": {
@@ -815,8 +815,8 @@
                             }
                           },
                           "range": [
-                            944,
-                            974
+                            938,
+                            968
                           ],
                           "loc": {
                             "start": {
@@ -837,8 +837,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                975,
-                                987
+                                969,
+                                981
                               ],
                               "loc": {
                                 "start": {
@@ -855,8 +855,8 @@
                               "type": "Identifier",
                               "name": "EVENT__PROJECT_SELECTED_COLLECTION",
                               "range": [
-                                988,
-                                1022
+                                982,
+                                1016
                               ],
                               "loc": {
                                 "start": {
@@ -870,8 +870,8 @@
                               }
                             },
                             "range": [
-                              975,
-                              1022
+                              969,
+                              1016
                             ],
                             "loc": {
                               "start": {
@@ -886,8 +886,8 @@
                           }
                         ],
                         "range": [
-                          944,
-                          1023
+                          938,
+                          1017
                         ],
                         "loc": {
                           "start": {
@@ -901,8 +901,8 @@
                         }
                       },
                       "range": [
-                        944,
-                        1024
+                        938,
+                        1018
                       ],
                       "loc": {
                         "start": {
@@ -917,8 +917,8 @@
                     }
                   ],
                   "range": [
-                    934,
-                    1030
+                    928,
+                    1024
                   ],
                   "loc": {
                     "start": {
@@ -934,8 +934,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  927,
-                  1030
+                  921,
+                  1024
                 ],
                 "loc": {
                   "start": {
@@ -951,8 +951,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                911,
-                1030
+                905,
+                1024
               ],
               "loc": {
                 "start": {
@@ -969,8 +969,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    670,
-                    757
+                    664,
+                    751
                   ],
                   "loc": {
                     "start": {
@@ -987,8 +987,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    758,
-                    776
+                    752,
+                    770
                   ],
                   "loc": {
                     "start": {
@@ -1005,8 +1005,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    777,
-                    864
+                    771,
+                    858
                   ],
                   "loc": {
                     "start": {
@@ -1023,8 +1023,8 @@
                   "type": "Block",
                   "value": "*\n     * Send click events.\n     ",
                   "range": [
-                    869,
-                    906
+                    863,
+                    900
                   ],
                   "loc": {
                     "start": {
@@ -1042,8 +1042,8 @@
             }
           ],
           "range": [
-            346,
-            1032
+            340,
+            1026
           ],
           "loc": {
             "start": {
@@ -1057,8 +1057,8 @@
           }
         },
         "range": [
-          290,
-          1032
+          284,
+          1026
         ],
         "loc": {
           "start": {
@@ -1075,8 +1075,8 @@
             "type": "Block",
             "value": "*\n * This class represents a navigation menu node.\n ",
             "range": [
-              218,
-              274
+              212,
+              268
             ],
             "loc": {
               "start": {
@@ -1093,8 +1093,8 @@
         "trailingComments": []
       },
       "range": [
-        275,
-        1032
+        269,
+        1026
       ],
       "loc": {
         "start": {
@@ -1111,8 +1111,8 @@
           "type": "Block",
           "value": "*\n * This class represents a navigation menu node.\n ",
           "range": [
-            218,
-            274
+            212,
+            268
           ],
           "loc": {
             "start": {
@@ -1142,8 +1142,8 @@
               "type": "Identifier",
               "name": "ViewNavigationNodeRoot",
               "range": [
-                1033,
-                1055
+                1027,
+                1049
               ],
               "loc": {
                 "start": {
@@ -1160,8 +1160,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1056,
-                1065
+                1050,
+                1059
               ],
               "loc": {
                 "start": {
@@ -1175,8 +1175,8 @@
               }
             },
             "range": [
-              1033,
-              1065
+              1027,
+              1059
             ],
             "loc": {
               "start": {
@@ -1193,8 +1193,8 @@
             "type": "Identifier",
             "name": "ui",
             "range": [
-              1066,
-              1068
+              1060,
+              1062
             ],
             "loc": {
               "start": {
@@ -1208,8 +1208,8 @@
             }
           },
           "range": [
-            1033,
-            1068
+            1027,
+            1062
           ],
           "loc": {
             "start": {
@@ -1231,8 +1231,8 @@
                 "type": "Identifier",
                 "name": "text",
                 "range": [
-                  1077,
-                  1081
+                  1071,
+                  1075
                 ],
                 "loc": {
                   "start": {
@@ -1250,8 +1250,8 @@
                 "value": ".node_text",
                 "raw": "'.node_text'",
                 "range": [
-                  1083,
-                  1095
+                  1077,
+                  1089
                 ],
                 "loc": {
                   "start": {
@@ -1269,8 +1269,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                1077,
-                1095
+                1071,
+                1089
               ],
               "loc": {
                 "start": {
@@ -1285,8 +1285,8 @@
             }
           ],
           "range": [
-            1071,
-            1097
+            1065,
+            1091
           ],
           "loc": {
             "start": {
@@ -1300,8 +1300,8 @@
           }
         },
         "range": [
-          1033,
-          1097
+          1027,
+          1091
         ],
         "loc": {
           "start": {
@@ -1315,8 +1315,8 @@
         }
       },
       "range": [
-        1033,
-        1098
+        1027,
+        1092
       ],
       "loc": {
         "start": {
@@ -1344,8 +1344,8 @@
               "type": "Identifier",
               "name": "ViewNavigationNodeRoot",
               "range": [
-                1099,
-                1121
+                1093,
+                1115
               ],
               "loc": {
                 "start": {
@@ -1362,8 +1362,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1122,
-                1131
+                1116,
+                1125
               ],
               "loc": {
                 "start": {
@@ -1377,8 +1377,8 @@
               }
             },
             "range": [
-              1099,
-              1131
+              1093,
+              1125
             ],
             "loc": {
               "start": {
@@ -1395,8 +1395,8 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              1132,
-              1138
+              1126,
+              1132
             ],
             "loc": {
               "start": {
@@ -1410,8 +1410,8 @@
             }
           },
           "range": [
-            1099,
-            1138
+            1093,
+            1132
           ],
           "loc": {
             "start": {
@@ -1434,8 +1434,8 @@
                 "value": "click @ui.text",
                 "raw": "'click @ui.text'",
                 "range": [
-                  1147,
-                  1163
+                  1141,
+                  1157
                 ],
                 "loc": {
                   "start": {
@@ -1453,8 +1453,8 @@
                 "value": "_handleClick",
                 "raw": "'_handleClick'",
                 "range": [
-                  1165,
-                  1179
+                  1159,
+                  1173
                 ],
                 "loc": {
                   "start": {
@@ -1472,8 +1472,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                1147,
-                1179
+                1141,
+                1173
               ],
               "loc": {
                 "start": {
@@ -1488,8 +1488,8 @@
             }
           ],
           "range": [
-            1141,
-            1181
+            1135,
+            1175
           ],
           "loc": {
             "start": {
@@ -1503,8 +1503,8 @@
           }
         },
         "range": [
-          1099,
-          1181
+          1093,
+          1175
         ],
         "loc": {
           "start": {
@@ -1518,8 +1518,8 @@
         }
       },
       "range": [
-        1099,
-        1182
+        1093,
+        1176
       ],
       "loc": {
         "start": {
@@ -1547,8 +1547,8 @@
               "type": "Identifier",
               "name": "ViewNavigationNodeRoot",
               "range": [
-                1183,
-                1205
+                1177,
+                1199
               ],
               "loc": {
                 "start": {
@@ -1565,8 +1565,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1206,
-                1215
+                1200,
+                1209
               ],
               "loc": {
                 "start": {
@@ -1580,8 +1580,8 @@
               }
             },
             "range": [
-              1183,
-              1215
+              1177,
+              1209
             ],
             "loc": {
               "start": {
@@ -1598,8 +1598,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              1216,
-              1224
+              1210,
+              1218
             ],
             "loc": {
               "start": {
@@ -1613,8 +1613,8 @@
             }
           },
           "range": [
-            1183,
-            1224
+            1177,
+            1218
           ],
           "loc": {
             "start": {
@@ -1632,8 +1632,8 @@
           "value": "#template-navigation_root",
           "raw": "'#template-navigation_root'",
           "range": [
-            1227,
-            1254
+            1221,
+            1248
           ],
           "loc": {
             "start": {
@@ -1647,8 +1647,8 @@
           }
         },
         "range": [
-          1183,
-          1254
+          1177,
+          1248
         ],
         "loc": {
           "start": {
@@ -1662,8 +1662,8 @@
         }
       },
       "range": [
-        1183,
-        1255
+        1177,
+        1249
       ],
       "loc": {
         "start": {
@@ -1691,8 +1691,8 @@
               "type": "Identifier",
               "name": "ViewNavigationNodeRoot",
               "range": [
-                1256,
-                1278
+                1250,
+                1272
               ],
               "loc": {
                 "start": {
@@ -1709,8 +1709,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1279,
-                1288
+                1273,
+                1282
               ],
               "loc": {
                 "start": {
@@ -1724,8 +1724,8 @@
               }
             },
             "range": [
-              1256,
-              1288
+              1250,
+              1282
             ],
             "loc": {
               "start": {
@@ -1742,8 +1742,8 @@
             "type": "Identifier",
             "name": "childView",
             "range": [
-              1289,
-              1298
+              1283,
+              1292
             ],
             "loc": {
               "start": {
@@ -1757,8 +1757,8 @@
             }
           },
           "range": [
-            1256,
-            1298
+            1250,
+            1292
           ],
           "loc": {
             "start": {
@@ -1775,8 +1775,8 @@
           "type": "Identifier",
           "name": "ViewNavigationNodeProject",
           "range": [
-            1301,
-            1326
+            1295,
+            1320
           ],
           "loc": {
             "start": {
@@ -1790,8 +1790,8 @@
           }
         },
         "range": [
-          1256,
-          1326
+          1250,
+          1320
         ],
         "loc": {
           "start": {
@@ -1805,8 +1805,8 @@
         }
       },
       "range": [
-        1256,
-        1327
+        1250,
+        1321
       ],
       "loc": {
         "start": {
@@ -1823,7 +1823,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1327
+    1321
   ],
   "loc": {
     "start": {
@@ -1840,8 +1840,8 @@
       "type": "Block",
       "value": "*\n * This class represents a navigation menu node.\n ",
       "range": [
-        218,
-        274
+        212,
+        268
       ],
       "loc": {
         "start": {
@@ -1858,8 +1858,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        348,
-        435
+        342,
+        429
       ],
       "loc": {
         "start": {
@@ -1876,8 +1876,8 @@
       "type": "Line",
       "value": " PUBLIC METHODS",
       "range": [
-        436,
-        453
+        430,
+        447
       ],
       "loc": {
         "start": {
@@ -1894,8 +1894,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        454,
-        541
+        448,
+        535
       ],
       "loc": {
         "start": {
@@ -1912,8 +1912,8 @@
       "type": "Block",
       "value": "*\n     * This hides all subviews on render (initially).\n     ",
       "range": [
-        546,
-        611
+        540,
+        605
       ],
       "loc": {
         "start": {
@@ -1930,8 +1930,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        670,
-        757
+        664,
+        751
       ],
       "loc": {
         "start": {
@@ -1948,8 +1948,8 @@
       "type": "Line",
       "value": " PRIVATE METHODS",
       "range": [
-        758,
-        776
+        752,
+        770
       ],
       "loc": {
         "start": {
@@ -1966,8 +1966,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        777,
-        864
+        771,
+        858
       ],
       "loc": {
         "start": {
@@ -1984,8 +1984,8 @@
       "type": "Block",
       "value": "*\n     * Send click events.\n     ",
       "range": [
-        869,
-        906
+        863,
+        900
       ],
       "loc": {
         "start": {

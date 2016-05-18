@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewList",
-        "raw": "'../../BaseViewList'",
+        "value": "js/Views/Master/Main/BaseViewList",
+        "raw": "'js/Views/Master/Main/BaseViewList'",
         "range": [
           25,
-          45
+          60
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 45
+            "column": 60
           }
         }
       },
       "range": [
         0,
-        46
+        61
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 46
+          "column": 61
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "ViewJobListItem",
             "range": [
-              54,
-              69
+              69,
+              84
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            54,
-            69
+            69,
+            84
           ],
           "loc": {
             "start": {
@@ -118,8 +118,8 @@
         "value": "./ViewJobListItem",
         "raw": "'./ViewJobListItem'",
         "range": [
-          75,
-          94
+          90,
+          109
         ],
         "loc": {
           "start": {
@@ -133,8 +133,8 @@
         }
       },
       "range": [
-        47,
-        95
+        62,
+        110
       ],
       "loc": {
         "start": {
@@ -151,8 +151,8 @@
           "type": "Block",
           "value": "*\n * View for Job list.\n ",
           "range": [
-            97,
-            126
+            112,
+            141
           ],
           "loc": {
             "start": {
@@ -175,8 +175,8 @@
           "type": "Identifier",
           "name": "ViewJobList",
           "range": [
-            148,
-            159
+            163,
+            174
           ],
           "loc": {
             "start": {
@@ -193,8 +193,8 @@
           "type": "Identifier",
           "name": "BaseViewList",
           "range": [
-            168,
-            180
+            183,
+            195
           ],
           "loc": {
             "start": {
@@ -211,8 +211,8 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            181,
-            183
+            196,
+            198
           ],
           "loc": {
             "start": {
@@ -226,8 +226,8 @@
           }
         },
         "range": [
-          142,
-          183
+          157,
+          198
         ],
         "loc": {
           "start": {
@@ -244,8 +244,8 @@
             "type": "Block",
             "value": "*\n * View for Job list.\n ",
             "range": [
-              97,
-              126
+              112,
+              141
             ],
             "loc": {
               "start": {
@@ -262,8 +262,8 @@
         "trailingComments": []
       },
       "range": [
-        127,
-        183
+        142,
+        198
       ],
       "loc": {
         "start": {
@@ -280,8 +280,8 @@
           "type": "Block",
           "value": "*\n * View for Job list.\n ",
           "range": [
-            97,
-            126
+            112,
+            141
           ],
           "loc": {
             "start": {
@@ -311,8 +311,8 @@
               "type": "Identifier",
               "name": "ViewJobList",
               "range": [
-                184,
-                195
+                199,
+                210
               ],
               "loc": {
                 "start": {
@@ -329,8 +329,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                196,
-                205
+                211,
+                220
               ],
               "loc": {
                 "start": {
@@ -344,8 +344,8 @@
               }
             },
             "range": [
-              184,
-              205
+              199,
+              220
             ],
             "loc": {
               "start": {
@@ -362,8 +362,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              206,
-              214
+              221,
+              229
             ],
             "loc": {
               "start": {
@@ -377,8 +377,8 @@
             }
           },
           "range": [
-            184,
-            214
+            199,
+            229
           ],
           "loc": {
             "start": {
@@ -396,8 +396,8 @@
           "value": "#template-main_job_list",
           "raw": "'#template-main_job_list'",
           "range": [
-            217,
-            242
+            232,
+            257
           ],
           "loc": {
             "start": {
@@ -411,8 +411,8 @@
           }
         },
         "range": [
-          184,
-          242
+          199,
+          257
         ],
         "loc": {
           "start": {
@@ -426,8 +426,8 @@
         }
       },
       "range": [
-        184,
-        243
+        199,
+        258
       ],
       "loc": {
         "start": {
@@ -455,8 +455,8 @@
               "type": "Identifier",
               "name": "ViewJobList",
               "range": [
-                244,
-                255
+                259,
+                270
               ],
               "loc": {
                 "start": {
@@ -473,8 +473,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                256,
-                265
+                271,
+                280
               ],
               "loc": {
                 "start": {
@@ -488,8 +488,8 @@
               }
             },
             "range": [
-              244,
-              265
+              259,
+              280
             ],
             "loc": {
               "start": {
@@ -506,8 +506,8 @@
             "type": "Identifier",
             "name": "childView",
             "range": [
-              266,
-              275
+              281,
+              290
             ],
             "loc": {
               "start": {
@@ -521,8 +521,8 @@
             }
           },
           "range": [
-            244,
-            275
+            259,
+            290
           ],
           "loc": {
             "start": {
@@ -539,8 +539,8 @@
           "type": "Identifier",
           "name": "ViewJobListItem",
           "range": [
-            278,
-            293
+            293,
+            308
           ],
           "loc": {
             "start": {
@@ -554,8 +554,8 @@
           }
         },
         "range": [
-          244,
-          293
+          259,
+          308
         ],
         "loc": {
           "start": {
@@ -569,8 +569,8 @@
         }
       },
       "range": [
-        244,
-        294
+        259,
+        309
       ],
       "loc": {
         "start": {
@@ -598,8 +598,8 @@
               "type": "Identifier",
               "name": "ViewJobList",
               "range": [
-                295,
-                306
+                310,
+                321
               ],
               "loc": {
                 "start": {
@@ -616,8 +616,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                307,
-                316
+                322,
+                331
               ],
               "loc": {
                 "start": {
@@ -631,8 +631,8 @@
               }
             },
             "range": [
-              295,
-              316
+              310,
+              331
             ],
             "loc": {
               "start": {
@@ -649,8 +649,8 @@
             "type": "Identifier",
             "name": "behaviors",
             "range": [
-              317,
-              326
+              332,
+              341
             ],
             "loc": {
               "start": {
@@ -664,8 +664,8 @@
             }
           },
           "range": [
-            295,
-            326
+            310,
+            341
           ],
           "loc": {
             "start": {
@@ -687,8 +687,8 @@
                 "type": "Identifier",
                 "name": "Table",
                 "range": [
-                  330,
-                  335
+                  345,
+                  350
                 ],
                 "loc": {
                   "start": {
@@ -711,8 +711,8 @@
                       "value": "table",
                       "raw": "'table'",
                       "range": [
-                        338,
-                        345
+                        353,
+                        360
                       ],
                       "loc": {
                         "start": {
@@ -730,8 +730,8 @@
                       "value": "#table-jobs",
                       "raw": "'#table-jobs'",
                       "range": [
-                        347,
-                        360
+                        362,
+                        375
                       ],
                       "loc": {
                         "start": {
@@ -749,8 +749,8 @@
                     "shorthand": false,
                     "computed": false,
                     "range": [
-                      338,
-                      360
+                      353,
+                      375
                     ],
                     "loc": {
                       "start": {
@@ -765,8 +765,8 @@
                   }
                 ],
                 "range": [
-                  337,
-                  361
+                  352,
+                  376
                 ],
                 "loc": {
                   "start": {
@@ -784,8 +784,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                330,
-                361
+                345,
+                376
               ],
               "loc": {
                 "start": {
@@ -800,8 +800,8 @@
             }
           ],
           "range": [
-            329,
-            362
+            344,
+            377
           ],
           "loc": {
             "start": {
@@ -815,8 +815,8 @@
           }
         },
         "range": [
-          295,
-          362
+          310,
+          377
         ],
         "loc": {
           "start": {
@@ -830,8 +830,8 @@
         }
       },
       "range": [
-        295,
-        363
+        310,
+        378
       ],
       "loc": {
         "start": {
@@ -850,8 +850,8 @@
         "type": "Identifier",
         "name": "ViewJobList",
         "range": [
-          380,
-          391
+          395,
+          406
         ],
         "loc": {
           "start": {
@@ -867,8 +867,8 @@
         "trailingComments": []
       },
       "range": [
-        365,
-        392
+        380,
+        407
       ],
       "loc": {
         "start": {
@@ -885,7 +885,7 @@
   "sourceType": "module",
   "range": [
     0,
-    392
+    407
   ],
   "loc": {
     "start": {
@@ -902,8 +902,8 @@
       "type": "Block",
       "value": "*\n * View for Job list.\n ",
       "range": [
-        97,
-        126
+        112,
+        141
       ],
       "loc": {
         "start": {

@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../BaseViewList",
-        "raw": "'../BaseViewList'",
+        "value": "js/Views/Master/Main/BaseViewList",
+        "raw": "'js/Views/Master/Main/BaseViewList'",
         "range": [
           25,
-          42
+          60
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 42
+            "column": 60
           }
         }
       },
       "range": [
         0,
-        43
+        61
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 43
+          "column": 61
         }
       },
       "trailingComments": [
@@ -78,8 +78,8 @@
           "type": "Block",
           "value": "*\n * View for InputPort list.\n ",
           "range": [
-            45,
-            80
+            63,
+            98
           ],
           "loc": {
             "start": {
@@ -102,8 +102,8 @@
           "type": "Identifier",
           "name": "ViewInputPortList",
           "range": [
-            102,
-            119
+            120,
+            137
           ],
           "loc": {
             "start": {
@@ -120,8 +120,8 @@
           "type": "Identifier",
           "name": "BaseViewList",
           "range": [
-            128,
-            140
+            146,
+            158
           ],
           "loc": {
             "start": {
@@ -138,8 +138,8 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            141,
-            143
+            159,
+            161
           ],
           "loc": {
             "start": {
@@ -153,8 +153,8 @@
           }
         },
         "range": [
-          96,
-          143
+          114,
+          161
         ],
         "loc": {
           "start": {
@@ -171,8 +171,8 @@
             "type": "Block",
             "value": "*\n * View for InputPort list.\n ",
             "range": [
-              45,
-              80
+              63,
+              98
             ],
             "loc": {
               "start": {
@@ -189,8 +189,8 @@
         "trailingComments": []
       },
       "range": [
-        81,
-        143
+        99,
+        161
       ],
       "loc": {
         "start": {
@@ -207,8 +207,8 @@
           "type": "Block",
           "value": "*\n * View for InputPort list.\n ",
           "range": [
-            45,
-            80
+            63,
+            98
           ],
           "loc": {
             "start": {
@@ -238,8 +238,8 @@
               "type": "Identifier",
               "name": "ViewInputPortList",
               "range": [
-                144,
-                161
+                162,
+                179
               ],
               "loc": {
                 "start": {
@@ -256,8 +256,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                162,
-                171
+                180,
+                189
               ],
               "loc": {
                 "start": {
@@ -271,8 +271,8 @@
               }
             },
             "range": [
-              144,
-              171
+              162,
+              189
             ],
             "loc": {
               "start": {
@@ -289,8 +289,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              172,
-              180
+              190,
+              198
             ],
             "loc": {
               "start": {
@@ -304,8 +304,8 @@
             }
           },
           "range": [
-            144,
-            180
+            162,
+            198
           ],
           "loc": {
             "start": {
@@ -323,8 +323,8 @@
           "value": "#template-main_inputport_list",
           "raw": "'#template-main_inputport_list'",
           "range": [
-            183,
-            214
+            201,
+            232
           ],
           "loc": {
             "start": {
@@ -338,8 +338,8 @@
           }
         },
         "range": [
-          144,
-          214
+          162,
+          232
         ],
         "loc": {
           "start": {
@@ -353,8 +353,8 @@
         }
       },
       "range": [
-        144,
-        215
+        162,
+        233
       ],
       "loc": {
         "start": {
@@ -371,7 +371,7 @@
   "sourceType": "module",
   "range": [
     0,
-    215
+    233
   ],
   "loc": {
     "start": {
@@ -388,8 +388,8 @@
       "type": "Block",
       "value": "*\n * View for InputPort list.\n ",
       "range": [
-        45,
-        80
+        63,
+        98
       ],
       "loc": {
         "start": {

@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/Connection",
-        "raw": "'../Models/Connection'",
+        "value": "js/Models/Connection",
+        "raw": "'js/Models/Connection'",
         "range": [
           70,
           92

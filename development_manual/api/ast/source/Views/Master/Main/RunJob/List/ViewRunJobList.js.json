@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewList",
-        "raw": "'../../BaseViewList'",
+        "value": "js/Views/Master/Main/BaseViewList",
+        "raw": "'js/Views/Master/Main/BaseViewList'",
         "range": [
           25,
-          45
+          60
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 45
+            "column": 60
           }
         }
       },
       "range": [
         0,
-        46
+        61
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 46
+          "column": 61
         }
       },
       "trailingComments": [
@@ -78,8 +78,8 @@
           "type": "Block",
           "value": "*\n * RunJob list view.\n ",
           "range": [
-            48,
-            76
+            63,
+            91
           ],
           "loc": {
             "start": {
@@ -102,8 +102,8 @@
           "type": "Identifier",
           "name": "ViewRunJobList",
           "range": [
-            98,
-            112
+            113,
+            127
           ],
           "loc": {
             "start": {
@@ -120,8 +120,8 @@
           "type": "Identifier",
           "name": "BaseViewList",
           "range": [
-            121,
-            133
+            136,
+            148
           ],
           "loc": {
             "start": {
@@ -138,8 +138,8 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            134,
-            136
+            149,
+            151
           ],
           "loc": {
             "start": {
@@ -153,8 +153,8 @@
           }
         },
         "range": [
-          92,
-          136
+          107,
+          151
         ],
         "loc": {
           "start": {
@@ -171,8 +171,8 @@
             "type": "Block",
             "value": "*\n * RunJob list view.\n ",
             "range": [
-              48,
-              76
+              63,
+              91
             ],
             "loc": {
               "start": {
@@ -189,8 +189,8 @@
         "trailingComments": []
       },
       "range": [
-        77,
-        136
+        92,
+        151
       ],
       "loc": {
         "start": {
@@ -207,8 +207,8 @@
           "type": "Block",
           "value": "*\n * RunJob list view.\n ",
           "range": [
-            48,
-            76
+            63,
+            91
           ],
           "loc": {
             "start": {
@@ -238,8 +238,8 @@
               "type": "Identifier",
               "name": "ViewRunJobList",
               "range": [
-                137,
-                151
+                152,
+                166
               ],
               "loc": {
                 "start": {
@@ -256,8 +256,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                152,
-                161
+                167,
+                176
               ],
               "loc": {
                 "start": {
@@ -271,8 +271,8 @@
               }
             },
             "range": [
-              137,
-              161
+              152,
+              176
             ],
             "loc": {
               "start": {
@@ -289,8 +289,8 @@
             "type": "Identifier",
             "name": "behaviors",
             "range": [
-              162,
-              171
+              177,
+              186
             ],
             "loc": {
               "start": {
@@ -304,8 +304,8 @@
             }
           },
           "range": [
-            137,
-            171
+            152,
+            186
           ],
           "loc": {
             "start": {
@@ -327,8 +327,8 @@
                 "type": "Identifier",
                 "name": "Table",
                 "range": [
-                  175,
-                  180
+                  190,
+                  195
                 ],
                 "loc": {
                   "start": {
@@ -351,8 +351,8 @@
                       "value": "table",
                       "raw": "'table'",
                       "range": [
-                        183,
-                        190
+                        198,
+                        205
                       ],
                       "loc": {
                         "start": {
@@ -370,8 +370,8 @@
                       "value": "#table-runjobs",
                       "raw": "'#table-runjobs'",
                       "range": [
-                        192,
-                        208
+                        207,
+                        223
                       ],
                       "loc": {
                         "start": {
@@ -389,8 +389,8 @@
                     "shorthand": false,
                     "computed": false,
                     "range": [
-                      183,
-                      208
+                      198,
+                      223
                     ],
                     "loc": {
                       "start": {
@@ -405,8 +405,8 @@
                   }
                 ],
                 "range": [
-                  182,
-                  209
+                  197,
+                  224
                 ],
                 "loc": {
                   "start": {
@@ -424,8 +424,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                175,
-                209
+                190,
+                224
               ],
               "loc": {
                 "start": {
@@ -440,8 +440,8 @@
             }
           ],
           "range": [
-            174,
-            210
+            189,
+            225
           ],
           "loc": {
             "start": {
@@ -455,8 +455,8 @@
           }
         },
         "range": [
-          137,
-          210
+          152,
+          225
         ],
         "loc": {
           "start": {
@@ -470,8 +470,8 @@
         }
       },
       "range": [
-        137,
-        211
+        152,
+        226
       ],
       "loc": {
         "start": {
@@ -488,7 +488,7 @@
   "sourceType": "module",
   "range": [
     0,
-    211
+    226
   ],
   "loc": {
     "start": {
@@ -505,8 +505,8 @@
       "type": "Block",
       "value": "*\n * RunJob list view.\n ",
       "range": [
-        48,
-        76
+        63,
+        91
       ],
       "loc": {
         "start": {

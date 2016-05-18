@@ -1,8 +1,8 @@
 window.esdocSearchIndex = [
   [
-    "rodan-client/js/shared/abstractupdater.js~abstractupdater",
-    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html",
-    "<span>AbstractUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/AbstractUpdater.js</span>",
+    "rodan-client/js/updater/abstractupdater.js~abstractupdater",
+    "class/js/Updater/AbstractUpdater.js~AbstractUpdater.html",
+    "<span>AbstractUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Updater/AbstractUpdater.js</span>",
     "class"
   ],
   [
@@ -306,9 +306,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/shared/pollupdater.js~pollupdater",
-    "class/js/Shared/PollUpdater.js~PollUpdater.html",
-    "<span>PollUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/PollUpdater.js</span>",
+    "rodan-client/js/updater/pollupdater.js~pollupdater",
+    "class/js/Updater/PollUpdater.js~PollUpdater.html",
+    "<span>PollUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Updater/PollUpdater.js</span>",
     "class"
   ],
   [
@@ -372,9 +372,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/shared/socketupdater.js~socketupdater",
-    "class/js/Shared/SocketUpdater.js~SocketUpdater.html",
-    "<span>SocketUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/SocketUpdater.js</span>",
+    "rodan-client/js/updater/socketupdater.js~socketupdater",
+    "class/js/Updater/SocketUpdater.js~SocketUpdater.html",
+    "<span>SocketUpdater</span> <span class=\"search-result-import-path\">rodan-client/js/Updater/SocketUpdater.js</span>",
     "class"
   ],
   [
@@ -1890,28 +1890,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/shared/abstractupdater.js",
-    "file/js/Shared/AbstractUpdater.js.html",
-    "js/Shared/AbstractUpdater.js",
+    "js/plugins.js",
+    "file/js/Plugins.js.html",
+    "js/Plugins.js",
     "file"
-  ],
-  [
-    "js/shared/abstractupdater.js~abstractupdater#clear",
-    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-clear",
-    "js/Shared/AbstractUpdater.js~AbstractUpdater#clear",
-    "method"
-  ],
-  [
-    "js/shared/abstractupdater.js~abstractupdater#setcollections",
-    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-setCollections",
-    "js/Shared/AbstractUpdater.js~AbstractUpdater#setCollections",
-    "method"
-  ],
-  [
-    "js/shared/abstractupdater.js~abstractupdater#update",
-    "class/js/Shared/AbstractUpdater.js~AbstractUpdater.html#instance-method-update",
-    "js/Shared/AbstractUpdater.js~AbstractUpdater#update",
-    "method"
   ],
   [
     "js/shared/cookie.js",
@@ -1983,18 +1965,6 @@ window.esdocSearchIndex = [
     "js/shared/errorhandler.js~errorhandler#initialize",
     "class/js/Shared/ErrorHandler.js~ErrorHandler.html#instance-method-initialize",
     "js/Shared/ErrorHandler.js~ErrorHandler#initialize",
-    "method"
-  ],
-  [
-    "js/shared/pollupdater.js",
-    "file/js/Shared/PollUpdater.js.html",
-    "js/Shared/PollUpdater.js",
-    "file"
-  ],
-  [
-    "js/shared/pollupdater.js~pollupdater#constructor",
-    "class/js/Shared/PollUpdater.js~PollUpdater.html#instance-constructor-constructor",
-    "js/Shared/PollUpdater.js~PollUpdater#constructor",
     "method"
   ],
   [
@@ -2814,15 +2784,51 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/shared/socketupdater.js",
-    "file/js/Shared/SocketUpdater.js.html",
-    "js/Shared/SocketUpdater.js",
+    "js/updater/abstractupdater.js",
+    "file/js/Updater/AbstractUpdater.js.html",
+    "js/Updater/AbstractUpdater.js",
     "file"
   ],
   [
-    "js/shared/socketupdater.js~socketupdater#constructor",
-    "class/js/Shared/SocketUpdater.js~SocketUpdater.html#instance-constructor-constructor",
-    "js/Shared/SocketUpdater.js~SocketUpdater#constructor",
+    "js/updater/abstractupdater.js~abstractupdater#clear",
+    "class/js/Updater/AbstractUpdater.js~AbstractUpdater.html#instance-method-clear",
+    "js/Updater/AbstractUpdater.js~AbstractUpdater#clear",
+    "method"
+  ],
+  [
+    "js/updater/abstractupdater.js~abstractupdater#setcollections",
+    "class/js/Updater/AbstractUpdater.js~AbstractUpdater.html#instance-method-setCollections",
+    "js/Updater/AbstractUpdater.js~AbstractUpdater#setCollections",
+    "method"
+  ],
+  [
+    "js/updater/abstractupdater.js~abstractupdater#update",
+    "class/js/Updater/AbstractUpdater.js~AbstractUpdater.html#instance-method-update",
+    "js/Updater/AbstractUpdater.js~AbstractUpdater#update",
+    "method"
+  ],
+  [
+    "js/updater/pollupdater.js",
+    "file/js/Updater/PollUpdater.js.html",
+    "js/Updater/PollUpdater.js",
+    "file"
+  ],
+  [
+    "js/updater/pollupdater.js~pollupdater#constructor",
+    "class/js/Updater/PollUpdater.js~PollUpdater.html#instance-constructor-constructor",
+    "js/Updater/PollUpdater.js~PollUpdater#constructor",
+    "method"
+  ],
+  [
+    "js/updater/socketupdater.js",
+    "file/js/Updater/SocketUpdater.js.html",
+    "js/Updater/SocketUpdater.js",
+    "file"
+  ],
+  [
+    "js/updater/socketupdater.js~socketupdater#constructor",
+    "class/js/Updater/SocketUpdater.js~SocketUpdater.html#instance-constructor-constructor",
+    "js/Updater/SocketUpdater.js~SocketUpdater#constructor",
     "method"
   ],
   [

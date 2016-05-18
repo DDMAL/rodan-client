@@ -35,8 +35,6 @@
 
 <p>For the instructions below, we’ll assume that you are <code class="highlighter-rouge">user</code> logged on <code class="highlighter-rouge">computer</code> and working in your <code class="highlighter-rouge">~</code> (home) directory.</p>
 
-<p><em>Note: You can see a description of files and directories that are included in the repository <a href="development_manual/Files">here</a>.</em></p>
-
 <h2 id="setup-rodan-server-for-the-client">Setup Rodan server for the client</h2>
 
 <p>You will most likely have to have the Rodan server administrator whitelist the IP and port you wish to host the client on to enable <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>. Furthermore, you will need the following information from the Rodan server:</p>
@@ -73,8 +71,6 @@ user@computer:~/rodan-client$ npm install
 </code></pre>
 </div>
 
-<p><em>Note: A list of all development dependencies and their purpose can be found <a href="Dependencies">here</a>.</em></p>
-
 <h3 id="install-application-dependencies">5. Install application dependencies.</h3>
 <p>The application dependencies are JavaScript applications that Rodan Client requires when running in a browser. These are managed and installed by <a href="http://jspm.io/">jspm</a>. jspm was installed as a local development dependency in the previous step.</p>
 
@@ -90,8 +86,6 @@ user@computer:~/rodan-client$ npm install
 * download and install the application dependencies to <code class="highlighter-rouge">rodan-client/web/libs/</code>.</p>
 
 <p>What jspm is doing is creating a web application directory (i.e. <code class="highlighter-rouge">web</code>) where the application will reside.</p>
-
-<p><em>Note: A list of all application dependencies and their purpose can be found <a href="Dependencies">here</a>.</em></p>
 
 <h3 id="configure">6. Configure</h3>
 <p>Rodan Client requires very little configuration to get started. Only two files need to be managed:</p>
@@ -118,25 +112,27 @@ user@computer:~/rodan-client$ cp js/Plugins.js.example Plugins.js
 <p>Next, we need make small edits to each.</p>
 
 <h5 id="configurationjson"><code class="highlighter-rouge">configuration.json</code></h5>
-<p>At a minimum, we need to set the URL of the Rodan server and the authentication type.</p>
+<p>At a minimum, we need tell Rodan Client where the Rodan server is and how to connect to it.</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">SERVER_URL</code>: This is the endpoint of the Rodan server you want the client to interact with. For example, if the server was at IP 123.456.789.1 on port 8080, you would set <code class="highlighter-rouge">"SERVER_URL": "http://123.456.789.1:8080"</code>.</p>
+    <p><code class="highlighter-rouge">SERVER_HOST</code>: This is the host name of the Rodan server you want the client to interact with. For example, if the server was at IP 123.456.789.1, you would set <code class="highlighter-rouge">"SERVER_HOST": "123.456.789.1"</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">SERVER_PORT</code>: This is the port for connecting to the Rodan server.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">SERVER_HTTPS</code>: The client will connect to the server using HTTPS iff <code class="highlighter-rouge">SERVER_HTTPS</code> is <code class="highlighter-rouge">true</code>. Else, HTTP will be used (not recommended).</p>
   </li>
   <li>
     <p><code class="highlighter-rouge">SERVER_AUTHENTICATION_TYPE</code>: This tells the client which authentication type to use - token or session. Token is recommended, but it depends on the Rodan server. For example, if the server uses token authentication, you would set <code class="highlighter-rouge">"SERVER_AUTHENTICATION_TYPE": "token"</code>.</p>
   </li>
 </ul>
 
-<p>For a full description of configuration options, please go <a href="Configuration">here</a>.</p>
-
 <p><em>Note: The <code class="highlighter-rouge">WORKFLOWBUILDERGUI</code> settings in <code class="highlighter-rouge">configuration.json</code> are the settings for the Workflow Builder GUI plugin. This plugin is discussed below.</em></p>
 
 <h5 id="jspluginsjs"><code class="highlighter-rouge">js/Plugins.js</code></h5>
 <p>Rodan Client comes with a plugin that allows a user to create and edit Workflows via a GUI, the Workflow Builder GUI. <code class="highlighter-rouge">js/Plugins.js</code> lets Rodan Client know what plugins exist and where the are located. For a standard Rodan Client install, no modifications need to be made to <code class="highlighter-rouge">js/Plugins.js</code>. However, if you wish to add plugins in the future, this file will have to be modified.</p>
-
-<p><em>Note: Information on developing and adding plugins can be found <a href="Plugins">here</a>.</em></p>
 
 <h3 id="deploy">7. Deploy</h3>
 <p>Rodan Client uses <a href="http://gulpjs.com/">Gulp</a> to manage deployment, both for development and production. How Rodan Client can be deployed is defined in <code class="highlighter-rouge">gulpfile.js</code>. Just like jspm, Gulp was installed as a development dependency, so its binary is located in `node_modules/.bin’.</p>

@@ -115,11 +115,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../Shared/RODAN_EVENTS",
-        "raw": "'../../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
           76,
-          103
+          100
         ],
         "loc": {
           "start": {
@@ -128,13 +128,13 @@
           },
           "end": {
             "line": 2,
-            "column": 52
+            "column": 49
           }
         }
       },
       "range": [
         51,
-        104
+        101
       ],
       "loc": {
         "start": {
@@ -143,7 +143,7 @@
         },
         "end": {
           "line": 2,
-          "column": 53
+          "column": 50
         }
       }
     },
@@ -156,8 +156,8 @@
             "type": "Identifier",
             "name": "ResourceType",
             "range": [
-              112,
-              124
+              109,
+              121
             ],
             "loc": {
               "start": {
@@ -171,8 +171,8 @@
             }
           },
           "range": [
-            112,
-            124
+            109,
+            121
           ],
           "loc": {
             "start": {
@@ -188,11 +188,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../Models/ResourceType",
-        "raw": "'../../Models/ResourceType'",
+        "value": "js/Models/ResourceType",
+        "raw": "'js/Models/ResourceType'",
         "range": [
-          130,
-          157
+          127,
+          151
         ],
         "loc": {
           "start": {
@@ -201,13 +201,13 @@
           },
           "end": {
             "line": 3,
-            "column": 52
+            "column": 49
           }
         }
       },
       "range": [
-        105,
-        158
+        102,
+        152
       ],
       "loc": {
         "start": {
@@ -216,7 +216,7 @@
         },
         "end": {
           "line": 3,
-          "column": 53
+          "column": 50
         }
       }
     },
@@ -229,8 +229,8 @@
             "type": "Identifier",
             "name": "_instance",
             "range": [
-              164,
-              173
+              158,
+              167
             ],
             "loc": {
               "start": {
@@ -248,8 +248,8 @@
             "value": null,
             "raw": "null",
             "range": [
-              176,
-              180
+              170,
+              174
             ],
             "loc": {
               "start": {
@@ -263,8 +263,8 @@
             }
           },
           "range": [
-            164,
-            180
+            158,
+            174
           ],
           "loc": {
             "start": {
@@ -280,8 +280,8 @@
       ],
       "kind": "let",
       "range": [
-        160,
-        181
+        154,
+        175
       ],
       "loc": {
         "start": {
@@ -298,8 +298,8 @@
           "type": "Block",
           "value": "*\n * Global Collection of ResourceType models.\n * This uses a pseudo-singleton model so we can inherit from BaseCollection.\n ",
           "range": [
-            183,
-            312
+            177,
+            306
           ],
           "loc": {
             "start": {
@@ -322,8 +322,8 @@
           "type": "Identifier",
           "name": "GlobalResourceTypeCollection",
           "range": [
-            334,
-            362
+            328,
+            356
           ],
           "loc": {
             "start": {
@@ -340,8 +340,8 @@
           "type": "Identifier",
           "name": "GlobalCollection",
           "range": [
-            371,
-            387
+            365,
+            381
           ],
           "loc": {
             "start": {
@@ -363,8 +363,8 @@
                 "type": "Identifier",
                 "name": "initialize",
                 "range": [
-                  700,
-                  710
+                  694,
+                  704
                 ],
                 "loc": {
                   "start": {
@@ -390,8 +390,8 @@
                         "type": "Identifier",
                         "name": "_instance",
                         "range": [
-                          731,
-                          740
+                          725,
+                          734
                         ],
                         "loc": {
                           "start": {
@@ -415,8 +415,8 @@
                                 "type": "Identifier",
                                 "name": "Error",
                                 "range": [
-                                  774,
-                                  779
+                                  768,
+                                  773
                                 ],
                                 "loc": {
                                   "start": {
@@ -435,8 +435,8 @@
                                   "value": "only one instance of this class may exist",
                                   "raw": "'only one instance of this class may exist'",
                                   "range": [
-                                    780,
-                                    823
+                                    774,
+                                    817
                                   ],
                                   "loc": {
                                     "start": {
@@ -451,8 +451,8 @@
                                 }
                               ],
                               "range": [
-                                770,
-                                824
+                                764,
+                                818
                               ],
                               "loc": {
                                 "start": {
@@ -466,8 +466,8 @@
                               }
                             },
                             "range": [
-                              764,
-                              825
+                              758,
+                              819
                             ],
                             "loc": {
                               "start": {
@@ -482,8 +482,8 @@
                           }
                         ],
                         "range": [
-                          750,
-                          835
+                          744,
+                          829
                         ],
                         "loc": {
                           "start": {
@@ -498,8 +498,8 @@
                       },
                       "alternate": null,
                       "range": [
-                        727,
-                        835
+                        721,
+                        829
                       ],
                       "loc": {
                         "start": {
@@ -521,8 +521,8 @@
                           "type": "Identifier",
                           "name": "_instance",
                           "range": [
-                            844,
-                            853
+                            838,
+                            847
                           ],
                           "loc": {
                             "start": {
@@ -538,8 +538,8 @@
                         "right": {
                           "type": "ThisExpression",
                           "range": [
-                            856,
-                            860
+                            850,
+                            854
                           ],
                           "loc": {
                             "start": {
@@ -553,8 +553,8 @@
                           }
                         },
                         "range": [
-                          844,
-                          860
+                          838,
+                          854
                         ],
                         "loc": {
                           "start": {
@@ -568,8 +568,8 @@
                         }
                       },
                       "range": [
-                        844,
-                        861
+                        838,
+                        855
                       ],
                       "loc": {
                         "start": {
@@ -586,8 +586,8 @@
                           "type": "Block",
                           "value": "* @ignore ",
                           "range": [
-                            870,
-                            884
+                            864,
+                            878
                           ],
                           "loc": {
                             "start": {
@@ -613,8 +613,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              893,
-                              897
+                              887,
+                              891
                             ],
                             "loc": {
                               "start": {
@@ -631,8 +631,8 @@
                             "type": "Identifier",
                             "name": "model",
                             "range": [
-                              898,
-                              903
+                              892,
+                              897
                             ],
                             "loc": {
                               "start": {
@@ -646,8 +646,8 @@
                             }
                           },
                           "range": [
-                            893,
-                            903
+                            887,
+                            897
                           ],
                           "loc": {
                             "start": {
@@ -664,8 +664,8 @@
                           "type": "Identifier",
                           "name": "ResourceType",
                           "range": [
-                            906,
-                            918
+                            900,
+                            912
                           ],
                           "loc": {
                             "start": {
@@ -679,8 +679,8 @@
                           }
                         },
                         "range": [
-                          893,
-                          918
+                          887,
+                          912
                         ],
                         "loc": {
                           "start": {
@@ -694,8 +694,8 @@
                         }
                       },
                       "range": [
-                        893,
-                        919
+                        887,
+                        913
                       ],
                       "loc": {
                         "start": {
@@ -712,8 +712,8 @@
                           "type": "Block",
                           "value": "* @ignore ",
                           "range": [
-                            870,
-                            884
+                            864,
+                            878
                           ],
                           "loc": {
                             "start": {
@@ -739,8 +739,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              928,
-                              932
+                              922,
+                              926
                             ],
                             "loc": {
                               "start": {
@@ -757,8 +757,8 @@
                             "type": "Identifier",
                             "name": "_route",
                             "range": [
-                              933,
-                              939
+                              927,
+                              933
                             ],
                             "loc": {
                               "start": {
@@ -772,8 +772,8 @@
                             }
                           },
                           "range": [
-                            928,
-                            939
+                            922,
+                            933
                           ],
                           "loc": {
                             "start": {
@@ -791,8 +791,8 @@
                           "value": "resourcetypes",
                           "raw": "'resourcetypes'",
                           "range": [
-                            942,
-                            957
+                            936,
+                            951
                           ],
                           "loc": {
                             "start": {
@@ -806,8 +806,8 @@
                           }
                         },
                         "range": [
-                          928,
-                          957
+                          922,
+                          951
                         ],
                         "loc": {
                           "start": {
@@ -821,8 +821,8 @@
                         }
                       },
                       "range": [
-                        928,
-                        958
+                        922,
+                        952
                       ],
                       "loc": {
                         "start": {
@@ -846,8 +846,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              967,
-                              971
+                              961,
+                              965
                             ],
                             "loc": {
                               "start": {
@@ -864,8 +864,8 @@
                             "type": "Identifier",
                             "name": "_loadCommand",
                             "range": [
-                              972,
-                              984
+                              966,
+                              978
                             ],
                             "loc": {
                               "start": {
@@ -879,8 +879,8 @@
                             }
                           },
                           "range": [
-                            967,
-                            984
+                            961,
+                            978
                           ],
                           "loc": {
                             "start": {
@@ -900,8 +900,8 @@
                             "type": "Identifier",
                             "name": "RODAN_EVENTS",
                             "range": [
-                              987,
-                              999
+                              981,
+                              993
                             ],
                             "loc": {
                               "start": {
@@ -918,8 +918,8 @@
                             "type": "Identifier",
                             "name": "REQUEST__GLOBAL_RESOURCETYPES_LOAD",
                             "range": [
-                              1000,
-                              1034
+                              994,
+                              1028
                             ],
                             "loc": {
                               "start": {
@@ -933,8 +933,8 @@
                             }
                           },
                           "range": [
-                            987,
-                            1034
+                            981,
+                            1028
                           ],
                           "loc": {
                             "start": {
@@ -948,8 +948,8 @@
                           }
                         },
                         "range": [
-                          967,
-                          1034
+                          961,
+                          1028
                         ],
                         "loc": {
                           "start": {
@@ -963,8 +963,8 @@
                         }
                       },
                       "range": [
-                        967,
-                        1035
+                        961,
+                        1029
                       ],
                       "loc": {
                         "start": {
@@ -988,8 +988,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              1044,
-                              1048
+                              1038,
+                              1042
                             ],
                             "loc": {
                               "start": {
@@ -1006,8 +1006,8 @@
                             "type": "Identifier",
                             "name": "_requestCommand",
                             "range": [
-                              1049,
-                              1064
+                              1043,
+                              1058
                             ],
                             "loc": {
                               "start": {
@@ -1021,8 +1021,8 @@
                             }
                           },
                           "range": [
-                            1044,
-                            1064
+                            1038,
+                            1058
                           ],
                           "loc": {
                             "start": {
@@ -1042,8 +1042,8 @@
                             "type": "Identifier",
                             "name": "RODAN_EVENTS",
                             "range": [
-                              1067,
-                              1079
+                              1061,
+                              1073
                             ],
                             "loc": {
                               "start": {
@@ -1060,8 +1060,8 @@
                             "type": "Identifier",
                             "name": "REQUEST__GLOBAL_RESOURCETYPE_COLLECTION",
                             "range": [
-                              1080,
-                              1119
+                              1074,
+                              1113
                             ],
                             "loc": {
                               "start": {
@@ -1075,8 +1075,8 @@
                             }
                           },
                           "range": [
-                            1067,
-                            1119
+                            1061,
+                            1113
                           ],
                           "loc": {
                             "start": {
@@ -1090,8 +1090,8 @@
                           }
                         },
                         "range": [
-                          1044,
-                          1119
+                          1038,
+                          1113
                         ],
                         "loc": {
                           "start": {
@@ -1105,8 +1105,8 @@
                         }
                       },
                       "range": [
-                        1044,
-                        1120
+                        1038,
+                        1114
                       ],
                       "loc": {
                         "start": {
@@ -1121,8 +1121,8 @@
                     }
                   ],
                   "range": [
-                    717,
-                    1126
+                    711,
+                    1120
                   ],
                   "loc": {
                     "start": {
@@ -1138,8 +1138,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  710,
-                  1126
+                  704,
+                  1120
                 ],
                 "loc": {
                   "start": {
@@ -1155,8 +1155,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                700,
-                1126
+                694,
+                1120
               ],
               "loc": {
                 "start": {
@@ -1173,8 +1173,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    390,
-                    477
+                    384,
+                    471
                   ],
                   "loc": {
                     "start": {
@@ -1191,8 +1191,8 @@
                   "type": "Line",
                   "value": " PUBLIC METHODS",
                   "range": [
-                    478,
-                    495
+                    472,
+                    489
                   ],
                   "loc": {
                     "start": {
@@ -1209,8 +1209,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    496,
-                    583
+                    490,
+                    577
                   ],
                   "loc": {
                     "start": {
@@ -1227,8 +1227,8 @@
                   "type": "Block",
                   "value": "*\n     * Initializes the instance.\n     *\n     * @throws {Error} thrown iff called more than once\n     ",
                   "range": [
-                    588,
-                    695
+                    582,
+                    689
                   ],
                   "loc": {
                     "start": {
@@ -1246,8 +1246,8 @@
             }
           ],
           "range": [
-            388,
-            1128
+            382,
+            1122
           ],
           "loc": {
             "start": {
@@ -1261,8 +1261,8 @@
           }
         },
         "range": [
-          328,
-          1128
+          322,
+          1122
         ],
         "loc": {
           "start": {
@@ -1279,8 +1279,8 @@
             "type": "Block",
             "value": "*\n * Global Collection of ResourceType models.\n * This uses a pseudo-singleton model so we can inherit from BaseCollection.\n ",
             "range": [
-              183,
-              312
+              177,
+              306
             ],
             "loc": {
               "start": {
@@ -1297,8 +1297,8 @@
         "trailingComments": []
       },
       "range": [
-        313,
-        1128
+        307,
+        1122
       ],
       "loc": {
         "start": {
@@ -1315,8 +1315,8 @@
           "type": "Block",
           "value": "*\n * Global Collection of ResourceType models.\n * This uses a pseudo-singleton model so we can inherit from BaseCollection.\n ",
           "range": [
-            183,
-            312
+            177,
+            306
           ],
           "loc": {
             "start": {
@@ -1335,7 +1335,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1128
+    1122
   ],
   "loc": {
     "start": {
@@ -1352,8 +1352,8 @@
       "type": "Block",
       "value": "*\n * Global Collection of ResourceType models.\n * This uses a pseudo-singleton model so we can inherit from BaseCollection.\n ",
       "range": [
-        183,
-        312
+        177,
+        306
       ],
       "loc": {
         "start": {
@@ -1370,8 +1370,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        390,
-        477
+        384,
+        471
       ],
       "loc": {
         "start": {
@@ -1388,8 +1388,8 @@
       "type": "Line",
       "value": " PUBLIC METHODS",
       "range": [
-        478,
-        495
+        472,
+        489
       ],
       "loc": {
         "start": {
@@ -1406,8 +1406,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        496,
-        583
+        490,
+        577
       ],
       "loc": {
         "start": {
@@ -1424,8 +1424,8 @@
       "type": "Block",
       "value": "*\n     * Initializes the instance.\n     *\n     * @throws {Error} thrown iff called more than once\n     ",
       "range": [
-        588,
-        695
+        582,
+        689
       ],
       "loc": {
         "start": {
@@ -1442,8 +1442,8 @@
       "type": "Block",
       "value": "* @ignore ",
       "range": [
-        870,
-        884
+        864,
+        878
       ],
       "loc": {
         "start": {

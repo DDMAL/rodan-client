@@ -3,7 +3,7 @@
   "expectCount": 397,
   "actualCount": 397,
   "files": {
-    "js/Shared/AbstractUpdater.js": {
+    "js/Updater/AbstractUpdater.js": {
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
@@ -263,7 +263,7 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Shared/PollUpdater.js": {
+    "js/Updater/PollUpdater.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -313,7 +313,7 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Shared/SocketUpdater.js": {
+    "js/Updater/SocketUpdater.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []

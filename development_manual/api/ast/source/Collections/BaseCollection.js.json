@@ -261,8 +261,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Shared/RODAN_EVENTS",
-        "raw": "'../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
           110,
           134
@@ -334,8 +334,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/Pagination",
-        "raw": "'../Models/Pagination'",
+        "value": "js/Models/Pagination",
+        "raw": "'js/Models/Pagination'",
         "range": [
           159,
           181

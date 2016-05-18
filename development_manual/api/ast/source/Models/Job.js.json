@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/InputPortTypeCollection",
-        "raw": "'../Collections/InputPortTypeCollection'",
+        "value": "js/Collections/InputPortTypeCollection",
+        "raw": "'js/Collections/InputPortTypeCollection'",
         "range": [
           73,
           113
@@ -188,8 +188,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/OutputPortTypeCollection",
-        "raw": "'../Collections/OutputPortTypeCollection'",
+        "value": "js/Collections/OutputPortTypeCollection",
+        "raw": "'js/Collections/OutputPortTypeCollection'",
         "range": [
           152,
           193

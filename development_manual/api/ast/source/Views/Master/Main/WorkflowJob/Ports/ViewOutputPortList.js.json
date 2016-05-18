@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewList",
-        "raw": "'../../BaseViewList'",
+        "value": "js/Views/Master/Main/BaseViewList",
+        "raw": "'js/Views/Master/Main/BaseViewList'",
         "range": [
           25,
-          45
+          60
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 45
+            "column": 60
           }
         }
       },
       "range": [
         0,
-        46
+        61
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 46
+          "column": 61
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "ViewOutputPortListItem",
             "range": [
-              54,
-              76
+              69,
+              91
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            54,
-            76
+            69,
+            91
           ],
           "loc": {
             "start": {
@@ -118,8 +118,8 @@
         "value": "./ViewOutputPortListItem",
         "raw": "'./ViewOutputPortListItem'",
         "range": [
-          82,
-          108
+          97,
+          123
         ],
         "loc": {
           "start": {
@@ -133,8 +133,8 @@
         }
       },
       "range": [
-        47,
-        109
+        62,
+        124
       ],
       "loc": {
         "start": {
@@ -151,8 +151,8 @@
           "type": "Block",
           "value": "*\n * OutputPort list view.\n ",
           "range": [
-            111,
-            143
+            126,
+            158
           ],
           "loc": {
             "start": {
@@ -175,8 +175,8 @@
           "type": "Identifier",
           "name": "ViewOutputPortList",
           "range": [
-            165,
-            183
+            180,
+            198
           ],
           "loc": {
             "start": {
@@ -193,8 +193,8 @@
           "type": "Identifier",
           "name": "BaseViewList",
           "range": [
-            192,
-            204
+            207,
+            219
           ],
           "loc": {
             "start": {
@@ -211,8 +211,8 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            205,
-            207
+            220,
+            222
           ],
           "loc": {
             "start": {
@@ -226,8 +226,8 @@
           }
         },
         "range": [
-          159,
-          207
+          174,
+          222
         ],
         "loc": {
           "start": {
@@ -244,8 +244,8 @@
             "type": "Block",
             "value": "*\n * OutputPort list view.\n ",
             "range": [
-              111,
-              143
+              126,
+              158
             ],
             "loc": {
               "start": {
@@ -262,8 +262,8 @@
         "trailingComments": []
       },
       "range": [
-        144,
-        207
+        159,
+        222
       ],
       "loc": {
         "start": {
@@ -280,8 +280,8 @@
           "type": "Block",
           "value": "*\n * OutputPort list view.\n ",
           "range": [
-            111,
-            143
+            126,
+            158
           ],
           "loc": {
             "start": {
@@ -311,8 +311,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortList",
               "range": [
-                208,
-                226
+                223,
+                241
               ],
               "loc": {
                 "start": {
@@ -329,8 +329,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                227,
-                236
+                242,
+                251
               ],
               "loc": {
                 "start": {
@@ -344,8 +344,8 @@
               }
             },
             "range": [
-              208,
-              236
+              223,
+              251
             ],
             "loc": {
               "start": {
@@ -362,8 +362,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              237,
-              245
+              252,
+              260
             ],
             "loc": {
               "start": {
@@ -377,8 +377,8 @@
             }
           },
           "range": [
-            208,
-            245
+            223,
+            260
           ],
           "loc": {
             "start": {
@@ -396,8 +396,8 @@
           "value": "#template-main_outputport_list",
           "raw": "'#template-main_outputport_list'",
           "range": [
-            248,
-            280
+            263,
+            295
           ],
           "loc": {
             "start": {
@@ -411,8 +411,8 @@
           }
         },
         "range": [
-          208,
-          280
+          223,
+          295
         ],
         "loc": {
           "start": {
@@ -426,8 +426,8 @@
         }
       },
       "range": [
-        208,
-        281
+        223,
+        296
       ],
       "loc": {
         "start": {
@@ -455,8 +455,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortList",
               "range": [
-                282,
-                300
+                297,
+                315
               ],
               "loc": {
                 "start": {
@@ -473,8 +473,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                301,
-                310
+                316,
+                325
               ],
               "loc": {
                 "start": {
@@ -488,8 +488,8 @@
               }
             },
             "range": [
-              282,
-              310
+              297,
+              325
             ],
             "loc": {
               "start": {
@@ -506,8 +506,8 @@
             "type": "Identifier",
             "name": "childView",
             "range": [
-              311,
-              320
+              326,
+              335
             ],
             "loc": {
               "start": {
@@ -521,8 +521,8 @@
             }
           },
           "range": [
-            282,
-            320
+            297,
+            335
           ],
           "loc": {
             "start": {
@@ -539,8 +539,8 @@
           "type": "Identifier",
           "name": "ViewOutputPortListItem",
           "range": [
-            323,
-            345
+            338,
+            360
           ],
           "loc": {
             "start": {
@@ -554,8 +554,8 @@
           }
         },
         "range": [
-          282,
-          345
+          297,
+          360
         ],
         "loc": {
           "start": {
@@ -569,8 +569,8 @@
         }
       },
       "range": [
-        282,
-        346
+        297,
+        361
       ],
       "loc": {
         "start": {
@@ -587,7 +587,7 @@
   "sourceType": "module",
   "range": [
     0,
-    346
+    361
   ],
   "loc": {
     "start": {
@@ -604,8 +604,8 @@
       "type": "Block",
       "value": "*\n * OutputPort list view.\n ",
       "range": [
-        111,
-        143
+        126,
+        158
       ],
       "loc": {
         "start": {

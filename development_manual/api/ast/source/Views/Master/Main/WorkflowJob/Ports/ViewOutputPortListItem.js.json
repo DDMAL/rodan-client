@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewListItem",
-        "raw": "'../../BaseViewListItem'",
+        "value": "js/Views/Master/Main/BaseViewListItem",
+        "raw": "'js/Views/Master/Main/BaseViewListItem'",
         "range": [
           29,
-          53
+          68
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 53
+            "column": 68
           }
         }
       },
       "range": [
         0,
-        54
+        69
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 54
+          "column": 69
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "RODAN_EVENTS",
             "range": [
-              62,
-              74
+              77,
+              89
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            62,
-            74
+            77,
+            89
           ],
           "loc": {
             "start": {
@@ -115,11 +115,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../../../../Shared/RODAN_EVENTS",
-        "raw": "'../../../../../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
-          80,
-          116
+          95,
+          119
         ],
         "loc": {
           "start": {
@@ -128,13 +128,13 @@
           },
           "end": {
             "line": 2,
-            "column": 61
+            "column": 49
           }
         }
       },
       "range": [
-        55,
-        117
+        70,
+        120
       ],
       "loc": {
         "start": {
@@ -143,7 +143,7 @@
         },
         "end": {
           "line": 2,
-          "column": 62
+          "column": 50
         }
       }
     },
@@ -156,8 +156,8 @@
             "type": "Identifier",
             "name": "Radio",
             "range": [
-              125,
-              130
+              128,
+              133
             ],
             "loc": {
               "start": {
@@ -171,8 +171,8 @@
             }
           },
           "range": [
-            125,
-            130
+            128,
+            133
           ],
           "loc": {
             "start": {
@@ -191,8 +191,8 @@
         "value": "backbone.radio",
         "raw": "'backbone.radio'",
         "range": [
-          136,
-          152
+          139,
+          155
         ],
         "loc": {
           "start": {
@@ -206,8 +206,8 @@
         }
       },
       "range": [
-        118,
-        153
+        121,
+        156
       ],
       "loc": {
         "start": {
@@ -224,8 +224,8 @@
           "type": "Block",
           "value": "*\n * OutputPort list item view.\n ",
           "range": [
-            155,
-            192
+            158,
+            195
           ],
           "loc": {
             "start": {
@@ -248,8 +248,8 @@
           "type": "Identifier",
           "name": "ViewOutputPortListItem",
           "range": [
-            214,
-            236
+            217,
+            239
           ],
           "loc": {
             "start": {
@@ -266,8 +266,8 @@
           "type": "Identifier",
           "name": "BaseViewListItem",
           "range": [
-            245,
-            261
+            248,
+            264
           ],
           "loc": {
             "start": {
@@ -289,8 +289,8 @@
                 "type": "Identifier",
                 "name": "initialize",
                 "range": [
-                  673,
-                  683
+                  676,
+                  686
                 ],
                 "loc": {
                   "start": {
@@ -311,8 +311,8 @@
                     "type": "Identifier",
                     "name": "options",
                     "range": [
-                      684,
-                      691
+                      687,
+                      694
                     ],
                     "loc": {
                       "start": {
@@ -340,8 +340,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              707,
-                              711
+                              710,
+                              714
                             ],
                             "loc": {
                               "start": {
@@ -358,8 +358,8 @@
                             "type": "Identifier",
                             "name": "_workflow",
                             "range": [
-                              712,
-                              721
+                              715,
+                              724
                             ],
                             "loc": {
                               "start": {
@@ -373,8 +373,8 @@
                             }
                           },
                           "range": [
-                            707,
-                            721
+                            710,
+                            724
                           ],
                           "loc": {
                             "start": {
@@ -394,8 +394,8 @@
                             "type": "Identifier",
                             "name": "options",
                             "range": [
-                              724,
-                              731
+                              727,
+                              734
                             ],
                             "loc": {
                               "start": {
@@ -412,8 +412,8 @@
                             "type": "Identifier",
                             "name": "workflow",
                             "range": [
-                              732,
-                              740
+                              735,
+                              743
                             ],
                             "loc": {
                               "start": {
@@ -427,8 +427,8 @@
                             }
                           },
                           "range": [
-                            724,
-                            740
+                            727,
+                            743
                           ],
                           "loc": {
                             "start": {
@@ -442,8 +442,8 @@
                           }
                         },
                         "range": [
-                          707,
-                          740
+                          710,
+                          743
                         ],
                         "loc": {
                           "start": {
@@ -457,8 +457,8 @@
                         }
                       },
                       "range": [
-                        707,
-                        741
+                        710,
+                        744
                       ],
                       "loc": {
                         "start": {
@@ -482,8 +482,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              750,
-                              754
+                              753,
+                              757
                             ],
                             "loc": {
                               "start": {
@@ -500,8 +500,8 @@
                             "type": "Identifier",
                             "name": "_workflowJob",
                             "range": [
-                              755,
-                              767
+                              758,
+                              770
                             ],
                             "loc": {
                               "start": {
@@ -515,8 +515,8 @@
                             }
                           },
                           "range": [
-                            750,
-                            767
+                            753,
+                            770
                           ],
                           "loc": {
                             "start": {
@@ -536,8 +536,8 @@
                             "type": "Identifier",
                             "name": "options",
                             "range": [
-                              770,
-                              777
+                              773,
+                              780
                             ],
                             "loc": {
                               "start": {
@@ -554,8 +554,8 @@
                             "type": "Identifier",
                             "name": "workflowjob",
                             "range": [
-                              778,
-                              789
+                              781,
+                              792
                             ],
                             "loc": {
                               "start": {
@@ -569,8 +569,8 @@
                             }
                           },
                           "range": [
-                            770,
-                            789
+                            773,
+                            792
                           ],
                           "loc": {
                             "start": {
@@ -584,8 +584,8 @@
                           }
                         },
                         "range": [
-                          750,
-                          789
+                          753,
+                          792
                         ],
                         "loc": {
                           "start": {
@@ -599,8 +599,8 @@
                         }
                       },
                       "range": [
-                        750,
-                        790
+                        753,
+                        793
                       ],
                       "loc": {
                         "start": {
@@ -615,8 +615,8 @@
                     }
                   ],
                   "range": [
-                    697,
-                    796
+                    700,
+                    799
                   ],
                   "loc": {
                     "start": {
@@ -632,8 +632,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  683,
-                  796
+                  686,
+                  799
                 ],
                 "loc": {
                   "start": {
@@ -649,8 +649,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                673,
-                796
+                676,
+                799
               ],
               "loc": {
                 "start": {
@@ -667,8 +667,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    264,
-                    351
+                    267,
+                    354
                   ],
                   "loc": {
                     "start": {
@@ -685,8 +685,8 @@
                   "type": "Line",
                   "value": " PUBLIC METHODS",
                   "range": [
-                    352,
-                    369
+                    355,
+                    372
                   ],
                   "loc": {
                     "start": {
@@ -703,8 +703,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    370,
-                    457
+                    373,
+                    460
                   ],
                   "loc": {
                     "start": {
@@ -721,8 +721,8 @@
                   "type": "Block",
                   "value": "*\n     * Initializes the instance.\n     *\n     * @param {object} options Marionette.View options object; 'options.workflow' (Workflow) and 'options.workflowjob' (WorkflowJob) must also be provided\n     ",
                   "range": [
-                    462,
-                    668
+                    465,
+                    671
                   ],
                   "loc": {
                     "start": {
@@ -741,8 +741,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    798,
-                    885
+                    801,
+                    888
                   ],
                   "loc": {
                     "start": {
@@ -759,8 +759,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    886,
-                    904
+                    889,
+                    907
                   ],
                   "loc": {
                     "start": {
@@ -777,8 +777,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    905,
-                    992
+                    908,
+                    995
                   ],
                   "loc": {
                     "start": {
@@ -795,8 +795,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle delete.\n     ",
                   "range": [
-                    997,
-                    1030
+                    1000,
+                    1033
                   ],
                   "loc": {
                     "start": {
@@ -818,8 +818,8 @@
                 "type": "Identifier",
                 "name": "_handleButtonDelete",
                 "range": [
-                  1035,
-                  1054
+                  1038,
+                  1057
                 ],
                 "loc": {
                   "start": {
@@ -855,8 +855,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  1071,
-                                  1076
+                                  1074,
+                                  1079
                                 ],
                                 "loc": {
                                   "start": {
@@ -873,8 +873,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  1077,
-                                  1084
+                                  1080,
+                                  1087
                                 ],
                                 "loc": {
                                   "start": {
@@ -888,8 +888,8 @@
                                 }
                               },
                               "range": [
-                                1071,
-                                1084
+                                1074,
+                                1087
                               ],
                               "loc": {
                                 "start": {
@@ -908,8 +908,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  1085,
-                                  1092
+                                  1088,
+                                  1095
                                 ],
                                 "loc": {
                                   "start": {
@@ -924,8 +924,8 @@
                               }
                             ],
                             "range": [
-                              1071,
-                              1093
+                              1074,
+                              1096
                             ],
                             "loc": {
                               "start": {
@@ -942,8 +942,8 @@
                             "type": "Identifier",
                             "name": "request",
                             "range": [
-                              1094,
-                              1101
+                              1097,
+                              1104
                             ],
                             "loc": {
                               "start": {
@@ -957,8 +957,8 @@
                             }
                           },
                           "range": [
-                            1071,
-                            1101
+                            1074,
+                            1104
                           ],
                           "loc": {
                             "start": {
@@ -979,8 +979,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                1102,
-                                1114
+                                1105,
+                                1117
                               ],
                               "loc": {
                                 "start": {
@@ -997,8 +997,8 @@
                               "type": "Identifier",
                               "name": "REQUEST__WORKFLOWBUILDER_REMOVE_OUTPUTPORT",
                               "range": [
-                                1115,
-                                1157
+                                1118,
+                                1160
                               ],
                               "loc": {
                                 "start": {
@@ -1012,8 +1012,8 @@
                               }
                             },
                             "range": [
-                              1102,
-                              1157
+                              1105,
+                              1160
                             ],
                             "loc": {
                               "start": {
@@ -1035,8 +1035,8 @@
                                   "type": "Identifier",
                                   "name": "outputport",
                                   "range": [
-                                    1160,
-                                    1170
+                                    1163,
+                                    1173
                                   ],
                                   "loc": {
                                     "start": {
@@ -1055,8 +1055,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1172,
-                                      1176
+                                      1175,
+                                      1179
                                     ],
                                     "loc": {
                                       "start": {
@@ -1073,8 +1073,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      1177,
-                                      1182
+                                      1180,
+                                      1185
                                     ],
                                     "loc": {
                                       "start": {
@@ -1088,8 +1088,8 @@
                                     }
                                   },
                                   "range": [
-                                    1172,
-                                    1182
+                                    1175,
+                                    1185
                                   ],
                                   "loc": {
                                     "start": {
@@ -1107,8 +1107,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  1160,
-                                  1182
+                                  1163,
+                                  1185
                                 ],
                                 "loc": {
                                   "start": {
@@ -1127,8 +1127,8 @@
                                   "type": "Identifier",
                                   "name": "workflow",
                                   "range": [
-                                    1184,
-                                    1192
+                                    1187,
+                                    1195
                                   ],
                                   "loc": {
                                     "start": {
@@ -1147,8 +1147,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1194,
-                                      1198
+                                      1197,
+                                      1201
                                     ],
                                     "loc": {
                                       "start": {
@@ -1165,8 +1165,8 @@
                                     "type": "Identifier",
                                     "name": "_workflow",
                                     "range": [
-                                      1199,
-                                      1208
+                                      1202,
+                                      1211
                                     ],
                                     "loc": {
                                       "start": {
@@ -1180,8 +1180,8 @@
                                     }
                                   },
                                   "range": [
-                                    1194,
-                                    1208
+                                    1197,
+                                    1211
                                   ],
                                   "loc": {
                                     "start": {
@@ -1199,8 +1199,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  1184,
-                                  1208
+                                  1187,
+                                  1211
                                 ],
                                 "loc": {
                                   "start": {
@@ -1219,8 +1219,8 @@
                                   "type": "Identifier",
                                   "name": "workflowjob",
                                   "range": [
-                                    1210,
-                                    1221
+                                    1213,
+                                    1224
                                   ],
                                   "loc": {
                                     "start": {
@@ -1239,8 +1239,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1223,
-                                      1227
+                                      1226,
+                                      1230
                                     ],
                                     "loc": {
                                       "start": {
@@ -1257,8 +1257,8 @@
                                     "type": "Identifier",
                                     "name": "_workflowJob",
                                     "range": [
-                                      1228,
-                                      1240
+                                      1231,
+                                      1243
                                     ],
                                     "loc": {
                                       "start": {
@@ -1272,8 +1272,8 @@
                                     }
                                   },
                                   "range": [
-                                    1223,
-                                    1240
+                                    1226,
+                                    1243
                                   ],
                                   "loc": {
                                     "start": {
@@ -1291,8 +1291,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  1210,
-                                  1240
+                                  1213,
+                                  1243
                                 ],
                                 "loc": {
                                   "start": {
@@ -1307,8 +1307,8 @@
                               }
                             ],
                             "range": [
-                              1159,
-                              1241
+                              1162,
+                              1244
                             ],
                             "loc": {
                               "start": {
@@ -1323,8 +1323,8 @@
                           }
                         ],
                         "range": [
-                          1071,
-                          1242
+                          1074,
+                          1245
                         ],
                         "loc": {
                           "start": {
@@ -1338,8 +1338,8 @@
                         }
                       },
                       "range": [
-                        1071,
-                        1243
+                        1074,
+                        1246
                       ],
                       "loc": {
                         "start": {
@@ -1354,8 +1354,8 @@
                     }
                   ],
                   "range": [
-                    1061,
-                    1249
+                    1064,
+                    1252
                   ],
                   "loc": {
                     "start": {
@@ -1371,8 +1371,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1054,
-                  1249
+                  1057,
+                  1252
                 ],
                 "loc": {
                   "start": {
@@ -1388,8 +1388,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1035,
-                1249
+                1038,
+                1252
               ],
               "loc": {
                 "start": {
@@ -1406,8 +1406,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    798,
-                    885
+                    801,
+                    888
                   ],
                   "loc": {
                     "start": {
@@ -1424,8 +1424,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    886,
-                    904
+                    889,
+                    907
                   ],
                   "loc": {
                     "start": {
@@ -1442,8 +1442,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    905,
-                    992
+                    908,
+                    995
                   ],
                   "loc": {
                     "start": {
@@ -1460,8 +1460,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle delete.\n     ",
                   "range": [
-                    997,
-                    1030
+                    1000,
+                    1033
                   ],
                   "loc": {
                     "start": {
@@ -1479,8 +1479,8 @@
             }
           ],
           "range": [
-            262,
-            1251
+            265,
+            1254
           ],
           "loc": {
             "start": {
@@ -1494,8 +1494,8 @@
           }
         },
         "range": [
-          208,
-          1251
+          211,
+          1254
         ],
         "loc": {
           "start": {
@@ -1512,8 +1512,8 @@
             "type": "Block",
             "value": "*\n * OutputPort list item view.\n ",
             "range": [
-              155,
-              192
+              158,
+              195
             ],
             "loc": {
               "start": {
@@ -1530,8 +1530,8 @@
         "trailingComments": []
       },
       "range": [
-        193,
-        1251
+        196,
+        1254
       ],
       "loc": {
         "start": {
@@ -1548,8 +1548,8 @@
           "type": "Block",
           "value": "*\n * OutputPort list item view.\n ",
           "range": [
-            155,
-            192
+            158,
+            195
           ],
           "loc": {
             "start": {
@@ -1579,8 +1579,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortListItem",
               "range": [
-                1252,
-                1274
+                1255,
+                1277
               ],
               "loc": {
                 "start": {
@@ -1597,8 +1597,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1275,
-                1284
+                1278,
+                1287
               ],
               "loc": {
                 "start": {
@@ -1612,8 +1612,8 @@
               }
             },
             "range": [
-              1252,
-              1284
+              1255,
+              1287
             ],
             "loc": {
               "start": {
@@ -1630,8 +1630,8 @@
             "type": "Identifier",
             "name": "ui",
             "range": [
-              1285,
-              1287
+              1288,
+              1290
             ],
             "loc": {
               "start": {
@@ -1645,8 +1645,8 @@
             }
           },
           "range": [
-            1252,
-            1287
+            1255,
+            1290
           ],
           "loc": {
             "start": {
@@ -1668,8 +1668,8 @@
                 "type": "Identifier",
                 "name": "buttonDelete",
                 "range": [
-                  1296,
-                  1308
+                  1299,
+                  1311
                 ],
                 "loc": {
                   "start": {
@@ -1687,8 +1687,8 @@
                 "value": "#button-delete",
                 "raw": "'#button-delete'",
                 "range": [
-                  1310,
-                  1326
+                  1313,
+                  1329
                 ],
                 "loc": {
                   "start": {
@@ -1706,8 +1706,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                1296,
-                1326
+                1299,
+                1329
               ],
               "loc": {
                 "start": {
@@ -1722,8 +1722,8 @@
             }
           ],
           "range": [
-            1290,
-            1328
+            1293,
+            1331
           ],
           "loc": {
             "start": {
@@ -1737,8 +1737,8 @@
           }
         },
         "range": [
-          1252,
-          1328
+          1255,
+          1331
         ],
         "loc": {
           "start": {
@@ -1752,8 +1752,8 @@
         }
       },
       "range": [
-        1252,
-        1329
+        1255,
+        1332
       ],
       "loc": {
         "start": {
@@ -1781,8 +1781,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortListItem",
               "range": [
-                1330,
-                1352
+                1333,
+                1355
               ],
               "loc": {
                 "start": {
@@ -1799,8 +1799,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1353,
-                1362
+                1356,
+                1365
               ],
               "loc": {
                 "start": {
@@ -1814,8 +1814,8 @@
               }
             },
             "range": [
-              1330,
-              1362
+              1333,
+              1365
             ],
             "loc": {
               "start": {
@@ -1832,8 +1832,8 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              1363,
-              1369
+              1366,
+              1372
             ],
             "loc": {
               "start": {
@@ -1847,8 +1847,8 @@
             }
           },
           "range": [
-            1330,
-            1369
+            1333,
+            1372
           ],
           "loc": {
             "start": {
@@ -1871,8 +1871,8 @@
                 "value": "click @ui.buttonDelete",
                 "raw": "'click @ui.buttonDelete'",
                 "range": [
-                  1378,
-                  1402
+                  1381,
+                  1405
                 ],
                 "loc": {
                   "start": {
@@ -1890,8 +1890,8 @@
                 "value": "_handleButtonDelete",
                 "raw": "'_handleButtonDelete'",
                 "range": [
-                  1404,
-                  1425
+                  1407,
+                  1428
                 ],
                 "loc": {
                   "start": {
@@ -1909,8 +1909,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                1378,
-                1425
+                1381,
+                1428
               ],
               "loc": {
                 "start": {
@@ -1925,8 +1925,8 @@
             }
           ],
           "range": [
-            1372,
-            1427
+            1375,
+            1430
           ],
           "loc": {
             "start": {
@@ -1940,8 +1940,8 @@
           }
         },
         "range": [
-          1330,
-          1427
+          1333,
+          1430
         ],
         "loc": {
           "start": {
@@ -1955,8 +1955,8 @@
         }
       },
       "range": [
-        1330,
-        1428
+        1333,
+        1431
       ],
       "loc": {
         "start": {
@@ -1984,8 +1984,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortListItem",
               "range": [
-                1429,
-                1451
+                1432,
+                1454
               ],
               "loc": {
                 "start": {
@@ -2002,8 +2002,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1452,
-                1461
+                1455,
+                1464
               ],
               "loc": {
                 "start": {
@@ -2017,8 +2017,8 @@
               }
             },
             "range": [
-              1429,
-              1461
+              1432,
+              1464
             ],
             "loc": {
               "start": {
@@ -2035,8 +2035,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              1462,
-              1470
+              1465,
+              1473
             ],
             "loc": {
               "start": {
@@ -2050,8 +2050,8 @@
             }
           },
           "range": [
-            1429,
-            1470
+            1432,
+            1473
           ],
           "loc": {
             "start": {
@@ -2069,8 +2069,8 @@
           "value": "#template-main_outputport_list_item",
           "raw": "'#template-main_outputport_list_item'",
           "range": [
-            1473,
-            1510
+            1476,
+            1513
           ],
           "loc": {
             "start": {
@@ -2084,8 +2084,8 @@
           }
         },
         "range": [
-          1429,
-          1510
+          1432,
+          1513
         ],
         "loc": {
           "start": {
@@ -2099,8 +2099,8 @@
         }
       },
       "range": [
-        1429,
-        1511
+        1432,
+        1514
       ],
       "loc": {
         "start": {
@@ -2128,8 +2128,8 @@
               "type": "Identifier",
               "name": "ViewOutputPortListItem",
               "range": [
-                1512,
-                1534
+                1515,
+                1537
               ],
               "loc": {
                 "start": {
@@ -2146,8 +2146,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1535,
-                1544
+                1538,
+                1547
               ],
               "loc": {
                 "start": {
@@ -2161,8 +2161,8 @@
               }
             },
             "range": [
-              1512,
-              1544
+              1515,
+              1547
             ],
             "loc": {
               "start": {
@@ -2179,8 +2179,8 @@
             "type": "Identifier",
             "name": "tagName",
             "range": [
-              1545,
-              1552
+              1548,
+              1555
             ],
             "loc": {
               "start": {
@@ -2194,8 +2194,8 @@
             }
           },
           "range": [
-            1512,
-            1552
+            1515,
+            1555
           ],
           "loc": {
             "start": {
@@ -2213,8 +2213,8 @@
           "value": "tr",
           "raw": "'tr'",
           "range": [
-            1555,
-            1559
+            1558,
+            1562
           ],
           "loc": {
             "start": {
@@ -2228,8 +2228,8 @@
           }
         },
         "range": [
-          1512,
-          1559
+          1515,
+          1562
         ],
         "loc": {
           "start": {
@@ -2243,8 +2243,8 @@
         }
       },
       "range": [
-        1512,
-        1560
+        1515,
+        1563
       ],
       "loc": {
         "start": {
@@ -2261,7 +2261,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1560
+    1563
   ],
   "loc": {
     "start": {
@@ -2278,8 +2278,8 @@
       "type": "Block",
       "value": "*\n * OutputPort list item view.\n ",
       "range": [
-        155,
-        192
+        158,
+        195
       ],
       "loc": {
         "start": {
@@ -2296,8 +2296,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        264,
-        351
+        267,
+        354
       ],
       "loc": {
         "start": {
@@ -2314,8 +2314,8 @@
       "type": "Line",
       "value": " PUBLIC METHODS",
       "range": [
-        352,
-        369
+        355,
+        372
       ],
       "loc": {
         "start": {
@@ -2332,8 +2332,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        370,
-        457
+        373,
+        460
       ],
       "loc": {
         "start": {
@@ -2350,8 +2350,8 @@
       "type": "Block",
       "value": "*\n     * Initializes the instance.\n     *\n     * @param {object} options Marionette.View options object; 'options.workflow' (Workflow) and 'options.workflowjob' (WorkflowJob) must also be provided\n     ",
       "range": [
-        462,
-        668
+        465,
+        671
       ],
       "loc": {
         "start": {
@@ -2368,8 +2368,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        798,
-        885
+        801,
+        888
       ],
       "loc": {
         "start": {
@@ -2386,8 +2386,8 @@
       "type": "Line",
       "value": " PRIVATE METHODS",
       "range": [
-        886,
-        904
+        889,
+        907
       ],
       "loc": {
         "start": {
@@ -2404,8 +2404,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        905,
-        992
+        908,
+        995
       ],
       "loc": {
         "start": {
@@ -2422,8 +2422,8 @@
       "type": "Block",
       "value": "*\n     * Handle delete.\n     ",
       "range": [
-        997,
-        1030
+        1000,
+        1033
       ],
       "loc": {
         "start": {

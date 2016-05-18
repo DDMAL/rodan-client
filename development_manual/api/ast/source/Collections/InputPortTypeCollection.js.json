@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/InputPortType",
-        "raw": "'../Models/InputPortType'",
+        "value": "js/Models/InputPortType",
+        "raw": "'js/Models/InputPortType'",
         "range": [
           73,
           98

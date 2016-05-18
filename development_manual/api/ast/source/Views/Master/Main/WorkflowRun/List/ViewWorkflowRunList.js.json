@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewList",
-        "raw": "'../../BaseViewList'",
+        "value": "js/Views/Master/Main/BaseViewList",
+        "raw": "'js/Views/Master/Main/BaseViewList'",
         "range": [
           25,
-          45
+          60
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 45
+            "column": 60
           }
         }
       },
       "range": [
         0,
-        46
+        61
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 46
+          "column": 61
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "ViewWorkflowRunListItem",
             "range": [
-              54,
-              77
+              69,
+              92
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            54,
-            77
+            69,
+            92
           ],
           "loc": {
             "start": {
@@ -118,8 +118,8 @@
         "value": "./ViewWorkflowRunListItem",
         "raw": "'./ViewWorkflowRunListItem'",
         "range": [
-          83,
-          110
+          98,
+          125
         ],
         "loc": {
           "start": {
@@ -133,8 +133,8 @@
         }
       },
       "range": [
-        47,
-        111
+        62,
+        126
       ],
       "loc": {
         "start": {
@@ -151,8 +151,8 @@
           "type": "Block",
           "value": "*\n * WorkflowRun list view.\n ",
           "range": [
-            113,
-            146
+            128,
+            161
           ],
           "loc": {
             "start": {
@@ -175,8 +175,8 @@
           "type": "Identifier",
           "name": "ViewWorkflowRunList",
           "range": [
-            168,
-            187
+            183,
+            202
           ],
           "loc": {
             "start": {
@@ -193,8 +193,8 @@
           "type": "Identifier",
           "name": "BaseViewList",
           "range": [
-            196,
-            208
+            211,
+            223
           ],
           "loc": {
             "start": {
@@ -211,8 +211,8 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            209,
-            211
+            224,
+            226
           ],
           "loc": {
             "start": {
@@ -226,8 +226,8 @@
           }
         },
         "range": [
-          162,
-          211
+          177,
+          226
         ],
         "loc": {
           "start": {
@@ -244,8 +244,8 @@
             "type": "Block",
             "value": "*\n * WorkflowRun list view.\n ",
             "range": [
-              113,
-              146
+              128,
+              161
             ],
             "loc": {
               "start": {
@@ -262,8 +262,8 @@
         "trailingComments": []
       },
       "range": [
-        147,
-        211
+        162,
+        226
       ],
       "loc": {
         "start": {
@@ -280,8 +280,8 @@
           "type": "Block",
           "value": "*\n * WorkflowRun list view.\n ",
           "range": [
-            113,
-            146
+            128,
+            161
           ],
           "loc": {
             "start": {
@@ -311,8 +311,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunList",
               "range": [
-                212,
-                231
+                227,
+                246
               ],
               "loc": {
                 "start": {
@@ -329,8 +329,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                232,
-                241
+                247,
+                256
               ],
               "loc": {
                 "start": {
@@ -344,8 +344,8 @@
               }
             },
             "range": [
-              212,
-              241
+              227,
+              256
             ],
             "loc": {
               "start": {
@@ -362,8 +362,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              242,
-              250
+              257,
+              265
             ],
             "loc": {
               "start": {
@@ -377,8 +377,8 @@
             }
           },
           "range": [
-            212,
-            250
+            227,
+            265
           ],
           "loc": {
             "start": {
@@ -396,8 +396,8 @@
           "value": "#template-main_workflowrun_list",
           "raw": "'#template-main_workflowrun_list'",
           "range": [
-            253,
-            286
+            268,
+            301
           ],
           "loc": {
             "start": {
@@ -411,8 +411,8 @@
           }
         },
         "range": [
-          212,
-          286
+          227,
+          301
         ],
         "loc": {
           "start": {
@@ -426,8 +426,8 @@
         }
       },
       "range": [
-        212,
-        287
+        227,
+        302
       ],
       "loc": {
         "start": {
@@ -455,8 +455,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunList",
               "range": [
-                288,
-                307
+                303,
+                322
               ],
               "loc": {
                 "start": {
@@ -473,8 +473,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                308,
-                317
+                323,
+                332
               ],
               "loc": {
                 "start": {
@@ -488,8 +488,8 @@
               }
             },
             "range": [
-              288,
-              317
+              303,
+              332
             ],
             "loc": {
               "start": {
@@ -506,8 +506,8 @@
             "type": "Identifier",
             "name": "childView",
             "range": [
-              318,
-              327
+              333,
+              342
             ],
             "loc": {
               "start": {
@@ -521,8 +521,8 @@
             }
           },
           "range": [
-            288,
-            327
+            303,
+            342
           ],
           "loc": {
             "start": {
@@ -539,8 +539,8 @@
           "type": "Identifier",
           "name": "ViewWorkflowRunListItem",
           "range": [
-            330,
-            353
+            345,
+            368
           ],
           "loc": {
             "start": {
@@ -554,8 +554,8 @@
           }
         },
         "range": [
-          288,
-          353
+          303,
+          368
         ],
         "loc": {
           "start": {
@@ -569,8 +569,8 @@
         }
       },
       "range": [
-        288,
-        354
+        303,
+        369
       ],
       "loc": {
         "start": {
@@ -598,8 +598,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunList",
               "range": [
-                355,
-                374
+                370,
+                389
               ],
               "loc": {
                 "start": {
@@ -616,8 +616,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                375,
-                384
+                390,
+                399
               ],
               "loc": {
                 "start": {
@@ -631,8 +631,8 @@
               }
             },
             "range": [
-              355,
-              384
+              370,
+              399
             ],
             "loc": {
               "start": {
@@ -649,8 +649,8 @@
             "type": "Identifier",
             "name": "behaviors",
             "range": [
-              385,
-              394
+              400,
+              409
             ],
             "loc": {
               "start": {
@@ -664,8 +664,8 @@
             }
           },
           "range": [
-            355,
-            394
+            370,
+            409
           ],
           "loc": {
             "start": {
@@ -687,8 +687,8 @@
                 "type": "Identifier",
                 "name": "Table",
                 "range": [
-                  398,
-                  403
+                  413,
+                  418
                 ],
                 "loc": {
                   "start": {
@@ -711,8 +711,8 @@
                       "value": "table",
                       "raw": "'table'",
                       "range": [
-                        406,
-                        413
+                        421,
+                        428
                       ],
                       "loc": {
                         "start": {
@@ -730,8 +730,8 @@
                       "value": "#table-workflowruns",
                       "raw": "'#table-workflowruns'",
                       "range": [
-                        415,
-                        436
+                        430,
+                        451
                       ],
                       "loc": {
                         "start": {
@@ -749,8 +749,8 @@
                     "shorthand": false,
                     "computed": false,
                     "range": [
-                      406,
-                      436
+                      421,
+                      451
                     ],
                     "loc": {
                       "start": {
@@ -765,8 +765,8 @@
                   }
                 ],
                 "range": [
-                  405,
-                  437
+                  420,
+                  452
                 ],
                 "loc": {
                   "start": {
@@ -784,8 +784,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                398,
-                437
+                413,
+                452
               ],
               "loc": {
                 "start": {
@@ -800,8 +800,8 @@
             }
           ],
           "range": [
-            397,
-            438
+            412,
+            453
           ],
           "loc": {
             "start": {
@@ -815,8 +815,8 @@
           }
         },
         "range": [
-          355,
-          438
+          370,
+          453
         ],
         "loc": {
           "start": {
@@ -830,8 +830,8 @@
         }
       },
       "range": [
-        355,
-        439
+        370,
+        454
       ],
       "loc": {
         "start": {
@@ -848,7 +848,7 @@
   "sourceType": "module",
   "range": [
     0,
-    439
+    454
   ],
   "loc": {
     "start": {
@@ -865,8 +865,8 @@
       "type": "Block",
       "value": "*\n * WorkflowRun list view.\n ",
       "range": [
-        113,
-        146
+        128,
+        161
       ],
       "loc": {
         "start": {

@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/ConnectionCollection",
-        "raw": "'../Collections/ConnectionCollection'",
+        "value": "js/Collections/ConnectionCollection",
+        "raw": "'js/Collections/ConnectionCollection'",
         "range": [
           70,
           107
@@ -188,8 +188,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/InputPortCollection",
-        "raw": "'../Collections/InputPortCollection'",
+        "value": "js/Collections/InputPortCollection",
+        "raw": "'js/Collections/InputPortCollection'",
         "range": [
           141,
           177
@@ -261,8 +261,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/OutputPortCollection",
-        "raw": "'../Collections/OutputPortCollection'",
+        "value": "js/Collections/OutputPortCollection",
+        "raw": "'js/Collections/OutputPortCollection'",
         "range": [
           212,
           249
@@ -334,8 +334,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/WorkflowJobCollection",
-        "raw": "'../Collections/WorkflowJobCollection'",
+        "value": "js/Collections/WorkflowJobCollection",
+        "raw": "'js/Collections/WorkflowJobCollection'",
         "range": [
           285,
           323
@@ -407,8 +407,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/WorkflowRunCollection",
-        "raw": "'../Collections/WorkflowRunCollection'",
+        "value": "js/Collections/WorkflowRunCollection",
+        "raw": "'js/Collections/WorkflowRunCollection'",
         "range": [
           359,
           397

@@ -42,11 +42,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../BaseViewListItem",
-        "raw": "'../../BaseViewListItem'",
+        "value": "js/Views/Master/Main/BaseViewListItem",
+        "raw": "'js/Views/Master/Main/BaseViewListItem'",
         "range": [
           29,
-          53
+          68
         ],
         "loc": {
           "start": {
@@ -55,13 +55,13 @@
           },
           "end": {
             "line": 1,
-            "column": 53
+            "column": 68
           }
         }
       },
       "range": [
         0,
-        54
+        69
       ],
       "loc": {
         "start": {
@@ -70,7 +70,7 @@
         },
         "end": {
           "line": 1,
-          "column": 54
+          "column": 69
         }
       }
     },
@@ -83,8 +83,8 @@
             "type": "Identifier",
             "name": "RODAN_EVENTS",
             "range": [
-              62,
-              74
+              77,
+              89
             ],
             "loc": {
               "start": {
@@ -98,8 +98,8 @@
             }
           },
           "range": [
-            62,
-            74
+            77,
+            89
           ],
           "loc": {
             "start": {
@@ -115,11 +115,11 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../../../../../Shared/RODAN_EVENTS",
-        "raw": "'../../../../../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
-          80,
-          116
+          95,
+          119
         ],
         "loc": {
           "start": {
@@ -128,13 +128,13 @@
           },
           "end": {
             "line": 2,
-            "column": 61
+            "column": 49
           }
         }
       },
       "range": [
-        55,
-        117
+        70,
+        120
       ],
       "loc": {
         "start": {
@@ -143,7 +143,7 @@
         },
         "end": {
           "line": 2,
-          "column": 62
+          "column": 50
         }
       }
     },
@@ -156,8 +156,8 @@
             "type": "Identifier",
             "name": "Radio",
             "range": [
-              125,
-              130
+              128,
+              133
             ],
             "loc": {
               "start": {
@@ -171,8 +171,8 @@
             }
           },
           "range": [
-            125,
-            130
+            128,
+            133
           ],
           "loc": {
             "start": {
@@ -191,8 +191,8 @@
         "value": "backbone.radio",
         "raw": "'backbone.radio'",
         "range": [
-          136,
-          152
+          139,
+          155
         ],
         "loc": {
           "start": {
@@ -206,8 +206,8 @@
         }
       },
       "range": [
-        118,
-        153
+        121,
+        156
       ],
       "loc": {
         "start": {
@@ -224,8 +224,8 @@
           "type": "Block",
           "value": "*\n * WorkflowRun list item view.\n ",
           "range": [
-            155,
-            193
+            158,
+            196
           ],
           "loc": {
             "start": {
@@ -248,8 +248,8 @@
           "type": "Identifier",
           "name": "ViewWorkflowRunListItem",
           "range": [
-            215,
-            238
+            218,
+            241
           ],
           "loc": {
             "start": {
@@ -266,8 +266,8 @@
           "type": "Identifier",
           "name": "BaseViewListItem",
           "range": [
-            247,
-            263
+            250,
+            266
           ],
           "loc": {
             "start": {
@@ -289,8 +289,8 @@
                 "type": "Identifier",
                 "name": "_handleDoubleClick",
                 "range": [
-                  510,
-                  528
+                  513,
+                  531
                 ],
                 "loc": {
                   "start": {
@@ -326,8 +326,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  545,
-                                  550
+                                  548,
+                                  553
                                 ],
                                 "loc": {
                                   "start": {
@@ -344,8 +344,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  551,
-                                  558
+                                  554,
+                                  561
                                 ],
                                 "loc": {
                                   "start": {
@@ -359,8 +359,8 @@
                                 }
                               },
                               "range": [
-                                545,
-                                558
+                                548,
+                                561
                               ],
                               "loc": {
                                 "start": {
@@ -379,8 +379,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  559,
-                                  566
+                                  562,
+                                  569
                                 ],
                                 "loc": {
                                   "start": {
@@ -395,8 +395,8 @@
                               }
                             ],
                             "range": [
-                              545,
-                              567
+                              548,
+                              570
                             ],
                             "loc": {
                               "start": {
@@ -413,8 +413,8 @@
                             "type": "Identifier",
                             "name": "trigger",
                             "range": [
-                              568,
-                              575
+                              571,
+                              578
                             ],
                             "loc": {
                               "start": {
@@ -428,8 +428,8 @@
                             }
                           },
                           "range": [
-                            545,
-                            575
+                            548,
+                            578
                           ],
                           "loc": {
                             "start": {
@@ -450,8 +450,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                576,
-                                588
+                                579,
+                                591
                               ],
                               "loc": {
                                 "start": {
@@ -468,8 +468,8 @@
                               "type": "Identifier",
                               "name": "EVENT__WORKFLOWRUN_SELECTED",
                               "range": [
-                                589,
-                                616
+                                592,
+                                619
                               ],
                               "loc": {
                                 "start": {
@@ -483,8 +483,8 @@
                               }
                             },
                             "range": [
-                              576,
-                              616
+                              579,
+                              619
                             ],
                             "loc": {
                               "start": {
@@ -506,8 +506,8 @@
                                   "type": "Identifier",
                                   "name": "workflowrun",
                                   "range": [
-                                    619,
-                                    630
+                                    622,
+                                    633
                                   ],
                                   "loc": {
                                     "start": {
@@ -526,8 +526,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      632,
-                                      636
+                                      635,
+                                      639
                                     ],
                                     "loc": {
                                       "start": {
@@ -544,8 +544,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      637,
-                                      642
+                                      640,
+                                      645
                                     ],
                                     "loc": {
                                       "start": {
@@ -559,8 +559,8 @@
                                     }
                                   },
                                   "range": [
-                                    632,
-                                    642
+                                    635,
+                                    645
                                   ],
                                   "loc": {
                                     "start": {
@@ -578,8 +578,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  619,
-                                  642
+                                  622,
+                                  645
                                 ],
                                 "loc": {
                                   "start": {
@@ -594,8 +594,8 @@
                               }
                             ],
                             "range": [
-                              618,
-                              643
+                              621,
+                              646
                             ],
                             "loc": {
                               "start": {
@@ -610,8 +610,8 @@
                           }
                         ],
                         "range": [
-                          545,
-                          644
+                          548,
+                          647
                         ],
                         "loc": {
                           "start": {
@@ -625,8 +625,8 @@
                         }
                       },
                       "range": [
-                        545,
-                        645
+                        548,
+                        648
                       ],
                       "loc": {
                         "start": {
@@ -641,8 +641,8 @@
                     }
                   ],
                   "range": [
-                    535,
-                    651
+                    538,
+                    654
                   ],
                   "loc": {
                     "start": {
@@ -658,8 +658,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  528,
-                  651
+                  531,
+                  654
                 ],
                 "loc": {
                   "start": {
@@ -675,8 +675,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                510,
-                651
+                513,
+                654
               ],
               "loc": {
                 "start": {
@@ -693,8 +693,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    266,
-                    353
+                    269,
+                    356
                   ],
                   "loc": {
                     "start": {
@@ -711,8 +711,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    354,
-                    372
+                    357,
+                    375
                   ],
                   "loc": {
                     "start": {
@@ -729,8 +729,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    373,
-                    460
+                    376,
+                    463
                   ],
                   "loc": {
                     "start": {
@@ -747,8 +747,8 @@
                   "type": "Block",
                   "value": "*\n     * Handles double click.\n     ",
                   "range": [
-                    465,
-                    505
+                    468,
+                    508
                   ],
                   "loc": {
                     "start": {
@@ -766,8 +766,8 @@
             }
           ],
           "range": [
-            264,
-            653
+            267,
+            656
           ],
           "loc": {
             "start": {
@@ -781,8 +781,8 @@
           }
         },
         "range": [
-          209,
-          653
+          212,
+          656
         ],
         "loc": {
           "start": {
@@ -799,8 +799,8 @@
             "type": "Block",
             "value": "*\n * WorkflowRun list item view.\n ",
             "range": [
-              155,
-              193
+              158,
+              196
             ],
             "loc": {
               "start": {
@@ -817,8 +817,8 @@
         "trailingComments": []
       },
       "range": [
-        194,
-        653
+        197,
+        656
       ],
       "loc": {
         "start": {
@@ -835,8 +835,8 @@
           "type": "Block",
           "value": "*\n * WorkflowRun list item view.\n ",
           "range": [
-            155,
-            193
+            158,
+            196
           ],
           "loc": {
             "start": {
@@ -866,8 +866,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunListItem",
               "range": [
-                654,
-                677
+                657,
+                680
               ],
               "loc": {
                 "start": {
@@ -884,8 +884,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                678,
-                687
+                681,
+                690
               ],
               "loc": {
                 "start": {
@@ -899,8 +899,8 @@
               }
             },
             "range": [
-              654,
-              687
+              657,
+              690
             ],
             "loc": {
               "start": {
@@ -917,8 +917,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              688,
-              696
+              691,
+              699
             ],
             "loc": {
               "start": {
@@ -932,8 +932,8 @@
             }
           },
           "range": [
-            654,
-            696
+            657,
+            699
           ],
           "loc": {
             "start": {
@@ -951,8 +951,8 @@
           "value": "#template-main_workflowrun_list_item",
           "raw": "'#template-main_workflowrun_list_item'",
           "range": [
-            699,
-            737
+            702,
+            740
           ],
           "loc": {
             "start": {
@@ -966,8 +966,8 @@
           }
         },
         "range": [
-          654,
-          737
+          657,
+          740
         ],
         "loc": {
           "start": {
@@ -981,8 +981,8 @@
         }
       },
       "range": [
-        654,
-        738
+        657,
+        741
       ],
       "loc": {
         "start": {
@@ -1010,8 +1010,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunListItem",
               "range": [
-                739,
-                762
+                742,
+                765
               ],
               "loc": {
                 "start": {
@@ -1028,8 +1028,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                763,
-                772
+                766,
+                775
               ],
               "loc": {
                 "start": {
@@ -1043,8 +1043,8 @@
               }
             },
             "range": [
-              739,
-              772
+              742,
+              775
             ],
             "loc": {
               "start": {
@@ -1061,8 +1061,8 @@
             "type": "Identifier",
             "name": "tagName",
             "range": [
-              773,
-              780
+              776,
+              783
             ],
             "loc": {
               "start": {
@@ -1076,8 +1076,8 @@
             }
           },
           "range": [
-            739,
-            780
+            742,
+            783
           ],
           "loc": {
             "start": {
@@ -1095,8 +1095,8 @@
           "value": "tr",
           "raw": "'tr'",
           "range": [
-            783,
-            787
+            786,
+            790
           ],
           "loc": {
             "start": {
@@ -1110,8 +1110,8 @@
           }
         },
         "range": [
-          739,
-          787
+          742,
+          790
         ],
         "loc": {
           "start": {
@@ -1125,8 +1125,8 @@
         }
       },
       "range": [
-        739,
-        788
+        742,
+        791
       ],
       "loc": {
         "start": {
@@ -1154,8 +1154,8 @@
               "type": "Identifier",
               "name": "ViewWorkflowRunListItem",
               "range": [
-                789,
-                812
+                792,
+                815
               ],
               "loc": {
                 "start": {
@@ -1172,8 +1172,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                813,
-                822
+                816,
+                825
               ],
               "loc": {
                 "start": {
@@ -1187,8 +1187,8 @@
               }
             },
             "range": [
-              789,
-              822
+              792,
+              825
             ],
             "loc": {
               "start": {
@@ -1205,8 +1205,8 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              823,
-              829
+              826,
+              832
             ],
             "loc": {
               "start": {
@@ -1220,8 +1220,8 @@
             }
           },
           "range": [
-            789,
-            829
+            792,
+            832
           ],
           "loc": {
             "start": {
@@ -1244,8 +1244,8 @@
                 "value": "dblclick",
                 "raw": "'dblclick'",
                 "range": [
-                  838,
-                  848
+                  841,
+                  851
                 ],
                 "loc": {
                   "start": {
@@ -1263,8 +1263,8 @@
                 "value": "_handleDoubleClick",
                 "raw": "'_handleDoubleClick'",
                 "range": [
-                  850,
-                  870
+                  853,
+                  873
                 ],
                 "loc": {
                   "start": {
@@ -1282,8 +1282,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                838,
-                870
+                841,
+                873
               ],
               "loc": {
                 "start": {
@@ -1298,8 +1298,8 @@
             }
           ],
           "range": [
-            832,
-            872
+            835,
+            875
           ],
           "loc": {
             "start": {
@@ -1313,8 +1313,8 @@
           }
         },
         "range": [
-          789,
-          872
+          792,
+          875
         ],
         "loc": {
           "start": {
@@ -1328,8 +1328,8 @@
         }
       },
       "range": [
-        789,
-        873
+        792,
+        876
       ],
       "loc": {
         "start": {
@@ -1346,7 +1346,7 @@
   "sourceType": "module",
   "range": [
     0,
-    873
+    876
   ],
   "loc": {
     "start": {
@@ -1363,8 +1363,8 @@
       "type": "Block",
       "value": "*\n * WorkflowRun list item view.\n ",
       "range": [
-        155,
-        193
+        158,
+        196
       ],
       "loc": {
         "start": {
@@ -1381,8 +1381,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        266,
-        353
+        269,
+        356
       ],
       "loc": {
         "start": {
@@ -1399,8 +1399,8 @@
       "type": "Line",
       "value": " PRIVATE METHODS",
       "range": [
-        354,
-        372
+        357,
+        375
       ],
       "loc": {
         "start": {
@@ -1417,8 +1417,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        373,
-        460
+        376,
+        463
       ],
       "loc": {
         "start": {
@@ -1435,8 +1435,8 @@
       "type": "Block",
       "value": "*\n     * Handles double click.\n     ",
       "range": [
-        465,
-        505
+        468,
+        508
       ],
       "loc": {
         "start": {

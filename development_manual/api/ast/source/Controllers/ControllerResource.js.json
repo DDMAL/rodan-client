@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Shared/RODAN_EVENTS",
-        "raw": "'../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
           72,
           96
@@ -188,8 +188,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Views/Master/Main/LayoutViewModel",
-        "raw": "'../Views/Master/Main/LayoutViewModel'",
+        "value": "js/Views/Master/Main/LayoutViewModel",
+        "raw": "'js/Views/Master/Main/LayoutViewModel'",
         "range": [
           126,
           164
@@ -334,8 +334,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/Resource",
-        "raw": "'../Models/Resource'",
+        "value": "js/Models/Resource",
+        "raw": "'js/Models/Resource'",
         "range": [
           223,
           243
@@ -407,8 +407,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/ResourceCollection",
-        "raw": "'../Collections/ResourceCollection'",
+        "value": "js/Collections/ResourceCollection",
+        "raw": "'js/Collections/ResourceCollection'",
         "range": [
           276,
           311
@@ -480,8 +480,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Views/Master/Main/Resource/Individual/ViewResource",
-        "raw": "'../Views/Master/Main/Resource/Individual/ViewResource'",
+        "value": "js/Views/Master/Main/Resource/Individual/ViewResource",
+        "raw": "'js/Views/Master/Main/Resource/Individual/ViewResource'",
         "range": [
           338,
           393
@@ -553,8 +553,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Views/Master/Main/Resource/List/ViewResourceList",
-        "raw": "'../Views/Master/Main/Resource/List/ViewResourceList'",
+        "value": "js/Views/Master/Main/Resource/List/ViewResourceList",
+        "raw": "'js/Views/Master/Main/Resource/List/ViewResourceList'",
         "range": [
           424,
           477
@@ -626,8 +626,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Views/Master/Main/Resource/List/ViewResourceListItem",
-        "raw": "'../Views/Master/Main/Resource/List/ViewResourceListItem'",
+        "value": "js/Views/Master/Main/Resource/List/ViewResourceListItem",
+        "raw": "'js/Views/Master/Main/Resource/List/ViewResourceListItem'",
         "range": [
           512,
           569
@@ -12479,7 +12479,7 @@
                       },
                       "range": [
                         5533,
-                        5625
+                        5621
                       ],
                       "loc": {
                         "start": {
@@ -12487,15 +12487,15 @@
                           "column": 8
                         },
                         "end": {
-                          "line": 141,
-                          "column": 4
+                          "line": 140,
+                          "column": 96
                         }
                       }
                     }
                   ],
                   "range": [
                     5489,
-                    5626
+                    5627
                   ],
                   "loc": {
                     "start": {
@@ -12512,7 +12512,7 @@
                 "expression": false,
                 "range": [
                   5465,
-                  5626
+                  5627
                 ],
                 "loc": {
                   "start": {
@@ -12529,7 +12529,7 @@
               "computed": false,
               "range": [
                 5445,
-                5626
+                5627
               ],
               "loc": {
                 "start": {
@@ -12566,7 +12566,7 @@
           ],
           "range": [
             672,
-            5628
+            5629
           ],
           "loc": {
             "start": {
@@ -12581,7 +12581,7 @@
         },
         "range": [
           624,
-          5628
+          5629
         ],
         "loc": {
           "start": {
@@ -12617,7 +12617,7 @@
       },
       "range": [
         609,
-        5628
+        5629
       ],
       "loc": {
         "start": {
@@ -12656,8 +12656,8 @@
         "type": "Identifier",
         "name": "ControllerResource",
         "range": [
-          5645,
-          5663
+          5646,
+          5664
         ],
         "loc": {
           "start": {
@@ -12673,8 +12673,8 @@
         "trailingComments": []
       },
       "range": [
-        5630,
-        5664
+        5631,
+        5665
       ],
       "loc": {
         "start": {
@@ -12691,7 +12691,7 @@
   "sourceType": "module",
   "range": [
     0,
-    5664
+    5665
   ],
   "loc": {
     "start": {

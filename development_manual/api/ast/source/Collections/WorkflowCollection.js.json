@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/Workflow",
-        "raw": "'../Models/Workflow'",
+        "value": "js/Models/Workflow",
+        "raw": "'js/Models/Workflow'",
         "range": [
           68,
           88

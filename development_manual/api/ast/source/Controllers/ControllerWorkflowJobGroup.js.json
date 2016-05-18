@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Shared/RODAN_EVENTS",
-        "raw": "'../Shared/RODAN_EVENTS'",
+        "value": "js/Shared/RODAN_EVENTS",
+        "raw": "'js/Shared/RODAN_EVENTS'",
         "range": [
           72,
           96
@@ -261,8 +261,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/WorkflowJobGroup",
-        "raw": "'../Models/WorkflowJobGroup'",
+        "value": "js/Models/WorkflowJobGroup",
+        "raw": "'js/Models/WorkflowJobGroup'",
         "range": [
           163,
           191
@@ -334,8 +334,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Collections/WorkflowJobGroupCollection",
-        "raw": "'../Collections/WorkflowJobGroupCollection'",
+        "value": "js/Collections/WorkflowJobGroupCollection",
+        "raw": "'js/Collections/WorkflowJobGroupCollection'",
         "range": [
           232,
           275

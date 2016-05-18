@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/OutputPort",
-        "raw": "'../Models/OutputPort'",
+        "value": "js/Models/OutputPort",
+        "raw": "'js/Models/OutputPort'",
         "range": [
           70,
           92

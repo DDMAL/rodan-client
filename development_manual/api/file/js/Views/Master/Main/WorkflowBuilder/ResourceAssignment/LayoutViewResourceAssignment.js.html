@@ -89,13 +89,13 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJob.js~WorkflowJob.html">WorkflowJob</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowJobGroup.js~WorkflowJobGroup.html">WorkflowJobGroup</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Models/WorkflowRun.js~WorkflowRun.html">WorkflowRun</a></span></span></li>
-<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/AbstractUpdater.js~AbstractUpdater.html">AbstractUpdater</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Shared</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Cookie.js~Cookie.html">Cookie</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/Environment.js~Environment.html">Environment</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/ErrorHandler.js~ErrorHandler.html">ErrorHandler</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/PollUpdater.js~PollUpdater.html">PollUpdater</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html">RODAN_EVENTS</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Shared/SocketUpdater.js~SocketUpdater.html">SocketUpdater</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Updater</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/AbstractUpdater.js~AbstractUpdater.html">AbstractUpdater</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/PollUpdater.js~PollUpdater.html">PollUpdater</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Updater/SocketUpdater.js~SocketUpdater.html">SocketUpdater</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/LayoutViewMaster.js~LayoutViewMaster.html">LayoutViewMaster</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">Views/Master/Main</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewList.js~BaseViewList.html">BaseViewList</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html">BaseViewListItem</a></span></span></li>
@@ -153,7 +153,6 @@
 <div class="content" data-ice="content"><h1 data-ice="title">js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Marionette from &apos;backbone.marionette&apos;;
 import Radio from &apos;backbone.radio&apos;;
-import RODAN_EVENTS from &apos;../../../../../Shared/RODAN_EVENTS&apos;;
 
 /**
  * ResourceAssignment view.

@@ -1,0 +1,156 @@
+/**
+ * Styles for Rodan client.
+ */
+/**************************************************************************************
+ * General parameters
+ *************************************************************************************/
+/* Navigation area */
+/* Status area */
+/* Main area */
+/* WorkflowBuilder area */
+/* WorkflowBuilder control area */
+/**************************************************************************************
+ * DO NOT TOUCH unless you know what you're doing.
+ *************************************************************************************/
+div#region-navigation {
+  background: #000000;
+  height: 100%;
+  color: #cccccc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  cursor: default; }
+
+div#region-navigation ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 10px; }
+
+div#region-navigation div.node_text {
+  cursor: pointer; }
+
+div#region-main {
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  cursor: default; }
+
+div#canvas-wrap {
+  height: 100%;
+  overflow-y: hidden;
+  padding: 0px; }
+
+div#canvas-tooltip {
+  position: fixed;
+  background-color: #ffff88;
+  margin-left: 3px;
+  padding: 2px;
+  height: auto;
+  border-style: solid;
+  border-width: 2px;
+  width: auto;
+  visiblity: visible;
+  display: inline-block; }
+
+canvas#canvas-workspace {
+  background-color: #dddddd;
+  height: 100%;
+  width: 100%;
+  padding: 0px; }
+
+textarea[type=text] {
+  height: 200px;
+  width: 100%;
+  resize: none; }
+
+.vertical-center {
+  height: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center; }
+
+.horizontal-center {
+  width: 100%;
+  text-align: center; }
+
+body {
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px; }
+
+div.fixed_individual {
+  width: 100%; }
+
+div.top {
+  height: 100%;
+  height: 100vh; }
+
+div.gui {
+  height: 100%;
+  height: 100vh; }
+
+div#main_workflowbuilder {
+  background-color: white;
+  height: 100%;
+  overflow: auto; }
+
+.instruction {
+  font-style: italic; }
+
+:disabled {
+  background: #dddddd; }
+
+.modal-body {
+  max-height: 600px;
+  overflow-y: auto; }
+
+.modal-content {
+  opacity: 0.88 !important; }
+
+.modal-backdrop {
+  opacity: 0.3 !important; }
+
+/**
+ * Make text in table unselectable. This helps make multiple selection look better.
+ */
+table {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #93DB70; }
+
+div.table-control {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+div.table-control span {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold; }
+
+div.table-control span {
+  display: inline-block;
+  width: 50%; }
+
+div.table-control span.align-right {
+  text-align: right; }
+
+div.table-control p {
+  font-size: 0;
+  /* Fixes inline block spacing */ }
+
+th.sort-ascending .glyphicon .glyphicon-arrow-up {
+  font-family: Arial, Helvetica, sans-serif; }
+
+table.scroll {
+  display: block;
+  height: 400px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden; }

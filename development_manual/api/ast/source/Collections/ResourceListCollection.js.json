@@ -115,8 +115,8 @@
       ],
       "source": {
         "type": "Literal",
-        "value": "../Models/ResourceList",
-        "raw": "'../Models/ResourceList'",
+        "value": "js/Models/ResourceList",
+        "raw": "'js/Models/ResourceList'",
         "range": [
           72,
           96
