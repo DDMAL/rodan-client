@@ -31,9 +31,9 @@ export default class RunJob extends BaseModel
         {
             var serverDate = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_DATE);
             var expiryDate = new Date(this.get('working_user_expiry'));
-            if (this.get('working_user') === null
-                || this.get('working_user') === currentUser.get('url')
-                || serverDate.getTime() > expiryDate.getTime())
+            if (this.get('working_user') === null ||
+                this.get('working_user') === currentUser.get('url') ||
+                serverDate.getTime() > expiryDate.getTime())
             {
                 return true;
             }

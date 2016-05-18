@@ -39,6 +39,7 @@ export default class ErrorHandler extends Marionette.Object
         text += 'url: ' + url + '\n';
         text += 'line: ' + lineNumber + '\n';
         text += 'column: ' + columnNumber;
+        console.log(error);
     }
 
     /**

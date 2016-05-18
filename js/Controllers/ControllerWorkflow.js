@@ -5,7 +5,6 @@ import Radio from 'backbone.radio';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
 import Workflow from '../Models/Workflow';
-import WorkflowJobGroup from '../Models/WorkflowJobGroup';
 import WorkflowCollection from '../Collections/WorkflowCollection';
 
 /**
@@ -39,7 +38,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleEventListSelected(options)
     {
-        this._collection = new WorkflowCollection()
+        this._collection = new WorkflowCollection();
         this._collection.fetch({data: {project: options.project.id}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
@@ -96,7 +95,7 @@ export default class ControllerWorkflow extends BaseController
     _handleCreateSuccess(model, collection)
     {
         collection.add(model);
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_CREATED, {workflow: model})
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_CREATED, {workflow: model});
     }
 
     /**
@@ -105,6 +104,6 @@ export default class ControllerWorkflow extends BaseController
     _handleDeleteSuccess(model, collection)
     {
         collection.remove(model);
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_DELETED, {workflow: model})
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_DELETED, {workflow: model});
     }
 }

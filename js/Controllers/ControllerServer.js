@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import _ from 'underscore';
 import Backbone from 'backbone';
 import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
@@ -42,7 +41,7 @@ export default class ControllerServer extends BaseController
         var request = new XMLHttpRequest();
         request.open('HEAD', Configuration.getServerURL());
         request.onreadystatechange = (event) => this._handleTimeRequest(event);
-        request.setRequestHeader("Content-Type", "text/html");
+        request.setRequestHeader('Content-Type', 'text/html');
         request.send('');
     }
 

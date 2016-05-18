@@ -583,4 +583,4 @@ BehaviorTable.prototype.defaults = {
 };
 BehaviorTable.prototype.collectionEvents = {
     'sync': '_handleCollectionEventSync'
-}
+};

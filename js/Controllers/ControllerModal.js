@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import BaseController from './BaseController';
-import Configuration from '../Configuration';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -45,7 +44,7 @@ export default class ControllerModal extends BaseController
      */
     _showWaitingModal()
     {
-        var $modalEl = $("#modal-generic");
+        var $modalEl = $('modal-generic');
         if ($modalEl.is(':visible'))
         {
             return;
@@ -66,7 +65,7 @@ export default class ControllerModal extends BaseController
      */
     _handleOnServerIdle()
     {
-        var $modalEl = $("#modal-generic");
+        var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible') && this._waiting)
         {
             Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
@@ -86,7 +85,7 @@ export default class ControllerModal extends BaseController
      */
     _handleOnServerWaiting()
     {
-        var $modalEl = $("#modal-generic");
+        var $modalEl = $('#modal-generic');
         if (!$modalEl.is(':visible'))
         {
             this._showWaitingModal();
@@ -98,7 +97,7 @@ export default class ControllerModal extends BaseController
      */
     _handleRequestModalHide()
     {
-        var $modalElement = $("#modal-generic");
+        var $modalElement = $('#modal-generic');
         $modalElement.modal('hide');
         this._waiting = false;
     }
@@ -108,7 +107,7 @@ export default class ControllerModal extends BaseController
      */
     _handleRequestModalSimpleShow(options)
     {
-        var $modalEl = $("#modal-generic");
+        var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
             return;
@@ -127,7 +126,7 @@ export default class ControllerModal extends BaseController
      */
     _handleRequestModalShow(options)
     {
-        var $modalEl = $("#modal-generic");
+        var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
             return;
@@ -138,7 +137,7 @@ export default class ControllerModal extends BaseController
         this._layoutViewModal.getRegion('modal_body').show(options.view);
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);
-        $modalEl.draggable({handle: ".modal-header"});
+        $modalEl.draggable({handle: '.modal-header'});
         $('.modal-title').text(options.title);
         $modalEl.modal({backdrop: 'static'});
     }

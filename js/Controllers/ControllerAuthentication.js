@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import BaseController from '../Controllers/BaseController';
 import Configuration from '../Configuration';
 import Cookie from '../Shared/Cookie';
@@ -68,7 +67,7 @@ export default class ControllerAuthentication extends BaseController
                     oldOnBeforeSend(xhr);
                 }
                 xhr.setRequestHeader('Authorization', 'Token ' + that._token.value);
-            }
+            };
         }
     }
 
@@ -213,7 +212,6 @@ export default class ControllerAuthentication extends BaseController
     _logout()
     {
         var authRoute = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-reset-token');
-        var authType = Configuration.SERVER_AUTHENTICATION_TYPE;
         var request = new XMLHttpRequest();
         request.onload = (event) => this._handleDeauthenticationResponse(event);
         request.ontimeout = (event) => this._handleTimeout(event);

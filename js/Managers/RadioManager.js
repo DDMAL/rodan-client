@@ -1,4 +1,3 @@
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 

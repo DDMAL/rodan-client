@@ -2,7 +2,6 @@ import BaseController from './BaseController';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
 import LayoutViewIndividualWorkflowRun from '../Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun';
 import Radio from 'backbone.radio';
-import RunJobCollection from '../Collections/RunJobCollection';
 import ViewWorkflowRunList from '../Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import WorkflowRun from '../Models/WorkflowRun';
 import WorkflowRunCollection from '../Collections/WorkflowRunCollection';

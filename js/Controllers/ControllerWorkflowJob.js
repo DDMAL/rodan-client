@@ -109,7 +109,6 @@ export default class ControllerWorkflowJob extends BaseController
      */
     _addInputPorts(workflowJob, inputPortTypes, workflow)
     {
-        var that = this;
         inputPortTypes.forEach(function(inputPortType) 
         {
             for (var i = 0; i < inputPortType.get('minimum');i ++)
@@ -124,7 +123,6 @@ export default class ControllerWorkflowJob extends BaseController
      */
     _addOutputPorts(workflowJob, outputPortTypes, targetInputPorts, workflow)
     {
-        var that = this;
         var sendTargetInputPorts = outputPortTypes.length === 1 && outputPortTypes.at(0).get('minimum') === 1 ? targetInputPorts : [];
         outputPortTypes.forEach(function(outputPortType) 
         {

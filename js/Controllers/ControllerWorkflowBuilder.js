@@ -15,15 +15,12 @@ import Resource from '../Models/Resource';
 import ResourceCollection from '../Collections/ResourceCollection';
 import ResourceList from '../Models/ResourceList';
 import ViewJobList from '../Views/Master/Main/Job/List/ViewJobList';
-import ViewResourceList from '../Views/Master/Main/Resource/List/ViewResourceList';
 import ViewResourceListAssigned from '../Views/Master/Main/Resource/List/ViewResourceListAssigned';
 import ViewResourceListAvailable from '../Views/Master/Main/Resource/List/ViewResourceListAvailable';
 import ViewWorkflow from '../Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowList from '../Views/Master/Main/Workflow/List/ViewWorkflowList';
 import ViewWorkflowListImportItem from '../Views/Master/Main/Workflow/List/ViewWorkflowListImportItem';
-import Workflow from '../Models/Workflow';
 import WorkflowCollection from '../Collections/WorkflowCollection';
-import WorkflowJob from '../Models/WorkflowJob';
 import ViewWorkflowJobGroup from '../Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup';
 import ViewSettings from '../Views/Master/Main/WorkflowJob/Settings/ViewSettings';
 

@@ -94,7 +94,7 @@ Configuration.getServerURL = function()
 {
     var url = this.SERVER_HOST + ':' + this.SERVER_PORT;
     return this.SERVER_HTTPS ? 'https://' + url : 'http://' + url;
-}
+};
 
 /**
  * Requests filename from the client host. Whatever it gets from the host

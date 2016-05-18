@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import BaseController from './BaseController';
-import Configuration from '../Configuration';
 import RODAN_EVENTS from '../Shared/RODAN_EVENTS';
-import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 /**
@@ -30,7 +28,7 @@ export default class ControllerContextMenu extends BaseController
      */
     _handleRequestContextMenuHide()
     {
-        $("#menu-context").hide();
+        $('#menu-context').hide();
     }
 
     /**

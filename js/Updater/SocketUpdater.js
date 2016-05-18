@@ -37,18 +37,11 @@ export default class SocketUpdater extends AbstractUpdater
     {
         if (event.data === '--heartbeat--')
         {
-            this._processHeartbeat(event);
+          //  this._processHeartbeat(event);
         }
         else
         {
             this.update();
         }
-    }
-
-    /**
-     * Process heartbeat.
-     */
-    _processHeartbeat(event)
-    {
     }
 }

@@ -53,7 +53,7 @@ export default class ControllerProject extends BaseController
     /**
      * Handle event Project generic response.
      */
-    _handleEventProjectGenericResponse(options)
+    _handleEventProjectGenericResponse()
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECTS_LOAD, {});
     }
@@ -61,7 +61,7 @@ export default class ControllerProject extends BaseController
     /**
      * Handle event Project delete response.
      */
-    _handleEventProjectDeleteResponse(options)
+    _handleEventProjectDeleteResponse()
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECTS_LOAD, {});
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION);
@@ -124,7 +124,7 @@ export default class ControllerProject extends BaseController
     {
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
-        var view = new ViewProjectList({collection: collection})
+        var view = new ViewProjectList({collection: collection});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 

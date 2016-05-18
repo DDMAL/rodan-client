@@ -39,11 +39,23 @@ export default class Environment
     {
         if (_os === null)
         {
-            _os='Unknown OS';
-            if (navigator.appVersion.indexOf('Win')!=-1) _os='Windows';
-            if (navigator.appVersion.indexOf('Mac')!=-1) _os='MacOS';
-            if (navigator.appVersion.indexOf('X11')!=-1) _os='UNIX';
-            if (navigator.appVersion.indexOf('Linux')!=-1) _os='Linux';
+            _os = 'Unknown OS';
+            if (navigator.appVersion.indexOf('Win') !== -1)
+            {
+                _os='Windows';
+            }
+            if (navigator.appVersion.indexOf('Mac') !== -1)
+            {
+                _os = 'MacOS';
+            }
+            if (navigator.appVersion.indexOf('X11') !== -1)
+            {
+                _os = 'UNIX';
+            }
+            if (navigator.appVersion.indexOf('Linux') !== -1)
+            {
+                _os = 'Linux';
+            }
         }
         return _os;
     }
@@ -55,7 +67,7 @@ export default class Environment
      */
     static getMultipleSelectionKey()
     {
-        return _keyControls[Environment.getOS()]['multiple'];
+        return _keyControls[Environment.getOS()].multiple;
     }
 
     /**
@@ -65,6 +77,6 @@ export default class Environment
      */
     static getRangeSelectionKey()
     {
-        return _keyControls[Environment.getOS()]['range'];
+        return _keyControls[Environment.getOS()].range;
     }
 }

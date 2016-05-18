@@ -45,16 +45,16 @@ export default class WorkflowJob extends BaseModel
     {
         for (var i in response.input_ports)
         {
-            var modelClass = this.get('input_ports').model;
-            var model = new modelClass(response.input_ports[i]);
+            var ModelClass = this.get('input_ports').model;
+            var model = new ModelClass(response.input_ports[i]);
             this.get('input_ports').add(model, {merge: true});
         }
         response.input_ports = this.get('input_ports');
 
-        for (var i in response.output_ports)
+        for (i in response.output_ports)
         {
-            var modelClass = this.get('output_ports').model;
-            var model = new modelClass(response.output_ports[i]);
+            var ModelClass = this.get('output_ports').model;
+            var model = new ModelClass(response.output_ports[i]);
             this.get('output_ports').add(model, {merge: true});
         }
         response.output_ports = this.get('output_ports');

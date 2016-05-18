@@ -137,7 +137,7 @@ export default class ControllerResource extends BaseController
     _handleDeleteSuccess(model, collection)
     {
         collection.remove(model);
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_DELETED, {resource: model})
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_DELETED, {resource: model});
     }
 }
 

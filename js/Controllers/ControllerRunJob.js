@@ -113,7 +113,7 @@ export default class ControllerRunJob extends BaseController
      */
     _openRunJobInterface(url)
     {
-        var newWindow = window.open(url, 'test', '_blank');
+        window.open(url, '', '_blank');
     }
 
     /**
