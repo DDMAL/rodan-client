@@ -19,6 +19,6 @@ export default class ResourceCollection extends BaseCollection
         this._route = 'resources';
         this._enumerations = [{field: 'uploaded', 
                                label: 'Uploaded or generated', 
-                               values: [{value: 'False', label: 'Generated'}, {value: 'True', label: 'User'}]}];
+                               values: [{value: 'False', label: 'Generated'}, {value: 'True', label: 'Uploaded'}]}];
     }
 }
