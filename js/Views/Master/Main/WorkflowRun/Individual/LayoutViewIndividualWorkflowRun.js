@@ -100,6 +100,14 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
     }
+
+    /**
+     * Handle button delete.
+     */
+    _handleButtonDelete()
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_DELETE, {workflowrun: this.model});
+    }
 }
 LayoutViewIndividualWorkflowRun.prototype.modelEvents = {
     'all': 'render'
@@ -108,13 +116,15 @@ LayoutViewIndividualWorkflowRun.prototype.ui = {
     buttonShowResources: '#button-resources_show',
     buttonShowRunJobs: '#button-runjobs_show',
     buttonSave: '#button-save_workflowrun',
+    buttonDelete: '#button-delete_workflowrun',
     textName: '#text-workflowrun_name',
     textDescription: '#text-workflowrun_description'
 };
 LayoutViewIndividualWorkflowRun.prototype.events = {
     'click @ui.buttonShowResources': '_showResources',
     'click @ui.buttonShowRunJobs': '_showRunJobs',
-    'click @ui.buttonSave': '_handleButtonSave'
+    'click @ui.buttonSave': '_handleButtonSave',
+    'click @ui.buttonDelete': '_handleButtonDelete'
 
 };
 LayoutViewIndividualWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
