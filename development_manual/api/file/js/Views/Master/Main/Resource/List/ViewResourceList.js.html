@@ -182,12 +182,12 @@ export default class ViewResourceList extends BaseViewList
     {
         var templateResourceType = _.template($(&apos;#template-main_resource_list_resourcetype_list_item&apos;).html());
         var resourceTypeCollection = Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
-        var html = templateResourceType({url: null, mimetype: &apos;Auto-detect&apos;, extension: &apos;Rodan will attempt to determine the file type based on the file itself&apos;});
-        this.$el.find(&apos;#select-resourcetype&apos;).append(html);
+//        var html = templateResourceType({url: null, mimetype: &apos;Auto-detect&apos;, extension: &apos;Rodan will attempt to determine the file type based on the file itself&apos;});
+ //       this.$el.find(&apos;#select-resourcetype&apos;).append(html);
         for (var i = 0; i &lt; resourceTypeCollection.length; i++)
         {
         	var resourceType = resourceTypeCollection.at(i);
-            html = templateResourceType(resourceType.attributes);
+            var html = templateResourceType(resourceType.attributes);
         	this.$el.find(&apos;#select-resourcetype&apos;).append(html);
         }
     }
