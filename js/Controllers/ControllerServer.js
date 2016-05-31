@@ -283,12 +283,15 @@ export default class ControllerServer extends BaseController
         }
 
         // Get the time.
-        var dateResponse = new Date(xhr.getResponseHeader('Date'));
-        if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
+        if (xhr.getResponseHeader)
         {
-            this._updateServerDate(dateResponse);
-            clearInterval(this._timeGetterInterval);
-            this._timeGetterInterval = null;
+            var dateResponse = new Date(xhr.getResponseHeader('Date'));
+            if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
+            {
+                this._updateServerDate(dateResponse);
+                clearInterval(this._timeGetterInterval);
+                this._timeGetterInterval = null;
+            }
         }
 
         // Set Date getter interval.

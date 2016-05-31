@@ -62,7 +62,7 @@ export default class ErrorHandler extends Marionette.Object
         }
         else
         {
-            alert(response.statusText);
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: response.statusText});
         }
     }
 
@@ -96,7 +96,7 @@ export default class ErrorHandler extends Marionette.Object
                 message += responseTextObject[property];
             }
         }
-        alert(message);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: message});
     }
 
     /**

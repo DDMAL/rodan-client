@@ -37,6 +37,7 @@ export default class ControllerModal extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, options => this._handleRequestModalShowError(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -128,5 +129,21 @@ export default class ControllerModal extends BaseController
         $modalEl.draggable({handle: '.modal-header'});
         $('.modal-title').text(options.title);
         $modalEl.modal({backdrop: 'static'});
+    }
+
+    /**
+     * Handle request show error modal.
+     */
+    _handleRequestModalShowError(options)
+    {
+        var $modalEl = $('#modal-generic');
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
+        this._layoutViewModal.render();
+        $modalEl.css({top: 0, left: 0, position: 'absolute'});
+        $modalEl.html(this._layoutViewModal.el);
+        $('.modal-title').text('Error');
+        $('.modal-body').append(options.text);
+        $modalEl.modal({backdrop: 'static', keyboard: false}); 
+        this._waiting = false;
     }
 }

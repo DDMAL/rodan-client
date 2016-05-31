@@ -15,14 +15,7 @@ export default class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonRunWorkflow()
     {
-        if (!this.model.get('valid'))
-        {
-            alert('The workflow must be valid prior to run.');
-        }
-        else
-        {
-            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
-        }
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
     }
 
     /**
@@ -46,7 +39,6 @@ export default class ViewWorkflow extends Marionette.ItemView
      */
     _handleButtonCopyWorkflow()
     {
-        alert('not yet implemented');
     }
 
     /**

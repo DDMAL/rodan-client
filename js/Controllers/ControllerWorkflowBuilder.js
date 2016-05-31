@@ -126,7 +126,7 @@ export default class ControllerWorkflowBuilder extends BaseController
             var collection = this._getResourceAssignments(inputPortUrl);
             if (collection.length === 0)
             {
-                alert('There are still unsatisfied Input Ports.');
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: 'There are still unsatisfied Input Ports.'});
                 return;
             }
 
@@ -161,7 +161,7 @@ export default class ControllerWorkflowBuilder extends BaseController
         // If we have anything left oveer in our cloned Collection, something is wrong.
         if (knownInputPorts.length > 0)
         {
-            alert('There are still unsatisfied Input Ports.');
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: 'There are still unsatisfied Input Ports.'});
         }
         else
         {
@@ -355,7 +355,7 @@ export default class ControllerWorkflowBuilder extends BaseController
         var multipleUrl = this._getInputPortURLWithMultipleAssignments();
         if (multipleUrl && resourcesAssigned.length > 0 && multipleUrl !== url)
         {
-            alert('Only one InputPort may have multiple Resources assigned to it.');
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: 'Only one InputPort may have multiple Resources assigned to it.'});
             return;
         }
         resourcesAssigned.add(options.resource);
