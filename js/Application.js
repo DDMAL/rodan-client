@@ -75,7 +75,6 @@ export default class Application extends Marionette.Application
         this._errorHandler = new ErrorHandler();
         
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
-
     }
 
     /**
@@ -156,6 +155,7 @@ export default class Application extends Marionette.Application
         $.ajaxPrefilter(function(options)
         {
             that._controllerAuthentication.ajaxPrefilter(options);
+            that._controllerServer.ajaxPrefilter(options);
         });
     }
 

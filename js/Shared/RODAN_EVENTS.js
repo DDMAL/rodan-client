@@ -216,7 +216,7 @@ class RODAN_EVENTS
         this.EVENT__SERVER_IDLE = 'EVENT__SERVER_IDLE';
         /** Triggered when server routes have been loaded. */
         this.EVENT__SERVER_ROUTESLOADED = 'EVENT__SERVER_ROUTESLOADED';
-        /** Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response). */
+        /** Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response). Sends {pending: int (number of pending AJAX responses)}*/
         this.EVENT__SERVER_WAITING = 'EVENT__SERVER_WAITING';
         /** Request server configuration. Returns object. */
         this.REQUEST__SERVER_CONFIGURATION = 'REQUEST__SERVER_CONFIGURATION';

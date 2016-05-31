@@ -27,7 +27,43 @@ export default class ControllerServer extends BaseController
         this._responseTimeout = null;
         this._responsePanic = null;
         this._waitingEventTriggered = false;
+        this._pendingRequests = 0;
         Backbone.sync = (method, model, options) => this._sync(method, model, options);
+    }
+
+    /**
+     * AJAX prefilter associated with server control.
+     *
+     * This will count the pending responses and set timeouts.
+     *
+     * @param {object} options object.beforeSend (optional) is a function that takes in the XmlHTTPRequest before sending; this may be useful for doing pre-processing of AJAX requests
+     */
+    ajaxPrefilter(options)
+    {
+        var that = this;
+        var oldOnBeforeSend = options.beforeSend;
+        options.beforeSend = function (xhr) 
+        {
+            if (oldOnBeforeSend)
+            {
+                oldOnBeforeSend(xhr);
+            }
+
+            // Set a timeout for x seconds.
+            if (that._responseTimeout === null)
+            {
+                that._responseTimeout = setTimeout(() => that._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
+            }
+
+            // Set a timeout for panic.
+            if (that._responsePanic === null)
+            {
+                that._responsePanic = setTimeout(() => that._sendPanicNotification(), Configuration.SERVER_PANIC_TIMER);
+            }
+
+            // Increment pending requests.
+            that._pendingRequests++;
+        };
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -46,26 +82,11 @@ export default class ControllerServer extends BaseController
     }
 
     /**
-     * Sync override. This is needed if we want to use WebSockets.
+     * Sync override. We do this to add handlers.
      */
     _sync(method, model, options)
     {
-        // Set a timeout for x seconds.
-        if (this._responseTimeout === null)
-        {
-            this._responseTimeout = setTimeout(() => this._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
-        }
-
-        // Set a timeout for panic.
-        if (this._responsePanic === null)
-        {
-            this._responsePanic = setTimeout(() => this._sendPanicNotification(), Configuration.SERVER_PANIC_TIMER);
-        }
-
-        // Apply generic handler for timeout.
-        options = this._applyResponseHandlers(options);
-
-        // Do call.
+        options = this._applyAJAXResponseHandlers(options);
         return this._originalSync(method, model, options);
     }
 
@@ -183,7 +204,8 @@ export default class ControllerServer extends BaseController
                                 type: 'OPTIONS',
                                 url: this._server.routes[key].url,
                                 dataType: 'json'};
-            var request = $.ajax(ajaxSettings); 
+            ajaxSettings = this._applyAJAXResponseHandlers(ajaxSettings);
+            var request = $.ajax(ajaxSettings);
             request.key = key;
         }
     }
@@ -197,11 +219,11 @@ export default class ControllerServer extends BaseController
     }
 
     /**
-     * Apply success/error handlers to HTTP request.
+     * Apply success/error AJAX handlers to HTTP request.
      */
-    _applyResponseHandlers(options)
+    _applyAJAXResponseHandlers(options)
     {
-        var genericResponseFunction = (model, response, options) => this._handleResponse(model, response, options);
+        var genericResponseFunction = (result, status, xhr) => this._handleAJAXResponse(result, status, xhr);
 
         // Success.
         if (!options.hasOwnProperty('success'))
@@ -211,10 +233,10 @@ export default class ControllerServer extends BaseController
         else
         {
             var customSuccessFunction = options.success;
-            options.success = function(model, response, options)
+            options.success = function(result, status, xhr)
             {
-                customSuccessFunction(model, response, options);
-                genericResponseFunction(model, response, options);
+                customSuccessFunction(result, status, xhr);
+                genericResponseFunction(result, status, xhr);
             };
         }
 
@@ -226,28 +248,25 @@ export default class ControllerServer extends BaseController
         else
         {
             var customErrorFunction = options.error;
-            options.error = function(model, response, options)
+            options.error = function(result, status, xhr)
             {
-                customErrorFunction(model, response, options);
-                genericResponseFunction(model, response, options);
+                customErrorFunction(result, status, xhr);
+                genericResponseFunction(result, status, xhr);
             };
-        }
-
-        // Complete
-        if (!options.hasOwnProperty('complete'))
-        {
-            options.complete = genericResponseFunction;
         }
 
         return options;
     }
 
     /**
-     * Handle response.
+     * Handle AJAX response (generic).
      */
-    _handleResponse(model, response, options)
+    _handleAJAXResponse(result, status, xhr)
     {
-        if (document.readyState === 'complete')
+        // Decrement the pending requests.
+        this._pendingRequests--;
+
+        if (document.readyState === 'complete' && this._pendingRequests === 0)
         {
             clearTimeout(this._responseTimeout);
             clearTimeout(this._responsePanic);
@@ -258,24 +277,27 @@ export default class ControllerServer extends BaseController
                 this._sendIdleNotification();
             }
         }
-
-        // Get the time.
-        if (options && options.getResponseHeader && options.getResponseHeader('Date'))
+        else if (this._waitingEventTriggered)
         {
-            var dateResponse = new Date(options.getResponseHeader('Date'));
-            if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
-            {
-                this._updateServerDate(dateResponse);
-                clearInterval(this._timeGetterInterval);
-                this._timeGetterInterval = null;
-            }
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_WAITING, {pending: this._pendingRequests});
         }
 
+        // Get the time.
+        var dateResponse = new Date(xhr.getResponseHeader('Date'));
+        if (this._serverDate === null || this._serverDate.getTime() < dateResponse.getTime())
+        {
+            this._updateServerDate(dateResponse);
+            clearInterval(this._timeGetterInterval);
+            this._timeGetterInterval = null;
+        }
+
+        // Set Date getter interval.
         if (!this._timeGetterInterval)
         {
             this._timeGetterInterval = setInterval(() => this._sendTimeGetterRequest(), Configuration.SERVER_REQUEST_TIME_INTERVAL);
         }
     }
+
 
     /**
      * Sends a notification that queries are still pending.
@@ -283,7 +305,7 @@ export default class ControllerServer extends BaseController
     _sendWaitingNotification()
     {
         this._waitingEventTriggered = true;
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_WAITING);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_WAITING, {pending: this._pendingRequests});
     }
 
     /**
