@@ -7488,12 +7488,459 @@
                   }
                 }
               ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle button delete.\n     ",
+                  "range": [
+                    4188,
+                    4228
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 104,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 106,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "_handleButtonDelete",
+                "range": [
+                  4233,
+                  4252
+                ],
+                "loc": {
+                  "start": {
+                    "line": 107,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 107,
+                    "column": 23
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "CallExpression",
+                            "callee": {
+                              "type": "MemberExpression",
+                              "computed": false,
+                              "object": {
+                                "type": "Identifier",
+                                "name": "Radio",
+                                "range": [
+                                  4269,
+                                  4274
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 109,
+                                    "column": 8
+                                  },
+                                  "end": {
+                                    "line": 109,
+                                    "column": 13
+                                  }
+                                }
+                              },
+                              "property": {
+                                "type": "Identifier",
+                                "name": "channel",
+                                "range": [
+                                  4275,
+                                  4282
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 109,
+                                    "column": 14
+                                  },
+                                  "end": {
+                                    "line": 109,
+                                    "column": 21
+                                  }
+                                }
+                              },
+                              "range": [
+                                4269,
+                                4282
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 109,
+                                  "column": 8
+                                },
+                                "end": {
+                                  "line": 109,
+                                  "column": 21
+                                }
+                              }
+                            },
+                            "arguments": [
+                              {
+                                "type": "Literal",
+                                "value": "rodan",
+                                "raw": "'rodan'",
+                                "range": [
+                                  4283,
+                                  4290
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 109,
+                                    "column": 22
+                                  },
+                                  "end": {
+                                    "line": 109,
+                                    "column": 29
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              4269,
+                              4291
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 109,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 109,
+                                "column": 30
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "request",
+                            "range": [
+                              4292,
+                              4299
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 109,
+                                "column": 31
+                              },
+                              "end": {
+                                "line": 109,
+                                "column": 38
+                              }
+                            }
+                          },
+                          "range": [
+                            4269,
+                            4299
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 109,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 109,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                              "type": "Identifier",
+                              "name": "RODAN_EVENTS",
+                              "range": [
+                                4300,
+                                4312
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 109,
+                                  "column": 39
+                                },
+                                "end": {
+                                  "line": 109,
+                                  "column": 51
+                                }
+                              }
+                            },
+                            "property": {
+                              "type": "Identifier",
+                              "name": "REQUEST__WORKFLOWRUN_DELETE",
+                              "range": [
+                                4313,
+                                4340
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 109,
+                                  "column": 52
+                                },
+                                "end": {
+                                  "line": 109,
+                                  "column": 79
+                                }
+                              }
+                            },
+                            "range": [
+                              4300,
+                              4340
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 109,
+                                "column": 39
+                              },
+                              "end": {
+                                "line": 109,
+                                "column": 79
+                              }
+                            }
+                          },
+                          {
+                            "type": "ObjectExpression",
+                            "properties": [
+                              {
+                                "type": "Property",
+                                "key": {
+                                  "type": "Identifier",
+                                  "name": "workflowrun",
+                                  "range": [
+                                    4343,
+                                    4354
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 109,
+                                      "column": 82
+                                    },
+                                    "end": {
+                                      "line": 109,
+                                      "column": 93
+                                    }
+                                  }
+                                },
+                                "value": {
+                                  "type": "MemberExpression",
+                                  "computed": false,
+                                  "object": {
+                                    "type": "ThisExpression",
+                                    "range": [
+                                      4356,
+                                      4360
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 109,
+                                        "column": 95
+                                      },
+                                      "end": {
+                                        "line": 109,
+                                        "column": 99
+                                      }
+                                    }
+                                  },
+                                  "property": {
+                                    "type": "Identifier",
+                                    "name": "model",
+                                    "range": [
+                                      4361,
+                                      4366
+                                    ],
+                                    "loc": {
+                                      "start": {
+                                        "line": 109,
+                                        "column": 100
+                                      },
+                                      "end": {
+                                        "line": 109,
+                                        "column": 105
+                                      }
+                                    }
+                                  },
+                                  "range": [
+                                    4356,
+                                    4366
+                                  ],
+                                  "loc": {
+                                    "start": {
+                                      "line": 109,
+                                      "column": 95
+                                    },
+                                    "end": {
+                                      "line": 109,
+                                      "column": 105
+                                    }
+                                  }
+                                },
+                                "kind": "init",
+                                "method": false,
+                                "shorthand": false,
+                                "computed": false,
+                                "range": [
+                                  4343,
+                                  4366
+                                ],
+                                "loc": {
+                                  "start": {
+                                    "line": 109,
+                                    "column": 82
+                                  },
+                                  "end": {
+                                    "line": 109,
+                                    "column": 105
+                                  }
+                                }
+                              }
+                            ],
+                            "range": [
+                              4342,
+                              4367
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 109,
+                                "column": 81
+                              },
+                              "end": {
+                                "line": 109,
+                                "column": 106
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          4269,
+                          4368
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 109,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 109,
+                            "column": 107
+                          }
+                        }
+                      },
+                      "range": [
+                        4269,
+                        4369
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 109,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 109,
+                          "column": 108
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    4259,
+                    4375
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 108,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 110,
+                      "column": 5
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  4252,
+                  4375
+                ],
+                "loc": {
+                  "start": {
+                    "line": 107,
+                    "column": 23
+                  },
+                  "end": {
+                    "line": 110,
+                    "column": 5
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                4233,
+                4375
+              ],
+              "loc": {
+                "start": {
+                  "line": 107,
+                  "column": 4
+                },
+                "end": {
+                  "line": 110,
+                  "column": 5
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * Handle button delete.\n     ",
+                  "range": [
+                    4188,
+                    4228
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 104,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 106,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
               "static": false
             }
           ],
           "range": [
             654,
-            4184
+            4377
           ],
           "loc": {
             "start": {
@@ -7501,14 +7948,14 @@
               "column": 0
             },
             "end": {
-              "line": 103,
+              "line": 111,
               "column": 1
             }
           }
         },
         "range": [
           586,
-          4184
+          4377
         ],
         "loc": {
           "start": {
@@ -7516,7 +7963,7 @@
             "column": 15
           },
           "end": {
-            "line": 103,
+            "line": 111,
             "column": 1
           }
         },
@@ -7544,7 +7991,7 @@
       },
       "range": [
         571,
-        4184
+        4377
       ],
       "loc": {
         "start": {
@@ -7552,7 +7999,7 @@
           "column": 0
         },
         "end": {
-          "line": 103,
+          "line": 111,
           "column": 1
         }
       },
@@ -7592,16 +8039,16 @@
               "type": "Identifier",
               "name": "LayoutViewIndividualWorkflowRun",
               "range": [
-                4185,
-                4216
+                4378,
+                4409
               ],
               "loc": {
                 "start": {
-                  "line": 104,
+                  "line": 112,
                   "column": 0
                 },
                 "end": {
-                  "line": 104,
+                  "line": 112,
                   "column": 31
                 }
               }
@@ -7610,31 +8057,31 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                4217,
-                4226
+                4410,
+                4419
               ],
               "loc": {
                 "start": {
-                  "line": 104,
+                  "line": 112,
                   "column": 32
                 },
                 "end": {
-                  "line": 104,
+                  "line": 112,
                   "column": 41
                 }
               }
             },
             "range": [
-              4185,
-              4226
+              4378,
+              4419
             ],
             "loc": {
               "start": {
-                "line": 104,
+                "line": 112,
                 "column": 0
               },
               "end": {
-                "line": 104,
+                "line": 112,
                 "column": 41
               }
             }
@@ -7643,31 +8090,31 @@
             "type": "Identifier",
             "name": "modelEvents",
             "range": [
-              4227,
-              4238
+              4420,
+              4431
             ],
             "loc": {
               "start": {
-                "line": 104,
+                "line": 112,
                 "column": 42
               },
               "end": {
-                "line": 104,
+                "line": 112,
                 "column": 53
               }
             }
           },
           "range": [
-            4185,
-            4238
+            4378,
+            4431
           ],
           "loc": {
             "start": {
-              "line": 104,
+              "line": 112,
               "column": 0
             },
             "end": {
-              "line": 104,
+              "line": 112,
               "column": 53
             }
           }
@@ -7682,16 +8129,16 @@
                 "value": "all",
                 "raw": "'all'",
                 "range": [
-                  4247,
-                  4252
+                  4440,
+                  4445
                 ],
                 "loc": {
                   "start": {
-                    "line": 105,
+                    "line": 113,
                     "column": 4
                   },
                   "end": {
-                    "line": 105,
+                    "line": 113,
                     "column": 9
                   }
                 }
@@ -7701,16 +8148,16 @@
                 "value": "render",
                 "raw": "'render'",
                 "range": [
-                  4254,
-                  4262
+                  4447,
+                  4455
                 ],
                 "loc": {
                   "start": {
-                    "line": 105,
+                    "line": 113,
                     "column": 11
                   },
                   "end": {
-                    "line": 105,
+                    "line": 113,
                     "column": 19
                   }
                 }
@@ -7720,62 +8167,62 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4247,
-                4262
+                4440,
+                4455
               ],
               "loc": {
                 "start": {
-                  "line": 105,
+                  "line": 113,
                   "column": 4
                 },
                 "end": {
-                  "line": 105,
+                  "line": 113,
                   "column": 19
                 }
               }
             }
           ],
           "range": [
-            4241,
-            4264
+            4434,
+            4457
           ],
           "loc": {
             "start": {
-              "line": 104,
+              "line": 112,
               "column": 56
             },
             "end": {
-              "line": 106,
+              "line": 114,
               "column": 1
             }
           }
         },
         "range": [
-          4185,
-          4264
+          4378,
+          4457
         ],
         "loc": {
           "start": {
-            "line": 104,
+            "line": 112,
             "column": 0
           },
           "end": {
-            "line": 106,
+            "line": 114,
             "column": 1
           }
         }
       },
       "range": [
-        4185,
-        4265
+        4378,
+        4458
       ],
       "loc": {
         "start": {
-          "line": 104,
+          "line": 112,
           "column": 0
         },
         "end": {
-          "line": 106,
+          "line": 114,
           "column": 2
         }
       }
@@ -7795,16 +8242,16 @@
               "type": "Identifier",
               "name": "LayoutViewIndividualWorkflowRun",
               "range": [
-                4266,
-                4297
+                4459,
+                4490
               ],
               "loc": {
                 "start": {
-                  "line": 107,
+                  "line": 115,
                   "column": 0
                 },
                 "end": {
-                  "line": 107,
+                  "line": 115,
                   "column": 31
                 }
               }
@@ -7813,31 +8260,31 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                4298,
-                4307
+                4491,
+                4500
               ],
               "loc": {
                 "start": {
-                  "line": 107,
+                  "line": 115,
                   "column": 32
                 },
                 "end": {
-                  "line": 107,
+                  "line": 115,
                   "column": 41
                 }
               }
             },
             "range": [
-              4266,
-              4307
+              4459,
+              4500
             ],
             "loc": {
               "start": {
-                "line": 107,
+                "line": 115,
                 "column": 0
               },
               "end": {
-                "line": 107,
+                "line": 115,
                 "column": 41
               }
             }
@@ -7846,31 +8293,31 @@
             "type": "Identifier",
             "name": "ui",
             "range": [
-              4308,
-              4310
+              4501,
+              4503
             ],
             "loc": {
               "start": {
-                "line": 107,
+                "line": 115,
                 "column": 42
               },
               "end": {
-                "line": 107,
+                "line": 115,
                 "column": 44
               }
             }
           },
           "range": [
-            4266,
-            4310
+            4459,
+            4503
           ],
           "loc": {
             "start": {
-              "line": 107,
+              "line": 115,
               "column": 0
             },
             "end": {
-              "line": 107,
+              "line": 115,
               "column": 44
             }
           }
@@ -7884,16 +8331,16 @@
                 "type": "Identifier",
                 "name": "buttonShowResources",
                 "range": [
-                  4319,
-                  4338
+                  4512,
+                  4531
                 ],
                 "loc": {
                   "start": {
-                    "line": 108,
+                    "line": 116,
                     "column": 4
                   },
                   "end": {
-                    "line": 108,
+                    "line": 116,
                     "column": 23
                   }
                 }
@@ -7903,16 +8350,16 @@
                 "value": "#button-resources_show",
                 "raw": "'#button-resources_show'",
                 "range": [
-                  4340,
-                  4364
+                  4533,
+                  4557
                 ],
                 "loc": {
                   "start": {
-                    "line": 108,
+                    "line": 116,
                     "column": 25
                   },
                   "end": {
-                    "line": 108,
+                    "line": 116,
                     "column": 49
                   }
                 }
@@ -7922,16 +8369,16 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4319,
-                4364
+                4512,
+                4557
               ],
               "loc": {
                 "start": {
-                  "line": 108,
+                  "line": 116,
                   "column": 4
                 },
                 "end": {
-                  "line": 108,
+                  "line": 116,
                   "column": 49
                 }
               }
@@ -7942,16 +8389,16 @@
                 "type": "Identifier",
                 "name": "buttonShowRunJobs",
                 "range": [
-                  4370,
-                  4387
+                  4563,
+                  4580
                 ],
                 "loc": {
                   "start": {
-                    "line": 109,
+                    "line": 117,
                     "column": 4
                   },
                   "end": {
-                    "line": 109,
+                    "line": 117,
                     "column": 21
                   }
                 }
@@ -7961,16 +8408,16 @@
                 "value": "#button-runjobs_show",
                 "raw": "'#button-runjobs_show'",
                 "range": [
-                  4389,
-                  4411
+                  4582,
+                  4604
                 ],
                 "loc": {
                   "start": {
-                    "line": 109,
+                    "line": 117,
                     "column": 23
                   },
                   "end": {
-                    "line": 109,
+                    "line": 117,
                     "column": 45
                   }
                 }
@@ -7980,16 +8427,16 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4370,
-                4411
+                4563,
+                4604
               ],
               "loc": {
                 "start": {
-                  "line": 109,
+                  "line": 117,
                   "column": 4
                 },
                 "end": {
-                  "line": 109,
+                  "line": 117,
                   "column": 45
                 }
               }
@@ -8000,16 +8447,16 @@
                 "type": "Identifier",
                 "name": "buttonSave",
                 "range": [
-                  4417,
-                  4427
+                  4610,
+                  4620
                 ],
                 "loc": {
                   "start": {
-                    "line": 110,
+                    "line": 118,
                     "column": 4
                   },
                   "end": {
-                    "line": 110,
+                    "line": 118,
                     "column": 14
                   }
                 }
@@ -8019,16 +8466,16 @@
                 "value": "#button-save_workflowrun",
                 "raw": "'#button-save_workflowrun'",
                 "range": [
-                  4429,
-                  4455
+                  4622,
+                  4648
                 ],
                 "loc": {
                   "start": {
-                    "line": 110,
+                    "line": 118,
                     "column": 16
                   },
                   "end": {
-                    "line": 110,
+                    "line": 118,
                     "column": 42
                   }
                 }
@@ -8038,17 +8485,75 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4417,
-                4455
+                4610,
+                4648
               ],
               "loc": {
                 "start": {
-                  "line": 110,
+                  "line": 118,
                   "column": 4
                 },
                 "end": {
-                  "line": 110,
+                  "line": 118,
                   "column": 42
+                }
+              }
+            },
+            {
+              "type": "Property",
+              "key": {
+                "type": "Identifier",
+                "name": "buttonDelete",
+                "range": [
+                  4654,
+                  4666
+                ],
+                "loc": {
+                  "start": {
+                    "line": 119,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 119,
+                    "column": 16
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "#button-delete_workflowrun",
+                "raw": "'#button-delete_workflowrun'",
+                "range": [
+                  4668,
+                  4696
+                ],
+                "loc": {
+                  "start": {
+                    "line": 119,
+                    "column": 18
+                  },
+                  "end": {
+                    "line": 119,
+                    "column": 46
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                4654,
+                4696
+              ],
+              "loc": {
+                "start": {
+                  "line": 119,
+                  "column": 4
+                },
+                "end": {
+                  "line": 119,
+                  "column": 46
                 }
               }
             },
@@ -8058,16 +8563,16 @@
                 "type": "Identifier",
                 "name": "textName",
                 "range": [
-                  4461,
-                  4469
+                  4702,
+                  4710
                 ],
                 "loc": {
                   "start": {
-                    "line": 111,
+                    "line": 120,
                     "column": 4
                   },
                   "end": {
-                    "line": 111,
+                    "line": 120,
                     "column": 12
                   }
                 }
@@ -8077,16 +8582,16 @@
                 "value": "#text-workflowrun_name",
                 "raw": "'#text-workflowrun_name'",
                 "range": [
-                  4471,
-                  4495
+                  4712,
+                  4736
                 ],
                 "loc": {
                   "start": {
-                    "line": 111,
+                    "line": 120,
                     "column": 14
                   },
                   "end": {
-                    "line": 111,
+                    "line": 120,
                     "column": 38
                   }
                 }
@@ -8096,16 +8601,16 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4461,
-                4495
+                4702,
+                4736
               ],
               "loc": {
                 "start": {
-                  "line": 111,
+                  "line": 120,
                   "column": 4
                 },
                 "end": {
-                  "line": 111,
+                  "line": 120,
                   "column": 38
                 }
               }
@@ -8116,16 +8621,16 @@
                 "type": "Identifier",
                 "name": "textDescription",
                 "range": [
-                  4501,
-                  4516
+                  4742,
+                  4757
                 ],
                 "loc": {
                   "start": {
-                    "line": 112,
+                    "line": 121,
                     "column": 4
                   },
                   "end": {
-                    "line": 112,
+                    "line": 121,
                     "column": 19
                   }
                 }
@@ -8135,16 +8640,16 @@
                 "value": "#text-workflowrun_description",
                 "raw": "'#text-workflowrun_description'",
                 "range": [
-                  4518,
-                  4549
+                  4759,
+                  4790
                 ],
                 "loc": {
                   "start": {
-                    "line": 112,
+                    "line": 121,
                     "column": 21
                   },
                   "end": {
-                    "line": 112,
+                    "line": 121,
                     "column": 52
                   }
                 }
@@ -8154,62 +8659,62 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4501,
-                4549
+                4742,
+                4790
               ],
               "loc": {
                 "start": {
-                  "line": 112,
+                  "line": 121,
                   "column": 4
                 },
                 "end": {
-                  "line": 112,
+                  "line": 121,
                   "column": 52
                 }
               }
             }
           ],
           "range": [
-            4313,
-            4551
+            4506,
+            4792
           ],
           "loc": {
             "start": {
-              "line": 107,
+              "line": 115,
               "column": 47
             },
             "end": {
-              "line": 113,
+              "line": 122,
               "column": 1
             }
           }
         },
         "range": [
-          4266,
-          4551
+          4459,
+          4792
         ],
         "loc": {
           "start": {
-            "line": 107,
+            "line": 115,
             "column": 0
           },
           "end": {
-            "line": 113,
+            "line": 122,
             "column": 1
           }
         }
       },
       "range": [
-        4266,
-        4552
+        4459,
+        4793
       ],
       "loc": {
         "start": {
-          "line": 107,
+          "line": 115,
           "column": 0
         },
         "end": {
-          "line": 113,
+          "line": 122,
           "column": 2
         }
       }
@@ -8229,16 +8734,16 @@
               "type": "Identifier",
               "name": "LayoutViewIndividualWorkflowRun",
               "range": [
-                4553,
-                4584
+                4794,
+                4825
               ],
               "loc": {
                 "start": {
-                  "line": 114,
+                  "line": 123,
                   "column": 0
                 },
                 "end": {
-                  "line": 114,
+                  "line": 123,
                   "column": 31
                 }
               }
@@ -8247,31 +8752,31 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                4585,
-                4594
+                4826,
+                4835
               ],
               "loc": {
                 "start": {
-                  "line": 114,
+                  "line": 123,
                   "column": 32
                 },
                 "end": {
-                  "line": 114,
+                  "line": 123,
                   "column": 41
                 }
               }
             },
             "range": [
-              4553,
-              4594
+              4794,
+              4835
             ],
             "loc": {
               "start": {
-                "line": 114,
+                "line": 123,
                 "column": 0
               },
               "end": {
-                "line": 114,
+                "line": 123,
                 "column": 41
               }
             }
@@ -8280,31 +8785,31 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              4595,
-              4601
+              4836,
+              4842
             ],
             "loc": {
               "start": {
-                "line": 114,
+                "line": 123,
                 "column": 42
               },
               "end": {
-                "line": 114,
+                "line": 123,
                 "column": 48
               }
             }
           },
           "range": [
-            4553,
-            4601
+            4794,
+            4842
           ],
           "loc": {
             "start": {
-              "line": 114,
+              "line": 123,
               "column": 0
             },
             "end": {
-              "line": 114,
+              "line": 123,
               "column": 48
             }
           }
@@ -8319,16 +8824,16 @@
                 "value": "click @ui.buttonShowResources",
                 "raw": "'click @ui.buttonShowResources'",
                 "range": [
-                  4610,
-                  4641
+                  4851,
+                  4882
                 ],
                 "loc": {
                   "start": {
-                    "line": 115,
+                    "line": 124,
                     "column": 4
                   },
                   "end": {
-                    "line": 115,
+                    "line": 124,
                     "column": 35
                   }
                 }
@@ -8338,16 +8843,16 @@
                 "value": "_showResources",
                 "raw": "'_showResources'",
                 "range": [
-                  4643,
-                  4659
+                  4884,
+                  4900
                 ],
                 "loc": {
                   "start": {
-                    "line": 115,
+                    "line": 124,
                     "column": 37
                   },
                   "end": {
-                    "line": 115,
+                    "line": 124,
                     "column": 53
                   }
                 }
@@ -8357,16 +8862,16 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4610,
-                4659
+                4851,
+                4900
               ],
               "loc": {
                 "start": {
-                  "line": 115,
+                  "line": 124,
                   "column": 4
                 },
                 "end": {
-                  "line": 115,
+                  "line": 124,
                   "column": 53
                 }
               }
@@ -8378,16 +8883,16 @@
                 "value": "click @ui.buttonShowRunJobs",
                 "raw": "'click @ui.buttonShowRunJobs'",
                 "range": [
-                  4665,
-                  4694
+                  4906,
+                  4935
                 ],
                 "loc": {
                   "start": {
-                    "line": 116,
+                    "line": 125,
                     "column": 4
                   },
                   "end": {
-                    "line": 116,
+                    "line": 125,
                     "column": 33
                   }
                 }
@@ -8397,16 +8902,16 @@
                 "value": "_showRunJobs",
                 "raw": "'_showRunJobs'",
                 "range": [
-                  4696,
-                  4710
+                  4937,
+                  4951
                 ],
                 "loc": {
                   "start": {
-                    "line": 116,
+                    "line": 125,
                     "column": 35
                   },
                   "end": {
-                    "line": 116,
+                    "line": 125,
                     "column": 49
                   }
                 }
@@ -8416,16 +8921,16 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4665,
-                4710
+                4906,
+                4951
               ],
               "loc": {
                 "start": {
-                  "line": 116,
+                  "line": 125,
                   "column": 4
                 },
                 "end": {
-                  "line": 116,
+                  "line": 125,
                   "column": 49
                 }
               }
@@ -8437,16 +8942,16 @@
                 "value": "click @ui.buttonSave",
                 "raw": "'click @ui.buttonSave'",
                 "range": [
-                  4716,
-                  4738
+                  4957,
+                  4979
                 ],
                 "loc": {
                   "start": {
-                    "line": 117,
+                    "line": 126,
                     "column": 4
                   },
                   "end": {
-                    "line": 117,
+                    "line": 126,
                     "column": 26
                   }
                 }
@@ -8456,16 +8961,16 @@
                 "value": "_handleButtonSave",
                 "raw": "'_handleButtonSave'",
                 "range": [
-                  4740,
-                  4759
+                  4981,
+                  5000
                 ],
                 "loc": {
                   "start": {
-                    "line": 117,
+                    "line": 126,
                     "column": 28
                   },
                   "end": {
-                    "line": 117,
+                    "line": 126,
                     "column": 47
                   }
                 }
@@ -8475,62 +8980,121 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                4716,
-                4759
+                4957,
+                5000
               ],
               "loc": {
                 "start": {
-                  "line": 117,
+                  "line": 126,
                   "column": 4
                 },
                 "end": {
-                  "line": 117,
+                  "line": 126,
                   "column": 47
+                }
+              }
+            },
+            {
+              "type": "Property",
+              "key": {
+                "type": "Literal",
+                "value": "click @ui.buttonDelete",
+                "raw": "'click @ui.buttonDelete'",
+                "range": [
+                  5006,
+                  5030
+                ],
+                "loc": {
+                  "start": {
+                    "line": 127,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 127,
+                    "column": 28
+                  }
+                }
+              },
+              "value": {
+                "type": "Literal",
+                "value": "_handleButtonDelete",
+                "raw": "'_handleButtonDelete'",
+                "range": [
+                  5032,
+                  5053
+                ],
+                "loc": {
+                  "start": {
+                    "line": 127,
+                    "column": 30
+                  },
+                  "end": {
+                    "line": 127,
+                    "column": 51
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                5006,
+                5053
+              ],
+              "loc": {
+                "start": {
+                  "line": 127,
+                  "column": 4
+                },
+                "end": {
+                  "line": 127,
+                  "column": 51
                 }
               }
             }
           ],
           "range": [
-            4604,
-            4762
+            4845,
+            5056
           ],
           "loc": {
             "start": {
-              "line": 114,
+              "line": 123,
               "column": 51
             },
             "end": {
-              "line": 119,
+              "line": 129,
               "column": 1
             }
           }
         },
         "range": [
-          4553,
-          4762
+          4794,
+          5056
         ],
         "loc": {
           "start": {
-            "line": 114,
+            "line": 123,
             "column": 0
           },
           "end": {
-            "line": 119,
+            "line": 129,
             "column": 1
           }
         }
       },
       "range": [
-        4553,
-        4763
+        4794,
+        5057
       ],
       "loc": {
         "start": {
-          "line": 114,
+          "line": 123,
           "column": 0
         },
         "end": {
-          "line": 119,
+          "line": 129,
           "column": 2
         }
       }
@@ -8550,16 +9114,16 @@
               "type": "Identifier",
               "name": "LayoutViewIndividualWorkflowRun",
               "range": [
-                4764,
-                4795
+                5058,
+                5089
               ],
               "loc": {
                 "start": {
-                  "line": 120,
+                  "line": 130,
                   "column": 0
                 },
                 "end": {
-                  "line": 120,
+                  "line": 130,
                   "column": 31
                 }
               }
@@ -8568,31 +9132,31 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                4796,
-                4805
+                5090,
+                5099
               ],
               "loc": {
                 "start": {
-                  "line": 120,
+                  "line": 130,
                   "column": 32
                 },
                 "end": {
-                  "line": 120,
+                  "line": 130,
                   "column": 41
                 }
               }
             },
             "range": [
-              4764,
-              4805
+              5058,
+              5099
             ],
             "loc": {
               "start": {
-                "line": 120,
+                "line": 130,
                 "column": 0
               },
               "end": {
-                "line": 120,
+                "line": 130,
                 "column": 41
               }
             }
@@ -8601,31 +9165,31 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              4806,
-              4814
+              5100,
+              5108
             ],
             "loc": {
               "start": {
-                "line": 120,
+                "line": 130,
                 "column": 42
               },
               "end": {
-                "line": 120,
+                "line": 130,
                 "column": 50
               }
             }
           },
           "range": [
-            4764,
-            4814
+            5058,
+            5108
           ],
           "loc": {
             "start": {
-              "line": 120,
+              "line": 130,
               "column": 0
             },
             "end": {
-              "line": 120,
+              "line": 130,
               "column": 50
             }
           }
@@ -8635,46 +9199,46 @@
           "value": "#template-main_workflowrun_individual",
           "raw": "'#template-main_workflowrun_individual'",
           "range": [
-            4817,
-            4856
+            5111,
+            5150
           ],
           "loc": {
             "start": {
-              "line": 120,
+              "line": 130,
               "column": 53
             },
             "end": {
-              "line": 120,
+              "line": 130,
               "column": 92
             }
           }
         },
         "range": [
-          4764,
-          4856
+          5058,
+          5150
         ],
         "loc": {
           "start": {
-            "line": 120,
+            "line": 130,
             "column": 0
           },
           "end": {
-            "line": 120,
+            "line": 130,
             "column": 92
           }
         }
       },
       "range": [
-        4764,
-        4857
+        5058,
+        5151
       ],
       "loc": {
         "start": {
-          "line": 120,
+          "line": 130,
           "column": 0
         },
         "end": {
-          "line": 120,
+          "line": 130,
           "column": 93
         }
       }
@@ -8683,7 +9247,7 @@
   "sourceType": "module",
   "range": [
     0,
-    4857
+    5151
   ],
   "loc": {
     "start": {
@@ -8691,7 +9255,7 @@
       "column": 0
     },
     "end": {
-      "line": 120,
+      "line": 130,
       "column": 93
     }
   },
@@ -8980,6 +9544,24 @@
         },
         "end": {
           "line": 97,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * Handle button delete.\n     ",
+      "range": [
+        4188,
+        4228
+      ],
+      "loc": {
+        "start": {
+          "line": 104,
+          "column": 4
+        },
+        "end": {
+          "line": 106,
           "column": 7
         }
       }

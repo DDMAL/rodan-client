@@ -253,6 +253,14 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
         Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
     }
+
+    /**
+     * Handle button delete.
+     */
+    _handleButtonDelete()
+    {
+        Radio.channel(&apos;rodan&apos;).request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_DELETE, {workflowrun: this.model});
+    }
 }
 LayoutViewIndividualWorkflowRun.prototype.modelEvents = {
     &apos;all&apos;: &apos;render&apos;
@@ -261,13 +269,15 @@ LayoutViewIndividualWorkflowRun.prototype.ui = {
     buttonShowResources: &apos;#button-resources_show&apos;,
     buttonShowRunJobs: &apos;#button-runjobs_show&apos;,
     buttonSave: &apos;#button-save_workflowrun&apos;,
+    buttonDelete: &apos;#button-delete_workflowrun&apos;,
     textName: &apos;#text-workflowrun_name&apos;,
     textDescription: &apos;#text-workflowrun_description&apos;
 };
 LayoutViewIndividualWorkflowRun.prototype.events = {
     &apos;click @ui.buttonShowResources&apos;: &apos;_showResources&apos;,
     &apos;click @ui.buttonShowRunJobs&apos;: &apos;_showRunJobs&apos;,
-    &apos;click @ui.buttonSave&apos;: &apos;_handleButtonSave&apos;
+    &apos;click @ui.buttonSave&apos;: &apos;_handleButtonSave&apos;,
+    &apos;click @ui.buttonDelete&apos;: &apos;_handleButtonDelete&apos;
 
 };
 LayoutViewIndividualWorkflowRun.prototype.template = &apos;#template-main_workflowrun_individual&apos;;</code></pre>

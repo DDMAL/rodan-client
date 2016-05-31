@@ -23003,10 +23003,10 @@
                     "trailingComments": [
                       {
                         "type": "Block",
-                        "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+                        "value": "* Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. ",
                         "range": [
                           32595,
-                          32669
+                          32671
                         ],
                         "loc": {
                           "start": {
@@ -23015,6 +23015,153 @@
                           },
                           "end": {
                             "line": 389,
+                            "column": 84
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            32680,
+                            32684
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 390,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 390,
+                              "column": 12
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "EVENT__WORKFLOWRUN_DELETED",
+                          "range": [
+                            32685,
+                            32711
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 390,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 390,
+                              "column": 39
+                            }
+                          }
+                        },
+                        "range": [
+                          32680,
+                          32711
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 390,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 390,
+                            "column": 39
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": "EVENT__WORKFLOWRUN_DELETED",
+                        "raw": "'EVENT__WORKFLOWRUN_DELETED'",
+                        "range": [
+                          32714,
+                          32742
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 390,
+                            "column": 42
+                          },
+                          "end": {
+                            "line": 390,
+                            "column": 70
+                          }
+                        }
+                      },
+                      "range": [
+                        32680,
+                        32742
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 390,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 390,
+                          "column": 70
+                        }
+                      }
+                    },
+                    "range": [
+                      32680,
+                      32743
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 390,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 390,
+                        "column": 71
+                      }
+                    },
+                    "leadingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. ",
+                        "range": [
+                          32595,
+                          32671
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 389,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 389,
+                            "column": 84
+                          }
+                        }
+                      }
+                    ],
+                    "trailingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+                        "range": [
+                          32752,
+                          32826
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 391,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 391,
                             "column": 82
                           }
                         }
@@ -23032,16 +23179,16 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            32678,
-                            32682
+                            32835,
+                            32839
                           ],
                           "loc": {
                             "start": {
-                              "line": 390,
+                              "line": 392,
                               "column": 8
                             },
                             "end": {
-                              "line": 390,
+                              "line": 392,
                               "column": 12
                             }
                           }
@@ -23050,31 +23197,31 @@
                           "type": "Identifier",
                           "name": "EVENT__WORKFLOWRUN_SAVED",
                           "range": [
-                            32683,
-                            32707
+                            32840,
+                            32864
                           ],
                           "loc": {
                             "start": {
-                              "line": 390,
+                              "line": 392,
                               "column": 13
                             },
                             "end": {
-                              "line": 390,
+                              "line": 392,
                               "column": 37
                             }
                           }
                         },
                         "range": [
-                          32678,
-                          32707
+                          32835,
+                          32864
                         ],
                         "loc": {
                           "start": {
-                            "line": 390,
+                            "line": 392,
                             "column": 8
                           },
                           "end": {
-                            "line": 390,
+                            "line": 392,
                             "column": 37
                           }
                         }
@@ -23084,46 +23231,46 @@
                         "value": "EVENT__WORKFLOWRUN_SAVED",
                         "raw": "'EVENT__WORKFLOWRUN_SAVED'",
                         "range": [
-                          32710,
-                          32736
+                          32867,
+                          32893
                         ],
                         "loc": {
                           "start": {
-                            "line": 390,
+                            "line": 392,
                             "column": 40
                           },
                           "end": {
-                            "line": 390,
+                            "line": 392,
                             "column": 66
                           }
                         }
                       },
                       "range": [
-                        32678,
-                        32736
+                        32835,
+                        32893
                       ],
                       "loc": {
                         "start": {
-                          "line": 390,
+                          "line": 392,
                           "column": 8
                         },
                         "end": {
-                          "line": 390,
+                          "line": 392,
                           "column": 66
                         }
                       }
                     },
                     "range": [
-                      32678,
-                      32737
+                      32835,
+                      32894
                     ],
                     "loc": {
                       "start": {
-                        "line": 390,
+                        "line": 392,
                         "column": 8
                       },
                       "end": {
-                        "line": 390,
+                        "line": 392,
                         "column": 67
                       }
                     },
@@ -23132,16 +23279,16 @@
                         "type": "Block",
                         "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
                         "range": [
-                          32595,
-                          32669
+                          32752,
+                          32826
                         ],
                         "loc": {
                           "start": {
-                            "line": 389,
+                            "line": 391,
                             "column": 8
                           },
                           "end": {
-                            "line": 389,
+                            "line": 391,
                             "column": 82
                           }
                         }
@@ -23152,16 +23299,16 @@
                         "type": "Block",
                         "value": "* Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. ",
                         "range": [
-                          32746,
-                          32842
+                          32903,
+                          32999
                         ],
                         "loc": {
                           "start": {
-                            "line": 391,
+                            "line": 393,
                             "column": 8
                           },
                           "end": {
-                            "line": 391,
+                            "line": 393,
                             "column": 104
                           }
                         }
@@ -23179,16 +23326,16 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            32851,
-                            32855
+                            33008,
+                            33012
                           ],
                           "loc": {
                             "start": {
-                              "line": 392,
+                              "line": 394,
                               "column": 8
                             },
                             "end": {
-                              "line": 392,
+                              "line": 394,
                               "column": 12
                             }
                           }
@@ -23197,31 +23344,31 @@
                           "type": "Identifier",
                           "name": "EVENT__WORKFLOWRUN_SELECTED",
                           "range": [
-                            32856,
-                            32883
+                            33013,
+                            33040
                           ],
                           "loc": {
                             "start": {
-                              "line": 392,
+                              "line": 394,
                               "column": 13
                             },
                             "end": {
-                              "line": 392,
+                              "line": 394,
                               "column": 40
                             }
                           }
                         },
                         "range": [
-                          32851,
-                          32883
+                          33008,
+                          33040
                         ],
                         "loc": {
                           "start": {
-                            "line": 392,
+                            "line": 394,
                             "column": 8
                           },
                           "end": {
-                            "line": 392,
+                            "line": 394,
                             "column": 40
                           }
                         }
@@ -23231,46 +23378,46 @@
                         "value": "EVENT__WORKFLOWRUN_SELECTED",
                         "raw": "'EVENT__WORKFLOWRUN_SELECTED'",
                         "range": [
-                          32886,
-                          32915
+                          33043,
+                          33072
                         ],
                         "loc": {
                           "start": {
-                            "line": 392,
+                            "line": 394,
                             "column": 43
                           },
                           "end": {
-                            "line": 392,
+                            "line": 394,
                             "column": 72
                           }
                         }
                       },
                       "range": [
-                        32851,
-                        32915
+                        33008,
+                        33072
                       ],
                       "loc": {
                         "start": {
-                          "line": 392,
+                          "line": 394,
                           "column": 8
                         },
                         "end": {
-                          "line": 392,
+                          "line": 394,
                           "column": 72
                         }
                       }
                     },
                     "range": [
-                      32851,
-                      32916
+                      33008,
+                      33073
                     ],
                     "loc": {
                       "start": {
-                        "line": 392,
+                        "line": 394,
                         "column": 8
                       },
                       "end": {
-                        "line": 392,
+                        "line": 394,
                         "column": 73
                       }
                     },
@@ -23279,16 +23426,16 @@
                         "type": "Block",
                         "value": "* Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. ",
                         "range": [
-                          32746,
-                          32842
+                          32903,
+                          32999
                         ],
                         "loc": {
                           "start": {
-                            "line": 391,
+                            "line": 393,
                             "column": 8
                           },
                           "end": {
-                            "line": 391,
+                            "line": 393,
                             "column": 104
                           }
                         }
@@ -23299,16 +23446,16 @@
                         "type": "Block",
                         "value": "* Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. ",
                         "range": [
-                          32925,
-                          33072
+                          33082,
+                          33229
                         ],
                         "loc": {
                           "start": {
-                            "line": 393,
+                            "line": 395,
                             "column": 8
                           },
                           "end": {
-                            "line": 393,
+                            "line": 395,
                             "column": 155
                           }
                         }
@@ -23326,16 +23473,16 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            33081,
-                            33085
+                            33238,
+                            33242
                           ],
                           "loc": {
                             "start": {
-                              "line": 394,
+                              "line": 396,
                               "column": 8
                             },
                             "end": {
-                              "line": 394,
+                              "line": 396,
                               "column": 12
                             }
                           }
@@ -23344,31 +23491,31 @@
                           "type": "Identifier",
                           "name": "EVENT__WORKFLOWRUN_SELECTED_COLLECTION",
                           "range": [
-                            33086,
-                            33124
+                            33243,
+                            33281
                           ],
                           "loc": {
                             "start": {
-                              "line": 394,
+                              "line": 396,
                               "column": 13
                             },
                             "end": {
-                              "line": 394,
+                              "line": 396,
                               "column": 51
                             }
                           }
                         },
                         "range": [
-                          33081,
-                          33124
+                          33238,
+                          33281
                         ],
                         "loc": {
                           "start": {
-                            "line": 394,
+                            "line": 396,
                             "column": 8
                           },
                           "end": {
-                            "line": 394,
+                            "line": 396,
                             "column": 51
                           }
                         }
@@ -23378,46 +23525,46 @@
                         "value": "EVENT__WORKFLOWRUN_SELECTED_COLLECTION",
                         "raw": "'EVENT__WORKFLOWRUN_SELECTED_COLLECTION'",
                         "range": [
-                          33127,
-                          33167
+                          33284,
+                          33324
                         ],
                         "loc": {
                           "start": {
-                            "line": 394,
+                            "line": 396,
                             "column": 54
                           },
                           "end": {
-                            "line": 394,
+                            "line": 396,
                             "column": 94
                           }
                         }
                       },
                       "range": [
-                        33081,
-                        33167
+                        33238,
+                        33324
                       ],
                       "loc": {
                         "start": {
-                          "line": 394,
+                          "line": 396,
                           "column": 8
                         },
                         "end": {
-                          "line": 394,
+                          "line": 396,
                           "column": 94
                         }
                       }
                     },
                     "range": [
-                      33081,
-                      33168
+                      33238,
+                      33325
                     ],
                     "loc": {
                       "start": {
-                        "line": 394,
+                        "line": 396,
                         "column": 8
                       },
                       "end": {
-                        "line": 394,
+                        "line": 396,
                         "column": 95
                       }
                     },
@@ -23426,16 +23573,16 @@
                         "type": "Block",
                         "value": "* Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. ",
                         "range": [
-                          32925,
-                          33072
+                          33082,
+                          33229
                         ],
                         "loc": {
                           "start": {
-                            "line": 393,
+                            "line": 395,
                             "column": 8
                           },
                           "end": {
-                            "line": 393,
+                            "line": 395,
                             "column": 155
                           }
                         }
@@ -23446,154 +23593,7 @@
                         "type": "Block",
                         "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
                         "range": [
-                          33177,
-                          33341
-                        ],
-                        "loc": {
-                          "start": {
-                            "line": 395,
-                            "column": 8
-                          },
-                          "end": {
-                            "line": 395,
-                            "column": 172
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "ExpressionStatement",
-                    "expression": {
-                      "type": "AssignmentExpression",
-                      "operator": "=",
-                      "left": {
-                        "type": "MemberExpression",
-                        "computed": false,
-                        "object": {
-                          "type": "ThisExpression",
-                          "range": [
-                            33350,
-                            33354
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 396,
-                              "column": 8
-                            },
-                            "end": {
-                              "line": 396,
-                              "column": 12
-                            }
-                          }
-                        },
-                        "property": {
-                          "type": "Identifier",
-                          "name": "REQUEST__WORKFLOWRUN_CREATE",
-                          "range": [
-                            33355,
-                            33382
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 396,
-                              "column": 13
-                            },
-                            "end": {
-                              "line": 396,
-                              "column": 40
-                            }
-                          }
-                        },
-                        "range": [
-                          33350,
-                          33382
-                        ],
-                        "loc": {
-                          "start": {
-                            "line": 396,
-                            "column": 8
-                          },
-                          "end": {
-                            "line": 396,
-                            "column": 40
-                          }
-                        }
-                      },
-                      "right": {
-                        "type": "Literal",
-                        "value": "REQUEST__WORKFLOWRUN_CREATE",
-                        "raw": "'REQUEST__WORKFLOWRUN_CREATE'",
-                        "range": [
-                          33385,
-                          33414
-                        ],
-                        "loc": {
-                          "start": {
-                            "line": 396,
-                            "column": 43
-                          },
-                          "end": {
-                            "line": 396,
-                            "column": 72
-                          }
-                        }
-                      },
-                      "range": [
-                        33350,
-                        33414
-                      ],
-                      "loc": {
-                        "start": {
-                          "line": 396,
-                          "column": 8
-                        },
-                        "end": {
-                          "line": 396,
-                          "column": 72
-                        }
-                      }
-                    },
-                    "range": [
-                      33350,
-                      33415
-                    ],
-                    "loc": {
-                      "start": {
-                        "line": 396,
-                        "column": 8
-                      },
-                      "end": {
-                        "line": 396,
-                        "column": 73
-                      }
-                    },
-                    "leadingComments": [
-                      {
-                        "type": "Block",
-                        "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
-                        "range": [
-                          33177,
-                          33341
-                        ],
-                        "loc": {
-                          "start": {
-                            "line": 395,
-                            "column": 8
-                          },
-                          "end": {
-                            "line": 395,
-                            "column": 172
-                          }
-                        }
-                      }
-                    ],
-                    "trailingComments": [
-                      {
-                        "type": "Block",
-                        "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
-                        "range": [
-                          33424,
+                          33334,
                           33498
                         ],
                         "loc": {
@@ -23603,7 +23603,7 @@
                           },
                           "end": {
                             "line": 397,
-                            "column": 82
+                            "column": 172
                           }
                         }
                       }
@@ -23636,10 +23636,10 @@
                         },
                         "property": {
                           "type": "Identifier",
-                          "name": "REQUEST__WORKFLOWRUN_SAVE",
+                          "name": "REQUEST__WORKFLOWRUN_CREATE",
                           "range": [
                             33512,
-                            33537
+                            33539
                           ],
                           "loc": {
                             "start": {
@@ -23648,13 +23648,13 @@
                             },
                             "end": {
                               "line": 398,
-                              "column": 38
+                              "column": 40
                             }
                           }
                         },
                         "range": [
                           33507,
-                          33537
+                          33539
                         ],
                         "loc": {
                           "start": {
@@ -23663,32 +23663,32 @@
                           },
                           "end": {
                             "line": 398,
-                            "column": 38
+                            "column": 40
                           }
                         }
                       },
                       "right": {
                         "type": "Literal",
-                        "value": "REQUEST__WORKFLOWRUN_SAVE",
-                        "raw": "'REQUEST__WORKFLOWRUN_SAVE'",
+                        "value": "REQUEST__WORKFLOWRUN_CREATE",
+                        "raw": "'REQUEST__WORKFLOWRUN_CREATE'",
                         "range": [
-                          33540,
-                          33567
+                          33542,
+                          33571
                         ],
                         "loc": {
                           "start": {
                             "line": 398,
-                            "column": 41
+                            "column": 43
                           },
                           "end": {
                             "line": 398,
-                            "column": 68
+                            "column": 72
                           }
                         }
                       },
                       "range": [
                         33507,
-                        33567
+                        33571
                       ],
                       "loc": {
                         "start": {
@@ -23697,13 +23697,13 @@
                         },
                         "end": {
                           "line": 398,
-                          "column": 68
+                          "column": 72
                         }
                       }
                     },
                     "range": [
                       33507,
-                      33568
+                      33572
                     ],
                     "loc": {
                       "start": {
@@ -23712,15 +23712,15 @@
                       },
                       "end": {
                         "line": 398,
-                        "column": 69
+                        "column": 73
                       }
                     },
                     "leadingComments": [
                       {
                         "type": "Block",
-                        "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                        "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
                         "range": [
-                          33424,
+                          33334,
                           33498
                         ],
                         "loc": {
@@ -23730,6 +23730,300 @@
                           },
                           "end": {
                             "line": 397,
+                            "column": 172
+                          }
+                        }
+                      }
+                    ],
+                    "trailingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Request a WorkflowRun be deleted. Takes {workflowrun: WorkflowRun}. ",
+                        "range": [
+                          33581,
+                          33655
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 399,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 399,
+                            "column": 82
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            33664,
+                            33668
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 400,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 400,
+                              "column": 12
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "REQUEST__WORKFLOWRUN_DELETE",
+                          "range": [
+                            33669,
+                            33696
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 400,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 400,
+                              "column": 40
+                            }
+                          }
+                        },
+                        "range": [
+                          33664,
+                          33696
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 400,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 400,
+                            "column": 40
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": "REQUEST__WORKFLOWRUN_DELETE",
+                        "raw": "'REQUEST__WORKFLOWRUN_DELETE'",
+                        "range": [
+                          33699,
+                          33728
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 400,
+                            "column": 43
+                          },
+                          "end": {
+                            "line": 400,
+                            "column": 72
+                          }
+                        }
+                      },
+                      "range": [
+                        33664,
+                        33728
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 400,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 400,
+                          "column": 72
+                        }
+                      }
+                    },
+                    "range": [
+                      33664,
+                      33729
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 400,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 400,
+                        "column": 73
+                      }
+                    },
+                    "leadingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Request a WorkflowRun be deleted. Takes {workflowrun: WorkflowRun}. ",
+                        "range": [
+                          33581,
+                          33655
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 399,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 399,
+                            "column": 82
+                          }
+                        }
+                      }
+                    ],
+                    "trailingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                        "range": [
+                          33738,
+                          33812
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 401,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 401,
+                            "column": 82
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ExpressionStatement",
+                    "expression": {
+                      "type": "AssignmentExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            33821,
+                            33825
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 402,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 402,
+                              "column": 12
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "REQUEST__WORKFLOWRUN_SAVE",
+                          "range": [
+                            33826,
+                            33851
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 402,
+                              "column": 13
+                            },
+                            "end": {
+                              "line": 402,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "range": [
+                          33821,
+                          33851
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 402,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 402,
+                            "column": 38
+                          }
+                        }
+                      },
+                      "right": {
+                        "type": "Literal",
+                        "value": "REQUEST__WORKFLOWRUN_SAVE",
+                        "raw": "'REQUEST__WORKFLOWRUN_SAVE'",
+                        "range": [
+                          33854,
+                          33881
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 402,
+                            "column": 41
+                          },
+                          "end": {
+                            "line": 402,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        33821,
+                        33881
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 402,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 402,
+                          "column": 68
+                        }
+                      }
+                    },
+                    "range": [
+                      33821,
+                      33882
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 402,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 402,
+                        "column": 69
+                      }
+                    },
+                    "leadingComments": [
+                      {
+                        "type": "Block",
+                        "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                        "range": [
+                          33738,
+                          33812
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 401,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 401,
                             "column": 82
                           }
                         }
@@ -23739,7 +24033,7 @@
                 ],
                 "range": [
                   726,
-                  33574
+                  33888
                 ],
                 "loc": {
                   "start": {
@@ -23747,7 +24041,7 @@
                     "column": 4
                   },
                   "end": {
-                    "line": 399,
+                    "line": 403,
                     "column": 5
                   }
                 }
@@ -23756,7 +24050,7 @@
               "expression": false,
               "range": [
                 719,
-                33574
+                33888
               ],
               "loc": {
                 "start": {
@@ -23764,7 +24058,7 @@
                   "column": 15
                 },
                 "end": {
-                  "line": 399,
+                  "line": 403,
                   "column": 5
                 }
               }
@@ -23773,7 +24067,7 @@
             "computed": false,
             "range": [
               708,
-              33574
+              33888
             ],
             "loc": {
               "start": {
@@ -23781,7 +24075,7 @@
                 "column": 4
               },
               "end": {
-                "line": 399,
+                "line": 403,
                 "column": 5
               }
             },
@@ -23810,7 +24104,7 @@
         ],
         "range": [
           683,
-          33576
+          33890
         ],
         "loc": {
           "start": {
@@ -23818,14 +24112,14 @@
             "column": 0
           },
           "end": {
-            "line": 400,
+            "line": 404,
             "column": 1
           }
         }
       },
       "range": [
         664,
-        33576
+        33890
       ],
       "loc": {
         "start": {
@@ -23833,7 +24127,7 @@
           "column": 0
         },
         "end": {
-          "line": 400,
+          "line": 404,
           "column": 1
         }
       },
@@ -23849,47 +24143,47 @@
           "type": "Identifier",
           "name": "RODAN_EVENTS",
           "range": [
-            33611,
-            33623
+            33925,
+            33937
           ],
           "loc": {
             "start": {
-              "line": 402,
+              "line": 406,
               "column": 19
             },
             "end": {
-              "line": 402,
+              "line": 406,
               "column": 31
             }
           }
         },
         "arguments": [],
         "range": [
-          33607,
-          33625
+          33921,
+          33939
         ],
         "loc": {
           "start": {
-            "line": 402,
+            "line": 406,
             "column": 15
           },
           "end": {
-            "line": 402,
+            "line": 406,
             "column": 33
           }
         }
       },
       "range": [
-        33592,
-        33626
+        33906,
+        33940
       ],
       "loc": {
         "start": {
-          "line": 402,
+          "line": 406,
           "column": 0
         },
         "end": {
-          "line": 402,
+          "line": 406,
           "column": 34
         }
       },
@@ -46553,10 +46847,10 @@
                       "trailingComments": [
                         {
                           "type": "Block",
-                          "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+                          "value": "* Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. ",
                           "range": [
                             32595,
-                            32669
+                            32671
                           ],
                           "loc": {
                             "start": {
@@ -46565,6 +46859,153 @@
                             },
                             "end": {
                               "line": 389,
+                              "column": 84
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              32680,
+                              32684
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 390,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 390,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "EVENT__WORKFLOWRUN_DELETED",
+                            "range": [
+                              32685,
+                              32711
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 390,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 390,
+                                "column": 39
+                              }
+                            }
+                          },
+                          "range": [
+                            32680,
+                            32711
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 390,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 390,
+                              "column": 39
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": "EVENT__WORKFLOWRUN_DELETED",
+                          "raw": "'EVENT__WORKFLOWRUN_DELETED'",
+                          "range": [
+                            32714,
+                            32742
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 390,
+                              "column": 42
+                            },
+                            "end": {
+                              "line": 390,
+                              "column": 70
+                            }
+                          }
+                        },
+                        "range": [
+                          32680,
+                          32742
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 390,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 390,
+                            "column": 70
+                          }
+                        }
+                      },
+                      "range": [
+                        32680,
+                        32743
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 390,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 390,
+                          "column": 71
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. ",
+                          "range": [
+                            32595,
+                            32671
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 389,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 389,
+                              "column": 84
+                            }
+                          }
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+                          "range": [
+                            32752,
+                            32826
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 391,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 391,
                               "column": 82
                             }
                           }
@@ -46582,16 +47023,16 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              32678,
-                              32682
+                              32835,
+                              32839
                             ],
                             "loc": {
                               "start": {
-                                "line": 390,
+                                "line": 392,
                                 "column": 8
                               },
                               "end": {
-                                "line": 390,
+                                "line": 392,
                                 "column": 12
                               }
                             }
@@ -46600,31 +47041,31 @@
                             "type": "Identifier",
                             "name": "EVENT__WORKFLOWRUN_SAVED",
                             "range": [
-                              32683,
-                              32707
+                              32840,
+                              32864
                             ],
                             "loc": {
                               "start": {
-                                "line": 390,
+                                "line": 392,
                                 "column": 13
                               },
                               "end": {
-                                "line": 390,
+                                "line": 392,
                                 "column": 37
                               }
                             }
                           },
                           "range": [
-                            32678,
-                            32707
+                            32835,
+                            32864
                           ],
                           "loc": {
                             "start": {
-                              "line": 390,
+                              "line": 392,
                               "column": 8
                             },
                             "end": {
-                              "line": 390,
+                              "line": 392,
                               "column": 37
                             }
                           }
@@ -46634,46 +47075,46 @@
                           "value": "EVENT__WORKFLOWRUN_SAVED",
                           "raw": "'EVENT__WORKFLOWRUN_SAVED'",
                           "range": [
-                            32710,
-                            32736
+                            32867,
+                            32893
                           ],
                           "loc": {
                             "start": {
-                              "line": 390,
+                              "line": 392,
                               "column": 40
                             },
                             "end": {
-                              "line": 390,
+                              "line": 392,
                               "column": 66
                             }
                           }
                         },
                         "range": [
-                          32678,
-                          32736
+                          32835,
+                          32893
                         ],
                         "loc": {
                           "start": {
-                            "line": 390,
+                            "line": 392,
                             "column": 8
                           },
                           "end": {
-                            "line": 390,
+                            "line": 392,
                             "column": 66
                           }
                         }
                       },
                       "range": [
-                        32678,
-                        32737
+                        32835,
+                        32894
                       ],
                       "loc": {
                         "start": {
-                          "line": 390,
+                          "line": 392,
                           "column": 8
                         },
                         "end": {
-                          "line": 390,
+                          "line": 392,
                           "column": 67
                         }
                       },
@@ -46682,16 +47123,16 @@
                           "type": "Block",
                           "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
                           "range": [
-                            32595,
-                            32669
+                            32752,
+                            32826
                           ],
                           "loc": {
                             "start": {
-                              "line": 389,
+                              "line": 391,
                               "column": 8
                             },
                             "end": {
-                              "line": 389,
+                              "line": 391,
                               "column": 82
                             }
                           }
@@ -46702,16 +47143,16 @@
                           "type": "Block",
                           "value": "* Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. ",
                           "range": [
-                            32746,
-                            32842
+                            32903,
+                            32999
                           ],
                           "loc": {
                             "start": {
-                              "line": 391,
+                              "line": 393,
                               "column": 8
                             },
                             "end": {
-                              "line": 391,
+                              "line": 393,
                               "column": 104
                             }
                           }
@@ -46729,16 +47170,16 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              32851,
-                              32855
+                              33008,
+                              33012
                             ],
                             "loc": {
                               "start": {
-                                "line": 392,
+                                "line": 394,
                                 "column": 8
                               },
                               "end": {
-                                "line": 392,
+                                "line": 394,
                                 "column": 12
                               }
                             }
@@ -46747,31 +47188,31 @@
                             "type": "Identifier",
                             "name": "EVENT__WORKFLOWRUN_SELECTED",
                             "range": [
-                              32856,
-                              32883
+                              33013,
+                              33040
                             ],
                             "loc": {
                               "start": {
-                                "line": 392,
+                                "line": 394,
                                 "column": 13
                               },
                               "end": {
-                                "line": 392,
+                                "line": 394,
                                 "column": 40
                               }
                             }
                           },
                           "range": [
-                            32851,
-                            32883
+                            33008,
+                            33040
                           ],
                           "loc": {
                             "start": {
-                              "line": 392,
+                              "line": 394,
                               "column": 8
                             },
                             "end": {
-                              "line": 392,
+                              "line": 394,
                               "column": 40
                             }
                           }
@@ -46781,46 +47222,46 @@
                           "value": "EVENT__WORKFLOWRUN_SELECTED",
                           "raw": "'EVENT__WORKFLOWRUN_SELECTED'",
                           "range": [
-                            32886,
-                            32915
+                            33043,
+                            33072
                           ],
                           "loc": {
                             "start": {
-                              "line": 392,
+                              "line": 394,
                               "column": 43
                             },
                             "end": {
-                              "line": 392,
+                              "line": 394,
                               "column": 72
                             }
                           }
                         },
                         "range": [
-                          32851,
-                          32915
+                          33008,
+                          33072
                         ],
                         "loc": {
                           "start": {
-                            "line": 392,
+                            "line": 394,
                             "column": 8
                           },
                           "end": {
-                            "line": 392,
+                            "line": 394,
                             "column": 72
                           }
                         }
                       },
                       "range": [
-                        32851,
-                        32916
+                        33008,
+                        33073
                       ],
                       "loc": {
                         "start": {
-                          "line": 392,
+                          "line": 394,
                           "column": 8
                         },
                         "end": {
-                          "line": 392,
+                          "line": 394,
                           "column": 73
                         }
                       },
@@ -46829,16 +47270,16 @@
                           "type": "Block",
                           "value": "* Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. ",
                           "range": [
-                            32746,
-                            32842
+                            32903,
+                            32999
                           ],
                           "loc": {
                             "start": {
-                              "line": 391,
+                              "line": 393,
                               "column": 8
                             },
                             "end": {
-                              "line": 391,
+                              "line": 393,
                               "column": 104
                             }
                           }
@@ -46849,16 +47290,16 @@
                           "type": "Block",
                           "value": "* Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. ",
                           "range": [
-                            32925,
-                            33072
+                            33082,
+                            33229
                           ],
                           "loc": {
                             "start": {
-                              "line": 393,
+                              "line": 395,
                               "column": 8
                             },
                             "end": {
-                              "line": 393,
+                              "line": 395,
                               "column": 155
                             }
                           }
@@ -46876,16 +47317,16 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              33081,
-                              33085
+                              33238,
+                              33242
                             ],
                             "loc": {
                               "start": {
-                                "line": 394,
+                                "line": 396,
                                 "column": 8
                               },
                               "end": {
-                                "line": 394,
+                                "line": 396,
                                 "column": 12
                               }
                             }
@@ -46894,31 +47335,31 @@
                             "type": "Identifier",
                             "name": "EVENT__WORKFLOWRUN_SELECTED_COLLECTION",
                             "range": [
-                              33086,
-                              33124
+                              33243,
+                              33281
                             ],
                             "loc": {
                               "start": {
-                                "line": 394,
+                                "line": 396,
                                 "column": 13
                               },
                               "end": {
-                                "line": 394,
+                                "line": 396,
                                 "column": 51
                               }
                             }
                           },
                           "range": [
-                            33081,
-                            33124
+                            33238,
+                            33281
                           ],
                           "loc": {
                             "start": {
-                              "line": 394,
+                              "line": 396,
                               "column": 8
                             },
                             "end": {
-                              "line": 394,
+                              "line": 396,
                               "column": 51
                             }
                           }
@@ -46928,46 +47369,46 @@
                           "value": "EVENT__WORKFLOWRUN_SELECTED_COLLECTION",
                           "raw": "'EVENT__WORKFLOWRUN_SELECTED_COLLECTION'",
                           "range": [
-                            33127,
-                            33167
+                            33284,
+                            33324
                           ],
                           "loc": {
                             "start": {
-                              "line": 394,
+                              "line": 396,
                               "column": 54
                             },
                             "end": {
-                              "line": 394,
+                              "line": 396,
                               "column": 94
                             }
                           }
                         },
                         "range": [
-                          33081,
-                          33167
+                          33238,
+                          33324
                         ],
                         "loc": {
                           "start": {
-                            "line": 394,
+                            "line": 396,
                             "column": 8
                           },
                           "end": {
-                            "line": 394,
+                            "line": 396,
                             "column": 94
                           }
                         }
                       },
                       "range": [
-                        33081,
-                        33168
+                        33238,
+                        33325
                       ],
                       "loc": {
                         "start": {
-                          "line": 394,
+                          "line": 396,
                           "column": 8
                         },
                         "end": {
-                          "line": 394,
+                          "line": 396,
                           "column": 95
                         }
                       },
@@ -46976,16 +47417,16 @@
                           "type": "Block",
                           "value": "* Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. ",
                           "range": [
-                            32925,
-                            33072
+                            33082,
+                            33229
                           ],
                           "loc": {
                             "start": {
-                              "line": 393,
+                              "line": 395,
                               "column": 8
                             },
                             "end": {
-                              "line": 393,
+                              "line": 395,
                               "column": 155
                             }
                           }
@@ -46996,154 +47437,7 @@
                           "type": "Block",
                           "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
                           "range": [
-                            33177,
-                            33341
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 395,
-                              "column": 8
-                            },
-                            "end": {
-                              "line": 395,
-                              "column": 172
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "ExpressionStatement",
-                      "expression": {
-                        "type": "AssignmentExpression",
-                        "operator": "=",
-                        "left": {
-                          "type": "MemberExpression",
-                          "computed": false,
-                          "object": {
-                            "type": "ThisExpression",
-                            "range": [
-                              33350,
-                              33354
-                            ],
-                            "loc": {
-                              "start": {
-                                "line": 396,
-                                "column": 8
-                              },
-                              "end": {
-                                "line": 396,
-                                "column": 12
-                              }
-                            }
-                          },
-                          "property": {
-                            "type": "Identifier",
-                            "name": "REQUEST__WORKFLOWRUN_CREATE",
-                            "range": [
-                              33355,
-                              33382
-                            ],
-                            "loc": {
-                              "start": {
-                                "line": 396,
-                                "column": 13
-                              },
-                              "end": {
-                                "line": 396,
-                                "column": 40
-                              }
-                            }
-                          },
-                          "range": [
-                            33350,
-                            33382
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 396,
-                              "column": 8
-                            },
-                            "end": {
-                              "line": 396,
-                              "column": 40
-                            }
-                          }
-                        },
-                        "right": {
-                          "type": "Literal",
-                          "value": "REQUEST__WORKFLOWRUN_CREATE",
-                          "raw": "'REQUEST__WORKFLOWRUN_CREATE'",
-                          "range": [
-                            33385,
-                            33414
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 396,
-                              "column": 43
-                            },
-                            "end": {
-                              "line": 396,
-                              "column": 72
-                            }
-                          }
-                        },
-                        "range": [
-                          33350,
-                          33414
-                        ],
-                        "loc": {
-                          "start": {
-                            "line": 396,
-                            "column": 8
-                          },
-                          "end": {
-                            "line": 396,
-                            "column": 72
-                          }
-                        }
-                      },
-                      "range": [
-                        33350,
-                        33415
-                      ],
-                      "loc": {
-                        "start": {
-                          "line": 396,
-                          "column": 8
-                        },
-                        "end": {
-                          "line": 396,
-                          "column": 73
-                        }
-                      },
-                      "leadingComments": [
-                        {
-                          "type": "Block",
-                          "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
-                          "range": [
-                            33177,
-                            33341
-                          ],
-                          "loc": {
-                            "start": {
-                              "line": 395,
-                              "column": 8
-                            },
-                            "end": {
-                              "line": 395,
-                              "column": 172
-                            }
-                          }
-                        }
-                      ],
-                      "trailingComments": [
-                        {
-                          "type": "Block",
-                          "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
-                          "range": [
-                            33424,
+                            33334,
                             33498
                           ],
                           "loc": {
@@ -47153,7 +47447,7 @@
                             },
                             "end": {
                               "line": 397,
-                              "column": 82
+                              "column": 172
                             }
                           }
                         }
@@ -47186,10 +47480,10 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "name": "REQUEST__WORKFLOWRUN_SAVE",
+                            "name": "REQUEST__WORKFLOWRUN_CREATE",
                             "range": [
                               33512,
-                              33537
+                              33539
                             ],
                             "loc": {
                               "start": {
@@ -47198,13 +47492,13 @@
                               },
                               "end": {
                                 "line": 398,
-                                "column": 38
+                                "column": 40
                               }
                             }
                           },
                           "range": [
                             33507,
-                            33537
+                            33539
                           ],
                           "loc": {
                             "start": {
@@ -47213,32 +47507,32 @@
                             },
                             "end": {
                               "line": 398,
-                              "column": 38
+                              "column": 40
                             }
                           }
                         },
                         "right": {
                           "type": "Literal",
-                          "value": "REQUEST__WORKFLOWRUN_SAVE",
-                          "raw": "'REQUEST__WORKFLOWRUN_SAVE'",
+                          "value": "REQUEST__WORKFLOWRUN_CREATE",
+                          "raw": "'REQUEST__WORKFLOWRUN_CREATE'",
                           "range": [
-                            33540,
-                            33567
+                            33542,
+                            33571
                           ],
                           "loc": {
                             "start": {
                               "line": 398,
-                              "column": 41
+                              "column": 43
                             },
                             "end": {
                               "line": 398,
-                              "column": 68
+                              "column": 72
                             }
                           }
                         },
                         "range": [
                           33507,
-                          33567
+                          33571
                         ],
                         "loc": {
                           "start": {
@@ -47247,13 +47541,13 @@
                           },
                           "end": {
                             "line": 398,
-                            "column": 68
+                            "column": 72
                           }
                         }
                       },
                       "range": [
                         33507,
-                        33568
+                        33572
                       ],
                       "loc": {
                         "start": {
@@ -47262,15 +47556,15 @@
                         },
                         "end": {
                           "line": 398,
-                          "column": 69
+                          "column": 73
                         }
                       },
                       "leadingComments": [
                         {
                           "type": "Block",
-                          "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                          "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
                           "range": [
-                            33424,
+                            33334,
                             33498
                           ],
                           "loc": {
@@ -47280,6 +47574,300 @@
                             },
                             "end": {
                               "line": 397,
+                              "column": 172
+                            }
+                          }
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Request a WorkflowRun be deleted. Takes {workflowrun: WorkflowRun}. ",
+                          "range": [
+                            33581,
+                            33655
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 399,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 399,
+                              "column": 82
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              33664,
+                              33668
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 400,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 400,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "REQUEST__WORKFLOWRUN_DELETE",
+                            "range": [
+                              33669,
+                              33696
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 400,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 400,
+                                "column": 40
+                              }
+                            }
+                          },
+                          "range": [
+                            33664,
+                            33696
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 400,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 400,
+                              "column": 40
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": "REQUEST__WORKFLOWRUN_DELETE",
+                          "raw": "'REQUEST__WORKFLOWRUN_DELETE'",
+                          "range": [
+                            33699,
+                            33728
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 400,
+                              "column": 43
+                            },
+                            "end": {
+                              "line": 400,
+                              "column": 72
+                            }
+                          }
+                        },
+                        "range": [
+                          33664,
+                          33728
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 400,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 400,
+                            "column": 72
+                          }
+                        }
+                      },
+                      "range": [
+                        33664,
+                        33729
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 400,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 400,
+                          "column": 73
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Request a WorkflowRun be deleted. Takes {workflowrun: WorkflowRun}. ",
+                          "range": [
+                            33581,
+                            33655
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 399,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 399,
+                              "column": 82
+                            }
+                          }
+                        }
+                      ],
+                      "trailingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                          "range": [
+                            33738,
+                            33812
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 401,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 401,
+                              "column": 82
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": false,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              33821,
+                              33825
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 402,
+                                "column": 8
+                              },
+                              "end": {
+                                "line": 402,
+                                "column": 12
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "REQUEST__WORKFLOWRUN_SAVE",
+                            "range": [
+                              33826,
+                              33851
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 402,
+                                "column": 13
+                              },
+                              "end": {
+                                "line": 402,
+                                "column": 38
+                              }
+                            }
+                          },
+                          "range": [
+                            33821,
+                            33851
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 402,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 402,
+                              "column": 38
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Literal",
+                          "value": "REQUEST__WORKFLOWRUN_SAVE",
+                          "raw": "'REQUEST__WORKFLOWRUN_SAVE'",
+                          "range": [
+                            33854,
+                            33881
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 402,
+                              "column": 41
+                            },
+                            "end": {
+                              "line": 402,
+                              "column": 68
+                            }
+                          }
+                        },
+                        "range": [
+                          33821,
+                          33881
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 402,
+                            "column": 8
+                          },
+                          "end": {
+                            "line": 402,
+                            "column": 68
+                          }
+                        }
+                      },
+                      "range": [
+                        33821,
+                        33882
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 402,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 402,
+                          "column": 69
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Block",
+                          "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+                          "range": [
+                            33738,
+                            33812
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 401,
+                              "column": 8
+                            },
+                            "end": {
+                              "line": 401,
                               "column": 82
                             }
                           }
@@ -47289,7 +47877,7 @@
                   ],
                   "range": [
                     726,
-                    33574
+                    33888
                   ],
                   "loc": {
                     "start": {
@@ -47297,7 +47885,7 @@
                       "column": 4
                     },
                     "end": {
-                      "line": 399,
+                      "line": 403,
                       "column": 5
                     }
                   }
@@ -47306,7 +47894,7 @@
                 "expression": false,
                 "range": [
                   719,
-                  33574
+                  33888
                 ],
                 "loc": {
                   "start": {
@@ -47314,7 +47902,7 @@
                     "column": 15
                   },
                   "end": {
-                    "line": 399,
+                    "line": 403,
                     "column": 5
                   }
                 }
@@ -47323,7 +47911,7 @@
               "computed": false,
               "range": [
                 708,
-                33574
+                33888
               ],
               "loc": {
                 "start": {
@@ -47331,7 +47919,7 @@
                   "column": 4
                 },
                 "end": {
-                  "line": 399,
+                  "line": 403,
                   "column": 5
                 }
               },
@@ -47360,7 +47948,7 @@
           ],
           "range": [
             683,
-            33576
+            33890
           ],
           "loc": {
             "start": {
@@ -47368,14 +47956,14 @@
               "column": 0
             },
             "end": {
-              "line": 400,
+              "line": 404,
               "column": 1
             }
           }
         },
         "range": [
           664,
-          33576
+          33890
         ],
         "loc": {
           "start": {
@@ -47383,7 +47971,7 @@
             "column": 0
           },
           "end": {
-            "line": 400,
+            "line": 404,
             "column": 1
           }
         },
@@ -47412,16 +48000,16 @@
             "type": "Block",
             "value": "* @ignore ",
             "range": [
-              33577,
-              33591
+              33891,
+              33905
             ],
             "loc": {
               "start": {
-                "line": 401,
+                "line": 405,
                 "column": 0
               },
               "end": {
-                "line": 401,
+                "line": 405,
                 "column": 14
               }
             }
@@ -47430,16 +48018,16 @@
         "__esdoc__pseudo_export": true
       },
       "range": [
-        33592,
-        33626
+        33906,
+        33940
       ],
       "loc": {
         "start": {
-          "line": 402,
+          "line": 406,
           "column": 0
         },
         "end": {
-          "line": 402,
+          "line": 406,
           "column": 34
         }
       },
@@ -47452,11 +48040,11 @@
         "kind": "let",
         "loc": {
           "start": {
-            "line": 402,
+            "line": 406,
             "column": 0
           },
           "end": {
-            "line": 402,
+            "line": 406,
             "column": 34
           }
         },
@@ -47481,16 +48069,16 @@
             "type": "Block",
             "value": "* @ignore ",
             "range": [
-              33577,
-              33591
+              33891,
+              33905
             ],
             "loc": {
               "start": {
-                "line": 401,
+                "line": 405,
                 "column": 0
               },
               "end": {
-                "line": 401,
+                "line": 405,
                 "column": 14
               }
             }
@@ -47499,16 +48087,16 @@
         "trailingComments": []
       },
       "range": [
-        33592,
-        33626
+        33906,
+        33940
       ],
       "loc": {
         "start": {
-          "line": 402,
+          "line": 406,
           "column": 0
         },
         "end": {
-          "line": 402,
+          "line": 406,
           "column": 34
         }
       },
@@ -47517,16 +48105,16 @@
           "type": "Block",
           "value": "* @ignore ",
           "range": [
-            33577,
-            33591
+            33891,
+            33905
           ],
           "loc": {
             "start": {
-              "line": 401,
+              "line": 405,
               "column": 0
             },
             "end": {
-              "line": 401,
+              "line": 405,
               "column": 14
             }
           }
@@ -47537,7 +48125,7 @@
   "sourceType": "module",
   "range": [
     558,
-    33626
+    33940
   ],
   "loc": {
     "start": {
@@ -47545,7 +48133,7 @@
       "column": 0
     },
     "end": {
-      "line": 402,
+      "line": 406,
       "column": 34
     }
   },
@@ -51584,10 +52172,10 @@
     },
     {
       "type": "Block",
-      "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+      "value": "* Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. ",
       "range": [
         32595,
-        32669
+        32671
       ],
       "loc": {
         "start": {
@@ -51596,6 +52184,24 @@
         },
         "end": {
           "line": 389,
+          "column": 84
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "* Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. ",
+      "range": [
+        32752,
+        32826
+      ],
+      "loc": {
+        "start": {
+          "line": 391,
+          "column": 8
+        },
+        "end": {
+          "line": 391,
           "column": 82
         }
       }
@@ -51604,16 +52210,16 @@
       "type": "Block",
       "value": "* Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. ",
       "range": [
-        32746,
-        32842
+        32903,
+        32999
       ],
       "loc": {
         "start": {
-          "line": 391,
+          "line": 393,
           "column": 8
         },
         "end": {
-          "line": 391,
+          "line": 393,
           "column": 104
         }
       }
@@ -51622,16 +52228,16 @@
       "type": "Block",
       "value": "* Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. ",
       "range": [
-        32925,
-        33072
+        33082,
+        33229
       ],
       "loc": {
         "start": {
-          "line": 393,
+          "line": 395,
           "column": 8
         },
         "end": {
-          "line": 393,
+          "line": 395,
           "column": 155
         }
       }
@@ -51640,25 +52246,7 @@
       "type": "Block",
       "value": "* Request a WorkflowRun be created. Takes {workflow: Workflow, assignments: [string (Resource URLs or individual ResourceList URL)] (index by InputPort URLs)}. ",
       "range": [
-        33177,
-        33341
-      ],
-      "loc": {
-        "start": {
-          "line": 395,
-          "column": 8
-        },
-        "end": {
-          "line": 395,
-          "column": 172
-        }
-      }
-    },
-    {
-      "type": "Block",
-      "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
-      "range": [
-        33424,
+        33334,
         33498
       ],
       "loc": {
@@ -51668,6 +52256,42 @@
         },
         "end": {
           "line": 397,
+          "column": 172
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "* Request a WorkflowRun be deleted. Takes {workflowrun: WorkflowRun}. ",
+      "range": [
+        33581,
+        33655
+      ],
+      "loc": {
+        "start": {
+          "line": 399,
+          "column": 8
+        },
+        "end": {
+          "line": 399,
+          "column": 82
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "* Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. ",
+      "range": [
+        33738,
+        33812
+      ],
+      "loc": {
+        "start": {
+          "line": 401,
+          "column": 8
+        },
+        "end": {
+          "line": 401,
           "column": 82
         }
       }
@@ -51676,16 +52300,16 @@
       "type": "Block",
       "value": "* @ignore ",
       "range": [
-        33577,
-        33591
+        33891,
+        33905
       ],
       "loc": {
         "start": {
-          "line": 401,
+          "line": 405,
           "column": 0
         },
         "end": {
-          "line": 401,
+          "line": 405,
           "column": 14
         }
       }

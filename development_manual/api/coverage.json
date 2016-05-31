@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 397,
-  "actualCount": 397,
+  "expectCount": 399,
+  "actualCount": 399,
   "files": {
     "js/Updater/AbstractUpdater.js": {
       "expectCount": 4,
@@ -124,8 +124,8 @@
       "undocumentLines": []
     },
     "js/Shared/RODAN_EVENTS.js": {
-      "expectCount": 136,
-      "actualCount": 136,
+      "expectCount": 138,
+      "actualCount": 138,
       "undocumentLines": []
     },
     "js/Shared/Environment.js": {

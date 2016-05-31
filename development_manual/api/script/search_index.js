@@ -1890,12 +1890,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/plugins.js",
-    "file/js/Plugins.js.html",
-    "js/Plugins.js",
-    "file"
-  ],
-  [
     "js/shared/cookie.js",
     "file/js/Shared/Cookie.js.html",
     "js/Shared/Cookie.js",
@@ -2199,6 +2193,12 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#event__workflowrun_created",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__WORKFLOWRUN_CREATED",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__WORKFLOWRUN_CREATED",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__workflowrun_deleted",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__WORKFLOWRUN_DELETED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__WORKFLOWRUN_DELETED",
     "member"
   ],
   [
@@ -2757,6 +2757,12 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__workflowrun_create",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOWRUN_CREATE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOWRUN_CREATE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__workflowrun_delete",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOWRUN_DELETE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOWRUN_DELETE",
     "member"
   ],
   [
