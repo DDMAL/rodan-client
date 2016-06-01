@@ -2,8 +2,8 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import ViewResourceList from 'js/Views/Master/Main/Resource/List/ViewResourceList';
-import ViewResourceListItem from 'js/Views/Master/Main/Resource/List/ViewResourceListItem';
+import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollection';
+import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 import ViewRunJobList from 'js/Views/Master/Main/RunJob/List/ViewRunJobList';
 import ViewRunJobListItem from 'js/Views/Master/Main/RunJob/List/ViewRunJobListItem';
 
@@ -43,9 +43,9 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this._layoutViewResources = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.regionResourceList.show(this._layoutViewResources);
-        this._viewResourceList = new ViewResourceList({collection: this._resources,
+        this._viewResourceList = new ViewResourceCollection({collection: this._resources,
                                                        template: '#template-main_workflowrun_individual_resources_list',
-                                                       childView: ViewResourceListItem});
+                                                       childView: ViewResourceCollectionItem});
         this._layoutViewResources.showCollection(this._viewResourceList);
 
         // Create RunJob list view.

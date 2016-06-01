@@ -5,8 +5,8 @@ import Radio from 'backbone.radio';
 import Resource from 'js/Models/Resource';
 import ResourceCollection from 'js/Collections/ResourceCollection';
 import ViewResource from 'js/Views/Master/Main/Resource/Individual/ViewResource';
-import ViewResourceList from 'js/Views/Master/Main/Resource/List/ViewResourceList';
-import ViewResourceListItem from 'js/Views/Master/Main/Resource/List/ViewResourceListItem';
+import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollection';
+import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 
 /**
  * Controller for Resources.
@@ -51,9 +51,9 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
-        var view = new ViewResourceList({collection: this._collection,
+        var view = new ViewResourceCollection({collection: this._collection,
                                          template: '#template-main_resource_list',
-                                         childView: ViewResourceListItem,
+                                         childView: ViewResourceCollectionItem,
                                          model: options.project});
         this._layoutView.showCollection(view);
     }

@@ -4,9 +4,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * View for Resource list.
+ * View for Resource Collection.
  */
-export default class ViewResourceList extends BaseViewCollection
+export default class ViewResourceCollection extends BaseViewCollection
 {
 	/**
 	 * Handle file button.
@@ -39,10 +39,10 @@ export default class ViewResourceList extends BaseViewCollection
         }
     }
 }
-ViewResourceList.prototype.behaviors = {Table: {'table': '#table-resources'}};
-ViewResourceList.prototype.ui = {
+ViewResourceCollection.prototype.behaviors = {Table: {'table': '#table-resources'}};
+ViewResourceCollection.prototype.ui = {
     fileInput: '#file-main_resource_file'
 };
-ViewResourceList.prototype.events = {
+ViewResourceCollection.prototype.events = {
     'change @ui.fileInput': '_handleClickButtonFile'
 };
