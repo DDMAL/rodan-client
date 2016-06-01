@@ -18,7 +18,7 @@ export default class ViewProjectCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 }
-ViewProjectCollectionItem.prototype.template = '#template-main_project_list_item';
+ViewProjectCollectionItem.prototype.template = '#template-main_project_collection_item';
 ViewProjectCollectionItem.prototype.tagName = 'tr';
 ViewProjectCollectionItem.prototype.events = {
     'dblclick': '_handleDoubleClick'

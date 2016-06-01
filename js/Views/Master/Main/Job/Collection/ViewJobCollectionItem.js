@@ -31,7 +31,7 @@ export default class ViewJobCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model, workflow: this._workflow});
     }
 }
-ViewJobCollectionItem.prototype.template = '#template-main_job_list_item';
+ViewJobCollectionItem.prototype.template = '#template-main_job_collection_item';
 ViewJobCollectionItem.prototype.tagName = 'tr';
 ViewJobCollectionItem.prototype.ui = {
     buttonAdd: '#button-main_job_button_add'

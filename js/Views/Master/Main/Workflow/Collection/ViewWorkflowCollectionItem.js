@@ -26,7 +26,7 @@ export default class ViewWorkflowCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_SELECTED, {workflow: this.model});
     }
 }
-ViewWorkflowCollectionItem.prototype.template = '#template-main_workflow_list_item';
+ViewWorkflowCollectionItem.prototype.template = '#template-main_workflow_collection_item';
 ViewWorkflowCollectionItem.prototype.tagName = 'tr';
 ViewWorkflowCollectionItem.prototype.events = {
     'click': '_handleClick',

@@ -40,7 +40,7 @@ export default class ViewResourceCollectionItemModal extends BaseViewCollectionI
         }
     }
 }
-ViewResourceCollectionItemModal.prototype.template = '#template-modal_resource_list_item';
+ViewResourceCollectionItemModal.prototype.template = '#template-modal_resource_collection_item';
 ViewResourceCollectionItemModal.prototype.tagName = 'tr';
 ViewResourceCollectionItemModal.prototype.events = {
     'dblclick': '_handleDoubleClick'

@@ -22,7 +22,7 @@ export default class ControllerResource extends BaseController
     _initializeRadio()
     {
         // Events
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
 
         // Requests
@@ -43,16 +43,16 @@ export default class ControllerResource extends BaseController
     }
 
     /**
-     * Handle list selection.
+     * Handle collection selection.
      */
-    _handleEventListSelected(options)
+    _handleEventCollectionSelected(options)
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, {data: {project: options.project.id}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewResourceCollection({collection: this._collection,
-                                         template: '#template-main_resource_list',
+                                         template: '#template-main_resource_collection',
                                          childView: ViewResourceCollectionItem,
                                          model: options.project});
         this._layoutView.showCollection(view);

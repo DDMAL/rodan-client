@@ -38,7 +38,7 @@ export default class ViewRunJobCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
     }
 }
-ViewRunJobCollectionItem.prototype.template = '#template-main_runjob_list_item';
+ViewRunJobCollectionItem.prototype.template = '#template-main_runjob_collection_item';
 ViewRunJobCollectionItem.prototype.tagName = 'tr';
 ViewRunJobCollectionItem.prototype.events = {
     'click': '_handleClick',

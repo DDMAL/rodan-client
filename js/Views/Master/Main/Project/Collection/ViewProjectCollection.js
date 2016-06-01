@@ -21,6 +21,6 @@ ViewProjectCollection.prototype.ui = {
 ViewProjectCollection.prototype.events = {
     'click @ui.buttonNewProject': '_handleButtonNewProject'
 };
-ViewProjectCollection.prototype.template = '#template-main_project_list';
+ViewProjectCollection.prototype.template = '#template-main_project_collection';
 ViewProjectCollection.prototype.childView = ViewProjectCollectionItem;
 ViewProjectCollection.prototype.behaviors = {Table: {'table': '#table-projects'}};

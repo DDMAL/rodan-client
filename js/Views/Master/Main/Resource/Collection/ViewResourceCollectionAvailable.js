@@ -6,5 +6,5 @@ import ViewResourceCollectionItemModal from './ViewResourceCollectionItemModal';
  */
 export default class ViewResourceCollectionAvailable extends ViewResourceCollection {}
 ViewResourceCollectionAvailable.prototype.allowMultipleSelection = true;
-ViewResourceCollectionAvailable.prototype.template = '#template-modal_resource_list';
+ViewResourceCollectionAvailable.prototype.template = '#template-modal_resource_collection';
 ViewResourceCollectionAvailable.prototype.childView = ViewResourceCollectionItemModal;

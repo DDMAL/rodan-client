@@ -67,7 +67,7 @@ export default class ControllerRunJob extends BaseController
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewRunJobCollection({collection: this._collection,
-                                       template: '#template-main_runjob_list',
+                                       template: '#template-main_runjob_collection',
                                        childView: ViewRunJobCollectionItem});
         this._layoutView.showCollection(view);
     }

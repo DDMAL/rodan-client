@@ -33,7 +33,7 @@ export default class ViewOutputPortTypeCollectionItem extends BaseViewCollection
     }
 }
 ViewOutputPortTypeCollectionItem.prototype.tagName = 'tr';
-ViewOutputPortTypeCollectionItem.prototype.template = '#template-main_outputporttype_list_item';
+ViewOutputPortTypeCollectionItem.prototype.template = '#template-main_outputporttype_collection_item';
 ViewOutputPortTypeCollectionItem.prototype.events = {
     'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
 };

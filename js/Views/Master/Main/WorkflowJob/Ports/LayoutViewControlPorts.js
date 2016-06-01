@@ -35,10 +35,10 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
      */
     onBeforeShow()
     {
-        this.regionControlInputPortTypes.show(this._inputPortTypeListView);
-        this.regionControlInputPorts.show(this._inputPortListView);
-        this.regionControlOutputPortTypes.show(this._outputPortTypeListView);
-        this.regionControlOutputPorts.show(this._outputPortListView);
+        this.regionControlInputPortTypes.show(this._inputPortTypeCollectionView);
+        this.regionControlInputPorts.show(this._inputPortCollectionView);
+        this.regionControlOutputPortTypes.show(this._outputPortTypeCollectionView);
+        this.regionControlOutputPorts.show(this._outputPortCollectionView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -49,15 +49,15 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
      */
     _initializeViews(options)
     {                                             
-        this._inputPortListView = new ViewInputPortCollection({collection: options.workflowjob.get('input_ports'),
-                                                         template: '#template-main_inputport_list',
+        this._inputPortCollectionView = new ViewInputPortCollection({collection: options.workflowjob.get('input_ports'),
+                                                         template: '#template-main_inputport_collection',
                                                          childView: ViewInputPortCollectionItem,
                                                          childViewOptions: options});
-        this._outputPortListView = new ViewOutputPortCollection({collection: options.workflowjob.get('output_ports'),
+        this._outputPortCollectionView = new ViewOutputPortCollection({collection: options.workflowjob.get('output_ports'),
                                                            childViewOptions: options});
-        this._inputPortTypeListView = new ViewInputPortTypeCollection({workflowjob: options.workflowjob,
+        this._inputPortTypeCollectionView = new ViewInputPortTypeCollection({workflowjob: options.workflowjob,
                                                                  childViewOptions: options});
-        this._outputPortTypeListView = new ViewOutputPortTypeCollection({workflowjob: options.workflowjob,
+        this._outputPortTypeCollectionView = new ViewOutputPortTypeCollection({workflowjob: options.workflowjob,
                                                                    childViewOptions: options});
     }
 }

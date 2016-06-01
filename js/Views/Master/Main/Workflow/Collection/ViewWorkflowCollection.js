@@ -14,7 +14,7 @@ export default class ViewWorkflowCollection extends BaseViewCollection
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, {project: project});
     }
 }
-ViewWorkflowCollection.prototype.template = '#template-main_workflow_list';
+ViewWorkflowCollection.prototype.template = '#template-main_workflow_collection';
 ViewWorkflowCollection.prototype.childView = ViewWorkflowCollectionItem;
 ViewWorkflowCollection.prototype.behaviors = {Table: {'table': '#table-workflows'}};
 ViewWorkflowCollection.prototype.ui = {

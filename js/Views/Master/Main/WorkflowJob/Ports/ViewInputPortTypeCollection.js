@@ -27,6 +27,6 @@ export default class ViewInputPortTypeCollection extends Marionette.CompositeVie
 ViewInputPortTypeCollection.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortTypeCollection.prototype.template = '#template-main_inputporttype_list';
+ViewInputPortTypeCollection.prototype.template = '#template-main_inputporttype_collection';
 ViewInputPortTypeCollection.prototype.childView = ViewInputPortTypeCollectionItem;
 ViewInputPortTypeCollection.prototype.childViewContainer = 'tbody';

@@ -21,5 +21,5 @@ export default class ViewResourceTypeCollectionItem extends BaseViewCollectionIt
         }
     }
 }
-ViewResourceTypeCollectionItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
+ViewResourceTypeCollectionItem.prototype.template = '#template-main_resource_individual_resourcetype_collection_item';
 ViewResourceTypeCollectionItem.prototype.tagName = 'option';

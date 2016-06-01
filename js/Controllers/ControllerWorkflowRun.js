@@ -25,7 +25,7 @@ export default class ControllerWorkflowRun extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
 
         // Requests.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventListSelected(options), this);
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options), this);
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED, options => this._handleEventItemSelected(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_DELETE, options => this._handleRequestWorkflowRunDelete(options), this);
@@ -77,9 +77,9 @@ export default class ControllerWorkflowRun extends BaseController
     }
 
     /**
-     * Handle list selection.
+     * Handle collection selection.
      */
-    _handleEventListSelected(options)
+    _handleEventCollectionSelected(options)
     {
         var collection = new WorkflowRunCollection();
         collection.fetchSort(false, 'created', {data: {project: options.project.id}});

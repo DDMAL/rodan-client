@@ -25,8 +25,8 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this._runJobs = options.runjobs;
         this._resources = options.resources;
         this.addRegions({
-            regionRunJobList: '#region-main_workflowrun_individual_runjobs',
-            regionResourceList: '#region-main_workflowrun_individual_resources'
+            regionRunJobCollection: '#region-main_workflowrun_individual_runjobs',
+            regionResourceCollection: '#region-main_workflowrun_individual_resources'
         });
     }
 
@@ -36,26 +36,26 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
     onRender()
     {
         // Empty regions.
-        this.regionRunJobList.empty();
-        this.regionResourceList.empty();
+        this.regionRunJobCollection.empty();
+        this.regionResourceCollection.empty();
 
-        // Create Resource list view.
+        // Create Resource collection view.
         this._layoutViewResources = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
-        this.regionResourceList.show(this._layoutViewResources);
-        this._viewResourceList = new ViewResourceCollection({collection: this._resources,
-                                                       template: '#template-main_workflowrun_individual_resources_list',
+        this.regionResourceCollection.show(this._layoutViewResources);
+        this._viewResourceCollection = new ViewResourceCollection({collection: this._resources,
+                                                       template: '#template-main_workflowrun_individual_resources_collection',
                                                        childView: ViewResourceCollectionItem});
-        this._layoutViewResources.showCollection(this._viewResourceList);
+        this._layoutViewResources.showCollection(this._viewResourceCollection);
 
-        // Create RunJob list view.
+        // Create RunJob collection view.
         this._layoutViewRunJobs = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
-        this.regionRunJobList.show(this._layoutViewRunJobs);
-        this._viewRunJobList = new ViewRunJobCollection({collection: this._runJobs,
-                                                   template: '#template-main_runjob_list_notitle',
+        this.regionRunJobCollection.show(this._layoutViewRunJobs);
+        this._viewRunJobCollection = new ViewRunJobCollection({collection: this._runJobs,
+                                                   template: '#template-main_runjob_collection_notitle',
                                                    childView: ViewRunJobCollectionItem});
-        this._layoutViewRunJobs.showCollection(this._viewRunJobList);
+        this._layoutViewRunJobs.showCollection(this._viewRunJobCollection);
 
         // Show Resources on default.
         this._showResources();
@@ -69,12 +69,12 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     _showResources()
     {
-        this.regionRunJobList.$el.hide();
+        this.regionRunJobCollection.$el.hide();
         this.ui.buttonShowResources.css('text-decoration', 'underline');
         this.ui.buttonShowRunJobs.css('text-decoration', 'none');
-        if (!this.regionResourceList.$el.is(':visible'))
+        if (!this.regionResourceCollection.$el.is(':visible'))
         {
-            this.regionResourceList.$el.toggle('fast');
+            this.regionResourceCollection.$el.toggle('fast');
         }
     }
 
@@ -83,12 +83,12 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     _showRunJobs()
     {
-        this.regionResourceList.$el.hide();
+        this.regionResourceCollection.$el.hide();
         this.ui.buttonShowResources.css('text-decoration', 'none');
         this.ui.buttonShowRunJobs.css('text-decoration', 'underline');
-        if (!this.regionRunJobList.$el.is(':visible'))
+        if (!this.regionRunJobCollection.$el.is(':visible'))
         {
-            this.regionRunJobList.$el.toggle('fast');
+            this.regionRunJobCollection.$el.toggle('fast');
         }
     }
 

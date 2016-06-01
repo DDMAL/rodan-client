@@ -68,9 +68,9 @@ export default class ControllerWorkflowBuilder extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_GET_RESOURCEASSIGNMENTS, options => this._handleRequestGetResourceAssignments(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, options => this._handleRequestImportWorkflow(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, options => this._handleEventLoadWorkflow(options), this);
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options => this._handleRequestShowJobListView(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options => this._handleRequestShowJobCollectionView(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestShowResourceAssignmentView(options), this);
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options => this._handleRequestShowWorkflowListView(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options => this._handleRequestShowWorkflowCollectionView(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options => this._handleRequestShowWorkflowView(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_VIEW, options => this._handleRequestShowWorkflowJobView(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options => this._handleRequestShowWorkflowJobPortsView(options), this);
@@ -397,9 +397,9 @@ export default class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
-     * Handle request show Job list view.
+     * Handle request show Job collection view.
      */
-    _handleRequestShowJobListView(options)
+    _handleRequestShowJobCollectionView(options)
     {
         var collection = new JobCollection();
         collection.fetch();
@@ -408,16 +408,16 @@ export default class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
-     * Handle request show Workflow list view.
+     * Handle request show Workflow collection view.
      */
-    _handleRequestShowWorkflowListView(options)
+    _handleRequestShowWorkflowCollectionView(options)
     {
         var collection = new WorkflowCollection();
         collection.fetch({data: {/*project: project.id, */valid: 'True'}});
         var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
         var view = new ViewWorkflowCollection({collection: collection,
                                          childView: ViewWorkflowCollectionImportItem,
-                                         template: '#template-main_workflow_list_import',
+                                         template: '#template-main_workflow_collection_import',
                                          childViewOptions: {workflow: options.workflow}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Workflows'});
     }

@@ -26,7 +26,7 @@ export default class ViewResourceCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: this.model});
     }
 }
-ViewResourceCollectionItem.prototype.template = '#template-main_resource_list_item';
+ViewResourceCollectionItem.prototype.template = '#template-main_resource_collection_item';
 ViewResourceCollectionItem.prototype.tagName = 'tr';
 ViewResourceCollectionItem.prototype.events = {
     'click': '_handleClick',

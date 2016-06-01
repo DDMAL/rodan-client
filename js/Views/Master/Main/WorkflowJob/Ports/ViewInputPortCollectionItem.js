@@ -38,5 +38,5 @@ ViewInputPortCollectionItem.prototype.ui = {
 ViewInputPortCollectionItem.prototype.events = {
             'click @ui.buttonDelete': '_handleButtonDelete'
         };
-ViewInputPortCollectionItem.prototype.template = '#template-main_inputport_list_item';
+ViewInputPortCollectionItem.prototype.template = '#template-main_inputport_collection_item';
 ViewInputPortCollectionItem.prototype.tagName = 'tr';

@@ -38,5 +38,5 @@ ViewOutputPortCollectionItem.prototype.ui = {
 ViewOutputPortCollectionItem.prototype.events = {
     'click @ui.buttonDelete': '_handleButtonDelete'
 };
-ViewOutputPortCollectionItem.prototype.template = '#template-main_outputport_list_item';
+ViewOutputPortCollectionItem.prototype.template = '#template-main_outputport_collection_item';
 ViewOutputPortCollectionItem.prototype.tagName = 'tr';

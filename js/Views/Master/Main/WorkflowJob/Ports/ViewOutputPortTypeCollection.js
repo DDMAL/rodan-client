@@ -27,6 +27,6 @@ export default class ViewOutputPortTypeCollection extends Marionette.CompositeVi
 ViewOutputPortTypeCollection.prototype.modelEvents = {
     'all': 'render'
 };
-ViewOutputPortTypeCollection.prototype.template = '#template-main_outputporttype_list';
+ViewOutputPortTypeCollection.prototype.template = '#template-main_outputporttype_collection';
 ViewOutputPortTypeCollection.prototype.childView = ViewOutputPortTypeCollectionItem;
 ViewOutputPortTypeCollection.prototype.childViewContainer = 'tbody';

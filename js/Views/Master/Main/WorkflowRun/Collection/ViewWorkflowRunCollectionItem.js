@@ -18,7 +18,7 @@ export default class ViewWorkflowRunCollectionItem extends BaseViewCollectionIte
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
 }
-ViewWorkflowRunCollectionItem.prototype.template = '#template-main_workflowrun_list_item';
+ViewWorkflowRunCollectionItem.prototype.template = '#template-main_workflowrun_collection_item';
 ViewWorkflowRunCollectionItem.prototype.tagName = 'tr';
 ViewWorkflowRunCollectionItem.prototype.events = {
     'dblclick': '_handleDoubleClick'

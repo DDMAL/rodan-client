@@ -17,7 +17,7 @@ export default class LayoutViewModel extends Marionette.LayoutView
     initialize()
     {
         this.addRegions({
-            regionList: '#region-main_layoutview_model_list',
+            regionCollection: '#region-main_layoutview_model_collection',
             regionItem: '#region-main_layoutview_model_item'
         });
     }
@@ -29,7 +29,7 @@ export default class LayoutViewModel extends Marionette.LayoutView
      */
     showCollection(view)
     {
-        this.regionList.show(view);
+        this.regionCollection.show(view);
     }
 
     /**

@@ -21,7 +21,7 @@ export default class ControllerWorkflow extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventListSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
 
         // Requests.
@@ -34,17 +34,17 @@ export default class ControllerWorkflow extends BaseController
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle list selection.
+     * Handle collection selection.
      */
-    _handleEventListSelected(options)
+    _handleEventCollectionSelected(options)
     {
         this._collection = new WorkflowCollection();
         this._collection.fetch({data: {project: options.project.id}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
-        this._viewList = new ViewWorkflowCollection({collection: this._collection});
-        this._layoutView.showCollection(this._viewList);
+        this._viewCollection = new ViewWorkflowCollection({collection: this._collection});
+        this._layoutView.showCollection(this._viewCollection);
     }
 
     /**

@@ -33,7 +33,7 @@ export default class ViewInputPortTypeCollectionItem extends BaseViewCollectionI
     }
 }
 ViewInputPortTypeCollectionItem.prototype.tagName = 'tr';
-ViewInputPortTypeCollectionItem.prototype.template = '#template-main_inputporttype_list_item';
+ViewInputPortTypeCollectionItem.prototype.template = '#template-main_inputporttype_collection_item';
 ViewInputPortTypeCollectionItem.prototype.events = {
     'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
 };
