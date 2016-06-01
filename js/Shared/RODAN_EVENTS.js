@@ -194,6 +194,12 @@ class RODAN_EVENTS
         this.REQUEST__RESOURCES_LOAD = 'REQUEST__RESOURCES_LOAD';
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        // ResourceList
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** Triggered when the user selects to see all available ResourceLists. Sends {project: Project (Project associated with ResourceListCollection)}. */
+        this.EVENT__RESOURCELIST_SELECTED_COLLECTION = 'EVENT__RESOURCELIST_SELECTED_COLLECTION';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         // RunJob
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when interactive RunJob has been acquired by the current user. Sends {runjob: RunJob}. */

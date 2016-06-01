@@ -3,6 +3,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import NAV_EVENTS from './Events';
 import Radio from 'backbone.radio';
 import ViewNavigationNodeRunJobs from './ViewNavigationNodeRunJobs';
+import ViewNavigationNodeResourceLists from './ViewNavigationNodeResourceLists';
 import ViewNavigationNodeResources from './ViewNavigationNodeResources';
 import ViewNavigationNodeWorkflowRuns from './ViewNavigationNodeWorkflowRuns';
 import ViewNavigationNodeWorkflows from './ViewNavigationNodeWorkflows';
@@ -27,10 +28,12 @@ export default class ViewNavigationNodeProject extends ViewNavigationNode
         /** @ignore */
         this.collection = new Backbone.Collection();
         var resourcesNodeModel = new Backbone.Model({name: 'Resources', project: this.model});
+        var resourceListsNodeModel = new Backbone.Model({name: 'Resource Lists', project: this.model});
         var workflowBuilderNodeModel = new Backbone.Model({name: 'Workflows', project: this.model});
         var workflowRunsNodeModel = new Backbone.Model({name: 'Workflow Runs', project: this.model});
         var runJobsNodeModel = new Backbone.Model({name: 'Run Jobs', project: this.model});
         this.collection.add(resourcesNodeModel);
+        this.collection.add(resourceListsNodeModel);
         this.collection.add(workflowBuilderNodeModel);
         this.collection.add(workflowRunsNodeModel);
         this.collection.add(runJobsNodeModel);
@@ -50,6 +53,11 @@ export default class ViewNavigationNodeProject extends ViewNavigationNode
             case 'Resources':
             {
                 return ViewNavigationNodeResources;
+            }
+
+            case 'Resource Lists':
+            {
+                return ViewNavigationNodeResourceLists;
             }
 
             case 'Workflows':

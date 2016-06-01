@@ -30,7 +30,7 @@ export default class GlobalCollection extends BaseCollection
      */
     _initializeRadio()
     {
-        Radio.channel('rodan').reply(this._loadCommand, options => this._retrieveList(options));
+        Radio.channel('rodan').reply(this._loadCommand, options => this._retrieveCollection(options));
         Radio.channel('rodan').reply(this._requestCommand, () => this._handleRequestInstance());
     }
 
@@ -45,9 +45,9 @@ export default class GlobalCollection extends BaseCollection
     }
 
     /**
-     * Retrieves list.
+     * Retrieves collection.
      */
-    _retrieveList(options)
+    _retrieveCollection(options)
     {
         options = options ? options : {};
         this.reset();

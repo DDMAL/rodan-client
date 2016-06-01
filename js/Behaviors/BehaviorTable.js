@@ -155,7 +155,7 @@ export default class BehaviorTable extends Marionette.Behavior
             var templateInput = _.template($(this.options.templateFilterEnum).html());
             var htmlChoice = templateChoice({label: enumeration.label, field: enumeration.field});
             var htmlInput = templateInput({label: enumeration.label, field: enumeration.field, values: enumeration.values});
-            var filterObject = {listItem: htmlChoice, input: htmlInput};
+            var filterObject = {collectionItem: htmlChoice, input: htmlInput};
             filters.push(filterObject);
         }
 
@@ -170,10 +170,10 @@ export default class BehaviorTable extends Marionette.Behavior
         var filters = this._getFilters(this.view.collection, filterFields);
         for (var index in filters)
         {
-            var $listItem = $(filters[index].listItem);
+            var $collectionItem = $(filters[index].collectionItem);
             var $formInput = $(filters[index].input);
-            $listItem.click((event) => this._handleFilterClick(event));
-            $(this.el).find('#filter-menu ul').append($listItem);
+            $collectionItem.click((event) => this._handleFilterClick(event));
+            $(this.el).find('#filter-menu ul').append($collectionItem);
             $(this.el).find('#filter-inputs').append($formInput);
         }
 
@@ -202,7 +202,7 @@ export default class BehaviorTable extends Marionette.Behavior
         var templateInput = _.template($(this.options.templateFilterText).html());
         var htmlChoice = templateChoice({label: label, field: field});
         var htmlInput = templateInput({label: label, field: field});
-        return {listItem: htmlChoice, input: htmlInput};
+        return {collectionItem: htmlChoice, input: htmlInput};
     }
 
     /**
@@ -214,7 +214,7 @@ export default class BehaviorTable extends Marionette.Behavior
         var templateInput = _.template($(this.options.templateFilterDatetime).html());
         var htmlChoice = templateChoice({label: label, field: field});
         var htmlInput = templateInput({label: label, field: field});
-        return {listItem: htmlChoice, input: htmlInput};  
+        return {collectionItem: htmlChoice, input: htmlInput};  
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
