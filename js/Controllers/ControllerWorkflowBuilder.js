@@ -18,8 +18,8 @@ import ViewJobCollection from 'js/Views/Master/Main/Job/Collection/ViewJobCollec
 import ViewResourceListAssigned from 'js/Views/Master/Main/Resource/List/ViewResourceListAssigned';
 import ViewResourceListAvailable from 'js/Views/Master/Main/Resource/List/ViewResourceListAvailable';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
-import ViewWorkflowList from 'js/Views/Master/Main/Workflow/List/ViewWorkflowList';
-import ViewWorkflowListImportItem from 'js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem';
+import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection';
+import ViewWorkflowCollectionImportItem from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem';
 import WorkflowCollection from 'js/Collections/WorkflowCollection';
 import ViewWorkflowJobGroup from 'js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup';
 import ViewSettings from 'js/Views/Master/Main/WorkflowJob/Settings/ViewSettings';
@@ -415,8 +415,8 @@ export default class ControllerWorkflowBuilder extends BaseController
         var collection = new WorkflowCollection();
         collection.fetch({data: {/*project: project.id, */valid: 'True'}});
         var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
-        var view = new ViewWorkflowList({collection: collection,
-                                         childView: ViewWorkflowListImportItem,
+        var view = new ViewWorkflowCollection({collection: collection,
+                                         childView: ViewWorkflowCollectionImportItem,
                                          template: '#template-main_workflow_list_import',
                                          childViewOptions: {workflow: options.workflow}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Workflows'});

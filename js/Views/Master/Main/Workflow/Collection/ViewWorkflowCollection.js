@@ -1,12 +1,12 @@
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import ViewWorkflowListItem from './ViewWorkflowListItem';
+import ViewWorkflowCollectionItem from './ViewWorkflowCollectionItem';
 
 /**
- * Workflow list view.
+ * Workflow Collection view.
  */
-export default class ViewWorkflowList extends BaseViewCollection
+export default class ViewWorkflowCollection extends BaseViewCollection
 {
     _handleButtonNewWorkflow()
     {
@@ -14,12 +14,12 @@ export default class ViewWorkflowList extends BaseViewCollection
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, {project: project});
     }
 }
-ViewWorkflowList.prototype.template = '#template-main_workflow_list';
-ViewWorkflowList.prototype.childView = ViewWorkflowListItem;
-ViewWorkflowList.prototype.behaviors = {Table: {'table': '#table-workflows'}};
-ViewWorkflowList.prototype.ui = {
+ViewWorkflowCollection.prototype.template = '#template-main_workflow_list';
+ViewWorkflowCollection.prototype.childView = ViewWorkflowCollectionItem;
+ViewWorkflowCollection.prototype.behaviors = {Table: {'table': '#table-workflows'}};
+ViewWorkflowCollection.prototype.ui = {
     newWorkflowButton: '#button-new_workflow'
 };
-ViewWorkflowList.prototype.events = {
+ViewWorkflowCollection.prototype.events = {
     'click @ui.newWorkflowButton': '_handleButtonNewWorkflow'
 };

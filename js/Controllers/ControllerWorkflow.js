@@ -3,7 +3,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
-import ViewWorkflowList from 'js/Views/Master/Main/Workflow/List/ViewWorkflowList';
+import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection';
 import Workflow from 'js/Models/Workflow';
 import WorkflowCollection from 'js/Collections/WorkflowCollection';
 
@@ -43,7 +43,7 @@ export default class ControllerWorkflow extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
-        this._viewList = new ViewWorkflowList({collection: this._collection});
+        this._viewList = new ViewWorkflowCollection({collection: this._collection});
         this._layoutView.showList(this._viewList);
     }
 

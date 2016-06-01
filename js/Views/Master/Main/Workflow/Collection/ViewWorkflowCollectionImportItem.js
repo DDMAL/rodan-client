@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * Workflow list item for importing into another Workflow.
+ * Workflow Collection item for importing into another Workflow.
  */
-export default class ViewWorkflowListImportItem extends BaseViewCollectionItem
+export default class ViewWorkflowCollectionImportItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -29,12 +29,12 @@ export default class ViewWorkflowListImportItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_IMPORT_WORKFLOW, {origin: this.model, target: this._workflow});
     }
 }
-ViewWorkflowListImportItem.prototype.template = '#template-main_workflowbuilder_workflow_list_item_import';
-ViewWorkflowListImportItem.prototype.tagName = 'tr';
-ViewWorkflowListImportItem.prototype.ui = {
+ViewWorkflowCollectionImportItem.prototype.template = '#template-main_workflowbuilder_workflow_list_item_import';
+ViewWorkflowCollectionImportItem.prototype.tagName = 'tr';
+ViewWorkflowCollectionImportItem.prototype.ui = {
     buttonImportWorkflow: '#button-main_workflowbuilder_workflow_import'
 };
-ViewWorkflowListImportItem.prototype.events = {
+ViewWorkflowCollectionImportItem.prototype.events = {
     'click @ui.buttonImportWorkflow': '_handleButtonImportWorkflow',
     'dblclick': '_handleButtonImportWorkflow'
 };
