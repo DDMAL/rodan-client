@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * OutputPortType list item view.
+ * OutputPortType Collection item view.
  */
-export default class ViewOutputPortTypeListItem extends BaseViewCollectionItem
+export default class ViewOutputPortTypeCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -32,11 +32,11 @@ export default class ViewOutputPortTypeListItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT, {outputporttype: this.model, workflowjob: this._workflowJob, workflow: this._workflow});
     }
 }
-ViewOutputPortTypeListItem.prototype.tagName = 'tr';
-ViewOutputPortTypeListItem.prototype.template = '#template-main_outputporttype_list_item';
-ViewOutputPortTypeListItem.prototype.events = {
+ViewOutputPortTypeCollectionItem.prototype.tagName = 'tr';
+ViewOutputPortTypeCollectionItem.prototype.template = '#template-main_outputporttype_list_item';
+ViewOutputPortTypeCollectionItem.prototype.events = {
     'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
 };
-ViewOutputPortTypeListItem.prototype.ui = {
+ViewOutputPortTypeCollectionItem.prototype.ui = {
     buttonNewOutputPort: '#button-new_outputport'
 };

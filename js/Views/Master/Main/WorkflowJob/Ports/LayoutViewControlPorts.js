@@ -3,7 +3,7 @@ import ViewInputPortCollection from 'js/Views/Master/Main/InputPort/ViewInputPor
 import ViewInputPortCollectionItem from './ViewInputPortCollectionItem';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';
-import ViewOutputPortTypeList from './ViewOutputPortTypeList';
+import ViewOutputPortTypeCollection from './ViewOutputPortTypeCollection';
 
 /**
  * View for editing ports.
@@ -57,7 +57,7 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
                                                            childViewOptions: options});
         this._inputPortTypeListView = new ViewInputPortTypeList({workflowjob: options.workflowjob,
                                                                  childViewOptions: options});
-        this._outputPortTypeListView = new ViewOutputPortTypeList({workflowjob: options.workflowjob,
+        this._outputPortTypeListView = new ViewOutputPortTypeCollection({workflowjob: options.workflowjob,
                                                                    childViewOptions: options});
     }
 }
