@@ -1,11 +1,11 @@
-import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
  * Workflow list item for importing into another Workflow.
  */
-export default class ViewWorkflowListImportItem extends BaseViewListItem
+export default class ViewWorkflowListImportItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

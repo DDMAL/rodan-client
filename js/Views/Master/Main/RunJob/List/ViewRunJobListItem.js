@@ -1,11 +1,11 @@
-import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
  * RunJob list item view.
  */
-export default class ViewRunJobListItem extends BaseViewListItem
+export default class ViewRunJobListItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

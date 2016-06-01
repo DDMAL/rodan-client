@@ -1,11 +1,11 @@
-import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
  * Resource item View for Collection in modal.
  */
-export default class ViewResourceListItemModal extends BaseViewListItem
+export default class ViewResourceListItemModal extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

@@ -1,9 +1,9 @@
 import Marionette from 'backbone.marionette';
 
 /**
- * Base List Item view.
+ * Base Collection Item view.
  */
-export default class BaseViewListItem extends Marionette.ItemView
+export default class BaseViewCollectionItem extends Marionette.ItemView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -21,6 +21,6 @@ export default class BaseViewListItem extends Marionette.ItemView
         this.$el.attr('title', description);
     }
 }
-BaseViewListItem.prototype.modelEvents = {
+BaseViewCollectionItem.prototype.modelEvents = {
     'change': 'render'
 };

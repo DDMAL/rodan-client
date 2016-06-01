@@ -1,11 +1,11 @@
-import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
  * InputPort list item view.
  */
-export default class ViewInputPortListItem extends BaseViewListItem
+export default class ViewInputPortListItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

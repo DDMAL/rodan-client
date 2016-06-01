@@ -1,4 +1,4 @@
-import BaseViewList from 'js/Views/Master/Main/BaseViewList';
+import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewWorkflowListItem from './ViewWorkflowListItem';
@@ -6,7 +6,7 @@ import ViewWorkflowListItem from './ViewWorkflowListItem';
 /**
  * Workflow list view.
  */
-export default class ViewWorkflowList extends BaseViewList
+export default class ViewWorkflowList extends BaseViewCollection
 {
     _handleButtonNewWorkflow()
     {

@@ -1,12 +1,12 @@
 import _ from 'underscore';
-import BaseViewList from 'js/Views/Master/Main/BaseViewList';
+import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
  * View for Resource list.
  */
-export default class ViewResourceList extends BaseViewList
+export default class ViewResourceList extends BaseViewCollection
 {
 	/**
 	 * Handle file button.

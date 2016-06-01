@@ -1,4 +1,4 @@
-import BaseViewList from 'js/Views/Master/Main/BaseViewList';
+import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewProjectCollectionItem from './ViewProjectCollectionItem';
@@ -6,7 +6,7 @@ import ViewProjectCollectionItem from './ViewProjectCollectionItem';
 /**
  * Project list view.
  */
-export default class ViewProjectCollection extends BaseViewList
+export default class ViewProjectCollection extends BaseViewCollection
 {
     _handleButtonNewProject()
     {

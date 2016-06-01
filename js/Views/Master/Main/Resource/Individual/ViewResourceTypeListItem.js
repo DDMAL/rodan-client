@@ -1,9 +1,9 @@
-import BaseViewListItem from 'js/Views/Master/Main/BaseViewListItem';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 
 /**
  * ResourceType view.
  */
-export default class ViewResourceTypeListItem extends BaseViewListItem
+export default class ViewResourceTypeListItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
