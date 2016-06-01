@@ -46,7 +46,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this._viewResourceList = new ViewResourceList({collection: this._resources,
                                                        template: '#template-main_workflowrun_individual_resources_list',
                                                        childView: ViewResourceListItem});
-        this._layoutViewResources.showList(this._viewResourceList);
+        this._layoutViewResources.showCollection(this._viewResourceList);
 
         // Create RunJob list view.
         this._layoutViewRunJobs = new LayoutViewModel();
@@ -55,7 +55,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         this._viewRunJobList = new ViewRunJobList({collection: this._runJobs,
                                                    template: '#template-main_runjob_list_notitle',
                                                    childView: ViewRunJobListItem});
-        this._layoutViewRunJobs.showList(this._viewRunJobList);
+        this._layoutViewRunJobs.showCollection(this._viewRunJobList);
 
         // Show Resources on default.
         this._showResources();

@@ -114,7 +114,7 @@ export default class ControllerProject extends BaseController
         var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
-        layoutView.showList(new ViewWorkflowRunCollection({collection: collection}));
+        layoutView.showCollection(new ViewWorkflowRunCollection({collection: collection}));
     }
 
     /**

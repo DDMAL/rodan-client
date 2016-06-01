@@ -23,11 +23,11 @@ export default class LayoutViewModel extends Marionette.LayoutView
     }
 
     /**
-     * Show a list view.
+     * Show a Collection view.
      *
-     * @param {Marionette.View} view list view to show
+     * @param {Marionette.View} view Collection view to show
      */
-    showList(view)
+    showCollection(view)
     {
         this.regionList.show(view);
     }

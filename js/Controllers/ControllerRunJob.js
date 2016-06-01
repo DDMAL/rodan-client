@@ -69,7 +69,7 @@ export default class ControllerRunJob extends BaseController
         var view = new ViewRunJobList({collection: this._collection,
                                        template: '#template-main_runjob_list',
                                        childView: ViewRunJobListItem});
-        this._layoutView.showList(view);
+        this._layoutView.showCollection(view);
     }
 
     /**

@@ -44,7 +44,7 @@ export default class ControllerWorkflow extends BaseController
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         this._viewList = new ViewWorkflowCollection({collection: this._collection});
-        this._layoutView.showList(this._viewList);
+        this._layoutView.showCollection(this._viewList);
     }
 
     /**

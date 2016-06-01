@@ -55,7 +55,7 @@ export default class ControllerResource extends BaseController
                                          template: '#template-main_resource_list',
                                          childView: ViewResourceListItem,
                                          model: options.project});
-        this._layoutView.showList(view);
+        this._layoutView.showCollection(view);
     }
 
     /**
