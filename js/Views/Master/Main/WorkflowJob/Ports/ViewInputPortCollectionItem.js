@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * InputPort list item view.
+ * InputPort Collection Item view.
  */
-export default class ViewInputPortListItem extends BaseViewCollectionItem
+export default class ViewInputPortCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -32,11 +32,11 @@ export default class ViewInputPortListItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_INPUTPORT, {inputport: this.model, workflow: this._workflow, workflowjob: this._workflowJob});
     }
 }
-ViewInputPortListItem.prototype.ui = {
+ViewInputPortCollectionItem.prototype.ui = {
             buttonDelete: '#button-delete'
         };
-ViewInputPortListItem.prototype.events = {
+ViewInputPortCollectionItem.prototype.events = {
             'click @ui.buttonDelete': '_handleButtonDelete'
         };
-ViewInputPortListItem.prototype.template = '#template-main_inputport_list_item';
-ViewInputPortListItem.prototype.tagName = 'tr';
+ViewInputPortCollectionItem.prototype.template = '#template-main_inputport_list_item';
+ViewInputPortCollectionItem.prototype.tagName = 'tr';

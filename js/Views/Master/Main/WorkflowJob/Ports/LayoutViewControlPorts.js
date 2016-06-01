@@ -1,6 +1,6 @@
 import Marionette from 'backbone.marionette';
-import ViewInputPortList from 'js/Views/Master/Main/InputPort/ViewInputPortList';
-import ViewInputPortListItem from './ViewInputPortListItem';
+import ViewInputPortCollection from 'js/Views/Master/Main/InputPort/ViewInputPortCollection';
+import ViewInputPortCollectionItem from './ViewInputPortCollectionItem';
 import ViewInputPortTypeList from './ViewInputPortTypeList';
 import ViewOutputPortList from './ViewOutputPortList';
 import ViewOutputPortTypeList from './ViewOutputPortTypeList';
@@ -49,9 +49,9 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
      */
     _initializeViews(options)
     {                                             
-        this._inputPortListView = new ViewInputPortList({collection: options.workflowjob.get('input_ports'),
+        this._inputPortListView = new ViewInputPortCollection({collection: options.workflowjob.get('input_ports'),
                                                          template: '#template-main_inputport_list',
-                                                         childView: ViewInputPortListItem,
+                                                         childView: ViewInputPortCollectionItem,
                                                          childViewOptions: options});
         this._outputPortListView = new ViewOutputPortList({collection: options.workflowjob.get('output_ports'),
                                                            childViewOptions: options});
