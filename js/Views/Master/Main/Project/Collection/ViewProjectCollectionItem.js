@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * Project list item view.
  */
-export default class ViewProjectListItem extends BaseViewListItem
+export default class ViewProjectCollectionItem extends BaseViewListItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -18,8 +18,8 @@ export default class ViewProjectListItem extends BaseViewListItem
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED, {project: this.model});
     }
 }
-ViewProjectListItem.prototype.template = '#template-main_project_list_item';
-ViewProjectListItem.prototype.tagName = 'tr';
-ViewProjectListItem.prototype.events = {
+ViewProjectCollectionItem.prototype.template = '#template-main_project_list_item';
+ViewProjectCollectionItem.prototype.tagName = 'tr';
+ViewProjectCollectionItem.prototype.events = {
     'dblclick': '_handleDoubleClick'
 };

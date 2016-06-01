@@ -259,7 +259,7 @@ export default class BaseCollection extends Backbone.Collection
     /**
      * Syncs the Collection while preserving the last used fetch options.data.
      */
-    syncList()
+    syncCollection()
     {
         this.fetch({data: this._lastData});
     }
@@ -280,7 +280,7 @@ export default class BaseCollection extends Backbone.Collection
      */
     _handleCreateSuccess()
     {
-        this.syncList({});
+        this.syncCollection({});
     }
 
     /**

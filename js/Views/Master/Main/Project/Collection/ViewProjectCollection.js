@@ -1,12 +1,12 @@
 import BaseViewList from 'js/Views/Master/Main/BaseViewList';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import ViewProjectListItem from './ViewProjectListItem';
+import ViewProjectCollectionItem from './ViewProjectCollectionItem';
 
 /**
  * Project list view.
  */
-export default class ViewProjectList extends BaseViewList
+export default class ViewProjectCollection extends BaseViewList
 {
     _handleButtonNewProject()
     {
@@ -15,12 +15,12 @@ export default class ViewProjectList extends BaseViewList
     }
 }
 
-ViewProjectList.prototype.ui = {
+ViewProjectCollection.prototype.ui = {
     buttonNewProject: '#button-new_project'
 };
-ViewProjectList.prototype.events = {
+ViewProjectCollection.prototype.events = {
     'click @ui.buttonNewProject': '_handleButtonNewProject'
 };
-ViewProjectList.prototype.template = '#template-main_project_list';
-ViewProjectList.prototype.childView = ViewProjectListItem;
-ViewProjectList.prototype.behaviors = {Table: {'table': '#table-projects'}};
+ViewProjectCollection.prototype.template = '#template-main_project_list';
+ViewProjectCollection.prototype.childView = ViewProjectCollectionItem;
+ViewProjectCollection.prototype.behaviors = {Table: {'table': '#table-projects'}};

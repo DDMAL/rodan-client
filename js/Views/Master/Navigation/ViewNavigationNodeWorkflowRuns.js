@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
 
 /**
- * This class represents a navigation menu node for a WorkflowRun list.
+ * This class represents a navigation menu node for a WorkflowRun Collection.
  */
 export default class ViewNavigationNodeWorkflowRuns extends ViewNavigationNode
 {

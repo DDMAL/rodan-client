@@ -4,7 +4,7 @@ import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
 import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
-import ViewProjectList from 'js/Views/Master/Main/Project/List/ViewProjectList';
+import ViewProjectCollection from 'js/Views/Master/Main/Project/Collection/ViewProjectCollection';
 import ViewWorkflowRunList from 'js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
@@ -124,7 +124,7 @@ export default class ControllerProject extends BaseController
     {
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
-        var view = new ViewProjectList({collection: collection});
+        var view = new ViewProjectCollection({collection: collection});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 

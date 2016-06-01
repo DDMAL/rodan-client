@@ -26,7 +26,7 @@ export default class AbstractUpdater
 		{
 			for (var i = 0; i < this._collections.length; i++)
 			{
-				this._collections[i].syncList();
+				this._collections[i].syncCollection();
 			}
 		}
 	}

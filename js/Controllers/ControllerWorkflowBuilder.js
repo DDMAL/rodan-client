@@ -817,7 +817,7 @@ export default class ControllerWorkflowBuilder extends BaseController
             this._resourcesAvailable[inputPort.get('url')] = new ResourceCollection();
             this._resourcesAvailable[inputPort.get('url')].fetch({data: data});
         }
-        this._resourcesAvailable[inputPort.get('url')].syncList();
+        this._resourcesAvailable[inputPort.get('url')].syncCollection();
         return this._resourcesAvailable[inputPort.get('url')];
     }
 

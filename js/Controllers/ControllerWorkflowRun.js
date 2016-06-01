@@ -145,7 +145,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleSyncWorkflowRun(runJobs, resources)
     {
-        runJobs.syncList();
-        resources.syncList();
+        runJobs.syncCollection();
+        resources.syncCollection();
     }
 }
