@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * View for Jot item in Job list.
+ * View for Job item in Job Collection.
  */
-export default class ViewJobListItem extends BaseViewCollectionItem
+export default class ViewJobCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -31,12 +31,12 @@ export default class ViewJobListItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, {job: this.model, workflow: this._workflow});
     }
 }
-ViewJobListItem.prototype.template = '#template-main_job_list_item';
-ViewJobListItem.prototype.tagName = 'tr';
-ViewJobListItem.prototype.ui = {
+ViewJobCollectionItem.prototype.template = '#template-main_job_list_item';
+ViewJobCollectionItem.prototype.tagName = 'tr';
+ViewJobCollectionItem.prototype.ui = {
     buttonAdd: '#button-main_job_button_add'
 };
-ViewJobListItem.prototype.events = {
+ViewJobCollectionItem.prototype.events = {
     'click @ui.buttonAdd': '_handleClickButtonAdd',
     'dblclick': '_handleClickButtonAdd'
 };

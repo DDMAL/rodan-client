@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * WorkflowRun list item view.
+ * WorkflowRun Collection item view.
  */
-export default class ViewWorkflowRunListItem extends BaseViewCollectionItem
+export default class ViewWorkflowRunCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -18,8 +18,8 @@ export default class ViewWorkflowRunListItem extends BaseViewCollectionItem
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED, {workflowrun: this.model});
     }
 }
-ViewWorkflowRunListItem.prototype.template = '#template-main_workflowrun_list_item';
-ViewWorkflowRunListItem.prototype.tagName = 'tr';
-ViewWorkflowRunListItem.prototype.events = {
+ViewWorkflowRunCollectionItem.prototype.template = '#template-main_workflowrun_list_item';
+ViewWorkflowRunCollectionItem.prototype.tagName = 'tr';
+ViewWorkflowRunCollectionItem.prototype.events = {
     'dblclick': '_handleDoubleClick'
 };

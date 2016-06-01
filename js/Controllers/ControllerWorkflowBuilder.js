@@ -14,7 +14,7 @@ import Radio from 'backbone.radio';
 import Resource from 'js/Models/Resource';
 import ResourceCollection from 'js/Collections/ResourceCollection';
 import ResourceList from 'js/Models/ResourceList';
-import ViewJobList from 'js/Views/Master/Main/Job/List/ViewJobList';
+import ViewJobCollection from 'js/Views/Master/Main/Job/Collection/ViewJobCollection';
 import ViewResourceListAssigned from 'js/Views/Master/Main/Resource/List/ViewResourceListAssigned';
 import ViewResourceListAvailable from 'js/Views/Master/Main/Resource/List/ViewResourceListAvailable';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
@@ -403,7 +403,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     {
         var collection = new JobCollection();
         collection.fetch();
-        var view = new ViewJobList({collection: collection, childViewOptions: {workflow: options.workflow}});
+        var view = new ViewJobCollection({collection: collection, childViewOptions: {workflow: options.workflow}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Jobs'});
     }
 

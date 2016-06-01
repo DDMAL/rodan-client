@@ -2,7 +2,7 @@ import BaseController from './BaseController';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewIndividualWorkflowRun from 'js/Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun';
 import Radio from 'backbone.radio';
-import ViewWorkflowRunList from 'js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
+import ViewWorkflowRunCollection from 'js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection';
 import WorkflowRun from 'js/Models/WorkflowRun';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
@@ -84,7 +84,7 @@ export default class ControllerWorkflowRun extends BaseController
         var collection = new WorkflowRunCollection();
         collection.fetchSort(false, 'created', {data: {project: options.project.id}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
-        var view = new ViewWorkflowRunList({collection: collection});
+        var view = new ViewWorkflowRunCollection({collection: collection});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: view});
     }
 

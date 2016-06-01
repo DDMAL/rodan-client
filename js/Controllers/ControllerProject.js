@@ -5,7 +5,7 @@ import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
 import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
 import ViewProjectCollection from 'js/Views/Master/Main/Project/Collection/ViewProjectCollection';
-import ViewWorkflowRunList from 'js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList';
+import ViewWorkflowRunCollection from 'js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
 /**
@@ -114,7 +114,7 @@ export default class ControllerProject extends BaseController
         var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
-        layoutView.showList(new ViewWorkflowRunList({collection: collection}));
+        layoutView.showList(new ViewWorkflowRunCollection({collection: collection}));
     }
 
     /**
