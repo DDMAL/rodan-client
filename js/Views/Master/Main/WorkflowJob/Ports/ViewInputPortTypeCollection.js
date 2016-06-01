@@ -1,12 +1,12 @@
 import Marionette from 'backbone.marionette';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import ViewInputPortTypeListItem from './ViewInputPortTypeListItem';
+import ViewInputPortTypeCollectionItem from './ViewInputPortTypeCollectionItem';
 
 /**
- * InputPortType list view.
+ * InputPortType Collection view.
  */
-export default class ViewInputPortTypeList extends Marionette.CompositeView
+export default class ViewInputPortTypeCollection extends Marionette.CompositeView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -24,9 +24,9 @@ export default class ViewInputPortTypeList extends Marionette.CompositeView
         this.collection = job.get('input_port_types');
     }
 }
-ViewInputPortTypeList.prototype.modelEvents = {
+ViewInputPortTypeCollection.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortTypeList.prototype.template = '#template-main_inputporttype_list';
-ViewInputPortTypeList.prototype.childView = ViewInputPortTypeListItem;
-ViewInputPortTypeList.prototype.childViewContainer = 'tbody';
+ViewInputPortTypeCollection.prototype.template = '#template-main_inputporttype_list';
+ViewInputPortTypeCollection.prototype.childView = ViewInputPortTypeCollectionItem;
+ViewInputPortTypeCollection.prototype.childViewContainer = 'tbody';

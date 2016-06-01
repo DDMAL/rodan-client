@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * InputPortType list item view.
+ * InputPortType Collection item view.
  */
-export default class ViewInputPortTypeListItem extends BaseViewCollectionItem
+export default class ViewInputPortTypeCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -32,11 +32,11 @@ export default class ViewInputPortTypeListItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT, {inputporttype: this.model, workflowjob: this._workflowJob, workflow: this._workflow});
     }
 }
-ViewInputPortTypeListItem.prototype.tagName = 'tr';
-ViewInputPortTypeListItem.prototype.template = '#template-main_inputporttype_list_item';
-ViewInputPortTypeListItem.prototype.events = {
+ViewInputPortTypeCollectionItem.prototype.tagName = 'tr';
+ViewInputPortTypeCollectionItem.prototype.template = '#template-main_inputporttype_list_item';
+ViewInputPortTypeCollectionItem.prototype.events = {
     'click @ui.buttonNewInputPort': '_handleButtonNewInputPort'
 };
-ViewInputPortTypeListItem.prototype.ui = {
+ViewInputPortTypeCollectionItem.prototype.ui = {
     buttonNewInputPort: '#button-new_inputport'
 };
