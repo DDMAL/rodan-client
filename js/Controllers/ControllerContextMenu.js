@@ -39,11 +39,11 @@ export default class ControllerContextMenu extends BaseController
         $('#menu-context').empty();
         for (var index in options.items)
         {
-            var listItemData = options.items[index];
-            var callOptions = listItemData.options ? listItemData.options : {};
-            var label = listItemData.label;
-            var channel = listItemData.channel ? listItemData.channel : 'rodan';
-            var radiorequest = listItemData.radiorequest;
+            var itemData = options.items[index];
+            var callOptions = itemData.options ? itemData.options : {};
+            var label = itemData.label;
+            var channel = itemData.channel ? itemData.channel : 'rodan';
+            var radiorequest = itemData.radiorequest;
 
             var functionCall = (event) => {
                 var data = $(event.currentTarget).data('radio');
