@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * Resource item View for Collection in modal.
  */
-export default class ViewResourceListItemModal extends BaseViewCollectionItem
+export default class ViewResourceCollectionItemModal extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -40,8 +40,8 @@ export default class ViewResourceListItemModal extends BaseViewCollectionItem
         }
     }
 }
-ViewResourceListItemModal.prototype.template = '#template-modal_resource_list_item';
-ViewResourceListItemModal.prototype.tagName = 'tr';
-ViewResourceListItemModal.prototype.events = {
+ViewResourceCollectionItemModal.prototype.template = '#template-modal_resource_list_item';
+ViewResourceCollectionItemModal.prototype.tagName = 'tr';
+ViewResourceCollectionItemModal.prototype.events = {
     'dblclick': '_handleDoubleClick'
 };

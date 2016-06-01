@@ -1,5 +1,5 @@
 import ViewResourceCollection from './ViewResourceCollection';
-import ViewResourceListItemModal from './ViewResourceListItemModal';
+import ViewResourceCollectionItemModal from './ViewResourceCollectionItemModal';
 
 /**
  * View for available Resources when assigning to InputPort.
@@ -7,4 +7,4 @@ import ViewResourceListItemModal from './ViewResourceListItemModal';
 export default class ViewResourceCollectionAvailable extends ViewResourceCollection {}
 ViewResourceCollectionAvailable.prototype.allowMultipleSelection = true;
 ViewResourceCollectionAvailable.prototype.template = '#template-modal_resource_list';
-ViewResourceCollectionAvailable.prototype.childView = ViewResourceListItemModal;
+ViewResourceCollectionAvailable.prototype.childView = ViewResourceCollectionItemModal;
