@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 import ViewProjectCollectionItem from './ViewProjectCollectionItem';
 
 /**
- * Project list view.
+ * Project Collection view.
  */
 export default class ViewProjectCollection extends BaseViewCollection
 {

@@ -3,7 +3,7 @@ import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem'
 /**
  * ResourceType view.
  */
-export default class ViewResourceTypeListItem extends BaseViewCollectionItem
+export default class ViewResourceTypeCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -21,5 +21,5 @@ export default class ViewResourceTypeListItem extends BaseViewCollectionItem
         }
     }
 }
-ViewResourceTypeListItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
-ViewResourceTypeListItem.prototype.tagName = 'option';
+ViewResourceTypeCollectionItem.prototype.template = '#template-main_resource_individual_resourcetype_list_item';
+ViewResourceTypeCollectionItem.prototype.tagName = 'option';

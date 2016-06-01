@@ -1,7 +1,7 @@
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import ViewResourceTypeListItem from './ViewResourceTypeListItem';
+import ViewResourceTypeCollectionItem from './ViewResourceTypeCollectionItem';
 
 /**
  * Resource view.
@@ -100,5 +100,5 @@ ViewResource.prototype.events = {
     'click @ui.buttonView': '_handleClickView'
 };
 ViewResource.prototype.template = '#template-main_resource_individual';
-ViewResource.prototype.childView = ViewResourceTypeListItem;
+ViewResource.prototype.childView = ViewResourceTypeCollectionItem;
 ViewResource.prototype.childViewContainer = '#select-resourcetype';

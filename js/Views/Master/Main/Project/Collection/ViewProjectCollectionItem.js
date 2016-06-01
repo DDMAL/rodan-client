@@ -3,7 +3,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * Project list item view.
+ * Project Collection item view.
  */
 export default class ViewProjectCollectionItem extends BaseViewCollectionItem
 {
