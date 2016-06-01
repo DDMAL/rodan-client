@@ -1,7 +1,7 @@
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import ViewResourceTypeCollectionItem from './ViewResourceTypeCollectionItem';
+import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem';
 
 /**
  * Resource view.
