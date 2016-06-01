@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * RunJob list item view.
+ * RunJob Collection item view.
  */
-export default class ViewRunJobListItem extends BaseViewCollectionItem
+export default class ViewRunJobCollectionItem extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -38,9 +38,9 @@ export default class ViewRunJobListItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
     }
 }
-ViewRunJobListItem.prototype.template = '#template-main_runjob_list_item';
-ViewRunJobListItem.prototype.tagName = 'tr';
-ViewRunJobListItem.prototype.events = {
+ViewRunJobCollectionItem.prototype.template = '#template-main_runjob_list_item';
+ViewRunJobCollectionItem.prototype.tagName = 'tr';
+ViewRunJobCollectionItem.prototype.events = {
     'click': '_handleClick',
     'dblclick': '_handleDoubleClick'
 };

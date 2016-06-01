@@ -5,8 +5,8 @@ import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
 import RunJobCollection from 'js/Collections/RunJobCollection';
 import ViewRunJob from 'js/Views/Master/Main/RunJob/Individual/ViewRunJob';
-import ViewRunJobList from 'js/Views/Master/Main/RunJob/List/ViewRunJobList';
-import ViewRunJobListItem from 'js/Views/Master/Main/RunJob/List/ViewRunJobListItem';
+import ViewRunJobCollection from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection';
+import ViewRunJobCollectionItem from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem';
 
 /**
  * Controller for RunJobs.
@@ -66,9 +66,9 @@ export default class ControllerRunJob extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [this._collection]});
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
-        var view = new ViewRunJobList({collection: this._collection,
+        var view = new ViewRunJobCollection({collection: this._collection,
                                        template: '#template-main_runjob_list',
-                                       childView: ViewRunJobListItem});
+                                       childView: ViewRunJobCollectionItem});
         this._layoutView.showCollection(view);
     }
 
