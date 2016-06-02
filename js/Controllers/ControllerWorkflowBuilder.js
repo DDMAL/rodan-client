@@ -7,7 +7,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import InputPort from 'js/Models/InputPort';
 import ViewControlWorkflowJob from 'js/Views/Master/Main/WorkflowJob/ViewControlWorkflowJob';
 import JobCollection from 'js/Collections/JobCollection';
-import LayoutViewControlPorts from 'js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts';
+import LayoutViewControlPorts from 'js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts';
 import LayoutViewResourceAssignment from 'js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment';
 import OutputPort from 'js/Models/OutputPort';
 import Radio from 'backbone.radio';
@@ -22,7 +22,7 @@ import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/Vie
 import ViewWorkflowCollectionImportItem from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem';
 import WorkflowCollection from 'js/Collections/WorkflowCollection';
 import ViewWorkflowJobGroup from 'js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup';
-import ViewSettings from 'js/Views/Master/Main/WorkflowJob/Settings/ViewSettings';
+import ViewSettings from 'js/Views/Master/Main/WorkflowJob/ViewSettings';
 
 /**
  * Controller for the WorkflowBuilder.
