@@ -25,10 +25,9 @@ export default class ControllerResourceList extends BaseController
 
         // Requests
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_CREATE, options => this._handleRequestResourceListCreate(options));
- //       Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_DELETE, options => this._handleCommandResourceDelete(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_DELETE, options => this._handleCommandResourceListDelete(options));
   //      Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, options => this._handleRequestResourceDownload(options));
   //      Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
-  //      Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELISTS_LOAD, options => this._handleRequestLoad(options));
     }
    
@@ -57,14 +56,6 @@ export default class ControllerResourceList extends BaseController
     }
 
     /**
-     * Handle item selection.
-     */
-/*    _handleEventItemSelected(options)
-    {
-        this._layoutView.showItem(new ViewResource({model: options.resource}));
-    }*/
-
-    /**
      * Handle command add Resource.
      */
     _handleRequestResourceListCreate(options)
@@ -74,13 +65,13 @@ export default class ControllerResourceList extends BaseController
     }
 
     /**
-     * Handle command delete Resource.
+     * Handle command delete ResourceList.
      */
- /*   _handleCommandResourceDelete(options)
+    _handleCommandResourceListDelete(options)
     {
         this._layoutView.clearItemView();
-        options.resource.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
-    }*/
+        options.resourcelist.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
+    }
 
     /**
      * Handle command download Resource.
@@ -123,9 +114,9 @@ export default class ControllerResourceList extends BaseController
     /**
      * Handle delete success.
      */
-  /*  _handleDeleteSuccess(model, collection)
+    _handleDeleteSuccess(model, collection)
     {
         collection.remove(model);
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_DELETED, {resource: model});
-    }*/
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCELIST_DELETED, {resourcelist: model});
+    }
 }

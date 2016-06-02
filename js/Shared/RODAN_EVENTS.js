@@ -198,10 +198,14 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when ResourceList has been created. Sends {resourcelist: ResourceList}. */
         this.EVENT__RESOURCELIST_CREATED = 'EVENT__RESOURCELIST_CREATED';
+        /** Triggered when ResourceList deleted. Sends {resourcelist: ResourceList}. */
+        this.EVENT__RESOURCELIST_DELETED = 'EVENT__RESOURCELIST_DELETED';
         /** Triggered when the user selects to see all available ResourceLists. Sends {project: Project (Project associated with ResourceListCollection)}. */
         this.EVENT__RESOURCELIST_SELECTED_COLLECTION = 'EVENT__RESOURCELIST_SELECTED_COLLECTION';
         /** Request a ResourceList be created. Takes {project: Project}. */
         this.REQUEST__RESOURCELIST_CREATE = 'REQUEST__RESOURCELIST_CREATE';
+        /** Request a ResourceList be deleted. Takes {resourcelist: ResourceList}. */
+        this.REQUEST__RESOURCELIST_DELETE = 'REQUEST__RESOURCELIST_DELETE';
         /** Request a ResourceListCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceListCollection. */
         this.REQUEST__RESOURCELISTS_LOAD = 'REQUEST__RESOURCELISTS_LOAD';
 
