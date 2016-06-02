@@ -3,9 +3,9 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * Resource item View for Collection in modal.
+ * Resource item View for Collection in modal - Resource assignment.
  */
-export default class ViewResourceCollectionItemModal extends BaseViewCollectionItem
+export default class ViewResourceCollectionItemModalResourceAssignment extends BaseViewCollectionItem
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -40,8 +40,8 @@ export default class ViewResourceCollectionItemModal extends BaseViewCollectionI
         }
     }
 }
-ViewResourceCollectionItemModal.prototype.template = '#template-modal_resource_collection_item';
-ViewResourceCollectionItemModal.prototype.tagName = 'tr';
-ViewResourceCollectionItemModal.prototype.events = {
+ViewResourceCollectionItemModalResourceAssignment.prototype.template = '#template-modal_resource_collection_item';
+ViewResourceCollectionItemModalResourceAssignment.prototype.tagName = 'tr';
+ViewResourceCollectionItemModalResourceAssignment.prototype.events = {
     'dblclick': '_handleDoubleClick'
 };

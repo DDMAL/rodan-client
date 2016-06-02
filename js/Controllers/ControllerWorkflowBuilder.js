@@ -16,6 +16,7 @@ import ResourceCollection from 'js/Collections/ResourceCollection';
 import ResourceList from 'js/Models/ResourceList';
 import ViewJobCollection from 'js/Views/Master/Main/Job/Collection/ViewJobCollection';
 import ViewResourceCollectionModal from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal';
+import ViewResourceCollectionItemModalResourceAssignment from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItemModalResourceAssignment';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection';
 import ViewWorkflowCollectionImportItem from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem';
@@ -178,9 +179,11 @@ export default class ControllerWorkflowBuilder extends BaseController
         var assignedResources = this._getResourceAssignments(inputPort.get('url'));
         var availableResources = this._getResourcesAvailable(inputPort);
         var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
-                                                                 childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
+                                                                    childView: ViewResourceCollectionItemModalResourceAssignment,
+                                                                    childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
         var resourceListView = new ViewResourceCollectionModal({collection: availableResources,
-                                                              childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
+                                                                childView: ViewResourceCollectionItemModalResourceAssignment,
+                                                                childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
