@@ -15,8 +15,7 @@ import Resource from 'js/Models/Resource';
 import ResourceCollection from 'js/Collections/ResourceCollection';
 import ResourceList from 'js/Models/ResourceList';
 import ViewJobCollection from 'js/Views/Master/Main/Job/Collection/ViewJobCollection';
-import ViewResourceCollectionAssigned from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionAssigned';
-import ViewResourceCollectionAvailable from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionAvailable';
+import ViewResourceCollectionModal from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection';
 import ViewWorkflowCollectionImportItem from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem';
@@ -178,9 +177,9 @@ export default class ControllerWorkflowBuilder extends BaseController
         var inputPort = options.inputport;
         var assignedResources = this._getResourceAssignments(inputPort.get('url'));
         var availableResources = this._getResourcesAvailable(inputPort);
-        var assignedResourceView = new ViewResourceCollectionAssigned({collection: assignedResources,
+        var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
                                                                  childViewOptions: {inputport: inputPort, assigned: true, workflow: options.workflow}});
-        var resourceListView = new ViewResourceCollectionAvailable({collection: availableResources,
+        var resourceListView = new ViewResourceCollectionModal({collection: availableResources,
                                                               childViewOptions: {inputport: inputPort, assigned: false, workflow: options.workflow}});
 
         // Show the layout view.
