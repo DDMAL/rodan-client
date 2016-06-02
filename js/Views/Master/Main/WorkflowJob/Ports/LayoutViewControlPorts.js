@@ -1,9 +1,9 @@
 import Marionette from 'backbone.marionette';
 import ViewInputPortCollection from 'js/Views/Master/Main/InputPort/ViewInputPortCollection';
-import ViewInputPortCollectionItem from './ViewInputPortCollectionItem';
-import ViewInputPortTypeCollection from './ViewInputPortTypeCollection';
-import ViewOutputPortCollection from './ViewOutputPortCollection';
-import ViewOutputPortTypeCollection from './ViewOutputPortTypeCollection';
+import ViewInputPortCollectionItem from 'js/Views/Master/Main/InputPort/ViewInputPortCollectionItem';
+import ViewInputPortTypeCollection from 'js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection';
+import ViewOutputPortCollection from 'js/Views/Master/Main/OutputPort/ViewOutputPortCollection';
+import ViewOutputPortTypeCollection from 'js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection';
 
 /**
  * View for editing ports.
