@@ -13,6 +13,7 @@ import ControllerContextMenu from './Controllers/ControllerContextMenu';
 import ControllerModal from './Controllers/ControllerModal';
 import ControllerProject from './Controllers/ControllerProject';
 import ControllerResource from './Controllers/ControllerResource';
+import ControllerResourceList from './Controllers/ControllerResourceList';
 import ControllerRunJob from './Controllers/ControllerRunJob';
 import ControllerServer from './Controllers/ControllerServer';
 import ControllerWorkflow from './Controllers/ControllerWorkflow';
@@ -138,6 +139,7 @@ export default class Application extends Marionette.Application
         this._modalController = new ControllerModal();
         this._projectController = new ControllerProject();
         this._resourceController = new ControllerResource();
+        this._resourceListController = new ControllerResourceList();
         this._runJobController = new ControllerRunJob();
         this._workflowController = new ControllerWorkflow();
         this._workflowRunController = new ControllerWorkflowRun();

@@ -1,18 +1,14 @@
-<h3>Resources</h3>
-<input id="file-main_resource_file" type="file" name="fileInput" multiple>
-<br>
-Type: <select id="select-resourcetype"></select>
+<h3>Resource Lists</h3>
+<button class="btn btn-xs  btn-primary" id="button-new_resourcelist" disabled>Create new Resource List</button>
 <hr/>
 <div class="table-responsive">
-    <table class="table table-hover table-condensed" id="table-resources">
+    <table class="table table-hover table-condensed scroll" id="table-resourcelists">
         <thead>
             <tr>
                 <th data-name="name">Name</th>
                 <th data-name="creator">Creator</th>
                 <th data-name="created">Created</th>
                 <th data-name="updated">Updated</th>
-                <th data-name="resource_type">Type</th>
-                <th>File exists</th>
             </tr>
         </thead>
         <tbody>

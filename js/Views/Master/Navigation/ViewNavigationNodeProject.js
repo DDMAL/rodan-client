@@ -33,7 +33,7 @@ export default class ViewNavigationNodeProject extends ViewNavigationNode
         var workflowRunsNodeModel = new Backbone.Model({name: 'Workflow Runs', project: this.model});
         var runJobsNodeModel = new Backbone.Model({name: 'Run Jobs', project: this.model});
         this.collection.add(resourcesNodeModel);
-      //  this.collection.add(resourceListsNodeModel);
+        this.collection.add(resourceListsNodeModel);
         this.collection.add(workflowBuilderNodeModel);
         this.collection.add(workflowRunsNodeModel);
         this.collection.add(runJobsNodeModel);
