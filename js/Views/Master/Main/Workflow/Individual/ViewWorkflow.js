@@ -42,6 +42,14 @@ export default class ViewWorkflow extends Marionette.ItemView
     }
 
     /**
+     * Handle button export workflow.
+     */
+    _handleButtonExport()
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_EXPORT, {workflow: this.model});
+    }
+
+    /**
      * Handle save button.
      */
     _handleButtonSave()
@@ -57,6 +65,7 @@ ViewWorkflow.prototype.ui = {
     runWorkflowButton: '#button-run_workflow',
     deleteWorkflowButton: '#button-delete_workflow',
     copyWorkflowButton: '#button-copy_workflow',
+    exportWorkflowButton: '#button-export_workflow',
     editWorkflowButton: '#button-edit_workflow',
     buttonSaveData: '#button-save_workflow_data',
     buttonSave: '#button-save_workflow',
@@ -69,6 +78,7 @@ ViewWorkflow.prototype.events = {
     'click @ui.editWorkflowButton': '_handleButtonEditWorkflow',
     'click @ui.copyWorkflowButton': '_handleButtonCopyWorkflow',
     'click @ui.buttonSaveData': '_handleButtonSave',
-    'click @ui.buttonSave': '_handleButtonSave'
+    'click @ui.buttonSave': '_handleButtonSave',
+    'click @ui.exportWorkflowButton': '_handleButtonExport'
         };
 ViewWorkflow.prototype.template = '#template-main_workflow_individual';

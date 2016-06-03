@@ -76,6 +76,12 @@ class RODAN_EVENTS
         this.REQUEST__CONTEXTMENU_SHOW = 'REQUEST__CONTEXTMENU_SHOW';
 
         ///////////////////////////////////////////////////////////////////////////////////////
+        // Download
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** Request a download to client machine be initiated. Takes {}. */
+        this.REQUEST__DOWNLOAD_START = 'REQUEST__DOWNLOAD_START';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
         // General
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Request "About" information be shown. */
@@ -260,7 +266,7 @@ class RODAN_EVENTS
         this.EVENT__TRANSFERMANAGER_UPLOAD_FAILED = 'EVENT__TRANSFERMANAGER_UPLOAD_FAILED';
         /** Triggered when file upload succeeds. Sends {request: jQuery XMLHTTPRequest, file: Javascript file object}. */
         this.EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED = 'EVENT__TRANSFERMANAGER_UPLOAD_SUCCEEDED';
-        /** Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine)}. */
+        /** Request download of a file from a URL. Takes {url: string (URL of file location), filename: string (name to give file when saving to local machine), mimetype: string (optional mimetype)}. */
         this.REQUEST__TRANSFERMANAGER_DOWNLOAD = 'REQUEST__TRANSFERMANAGER_DOWNLOAD';
         /** Request counts of uploads for this session. Returns {completed: int >= 0, failed:  int >= 0, pending:  int >= 0}. */
         this.REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT = 'REQUEST__TRANSFERMANAGER_GET_UPLOAD_COUNT';
@@ -292,6 +298,8 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOW_CREATE = 'REQUEST__WORKFLOW_CREATE';
         /** Request a Workflow be deleted. Takes {workflow: Workflow}. */
         this.REQUEST__WORKFLOW_DELETE = 'REQUEST__WORKFLOW_DELETE';
+        /** Request a Workflow be exported. Takes {workflow: Workflow}. */
+        this.REQUEST__WORKFLOW_EXPORT = 'REQUEST__WORKFLOW_EXPORT';
         /** Request a Workflow be saved/updated. Takes {workflow: Workflow, fields: {object with attributes to change}}. */
         this.REQUEST__WORKFLOW_SAVE = 'REQUEST__WORKFLOW_SAVE';
 

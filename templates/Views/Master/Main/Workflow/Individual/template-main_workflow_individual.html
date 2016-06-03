@@ -8,9 +8,11 @@
     Created: <%= _.formatFromUTC(created) %><br>
     Updated: <%= _.formatFromUTC(updated) %><br>
     Valid: <%= valid %><br>
-    <button class="btn btn-xs btn-warning" id="button-save_workflow">Save</button>
- <!--   <button class="btn btn-xs" id="button-run_workflow">Run</button>-->
-    <button class="btn btn-xs" id="button-copy_workflow" disabled>Copy</button>
-    <button class="btn btn-xs btn-warning" id="button-edit_workflow">Edit</button>
-    <button class="btn btn-xs btn-danger" id="button-delete_workflow">Delete</button>
+    <div class="btn-group" role="group">
+        <button class="btn btn-xs btn-primary" id="button-copy_workflow" disabled>Copy</button>
+        <button class="btn btn-xs btn-primary" id="button-export_workflow">Export</button>
+        <button class="btn btn-xs btn-warning" id="button-save_workflow">Save</button>
+        <button class="btn btn-xs btn-warning" id="button-edit_workflow">Edit</button>
+        <button class="btn btn-xs btn-danger" id="button-delete_workflow">Delete</button>
+    </div>
 </div>

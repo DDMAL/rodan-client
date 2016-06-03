@@ -28,6 +28,7 @@ export default class ControllerWorkflow extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_EXPORT, options => this._handleCommandExportWorkflow(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +87,14 @@ export default class ControllerWorkflow extends BaseController
         options.workflow.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_SAVED, {workflow: model})});
     }
 
+    /**
+     * Handle export workflow.
+     */
+    _handleCommandExportWorkflow(options)
+    {
+        options.workflow.sync('read', options.workflow, {data: {export: true}, success: (result) => this._handleExportSuccess(result, options.workflow)});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -105,5 +114,14 @@ export default class ControllerWorkflow extends BaseController
     {
         collection.remove(model);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_DELETED, {workflow: model});
+    }
+
+    /**
+     * Handle export success.
+     */
+    _handleExportSuccess(result, model)
+    {
+        var data = JSON.stringify(result);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DOWNLOAD_START, {data: data, filename: model.get('name'), mimetype: 'application/json'});
     }
 }

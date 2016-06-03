@@ -1,7 +1,5 @@
 import Backbone from 'backbone';
 import Radio from 'backbone.radio';
-import saveAs from 'filesaver';
-
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
@@ -93,7 +91,7 @@ export default class TransferManager
     /**
      * Handle request state change.
      */
-    _handleStateChange(event, filename, mimetype)
+    _handleStateChange(request, filename, mimetype)
     {
         var request = event.currentTarget;
         switch (request.readyState)
@@ -120,8 +118,7 @@ export default class TransferManager
 
             case 4:
             {
-                var blob = new Blob([request.response], {type: mimetype});
-                saveAs(blob, filename);
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DOWNLOAD_START, {data: request.response, filename: filename, mimetype: mimetype});
                 break;
             }
 

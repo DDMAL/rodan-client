@@ -10,6 +10,7 @@ import Radio from 'backbone.radio';
 import BehaviorTable from './Behaviors/BehaviorTable';
 import ControllerAuthentication from './Controllers/ControllerAuthentication';
 import ControllerContextMenu from './Controllers/ControllerContextMenu';
+import ControllerDownload from './Controllers/ControllerDownload';
 import ControllerModal from './Controllers/ControllerModal';
 import ControllerProject from './Controllers/ControllerProject';
 import ControllerResource from './Controllers/ControllerResource';
@@ -134,6 +135,7 @@ export default class Application extends Marionette.Application
     _initializeControllers()
     {
         this._contextMenuController = new ControllerContextMenu();
+        this._downloadController = new ControllerDownload();
         this._controllerServer = new ControllerServer();
         this._controllerAuthentication = new ControllerAuthentication(this._controllerServer);
         this._modalController = new ControllerModal();
