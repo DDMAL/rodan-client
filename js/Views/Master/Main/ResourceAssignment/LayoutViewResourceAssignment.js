@@ -17,13 +17,11 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
     initialize(options)
     {
         this.addRegions({
-            regionAvailableResources: '#region-main_workflowbuilder_resourceassignment_availableresources',
-            regionAssignedResources: '#region-main_workflowbuilder_resourceassignment_assignedresources'
+            regionAvailableResources: '#region-main_resourceassignment_availableresources',
+            regionAssignedResources: '#region-main_resourceassignment_assignedresources'
         });
         this._viewAvailableResources = options.viewavailableresources;
         this._viewAssignedResources = options.viewassignedresources;
-        this._workflow = options.workflow;
-        this._inputPort = options.inputport;
     }
 
     /**
@@ -74,7 +72,7 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
         $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
     }
 }
-LayoutViewResourceAssignment.prototype.template = '#template-main_workflowbuilder_resourceassignment';
+LayoutViewResourceAssignment.prototype.template = '#template-main_resourceassignment';
 LayoutViewResourceAssignment.prototype.ui = {
     buttonAddAll: '#button-add_all',
     buttonAddSelected: '#button-add_selected',

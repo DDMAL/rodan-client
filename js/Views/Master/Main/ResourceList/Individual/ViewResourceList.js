@@ -70,16 +70,16 @@ export default class ViewResourceList extends Marionette.CompositeView
      */
     _handleClickDownload()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_DOWNLOAD, {resource: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_DOWNLOAD, {resourcelist: this.model});
     }
 
     /**
-     * Handle button view.
+     * Handle button add/remove.
      */
-    _handleClickView()
-    {
-        window.open(this.model.get('viewer_url'));
-    }
+     _handleClickAddRemove()
+     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_SHOW_RESOURCEASSIGNMENT_VIEW, {resourcelist: this.model});
+     }
 }
 ViewResourceList.prototype.modelEvents = {
     'all': 'render'
@@ -90,13 +90,14 @@ ViewResourceList.prototype.ui = {
     selectResourceType: '#select-resourcetype',
     resourceListName: '#text-resourcelist_name',
     resourceListDescription: '#text-resourcelist_description',
-    buttonDownload: '#button-main_resourcelist_individual_download'
+    buttonDownload: '#button-main_resourcelist_individual_download',
+    buttonAddRemove: '#button-main_resourcelist_individual_addremove'
 };
 ViewResourceList.prototype.events = {
     'click @ui.buttonSave': '_handleClickButtonSave',
     'click @ui.buttonDelete': '_handleClickButtonDelete',
     'click @ui.buttonDownload': '_handleClickDownload',
-    'click @ui.buttonView': '_handleClickView'
+    'click @ui.buttonAddRemove': '_handleClickAddRemove'
 };
 ViewResourceList.prototype.template = '#template-main_resourcelist_individual';
 ViewResourceList.prototype.childView = ViewResourceTypeCollectionItem;

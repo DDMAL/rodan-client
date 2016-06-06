@@ -23,7 +23,7 @@ export default class ViewResourceListCollectionItem extends BaseViewCollectionIt
      */
     _handleDblClick()
     {
-       // Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: this.model});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_DOWNLOAD, {resourcelist: this.model});
     }
 }
 ViewResourceListCollectionItem.prototype.template = '#template-main_resourcelist_collection_item';

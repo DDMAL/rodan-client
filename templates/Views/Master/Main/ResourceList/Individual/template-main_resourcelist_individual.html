@@ -9,7 +9,10 @@
     Updated: <%= _.formatFromUTC(updated) %><br>
     Type: <select id="select-resourcetype"></select><br>
     <br>
-    <button class="btn btn-xs  btn-warning" id="button-main_resourcelist_individual_save">Save</button>
-    <button class="btn btn-xs btn-primary" id="button-main_resourcelist_individual_download">Download</button>
-    <button class="btn btn-xs btn-danger" id="button-main_resourcelist_individual_delete">Delete</button>
+    <div class="btn-group" role="group">
+        <button class="btn btn-xs  btn-warning" id="button-main_resourcelist_individual_save">Save</button>
+        <button class="btn btn-xs  btn-warning" id="button-main_resourcelist_individual_addremove">Add/Remove Resources</button>
+        <button class="btn btn-xs btn-primary" id="button-main_resourcelist_individual_download">Download</button>
+        <button class="btn btn-xs btn-danger" id="button-main_resourcelist_individual_delete">Delete</button>
+    </div>
 </div>
