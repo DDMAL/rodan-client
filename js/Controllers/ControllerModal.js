@@ -137,7 +137,7 @@ export default class ControllerModal extends BaseController
     _handleRequestModalShowError(options)
     {
         var $modalEl = $('#modal-generic');
-        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
+        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_error'});
         this._layoutViewModal.render();
         $modalEl.css({top: 0, left: 0, position: 'absolute'});
         $modalEl.html(this._layoutViewModal.el);

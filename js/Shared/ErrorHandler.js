@@ -35,11 +35,12 @@ export default class ErrorHandler extends Marionette.Object
      */
     _handleJavaScriptError(errorText, url, lineNumber, columnNumber, error)
     {
-        var text = 'text: ' + errorText + '\n';
-        text += 'url: ' + url + '\n';
-        text += 'line: ' + lineNumber + '\n';
+        var text = 'Rodan Client has encountered an unexpected error.<br><br>';
+        text += 'text: ' + errorText + '<br>';
+        text += 'url: ' + url + '<br>';
+        text += 'line: ' + lineNumber + '<br>';
         text += 'column: ' + columnNumber;
-        console.log(error);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_ERROR, {text: text});
     }
 
     /**
