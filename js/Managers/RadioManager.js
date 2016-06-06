@@ -31,6 +31,7 @@ export default class RadioManager
 
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_CREATE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_CREATED, modalTitle: 'Creating Workflow'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_DELETE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_DELETED, modalTitle: 'Deleting Workflow'};
+        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_IMPORT] = {event: RODAN_EVENTS.EVENT__WORKFLOW_CREATED, modalTitle: 'Importing Workflow'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_SAVE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_SAVED, modalTitle: 'Saving Workflow'};
 
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW] = {event: RODAN_EVENTS.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, modalTitle: 'Loading Workflow'};

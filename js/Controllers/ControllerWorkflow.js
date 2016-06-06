@@ -27,6 +27,7 @@ export default class ControllerWorkflow extends BaseController
         // Requests.
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_IMPORT, options => this._handleCommandImportWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_EXPORT, options => this._handleCommandExportWorkflow(options));
     }
@@ -95,6 +96,38 @@ export default class ControllerWorkflow extends BaseController
         options.workflow.sync('read', options.workflow, {data: {export: true}, success: (result) => this._handleExportSuccess(result, options.workflow)});
     }
 
+    /**
+     * Handle import workflow.
+     */
+    _handleCommandImportWorkflow(options)
+    {
+        var fileReader = new FileReader();
+        fileReader.onerror = (event) => this._handleFileReaderError(event);
+        fileReader.onload = (event) => this._handleFileReaderLoaded(event, options.project);
+        fileReader.readAsText(options.file);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS - FileReader handlers
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle FileReader error.
+     */
+    _handleFileReaderError(event)
+    {
+        // TODO error
+        console.error(event);
+    }
+
+    /**
+     * Handle FileReader loaded.
+     */
+    _handleFileReaderLoaded(event, project)
+    {
+        var workflow = new Workflow({project: project.get('url'), serialized: JSON.parse(event.target.result)});
+        workflow.save({}, {success: (model) => this._handleImportSuccess(model, this._collection)});
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - REST handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -123,5 +156,15 @@ export default class ControllerWorkflow extends BaseController
     {
         var data = JSON.stringify(result);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DOWNLOAD_START, {data: data, filename: model.get('name'), mimetype: 'application/json'});
+    }
+
+    /**
+     * Handle import success.
+     */
+    _handleImportSuccess(model, collection)
+    {
+        collection.add(model, {});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_CREATED, {workflow: model});
+        //Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: model});
     }
 }

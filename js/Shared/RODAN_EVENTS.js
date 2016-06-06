@@ -78,7 +78,7 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // Download
         ///////////////////////////////////////////////////////////////////////////////////////
-        /** Request a download to client machine be initiated. Takes {}. */
+        /** Request a download to client machine be initiated. Takes {data: (data object/string/etc), mimetype: string (mime type), filename: string}. */
         this.REQUEST__DOWNLOAD_START = 'REQUEST__DOWNLOAD_START';
 
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -300,6 +300,8 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOW_DELETE = 'REQUEST__WORKFLOW_DELETE';
         /** Request a Workflow be exported. Takes {workflow: Workflow}. */
         this.REQUEST__WORKFLOW_EXPORT = 'REQUEST__WORKFLOW_EXPORT';
+        /** Request a Workflow be imported. Takes {}. */
+        this.REQUEST__WORKFLOW_IMPORT = 'REQUEST__WORKFLOW_IMPORT';
         /** Request a Workflow be saved/updated. Takes {workflow: Workflow, fields: {object with attributes to change}}. */
         this.REQUEST__WORKFLOW_SAVE = 'REQUEST__WORKFLOW_SAVE';
 
