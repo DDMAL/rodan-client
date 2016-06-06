@@ -61,7 +61,7 @@ export default class ResourceList extends BaseModel
      */
     getResourceTypeUuid()
     {
-        if (this.get('resource_type') !== undefined)
+        if (this.get('resource_type'))
         {
             var lastSlash = this.get('resource_type').lastIndexOf('/');
             var subString = this.get('resource_type').substring(0, lastSlash);

@@ -4,6 +4,7 @@ import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Radio from 'backbone.radio';
 import ResourceList from 'js/Models/ResourceList';
 import ResourceListCollection from 'js/Collections/ResourceListCollection';
+import ViewResourceList from 'js/Views/Master/Main/ResourceList/Individual/ViewResourceList';
 import ViewResourceListCollection from 'js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection';
 import ViewResourceListCollectionItem from 'js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem';
 
@@ -22,12 +23,13 @@ export default class ControllerResourceList extends BaseController
     {
         // Events
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_SELECTED, options => this._handleEventItemSelected(options));
 
         // Requests
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_CREATE, options => this._handleRequestResourceListCreate(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_DELETE, options => this._handleCommandResourceListDelete(options));
   //      Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, options => this._handleRequestResourceDownload(options));
-  //      Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, options => this._handleCommandResourceSave(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_SAVE, options => this._handleCommandResourceListSave(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELISTS_LOAD, options => this._handleRequestLoad(options));
     }
    
@@ -53,6 +55,14 @@ export default class ControllerResourceList extends BaseController
                                                    childView: ViewResourceListCollectionItem,
                                                    model: options.project});
         this._layoutView.showCollection(view);
+    }
+
+    /**
+     * Handle item selection.
+     */
+    _handleEventItemSelected(options)
+    {
+        this._layoutView.showItem(new ViewResourceList({model: options.resourcelist}));
     }
 
     /**
@@ -87,10 +97,10 @@ export default class ControllerResourceList extends BaseController
     /**
      * Handle command save Resource.
      */
- /*   _handleCommandResourceSave(options)
+    _handleCommandResourceListSave(options)
     {
-        options.resource.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SAVED, {resource: model})});
-    }*/
+        options.resourcelist.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCELIST_SAVED, {resourcelist: model})});
+    }
 
     /**
      * Handle request load.

@@ -27,7 +27,7 @@ export default class ViewResourceCollection extends BaseViewCollection
      */
     onRender()
     {
-        var templateResourceType = _.template($('#template-main_resource_collection_resourcetype_collection_item').html());
+        var templateResourceType = _.template($('#template-resourcetype_collection_item').html());
         var resourceTypeCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
 //        var html = templateResourceType({url: null, mimetype: 'Auto-detect', extension: 'Rodan will attempt to determine the file type based on the file itself'});
  //       this.$el.find('#select-resourcetype').append(html);

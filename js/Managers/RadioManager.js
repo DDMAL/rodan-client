@@ -29,6 +29,10 @@ export default class RadioManager
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__RESOURCE_DELETE] = {event: RODAN_EVENTS.EVENT__RESOURCE_DELETED, modalTitle: 'Deleting Resource'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__RESOURCE_SAVE] = {event: RODAN_EVENTS.EVENT__RESOURCE_SAVED, modalTitle: 'Saving Resource'};
 
+        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__RESOURCELIST_CREATE] = {event: RODAN_EVENTS.EVENT__RESOURCELIST_CREATED, modalTitle: 'Creating Resource List'};
+        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__RESOURCELIST_DELETE] = {event: RODAN_EVENTS.EVENT__RESOURCELIST_DELETED, modalTitle: 'Deleting Resource List'};
+        this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__RESOURCELIST_SAVE] = {event: RODAN_EVENTS.EVENT__RESOURCELIST_SAVED, modalTitle: 'Saving Resource List'};
+
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_CREATE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_CREATED, modalTitle: 'Creating Workflow'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_DELETE] = {event: RODAN_EVENTS.EVENT__WORKFLOW_DELETED, modalTitle: 'Deleting Workflow'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__WORKFLOW_IMPORT] = {event: RODAN_EVENTS.EVENT__WORKFLOW_CREATED, modalTitle: 'Importing Workflow'};
