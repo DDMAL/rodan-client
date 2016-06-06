@@ -7,7 +7,6 @@ import ResourceCollection from 'js/Collections/ResourceCollection';
 import ResourceList from 'js/Models/ResourceList';
 import ResourceListCollection from 'js/Collections/ResourceListCollection';
 import ViewResourceCollectionModal from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal';
-import ViewResourceCollectionModalItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem';
 import ViewResourceList from 'js/Views/Master/Main/ResourceList/Individual/ViewResourceList';
 import ViewResourceListCollection from 'js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection';
 import ViewResourceListCollectionItem from 'js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem';
@@ -80,13 +79,11 @@ export default class ControllerResourceList extends BaseController
 
         // Create views.
         var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
-                                                                    childView: ViewResourceCollectionModalItem,
                                                                     childViewOptions: {assigned: true, 
                                                                                        requestdata: {resourcelist: options.resourcelist},
                                                                                        assignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_ADD_RESOURCE,
                                                                                        unassignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_REMOVE_RESOURCE}});
         var resourceListView = new ViewResourceCollectionModal({collection: availableResources,
-                                                                childView: ViewResourceCollectionModalItem,
                                                                 childViewOptions: {assigned: false, 
                                                                                    requestdata: {resourcelist: options.resourcelist},
                                                                                    assignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_ADD_RESOURCE,
