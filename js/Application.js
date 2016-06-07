@@ -23,7 +23,7 @@ import ControllerWorkflowJob from './Controllers/ControllerWorkflowJob';
 import ControllerWorkflowJobGroup from './Controllers/ControllerWorkflowJobGroup';
 import ControllerWorkflowRun from './Controllers/ControllerWorkflowRun';
 import Configuration from './Configuration';
-import ErrorHandler from './Shared/ErrorHandler';
+import ErrorManager from 'js/Managers/ErrorManager';
 import RODAN_EVENTS from './Shared/RODAN_EVENTS';
 import GlobalInputPortTypeCollection from './Collections/Global/GlobalInputPortTypeCollection';
 import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
@@ -74,7 +74,6 @@ export default class Application extends Marionette.Application
         this._initializeAjaxPrefilters();
         this._initializeViews();
         this._initializeControllers();
-        this._errorHandler = new ErrorHandler();
         
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
     }
@@ -87,6 +86,7 @@ export default class Application extends Marionette.Application
         this._transferManager = new TransferManager();
         this._radioManager = new RadioManager();
         this._updateManager = new UpdateManager();
+        this._errorManager = new ErrorManager();
     }
 
     /**

@@ -1,35 +1,26 @@
-import RODAN_EVENTS from './RODAN_EVENTS';
-import Marionette from 'backbone.marionette';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 
 /**
- * General error handler.
+ * General error manager.
  */
-export default class ErrorHandler extends Marionette.Object
+export default class ErrorHandler
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initialize.
+     * Constructor.
      */
-    initialize()
+    constructor()
     {
-        this._initializeRadio();
         window.onerror = (errorText, url, lineNumber, columnNumber, error) => this._handleJavaScriptError(errorText, url, lineNumber, columnNumber, error);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, (options) => this._handleError(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Initialize Radio.
-     */
-    _initializeRadio()
-    {
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, (options) => this._handleError(options));
-    }
-
     /**
      * Handles Javscript error.
      */

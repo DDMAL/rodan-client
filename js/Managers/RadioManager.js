@@ -17,9 +17,12 @@ export default class RadioManager
         Radio.tuneIn('rodan');
         this._originalRadioLog = Radio.log;
         Radio.log = (channelName, eventName, options) => this._handleRadioRequest(channelName, eventName, options);
+        this._logQueue = [];
 
         this._pendingResponses = [];
         this._radioRequestResponseMap = [];
+
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__LOG, () => this._handleRequestLog());
 
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__PROJECT_CREATE] = {event: RODAN_EVENTS.EVENT__PROJECT_CREATED, modalTitle: 'Creating Project'};
         this._radioRequestResponseMap[RODAN_EVENTS.REQUEST__PROJECT_DELETE] = {event: RODAN_EVENTS.EVENT__PROJECT_DELETED, modalTitle: 'Deleting Project'};
@@ -62,6 +65,14 @@ export default class RadioManager
      */
     _handleRadioRequest(channelName, eventName, options)
     {
+        // Log queue.
+        if (this._logQueue.length === 100)
+        {
+            this._logQueue.shift();
+        }
+        this._logQueue.push({name: channelName, event: eventName, options: options});
+
+        // Process.
         var response = this._radioRequestResponseMap[eventName];
         if (response)
         {
@@ -74,6 +85,7 @@ export default class RadioManager
             Radio.channel('rodan').once(response.event, () => this._handleRadioEvent(response.event));
         }
     }
+
     /**
      * Handle Radio event.
      */
@@ -85,5 +97,13 @@ export default class RadioManager
         {
             Radio.channel('rodan').once(eventName, () => this._handleRadioEvent(eventName));
         }
+    }
+
+    /**
+     * Handle request log.
+     */
+    _handleRequestLog()
+    {
+        return this._logQueue;
     }
 }

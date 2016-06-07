@@ -84,6 +84,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // General
         ///////////////////////////////////////////////////////////////////////////////////////
+        /** Request last 100 Radio events. Returns [{name (string), event (string), options (object)}]. */
+        this.REQUEST__LOG = 'REQUEST__LOG';
         /** Request "About" information be shown. */
         this.REQUEST__SHOW_ABOUT = 'REQUEST__SHOW_ABOUT';
         /** Request "Help" page be shown. */
