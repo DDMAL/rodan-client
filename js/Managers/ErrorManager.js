@@ -51,7 +51,7 @@ export default class ErrorHandler
                 var text = error.error_code + '<br>';
                 text += error.details[0];
                 Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_ERROR, {json: error});
-                this._showRodanErrorView(text, error);
+     //           this._showRodanErrorView(text, error);
             }
             else
             {
