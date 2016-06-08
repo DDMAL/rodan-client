@@ -52,9 +52,10 @@ export default class ViewResourceList extends Marionette.CompositeView
      */
     _handleClickButtonSave()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_SAVE, {resourcelist: this.model, fields: {resource_type: this.ui.selectResourceType.val(),
-                                                                                                 name: this.ui.resourceListName.val(),
-                                                                                                 description: this.ui.resourceListDescription.val()}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_SAVE, {resourcelist: this.model,
+                                                                                 fields: {resource_type: this.ui.selectResourceType.val(),
+                                                                                          name: this.ui.resourceListName.val(),
+                                                                                          description: this.ui.resourceListDescription.val()}});
     }
 
     /**

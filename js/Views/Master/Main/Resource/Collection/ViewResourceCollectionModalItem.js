@@ -19,7 +19,6 @@ export default class ViewResourceCollectionModalItem extends BaseViewCollectionI
     {
         this._assigned = options.assigned;
         this._requestData = options.requestdata;
-        this._requestData.resource = this.model;
         this._assignRequest = options.assignrequest;
         this._unassignRequest = options.unassignrequest;
     }
@@ -32,6 +31,7 @@ export default class ViewResourceCollectionModalItem extends BaseViewCollectionI
      */
     _handleDoubleClick()
     {
+        this._requestData.resource = this.model;
         if (this._assigned)
         {
             Radio.channel('rodan').request(this._unassignRequest, this._requestData); 

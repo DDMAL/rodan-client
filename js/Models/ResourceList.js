@@ -1,6 +1,7 @@
 import BaseModel from './BaseModel';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
+import ResourceCollection from 'js/Collections/ResourceCollection';
 
 /**
  * ResourceList.
@@ -12,8 +13,10 @@ export default class ResourceList extends BaseModel
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize.
+     *
+     * @param {object} options Backbone.Model options object
      */
-    initialize()
+    initialize(options)
     {
         this._updateResourceTypeFull();
         this.on('change:resource_type', () => this._updateResourceTypeFull());
