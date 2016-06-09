@@ -459,8 +459,8 @@ class ItemController
         if (contextMenuData.length > 0)
         {
             Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW, {items: contextMenuData, 
-                                                                                    top: mouseEvent.event.y,
-                                                                                    left: mouseEvent.event.x});
+                                                                                    top: mouseEvent.event.pageY,
+                                                                                    left: mouseEvent.event.pageX});
         }
     }
 

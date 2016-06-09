@@ -87,7 +87,6 @@ class OutputPortItem extends BasePortItem
     _handleClick(event)
     {
         super._handleClick(event);
-        console.log('adsadf');
     }
 }
 

@@ -238,7 +238,7 @@ class WorkflowBuilderGUI
                 if (event.event.button === 2)
                 {
                     Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW,
-                                              {items: this._menuItems, top: event.event.y, left: event.event.x});
+                                              {items: this._menuItems, top: event.event.pageY, left: event.event.pageX});
                 }
             }
         }
