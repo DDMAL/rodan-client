@@ -456,7 +456,7 @@ class ItemController
             contextMenuData = itemClass.getContextMenuDataMultiple();
         }
 
-        if (contextMenuData.length > 0)
+        if (contextMenuData && contextMenuData.length > 0)
         {
             Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__CONTEXTMENU_SHOW, {items: contextMenuData, 
                                                                                     top: mouseEvent.event.pageY,
