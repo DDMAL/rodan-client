@@ -68,14 +68,24 @@ export default class ControllerResourceList extends BaseController
      */
     _handleRequestShowResourceAssignmentView(options)
     {
-        // Get Collections.
-        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        // Get ResourceType (if it exists).
+        var resourceTypeId = null;
         var globalResourceTypes = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
-        var resourceTypeId = globalResourceTypes.findWhere({url: options.resourcelist.get('resource_type')}).id;
-        var data = {project: project.id, resource_type: resourceTypeId};
-        var assignedResources = new ResourceCollection(options.resourcelist.get('resources'));
+        if (options.resourcelist.has('resource_type'))
+        {
+            resourceTypeId = globalResourceTypes.findWhere({url: options.resourcelist.get('resource_type')}).id;
+        }
+
+        // Get available Resources.
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        var data = {project: project.id, resource_type: null};
         var availableResources = new ResourceCollection();
         availableResources.fetch({data: data});
+
+        // Get Collections.
+        // Issue #113: https://github.com/DDMAL/rodan-client/issues/113
+        // What's the best way to get Resource objects for a ResourceList.
+        var assignedResources = new ResourceCollection();
 
         // Create views.
         var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
