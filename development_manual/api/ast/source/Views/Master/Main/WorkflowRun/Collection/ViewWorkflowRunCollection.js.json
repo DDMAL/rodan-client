@@ -1,0 +1,883 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "BaseViewCollection",
+            "range": [
+              7,
+              25
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 25
+              }
+            }
+          },
+          "range": [
+            7,
+            25
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 25
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "js/Views/Master/Main/BaseViewCollection",
+        "raw": "'js/Views/Master/Main/BaseViewCollection'",
+        "range": [
+          31,
+          72
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 31
+          },
+          "end": {
+            "line": 1,
+            "column": 72
+          }
+        }
+      },
+      "range": [
+        0,
+        73
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 73
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "ViewWorkflowRunCollectionItem",
+            "range": [
+              81,
+              110
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 36
+              }
+            }
+          },
+          "range": [
+            81,
+            110
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 36
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./ViewWorkflowRunCollectionItem",
+        "raw": "'./ViewWorkflowRunCollectionItem'",
+        "range": [
+          116,
+          149
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 42
+          },
+          "end": {
+            "line": 2,
+            "column": 75
+          }
+        }
+      },
+      "range": [
+        74,
+        150
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 76
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * WorkflowRun Collection view.\n ",
+          "range": [
+            152,
+            191
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ViewWorkflowRunCollection",
+          "range": [
+            213,
+            238
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 21
+            },
+            "end": {
+              "line": 7,
+              "column": 46
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "BaseViewCollection",
+          "range": [
+            247,
+            265
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 55
+            },
+            "end": {
+              "line": 7,
+              "column": 73
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [],
+          "range": [
+            266,
+            268
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 74
+            },
+            "end": {
+              "line": 7,
+              "column": 76
+            }
+          }
+        },
+        "range": [
+          207,
+          268
+        ],
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 15
+          },
+          "end": {
+            "line": 7,
+            "column": 76
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * WorkflowRun Collection view.\n ",
+            "range": [
+              152,
+              191
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        192,
+        268
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 76
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * WorkflowRun Collection view.\n ",
+          "range": [
+            152,
+            191
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewWorkflowRunCollection",
+              "range": [
+                269,
+                294
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 0
+                },
+                "end": {
+                  "line": 8,
+                  "column": 25
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                295,
+                304
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 26
+                },
+                "end": {
+                  "line": 8,
+                  "column": 35
+                }
+              }
+            },
+            "range": [
+              269,
+              304
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 35
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "template",
+            "range": [
+              305,
+              313
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 36
+              },
+              "end": {
+                "line": 8,
+                "column": 44
+              }
+            }
+          },
+          "range": [
+            269,
+            313
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 44
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "#template-main_workflowrun_collection",
+          "raw": "'#template-main_workflowrun_collection'",
+          "range": [
+            316,
+            355
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 47
+            },
+            "end": {
+              "line": 8,
+              "column": 86
+            }
+          }
+        },
+        "range": [
+          269,
+          355
+        ],
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 86
+          }
+        }
+      },
+      "range": [
+        269,
+        356
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewWorkflowRunCollection",
+              "range": [
+                357,
+                382
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 0
+                },
+                "end": {
+                  "line": 9,
+                  "column": 25
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                383,
+                392
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 26
+                },
+                "end": {
+                  "line": 9,
+                  "column": 35
+                }
+              }
+            },
+            "range": [
+              357,
+              392
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 9,
+                "column": 35
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "childView",
+            "range": [
+              393,
+              402
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 36
+              },
+              "end": {
+                "line": 9,
+                "column": 45
+              }
+            }
+          },
+          "range": [
+            357,
+            402
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 45
+            }
+          }
+        },
+        "right": {
+          "type": "Identifier",
+          "name": "ViewWorkflowRunCollectionItem",
+          "range": [
+            405,
+            434
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 48
+            },
+            "end": {
+              "line": 9,
+              "column": 77
+            }
+          }
+        },
+        "range": [
+          357,
+          434
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 9,
+            "column": 77
+          }
+        }
+      },
+      "range": [
+        357,
+        435
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 78
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewWorkflowRunCollection",
+              "range": [
+                436,
+                461
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 0
+                },
+                "end": {
+                  "line": 10,
+                  "column": 25
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                462,
+                471
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 26
+                },
+                "end": {
+                  "line": 10,
+                  "column": 35
+                }
+              }
+            },
+            "range": [
+              436,
+              471
+            ],
+            "loc": {
+              "start": {
+                "line": 10,
+                "column": 0
+              },
+              "end": {
+                "line": 10,
+                "column": 35
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "behaviors",
+            "range": [
+              472,
+              481
+            ],
+            "loc": {
+              "start": {
+                "line": 10,
+                "column": 36
+              },
+              "end": {
+                "line": 10,
+                "column": 45
+              }
+            }
+          },
+          "range": [
+            436,
+            481
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 0
+            },
+            "end": {
+              "line": 10,
+              "column": 45
+            }
+          }
+        },
+        "right": {
+          "type": "ObjectExpression",
+          "properties": [
+            {
+              "type": "Property",
+              "key": {
+                "type": "Identifier",
+                "name": "Table",
+                "range": [
+                  485,
+                  490
+                ],
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 49
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 54
+                  }
+                }
+              },
+              "value": {
+                "type": "ObjectExpression",
+                "properties": [
+                  {
+                    "type": "Property",
+                    "key": {
+                      "type": "Literal",
+                      "value": "table",
+                      "raw": "'table'",
+                      "range": [
+                        493,
+                        500
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 10,
+                          "column": 57
+                        },
+                        "end": {
+                          "line": 10,
+                          "column": 64
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "Literal",
+                      "value": "#table-workflowruns",
+                      "raw": "'#table-workflowruns'",
+                      "range": [
+                        502,
+                        523
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 10,
+                          "column": 66
+                        },
+                        "end": {
+                          "line": 10,
+                          "column": 87
+                        }
+                      }
+                    },
+                    "kind": "init",
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "range": [
+                      493,
+                      523
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 10,
+                        "column": 57
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 87
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  492,
+                  524
+                ],
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 56
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 88
+                  }
+                }
+              },
+              "kind": "init",
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "range": [
+                485,
+                524
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 49
+                },
+                "end": {
+                  "line": 10,
+                  "column": 88
+                }
+              }
+            }
+          ],
+          "range": [
+            484,
+            525
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 48
+            },
+            "end": {
+              "line": 10,
+              "column": 89
+            }
+          }
+        },
+        "range": [
+          436,
+          525
+        ],
+        "loc": {
+          "start": {
+            "line": 10,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 89
+          }
+        }
+      },
+      "range": [
+        436,
+        526
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 0
+        },
+        "end": {
+          "line": 10,
+          "column": 90
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    526
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 10,
+      "column": 90
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * WorkflowRun Collection view.\n ",
+      "range": [
+        152,
+        191
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    }
+  ]
+}

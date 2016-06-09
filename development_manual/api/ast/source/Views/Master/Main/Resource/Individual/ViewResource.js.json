@@ -227,10 +227,10 @@
           "type": "ImportDefaultSpecifier",
           "local": {
             "type": "Identifier",
-            "name": "ViewResourceTypeListItem",
+            "name": "ViewResourceTypeCollectionItem",
             "range": [
               140,
-              164
+              170
             ],
             "loc": {
               "start": {
@@ -239,13 +239,13 @@
               },
               "end": {
                 "line": 4,
-                "column": 31
+                "column": 37
               }
             }
           },
           "range": [
             140,
-            164
+            170
           ],
           "loc": {
             "start": {
@@ -254,33 +254,33 @@
             },
             "end": {
               "line": 4,
-              "column": 31
+              "column": 37
             }
           }
         }
       ],
       "source": {
         "type": "Literal",
-        "value": "./ViewResourceTypeListItem",
-        "raw": "'./ViewResourceTypeListItem'",
+        "value": "js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem",
+        "raw": "'js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem'",
         "range": [
-          170,
-          198
+          176,
+          242
         ],
         "loc": {
           "start": {
             "line": 4,
-            "column": 37
+            "column": 43
           },
           "end": {
             "line": 4,
-            "column": 65
+            "column": 109
           }
         }
       },
       "range": [
         133,
-        199
+        243
       ],
       "loc": {
         "start": {
@@ -289,7 +289,7 @@
         },
         "end": {
           "line": 4,
-          "column": 66
+          "column": 110
         }
       },
       "trailingComments": [
@@ -297,8 +297,8 @@
           "type": "Block",
           "value": "*\n * Resource view.\n ",
           "range": [
-            201,
-            226
+            245,
+            270
           ],
           "loc": {
             "start": {
@@ -321,8 +321,8 @@
           "type": "Identifier",
           "name": "ViewResource",
           "range": [
-            248,
-            260
+            292,
+            304
           ],
           "loc": {
             "start": {
@@ -342,8 +342,8 @@
             "type": "Identifier",
             "name": "Marionette",
             "range": [
-              269,
-              279
+              313,
+              323
             ],
             "loc": {
               "start": {
@@ -360,8 +360,8 @@
             "type": "Identifier",
             "name": "CompositeView",
             "range": [
-              280,
-              293
+              324,
+              337
             ],
             "loc": {
               "start": {
@@ -375,8 +375,8 @@
             }
           },
           "range": [
-            269,
-            293
+            313,
+            337
           ],
           "loc": {
             "start": {
@@ -398,8 +398,8 @@
                 "type": "Identifier",
                 "name": "initialize",
                 "range": [
-                  543,
-                  553
+                  587,
+                  597
                 ],
                 "loc": {
                   "start": {
@@ -430,8 +430,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              593,
-                              597
+                              637,
+                              641
                             ],
                             "loc": {
                               "start": {
@@ -448,8 +448,8 @@
                             "type": "Identifier",
                             "name": "collection",
                             "range": [
-                              598,
-                              608
+                              642,
+                              652
                             ],
                             "loc": {
                               "start": {
@@ -463,8 +463,8 @@
                             }
                           },
                           "range": [
-                            593,
-                            608
+                            637,
+                            652
                           ],
                           "loc": {
                             "start": {
@@ -491,8 +491,8 @@
                                   "type": "Identifier",
                                   "name": "Radio",
                                   "range": [
-                                    611,
-                                    616
+                                    655,
+                                    660
                                   ],
                                   "loc": {
                                     "start": {
@@ -509,8 +509,8 @@
                                   "type": "Identifier",
                                   "name": "channel",
                                   "range": [
-                                    617,
-                                    624
+                                    661,
+                                    668
                                   ],
                                   "loc": {
                                     "start": {
@@ -524,8 +524,8 @@
                                   }
                                 },
                                 "range": [
-                                  611,
-                                  624
+                                  655,
+                                  668
                                 ],
                                 "loc": {
                                   "start": {
@@ -544,8 +544,8 @@
                                   "value": "rodan",
                                   "raw": "'rodan'",
                                   "range": [
-                                    625,
-                                    632
+                                    669,
+                                    676
                                   ],
                                   "loc": {
                                     "start": {
@@ -560,8 +560,8 @@
                                 }
                               ],
                               "range": [
-                                611,
-                                633
+                                655,
+                                677
                               ],
                               "loc": {
                                 "start": {
@@ -578,8 +578,8 @@
                               "type": "Identifier",
                               "name": "request",
                               "range": [
-                                634,
-                                641
+                                678,
+                                685
                               ],
                               "loc": {
                                 "start": {
@@ -593,8 +593,8 @@
                               }
                             },
                             "range": [
-                              611,
-                              641
+                              655,
+                              685
                             ],
                             "loc": {
                               "start": {
@@ -615,8 +615,8 @@
                                 "type": "Identifier",
                                 "name": "RODAN_EVENTS",
                                 "range": [
-                                  642,
-                                  654
+                                  686,
+                                  698
                                 ],
                                 "loc": {
                                   "start": {
@@ -633,8 +633,8 @@
                                 "type": "Identifier",
                                 "name": "REQUEST__GLOBAL_RESOURCETYPE_COLLECTION",
                                 "range": [
-                                  655,
-                                  694
+                                  699,
+                                  738
                                 ],
                                 "loc": {
                                   "start": {
@@ -648,8 +648,8 @@
                                 }
                               },
                               "range": [
-                                642,
-                                694
+                                686,
+                                738
                               ],
                               "loc": {
                                 "start": {
@@ -664,8 +664,8 @@
                             }
                           ],
                           "range": [
-                            611,
-                            695
+                            655,
+                            739
                           ],
                           "loc": {
                             "start": {
@@ -679,8 +679,8 @@
                           }
                         },
                         "range": [
-                          593,
-                          695
+                          637,
+                          739
                         ],
                         "loc": {
                           "start": {
@@ -694,8 +694,8 @@
                         }
                       },
                       "range": [
-                        593,
-                        696
+                        637,
+                        740
                       ],
                       "loc": {
                         "start": {
@@ -712,8 +712,8 @@
                           "type": "Block",
                           "value": "* @ignore ",
                           "range": [
-                            570,
-                            584
+                            614,
+                            628
                           ],
                           "loc": {
                             "start": {
@@ -741,8 +741,8 @@
                             "object": {
                               "type": "ThisExpression",
                               "range": [
-                                705,
-                                709
+                                749,
+                                753
                               ],
                               "loc": {
                                 "start": {
@@ -759,8 +759,8 @@
                               "type": "Identifier",
                               "name": "collection",
                               "range": [
-                                710,
-                                720
+                                754,
+                                764
                               ],
                               "loc": {
                                 "start": {
@@ -774,8 +774,8 @@
                               }
                             },
                             "range": [
-                              705,
-                              720
+                              749,
+                              764
                             ],
                             "loc": {
                               "start": {
@@ -792,8 +792,8 @@
                             "type": "Identifier",
                             "name": "each",
                             "range": [
-                              721,
-                              725
+                              765,
+                              769
                             ],
                             "loc": {
                               "start": {
@@ -807,8 +807,8 @@
                             }
                           },
                           "range": [
-                            705,
-                            725
+                            749,
+                            769
                           ],
                           "loc": {
                             "start": {
@@ -830,8 +830,8 @@
                                 "type": "Identifier",
                                 "name": "model",
                                 "range": [
-                                  735,
-                                  740
+                                  779,
+                                  784
                                 ],
                                 "loc": {
                                   "start": {
@@ -859,8 +859,8 @@
                                         "type": "Identifier",
                                         "name": "model",
                                         "range": [
-                                          744,
-                                          749
+                                          788,
+                                          793
                                         ],
                                         "loc": {
                                           "start": {
@@ -877,8 +877,8 @@
                                         "type": "Identifier",
                                         "name": "unset",
                                         "range": [
-                                          750,
-                                          755
+                                          794,
+                                          799
                                         ],
                                         "loc": {
                                           "start": {
@@ -892,8 +892,8 @@
                                         }
                                       },
                                       "range": [
-                                        744,
-                                        755
+                                        788,
+                                        799
                                       ],
                                       "loc": {
                                         "start": {
@@ -912,8 +912,8 @@
                                         "value": "selected",
                                         "raw": "'selected'",
                                         "range": [
-                                          756,
-                                          766
+                                          800,
+                                          810
                                         ],
                                         "loc": {
                                           "start": {
@@ -928,8 +928,8 @@
                                       }
                                     ],
                                     "range": [
-                                      744,
-                                      767
+                                      788,
+                                      811
                                     ],
                                     "loc": {
                                       "start": {
@@ -943,8 +943,8 @@
                                     }
                                   },
                                   "range": [
-                                    744,
-                                    768
+                                    788,
+                                    812
                                   ],
                                   "loc": {
                                     "start": {
@@ -959,8 +959,8 @@
                                 }
                               ],
                               "range": [
-                                742,
-                                770
+                                786,
+                                814
                               ],
                               "loc": {
                                 "start": {
@@ -976,8 +976,8 @@
                             "generator": false,
                             "expression": false,
                             "range": [
-                              726,
-                              770
+                              770,
+                              814
                             ],
                             "loc": {
                               "start": {
@@ -992,8 +992,8 @@
                           }
                         ],
                         "range": [
-                          705,
-                          771
+                          749,
+                          815
                         ],
                         "loc": {
                           "start": {
@@ -1007,8 +1007,8 @@
                         }
                       },
                       "range": [
-                        705,
-                        772
+                        749,
+                        816
                       ],
                       "loc": {
                         "start": {
@@ -1030,8 +1030,8 @@
                             "type": "Identifier",
                             "name": "resourceType",
                             "range": [
-                              785,
-                              797
+                              829,
+                              841
                             ],
                             "loc": {
                               "start": {
@@ -1055,8 +1055,8 @@
                                 "object": {
                                   "type": "ThisExpression",
                                   "range": [
-                                    800,
-                                    804
+                                    844,
+                                    848
                                   ],
                                   "loc": {
                                     "start": {
@@ -1073,8 +1073,8 @@
                                   "type": "Identifier",
                                   "name": "collection",
                                   "range": [
-                                    805,
-                                    815
+                                    849,
+                                    859
                                   ],
                                   "loc": {
                                     "start": {
@@ -1088,8 +1088,8 @@
                                   }
                                 },
                                 "range": [
-                                  800,
-                                  815
+                                  844,
+                                  859
                                 ],
                                 "loc": {
                                   "start": {
@@ -1106,8 +1106,8 @@
                                 "type": "Identifier",
                                 "name": "findWhere",
                                 "range": [
-                                  816,
-                                  825
+                                  860,
+                                  869
                                 ],
                                 "loc": {
                                   "start": {
@@ -1121,8 +1121,8 @@
                                 }
                               },
                               "range": [
-                                800,
-                                825
+                                844,
+                                869
                               ],
                               "loc": {
                                 "start": {
@@ -1145,8 +1145,8 @@
                                       "type": "Identifier",
                                       "name": "url",
                                       "range": [
-                                        827,
-                                        830
+                                        871,
+                                        874
                                       ],
                                       "loc": {
                                         "start": {
@@ -1170,8 +1170,8 @@
                                           "object": {
                                             "type": "ThisExpression",
                                             "range": [
-                                              832,
-                                              836
+                                              876,
+                                              880
                                             ],
                                             "loc": {
                                               "start": {
@@ -1188,8 +1188,8 @@
                                             "type": "Identifier",
                                             "name": "model",
                                             "range": [
-                                              837,
-                                              842
+                                              881,
+                                              886
                                             ],
                                             "loc": {
                                               "start": {
@@ -1203,8 +1203,8 @@
                                             }
                                           },
                                           "range": [
-                                            832,
-                                            842
+                                            876,
+                                            886
                                           ],
                                           "loc": {
                                             "start": {
@@ -1221,8 +1221,8 @@
                                           "type": "Identifier",
                                           "name": "get",
                                           "range": [
-                                            843,
-                                            846
+                                            887,
+                                            890
                                           ],
                                           "loc": {
                                             "start": {
@@ -1236,8 +1236,8 @@
                                           }
                                         },
                                         "range": [
-                                          832,
-                                          846
+                                          876,
+                                          890
                                         ],
                                         "loc": {
                                           "start": {
@@ -1256,8 +1256,8 @@
                                           "value": "resource_type",
                                           "raw": "'resource_type'",
                                           "range": [
-                                            847,
-                                            862
+                                            891,
+                                            906
                                           ],
                                           "loc": {
                                             "start": {
@@ -1272,8 +1272,8 @@
                                         }
                                       ],
                                       "range": [
-                                        832,
-                                        863
+                                        876,
+                                        907
                                       ],
                                       "loc": {
                                         "start": {
@@ -1291,8 +1291,8 @@
                                     "shorthand": false,
                                     "computed": false,
                                     "range": [
-                                      827,
-                                      863
+                                      871,
+                                      907
                                     ],
                                     "loc": {
                                       "start": {
@@ -1307,8 +1307,8 @@
                                   }
                                 ],
                                 "range": [
-                                  826,
-                                  864
+                                  870,
+                                  908
                                 ],
                                 "loc": {
                                   "start": {
@@ -1323,8 +1323,8 @@
                               }
                             ],
                             "range": [
-                              800,
-                              865
+                              844,
+                              909
                             ],
                             "loc": {
                               "start": {
@@ -1338,8 +1338,8 @@
                             }
                           },
                           "range": [
-                            785,
-                            865
+                            829,
+                            909
                           ],
                           "loc": {
                             "start": {
@@ -1355,8 +1355,8 @@
                       ],
                       "kind": "var",
                       "range": [
-                        781,
-                        866
+                        825,
+                        910
                       ],
                       "loc": {
                         "start": {
@@ -1380,8 +1380,8 @@
                             "type": "Identifier",
                             "name": "resourceType",
                             "range": [
-                              875,
-                              887
+                              919,
+                              931
                             ],
                             "loc": {
                               "start": {
@@ -1398,8 +1398,8 @@
                             "type": "Identifier",
                             "name": "set",
                             "range": [
-                              888,
-                              891
+                              932,
+                              935
                             ],
                             "loc": {
                               "start": {
@@ -1413,8 +1413,8 @@
                             }
                           },
                           "range": [
-                            875,
-                            891
+                            919,
+                            935
                           ],
                           "loc": {
                             "start": {
@@ -1433,8 +1433,8 @@
                             "value": "selected",
                             "raw": "'selected'",
                             "range": [
-                              892,
-                              902
+                              936,
+                              946
                             ],
                             "loc": {
                               "start": {
@@ -1452,8 +1452,8 @@
                             "value": "selected",
                             "raw": "'selected'",
                             "range": [
-                              904,
-                              914
+                              948,
+                              958
                             ],
                             "loc": {
                               "start": {
@@ -1468,8 +1468,8 @@
                           }
                         ],
                         "range": [
-                          875,
-                          915
+                          919,
+                          959
                         ],
                         "loc": {
                           "start": {
@@ -1483,8 +1483,8 @@
                         }
                       },
                       "range": [
-                        875,
-                        916
+                        919,
+                        960
                       ],
                       "loc": {
                         "start": {
@@ -1499,8 +1499,8 @@
                     }
                   ],
                   "range": [
-                    560,
-                    922
+                    604,
+                    966
                   ],
                   "loc": {
                     "start": {
@@ -1516,8 +1516,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  553,
-                  922
+                  597,
+                  966
                 ],
                 "loc": {
                   "start": {
@@ -1533,8 +1533,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                543,
-                922
+                587,
+                966
               ],
               "loc": {
                 "start": {
@@ -1551,8 +1551,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    296,
-                    383
+                    340,
+                    427
                   ],
                   "loc": {
                     "start": {
@@ -1569,8 +1569,8 @@
                   "type": "Line",
                   "value": " PUBLIC METHODS",
                   "range": [
-                    384,
-                    401
+                    428,
+                    445
                   ],
                   "loc": {
                     "start": {
@@ -1587,8 +1587,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    402,
-                    489
+                    446,
+                    533
                   ],
                   "loc": {
                     "start": {
@@ -1605,8 +1605,8 @@
                   "type": "Block",
                   "value": "*\n     * Initializes the instance.\n     ",
                   "range": [
-                    494,
-                    538
+                    538,
+                    582
                   ],
                   "loc": {
                     "start": {
@@ -1625,8 +1625,8 @@
                   "type": "Block",
                   "value": "*\n     * Initialize buttons after render.\n     ",
                   "range": [
-                    928,
-                    979
+                    972,
+                    1023
                   ],
                   "loc": {
                     "start": {
@@ -1648,8 +1648,8 @@
                 "type": "Identifier",
                 "name": "onRender",
                 "range": [
-                  984,
-                  992
+                  1028,
+                  1036
                 ],
                 "loc": {
                   "start": {
@@ -1678,8 +1678,8 @@
                             "type": "Identifier",
                             "name": "disabledDelete",
                             "range": [
-                              1013,
-                              1027
+                              1057,
+                              1071
                             ],
                             "loc": {
                               "start": {
@@ -1706,8 +1706,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1030,
-                                      1034
+                                      1074,
+                                      1078
                                     ],
                                     "loc": {
                                       "start": {
@@ -1724,8 +1724,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      1035,
-                                      1040
+                                      1079,
+                                      1084
                                     ],
                                     "loc": {
                                       "start": {
@@ -1739,8 +1739,8 @@
                                     }
                                   },
                                   "range": [
-                                    1030,
-                                    1040
+                                    1074,
+                                    1084
                                   ],
                                   "loc": {
                                     "start": {
@@ -1757,8 +1757,8 @@
                                   "type": "Identifier",
                                   "name": "get",
                                   "range": [
-                                    1041,
-                                    1044
+                                    1085,
+                                    1088
                                   ],
                                   "loc": {
                                     "start": {
@@ -1772,8 +1772,8 @@
                                   }
                                 },
                                 "range": [
-                                  1030,
-                                  1044
+                                  1074,
+                                  1088
                                 ],
                                 "loc": {
                                   "start": {
@@ -1792,8 +1792,8 @@
                                   "value": "origin",
                                   "raw": "'origin'",
                                   "range": [
-                                    1045,
-                                    1053
+                                    1089,
+                                    1097
                                   ],
                                   "loc": {
                                     "start": {
@@ -1808,8 +1808,8 @@
                                 }
                               ],
                               "range": [
-                                1030,
-                                1054
+                                1074,
+                                1098
                               ],
                               "loc": {
                                 "start": {
@@ -1827,8 +1827,8 @@
                               "value": null,
                               "raw": "null",
                               "range": [
-                                1059,
-                                1063
+                                1103,
+                                1107
                               ],
                               "loc": {
                                 "start": {
@@ -1842,8 +1842,8 @@
                               }
                             },
                             "range": [
-                              1030,
-                              1063
+                              1074,
+                              1107
                             ],
                             "loc": {
                               "start": {
@@ -1857,8 +1857,8 @@
                             }
                           },
                           "range": [
-                            1013,
-                            1063
+                            1057,
+                            1107
                           ],
                           "loc": {
                             "start": {
@@ -1874,8 +1874,8 @@
                       ],
                       "kind": "var",
                       "range": [
-                        1009,
-                        1064
+                        1053,
+                        1108
                       ],
                       "loc": {
                         "start": {
@@ -1901,8 +1901,8 @@
                               "type": "Identifier",
                               "name": "$",
                               "range": [
-                                1073,
-                                1074
+                                1117,
+                                1118
                               ],
                               "loc": {
                                 "start": {
@@ -1925,8 +1925,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1075,
-                                      1079
+                                      1119,
+                                      1123
                                     ],
                                     "loc": {
                                       "start": {
@@ -1943,8 +1943,8 @@
                                     "type": "Identifier",
                                     "name": "ui",
                                     "range": [
-                                      1080,
-                                      1082
+                                      1124,
+                                      1126
                                     ],
                                     "loc": {
                                       "start": {
@@ -1958,8 +1958,8 @@
                                     }
                                   },
                                   "range": [
-                                    1075,
-                                    1082
+                                    1119,
+                                    1126
                                   ],
                                   "loc": {
                                     "start": {
@@ -1976,8 +1976,8 @@
                                   "type": "Identifier",
                                   "name": "buttonDelete",
                                   "range": [
-                                    1083,
-                                    1095
+                                    1127,
+                                    1139
                                   ],
                                   "loc": {
                                     "start": {
@@ -1991,8 +1991,8 @@
                                   }
                                 },
                                 "range": [
-                                  1075,
-                                  1095
+                                  1119,
+                                  1139
                                 ],
                                 "loc": {
                                   "start": {
@@ -2007,8 +2007,8 @@
                               }
                             ],
                             "range": [
-                              1073,
-                              1096
+                              1117,
+                              1140
                             ],
                             "loc": {
                               "start": {
@@ -2025,8 +2025,8 @@
                             "type": "Identifier",
                             "name": "attr",
                             "range": [
-                              1097,
-                              1101
+                              1141,
+                              1145
                             ],
                             "loc": {
                               "start": {
@@ -2040,8 +2040,8 @@
                             }
                           },
                           "range": [
-                            1073,
-                            1101
+                            1117,
+                            1145
                           ],
                           "loc": {
                             "start": {
@@ -2060,8 +2060,8 @@
                             "value": "disabled",
                             "raw": "'disabled'",
                             "range": [
-                              1102,
-                              1112
+                              1146,
+                              1156
                             ],
                             "loc": {
                               "start": {
@@ -2078,8 +2078,8 @@
                             "type": "Identifier",
                             "name": "disabledDelete",
                             "range": [
-                              1114,
-                              1128
+                              1158,
+                              1172
                             ],
                             "loc": {
                               "start": {
@@ -2094,8 +2094,8 @@
                           }
                         ],
                         "range": [
-                          1073,
-                          1129
+                          1117,
+                          1173
                         ],
                         "loc": {
                           "start": {
@@ -2109,8 +2109,8 @@
                         }
                       },
                       "range": [
-                        1073,
-                        1130
+                        1117,
+                        1174
                       ],
                       "loc": {
                         "start": {
@@ -2132,8 +2132,8 @@
                             "type": "Identifier",
                             "name": "disabledDownload",
                             "range": [
-                              1144,
-                              1160
+                              1188,
+                              1204
                             ],
                             "loc": {
                               "start": {
@@ -2160,8 +2160,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1163,
-                                      1167
+                                      1207,
+                                      1211
                                     ],
                                     "loc": {
                                       "start": {
@@ -2178,8 +2178,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      1168,
-                                      1173
+                                      1212,
+                                      1217
                                     ],
                                     "loc": {
                                       "start": {
@@ -2193,8 +2193,8 @@
                                     }
                                   },
                                   "range": [
-                                    1163,
-                                    1173
+                                    1207,
+                                    1217
                                   ],
                                   "loc": {
                                     "start": {
@@ -2211,8 +2211,8 @@
                                   "type": "Identifier",
                                   "name": "get",
                                   "range": [
-                                    1174,
-                                    1177
+                                    1218,
+                                    1221
                                   ],
                                   "loc": {
                                     "start": {
@@ -2226,8 +2226,8 @@
                                   }
                                 },
                                 "range": [
-                                  1163,
-                                  1177
+                                  1207,
+                                  1221
                                 ],
                                 "loc": {
                                   "start": {
@@ -2246,8 +2246,8 @@
                                   "value": "download",
                                   "raw": "'download'",
                                   "range": [
-                                    1178,
-                                    1188
+                                    1222,
+                                    1232
                                   ],
                                   "loc": {
                                     "start": {
@@ -2262,8 +2262,8 @@
                                 }
                               ],
                               "range": [
-                                1163,
-                                1189
+                                1207,
+                                1233
                               ],
                               "loc": {
                                 "start": {
@@ -2281,8 +2281,8 @@
                               "value": null,
                               "raw": "null",
                               "range": [
-                                1194,
-                                1198
+                                1238,
+                                1242
                               ],
                               "loc": {
                                 "start": {
@@ -2296,8 +2296,8 @@
                               }
                             },
                             "range": [
-                              1163,
-                              1198
+                              1207,
+                              1242
                             ],
                             "loc": {
                               "start": {
@@ -2311,8 +2311,8 @@
                             }
                           },
                           "range": [
-                            1144,
-                            1198
+                            1188,
+                            1242
                           ],
                           "loc": {
                             "start": {
@@ -2328,8 +2328,8 @@
                       ],
                       "kind": "var",
                       "range": [
-                        1140,
-                        1199
+                        1184,
+                        1243
                       ],
                       "loc": {
                         "start": {
@@ -2355,8 +2355,8 @@
                               "type": "Identifier",
                               "name": "$",
                               "range": [
-                                1208,
-                                1209
+                                1252,
+                                1253
                               ],
                               "loc": {
                                 "start": {
@@ -2379,8 +2379,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1210,
-                                      1214
+                                      1254,
+                                      1258
                                     ],
                                     "loc": {
                                       "start": {
@@ -2397,8 +2397,8 @@
                                     "type": "Identifier",
                                     "name": "ui",
                                     "range": [
-                                      1215,
-                                      1217
+                                      1259,
+                                      1261
                                     ],
                                     "loc": {
                                       "start": {
@@ -2412,8 +2412,8 @@
                                     }
                                   },
                                   "range": [
-                                    1210,
-                                    1217
+                                    1254,
+                                    1261
                                   ],
                                   "loc": {
                                     "start": {
@@ -2430,8 +2430,8 @@
                                   "type": "Identifier",
                                   "name": "buttonDownload",
                                   "range": [
-                                    1218,
-                                    1232
+                                    1262,
+                                    1276
                                   ],
                                   "loc": {
                                     "start": {
@@ -2445,8 +2445,8 @@
                                   }
                                 },
                                 "range": [
-                                  1210,
-                                  1232
+                                  1254,
+                                  1276
                                 ],
                                 "loc": {
                                   "start": {
@@ -2461,8 +2461,8 @@
                               }
                             ],
                             "range": [
-                              1208,
-                              1233
+                              1252,
+                              1277
                             ],
                             "loc": {
                               "start": {
@@ -2479,8 +2479,8 @@
                             "type": "Identifier",
                             "name": "attr",
                             "range": [
-                              1234,
-                              1238
+                              1278,
+                              1282
                             ],
                             "loc": {
                               "start": {
@@ -2494,8 +2494,8 @@
                             }
                           },
                           "range": [
-                            1208,
-                            1238
+                            1252,
+                            1282
                           ],
                           "loc": {
                             "start": {
@@ -2514,8 +2514,8 @@
                             "value": "disabled",
                             "raw": "'disabled'",
                             "range": [
-                              1239,
-                              1249
+                              1283,
+                              1293
                             ],
                             "loc": {
                               "start": {
@@ -2532,8 +2532,8 @@
                             "type": "Identifier",
                             "name": "disabledDownload",
                             "range": [
-                              1251,
-                              1267
+                              1295,
+                              1311
                             ],
                             "loc": {
                               "start": {
@@ -2548,8 +2548,8 @@
                           }
                         ],
                         "range": [
-                          1208,
-                          1268
+                          1252,
+                          1312
                         ],
                         "loc": {
                           "start": {
@@ -2563,8 +2563,8 @@
                         }
                       },
                       "range": [
-                        1208,
-                        1269
+                        1252,
+                        1313
                       ],
                       "loc": {
                         "start": {
@@ -2586,8 +2586,8 @@
                             "type": "Identifier",
                             "name": "disableView",
                             "range": [
-                              1283,
-                              1294
+                              1327,
+                              1338
                             ],
                             "loc": {
                               "start": {
@@ -2617,8 +2617,8 @@
                                     "object": {
                                       "type": "ThisExpression",
                                       "range": [
-                                        1297,
-                                        1301
+                                        1341,
+                                        1345
                                       ],
                                       "loc": {
                                         "start": {
@@ -2635,8 +2635,8 @@
                                       "type": "Identifier",
                                       "name": "model",
                                       "range": [
-                                        1302,
-                                        1307
+                                        1346,
+                                        1351
                                       ],
                                       "loc": {
                                         "start": {
@@ -2650,8 +2650,8 @@
                                       }
                                     },
                                     "range": [
-                                      1297,
-                                      1307
+                                      1341,
+                                      1351
                                     ],
                                     "loc": {
                                       "start": {
@@ -2668,8 +2668,8 @@
                                     "type": "Identifier",
                                     "name": "get",
                                     "range": [
-                                      1308,
-                                      1311
+                                      1352,
+                                      1355
                                     ],
                                     "loc": {
                                       "start": {
@@ -2683,8 +2683,8 @@
                                     }
                                   },
                                   "range": [
-                                    1297,
-                                    1311
+                                    1341,
+                                    1355
                                   ],
                                   "loc": {
                                     "start": {
@@ -2703,8 +2703,8 @@
                                     "value": "viewer_url",
                                     "raw": "'viewer_url'",
                                     "range": [
-                                      1312,
-                                      1324
+                                      1356,
+                                      1368
                                     ],
                                     "loc": {
                                       "start": {
@@ -2719,8 +2719,8 @@
                                   }
                                 ],
                                 "range": [
-                                  1297,
-                                  1325
+                                  1341,
+                                  1369
                                 ],
                                 "loc": {
                                   "start": {
@@ -2738,8 +2738,8 @@
                                 "value": null,
                                 "raw": "null",
                                 "range": [
-                                  1330,
-                                  1334
+                                  1374,
+                                  1378
                                 ],
                                 "loc": {
                                   "start": {
@@ -2753,8 +2753,8 @@
                                 }
                               },
                               "range": [
-                                1297,
-                                1334
+                                1341,
+                                1378
                               ],
                               "loc": {
                                 "start": {
@@ -2771,8 +2771,8 @@
                               "type": "Identifier",
                               "name": "disabledDownload",
                               "range": [
-                                1338,
-                                1354
+                                1382,
+                                1398
                               ],
                               "loc": {
                                 "start": {
@@ -2786,8 +2786,8 @@
                               }
                             },
                             "range": [
-                              1297,
-                              1354
+                              1341,
+                              1398
                             ],
                             "loc": {
                               "start": {
@@ -2801,8 +2801,8 @@
                             }
                           },
                           "range": [
-                            1283,
-                            1354
+                            1327,
+                            1398
                           ],
                           "loc": {
                             "start": {
@@ -2818,8 +2818,8 @@
                       ],
                       "kind": "var",
                       "range": [
-                        1279,
-                        1355
+                        1323,
+                        1399
                       ],
                       "loc": {
                         "start": {
@@ -2845,8 +2845,8 @@
                               "type": "Identifier",
                               "name": "$",
                               "range": [
-                                1364,
-                                1365
+                                1408,
+                                1409
                               ],
                               "loc": {
                                 "start": {
@@ -2869,8 +2869,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1366,
-                                      1370
+                                      1410,
+                                      1414
                                     ],
                                     "loc": {
                                       "start": {
@@ -2887,8 +2887,8 @@
                                     "type": "Identifier",
                                     "name": "ui",
                                     "range": [
-                                      1371,
-                                      1373
+                                      1415,
+                                      1417
                                     ],
                                     "loc": {
                                       "start": {
@@ -2902,8 +2902,8 @@
                                     }
                                   },
                                   "range": [
-                                    1366,
-                                    1373
+                                    1410,
+                                    1417
                                   ],
                                   "loc": {
                                     "start": {
@@ -2920,8 +2920,8 @@
                                   "type": "Identifier",
                                   "name": "buttonView",
                                   "range": [
-                                    1374,
-                                    1384
+                                    1418,
+                                    1428
                                   ],
                                   "loc": {
                                     "start": {
@@ -2935,8 +2935,8 @@
                                   }
                                 },
                                 "range": [
-                                  1366,
-                                  1384
+                                  1410,
+                                  1428
                                 ],
                                 "loc": {
                                   "start": {
@@ -2951,8 +2951,8 @@
                               }
                             ],
                             "range": [
-                              1364,
-                              1385
+                              1408,
+                              1429
                             ],
                             "loc": {
                               "start": {
@@ -2969,8 +2969,8 @@
                             "type": "Identifier",
                             "name": "attr",
                             "range": [
-                              1386,
-                              1390
+                              1430,
+                              1434
                             ],
                             "loc": {
                               "start": {
@@ -2984,8 +2984,8 @@
                             }
                           },
                           "range": [
-                            1364,
-                            1390
+                            1408,
+                            1434
                           ],
                           "loc": {
                             "start": {
@@ -3004,8 +3004,8 @@
                             "value": "disabled",
                             "raw": "'disabled'",
                             "range": [
-                              1391,
-                              1401
+                              1435,
+                              1445
                             ],
                             "loc": {
                               "start": {
@@ -3022,8 +3022,8 @@
                             "type": "Identifier",
                             "name": "disableView",
                             "range": [
-                              1403,
-                              1414
+                              1447,
+                              1458
                             ],
                             "loc": {
                               "start": {
@@ -3038,8 +3038,8 @@
                           }
                         ],
                         "range": [
-                          1364,
-                          1415
+                          1408,
+                          1459
                         ],
                         "loc": {
                           "start": {
@@ -3053,8 +3053,8 @@
                         }
                       },
                       "range": [
-                        1364,
-                        1416
+                        1408,
+                        1460
                       ],
                       "loc": {
                         "start": {
@@ -3069,8 +3069,8 @@
                     }
                   ],
                   "range": [
-                    999,
-                    1422
+                    1043,
+                    1466
                   ],
                   "loc": {
                     "start": {
@@ -3086,8 +3086,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  992,
-                  1422
+                  1036,
+                  1466
                 ],
                 "loc": {
                   "start": {
@@ -3103,8 +3103,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                984,
-                1422
+                1028,
+                1466
               ],
               "loc": {
                 "start": {
@@ -3121,8 +3121,8 @@
                   "type": "Block",
                   "value": "*\n     * Initialize buttons after render.\n     ",
                   "range": [
-                    928,
-                    979
+                    972,
+                    1023
                   ],
                   "loc": {
                     "start": {
@@ -3141,8 +3141,8 @@
                   "type": "Block",
                   "value": "*\n     * Destroy callback.\n     ",
                   "range": [
-                    1428,
-                    1464
+                    1472,
+                    1508
                   ],
                   "loc": {
                     "start": {
@@ -3164,8 +3164,8 @@
                 "type": "Identifier",
                 "name": "onDestroy",
                 "range": [
-                  1469,
-                  1478
+                  1513,
+                  1522
                 ],
                 "loc": {
                   "start": {
@@ -3196,8 +3196,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              1495,
-                              1499
+                              1539,
+                              1543
                             ],
                             "loc": {
                               "start": {
@@ -3214,8 +3214,8 @@
                             "type": "Identifier",
                             "name": "collection",
                             "range": [
-                              1500,
-                              1510
+                              1544,
+                              1554
                             ],
                             "loc": {
                               "start": {
@@ -3229,8 +3229,8 @@
                             }
                           },
                           "range": [
-                            1495,
-                            1510
+                            1539,
+                            1554
                           ],
                           "loc": {
                             "start": {
@@ -3248,8 +3248,8 @@
                           "value": null,
                           "raw": "null",
                           "range": [
-                            1513,
-                            1517
+                            1557,
+                            1561
                           ],
                           "loc": {
                             "start": {
@@ -3263,8 +3263,8 @@
                           }
                         },
                         "range": [
-                          1495,
-                          1517
+                          1539,
+                          1561
                         ],
                         "loc": {
                           "start": {
@@ -3278,8 +3278,8 @@
                         }
                       },
                       "range": [
-                        1495,
-                        1518
+                        1539,
+                        1562
                       ],
                       "loc": {
                         "start": {
@@ -3294,8 +3294,8 @@
                     }
                   ],
                   "range": [
-                    1485,
-                    1524
+                    1529,
+                    1568
                   ],
                   "loc": {
                     "start": {
@@ -3311,8 +3311,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1478,
-                  1524
+                  1522,
+                  1568
                 ],
                 "loc": {
                   "start": {
@@ -3328,8 +3328,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1469,
-                1524
+                1513,
+                1568
               ],
               "loc": {
                 "start": {
@@ -3346,8 +3346,8 @@
                   "type": "Block",
                   "value": "*\n     * Destroy callback.\n     ",
                   "range": [
-                    1428,
-                    1464
+                    1472,
+                    1508
                   ],
                   "loc": {
                     "start": {
@@ -3366,8 +3366,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    1526,
-                    1613
+                    1570,
+                    1657
                   ],
                   "loc": {
                     "start": {
@@ -3384,8 +3384,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    1614,
-                    1632
+                    1658,
+                    1676
                   ],
                   "loc": {
                     "start": {
@@ -3402,8 +3402,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    1633,
-                    1720
+                    1677,
+                    1764
                   ],
                   "loc": {
                     "start": {
@@ -3420,8 +3420,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button save.\n     ",
                   "range": [
-                    1725,
-                    1763
+                    1769,
+                    1807
                   ],
                   "loc": {
                     "start": {
@@ -3443,8 +3443,8 @@
                 "type": "Identifier",
                 "name": "_handleClickButtonSave",
                 "range": [
-                  1768,
-                  1790
+                  1812,
+                  1834
                 ],
                 "loc": {
                   "start": {
@@ -3480,8 +3480,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  1807,
-                                  1812
+                                  1851,
+                                  1856
                                 ],
                                 "loc": {
                                   "start": {
@@ -3498,8 +3498,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  1813,
-                                  1820
+                                  1857,
+                                  1864
                                 ],
                                 "loc": {
                                   "start": {
@@ -3513,8 +3513,8 @@
                                 }
                               },
                               "range": [
-                                1807,
-                                1820
+                                1851,
+                                1864
                               ],
                               "loc": {
                                 "start": {
@@ -3533,8 +3533,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  1821,
-                                  1828
+                                  1865,
+                                  1872
                                 ],
                                 "loc": {
                                   "start": {
@@ -3549,8 +3549,8 @@
                               }
                             ],
                             "range": [
-                              1807,
-                              1829
+                              1851,
+                              1873
                             ],
                             "loc": {
                               "start": {
@@ -3567,8 +3567,8 @@
                             "type": "Identifier",
                             "name": "request",
                             "range": [
-                              1830,
-                              1837
+                              1874,
+                              1881
                             ],
                             "loc": {
                               "start": {
@@ -3582,8 +3582,8 @@
                             }
                           },
                           "range": [
-                            1807,
-                            1837
+                            1851,
+                            1881
                           ],
                           "loc": {
                             "start": {
@@ -3604,8 +3604,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                1838,
-                                1850
+                                1882,
+                                1894
                               ],
                               "loc": {
                                 "start": {
@@ -3622,8 +3622,8 @@
                               "type": "Identifier",
                               "name": "REQUEST__RESOURCE_SAVE",
                               "range": [
-                                1851,
-                                1873
+                                1895,
+                                1917
                               ],
                               "loc": {
                                 "start": {
@@ -3637,8 +3637,8 @@
                               }
                             },
                             "range": [
-                              1838,
-                              1873
+                              1882,
+                              1917
                             ],
                             "loc": {
                               "start": {
@@ -3660,8 +3660,8 @@
                                   "type": "Identifier",
                                   "name": "resource",
                                   "range": [
-                                    1876,
-                                    1884
+                                    1920,
+                                    1928
                                   ],
                                   "loc": {
                                     "start": {
@@ -3680,8 +3680,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      1886,
-                                      1890
+                                      1930,
+                                      1934
                                     ],
                                     "loc": {
                                       "start": {
@@ -3698,8 +3698,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      1891,
-                                      1896
+                                      1935,
+                                      1940
                                     ],
                                     "loc": {
                                       "start": {
@@ -3713,8 +3713,8 @@
                                     }
                                   },
                                   "range": [
-                                    1886,
-                                    1896
+                                    1930,
+                                    1940
                                   ],
                                   "loc": {
                                     "start": {
@@ -3732,8 +3732,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  1876,
-                                  1896
+                                  1920,
+                                  1940
                                 ],
                                 "loc": {
                                   "start": {
@@ -3752,8 +3752,8 @@
                                   "type": "Identifier",
                                   "name": "fields",
                                   "range": [
-                                    1898,
-                                    1904
+                                    1942,
+                                    1948
                                   ],
                                   "loc": {
                                     "start": {
@@ -3775,8 +3775,8 @@
                                         "type": "Identifier",
                                         "name": "resource_type",
                                         "range": [
-                                          1907,
-                                          1920
+                                          1951,
+                                          1964
                                         ],
                                         "loc": {
                                           "start": {
@@ -3803,8 +3803,8 @@
                                               "object": {
                                                 "type": "ThisExpression",
                                                 "range": [
-                                                  1922,
-                                                  1926
+                                                  1966,
+                                                  1970
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -3821,8 +3821,8 @@
                                                 "type": "Identifier",
                                                 "name": "ui",
                                                 "range": [
-                                                  1927,
-                                                  1929
+                                                  1971,
+                                                  1973
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -3836,8 +3836,8 @@
                                                 }
                                               },
                                               "range": [
-                                                1922,
-                                                1929
+                                                1966,
+                                                1973
                                               ],
                                               "loc": {
                                                 "start": {
@@ -3854,8 +3854,8 @@
                                               "type": "Identifier",
                                               "name": "selectResourceType",
                                               "range": [
-                                                1930,
-                                                1948
+                                                1974,
+                                                1992
                                               ],
                                               "loc": {
                                                 "start": {
@@ -3869,8 +3869,8 @@
                                               }
                                             },
                                             "range": [
-                                              1922,
-                                              1948
+                                              1966,
+                                              1992
                                             ],
                                             "loc": {
                                               "start": {
@@ -3887,8 +3887,8 @@
                                             "type": "Identifier",
                                             "name": "val",
                                             "range": [
-                                              1949,
-                                              1952
+                                              1993,
+                                              1996
                                             ],
                                             "loc": {
                                               "start": {
@@ -3902,8 +3902,8 @@
                                             }
                                           },
                                           "range": [
-                                            1922,
-                                            1952
+                                            1966,
+                                            1996
                                           ],
                                           "loc": {
                                             "start": {
@@ -3918,8 +3918,8 @@
                                         },
                                         "arguments": [],
                                         "range": [
-                                          1922,
-                                          1954
+                                          1966,
+                                          1998
                                         ],
                                         "loc": {
                                           "start": {
@@ -3937,8 +3937,8 @@
                                       "shorthand": false,
                                       "computed": false,
                                       "range": [
-                                        1907,
-                                        1954
+                                        1951,
+                                        1998
                                       ],
                                       "loc": {
                                         "start": {
@@ -3957,8 +3957,8 @@
                                         "type": "Identifier",
                                         "name": "name",
                                         "range": [
-                                          2053,
-                                          2057
+                                          2097,
+                                          2101
                                         ],
                                         "loc": {
                                           "start": {
@@ -3985,8 +3985,8 @@
                                               "object": {
                                                 "type": "ThisExpression",
                                                 "range": [
-                                                  2059,
-                                                  2063
+                                                  2103,
+                                                  2107
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4003,8 +4003,8 @@
                                                 "type": "Identifier",
                                                 "name": "ui",
                                                 "range": [
-                                                  2064,
-                                                  2066
+                                                  2108,
+                                                  2110
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4018,8 +4018,8 @@
                                                 }
                                               },
                                               "range": [
-                                                2059,
-                                                2066
+                                                2103,
+                                                2110
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4036,8 +4036,8 @@
                                               "type": "Identifier",
                                               "name": "resourceName",
                                               "range": [
-                                                2067,
-                                                2079
+                                                2111,
+                                                2123
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4051,8 +4051,8 @@
                                               }
                                             },
                                             "range": [
-                                              2059,
-                                              2079
+                                              2103,
+                                              2123
                                             ],
                                             "loc": {
                                               "start": {
@@ -4069,8 +4069,8 @@
                                             "type": "Identifier",
                                             "name": "val",
                                             "range": [
-                                              2080,
-                                              2083
+                                              2124,
+                                              2127
                                             ],
                                             "loc": {
                                               "start": {
@@ -4084,8 +4084,8 @@
                                             }
                                           },
                                           "range": [
-                                            2059,
-                                            2083
+                                            2103,
+                                            2127
                                           ],
                                           "loc": {
                                             "start": {
@@ -4100,8 +4100,8 @@
                                         },
                                         "arguments": [],
                                         "range": [
-                                          2059,
-                                          2085
+                                          2103,
+                                          2129
                                         ],
                                         "loc": {
                                           "start": {
@@ -4119,8 +4119,8 @@
                                       "shorthand": false,
                                       "computed": false,
                                       "range": [
-                                        2053,
-                                        2085
+                                        2097,
+                                        2129
                                       ],
                                       "loc": {
                                         "start": {
@@ -4139,8 +4139,8 @@
                                         "type": "Identifier",
                                         "name": "description",
                                         "range": [
-                                          2184,
-                                          2195
+                                          2228,
+                                          2239
                                         ],
                                         "loc": {
                                           "start": {
@@ -4167,8 +4167,8 @@
                                               "object": {
                                                 "type": "ThisExpression",
                                                 "range": [
-                                                  2197,
-                                                  2201
+                                                  2241,
+                                                  2245
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4185,8 +4185,8 @@
                                                 "type": "Identifier",
                                                 "name": "ui",
                                                 "range": [
-                                                  2202,
-                                                  2204
+                                                  2246,
+                                                  2248
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4200,8 +4200,8 @@
                                                 }
                                               },
                                               "range": [
-                                                2197,
-                                                2204
+                                                2241,
+                                                2248
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4218,8 +4218,8 @@
                                               "type": "Identifier",
                                               "name": "resourceDescription",
                                               "range": [
-                                                2205,
-                                                2224
+                                                2249,
+                                                2268
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4233,8 +4233,8 @@
                                               }
                                             },
                                             "range": [
-                                              2197,
-                                              2224
+                                              2241,
+                                              2268
                                             ],
                                             "loc": {
                                               "start": {
@@ -4251,8 +4251,8 @@
                                             "type": "Identifier",
                                             "name": "val",
                                             "range": [
-                                              2225,
-                                              2228
+                                              2269,
+                                              2272
                                             ],
                                             "loc": {
                                               "start": {
@@ -4266,8 +4266,8 @@
                                             }
                                           },
                                           "range": [
-                                            2197,
-                                            2228
+                                            2241,
+                                            2272
                                           ],
                                           "loc": {
                                             "start": {
@@ -4282,8 +4282,8 @@
                                         },
                                         "arguments": [],
                                         "range": [
-                                          2197,
-                                          2230
+                                          2241,
+                                          2274
                                         ],
                                         "loc": {
                                           "start": {
@@ -4301,8 +4301,8 @@
                                       "shorthand": false,
                                       "computed": false,
                                       "range": [
-                                        2184,
-                                        2230
+                                        2228,
+                                        2274
                                       ],
                                       "loc": {
                                         "start": {
@@ -4317,8 +4317,8 @@
                                     }
                                   ],
                                   "range": [
-                                    1906,
-                                    2231
+                                    1950,
+                                    2275
                                   ],
                                   "loc": {
                                     "start": {
@@ -4336,8 +4336,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  1898,
-                                  2231
+                                  1942,
+                                  2275
                                 ],
                                 "loc": {
                                   "start": {
@@ -4352,8 +4352,8 @@
                               }
                             ],
                             "range": [
-                              1875,
-                              2232
+                              1919,
+                              2276
                             ],
                             "loc": {
                               "start": {
@@ -4368,8 +4368,8 @@
                           }
                         ],
                         "range": [
-                          1807,
-                          2233
+                          1851,
+                          2277
                         ],
                         "loc": {
                           "start": {
@@ -4383,8 +4383,8 @@
                         }
                       },
                       "range": [
-                        1807,
-                        2234
+                        1851,
+                        2278
                       ],
                       "loc": {
                         "start": {
@@ -4399,8 +4399,8 @@
                     }
                   ],
                   "range": [
-                    1797,
-                    2240
+                    1841,
+                    2284
                   ],
                   "loc": {
                     "start": {
@@ -4416,8 +4416,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1790,
-                  2240
+                  1834,
+                  2284
                 ],
                 "loc": {
                   "start": {
@@ -4433,8 +4433,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1768,
-                2240
+                1812,
+                2284
               ],
               "loc": {
                 "start": {
@@ -4451,8 +4451,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    1526,
-                    1613
+                    1570,
+                    1657
                   ],
                   "loc": {
                     "start": {
@@ -4469,8 +4469,8 @@
                   "type": "Line",
                   "value": " PRIVATE METHODS",
                   "range": [
-                    1614,
-                    1632
+                    1658,
+                    1676
                   ],
                   "loc": {
                     "start": {
@@ -4487,8 +4487,8 @@
                   "type": "Line",
                   "value": "/////////////////////////////////////////////////////////////////////////////////////",
                   "range": [
-                    1633,
-                    1720
+                    1677,
+                    1764
                   ],
                   "loc": {
                     "start": {
@@ -4505,8 +4505,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button save.\n     ",
                   "range": [
-                    1725,
-                    1763
+                    1769,
+                    1807
                   ],
                   "loc": {
                     "start": {
@@ -4525,8 +4525,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button delete.\n     ",
                   "range": [
-                    2246,
-                    2286
+                    2290,
+                    2330
                   ],
                   "loc": {
                     "start": {
@@ -4548,8 +4548,8 @@
                 "type": "Identifier",
                 "name": "_handleClickButtonDelete",
                 "range": [
-                  2291,
-                  2315
+                  2335,
+                  2359
                 ],
                 "loc": {
                   "start": {
@@ -4585,8 +4585,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  2332,
-                                  2337
+                                  2376,
+                                  2381
                                 ],
                                 "loc": {
                                   "start": {
@@ -4603,8 +4603,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  2338,
-                                  2345
+                                  2382,
+                                  2389
                                 ],
                                 "loc": {
                                   "start": {
@@ -4618,8 +4618,8 @@
                                 }
                               },
                               "range": [
-                                2332,
-                                2345
+                                2376,
+                                2389
                               ],
                               "loc": {
                                 "start": {
@@ -4638,8 +4638,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  2346,
-                                  2353
+                                  2390,
+                                  2397
                                 ],
                                 "loc": {
                                   "start": {
@@ -4654,8 +4654,8 @@
                               }
                             ],
                             "range": [
-                              2332,
-                              2354
+                              2376,
+                              2398
                             ],
                             "loc": {
                               "start": {
@@ -4672,8 +4672,8 @@
                             "type": "Identifier",
                             "name": "request",
                             "range": [
-                              2355,
-                              2362
+                              2399,
+                              2406
                             ],
                             "loc": {
                               "start": {
@@ -4687,8 +4687,8 @@
                             }
                           },
                           "range": [
-                            2332,
-                            2362
+                            2376,
+                            2406
                           ],
                           "loc": {
                             "start": {
@@ -4709,8 +4709,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                2363,
-                                2375
+                                2407,
+                                2419
                               ],
                               "loc": {
                                 "start": {
@@ -4727,8 +4727,8 @@
                               "type": "Identifier",
                               "name": "REQUEST__RESOURCE_DELETE",
                               "range": [
-                                2376,
-                                2400
+                                2420,
+                                2444
                               ],
                               "loc": {
                                 "start": {
@@ -4742,8 +4742,8 @@
                               }
                             },
                             "range": [
-                              2363,
-                              2400
+                              2407,
+                              2444
                             ],
                             "loc": {
                               "start": {
@@ -4765,8 +4765,8 @@
                                   "type": "Identifier",
                                   "name": "resource",
                                   "range": [
-                                    2403,
-                                    2411
+                                    2447,
+                                    2455
                                   ],
                                   "loc": {
                                     "start": {
@@ -4785,8 +4785,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      2413,
-                                      2417
+                                      2457,
+                                      2461
                                     ],
                                     "loc": {
                                       "start": {
@@ -4803,8 +4803,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      2418,
-                                      2423
+                                      2462,
+                                      2467
                                     ],
                                     "loc": {
                                       "start": {
@@ -4818,8 +4818,8 @@
                                     }
                                   },
                                   "range": [
-                                    2413,
-                                    2423
+                                    2457,
+                                    2467
                                   ],
                                   "loc": {
                                     "start": {
@@ -4837,8 +4837,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  2403,
-                                  2423
+                                  2447,
+                                  2467
                                 ],
                                 "loc": {
                                   "start": {
@@ -4853,8 +4853,8 @@
                               }
                             ],
                             "range": [
-                              2402,
-                              2424
+                              2446,
+                              2468
                             ],
                             "loc": {
                               "start": {
@@ -4869,8 +4869,8 @@
                           }
                         ],
                         "range": [
-                          2332,
-                          2425
+                          2376,
+                          2469
                         ],
                         "loc": {
                           "start": {
@@ -4884,8 +4884,8 @@
                         }
                       },
                       "range": [
-                        2332,
-                        2426
+                        2376,
+                        2470
                       ],
                       "loc": {
                         "start": {
@@ -4900,8 +4900,8 @@
                     }
                   ],
                   "range": [
-                    2322,
-                    2432
+                    2366,
+                    2476
                   ],
                   "loc": {
                     "start": {
@@ -4917,8 +4917,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  2315,
-                  2432
+                  2359,
+                  2476
                 ],
                 "loc": {
                   "start": {
@@ -4934,8 +4934,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                2291,
-                2432
+                2335,
+                2476
               ],
               "loc": {
                 "start": {
@@ -4952,8 +4952,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button delete.\n     ",
                   "range": [
-                    2246,
-                    2286
+                    2290,
+                    2330
                   ],
                   "loc": {
                     "start": {
@@ -4972,8 +4972,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button download.\n     ",
                   "range": [
-                    2438,
-                    2480
+                    2482,
+                    2524
                   ],
                   "loc": {
                     "start": {
@@ -4995,8 +4995,8 @@
                 "type": "Identifier",
                 "name": "_handleClickDownload",
                 "range": [
-                  2485,
-                  2505
+                  2529,
+                  2549
                 ],
                 "loc": {
                   "start": {
@@ -5032,8 +5032,8 @@
                                 "type": "Identifier",
                                 "name": "Radio",
                                 "range": [
-                                  2522,
-                                  2527
+                                  2566,
+                                  2571
                                 ],
                                 "loc": {
                                   "start": {
@@ -5050,8 +5050,8 @@
                                 "type": "Identifier",
                                 "name": "channel",
                                 "range": [
-                                  2528,
-                                  2535
+                                  2572,
+                                  2579
                                 ],
                                 "loc": {
                                   "start": {
@@ -5065,8 +5065,8 @@
                                 }
                               },
                               "range": [
-                                2522,
-                                2535
+                                2566,
+                                2579
                               ],
                               "loc": {
                                 "start": {
@@ -5085,8 +5085,8 @@
                                 "value": "rodan",
                                 "raw": "'rodan'",
                                 "range": [
-                                  2536,
-                                  2543
+                                  2580,
+                                  2587
                                 ],
                                 "loc": {
                                   "start": {
@@ -5101,8 +5101,8 @@
                               }
                             ],
                             "range": [
-                              2522,
-                              2544
+                              2566,
+                              2588
                             ],
                             "loc": {
                               "start": {
@@ -5119,8 +5119,8 @@
                             "type": "Identifier",
                             "name": "request",
                             "range": [
-                              2545,
-                              2552
+                              2589,
+                              2596
                             ],
                             "loc": {
                               "start": {
@@ -5134,8 +5134,8 @@
                             }
                           },
                           "range": [
-                            2522,
-                            2552
+                            2566,
+                            2596
                           ],
                           "loc": {
                             "start": {
@@ -5156,8 +5156,8 @@
                               "type": "Identifier",
                               "name": "RODAN_EVENTS",
                               "range": [
-                                2553,
-                                2565
+                                2597,
+                                2609
                               ],
                               "loc": {
                                 "start": {
@@ -5174,8 +5174,8 @@
                               "type": "Identifier",
                               "name": "REQUEST__RESOURCE_DOWNLOAD",
                               "range": [
-                                2566,
-                                2592
+                                2610,
+                                2636
                               ],
                               "loc": {
                                 "start": {
@@ -5189,8 +5189,8 @@
                               }
                             },
                             "range": [
-                              2553,
-                              2592
+                              2597,
+                              2636
                             ],
                             "loc": {
                               "start": {
@@ -5212,8 +5212,8 @@
                                   "type": "Identifier",
                                   "name": "resource",
                                   "range": [
-                                    2595,
-                                    2603
+                                    2639,
+                                    2647
                                   ],
                                   "loc": {
                                     "start": {
@@ -5232,8 +5232,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      2605,
-                                      2609
+                                      2649,
+                                      2653
                                     ],
                                     "loc": {
                                       "start": {
@@ -5250,8 +5250,8 @@
                                     "type": "Identifier",
                                     "name": "model",
                                     "range": [
-                                      2610,
-                                      2615
+                                      2654,
+                                      2659
                                     ],
                                     "loc": {
                                       "start": {
@@ -5265,8 +5265,8 @@
                                     }
                                   },
                                   "range": [
-                                    2605,
-                                    2615
+                                    2649,
+                                    2659
                                   ],
                                   "loc": {
                                     "start": {
@@ -5284,8 +5284,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  2595,
-                                  2615
+                                  2639,
+                                  2659
                                 ],
                                 "loc": {
                                   "start": {
@@ -5300,8 +5300,8 @@
                               }
                             ],
                             "range": [
-                              2594,
-                              2616
+                              2638,
+                              2660
                             ],
                             "loc": {
                               "start": {
@@ -5316,8 +5316,8 @@
                           }
                         ],
                         "range": [
-                          2522,
-                          2617
+                          2566,
+                          2661
                         ],
                         "loc": {
                           "start": {
@@ -5331,8 +5331,8 @@
                         }
                       },
                       "range": [
-                        2522,
-                        2618
+                        2566,
+                        2662
                       ],
                       "loc": {
                         "start": {
@@ -5347,8 +5347,8 @@
                     }
                   ],
                   "range": [
-                    2512,
-                    2624
+                    2556,
+                    2668
                   ],
                   "loc": {
                     "start": {
@@ -5364,8 +5364,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  2505,
-                  2624
+                  2549,
+                  2668
                 ],
                 "loc": {
                   "start": {
@@ -5381,8 +5381,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                2485,
-                2624
+                2529,
+                2668
               ],
               "loc": {
                 "start": {
@@ -5399,8 +5399,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button download.\n     ",
                   "range": [
-                    2438,
-                    2480
+                    2482,
+                    2524
                   ],
                   "loc": {
                     "start": {
@@ -5419,8 +5419,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button view.\n     ",
                   "range": [
-                    2630,
-                    2668
+                    2674,
+                    2712
                   ],
                   "loc": {
                     "start": {
@@ -5442,8 +5442,8 @@
                 "type": "Identifier",
                 "name": "_handleClickView",
                 "range": [
-                  2673,
-                  2689
+                  2717,
+                  2733
                 ],
                 "loc": {
                   "start": {
@@ -5474,8 +5474,8 @@
                             "type": "Identifier",
                             "name": "window",
                             "range": [
-                              2706,
-                              2712
+                              2750,
+                              2756
                             ],
                             "loc": {
                               "start": {
@@ -5492,8 +5492,8 @@
                             "type": "Identifier",
                             "name": "open",
                             "range": [
-                              2713,
-                              2717
+                              2757,
+                              2761
                             ],
                             "loc": {
                               "start": {
@@ -5507,8 +5507,8 @@
                             }
                           },
                           "range": [
-                            2706,
-                            2717
+                            2750,
+                            2761
                           ],
                           "loc": {
                             "start": {
@@ -5533,8 +5533,8 @@
                                 "object": {
                                   "type": "ThisExpression",
                                   "range": [
-                                    2718,
-                                    2722
+                                    2762,
+                                    2766
                                   ],
                                   "loc": {
                                     "start": {
@@ -5551,8 +5551,8 @@
                                   "type": "Identifier",
                                   "name": "model",
                                   "range": [
-                                    2723,
-                                    2728
+                                    2767,
+                                    2772
                                   ],
                                   "loc": {
                                     "start": {
@@ -5566,8 +5566,8 @@
                                   }
                                 },
                                 "range": [
-                                  2718,
-                                  2728
+                                  2762,
+                                  2772
                                 ],
                                 "loc": {
                                   "start": {
@@ -5584,8 +5584,8 @@
                                 "type": "Identifier",
                                 "name": "get",
                                 "range": [
-                                  2729,
-                                  2732
+                                  2773,
+                                  2776
                                 ],
                                 "loc": {
                                   "start": {
@@ -5599,8 +5599,8 @@
                                 }
                               },
                               "range": [
-                                2718,
-                                2732
+                                2762,
+                                2776
                               ],
                               "loc": {
                                 "start": {
@@ -5619,8 +5619,8 @@
                                 "value": "viewer_url",
                                 "raw": "'viewer_url'",
                                 "range": [
-                                  2733,
-                                  2745
+                                  2777,
+                                  2789
                                 ],
                                 "loc": {
                                   "start": {
@@ -5635,8 +5635,8 @@
                               }
                             ],
                             "range": [
-                              2718,
-                              2746
+                              2762,
+                              2790
                             ],
                             "loc": {
                               "start": {
@@ -5651,8 +5651,8 @@
                           }
                         ],
                         "range": [
-                          2706,
-                          2747
+                          2750,
+                          2791
                         ],
                         "loc": {
                           "start": {
@@ -5666,8 +5666,8 @@
                         }
                       },
                       "range": [
-                        2706,
-                        2748
+                        2750,
+                        2792
                       ],
                       "loc": {
                         "start": {
@@ -5682,8 +5682,8 @@
                     }
                   ],
                   "range": [
-                    2696,
-                    2754
+                    2740,
+                    2798
                   ],
                   "loc": {
                     "start": {
@@ -5699,8 +5699,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  2689,
-                  2754
+                  2733,
+                  2798
                 ],
                 "loc": {
                   "start": {
@@ -5716,8 +5716,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                2673,
-                2754
+                2717,
+                2798
               ],
               "loc": {
                 "start": {
@@ -5734,8 +5734,8 @@
                   "type": "Block",
                   "value": "*\n     * Handle button view.\n     ",
                   "range": [
-                    2630,
-                    2668
+                    2674,
+                    2712
                   ],
                   "loc": {
                     "start": {
@@ -5753,8 +5753,8 @@
             }
           ],
           "range": [
-            294,
-            2756
+            338,
+            2800
           ],
           "loc": {
             "start": {
@@ -5768,8 +5768,8 @@
           }
         },
         "range": [
-          242,
-          2756
+          286,
+          2800
         ],
         "loc": {
           "start": {
@@ -5786,8 +5786,8 @@
             "type": "Block",
             "value": "*\n * Resource view.\n ",
             "range": [
-              201,
-              226
+              245,
+              270
             ],
             "loc": {
               "start": {
@@ -5804,8 +5804,8 @@
         "trailingComments": []
       },
       "range": [
-        227,
-        2756
+        271,
+        2800
       ],
       "loc": {
         "start": {
@@ -5822,8 +5822,8 @@
           "type": "Block",
           "value": "*\n * Resource view.\n ",
           "range": [
-            201,
-            226
+            245,
+            270
           ],
           "loc": {
             "start": {
@@ -5853,8 +5853,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                2757,
-                2769
+                2801,
+                2813
               ],
               "loc": {
                 "start": {
@@ -5871,8 +5871,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                2770,
-                2779
+                2814,
+                2823
               ],
               "loc": {
                 "start": {
@@ -5886,8 +5886,8 @@
               }
             },
             "range": [
-              2757,
-              2779
+              2801,
+              2823
             ],
             "loc": {
               "start": {
@@ -5904,8 +5904,8 @@
             "type": "Identifier",
             "name": "modelEvents",
             "range": [
-              2780,
-              2791
+              2824,
+              2835
             ],
             "loc": {
               "start": {
@@ -5919,8 +5919,8 @@
             }
           },
           "range": [
-            2757,
-            2791
+            2801,
+            2835
           ],
           "loc": {
             "start": {
@@ -5943,8 +5943,8 @@
                 "value": "all",
                 "raw": "'all'",
                 "range": [
-                  2800,
-                  2805
+                  2844,
+                  2849
                 ],
                 "loc": {
                   "start": {
@@ -5962,8 +5962,8 @@
                 "value": "render",
                 "raw": "'render'",
                 "range": [
-                  2807,
-                  2815
+                  2851,
+                  2859
                 ],
                 "loc": {
                   "start": {
@@ -5981,8 +5981,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                2800,
-                2815
+                2844,
+                2859
               ],
               "loc": {
                 "start": {
@@ -5997,8 +5997,8 @@
             }
           ],
           "range": [
-            2794,
-            2817
+            2838,
+            2861
           ],
           "loc": {
             "start": {
@@ -6012,8 +6012,8 @@
           }
         },
         "range": [
-          2757,
-          2817
+          2801,
+          2861
         ],
         "loc": {
           "start": {
@@ -6027,8 +6027,8 @@
         }
       },
       "range": [
-        2757,
-        2818
+        2801,
+        2862
       ],
       "loc": {
         "start": {
@@ -6056,8 +6056,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                2819,
-                2831
+                2863,
+                2875
               ],
               "loc": {
                 "start": {
@@ -6074,8 +6074,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                2832,
-                2841
+                2876,
+                2885
               ],
               "loc": {
                 "start": {
@@ -6089,8 +6089,8 @@
               }
             },
             "range": [
-              2819,
-              2841
+              2863,
+              2885
             ],
             "loc": {
               "start": {
@@ -6107,8 +6107,8 @@
             "type": "Identifier",
             "name": "ui",
             "range": [
-              2842,
-              2844
+              2886,
+              2888
             ],
             "loc": {
               "start": {
@@ -6122,8 +6122,8 @@
             }
           },
           "range": [
-            2819,
-            2844
+            2863,
+            2888
           ],
           "loc": {
             "start": {
@@ -6145,8 +6145,8 @@
                 "type": "Identifier",
                 "name": "buttonSave",
                 "range": [
-                  2853,
-                  2863
+                  2897,
+                  2907
                 ],
                 "loc": {
                   "start": {
@@ -6164,8 +6164,8 @@
                 "value": "#button-main_resource_individual_save",
                 "raw": "'#button-main_resource_individual_save'",
                 "range": [
-                  2865,
-                  2904
+                  2909,
+                  2948
                 ],
                 "loc": {
                   "start": {
@@ -6183,8 +6183,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                2853,
-                2904
+                2897,
+                2948
               ],
               "loc": {
                 "start": {
@@ -6203,8 +6203,8 @@
                 "type": "Identifier",
                 "name": "buttonDelete",
                 "range": [
-                  2910,
-                  2922
+                  2954,
+                  2966
                 ],
                 "loc": {
                   "start": {
@@ -6222,8 +6222,8 @@
                 "value": "#button-main_resource_individual_delete",
                 "raw": "'#button-main_resource_individual_delete'",
                 "range": [
-                  2924,
-                  2965
+                  2968,
+                  3009
                 ],
                 "loc": {
                   "start": {
@@ -6241,8 +6241,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                2910,
-                2965
+                2954,
+                3009
               ],
               "loc": {
                 "start": {
@@ -6261,8 +6261,8 @@
                 "type": "Identifier",
                 "name": "selectResourceType",
                 "range": [
-                  2971,
-                  2989
+                  3015,
+                  3033
                 ],
                 "loc": {
                   "start": {
@@ -6280,8 +6280,8 @@
                 "value": "#select-resourcetype",
                 "raw": "'#select-resourcetype'",
                 "range": [
-                  2991,
-                  3013
+                  3035,
+                  3057
                 ],
                 "loc": {
                   "start": {
@@ -6299,8 +6299,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                2971,
-                3013
+                3015,
+                3057
               ],
               "loc": {
                 "start": {
@@ -6319,8 +6319,8 @@
                 "type": "Identifier",
                 "name": "resourceName",
                 "range": [
-                  3019,
-                  3031
+                  3063,
+                  3075
                 ],
                 "loc": {
                   "start": {
@@ -6338,8 +6338,8 @@
                 "value": "#text-resource_name",
                 "raw": "'#text-resource_name'",
                 "range": [
-                  3033,
-                  3054
+                  3077,
+                  3098
                 ],
                 "loc": {
                   "start": {
@@ -6357,8 +6357,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3019,
-                3054
+                3063,
+                3098
               ],
               "loc": {
                 "start": {
@@ -6377,8 +6377,8 @@
                 "type": "Identifier",
                 "name": "resourceDescription",
                 "range": [
-                  3060,
-                  3079
+                  3104,
+                  3123
                 ],
                 "loc": {
                   "start": {
@@ -6396,8 +6396,8 @@
                 "value": "#text-resource_description",
                 "raw": "'#text-resource_description'",
                 "range": [
-                  3081,
-                  3109
+                  3125,
+                  3153
                 ],
                 "loc": {
                   "start": {
@@ -6415,8 +6415,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3060,
-                3109
+                3104,
+                3153
               ],
               "loc": {
                 "start": {
@@ -6435,8 +6435,8 @@
                 "type": "Identifier",
                 "name": "buttonDownload",
                 "range": [
-                  3115,
-                  3129
+                  3159,
+                  3173
                 ],
                 "loc": {
                   "start": {
@@ -6454,8 +6454,8 @@
                 "value": "#button-main_resource_individual_download",
                 "raw": "'#button-main_resource_individual_download'",
                 "range": [
-                  3131,
-                  3174
+                  3175,
+                  3218
                 ],
                 "loc": {
                   "start": {
@@ -6473,8 +6473,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3115,
-                3174
+                3159,
+                3218
               ],
               "loc": {
                 "start": {
@@ -6493,8 +6493,8 @@
                 "type": "Identifier",
                 "name": "buttonView",
                 "range": [
-                  3180,
-                  3190
+                  3224,
+                  3234
                 ],
                 "loc": {
                   "start": {
@@ -6512,8 +6512,8 @@
                 "value": "#button-main_resource_individual_view",
                 "raw": "'#button-main_resource_individual_view'",
                 "range": [
-                  3192,
-                  3231
+                  3236,
+                  3275
                 ],
                 "loc": {
                   "start": {
@@ -6531,8 +6531,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3180,
-                3231
+                3224,
+                3275
               ],
               "loc": {
                 "start": {
@@ -6547,8 +6547,8 @@
             }
           ],
           "range": [
-            2847,
-            3233
+            2891,
+            3277
           ],
           "loc": {
             "start": {
@@ -6562,8 +6562,8 @@
           }
         },
         "range": [
-          2819,
-          3233
+          2863,
+          3277
         ],
         "loc": {
           "start": {
@@ -6577,8 +6577,8 @@
         }
       },
       "range": [
-        2819,
-        3234
+        2863,
+        3278
       ],
       "loc": {
         "start": {
@@ -6606,8 +6606,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                3235,
-                3247
+                3279,
+                3291
               ],
               "loc": {
                 "start": {
@@ -6624,8 +6624,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                3248,
-                3257
+                3292,
+                3301
               ],
               "loc": {
                 "start": {
@@ -6639,8 +6639,8 @@
               }
             },
             "range": [
-              3235,
-              3257
+              3279,
+              3301
             ],
             "loc": {
               "start": {
@@ -6657,8 +6657,8 @@
             "type": "Identifier",
             "name": "events",
             "range": [
-              3258,
-              3264
+              3302,
+              3308
             ],
             "loc": {
               "start": {
@@ -6672,8 +6672,8 @@
             }
           },
           "range": [
-            3235,
-            3264
+            3279,
+            3308
           ],
           "loc": {
             "start": {
@@ -6696,8 +6696,8 @@
                 "value": "click @ui.buttonSave",
                 "raw": "'click @ui.buttonSave'",
                 "range": [
-                  3273,
-                  3295
+                  3317,
+                  3339
                 ],
                 "loc": {
                   "start": {
@@ -6715,8 +6715,8 @@
                 "value": "_handleClickButtonSave",
                 "raw": "'_handleClickButtonSave'",
                 "range": [
-                  3297,
-                  3321
+                  3341,
+                  3365
                 ],
                 "loc": {
                   "start": {
@@ -6734,8 +6734,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3273,
-                3321
+                3317,
+                3365
               ],
               "loc": {
                 "start": {
@@ -6755,8 +6755,8 @@
                 "value": "click @ui.buttonDelete",
                 "raw": "'click @ui.buttonDelete'",
                 "range": [
-                  3327,
-                  3351
+                  3371,
+                  3395
                 ],
                 "loc": {
                   "start": {
@@ -6774,8 +6774,8 @@
                 "value": "_handleClickButtonDelete",
                 "raw": "'_handleClickButtonDelete'",
                 "range": [
-                  3353,
-                  3379
+                  3397,
+                  3423
                 ],
                 "loc": {
                   "start": {
@@ -6793,8 +6793,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3327,
-                3379
+                3371,
+                3423
               ],
               "loc": {
                 "start": {
@@ -6814,8 +6814,8 @@
                 "value": "click @ui.buttonDownload",
                 "raw": "'click @ui.buttonDownload'",
                 "range": [
-                  3385,
-                  3411
+                  3429,
+                  3455
                 ],
                 "loc": {
                   "start": {
@@ -6833,8 +6833,8 @@
                 "value": "_handleClickDownload",
                 "raw": "'_handleClickDownload'",
                 "range": [
-                  3413,
-                  3435
+                  3457,
+                  3479
                 ],
                 "loc": {
                   "start": {
@@ -6852,8 +6852,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3385,
-                3435
+                3429,
+                3479
               ],
               "loc": {
                 "start": {
@@ -6873,8 +6873,8 @@
                 "value": "click @ui.buttonView",
                 "raw": "'click @ui.buttonView'",
                 "range": [
-                  3441,
-                  3463
+                  3485,
+                  3507
                 ],
                 "loc": {
                   "start": {
@@ -6892,8 +6892,8 @@
                 "value": "_handleClickView",
                 "raw": "'_handleClickView'",
                 "range": [
-                  3465,
-                  3483
+                  3509,
+                  3527
                 ],
                 "loc": {
                   "start": {
@@ -6911,8 +6911,8 @@
               "shorthand": false,
               "computed": false,
               "range": [
-                3441,
-                3483
+                3485,
+                3527
               ],
               "loc": {
                 "start": {
@@ -6927,8 +6927,8 @@
             }
           ],
           "range": [
-            3267,
-            3485
+            3311,
+            3529
           ],
           "loc": {
             "start": {
@@ -6942,8 +6942,8 @@
           }
         },
         "range": [
-          3235,
-          3485
+          3279,
+          3529
         ],
         "loc": {
           "start": {
@@ -6957,8 +6957,8 @@
         }
       },
       "range": [
-        3235,
-        3486
+        3279,
+        3530
       ],
       "loc": {
         "start": {
@@ -6986,8 +6986,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                3487,
-                3499
+                3531,
+                3543
               ],
               "loc": {
                 "start": {
@@ -7004,8 +7004,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                3500,
-                3509
+                3544,
+                3553
               ],
               "loc": {
                 "start": {
@@ -7019,8 +7019,8 @@
               }
             },
             "range": [
-              3487,
-              3509
+              3531,
+              3553
             ],
             "loc": {
               "start": {
@@ -7037,8 +7037,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              3510,
-              3518
+              3554,
+              3562
             ],
             "loc": {
               "start": {
@@ -7052,8 +7052,8 @@
             }
           },
           "range": [
-            3487,
-            3518
+            3531,
+            3562
           ],
           "loc": {
             "start": {
@@ -7071,8 +7071,8 @@
           "value": "#template-main_resource_individual",
           "raw": "'#template-main_resource_individual'",
           "range": [
-            3521,
-            3557
+            3565,
+            3601
           ],
           "loc": {
             "start": {
@@ -7086,8 +7086,8 @@
           }
         },
         "range": [
-          3487,
-          3557
+          3531,
+          3601
         ],
         "loc": {
           "start": {
@@ -7101,8 +7101,8 @@
         }
       },
       "range": [
-        3487,
-        3558
+        3531,
+        3602
       ],
       "loc": {
         "start": {
@@ -7130,8 +7130,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                3559,
-                3571
+                3603,
+                3615
               ],
               "loc": {
                 "start": {
@@ -7148,8 +7148,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                3572,
-                3581
+                3616,
+                3625
               ],
               "loc": {
                 "start": {
@@ -7163,8 +7163,8 @@
               }
             },
             "range": [
-              3559,
-              3581
+              3603,
+              3625
             ],
             "loc": {
               "start": {
@@ -7181,8 +7181,8 @@
             "type": "Identifier",
             "name": "childView",
             "range": [
-              3582,
-              3591
+              3626,
+              3635
             ],
             "loc": {
               "start": {
@@ -7196,8 +7196,8 @@
             }
           },
           "range": [
-            3559,
-            3591
+            3603,
+            3635
           ],
           "loc": {
             "start": {
@@ -7212,10 +7212,10 @@
         },
         "right": {
           "type": "Identifier",
-          "name": "ViewResourceTypeListItem",
+          "name": "ViewResourceTypeCollectionItem",
           "range": [
-            3594,
-            3618
+            3638,
+            3668
           ],
           "loc": {
             "start": {
@@ -7224,13 +7224,13 @@
             },
             "end": {
               "line": 103,
-              "column": 59
+              "column": 65
             }
           }
         },
         "range": [
-          3559,
-          3618
+          3603,
+          3668
         ],
         "loc": {
           "start": {
@@ -7239,13 +7239,13 @@
           },
           "end": {
             "line": 103,
-            "column": 59
+            "column": 65
           }
         }
       },
       "range": [
-        3559,
-        3619
+        3603,
+        3669
       ],
       "loc": {
         "start": {
@@ -7254,7 +7254,7 @@
         },
         "end": {
           "line": 103,
-          "column": 60
+          "column": 66
         }
       }
     },
@@ -7273,8 +7273,8 @@
               "type": "Identifier",
               "name": "ViewResource",
               "range": [
-                3620,
-                3632
+                3670,
+                3682
               ],
               "loc": {
                 "start": {
@@ -7291,8 +7291,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                3633,
-                3642
+                3683,
+                3692
               ],
               "loc": {
                 "start": {
@@ -7306,8 +7306,8 @@
               }
             },
             "range": [
-              3620,
-              3642
+              3670,
+              3692
             ],
             "loc": {
               "start": {
@@ -7324,8 +7324,8 @@
             "type": "Identifier",
             "name": "childViewContainer",
             "range": [
-              3643,
-              3661
+              3693,
+              3711
             ],
             "loc": {
               "start": {
@@ -7339,8 +7339,8 @@
             }
           },
           "range": [
-            3620,
-            3661
+            3670,
+            3711
           ],
           "loc": {
             "start": {
@@ -7358,8 +7358,8 @@
           "value": "#select-resourcetype",
           "raw": "'#select-resourcetype'",
           "range": [
-            3664,
-            3686
+            3714,
+            3736
           ],
           "loc": {
             "start": {
@@ -7373,8 +7373,8 @@
           }
         },
         "range": [
-          3620,
-          3686
+          3670,
+          3736
         ],
         "loc": {
           "start": {
@@ -7388,8 +7388,8 @@
         }
       },
       "range": [
-        3620,
-        3687
+        3670,
+        3737
       ],
       "loc": {
         "start": {
@@ -7406,7 +7406,7 @@
   "sourceType": "module",
   "range": [
     0,
-    3687
+    3737
   ],
   "loc": {
     "start": {
@@ -7423,8 +7423,8 @@
       "type": "Block",
       "value": "*\n * Resource view.\n ",
       "range": [
-        201,
-        226
+        245,
+        270
       ],
       "loc": {
         "start": {
@@ -7441,8 +7441,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        296,
-        383
+        340,
+        427
       ],
       "loc": {
         "start": {
@@ -7459,8 +7459,8 @@
       "type": "Line",
       "value": " PUBLIC METHODS",
       "range": [
-        384,
-        401
+        428,
+        445
       ],
       "loc": {
         "start": {
@@ -7477,8 +7477,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        402,
-        489
+        446,
+        533
       ],
       "loc": {
         "start": {
@@ -7495,8 +7495,8 @@
       "type": "Block",
       "value": "*\n     * Initializes the instance.\n     ",
       "range": [
-        494,
-        538
+        538,
+        582
       ],
       "loc": {
         "start": {
@@ -7513,8 +7513,8 @@
       "type": "Block",
       "value": "* @ignore ",
       "range": [
-        570,
-        584
+        614,
+        628
       ],
       "loc": {
         "start": {
@@ -7531,8 +7531,8 @@
       "type": "Block",
       "value": "*\n     * Initialize buttons after render.\n     ",
       "range": [
-        928,
-        979
+        972,
+        1023
       ],
       "loc": {
         "start": {
@@ -7549,8 +7549,8 @@
       "type": "Block",
       "value": "*\n     * Destroy callback.\n     ",
       "range": [
-        1428,
-        1464
+        1472,
+        1508
       ],
       "loc": {
         "start": {
@@ -7567,8 +7567,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        1526,
-        1613
+        1570,
+        1657
       ],
       "loc": {
         "start": {
@@ -7585,8 +7585,8 @@
       "type": "Line",
       "value": " PRIVATE METHODS",
       "range": [
-        1614,
-        1632
+        1658,
+        1676
       ],
       "loc": {
         "start": {
@@ -7603,8 +7603,8 @@
       "type": "Line",
       "value": "/////////////////////////////////////////////////////////////////////////////////////",
       "range": [
-        1633,
-        1720
+        1677,
+        1764
       ],
       "loc": {
         "start": {
@@ -7621,8 +7621,8 @@
       "type": "Block",
       "value": "*\n     * Handle button save.\n     ",
       "range": [
-        1725,
-        1763
+        1769,
+        1807
       ],
       "loc": {
         "start": {
@@ -7639,8 +7639,8 @@
       "type": "Block",
       "value": "*\n     * Handle button delete.\n     ",
       "range": [
-        2246,
-        2286
+        2290,
+        2330
       ],
       "loc": {
         "start": {
@@ -7657,8 +7657,8 @@
       "type": "Block",
       "value": "*\n     * Handle button download.\n     ",
       "range": [
-        2438,
-        2480
+        2482,
+        2524
       ],
       "loc": {
         "start": {
@@ -7675,8 +7675,8 @@
       "type": "Block",
       "value": "*\n     * Handle button view.\n     ",
       "range": [
-        2630,
-        2668
+        2674,
+        2712
       ],
       "loc": {
         "start": {

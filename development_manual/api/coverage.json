@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 399,
-  "actualCount": 399,
+  "expectCount": 430,
+  "actualCount": 430,
   "files": {
     "js/Updater/AbstractUpdater.js": {
       "expectCount": 4,
@@ -28,12 +28,12 @@
       "actualCount": 8,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/BaseViewList.js": {
+    "js/Views/Master/Main/BaseViewCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/BaseViewListItem.js": {
+    "js/Views/Master/Main/BaseViewCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -68,6 +68,11 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "js/Controllers/ControllerDownload.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
     "js/Controllers/ControllerModal.js": {
       "expectCount": 2,
       "actualCount": 2,
@@ -83,14 +88,19 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "js/Controllers/ControllerResourceList.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "js/Controllers/ControllerRunJob.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
     "js/Controllers/ControllerServer.js": {
-      "expectCount": 2,
-      "actualCount": 2,
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "js/Controllers/ControllerWorkflow.js": {
@@ -124,8 +134,8 @@
       "undocumentLines": []
     },
     "js/Shared/RODAN_EVENTS.js": {
-      "expectCount": 138,
-      "actualCount": 138,
+      "expectCount": 155,
+      "actualCount": 155,
       "undocumentLines": []
     },
     "js/Shared/Environment.js": {
@@ -133,7 +143,7 @@
       "actualCount": 4,
       "undocumentLines": []
     },
-    "js/Shared/ErrorHandler.js": {
+    "js/Managers/ErrorManager.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -198,7 +208,7 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js": {
+    "js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
@@ -228,7 +238,7 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js": {
+    "js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js": {
       "expectCount": 4,
       "actualCount": 4,
       "undocumentLines": []
@@ -338,32 +348,37 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/InputPort/ViewInputPortList.js": {
+    "js/Views/Master/Error/ViewError.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/InputPort/ViewInputPortCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js": {
+    "js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js": {
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js": {
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Job/List/ViewJobList.js": {
+    "js/Views/Master/Main/Job/Collection/ViewJobCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Job/List/ViewJobListItem.js": {
+    "js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -381,6 +396,11 @@
     "js/Views/Master/Navigation/ViewNavigationNodeProject.js": {
       "expectCount": 3,
       "actualCount": 3,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js": {
+      "expectCount": 2,
+      "actualCount": 2,
       "undocumentLines": []
     },
     "js/Views/Master/Navigation/ViewNavigationNodeResources.js": {
@@ -408,22 +428,22 @@
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js": {
+    "js/Views/Master/Main/OutputPort/ViewOutputPortCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js": {
+    "js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js": {
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js": {
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -433,12 +453,12 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Project/List/ViewProjectList.js": {
+    "js/Views/Master/Main/Project/Collection/ViewProjectCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Project/List/ViewProjectListItem.js": {
+    "js/Views/Master/Main/Project/Collection/ViewProjectCollectionItem.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -448,32 +468,42 @@
       "actualCount": 4,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Resource/List/ViewResourceList.js": {
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js": {
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js": {
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Resource/List/ViewResourceListItem.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js": {
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js": {
+    "js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
@@ -483,17 +513,17 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/RunJob/List/ViewRunJobList.js": {
+    "js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js": {
+    "js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js": {
+    "js/Views/Master/Main/WorkflowJob/ViewSettings.js": {
       "expectCount": 3,
       "actualCount": 3,
       "undocumentLines": []
@@ -503,32 +533,32 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionItem.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js": {
       "expectCount": 2,
       "actualCount": 2,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowList.js": {
+    "js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js": {
-      "expectCount": 2,
-      "actualCount": 2,
-      "undocumentLines": []
-    },
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js": {
+    "js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollectionItem.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []

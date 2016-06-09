@@ -30,15 +30,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/baseviewlist.js~baseviewlist",
-    "class/js/Views/Master/Main/BaseViewList.js~BaseViewList.html",
-    "<span>BaseViewList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/BaseViewList.js</span>",
+    "rodan-client/js/views/master/main/baseviewcollection.js~baseviewcollection",
+    "class/js/Views/Master/Main/BaseViewCollection.js~BaseViewCollection.html",
+    "<span>BaseViewCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/BaseViewCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/baseviewlistitem.js~baseviewlistitem",
-    "class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html",
-    "<span>BaseViewListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/BaseViewListItem.js</span>",
+    "rodan-client/js/views/master/main/baseviewcollectionitem.js~baseviewcollectionitem",
+    "class/js/Views/Master/Main/BaseViewCollectionItem.js~BaseViewCollectionItem.html",
+    "<span>BaseViewCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/BaseViewCollectionItem.js</span>",
     "class"
   ],
   [
@@ -78,6 +78,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "rodan-client/js/controllers/controllerdownload.js~controllerdownload",
+    "class/js/Controllers/ControllerDownload.js~ControllerDownload.html",
+    "<span>ControllerDownload</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerDownload.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/controllers/controllermodal.js~controllermodal",
     "class/js/Controllers/ControllerModal.js~ControllerModal.html",
     "<span>ControllerModal</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerModal.js</span>",
@@ -93,6 +99,12 @@ window.esdocSearchIndex = [
     "rodan-client/js/controllers/controllerresource.js~controllerresource",
     "class/js/Controllers/ControllerResource.js~ControllerResource.html",
     "<span>ControllerResource</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerResource.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/controllers/controllerresourcelist.js~controllerresourcelist",
+    "class/js/Controllers/ControllerResourceList.js~ControllerResourceList.html",
+    "<span>ControllerResourceList</span> <span class=\"search-result-import-path\">rodan-client/js/Controllers/ControllerResourceList.js</span>",
     "class"
   ],
   [
@@ -150,9 +162,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/shared/errorhandler.js~errorhandler",
-    "class/js/Shared/ErrorHandler.js~ErrorHandler.html",
-    "<span>ErrorHandler</span> <span class=\"search-result-import-path\">rodan-client/js/Shared/ErrorHandler.js</span>",
+    "rodan-client/js/managers/errormanager.js~errorhandler",
+    "class/js/Managers/ErrorManager.js~ErrorHandler.html",
+    "<span>ErrorHandler</span> <span class=\"search-result-import-path\">rodan-client/js/Managers/ErrorManager.js</span>",
     "class"
   ],
   [
@@ -228,9 +240,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/layoutviewcontrolports.js~layoutviewcontrolports",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts.html",
-    "<span>LayoutViewControlPorts</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js</span>",
+    "rodan-client/js/views/master/main/workflowjob/layoutviewcontrolports.js~layoutviewcontrolports",
+    "class/js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js~LayoutViewControlPorts.html",
+    "<span>LayoutViewControlPorts</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js</span>",
     "class"
   ],
   [
@@ -264,9 +276,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowbuilder/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment",
-    "class/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html",
-    "<span>LayoutViewResourceAssignment</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js</span>",
+    "rodan-client/js/views/master/main/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment",
+    "class/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html",
+    "<span>LayoutViewResourceAssignment</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js</span>",
     "class"
   ],
   [
@@ -402,39 +414,45 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/inputport/viewinputportlist.js~viewinputportlist",
-    "class/js/Views/Master/Main/InputPort/ViewInputPortList.js~ViewInputPortList.html",
-    "<span>ViewInputPortList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/InputPort/ViewInputPortList.js</span>",
+    "rodan-client/js/views/master/error/viewerror.js~viewerror",
+    "class/js/Views/Master/Error/ViewError.js~ViewError.html",
+    "<span>ViewError</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Error/ViewError.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewinputportlistitem.js~viewinputportlistitem",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js~ViewInputPortListItem.html",
-    "<span>ViewInputPortListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js</span>",
+    "rodan-client/js/views/master/main/inputport/viewinputportcollection.js~viewinputportcollection",
+    "class/js/Views/Master/Main/InputPort/ViewInputPortCollection.js~ViewInputPortCollection.html",
+    "<span>ViewInputPortCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/InputPort/ViewInputPortCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewinputporttypelist.js~viewinputporttypelist",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js~ViewInputPortTypeList.html",
-    "<span>ViewInputPortTypeList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js</span>",
+    "rodan-client/js/views/master/main/inputport/viewinputportcollectionitem.js~viewinputportcollectionitem",
+    "class/js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js~ViewInputPortCollectionItem.html",
+    "<span>ViewInputPortCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewinputporttypelistitem.js~viewinputporttypelistitem",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js~ViewInputPortTypeListItem.html",
-    "<span>ViewInputPortTypeListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js</span>",
+    "rodan-client/js/views/master/main/inputporttype/viewinputporttypecollection.js~viewinputporttypecollection",
+    "class/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js~ViewInputPortTypeCollection.html",
+    "<span>ViewInputPortTypeCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/job/list/viewjoblist.js~viewjoblist",
-    "class/js/Views/Master/Main/Job/List/ViewJobList.js~ViewJobList.html",
-    "<span>ViewJobList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Job/List/ViewJobList.js</span>",
+    "rodan-client/js/views/master/main/inputporttype/viewinputporttypecollectionitem.js~viewinputporttypecollectionitem",
+    "class/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js~ViewInputPortTypeCollectionItem.html",
+    "<span>ViewInputPortTypeCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/job/list/viewjoblistitem.js~viewjoblistitem",
-    "class/js/Views/Master/Main/Job/List/ViewJobListItem.js~ViewJobListItem.html",
-    "<span>ViewJobListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Job/List/ViewJobListItem.js</span>",
+    "rodan-client/js/views/master/main/job/collection/viewjobcollection.js~viewjobcollection",
+    "class/js/Views/Master/Main/Job/Collection/ViewJobCollection.js~ViewJobCollection.html",
+    "<span>ViewJobCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Job/Collection/ViewJobCollection.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/job/collection/viewjobcollectionitem.js~viewjobcollectionitem",
+    "class/js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js~ViewJobCollectionItem.html",
+    "<span>ViewJobCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js</span>",
     "class"
   ],
   [
@@ -453,6 +471,12 @@ window.esdocSearchIndex = [
     "rodan-client/js/views/master/navigation/viewnavigationnodeproject.js~viewnavigationnodeproject",
     "class/js/Views/Master/Navigation/ViewNavigationNodeProject.js~ViewNavigationNodeProject.html",
     "<span>ViewNavigationNodeProject</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Navigation/ViewNavigationNodeProject.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/navigation/viewnavigationnoderesourcelists.js~viewnavigationnoderesourcelists",
+    "class/js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js~ViewNavigationNodeResourceLists.html",
+    "<span>ViewNavigationNodeResourceLists</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js</span>",
     "class"
   ],
   [
@@ -486,27 +510,27 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewoutputportlist.js~viewoutputportlist",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js~ViewOutputPortList.html",
-    "<span>ViewOutputPortList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js</span>",
+    "rodan-client/js/views/master/main/outputport/viewoutputportcollection.js~viewoutputportcollection",
+    "class/js/Views/Master/Main/OutputPort/ViewOutputPortCollection.js~ViewOutputPortCollection.html",
+    "<span>ViewOutputPortCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/OutputPort/ViewOutputPortCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewoutputportlistitem.js~viewoutputportlistitem",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js~ViewOutputPortListItem.html",
-    "<span>ViewOutputPortListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js</span>",
+    "rodan-client/js/views/master/main/outputport/viewoutputportcollectionitem.js~viewoutputportcollectionitem",
+    "class/js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js~ViewOutputPortCollectionItem.html",
+    "<span>ViewOutputPortCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewoutputporttypelist.js~viewoutputporttypelist",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js~ViewOutputPortTypeList.html",
-    "<span>ViewOutputPortTypeList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js</span>",
+    "rodan-client/js/views/master/main/outputporttype/viewoutputporttypecollection.js~viewoutputporttypecollection",
+    "class/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js~ViewOutputPortTypeCollection.html",
+    "<span>ViewOutputPortTypeCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/ports/viewoutputporttypelistitem.js~viewoutputporttypelistitem",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js~ViewOutputPortTypeListItem.html",
-    "<span>ViewOutputPortTypeListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js</span>",
+    "rodan-client/js/views/master/main/outputporttype/viewoutputporttypecollectionitem.js~viewoutputporttypecollectionitem",
+    "class/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js~ViewOutputPortTypeCollectionItem.html",
+    "<span>ViewOutputPortTypeCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js</span>",
     "class"
   ],
   [
@@ -516,15 +540,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/project/list/viewprojectlist.js~viewprojectlist",
-    "class/js/Views/Master/Main/Project/List/ViewProjectList.js~ViewProjectList.html",
-    "<span>ViewProjectList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Project/List/ViewProjectList.js</span>",
+    "rodan-client/js/views/master/main/project/collection/viewprojectcollection.js~viewprojectcollection",
+    "class/js/Views/Master/Main/Project/Collection/ViewProjectCollection.js~ViewProjectCollection.html",
+    "<span>ViewProjectCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Project/Collection/ViewProjectCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/project/list/viewprojectlistitem.js~viewprojectlistitem",
-    "class/js/Views/Master/Main/Project/List/ViewProjectListItem.js~ViewProjectListItem.html",
-    "<span>ViewProjectListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Project/List/ViewProjectListItem.js</span>",
+    "rodan-client/js/views/master/main/project/collection/viewprojectcollectionitem.js~viewprojectcollectionitem",
+    "class/js/Views/Master/Main/Project/Collection/ViewProjectCollectionItem.js~ViewProjectCollectionItem.html",
+    "<span>ViewProjectCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Project/Collection/ViewProjectCollectionItem.js</span>",
     "class"
   ],
   [
@@ -534,39 +558,51 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/list/viewresourcelist.js~viewresourcelist",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html",
-    "<span>ViewResourceList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceList.js</span>",
+    "rodan-client/js/views/master/main/resource/collection/viewresourcecollection.js~viewresourcecollection",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js~ViewResourceCollection.html",
+    "<span>ViewResourceCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/list/viewresourcelistassigned.js~viewresourcelistassigned",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js~ViewResourceListAssigned.html",
-    "<span>ViewResourceListAssigned</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js</span>",
+    "rodan-client/js/views/master/main/resource/collection/viewresourcecollectionitem.js~viewresourcecollectionitem",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem.js~ViewResourceCollectionItem.html",
+    "<span>ViewResourceCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/list/viewresourcelistavailable.js~viewresourcelistavailable",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js~ViewResourceListAvailable.html",
-    "<span>ViewResourceListAvailable</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js</span>",
+    "rodan-client/js/views/master/main/resource/collection/viewresourcecollectionmodal.js~viewresourcecollectionmodal",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal.js~ViewResourceCollectionModal.html",
+    "<span>ViewResourceCollectionModal</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/list/viewresourcelistitem.js~viewresourcelistitem",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceListItem.js~ViewResourceListItem.html",
-    "<span>ViewResourceListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListItem.js</span>",
+    "rodan-client/js/views/master/main/resource/collection/viewresourcecollectionmodalitem.js~viewresourcecollectionmodalitem",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js~ViewResourceCollectionModalItem.html",
+    "<span>ViewResourceCollectionModalItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/list/viewresourcelistitemmodal.js~viewresourcelistitemmodal",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html",
-    "<span>ViewResourceListItemModal</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js</span>",
+    "rodan-client/js/views/master/main/resourcelist/individual/viewresourcelist.js~viewresourcelist",
+    "class/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList.html",
+    "<span>ViewResourceList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/resource/individual/viewresourcetypelistitem.js~viewresourcetypelistitem",
-    "class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html",
-    "<span>ViewResourceTypeListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js</span>",
+    "rodan-client/js/views/master/main/resourcelist/collection/viewresourcelistcollection.js~viewresourcelistcollection",
+    "class/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js~ViewResourceListCollection.html",
+    "<span>ViewResourceListCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/resourcelist/collection/viewresourcelistcollectionitem.js~viewresourcelistcollectionitem",
+    "class/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem.js~ViewResourceListCollectionItem.html",
+    "<span>ViewResourceListCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/resourcetype/viewresourcetypecollectionitem.js~viewresourcetypecollectionitem",
+    "class/js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js~ViewResourceTypeCollectionItem.html",
+    "<span>ViewResourceTypeCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js</span>",
     "class"
   ],
   [
@@ -576,21 +612,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/runjob/list/viewrunjoblist.js~viewrunjoblist",
-    "class/js/Views/Master/Main/RunJob/List/ViewRunJobList.js~ViewRunJobList.html",
-    "<span>ViewRunJobList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/RunJob/List/ViewRunJobList.js</span>",
+    "rodan-client/js/views/master/main/runjob/collection/viewrunjobcollection.js~viewrunjobcollection",
+    "class/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection.js~ViewRunJobCollection.html",
+    "<span>ViewRunJobCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/runjob/list/viewrunjoblistitem.js~viewrunjoblistitem",
-    "class/js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js~ViewRunJobListItem.html",
-    "<span>ViewRunJobListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js</span>",
+    "rodan-client/js/views/master/main/runjob/collection/viewrunjobcollectionitem.js~viewrunjobcollectionitem",
+    "class/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js~ViewRunJobCollectionItem.html",
+    "<span>ViewRunJobCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflowjob/settings/viewsettings.js~viewsettings",
-    "class/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings.html",
-    "<span>ViewSettings</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js</span>",
+    "rodan-client/js/views/master/main/workflowjob/viewsettings.js~viewsettings",
+    "class/js/Views/Master/Main/WorkflowJob/ViewSettings.js~ViewSettings.html",
+    "<span>ViewSettings</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJob/ViewSettings.js</span>",
     "class"
   ],
   [
@@ -600,39 +636,39 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "rodan-client/js/views/master/main/workflow/collection/viewworkflowcollection.js~viewworkflowcollection",
+    "class/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection.js~ViewWorkflowCollection.html",
+    "<span>ViewWorkflowCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/workflow/collection/viewworkflowcollectionimportitem.js~viewworkflowcollectionimportitem",
+    "class/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js~ViewWorkflowCollectionImportItem.html",
+    "<span>ViewWorkflowCollectionImportItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js</span>",
+    "class"
+  ],
+  [
+    "rodan-client/js/views/master/main/workflow/collection/viewworkflowcollectionitem.js~viewworkflowcollectionitem",
+    "class/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionItem.js~ViewWorkflowCollectionItem.html",
+    "<span>ViewWorkflowCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionItem.js</span>",
+    "class"
+  ],
+  [
     "rodan-client/js/views/master/main/workflowjobgroup/viewworkflowjobgroup.js~viewworkflowjobgroup",
     "class/js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js~ViewWorkflowJobGroup.html",
     "<span>ViewWorkflowJobGroup</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflow/list/viewworkflowlist.js~viewworkflowlist",
-    "class/js/Views/Master/Main/Workflow/List/ViewWorkflowList.js~ViewWorkflowList.html",
-    "<span>ViewWorkflowList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/List/ViewWorkflowList.js</span>",
+    "rodan-client/js/views/master/main/workflowrun/collection/viewworkflowruncollection.js~viewworkflowruncollection",
+    "class/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection.js~ViewWorkflowRunCollection.html",
+    "<span>ViewWorkflowRunCollection</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection.js</span>",
     "class"
   ],
   [
-    "rodan-client/js/views/master/main/workflow/list/viewworkflowlistimportitem.js~viewworkflowlistimportitem",
-    "class/js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js~ViewWorkflowListImportItem.html",
-    "<span>ViewWorkflowListImportItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js</span>",
-    "class"
-  ],
-  [
-    "rodan-client/js/views/master/main/workflow/list/viewworkflowlistitem.js~viewworkflowlistitem",
-    "class/js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js~ViewWorkflowListItem.html",
-    "<span>ViewWorkflowListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js</span>",
-    "class"
-  ],
-  [
-    "rodan-client/js/views/master/main/workflowrun/list/viewworkflowrunlist.js~viewworkflowrunlist",
-    "class/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js~ViewWorkflowRunList.html",
-    "<span>ViewWorkflowRunList</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js</span>",
-    "class"
-  ],
-  [
-    "rodan-client/js/views/master/main/workflowrun/list/viewworkflowrunlistitem.js~viewworkflowrunlistitem",
-    "class/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js~ViewWorkflowRunListItem.html",
-    "<span>ViewWorkflowRunListItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js</span>",
+    "rodan-client/js/views/master/main/workflowrun/collection/viewworkflowruncollectionitem.js~viewworkflowruncollectionitem",
+    "class/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollectionItem.js~ViewWorkflowRunCollectionItem.html",
+    "<span>ViewWorkflowRunCollectionItem</span> <span class=\"search-result-import-path\">rodan-client/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollectionItem.js</span>",
     "class"
   ],
   [
@@ -1122,9 +1158,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "js/collections/basecollection.js~basecollection#synclist",
-    "class/js/Collections/BaseCollection.js~BaseCollection.html#instance-method-syncList",
-    "js/Collections/BaseCollection.js~BaseCollection#syncList",
+    "js/collections/basecollection.js~basecollection#synccollection",
+    "class/js/Collections/BaseCollection.js~BaseCollection.html#instance-method-syncCollection",
+    "js/Collections/BaseCollection.js~BaseCollection#syncCollection",
     "method"
   ],
   [
@@ -1404,6 +1440,18 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "js/controllers/controllerdownload.js",
+    "file/js/Controllers/ControllerDownload.js.html",
+    "js/Controllers/ControllerDownload.js",
+    "file"
+  ],
+  [
+    "js/controllers/controllerdownload.js~controllerdownload#initialize",
+    "class/js/Controllers/ControllerDownload.js~ControllerDownload.html#instance-method-initialize",
+    "js/Controllers/ControllerDownload.js~ControllerDownload#initialize",
+    "method"
+  ],
+  [
     "js/controllers/controllermodal.js",
     "file/js/Controllers/ControllerModal.js.html",
     "js/Controllers/ControllerModal.js",
@@ -1434,6 +1482,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "js/controllers/controllerresourcelist.js",
+    "file/js/Controllers/ControllerResourceList.js.html",
+    "js/Controllers/ControllerResourceList.js",
+    "file"
+  ],
+  [
     "js/controllers/controllerrunjob.js",
     "file/js/Controllers/ControllerRunJob.js.html",
     "js/Controllers/ControllerRunJob.js",
@@ -1450,6 +1504,12 @@ window.esdocSearchIndex = [
     "file/js/Controllers/ControllerServer.js.html",
     "js/Controllers/ControllerServer.js",
     "file"
+  ],
+  [
+    "js/controllers/controllerserver.js~controllerserver#ajaxprefilter",
+    "class/js/Controllers/ControllerServer.js~ControllerServer.html#instance-method-ajaxPrefilter",
+    "js/Controllers/ControllerServer.js~ControllerServer#ajaxPrefilter",
+    "method"
   ],
   [
     "js/controllers/controllerserver.js~controllerserver#initialize",
@@ -1498,6 +1558,18 @@ window.esdocSearchIndex = [
     "file/js/Controllers/ControllerWorkflowRun.js.html",
     "js/Controllers/ControllerWorkflowRun.js",
     "file"
+  ],
+  [
+    "js/managers/errormanager.js",
+    "file/js/Managers/ErrorManager.js.html",
+    "js/Managers/ErrorManager.js",
+    "file"
+  ],
+  [
+    "js/managers/errormanager.js~errorhandler#constructor",
+    "class/js/Managers/ErrorManager.js~ErrorHandler.html#instance-constructor-constructor",
+    "js/Managers/ErrorManager.js~ErrorHandler#constructor",
+    "method"
   ],
   [
     "js/managers/radiomanager.js",
@@ -1950,18 +2022,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/shared/errorhandler.js",
-    "file/js/Shared/ErrorHandler.js.html",
-    "js/Shared/ErrorHandler.js",
-    "file"
-  ],
-  [
-    "js/shared/errorhandler.js~errorhandler#initialize",
-    "class/js/Shared/ErrorHandler.js~ErrorHandler.html#instance-method-initialize",
-    "js/Shared/ErrorHandler.js~ErrorHandler#initialize",
-    "method"
-  ],
-  [
     "js/shared/rodan_events.js",
     "file/js/Shared/RODAN_EVENTS.js.html",
     "js/Shared/RODAN_EVENTS.js",
@@ -2043,6 +2103,36 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#event__project_selected_collection",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__PROJECT_SELECTED_COLLECTION",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__PROJECT_SELECTED_COLLECTION",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__resourcelist_created",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__RESOURCELIST_CREATED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__RESOURCELIST_CREATED",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__resourcelist_deleted",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__RESOURCELIST_DELETED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__RESOURCELIST_DELETED",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__resourcelist_saved",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__RESOURCELIST_SAVED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__RESOURCELIST_SAVED",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__resourcelist_selected",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__RESOURCELIST_SELECTED",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__RESOURCELIST_SELECTED",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#event__resourcelist_selected_collection",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-EVENT__RESOURCELIST_SELECTED_COLLECTION",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#EVENT__RESOURCELIST_SELECTED_COLLECTION",
     "member"
   ],
   [
@@ -2286,6 +2376,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/shared/rodan_events.js~rodan_events#request__download_start",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__DOWNLOAD_START",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__DOWNLOAD_START",
+    "member"
+  ],
+  [
     "js/shared/rodan_events.js~rodan_events#request__global_inputporttypes_load",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__GLOBAL_INPUTPORTTYPES_LOAD",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__GLOBAL_INPUTPORTTYPES_LOAD",
@@ -2346,6 +2442,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/shared/rodan_events.js~rodan_events#request__log",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__LOG",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__LOG",
+    "member"
+  ],
+  [
     "js/shared/rodan_events.js~rodan_events#request__mainregion_show_view",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__MAINREGION_SHOW_VIEW",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__MAINREGION_SHOW_VIEW",
@@ -2397,6 +2499,54 @@ window.esdocSearchIndex = [
     "js/shared/rodan_events.js~rodan_events#request__project_set_active",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__PROJECT_SET_ACTIVE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__PROJECT_SET_ACTIVE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelists_load",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELISTS_LOAD",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELISTS_LOAD",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_add_resource",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_ADD_RESOURCE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_ADD_RESOURCE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_create",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_CREATE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_CREATE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_delete",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_DELETE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_DELETE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_download",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_DOWNLOAD",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_DOWNLOAD",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_remove_resource",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_REMOVE_RESOURCE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_REMOVE_RESOURCE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_save",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_SAVE",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_SAVE",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__resourcelist_show_resourceassignment_view",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__RESOURCELIST_SHOW_RESOURCEASSIGNMENT_VIEW",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__RESOURCELIST_SHOW_RESOURCEASSIGNMENT_VIEW",
     "member"
   ],
   [
@@ -2784,6 +2934,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "js/shared/rodan_events.js~rodan_events#request__workflow_export",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOW_EXPORT",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOW_EXPORT",
+    "member"
+  ],
+  [
+    "js/shared/rodan_events.js~rodan_events#request__workflow_import",
+    "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOW_IMPORT",
+    "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOW_IMPORT",
+    "member"
+  ],
+  [
     "js/shared/rodan_events.js~rodan_events#request__workflow_save",
     "class/js/Shared/RODAN_EVENTS.js~RODAN_EVENTS.html#instance-member-REQUEST__WORKFLOW_SAVE",
     "js/Shared/RODAN_EVENTS.js~RODAN_EVENTS#REQUEST__WORKFLOW_SAVE",
@@ -2838,6 +3000,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/views/master/error/viewerror.js",
+    "file/js/Views/Master/Error/ViewError.js.html",
+    "js/Views/Master/Error/ViewError.js",
+    "file"
+  ],
+  [
+    "js/views/master/error/viewerror.js~viewerror#initialize",
+    "class/js/Views/Master/Error/ViewError.js~ViewError.html#instance-method-initialize",
+    "js/Views/Master/Error/ViewError.js~ViewError#initialize",
+    "method"
+  ],
+  [
     "js/views/master/layoutviewmaster.js",
     "file/js/Views/Master/LayoutViewMaster.js.html",
     "js/Views/Master/LayoutViewMaster.js",
@@ -2856,45 +3030,81 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/views/master/main/baseviewlist.js",
-    "file/js/Views/Master/Main/BaseViewList.js.html",
-    "js/Views/Master/Main/BaseViewList.js",
+    "js/views/master/main/baseviewcollection.js",
+    "file/js/Views/Master/Main/BaseViewCollection.js.html",
+    "js/Views/Master/Main/BaseViewCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/baseviewlistitem.js",
-    "file/js/Views/Master/Main/BaseViewListItem.js.html",
-    "js/Views/Master/Main/BaseViewListItem.js",
+    "js/views/master/main/baseviewcollectionitem.js",
+    "file/js/Views/Master/Main/BaseViewCollectionItem.js.html",
+    "js/Views/Master/Main/BaseViewCollectionItem.js",
     "file"
   ],
   [
-    "js/views/master/main/baseviewlistitem.js~baseviewlistitem#onrender",
-    "class/js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem.html#instance-method-onRender",
-    "js/Views/Master/Main/BaseViewListItem.js~BaseViewListItem#onRender",
+    "js/views/master/main/baseviewcollectionitem.js~baseviewcollectionitem#onrender",
+    "class/js/Views/Master/Main/BaseViewCollectionItem.js~BaseViewCollectionItem.html#instance-method-onRender",
+    "js/Views/Master/Main/BaseViewCollectionItem.js~BaseViewCollectionItem#onRender",
     "method"
   ],
   [
-    "js/views/master/main/inputport/viewinputportlist.js",
-    "file/js/Views/Master/Main/InputPort/ViewInputPortList.js.html",
-    "js/Views/Master/Main/InputPort/ViewInputPortList.js",
+    "js/views/master/main/inputport/viewinputportcollection.js",
+    "file/js/Views/Master/Main/InputPort/ViewInputPortCollection.js.html",
+    "js/Views/Master/Main/InputPort/ViewInputPortCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/job/list/viewjoblist.js",
-    "file/js/Views/Master/Main/Job/List/ViewJobList.js.html",
-    "js/Views/Master/Main/Job/List/ViewJobList.js",
+    "js/views/master/main/inputport/viewinputportcollectionitem.js",
+    "file/js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js.html",
+    "js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js",
     "file"
   ],
   [
-    "js/views/master/main/job/list/viewjoblistitem.js",
-    "file/js/Views/Master/Main/Job/List/ViewJobListItem.js.html",
-    "js/Views/Master/Main/Job/List/ViewJobListItem.js",
+    "js/views/master/main/inputport/viewinputportcollectionitem.js~viewinputportcollectionitem#initialize",
+    "class/js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js~ViewInputPortCollectionItem.html#instance-method-initialize",
+    "js/Views/Master/Main/InputPort/ViewInputPortCollectionItem.js~ViewInputPortCollectionItem#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/inputporttype/viewinputporttypecollection.js",
+    "file/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js.html",
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/job/list/viewjoblistitem.js~viewjoblistitem#initialize",
-    "class/js/Views/Master/Main/Job/List/ViewJobListItem.js~ViewJobListItem.html#instance-method-initialize",
-    "js/Views/Master/Main/Job/List/ViewJobListItem.js~ViewJobListItem#initialize",
+    "js/views/master/main/inputporttype/viewinputporttypecollection.js~viewinputporttypecollection#initialize",
+    "class/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js~ViewInputPortTypeCollection.html#instance-method-initialize",
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollection.js~ViewInputPortTypeCollection#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/inputporttype/viewinputporttypecollectionitem.js",
+    "file/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js.html",
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/inputporttype/viewinputporttypecollectionitem.js~viewinputporttypecollectionitem#initialize",
+    "class/js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js~ViewInputPortTypeCollectionItem.html#instance-method-initialize",
+    "js/Views/Master/Main/InputPortType/ViewInputPortTypeCollectionItem.js~ViewInputPortTypeCollectionItem#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/job/collection/viewjobcollection.js",
+    "file/js/Views/Master/Main/Job/Collection/ViewJobCollection.js.html",
+    "js/Views/Master/Main/Job/Collection/ViewJobCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/job/collection/viewjobcollectionitem.js",
+    "file/js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js.html",
+    "js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/job/collection/viewjobcollectionitem.js~viewjobcollectionitem#initialize",
+    "class/js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js~ViewJobCollectionItem.html#instance-method-initialize",
+    "js/Views/Master/Main/Job/Collection/ViewJobCollectionItem.js~ViewJobCollectionItem#initialize",
     "method"
   ],
   [
@@ -2928,15 +3138,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/views/master/main/layoutviewmodel.js~layoutviewmodel#showitem",
-    "class/js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel.html#instance-method-showItem",
-    "js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel#showItem",
+    "js/views/master/main/layoutviewmodel.js~layoutviewmodel#showcollection",
+    "class/js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel.html#instance-method-showCollection",
+    "js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel#showCollection",
     "method"
   ],
   [
-    "js/views/master/main/layoutviewmodel.js~layoutviewmodel#showlist",
-    "class/js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel.html#instance-method-showList",
-    "js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel#showList",
+    "js/views/master/main/layoutviewmodel.js~layoutviewmodel#showitem",
+    "class/js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel.html#instance-method-showItem",
+    "js/Views/Master/Main/LayoutViewModel.js~LayoutViewModel#showItem",
     "method"
   ],
   [
@@ -2952,22 +3162,100 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/views/master/main/outputport/viewoutputportcollection.js",
+    "file/js/Views/Master/Main/OutputPort/ViewOutputPortCollection.js.html",
+    "js/Views/Master/Main/OutputPort/ViewOutputPortCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/outputport/viewoutputportcollectionitem.js",
+    "file/js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js.html",
+    "js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/outputport/viewoutputportcollectionitem.js~viewoutputportcollectionitem#initialize",
+    "class/js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js~ViewOutputPortCollectionItem.html#instance-method-initialize",
+    "js/Views/Master/Main/OutputPort/ViewOutputPortCollectionItem.js~ViewOutputPortCollectionItem#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/outputporttype/viewoutputporttypecollection.js",
+    "file/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js.html",
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/outputporttype/viewoutputporttypecollection.js~viewoutputporttypecollection#initialize",
+    "class/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js~ViewOutputPortTypeCollection.html#instance-method-initialize",
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollection.js~ViewOutputPortTypeCollection#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/outputporttype/viewoutputporttypecollectionitem.js",
+    "file/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js.html",
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/outputporttype/viewoutputporttypecollectionitem.js~viewoutputporttypecollectionitem#initialize",
+    "class/js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js~ViewOutputPortTypeCollectionItem.html#instance-method-initialize",
+    "js/Views/Master/Main/OutputPortType/ViewOutputPortTypeCollectionItem.js~ViewOutputPortTypeCollectionItem#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/project/collection/viewprojectcollection.js",
+    "file/js/Views/Master/Main/Project/Collection/ViewProjectCollection.js.html",
+    "js/Views/Master/Main/Project/Collection/ViewProjectCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/project/collection/viewprojectcollectionitem.js",
+    "file/js/Views/Master/Main/Project/Collection/ViewProjectCollectionItem.js.html",
+    "js/Views/Master/Main/Project/Collection/ViewProjectCollectionItem.js",
+    "file"
+  ],
+  [
     "js/views/master/main/project/individual/viewproject.js",
     "file/js/Views/Master/Main/Project/Individual/ViewProject.js.html",
     "js/Views/Master/Main/Project/Individual/ViewProject.js",
     "file"
   ],
   [
-    "js/views/master/main/project/list/viewprojectlist.js",
-    "file/js/Views/Master/Main/Project/List/ViewProjectList.js.html",
-    "js/Views/Master/Main/Project/List/ViewProjectList.js",
+    "js/views/master/main/resource/collection/viewresourcecollection.js",
+    "file/js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js.html",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/project/list/viewprojectlistitem.js",
-    "file/js/Views/Master/Main/Project/List/ViewProjectListItem.js.html",
-    "js/Views/Master/Main/Project/List/ViewProjectListItem.js",
+    "js/views/master/main/resource/collection/viewresourcecollection.js~viewresourcecollection#onrender",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js~ViewResourceCollection.html#instance-method-onRender",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollection.js~ViewResourceCollection#onRender",
+    "method"
+  ],
+  [
+    "js/views/master/main/resource/collection/viewresourcecollectionitem.js",
+    "file/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem.js.html",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem.js",
     "file"
+  ],
+  [
+    "js/views/master/main/resource/collection/viewresourcecollectionmodal.js",
+    "file/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal.js.html",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/resource/collection/viewresourcecollectionmodalitem.js",
+    "file/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js.html",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/resource/collection/viewresourcecollectionmodalitem.js~viewresourcecollectionmodalitem#initialize",
+    "class/js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js~ViewResourceCollectionModalItem.html#instance-method-initialize",
+    "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem.js~ViewResourceCollectionModalItem#initialize",
+    "method"
   ],
   [
     "js/views/master/main/resource/individual/viewresource.js",
@@ -2994,57 +3282,99 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "js/views/master/main/resource/individual/viewresourcetypelistitem.js",
-    "file/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js.html",
-    "js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js",
+    "js/views/master/main/resourceassignment/layoutviewresourceassignment.js",
+    "file/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js.html",
+    "js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js",
     "file"
   ],
   [
-    "js/views/master/main/resource/individual/viewresourcetypelistitem.js~viewresourcetypelistitem#onrender",
-    "class/js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem.html#instance-method-onRender",
-    "js/Views/Master/Main/Resource/Individual/ViewResourceTypeListItem.js~ViewResourceTypeListItem#onRender",
+    "js/views/master/main/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#initialize",
+    "class/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-initialize",
+    "js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#initialize",
     "method"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelist.js",
-    "file/js/Views/Master/Main/Resource/List/ViewResourceList.js.html",
-    "js/Views/Master/Main/Resource/List/ViewResourceList.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/resource/list/viewresourcelist.js~viewresourcelist#onrender",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList.html#instance-method-onRender",
-    "js/Views/Master/Main/Resource/List/ViewResourceList.js~ViewResourceList#onRender",
+    "js/views/master/main/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#onbeforeshow",
+    "class/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-onBeforeShow",
+    "js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#onBeforeShow",
     "method"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelistassigned.js",
-    "file/js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js.html",
-    "js/Views/Master/Main/Resource/List/ViewResourceListAssigned.js",
+    "js/views/master/main/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#ondestroy",
+    "class/js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-onDestroy",
+    "js/Views/Master/Main/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#onDestroy",
+    "method"
+  ],
+  [
+    "js/views/master/main/resourcelist/collection/viewresourcelistcollection.js",
+    "file/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js.html",
+    "js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelistavailable.js",
-    "file/js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js.html",
-    "js/Views/Master/Main/Resource/List/ViewResourceListAvailable.js",
+    "js/views/master/main/resourcelist/collection/viewresourcelistcollection.js~viewresourcelistcollection#onrender",
+    "class/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js~ViewResourceListCollection.html#instance-method-onRender",
+    "js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollection.js~ViewResourceListCollection#onRender",
+    "method"
+  ],
+  [
+    "js/views/master/main/resourcelist/collection/viewresourcelistcollectionitem.js",
+    "file/js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem.js.html",
+    "js/Views/Master/Main/ResourceList/Collection/ViewResourceListCollectionItem.js",
     "file"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelistitem.js",
-    "file/js/Views/Master/Main/Resource/List/ViewResourceListItem.js.html",
-    "js/Views/Master/Main/Resource/List/ViewResourceListItem.js",
+    "js/views/master/main/resourcelist/individual/viewresourcelist.js",
+    "file/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js.html",
+    "js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js",
     "file"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelistitemmodal.js",
-    "file/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js.html",
-    "js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js",
+    "js/views/master/main/resourcelist/individual/viewresourcelist.js~viewresourcelist#initialize",
+    "class/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList.html#instance-method-initialize",
+    "js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/resourcelist/individual/viewresourcelist.js~viewresourcelist#ondestroy",
+    "class/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList.html#instance-method-onDestroy",
+    "js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList#onDestroy",
+    "method"
+  ],
+  [
+    "js/views/master/main/resourcelist/individual/viewresourcelist.js~viewresourcelist#onrender",
+    "class/js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList.html#instance-method-onRender",
+    "js/Views/Master/Main/ResourceList/Individual/ViewResourceList.js~ViewResourceList#onRender",
+    "method"
+  ],
+  [
+    "js/views/master/main/resourcetype/viewresourcetypecollectionitem.js",
+    "file/js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js.html",
+    "js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js",
     "file"
   ],
   [
-    "js/views/master/main/resource/list/viewresourcelistitemmodal.js~viewresourcelistitemmodal#initialize",
-    "class/js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal.html#instance-method-initialize",
-    "js/Views/Master/Main/Resource/List/ViewResourceListItemModal.js~ViewResourceListItemModal#initialize",
+    "js/views/master/main/resourcetype/viewresourcetypecollectionitem.js~viewresourcetypecollectionitem#onrender",
+    "class/js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js~ViewResourceTypeCollectionItem.html#instance-method-onRender",
+    "js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem.js~ViewResourceTypeCollectionItem#onRender",
+    "method"
+  ],
+  [
+    "js/views/master/main/runjob/collection/viewrunjobcollection.js",
+    "file/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection.js.html",
+    "js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/runjob/collection/viewrunjobcollectionitem.js",
+    "file/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js.html",
+    "js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/runjob/collection/viewrunjobcollectionitem.js~viewrunjobcollectionitem#onbeforerender",
+    "class/js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js~ViewRunJobCollectionItem.html#instance-method-onBeforeRender",
+    "js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem.js~ViewRunJobCollectionItem#onBeforeRender",
     "method"
   ],
   [
@@ -3054,22 +3384,28 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "js/views/master/main/runjob/list/viewrunjoblist.js",
-    "file/js/Views/Master/Main/RunJob/List/ViewRunJobList.js.html",
-    "js/Views/Master/Main/RunJob/List/ViewRunJobList.js",
+    "js/views/master/main/workflow/collection/viewworkflowcollection.js",
+    "file/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection.js.html",
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection.js",
     "file"
   ],
   [
-    "js/views/master/main/runjob/list/viewrunjoblistitem.js",
-    "file/js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js.html",
-    "js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js",
+    "js/views/master/main/workflow/collection/viewworkflowcollectionimportitem.js",
+    "file/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js.html",
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js",
     "file"
   ],
   [
-    "js/views/master/main/runjob/list/viewrunjoblistitem.js~viewrunjoblistitem#onbeforerender",
-    "class/js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js~ViewRunJobListItem.html#instance-method-onBeforeRender",
-    "js/Views/Master/Main/RunJob/List/ViewRunJobListItem.js~ViewRunJobListItem#onBeforeRender",
+    "js/views/master/main/workflow/collection/viewworkflowcollectionimportitem.js~viewworkflowcollectionimportitem#initialize",
+    "class/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js~ViewWorkflowCollectionImportItem.html#instance-method-initialize",
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem.js~ViewWorkflowCollectionImportItem#initialize",
     "method"
+  ],
+  [
+    "js/views/master/main/workflow/collection/viewworkflowcollectionitem.js",
+    "file/js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionItem.js.html",
+    "js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionItem.js",
+    "file"
   ],
   [
     "js/views/master/main/workflow/individual/viewworkflow.js",
@@ -3078,165 +3414,21 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "js/views/master/main/workflow/list/viewworkflowlist.js",
-    "file/js/Views/Master/Main/Workflow/List/ViewWorkflowList.js.html",
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowList.js",
+    "js/views/master/main/workflowjob/layoutviewcontrolports.js",
+    "file/js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js.html",
+    "js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js",
     "file"
   ],
   [
-    "js/views/master/main/workflow/list/viewworkflowlistimportitem.js",
-    "file/js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js.html",
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflow/list/viewworkflowlistimportitem.js~viewworkflowlistimportitem#initialize",
-    "class/js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js~ViewWorkflowListImportItem.html#instance-method-initialize",
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowListImportItem.js~ViewWorkflowListImportItem#initialize",
+    "js/views/master/main/workflowjob/layoutviewcontrolports.js~layoutviewcontrolports#initialize",
+    "class/js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js~LayoutViewControlPorts.html#instance-method-initialize",
+    "js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js~LayoutViewControlPorts#initialize",
     "method"
   ],
   [
-    "js/views/master/main/workflow/list/viewworkflowlistitem.js",
-    "file/js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js.html",
-    "js/Views/Master/Main/Workflow/List/ViewWorkflowListItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowbuilder/resourceassignment/layoutviewresourceassignment.js",
-    "file/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js.html",
-    "js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowbuilder/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#initialize",
-    "class/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowbuilder/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#onbeforeshow",
-    "class/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-onBeforeShow",
-    "js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#onBeforeShow",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowbuilder/resourceassignment/layoutviewresourceassignment.js~layoutviewresourceassignment#ondestroy",
-    "class/js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment.html#instance-method-onDestroy",
-    "js/Views/Master/Main/WorkflowBuilder/ResourceAssignment/LayoutViewResourceAssignment.js~LayoutViewResourceAssignment#onDestroy",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/layoutviewcontrolports.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/layoutviewcontrolports.js~layoutviewcontrolports#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/layoutviewcontrolports.js~layoutviewcontrolports#onbeforeshow",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts.html#instance-method-onBeforeShow",
-    "js/Views/Master/Main/WorkflowJob/Ports/LayoutViewControlPorts.js~LayoutViewControlPorts#onBeforeShow",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputportlistitem.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputportlistitem.js~viewinputportlistitem#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js~ViewInputPortListItem.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortListItem.js~ViewInputPortListItem#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputporttypelist.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputporttypelist.js~viewinputporttypelist#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js~ViewInputPortTypeList.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeList.js~ViewInputPortTypeList#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputporttypelistitem.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewinputporttypelistitem.js~viewinputporttypelistitem#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js~ViewInputPortTypeListItem.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewInputPortTypeListItem.js~ViewInputPortTypeListItem#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputportlist.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortList.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputportlistitem.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputportlistitem.js~viewoutputportlistitem#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js~ViewOutputPortListItem.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortListItem.js~ViewOutputPortListItem#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputporttypelist.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputporttypelist.js~viewoutputporttypelist#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js~ViewOutputPortTypeList.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeList.js~ViewOutputPortTypeList#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputporttypelistitem.js",
-    "file/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js.html",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/ports/viewoutputporttypelistitem.js~viewoutputporttypelistitem#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js~ViewOutputPortTypeListItem.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Ports/ViewOutputPortTypeListItem.js~ViewOutputPortTypeListItem#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/settings/viewsettings.js",
-    "file/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js.html",
-    "js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowjob/settings/viewsettings.js~viewsettings#initialize",
-    "class/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings.html#instance-method-initialize",
-    "js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings#initialize",
-    "method"
-  ],
-  [
-    "js/views/master/main/workflowjob/settings/viewsettings.js~viewsettings#onrender",
-    "class/js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings.html#instance-method-onRender",
-    "js/Views/Master/Main/WorkflowJob/Settings/ViewSettings.js~ViewSettings#onRender",
+    "js/views/master/main/workflowjob/layoutviewcontrolports.js~layoutviewcontrolports#onbeforeshow",
+    "class/js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js~LayoutViewControlPorts.html#instance-method-onBeforeShow",
+    "js/Views/Master/Main/WorkflowJob/LayoutViewControlPorts.js~LayoutViewControlPorts#onBeforeShow",
     "method"
   ],
   [
@@ -3252,6 +3444,24 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "js/views/master/main/workflowjob/viewsettings.js",
+    "file/js/Views/Master/Main/WorkflowJob/ViewSettings.js.html",
+    "js/Views/Master/Main/WorkflowJob/ViewSettings.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/workflowjob/viewsettings.js~viewsettings#initialize",
+    "class/js/Views/Master/Main/WorkflowJob/ViewSettings.js~ViewSettings.html#instance-method-initialize",
+    "js/Views/Master/Main/WorkflowJob/ViewSettings.js~ViewSettings#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/main/workflowjob/viewsettings.js~viewsettings#onrender",
+    "class/js/Views/Master/Main/WorkflowJob/ViewSettings.js~ViewSettings.html#instance-method-onRender",
+    "js/Views/Master/Main/WorkflowJob/ViewSettings.js~ViewSettings#onRender",
+    "method"
+  ],
+  [
     "js/views/master/main/workflowjobgroup/viewworkflowjobgroup.js",
     "file/js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js.html",
     "js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js",
@@ -3262,6 +3472,18 @@ window.esdocSearchIndex = [
     "class/js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js~ViewWorkflowJobGroup.html#instance-method-initialize",
     "js/Views/Master/Main/WorkflowJobGroup/ViewWorkflowJobGroup.js~ViewWorkflowJobGroup#initialize",
     "method"
+  ],
+  [
+    "js/views/master/main/workflowrun/collection/viewworkflowruncollection.js",
+    "file/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection.js.html",
+    "js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection.js",
+    "file"
+  ],
+  [
+    "js/views/master/main/workflowrun/collection/viewworkflowruncollectionitem.js",
+    "file/js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollectionItem.js.html",
+    "js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollectionItem.js",
+    "file"
   ],
   [
     "js/views/master/main/workflowrun/individual/layoutviewindividualworkflowrun.js",
@@ -3280,18 +3502,6 @@ window.esdocSearchIndex = [
     "class/js/Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun.js~LayoutViewIndividualWorkflowRun.html#instance-method-onRender",
     "js/Views/Master/Main/WorkflowRun/Individual/LayoutViewIndividualWorkflowRun.js~LayoutViewIndividualWorkflowRun#onRender",
     "method"
-  ],
-  [
-    "js/views/master/main/workflowrun/list/viewworkflowrunlist.js",
-    "file/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js.html",
-    "js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunList.js",
-    "file"
-  ],
-  [
-    "js/views/master/main/workflowrun/list/viewworkflowrunlistitem.js",
-    "file/js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js.html",
-    "js/Views/Master/Main/WorkflowRun/List/ViewWorkflowRunListItem.js",
-    "file"
   ],
   [
     "js/views/master/navigation/events.js",
@@ -3345,6 +3555,18 @@ window.esdocSearchIndex = [
     "js/views/master/navigation/viewnavigationnodeproject.js~viewnavigationnodeproject#initialize",
     "class/js/Views/Master/Navigation/ViewNavigationNodeProject.js~ViewNavigationNodeProject.html#instance-method-initialize",
     "js/Views/Master/Navigation/ViewNavigationNodeProject.js~ViewNavigationNodeProject#initialize",
+    "method"
+  ],
+  [
+    "js/views/master/navigation/viewnavigationnoderesourcelists.js",
+    "file/js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js.html",
+    "js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js",
+    "file"
+  ],
+  [
+    "js/views/master/navigation/viewnavigationnoderesourcelists.js~viewnavigationnoderesourcelists#initialize",
+    "class/js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js~ViewNavigationNodeResourceLists.html#instance-method-initialize",
+    "js/Views/Master/Navigation/ViewNavigationNodeResourceLists.js~ViewNavigationNodeResourceLists#initialize",
     "method"
   ],
   [

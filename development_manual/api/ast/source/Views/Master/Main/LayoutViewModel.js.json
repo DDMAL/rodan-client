@@ -265,10 +265,10 @@
                                 "type": "Property",
                                 "key": {
                                   "type": "Identifier",
-                                  "name": "regionList",
+                                  "name": "regionCollection",
                                   "range": [
                                     698,
-                                    708
+                                    714
                                   ],
                                   "loc": {
                                     "start": {
@@ -277,26 +277,26 @@
                                     },
                                     "end": {
                                       "line": 20,
-                                      "column": 22
+                                      "column": 28
                                     }
                                   }
                                 },
                                 "value": {
                                   "type": "Literal",
-                                  "value": "#region-main_layoutview_model_list",
-                                  "raw": "'#region-main_layoutview_model_list'",
+                                  "value": "#region-main_layoutview_model_collection",
+                                  "raw": "'#region-main_layoutview_model_collection'",
                                   "range": [
-                                    710,
-                                    746
+                                    716,
+                                    758
                                   ],
                                   "loc": {
                                     "start": {
                                       "line": 20,
-                                      "column": 24
+                                      "column": 30
                                     },
                                     "end": {
                                       "line": 20,
-                                      "column": 60
+                                      "column": 72
                                     }
                                   }
                                 },
@@ -306,7 +306,7 @@
                                 "computed": false,
                                 "range": [
                                   698,
-                                  746
+                                  758
                                 ],
                                 "loc": {
                                   "start": {
@@ -315,7 +315,7 @@
                                   },
                                   "end": {
                                     "line": 20,
-                                    "column": 60
+                                    "column": 72
                                   }
                                 }
                               },
@@ -325,8 +325,8 @@
                                   "type": "Identifier",
                                   "name": "regionItem",
                                   "range": [
-                                    761,
-                                    771
+                                    773,
+                                    783
                                   ],
                                   "loc": {
                                     "start": {
@@ -344,8 +344,8 @@
                                   "value": "#region-main_layoutview_model_item",
                                   "raw": "'#region-main_layoutview_model_item'",
                                   "range": [
-                                    773,
-                                    809
+                                    785,
+                                    821
                                   ],
                                   "loc": {
                                     "start": {
@@ -363,8 +363,8 @@
                                 "shorthand": false,
                                 "computed": false,
                                 "range": [
-                                  761,
-                                  809
+                                  773,
+                                  821
                                 ],
                                 "loc": {
                                   "start": {
@@ -380,7 +380,7 @@
                             ],
                             "range": [
                               683,
-                              820
+                              832
                             ],
                             "loc": {
                               "start": {
@@ -396,7 +396,7 @@
                         ],
                         "range": [
                           667,
-                          821
+                          833
                         ],
                         "loc": {
                           "start": {
@@ -411,7 +411,7 @@
                       },
                       "range": [
                         667,
-                        822
+                        834
                       ],
                       "loc": {
                         "start": {
@@ -427,7 +427,7 @@
                   ],
                   "range": [
                     656,
-                    829
+                    841
                   ],
                   "loc": {
                     "start": {
@@ -444,7 +444,7 @@
                 "expression": false,
                 "range": [
                   648,
-                  829
+                  841
                 ],
                 "loc": {
                   "start": {
@@ -461,7 +461,7 @@
               "computed": false,
               "range": [
                 638,
-                829
+                841
               ],
               "loc": {
                 "start": {
@@ -550,10 +550,10 @@
               "trailingComments": [
                 {
                   "type": "Block",
-                  "value": "*\r\n     * Show a list view.\r\n     *\r\n     * @param {Marionette.View} view list view to show\r\n     ",
+                  "value": "*\r\n     * Show a Collection view.\r\n     *\r\n     * @param {Marionette.View} view Collection view to show\r\n     ",
                   "range": [
-                    837,
-                    939
+                    849,
+                    963
                   ],
                   "loc": {
                     "start": {
@@ -573,10 +573,10 @@
               "type": "MethodDefinition",
               "key": {
                 "type": "Identifier",
-                "name": "showList",
+                "name": "showCollection",
                 "range": [
-                  945,
-                  953
+                  969,
+                  983
                 ],
                 "loc": {
                   "start": {
@@ -585,7 +585,7 @@
                   },
                   "end": {
                     "line": 30,
-                    "column": 12
+                    "column": 18
                   }
                 }
               },
@@ -597,17 +597,17 @@
                     "type": "Identifier",
                     "name": "view",
                     "range": [
-                      954,
-                      958
+                      984,
+                      988
                     ],
                     "loc": {
                       "start": {
                         "line": 30,
-                        "column": 13
+                        "column": 19
                       },
                       "end": {
                         "line": 30,
-                        "column": 17
+                        "column": 23
                       }
                     }
                   }
@@ -628,8 +628,8 @@
                             "object": {
                               "type": "ThisExpression",
                               "range": [
-                                976,
-                                980
+                                1006,
+                                1010
                               ],
                               "loc": {
                                 "start": {
@@ -644,10 +644,10 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "name": "regionList",
+                              "name": "regionCollection",
                               "range": [
-                                981,
-                                991
+                                1011,
+                                1027
                               ],
                               "loc": {
                                 "start": {
@@ -656,13 +656,13 @@
                                 },
                                 "end": {
                                   "line": 32,
-                                  "column": 23
+                                  "column": 29
                                 }
                               }
                             },
                             "range": [
-                              976,
-                              991
+                              1006,
+                              1027
                             ],
                             "loc": {
                               "start": {
@@ -671,7 +671,7 @@
                               },
                               "end": {
                                 "line": 32,
-                                "column": 23
+                                "column": 29
                               }
                             }
                           },
@@ -679,23 +679,23 @@
                             "type": "Identifier",
                             "name": "show",
                             "range": [
-                              992,
-                              996
+                              1028,
+                              1032
                             ],
                             "loc": {
                               "start": {
                                 "line": 32,
-                                "column": 24
+                                "column": 30
                               },
                               "end": {
                                 "line": 32,
-                                "column": 28
+                                "column": 34
                               }
                             }
                           },
                           "range": [
-                            976,
-                            996
+                            1006,
+                            1032
                           ],
                           "loc": {
                             "start": {
@@ -704,7 +704,7 @@
                             },
                             "end": {
                               "line": 32,
-                              "column": 28
+                              "column": 34
                             }
                           }
                         },
@@ -713,24 +713,24 @@
                             "type": "Identifier",
                             "name": "view",
                             "range": [
-                              997,
-                              1001
+                              1033,
+                              1037
                             ],
                             "loc": {
                               "start": {
                                 "line": 32,
-                                "column": 29
+                                "column": 35
                               },
                               "end": {
                                 "line": 32,
-                                "column": 33
+                                "column": 39
                               }
                             }
                           }
                         ],
                         "range": [
-                          976,
-                          1002
+                          1006,
+                          1038
                         ],
                         "loc": {
                           "start": {
@@ -739,13 +739,13 @@
                           },
                           "end": {
                             "line": 32,
-                            "column": 34
+                            "column": 40
                           }
                         }
                       },
                       "range": [
-                        976,
-                        1003
+                        1006,
+                        1039
                       ],
                       "loc": {
                         "start": {
@@ -754,14 +754,14 @@
                         },
                         "end": {
                           "line": 32,
-                          "column": 35
+                          "column": 41
                         }
                       }
                     }
                   ],
                   "range": [
-                    965,
-                    1010
+                    995,
+                    1046
                   ],
                   "loc": {
                     "start": {
@@ -777,13 +777,13 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  953,
-                  1010
+                  983,
+                  1046
                 ],
                 "loc": {
                   "start": {
                     "line": 30,
-                    "column": 12
+                    "column": 18
                   },
                   "end": {
                     "line": 33,
@@ -794,8 +794,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                945,
-                1010
+                969,
+                1046
               ],
               "loc": {
                 "start": {
@@ -810,10 +810,10 @@
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\r\n     * Show a list view.\r\n     *\r\n     * @param {Marionette.View} view list view to show\r\n     ",
+                  "value": "*\r\n     * Show a Collection view.\r\n     *\r\n     * @param {Marionette.View} view Collection view to show\r\n     ",
                   "range": [
-                    837,
-                    939
+                    849,
+                    963
                   ],
                   "loc": {
                     "start": {
@@ -832,8 +832,8 @@
                   "type": "Block",
                   "value": "*\r\n     * Show an item view.\r\n     *\r\n     * @param {Marionette.View} view item view to show\r\n     ",
                   "range": [
-                    1018,
-                    1121
+                    1054,
+                    1157
                   ],
                   "loc": {
                     "start": {
@@ -855,8 +855,8 @@
                 "type": "Identifier",
                 "name": "showItem",
                 "range": [
-                  1127,
-                  1135
+                  1163,
+                  1171
                 ],
                 "loc": {
                   "start": {
@@ -877,8 +877,8 @@
                     "type": "Identifier",
                     "name": "view",
                     "range": [
-                      1136,
-                      1140
+                      1172,
+                      1176
                     ],
                     "loc": {
                       "start": {
@@ -908,8 +908,8 @@
                             "object": {
                               "type": "ThisExpression",
                               "range": [
-                                1158,
-                                1162
+                                1194,
+                                1198
                               ],
                               "loc": {
                                 "start": {
@@ -926,8 +926,8 @@
                               "type": "Identifier",
                               "name": "regionItem",
                               "range": [
-                                1163,
-                                1173
+                                1199,
+                                1209
                               ],
                               "loc": {
                                 "start": {
@@ -941,8 +941,8 @@
                               }
                             },
                             "range": [
-                              1158,
-                              1173
+                              1194,
+                              1209
                             ],
                             "loc": {
                               "start": {
@@ -959,8 +959,8 @@
                             "type": "Identifier",
                             "name": "show",
                             "range": [
-                              1174,
-                              1178
+                              1210,
+                              1214
                             ],
                             "loc": {
                               "start": {
@@ -974,8 +974,8 @@
                             }
                           },
                           "range": [
-                            1158,
-                            1178
+                            1194,
+                            1214
                           ],
                           "loc": {
                             "start": {
@@ -993,8 +993,8 @@
                             "type": "Identifier",
                             "name": "view",
                             "range": [
-                              1179,
-                              1183
+                              1215,
+                              1219
                             ],
                             "loc": {
                               "start": {
@@ -1009,8 +1009,8 @@
                           }
                         ],
                         "range": [
-                          1158,
-                          1184
+                          1194,
+                          1220
                         ],
                         "loc": {
                           "start": {
@@ -1024,8 +1024,8 @@
                         }
                       },
                       "range": [
-                        1158,
-                        1185
+                        1194,
+                        1221
                       ],
                       "loc": {
                         "start": {
@@ -1040,8 +1040,8 @@
                     }
                   ],
                   "range": [
-                    1147,
-                    1192
+                    1183,
+                    1228
                   ],
                   "loc": {
                     "start": {
@@ -1057,8 +1057,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1135,
-                  1192
+                  1171,
+                  1228
                 ],
                 "loc": {
                   "start": {
@@ -1074,8 +1074,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1127,
-                1192
+                1163,
+                1228
               ],
               "loc": {
                 "start": {
@@ -1092,8 +1092,8 @@
                   "type": "Block",
                   "value": "*\r\n     * Show an item view.\r\n     *\r\n     * @param {Marionette.View} view item view to show\r\n     ",
                   "range": [
-                    1018,
-                    1121
+                    1054,
+                    1157
                   ],
                   "loc": {
                     "start": {
@@ -1112,8 +1112,8 @@
                   "type": "Block",
                   "value": "*\r\n     * Clears item view.\r\n     ",
                   "range": [
-                    1200,
-                    1238
+                    1236,
+                    1274
                   ],
                   "loc": {
                     "start": {
@@ -1135,8 +1135,8 @@
                 "type": "Identifier",
                 "name": "clearItemView",
                 "range": [
-                  1244,
-                  1257
+                  1280,
+                  1293
                 ],
                 "loc": {
                   "start": {
@@ -1169,8 +1169,8 @@
                             "object": {
                               "type": "ThisExpression",
                               "range": [
-                                1276,
-                                1280
+                                1312,
+                                1316
                               ],
                               "loc": {
                                 "start": {
@@ -1187,8 +1187,8 @@
                               "type": "Identifier",
                               "name": "regionItem",
                               "range": [
-                                1281,
-                                1291
+                                1317,
+                                1327
                               ],
                               "loc": {
                                 "start": {
@@ -1202,8 +1202,8 @@
                               }
                             },
                             "range": [
-                              1276,
-                              1291
+                              1312,
+                              1327
                             ],
                             "loc": {
                               "start": {
@@ -1220,8 +1220,8 @@
                             "type": "Identifier",
                             "name": "empty",
                             "range": [
-                              1292,
-                              1297
+                              1328,
+                              1333
                             ],
                             "loc": {
                               "start": {
@@ -1235,8 +1235,8 @@
                             }
                           },
                           "range": [
-                            1276,
-                            1297
+                            1312,
+                            1333
                           ],
                           "loc": {
                             "start": {
@@ -1251,8 +1251,8 @@
                         },
                         "arguments": [],
                         "range": [
-                          1276,
-                          1299
+                          1312,
+                          1335
                         ],
                         "loc": {
                           "start": {
@@ -1266,8 +1266,8 @@
                         }
                       },
                       "range": [
-                        1276,
-                        1300
+                        1312,
+                        1336
                       ],
                       "loc": {
                         "start": {
@@ -1282,8 +1282,8 @@
                     }
                   ],
                   "range": [
-                    1265,
-                    1307
+                    1301,
+                    1343
                   ],
                   "loc": {
                     "start": {
@@ -1299,8 +1299,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1257,
-                  1307
+                  1293,
+                  1343
                 ],
                 "loc": {
                   "start": {
@@ -1316,8 +1316,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1244,
-                1307
+                1280,
+                1343
               ],
               "loc": {
                 "start": {
@@ -1334,8 +1334,8 @@
                   "type": "Block",
                   "value": "*\r\n     * Clears item view.\r\n     ",
                   "range": [
-                    1200,
-                    1238
+                    1236,
+                    1274
                   ],
                   "loc": {
                     "start": {
@@ -1354,7 +1354,7 @@
           ],
           "range": [
             382,
-            1310
+            1346
           ],
           "loc": {
             "start": {
@@ -1369,7 +1369,7 @@
         },
         "range": [
           329,
-          1310
+          1346
         ],
         "loc": {
           "start": {
@@ -1405,7 +1405,7 @@
       },
       "range": [
         314,
-        1310
+        1346
       ],
       "loc": {
         "start": {
@@ -1453,8 +1453,8 @@
               "type": "Identifier",
               "name": "LayoutViewModel",
               "range": [
-                1312,
-                1327
+                1348,
+                1363
               ],
               "loc": {
                 "start": {
@@ -1471,8 +1471,8 @@
               "type": "Identifier",
               "name": "prototype",
               "range": [
-                1328,
-                1337
+                1364,
+                1373
               ],
               "loc": {
                 "start": {
@@ -1486,8 +1486,8 @@
               }
             },
             "range": [
-              1312,
-              1337
+              1348,
+              1373
             ],
             "loc": {
               "start": {
@@ -1504,8 +1504,8 @@
             "type": "Identifier",
             "name": "template",
             "range": [
-              1338,
-              1346
+              1374,
+              1382
             ],
             "loc": {
               "start": {
@@ -1519,8 +1519,8 @@
             }
           },
           "range": [
-            1312,
-            1346
+            1348,
+            1382
           ],
           "loc": {
             "start": {
@@ -1538,8 +1538,8 @@
           "value": "#template-main_layoutview_model",
           "raw": "'#template-main_layoutview_model'",
           "range": [
-            1349,
-            1382
+            1385,
+            1418
           ],
           "loc": {
             "start": {
@@ -1553,8 +1553,8 @@
           }
         },
         "range": [
-          1312,
-          1382
+          1348,
+          1418
         ],
         "loc": {
           "start": {
@@ -1568,8 +1568,8 @@
         }
       },
       "range": [
-        1312,
-        1383
+        1348,
+        1419
       ],
       "loc": {
         "start": {
@@ -1586,7 +1586,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1383
+    1419
   ],
   "loc": {
     "start": {
@@ -1691,10 +1691,10 @@
     },
     {
       "type": "Block",
-      "value": "*\r\n     * Show a list view.\r\n     *\r\n     * @param {Marionette.View} view list view to show\r\n     ",
+      "value": "*\r\n     * Show a Collection view.\r\n     *\r\n     * @param {Marionette.View} view Collection view to show\r\n     ",
       "range": [
-        837,
-        939
+        849,
+        963
       ],
       "loc": {
         "start": {
@@ -1711,8 +1711,8 @@
       "type": "Block",
       "value": "*\r\n     * Show an item view.\r\n     *\r\n     * @param {Marionette.View} view item view to show\r\n     ",
       "range": [
-        1018,
-        1121
+        1054,
+        1157
       ],
       "loc": {
         "start": {
@@ -1729,8 +1729,8 @@
       "type": "Block",
       "value": "*\r\n     * Clears item view.\r\n     ",
       "range": [
-        1200,
-        1238
+        1236,
+        1274
       ],
       "loc": {
         "start": {

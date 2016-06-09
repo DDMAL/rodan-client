@@ -1,0 +1,766 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "ViewResourceCollection",
+            "range": [
+              7,
+              29
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 29
+              }
+            }
+          },
+          "range": [
+            7,
+            29
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 29
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "js/Views/Master/Main/Resource/Collection/ViewResourceCollection",
+        "raw": "'js/Views/Master/Main/Resource/Collection/ViewResourceCollection'",
+        "range": [
+          35,
+          100
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 35
+          },
+          "end": {
+            "line": 1,
+            "column": 100
+          }
+        }
+      },
+      "range": [
+        0,
+        101
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 101
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "ViewResourceCollectionModalItem",
+            "range": [
+              109,
+              140
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 38
+              }
+            }
+          },
+          "range": [
+            109,
+            140
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 38
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem",
+        "raw": "'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem'",
+        "range": [
+          146,
+          220
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 44
+          },
+          "end": {
+            "line": 2,
+            "column": 118
+          }
+        }
+      },
+      "range": [
+        102,
+        221
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 119
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * View for Resource Collection in modal view.\n ",
+          "range": [
+            223,
+            277
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "ViewResourceCollectionModal",
+          "range": [
+            299,
+            326
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 21
+            },
+            "end": {
+              "line": 7,
+              "column": 48
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "ViewResourceCollection",
+          "range": [
+            335,
+            357
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 57
+            },
+            "end": {
+              "line": 7,
+              "column": 79
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [],
+          "range": [
+            358,
+            360
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 80
+            },
+            "end": {
+              "line": 7,
+              "column": 82
+            }
+          }
+        },
+        "range": [
+          293,
+          360
+        ],
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 15
+          },
+          "end": {
+            "line": 7,
+            "column": 82
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * View for Resource Collection in modal view.\n ",
+            "range": [
+              223,
+              277
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 0
+              },
+              "end": {
+                "line": 6,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        278,
+        360
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 82
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * View for Resource Collection in modal view.\n ",
+          "range": [
+            223,
+            277
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 6,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewResourceCollectionModal",
+              "range": [
+                361,
+                388
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 0
+                },
+                "end": {
+                  "line": 8,
+                  "column": 27
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                389,
+                398
+              ],
+              "loc": {
+                "start": {
+                  "line": 8,
+                  "column": 28
+                },
+                "end": {
+                  "line": 8,
+                  "column": 37
+                }
+              }
+            },
+            "range": [
+              361,
+              398
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 37
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "allowMultipleSelection",
+            "range": [
+              399,
+              421
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 38
+              },
+              "end": {
+                "line": 8,
+                "column": 60
+              }
+            }
+          },
+          "range": [
+            361,
+            421
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 60
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": true,
+          "raw": "true",
+          "range": [
+            424,
+            428
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 63
+            },
+            "end": {
+              "line": 8,
+              "column": 67
+            }
+          }
+        },
+        "range": [
+          361,
+          428
+        ],
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 67
+          }
+        }
+      },
+      "range": [
+        361,
+        429
+      ],
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 68
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewResourceCollectionModal",
+              "range": [
+                430,
+                457
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 0
+                },
+                "end": {
+                  "line": 9,
+                  "column": 27
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                458,
+                467
+              ],
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 28
+                },
+                "end": {
+                  "line": 9,
+                  "column": 37
+                }
+              }
+            },
+            "range": [
+              430,
+              467
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 9,
+                "column": 37
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "template",
+            "range": [
+              468,
+              476
+            ],
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 38
+              },
+              "end": {
+                "line": 9,
+                "column": 46
+              }
+            }
+          },
+          "range": [
+            430,
+            476
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 0
+            },
+            "end": {
+              "line": 9,
+              "column": 46
+            }
+          }
+        },
+        "right": {
+          "type": "Literal",
+          "value": "#template-modal_resource_collection",
+          "raw": "'#template-modal_resource_collection'",
+          "range": [
+            479,
+            516
+          ],
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 49
+            },
+            "end": {
+              "line": 9,
+              "column": 86
+            }
+          }
+        },
+        "range": [
+          430,
+          516
+        ],
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 9,
+            "column": 86
+          }
+        }
+      },
+      "range": [
+        430,
+        517
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 87
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "AssignmentExpression",
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "MemberExpression",
+            "computed": false,
+            "object": {
+              "type": "Identifier",
+              "name": "ViewResourceCollectionModal",
+              "range": [
+                518,
+                545
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 0
+                },
+                "end": {
+                  "line": 10,
+                  "column": 27
+                }
+              }
+            },
+            "property": {
+              "type": "Identifier",
+              "name": "prototype",
+              "range": [
+                546,
+                555
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 28
+                },
+                "end": {
+                  "line": 10,
+                  "column": 37
+                }
+              }
+            },
+            "range": [
+              518,
+              555
+            ],
+            "loc": {
+              "start": {
+                "line": 10,
+                "column": 0
+              },
+              "end": {
+                "line": 10,
+                "column": 37
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "childView",
+            "range": [
+              556,
+              565
+            ],
+            "loc": {
+              "start": {
+                "line": 10,
+                "column": 38
+              },
+              "end": {
+                "line": 10,
+                "column": 47
+              }
+            }
+          },
+          "range": [
+            518,
+            565
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 0
+            },
+            "end": {
+              "line": 10,
+              "column": 47
+            }
+          }
+        },
+        "right": {
+          "type": "Identifier",
+          "name": "ViewResourceCollectionModalItem",
+          "range": [
+            568,
+            599
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 50
+            },
+            "end": {
+              "line": 10,
+              "column": 81
+            }
+          }
+        },
+        "range": [
+          518,
+          599
+        ],
+        "loc": {
+          "start": {
+            "line": 10,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 81
+          }
+        }
+      },
+      "range": [
+        518,
+        600
+      ],
+      "loc": {
+        "start": {
+          "line": 10,
+          "column": 0
+        },
+        "end": {
+          "line": 10,
+          "column": 82
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    600
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 10,
+      "column": 82
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n * View for Resource Collection in modal view.\n ",
+      "range": [
+        223,
+        277
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 3
+        }
+      }
+    }
+  ]
+}
