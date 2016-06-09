@@ -25,7 +25,7 @@ var Configuration = {
 
     // This determines the method to use for loading updates from the server.
     // Either 'POLL' (default) or 'SOCKET'.
-    SERVER_UPDATE_METHOD: 'SOCKET',
+    SERVER_UPDATE_METHOD: 'POLL',
 
     // Interval after which the client will get the server time (ms).
     // Generally, the client extracts the server time from all responses from the server.

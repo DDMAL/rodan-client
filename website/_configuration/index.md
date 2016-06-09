@@ -10,6 +10,7 @@ The following lists all Rodan Client configuration settings. Configuration setti
 * **`SERVER_HTTPS` (optional, default: `true`)**: The client will connect to the server using HTTPS iff `SERVER_HTTPS` is `true`. Else, HTTP will be used (not recommended). Note: if using sockets, some browsers require that both HTTP and WS be secure or both not be secure, but not mixed.
 * **`SERVER_SOCKET_AVAILABLE` (optional, default: `false`)**: The client will use a web socket connection to be notified of updates to the database iff `SERVER_SOCKET_AVAILABLE` is `SERVER_SOCKET_AVAILABLE`. Else, a polling strategy will be used.
 * **`SERVER_AUTHENTICATION_TYPE` (required, no default)**: The authentication type. Either 'session' or 'token'.
+* **`SERVER_UPDATE_METHOD` (optional, default: `'POLL'`)**: This determines the method to use for loading updates from the server. Either `'POLL'` (default) or `'SOCKET'`.
 * **`SERVER_REQUEST_TIME_INTERVAL` (default: 60000)**: Interval (in milliseconds) after which the client will get the server time. Generally, the client extracts the server time from all responses from the server. However, if the client has not received a response from the server after this amount of time, the client will fire an HTTP HEAD request and get the server time. This means that the server MUST exposde the 'Date' response header. As such, it is recommended that this value be greater than the `EVENT_TIMER_FREQUENCY` to reduce traffic.
 
 ## Client Admin
