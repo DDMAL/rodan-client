@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import BaseModel from './BaseModel';
 import InputPortCollection from 'js/Collections/InputPortCollection';
 import OutputPortCollection from 'js/Collections/OutputPortCollection';
@@ -84,6 +85,16 @@ export default class WorkflowJob extends BaseModel
     {
         var string = this.get('name') + ': ' + this.get('job_description');
         return string;
+    }
+
+    /**
+     * Returns true iff this WorkflowJob has settings.
+     *
+     * @return {boolean} true iff this WorkflowJob has settings
+     */
+    hasSettings()
+    {
+        return !$.isEmptyObject(this.get('job_settings'));
     }
 }
 WorkflowJob.prototype.routeName = 'workflowjobs';

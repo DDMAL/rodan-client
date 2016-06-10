@@ -45,6 +45,11 @@ class WorkflowJobItem extends BaseWorkflowJobItem
                           {label: 'Settings', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_SETTINGS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
                           {label: 'Ports', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWJOB_PORTS_VIEW, options: {workflowjob: this.getModel(), workflow: workflow}},
                           {label: 'Delete', radiorequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOB, options: {workflowjob: this.getModel(), workflow: workflow}}];
+        var model = this.getModel();
+        if (!model.hasSettings())
+        {
+            this.menuItems.splice(1, 1); 
+        }
         this.coordinateSetInfo = [];
         this.coordinateSetInfo['class'] = WorkflowJobCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job';
