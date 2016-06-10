@@ -93,8 +93,7 @@ export default class TransferManager
      */
     _handleStateChange(request, filename, mimetype)
     {
-        var request = event.currentTarget;
-        switch (request.readyState)
+        switch (request.currentTarget.readyState)
         {
             case 0: //UNSENT
             {
@@ -118,7 +117,7 @@ export default class TransferManager
 
             case 4:
             {
-                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DOWNLOAD_START, {data: request.response, filename: filename, mimetype: mimetype});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DOWNLOAD_START, {data: request.currentTarget.response, filename: filename, mimetype: mimetype});
                 break;
             }
 
