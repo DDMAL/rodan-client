@@ -72,7 +72,7 @@ export default class ViewSettings extends Marionette.ItemView
             startval: startValues,
             form_name_root: ' '
         };
-        this._editor = new JSONEditor.JSONEditor(element, settingsSchema); 
+        this._editor = new JSONEditor(element, settingsSchema); 
     }
 
     /**
