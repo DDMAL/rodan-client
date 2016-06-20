@@ -22,7 +22,6 @@ export default class Resource extends BaseModel
         this.set('download', this._getDownloadUrl());
         this.on('change:resource_type', () => this._updateResourceTypeFull());
         this.on('change:resource_file', () => this.set('download', this._getDownloadUrl()));
-        this.on('change:compat_resource_file', () => this.set('download', this._getDownloadUrl()));
 
         // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
         if (this.get('creator') === null)
@@ -131,11 +130,7 @@ export default class Resource extends BaseModel
      */
     _getDownloadUrl()
     {
-        if (this.get('compat_resource_file'))
-        {
-            return this.get('compat_resource_file');
-        }
-        else if (this.get('resource_file'))
+        if (this.get('resource_file'))
         {
             return this.get('resource_file');
         }
