@@ -20,6 +20,9 @@ var Configuration = {
     // Set to true iff the server allows socket connections. Default is false.
     SERVER_SOCKET_AVAILABLE: false,
 
+    // Set to true iff you want to see socket message data in the console. Default is false.
+    SERVER_SOCKET_DEBUG: false,
+
     // Authentication type. Either 'session' or 'token'.
     SERVER_AUTHENTICATION_TYPE: '',
 

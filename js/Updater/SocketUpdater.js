@@ -35,6 +35,13 @@ export default class SocketUpdater extends AbstractUpdater
      */
     _handleSocketMessage(event)
     {
+        // Output if debug socket.
+        if (Configuration.SERVER_SOCKET_DEBUG)
+        {
+            console.log(event.data);
+        }
+
+        // Process.
         if (event.data === '--heartbeat--')
         {
           //  this._processHeartbeat(event);
