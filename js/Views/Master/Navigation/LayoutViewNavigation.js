@@ -93,7 +93,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
         var hostname = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_HOSTNAME);
         var version = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION);
         var serverDate = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_DATE);
-        serverDate = serverDate.toString();
+        serverDate = serverDate ? serverDate.toString() : 'unknown';
         var username = user ? user.get('username') : 'no user';
         var name = user ? user.get('first_name') + ' ' + user.get('last_name') : 'no user';
         var html = _.template($('#template-misc_about').html())({hostname: hostname,
