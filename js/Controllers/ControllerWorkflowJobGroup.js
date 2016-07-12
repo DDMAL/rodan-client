@@ -28,6 +28,10 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _initializeRadio()
     {
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWJOBGROUP_DELETED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWJOBGROUP_IMPORTED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWJOBGROUP_SAVED, options => this._handleSuccessGeneric(options));
+
         // Requests.
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_CREATE, (options) => this._handleRequestCreateWorkflowJobGroup(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_DELETE, (options) => this._handleRequestDeleteWorkflowJobGroup(options));
@@ -61,6 +65,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestSaveWorkflowJobGroup(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Job Group', text: 'Please wait...'});
         options.workflowjobgroup.save(options.workflowjobgroup.changed, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWJOBGROUP_SAVED, {workflowjobgroup: model})});
     }
 
@@ -77,6 +82,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestDeleteWorkflowJobGroup(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow Job Group', text: 'Please wait...'});
         options.workflowjobgroup.destroy({success: (model) => this._handleWorkflowJobGroupDeleteSuccess(options.workflowjobgroup)});
     }
 
@@ -85,6 +91,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestImportWorkflowJobGroup(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Importing Workflow', text: 'Please wait...'});
         var workflow = options.target;
         var originWorkflow = options.origin;
         var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});
@@ -202,5 +209,13 @@ export default class ControllerWorkflowJobGroup extends BaseController
             }
         }
         return object;
+    }
+
+    /**
+     * Handle generic success.
+     */
+    _handleSuccessGeneric(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }

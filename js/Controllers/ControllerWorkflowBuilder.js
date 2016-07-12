@@ -50,6 +50,7 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _initializeRadio()
     {
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_LOADED_WORKFLOW, options => this._handleSuccessGeneric(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_SELECTED, options => this._handleEventBuilderSelected(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SET_ADDPORTS, options => this._handleRequestSetAddPorts(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_CONNECTION, options => this._handleCommandAddConnection(options), this);
@@ -300,6 +301,7 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _handleEventLoadWorkflow(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Loading Workflow', text: 'Please wait...'});
         options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 
@@ -478,6 +480,14 @@ export default class ControllerWorkflowBuilder extends BaseController
         var outputPort = options.outputport;
         var workflow = options.workflow;
         return this._getSatisfiableInputPorts(outputPort, workflow);
+    }
+
+    /**
+     * Handle generic success.
+     */
+    _handleSuccessGeneric(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
