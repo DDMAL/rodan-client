@@ -9,6 +9,7 @@
         "NAME": "",
         "EMAIL": ""
     },
+    "DEBUG": false,
     "WORKFLOWBUILDERGUI":
     {
         "USER_AGENT": "rodan-standard",

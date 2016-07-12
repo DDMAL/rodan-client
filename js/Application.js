@@ -58,6 +58,12 @@ export default class Application extends Marionette.Application
      */
     _startUp()
     {
+        // Check debug.
+        if (Configuration.DEBUG)
+        {
+            Radio.tuneIn('rodan');
+        }
+
         Configuration.load('info.json');
         this.addRegions({
             regionMaster: '#region-master'

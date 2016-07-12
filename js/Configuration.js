@@ -82,7 +82,10 @@ var Configuration = {
     ADMIN_CLIENT: {
         NAME: '',
         EMAIL: ''
-    }
+    },
+
+    // Turns on debug mode.
+    DEBUG: false
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
