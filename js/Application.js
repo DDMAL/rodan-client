@@ -31,7 +31,6 @@ import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPor
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
-import RadioManager from './Managers/RadioManager';
 import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';
 
@@ -84,7 +83,6 @@ export default class Application extends Marionette.Application
     _initializeManagers()
     {
         this._transferManager = new TransferManager();
-        this._radioManager = new RadioManager();
         this._updateManager = new UpdateManager();
         this._errorManager = new ErrorManager();
     }

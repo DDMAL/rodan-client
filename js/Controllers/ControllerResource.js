@@ -24,6 +24,9 @@ export default class ControllerResource extends BaseController
         // Events
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_CREATED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_DELETED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCE_SAVED, options => this._handleSuccessGeneric(options));
 
         // Requests
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, options => this._handleRequestResourceCreate(options));
@@ -71,6 +74,7 @@ export default class ControllerResource extends BaseController
      */
     _handleRequestResourceCreate(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Resource', text: 'Please wait...'});
         var resource = null;
         if (options.resourcetype)
         {
@@ -89,6 +93,7 @@ export default class ControllerResource extends BaseController
      */
     _handleCommandResourceDelete(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Resource', text: 'Please wait...'});
         this._layoutView.clearItemView();
         options.resource.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
     }
@@ -109,6 +114,7 @@ export default class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Resource', text: 'Please wait...'});
         options.resource.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SAVED, {resource: model})});
     }
 
@@ -138,6 +144,14 @@ export default class ControllerResource extends BaseController
     {
         collection.remove(model);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_DELETED, {resource: model});
+    }
+
+    /**
+     * Handle generic success.
+     */
+    _handleSuccessGeneric(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }
 

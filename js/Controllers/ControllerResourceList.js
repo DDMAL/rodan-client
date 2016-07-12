@@ -27,6 +27,9 @@ export default class ControllerResourceList extends BaseController
         // Events
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_CREATED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_DELETED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__RESOURCELIST_SAVED, options => this._handleSuccessGeneric(options));
 
         // Requests
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_ADD_RESOURCE, options => this._handleRequestAddResource(options));
@@ -191,5 +194,13 @@ export default class ControllerResourceList extends BaseController
     {
         collection.remove(model);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCELIST_DELETED, {resourcelist: model});
+    }
+
+    /**
+     * Handle generic success.
+     */
+    _handleSuccessGeneric(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }

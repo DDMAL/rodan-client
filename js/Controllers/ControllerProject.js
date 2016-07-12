@@ -55,6 +55,7 @@ export default class ControllerProject extends BaseController
      */
     _handleEventProjectGenericResponse()
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECTS_LOAD, {});
     }
 
@@ -63,6 +64,7 @@ export default class ControllerProject extends BaseController
      */
     _handleEventProjectDeleteResponse()
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECTS_LOAD, {});
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION);
     }
@@ -72,6 +74,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestProjectSave(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Project', text: 'Please wait...'});
         options.project.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SAVED, {project: model})});
     }
 
@@ -80,6 +83,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestCreateProject(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Project', text: 'Please wait...'});
         var project = new Project({creator: options.user});
         project.save({}, {success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_CREATED, {project: model})});
     }
@@ -89,6 +93,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestProjectDelete(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Project', text: 'Please wait...'});
         this._activeProject = null;
         options.project.destroy({success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_DELETED, {project: model})});
     }

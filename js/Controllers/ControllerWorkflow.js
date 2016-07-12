@@ -23,6 +23,9 @@ export default class ControllerWorkflow extends BaseController
         // Events.
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED, options => this._handleEventItemSelected(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_CREATED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_DELETED, options => this._handleSuccessGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SAVED, options => this._handleSuccessGeneric(options));
 
         // Requests.
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
@@ -63,6 +66,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandDeleteWorkflow(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow', text: 'Please wait...'});
         // Clear the individual view (if there).
         if (this._viewItem !== null && options.workflow === this._viewItem.model)
         {
@@ -76,6 +80,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandAddWorkflow(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Workflow', text: 'Please wait...'});
         var workflow = new Workflow({project: options.project.get('url'), name: 'untitled'});
         workflow.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
     }
@@ -85,6 +90,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow', text: 'Please wait...'});
         options.workflow.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_SAVED, {workflow: model})});
     }
 
@@ -101,6 +107,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandImportWorkflow(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Importing Workflow', text: 'Please wait...'});
         var fileReader = new FileReader();
         fileReader.onerror = (event) => this._handleFileReaderError(event);
         fileReader.onload = (event) => this._handleFileReaderLoaded(event, options.project);
@@ -166,5 +173,13 @@ export default class ControllerWorkflow extends BaseController
         collection.add(model, {});
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_CREATED, {workflow: model});
         //Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_VALIDATE_WORKFLOW, {workflow: model});
+    }
+
+    /**
+     * Handle generic success.
+     */
+    _handleSuccessGeneric(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }

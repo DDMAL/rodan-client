@@ -40,6 +40,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunCreationResponse(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
@@ -49,6 +50,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunDeleteResponse(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
     }
@@ -58,6 +60,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleEventWorkflowRunSaveResponse(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
     }
 
@@ -93,6 +96,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunCreate(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Workflow Run', text: 'Please wait...'});
         var name = options.workflow.get('name');
         var description = 'Run of Workflow "' + name + '"\n\n' + this._getResourceAssignmentDescription(options.assignments);
         var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), 
@@ -107,6 +111,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunDelete(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow Run', text: 'Please wait...'});
         options.workflowrun.destroy({success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_DELETED, {workflowrun: model})});
     }
 
@@ -115,6 +120,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunSave(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Run', text: 'Please wait...'});
         options.workflowrun.save(options.workflowrun.changed,
                                  {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
     }
