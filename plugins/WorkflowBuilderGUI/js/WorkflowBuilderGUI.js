@@ -42,6 +42,9 @@ class WorkflowBuilderGUI
         this._initializeInterface();
         this._initializeGlobalTool();
         this._initializeGui();
+
+        // We have to clear the updater.
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_CLEAR);
     }
 
     /**

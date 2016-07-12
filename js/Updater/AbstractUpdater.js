@@ -36,6 +36,6 @@ export default class AbstractUpdater
      */
     clear()
     {
-    	this._collection = null;
+    	this._collections = null;
     }
 }
