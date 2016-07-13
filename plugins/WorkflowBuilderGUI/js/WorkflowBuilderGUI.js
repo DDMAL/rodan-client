@@ -120,6 +120,7 @@ class WorkflowBuilderGUI
      */
     _initializeGlobalTool()
     {
+        this._lastToolEvent = null;
         paper.tool = new Tool();
         paper.tool.onMouseMove = event => this._handleEvent(event);
         paper.tool.onMouseUp = event => this._handleEvent(event);
@@ -207,6 +208,7 @@ class WorkflowBuilderGUI
                 break;
             }
         }
+        this._lastToolEvent = toolEvent;
     }
 
     /**
@@ -258,9 +260,11 @@ class WorkflowBuilderGUI
             }
             else
             {
-                // TODO translate canvas
-               // BUG HERE WHEN I TRY TO TRANSLATE CANVAS
-                //this._itemController.moveSelectedItems(event.delta);
+                var deltaX = (event.event.screenX - this._lastToolEvent.event.screenX) / paper.view.zoom;
+                var deltaY = (event.event.screenY - this._lastToolEvent.event.screenY) / paper.view.zoom;
+                var delta = new Point(deltaX, deltaY);
+                paper.view.translate(delta);
+                this._limitViewInThresholds(); // make sure we stay in bounds!
             }
         }
         else if (event.type === 'mouseup')
@@ -401,7 +405,8 @@ class WorkflowBuilderGUI
     _handleRequestZoomOut()
     {
         var zoom = paper.view.zoom - Configuration.WORKFLOWBUILDERGUI.ZOOM_RATE;
-        paper.view.zoom = zoom > Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN ? zoom : Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN;    
+        paper.view.zoom = zoom > Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN ? zoom : Configuration.WORKFLOWBUILDERGUI.ZOOM_MIN;   
+        this._limitViewInThresholds(); // make sure we stay in bounds! 
     }
 
     /**
@@ -410,6 +415,53 @@ class WorkflowBuilderGUI
     _handleRequestZoomReset()
     {
         paper.view.zoom = Configuration.WORKFLOWBUILDERGUI.ZOOM_INITIAL;
+        this._limitViewInThresholds(); // make sure we stay in bounds!
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns thresholds for given view zoom (xLeft, xRight, yTop, yBottom).
+     */
+    _getThresholds()
+    {
+        var halfWidth = paper.view.size.width / 2;
+        var halfHeight = paper.view.size.height / 2;
+        return {xLeft: halfWidth,
+                xRight: halfWidth + paper.view.viewSize.width - paper.view.size.width,
+                yTop: halfHeight,
+                yBottom: halfHeight + paper.view.viewSize.height - paper.view.size.height};
+    }
+
+    /**
+     * Limits view to the thresholds.
+     */
+    _limitViewInThresholds()
+    {
+        var thresholds = this._getThresholds();
+        var newPoint = new Point(paper.view.center.x, paper.view.center.y);
+
+        // x
+        if (paper.view.center.x < thresholds.xLeft)
+        {
+            newPoint.x = thresholds.xLeft;
+        }
+        else if (paper.view.center.x > thresholds.xRight)
+        {
+            newPoint.x = thresholds.xRight;
+        }
+
+        // y
+        if (paper.view.center.y < thresholds.yTop)
+        {
+            newPoint.y = thresholds.yTop;
+        }
+        else if (paper.view.center.y > thresholds.yBottom)
+        {
+            newPoint.y = thresholds.yBottom;
+        }
+        paper.view.setCenter(newPoint);
     }
 }
 
