@@ -57,7 +57,7 @@
             "jqueryui": "npm:jqueryui@^1.11.1",
             "json-editor": "github:jdorn/json-editor@^0.7.24",
             "moment": "github:moment/moment@^2.12.0",
-            "paper": "npm:paper@^0.9.25",
+            "paper": "npm:paper@0.10.2",
             "system": "npm:system@^1.0.4",
             "twbs/bootstrap": "github:twbs/bootstrap@^3.3.6",
             "underscore": "npm:underscore@^1.8.3"
