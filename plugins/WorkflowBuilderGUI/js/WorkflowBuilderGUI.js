@@ -263,8 +263,8 @@ class WorkflowBuilderGUI
                 var deltaX = (event.event.screenX - this._lastToolEvent.event.screenX) / paper.view.zoom;
                 var deltaY = (event.event.screenY - this._lastToolEvent.event.screenY) / paper.view.zoom;
                 var delta = new Point(deltaX, deltaY);
-                paper.view.translate(delta);
-                this._limitViewInThresholds(); // make sure we stay in bounds!
+                //paper.view.translate(delta);
+                //this._limitViewInThresholds(); // make sure we stay in bounds!
             }
         }
         else if (event.type === 'mouseup')
@@ -438,7 +438,7 @@ class WorkflowBuilderGUI
      * Limits view to the thresholds.
      */
     _limitViewInThresholds()
-    {
+    {/*
         var thresholds = this._getThresholds();
         var newPoint = new Point(paper.view.center.x, paper.view.center.y);
 
@@ -461,7 +461,7 @@ class WorkflowBuilderGUI
         {
             newPoint.y = thresholds.yBottom;
         }
-        paper.view.setCenter(newPoint);
+        paper.view.setCenter(newPoint);*/
     }
 }
 
