@@ -80,6 +80,8 @@ export default class ControllerAuthentication extends BaseController
     _initializeRadio()
     {
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__USER_SAVED, (options) => this._handleEventGeneric(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__USER_CHANGED_PASSWORD, (options) => this._handleEventGeneric(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__USER_CHANGE_PASSWORD, (options) => this._handleRequestChangePassword(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__USER_SAVE, (options) => this._handleRequestSaveUser(options));
 
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
@@ -319,6 +321,7 @@ export default class ControllerAuthentication extends BaseController
     {
         var route = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-me');
         var ajaxSettings = {success: (response) => this._handleSaveUserSuccess(response),
+                            error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                             type: 'PATCH',
                             url: route,
                             dataType: 'json',
@@ -328,11 +331,35 @@ export default class ControllerAuthentication extends BaseController
     }
 
     /**
+     * Handle request change password.
+     */
+    _handleRequestChangePassword(options)
+    {
+        var route = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-change-password');
+        var ajaxSettings = {success: (response) => this._handleChangePasswordSuccess(response),
+                        //    error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                            type: 'POST',
+                            url: route,
+                         //   dataType: 'json',
+                            data: {new_password: options.newpassword, current_password: options.currentpassword}};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Changing password', text: 'Please wait...', override: true});
+    }
+
+    /**
      * Handle response from saving user.
      */
     _handleSaveUserSuccess(response)
     {
         this._user = new User(response);
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__USER_SAVED, {user: this._user});
+    }
+
+    /**
+     * Handle success response from changing password.
+     */
+    _handleChangePasswordSuccess(response)
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__USER_CHANGED_PASSWORD);
     }
 }

@@ -96,7 +96,7 @@ export default class ControllerModal extends BaseController
     _handleRequestModalSimpleShow(options)
     {
         var $modalEl = $('#modal-generic');
-        if (options.override && $modalEl.is(':visible'))
+        if (!options.override && $modalEl.is(':visible'))
         {
             return;
         }
