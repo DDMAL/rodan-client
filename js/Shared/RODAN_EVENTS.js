@@ -272,6 +272,8 @@ class RODAN_EVENTS
         this.REQUEST__SERVER_LOAD_ROUTES = 'REQUEST__SERVER_LOAD_ROUTES';
         /** Request the client to load all options for routes. Must authenticate prior to making this request. */
         this.REQUEST__SERVER_LOAD_ROUTE_OPTIONS = 'REQUEST__SERVER_LOAD_ROUTE_OPTIONS';
+        /** Request a custom AJAX request to be sent. This ensures that the client response handlers (along with any custom handlers you define) are used, and that authentication is taken care of. Takes {settings: {jQuery.ajax settings}}. */
+        this.REQUEST__SERVER_REQUEST_AJAX = 'REQUEST__SERVER_REQUEST_AJAX';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Transfer Manager
@@ -294,6 +296,14 @@ class RODAN_EVENTS
         this.REQUEST__UPDATER_CLEAR = 'REQUEST__UPDATER_CLEAR';
         /** Request a set of collections to be updated. Takes {collections: [BaseCollection]}. */
         this.REQUEST__UPDATER_SET_COLLECTIONS = 'REQUEST__UPDATER_SET_COLLECTIONS';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // User
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** Triggered when User has been saved. Sends {user: User}. */
+        this.EVENT__USER_SAVED = 'EVENT__USER_SAVED';
+        /** Request a User be saved/updated. Takes {fields: {object with attributes to change}}. */
+        this.REQUEST__USER_SAVE = 'REQUEST__USER_SAVE';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Workflow

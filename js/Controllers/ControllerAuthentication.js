@@ -79,6 +79,9 @@ export default class ControllerAuthentication extends BaseController
      */
     _initializeRadio()
     {
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__USER_SAVED, (options) => this._handleEventGeneric(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__USER_SAVE, (options) => this._handleRequestSaveUser(options));
+
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER, () => this._handleRequestUser());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_LOGIN, options => this._login(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK, () => this._checkAuthenticationStatus());
@@ -299,5 +302,37 @@ export default class ControllerAuthentication extends BaseController
                 break;
             }
         }
+    }
+
+    /**
+     * Handle event generic.
+     */
+    _handleEventGeneric()
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+    }
+
+    /**
+     * Handle request save User.
+     */
+    _handleRequestSaveUser(options)
+    {
+        var route = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'auth-me');
+        var ajaxSettings = {success: (response) => this._handleSaveUserSuccess(response),
+                            type: 'PATCH',
+                            url: route,
+                            dataType: 'json',
+                            data: options.fields};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Updating user', text: 'Please wait...', override: true});
+    }
+
+    /**
+     * Handle response from saving user.
+     */
+    _handleSaveUserSuccess(response)
+    {
+        this._user = new User(response);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__USER_SAVED, {user: this._user});
     }
 }

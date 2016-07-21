@@ -52,7 +52,7 @@ export default class ControllerServer extends BaseController
             // Set a timeout for x seconds.
             if (that._responseTimeout === null)
             {
-                that._responseTimeout = setTimeout(() => that._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
+//                that._responseTimeout = setTimeout(() => that._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
             }
 
             // Set a timeout for panic.
@@ -103,6 +103,7 @@ export default class ControllerServer extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE_OPTIONS, options => this._handleRequestServerRouteOptions(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_HOSTNAME, () => this._handleRequestServerHostname());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION, () => this._handleRequestServerVersionRodan());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, (options) => this._handleRequestAjax(options));
     }
 
     /**
@@ -185,7 +186,6 @@ export default class ControllerServer extends BaseController
         routeRequest.setRequestHeader('Accept', 'application/json');
         routeRequest.send();
     }
-
 
     /**
      * Fetches the OPTIONS (arguments for sorting, filtering, etc).
@@ -351,5 +351,14 @@ export default class ControllerServer extends BaseController
     {
         this._serverDate = date;
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_DATE_UPDATED, {date: this._serverDate});
+    }
+
+    /**
+     * Requests custom AJAX request.
+     */
+    _handleRequestAjax(options)
+    {
+        var ajaxSettings = this._applyAJAXResponseHandlers(options.settings);
+        $.ajax(ajaxSettings);
     }
 }
