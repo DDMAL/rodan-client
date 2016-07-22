@@ -1,72 +1,77 @@
 {
-    "name": "rodan-client",
-    "version": "0.12.1",
-    "description": "Rodan client",
-    "main": "gulpfile.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "rodan-client",
+  "version": "0.12.1",
+  "description": "Rodan client",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ddmal/rodan-client"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "connect": "^3.4.1",
+    "connect-livereload": "^0.5.4",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cli": "^1.2.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-jspm": "^0.5.8",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-shell": "^0.5.2",
+    "gulp-sym": "0.0.14",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "jspm": "^0.16.31",
+    "path": "^0.12.7",
+    "prompt-sync": "^4.0.4",
+    "serve-index": "^1.7.3",
+    "serve-static": "^1.10.2"
+  },
+  "optionalDependencies": {
+    "esdoc": "*"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "web",
+      "lib": "web",
+      "packages": "web/libs"
     },
-    "author": "",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ddmal/rodan-client"
+    "dependencies": {
+      "backbone": "npm:backbone@^1.3.2",
+      "backbone.babysitter": "npm:backbone.babysitter@^0.1.11",
+      "backbone.marionette": "npm:backbone.marionette@^2.4.5",
+      "backbone.radio": "npm:backbone.radio@^1.0.4",
+      "backbone.wreqr": "npm:backbone.wreqr@^1.3.6",
+      "css": "github:systemjs/plugin-css@^0.1.20",
+      "datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@^4.17.37",
+      "filesaver": "github:eligrey/FileSaver.js@master",
+      "jquery": "npm:jquery@^2.2.2",
+      "jqueryui": "npm:jqueryui@^1.11.1",
+      "json-editor": "github:jdorn/json-editor@^0.7.24",
+      "moment": "github:moment/moment@^2.12.0",
+      "paper": "npm:paper@0.10.2",
+      "system": "npm:system@^1.0.4",
+      "twbs/bootstrap": "github:twbs/bootstrap@^3.3.6",
+      "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {
-        "babel-preset-es2015": "^6.6.0",
-        "connect": "^3.4.1",
-        "connect-livereload": "^0.5.4",
-        "del": "^2.2.0",
-        "gulp": "^3.9.1",
-        "gulp-babel": "^6.1.2",
-        "gulp-cli": "^1.2.1",
-        "gulp-jshint": "^2.0.0",
-        "gulp-jspm": "^0.5.8",
-        "gulp-livereload": "^3.8.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^2.2.0",
-        "gulp-shell": "^0.5.2",
-        "gulp-sym": "0.0.14",
-        "jshint": "^2.9.1",
-        "jshint-stylish": "^2.1.0",
-        "jspm": "^0.16.31",
-        "path": "^0.12.7",
-        "prompt-sync": "^4.0.4",
-        "serve-index": "^1.7.3",
-        "serve-static": "^1.10.2"
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "clean-css": "npm:clean-css@^3.4.10",
+      "core-js": "npm:core-js@^1.1.4"
     },
-    "optionalDependencies": {
-        "esdoc": "*"
-    },
-    "jspm": {
-        "directories": {
-            "baseURL": "web",
-            "lib": "web",
-            "packages": "web/libs"
-        },
-        "dependencies": {
-            "backbone": "npm:backbone@^1.3.2",
-            "backbone.babysitter": "npm:backbone.babysitter@^0.1.11",
-            "backbone.marionette": "npm:backbone.marionette@^2.4.5",
-            "backbone.radio": "npm:backbone.radio@^1.0.4",
-            "backbone.wreqr": "npm:backbone.wreqr@^1.3.6",
-            "css": "github:systemjs/plugin-css@^0.1.20",
-            "datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@^4.17.37",
-            "filesaver": "github:eligrey/FileSaver.js@master",
-            "jquery": "npm:jquery@^2.2.2",
-            "jqueryui": "npm:jqueryui@^1.11.1",
-            "json-editor": "github:jdorn/json-editor@^0.7.24",
-            "moment": "github:moment/moment@^2.12.0",
-            "paper": "npm:paper@0.9.25",
-            "system": "npm:system@^1.0.4",
-            "twbs/bootstrap": "github:twbs/bootstrap@^3.3.6",
-            "underscore": "npm:underscore@^1.8.3"
-        },
-        "devDependencies": {
-            "babel": "npm:babel-core@^5.8.24",
-            "babel-runtime": "npm:babel-runtime@^5.8.24",
-            "clean-css": "npm:clean-css@^3.4.10",
-            "core-js": "npm:core-js@^1.1.4"
-        }
+    "overrides": {
+      "npm:paper@0.10.2": {
+        "format": "amd"
+      }
     }
+  }
 }
