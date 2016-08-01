@@ -15,7 +15,8 @@ export default class SocketUpdater extends AbstractUpdater
     constructor()
     {
         super();
-        this._webSocket = new WebSocket('ws://' + Configuration.SERVER_HOST + ':' + Configuration.SERVER_PORT + '/ws/rodan?subscribe-broadcast&publish-broadcast&echo');
+	var protocol = Configuration.SERVER_HTTPS ? 'wss' : 'ws';
+        this._webSocket = new WebSocket(protocol + '://' + Configuration.SERVER_HOST + ':' + Configuration.SERVER_PORT + '/ws/rodan?subscribe-broadcast&publish-broadcast&echo');
         this._webSocket.onmessage = (event) => this._handleSocketMessage(event);
     }
 
