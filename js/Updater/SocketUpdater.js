@@ -15,7 +15,7 @@ export default class SocketUpdater extends AbstractUpdater
     constructor()
     {
         super();
-	var protocol = Configuration.SERVER_HTTPS ? 'wss' : 'ws';
+	    var protocol = Configuration.SERVER_HTTPS ? 'wss' : 'ws';
         this._webSocket = new WebSocket(protocol + '://' + Configuration.SERVER_HOST + ':' + Configuration.SERVER_PORT + '/ws/rodan?subscribe-broadcast&publish-broadcast&echo');
         this._webSocket.onmessage = (event) => this._handleSocketMessage(event);
     }
@@ -50,6 +50,21 @@ export default class SocketUpdater extends AbstractUpdater
         else
         {
             this.update();
+        }
+    }
+
+    /**
+     * Process socket message.
+     */
+    _processSocketMessage(data)
+    {
+        console.log(this._collections);
+        if (data.model && data.model === 'project')
+        {
+        }
+        else
+        {
+
         }
     }
 }
