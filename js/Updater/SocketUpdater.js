@@ -1,5 +1,7 @@
 import AbstractUpdater from './AbstractUpdater';
 import Configuration from 'js/Configuration';
+import Radio from 'backbone.radio';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
  * Updater that uses sockets to trigger collection updates.
@@ -49,7 +51,7 @@ export default class SocketUpdater extends AbstractUpdater
         }
         else
         {
-            this.update();
+            this._processSocketMessage(JSON.parse(event.data));
         }
     }
 
@@ -58,13 +60,24 @@ export default class SocketUpdater extends AbstractUpdater
      */
     _processSocketMessage(data)
     {
-        console.log(this._collections);
-        if (data.model && data.model === 'project')
+        // We definitely update if:
+        //
+        // - no model is specified
+        // - the model specified is a Project
+        //
+        // In these cases, the update is very general.
+        // Else, we have to check if the model is related to our active project somehow.
+        if (!data.model || data.model === 'project')
         {
+            this.update();
         }
-        else
+        else if (data.project)
         {
-
+            var activeProject = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+            if (activeProject && data.project === activeProject.id)
+            {
+                this.update();
+            }
         }
     }
 }
