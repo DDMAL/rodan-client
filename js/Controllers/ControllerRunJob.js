@@ -76,7 +76,7 @@ export default class ControllerRunJob extends BaseController
      * Handle request acquire.
      */
     _handleRequestAcquire(options)
-    {debugger;
+    {
         // Get lock if available. Else, if we already have the lock, simply open the interface.
         var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
         var runJobUrl = options.runjob.get('url');

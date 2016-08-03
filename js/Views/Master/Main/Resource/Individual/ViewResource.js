@@ -79,7 +79,7 @@ export default class ViewResource extends Marionette.CompositeView
      */
     _handleClickView()
     {
-        window.open(this.model.get('viewer_url'));
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, {resource: this.model});
     }
 }
 ViewResource.prototype.modelEvents = {

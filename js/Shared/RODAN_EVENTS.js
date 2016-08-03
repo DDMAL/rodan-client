@@ -196,6 +196,8 @@ class RODAN_EVENTS
         this.REQUEST__RESOURCE_DOWNLOAD = 'REQUEST__RESOURCE_DOWNLOAD';
         /** Request a Resource be saved/updated. Takes {resource: Resource, fields: {object with attributes to change}}. */
         this.REQUEST__RESOURCE_SAVE = 'REQUEST__RESOURCE_SAVE';
+        /** Request a viewer URL (with auth-token) for the provided Resource. Takes {resource: Resource}. */
+        this.REQUEST__RESOURCE_VIEWER_ACQUIRE = 'REQUEST__RESOURCE_VIEWER_ACQUIRE';
         /** Request a ResourceCollection to be loaded. Takes {data: Object (query parameters)}. Returns ResourceCollection. */
         this.REQUEST__RESOURCES_LOAD = 'REQUEST__RESOURCES_LOAD';
 
