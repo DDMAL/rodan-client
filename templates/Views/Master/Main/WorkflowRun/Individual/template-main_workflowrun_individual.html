@@ -5,9 +5,10 @@
         <input type="text" class="form-control input-sm" id="text-workflowrun_name" value="<%= _.escape(name) %>" name="text-workflowrun_name">
         <label for="text-workflowrun_description">Description:</label>
         <textarea type="text" class="form-control input-sm" id="text-workflowrun_description" name="text-workflowrun_description"><%= _.escape(description) %></textarea>
-	Creator: <%= creator %><br/>
+	    Creator: <%= creator %><br/>
         Created on: <%= _.formatFromUTC(created) %><br/>
         Updated on: <%= _.formatFromUTC(updated) %><br/>
+        URL: <%= url %><br>
         Status: <%= statusText %><br/>
         <button class="btn btn-xs btn-warning" id="button-save_workflowrun">Save</button>
         <button class="btn btn-xs btn-danger" id="button-delete_workflowrun">Delete</button>

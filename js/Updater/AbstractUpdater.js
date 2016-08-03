@@ -26,14 +26,6 @@ export default class AbstractUpdater
 	{
 		if (this._collections)
 		{
-	        // Output if debug socket.
-	        if (Configuration.SERVER_SOCKET_DEBUG)
-	        {
-	            console.log('socket-triggered update:');
-	            console.log(this._collections);
-	        }
-
-	        // Update.
 			for (var i = 0; i < this._collections.length; i++)
 			{
 				this._collections[i].syncCollection();
