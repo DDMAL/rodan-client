@@ -148,7 +148,7 @@ export default class ControllerResource extends BaseController
      */
     _handleSuccessAcquire(response)
     {
-        window.open(response.working_url);
+        window.open(response.working_url, '', '_blank');
     }
 
     /**
