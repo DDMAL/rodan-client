@@ -29,6 +29,7 @@ class RODAN_EVENTS
         {
             throw new Error('this class cannot be instantiated more than once');
         }
+        _instance = this;
 
         /** @ignore */
         this.REQUEST__RESOURCE_SHOWLAYOUTVIEW = 'REQUEST__RESOURCE_SHOWLAYOUTVIEW';  // Show LayoutView for Resource control (outside of the primary Resources view). This tells the ControllerResource which LayoutView to reference upon events. Takes {layoutView: LayoutView}.
@@ -84,6 +85,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // General
         ///////////////////////////////////////////////////////////////////////////////////////
+        /** Request "API" information to be show. */
+        this.REQUEST__SHOW_API = 'REQUEST__SHOW_API',
         /** Request last 100 Radio events. Returns [{name (string), event (string), options (object)}]. */
         this.REQUEST__LOG = 'REQUEST__LOG';
         /** Request "About" information be shown. */
