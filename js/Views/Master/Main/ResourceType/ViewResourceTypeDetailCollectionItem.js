@@ -14,7 +14,7 @@ export default class ViewResourceTypeDetailCollectionItem extends BaseViewCollec
      */
     _handleButton()
     {
-        target.textContent = this.model.get(this.model.get('url'));
+        Utilities.copyTextToClipboard(this.model.get('url'));
     }
 }
 ViewResourceTypeDetailCollectionItem.prototype.template = '#template-resourcetype_detail_collection_item';
