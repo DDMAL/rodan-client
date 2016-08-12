@@ -52,7 +52,7 @@ export default class ControllerServer extends BaseController
             // Set a timeout for x seconds.
             if (that._responseTimeout === null)
             {
-//                that._responseTimeout = setTimeout(() => that._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
+                that._responseTimeout = setTimeout(() => that._sendWaitingNotification(), Configuration.SERVER_WAIT_TIMER);
             }
 
             // Set a timeout for panic.
@@ -63,6 +63,7 @@ export default class ControllerServer extends BaseController
 
             // Increment pending requests.
             that._pendingRequests++;
+            Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_REQUESTS_PENDING_UPDATE, {pending: that._pendingRequests});
         };
     }
 
@@ -265,6 +266,7 @@ export default class ControllerServer extends BaseController
     {
         // Decrement the pending requests.
         this._pendingRequests--;
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_REQUESTS_PENDING_UPDATE, {pending: this._pendingRequests});
 
         if (document.readyState === 'complete' && this._pendingRequests === 0)
         {

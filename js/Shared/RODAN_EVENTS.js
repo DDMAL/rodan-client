@@ -157,6 +157,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // Project
         ///////////////////////////////////////////////////////////////////////////////////////
+        /** Triggered when Project admin interface has been selected. Takes {project: Project}. */
+        this.EVENT__PROJECT_ADMIN = 'EVENT__PROJECT_ADMIN';
         /** Triggered when Project has been created. Sends {project: Project}. */
         this.EVENT__PROJECT_CREATED = 'EVENT__PROJECT_CREATED';
         /** Triggered when Project has been deleted. Sends {project: Project}. */
@@ -257,6 +259,8 @@ class RODAN_EVENTS
         this.EVENT__SERVER_ERROR = 'EVENT__SERVER_ERROR';
         /** Triggered when the client has no pending HTTP requests waiting to complete. Only fires if EVENT__SERVER_WAITING had previously been fired. */
         this.EVENT__SERVER_IDLE = 'EVENT__SERVER_IDLE';
+        /** Triggered when there is an update to pending AJAX requests. Sends {pending: int >= 0}.  */
+        this.EVENT__SERVER_REQUESTS_PENDING_UPDATE = 'EVENT__SERVER_REQUESTS_PENDING_UPDATE';
         /** Triggered when server routes have been loaded. */
         this.EVENT__SERVER_ROUTESLOADED = 'EVENT__SERVER_ROUTESLOADED';
         /** Triggered when client has been waiting a predefined amount of time for 'complete' state (i.e. not waiting on server response). Sends {pending: int (number of pending AJAX responses)}*/

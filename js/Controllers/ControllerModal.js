@@ -28,11 +28,6 @@ export default class ControllerModal extends BaseController
      */
     _initializeRadio()
     {
-        // Events.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_IDLE, () => this._handleOnServerIdle());
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_PANIC, () => this._handleOnServerPanic());
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_WAITING, (options) => this._handleOnServerWaiting(options));
-
         // Requests.
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
@@ -42,44 +37,6 @@ export default class ControllerModal extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Radio handlers
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * Handle on server idle.
-     */
-    _handleOnServerIdle()
-    {
-        var $modalEl = $('#modal-generic');
-        if ($modalEl.is(':visible') && this._waiting)
-        {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
-        }
-    }
-
-    /**
-     * Handle on server panic.
-     */
-    _handleOnServerPanic()
-    {
-    }
-
-    /**
-     * Handle on server waiting.
-     */
-    _handleOnServerWaiting(options)
-    {
-        var $modalEl = $('#modal-generic');
-        if (!$modalEl.is(':visible') || this._waiting)
-        {
-            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_waiting'});
-            this._layoutViewModal.render();
-            $modalEl.css({top: 0, left: 0, position: 'absolute'});
-            $modalEl.html(this._layoutViewModal.el);
-            $('.modal-title').text('Wating on server');
-            $('.modal-body').append('Pending responses from server: ' + options.pending);
-            $modalEl.modal({backdrop: 'static', keyboard: false}); 
-            this._waiting = true;
-        }
-    }
-
     /**
      * Handle request modal hide.
      */

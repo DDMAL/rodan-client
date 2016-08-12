@@ -1,5 +1,6 @@
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
+import LayoutViewStatus from './Status/LayoutViewStatus';
 import Marionette from 'backbone.marionette';
 
 /**
@@ -17,7 +18,8 @@ export default class LayoutViewMaster extends Marionette.LayoutView
     {
         this.addRegions({
             regionMain: '#region-main',
-            regionNavigation: '#region-navigation'
+            regionNavigation: '#region-navigation',
+            regionStatus: '#region-status'
         });
         this._initializeViews();
 
@@ -30,6 +32,7 @@ export default class LayoutViewMaster extends Marionette.LayoutView
     {
         this.regionMain.show(this._layoutViewMain);
         this.regionNavigation.show(this._layoutViewNavigation);
+        this.regionStatus.show(this._layoutViewStatus);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +45,7 @@ export default class LayoutViewMaster extends Marionette.LayoutView
     {
         this._layoutViewNavigation = new LayoutViewNavigation();
         this._layoutViewMain = new LayoutViewMain();
+        this._layoutViewStatus = new LayoutViewStatus();
     }
 }
 LayoutViewMaster.prototype.template = '#template-master';

@@ -59,6 +59,14 @@ export default class ViewProject extends Marionette.CompositeView
     {
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCELIST_SELECTED_COLLECTION, {project: this.model});
     }
+
+    /**
+     * Handle button Project admin.
+     */
+    _handleButtonProjectAdmin()
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_ADMIN, {project: this.model});
+    }
 }
 ViewProject.prototype.modelEvents = {
             'all': 'render'
@@ -71,7 +79,8 @@ ViewProject.prototype.ui = {
             workflowCount: '#workflow_count',
             buttonRunJobs: '#button-runjobs',
             textName: '#text-project_name',
-            textDescription: '#text-project_description'
+            textDescription: '#text-project_description',
+            buttonAdmin: '#button-project_admin'
         };
 ViewProject.prototype.events = {
             'click @ui.buttonSave': '_handleButtonSave',
@@ -79,6 +88,7 @@ ViewProject.prototype.events = {
             'click @ui.resourceCount': '_handleClickResourceCount',
             'click @ui.workflowCount': '_handleClickWorkflowCount',
             'click @ui.buttonRunJobs': '_handleButtonRunJobs',
-            'click @ui.buttonResourceLists': '_handleButtonResourceLists'
+            'click @ui.buttonResourceLists': '_handleButtonResourceLists',
+            'click @ui.buttonAdmin': '_handleButtonProjectAdmin'
         };
 ViewProject.prototype.template = '#template-main_project_individual';

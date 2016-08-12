@@ -4,9 +4,12 @@ import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
 import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
+import ViewProjectAdmin from 'js/Views/Master/Main/Project/Individual/ViewProjectAdmin';
 import ViewProjectCollection from 'js/Views/Master/Main/Project/Collection/ViewProjectCollection';
 import ViewWorkflowRunCollection from 'js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
+
+import UserCollection from 'js/Collections/UserCollection';
 
 /**
  * Controller for Projects.
@@ -25,7 +28,7 @@ export default class ControllerProject extends BaseController
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS - initialization
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
      * Initialize Radio.
@@ -33,6 +36,7 @@ export default class ControllerProject extends BaseController
     _initializeRadio()
     {
         // Events.
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADMIN, options => this._handleEventProjectAdmin(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
@@ -50,6 +54,29 @@ export default class ControllerProject extends BaseController
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Event handlers
 ///////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Handle event Project admin.
+     */
+    _handleEventProjectAdmin(options)
+    {
+  /*      var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
+                                  error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                  type: 'GET',
+                                  url: options.project.get('url') + 'admins/'};
+        var ajaxSettingsWorkers = {success: (response) => this._handleProjectGetWorkersSuccess(response),
+                                   error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                   type: 'GET',
+                                   url: options.project.get('url') + 'workers/'};*/
+//        var test = {type: 'GET', url: 'https://132.206.14.136/users/'};
+  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: test});
+        var blah = new UserCollection();
+        blah.fetch();
+  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+    //    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
+//        var view = new ViewProjectAdmin({model: options.project});
+  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Administration'});
+    }
+
     /**
      * Handle event Project generic response.
      */
@@ -139,5 +166,21 @@ export default class ControllerProject extends BaseController
     _handleRequestProjectActive()
     {
         return this._activeProject;
+    }
+
+    /**
+     * Handle project admins get success.
+     */
+    _handleProjectGetAdminsSuccess(response)
+    {
+debugger;
+    }
+
+    /**
+     * Handle project workers get success.
+     */
+    _handleProjectGetWorkersSuccess(response)
+    {
+debugger;
     }
 }
