@@ -41,13 +41,21 @@ export default class LayoutViewStatus extends Marionette.LayoutView
         }
         else if (options.pending > 0)
         {
-            this._completed = this._pending - options.pending;
+            if (this._pending - options.pending > this._completed)
+            {
+                this._completed = this._pending - options.pending;
+            }
+            else
+            {
+                this._pending = options.pending + this._completed;
+            }
         }
         else
         {
             this._pending = 0;
             this._completed = 0;
         }
+        console.log(options.pending + ' ' + this._completed + ' ' + this._pending);
         this._updateStatusBar();
     }
 
@@ -65,7 +73,7 @@ export default class LayoutViewStatus extends Marionette.LayoutView
      */
     _updateStatusBar()
     {
-        var text = '' + this._completed + ' of ' + this._pending;
+        var text = '' + this._completed + ' of ' + this._pending + ' requests pending...';
         var percent = 100;
         if (this._completed === this._pending)
         {
@@ -76,6 +84,7 @@ export default class LayoutViewStatus extends Marionette.LayoutView
             percent = Math.floor(this._completed * 100 / this._pending);
         }
         $(this.el).find('div#statusbar').width(percent + '%');
+        $(this.el).find('#status-pending_responses').text(text);
     }
 }
 LayoutViewStatus.prototype.template = '#template-status';
