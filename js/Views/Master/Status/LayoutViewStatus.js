@@ -55,7 +55,6 @@ export default class LayoutViewStatus extends Marionette.LayoutView
             this._pending = 0;
             this._completed = 0;
         }
-        console.log(options.pending + ' ' + this._completed + ' ' + this._pending);
         this._updateStatusBar();
     }
 
