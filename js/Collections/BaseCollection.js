@@ -29,7 +29,7 @@ export default class BaseCollection extends Backbone.Collection
         this._filters = {};
         this._sort = {};//{ordering: '-created'};
         this._page = {};
-        this._enumerations = this._enumerations ? this._enumerations : [];
+        this._enumerations = this._enumerations ? this._enumerations : new Map();
         this.on('add', (model, collection, options) => this._onAdd(model, collection, options));
     }
 
@@ -46,17 +46,18 @@ export default class BaseCollection extends Backbone.Collection
     /**
      * Returns enumerations of this Collection. These are custom-defined in the subclasses.
      *
-     * Enumerations should be defined in subclasses as follows:
-     * - [{field: string, label: string, values: [{value: primitive type, label: string}] (optional)}]
+     * Enumerations should be defined in subclasses as ES6 Maps. The key is a property of 
+     * the associated Model in the Collection. The value is an Object:
+     *
+     * - {label: string, values: [{value: primitive type, label: string}] (optional)}
      *
      * In the above:
-     * - "field" is a property of the associated Model in the Collection
      * - "label" is a string that will appear in the table header
      * - "values" is optional; populate this array with explicit "value"/"label"s if desired, else BaseCollection will determine the values for enumeration based on the contents of the Collection
      * 
      * @todo Rodan server should provide explicit enumerations
      *
-     * @return {array} enumerations
+     * @return Map enumerations
      */
     getEnumerations()
     {
@@ -76,7 +77,7 @@ export default class BaseCollection extends Backbone.Collection
             this._parsePagination(response);
         }
 
-        if (this._enumerations && this._enumerations.length > 0)
+        if (this._enumerations && this._enumerations.size > 0)
         {
             this._populateEnumerations(response);
         }
@@ -301,18 +302,17 @@ export default class BaseCollection extends Backbone.Collection
     _populateEnumerations(response)
     {
         var items = response.results ? response.results : response;
-        for (var j in this._enumerations)
+        for (var [field, enumeration] of this._enumerations)
         {
-            var field = this._enumerations[j].field;
-            if (!this._enumerations[j].values || this._enumerations[j].values.length === 0)
+            if (!enumeration.values || enumeration.values.length === 0)
             {
-                this._enumerations[j].values = [];
+                enumeration.values = [];
                 for (var i in items)
                 {
                     var result = items[i];
-                    this._enumerations[j].values.push({value: result[field], label: result[field]});
+                    enumeration.values.push({value: result[field], label: result[field]});
                 }
-                this._enumerations[j].values = _.uniq(this._enumerations[j].values, false, function(item) {return item.value;});
+                enumeration.values = _.uniq(enumeration.values, false, function(item) {return item.value;});
             }
         }
     }
