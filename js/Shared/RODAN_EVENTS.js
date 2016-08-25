@@ -311,6 +311,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when User has changed password. */
         this.EVENT__USER_CHANGED_PASSWORD = 'EVENT__USER_CHANGED_PASSWORD';
+        /** Triggered when UserPreference for current User has been loaded. Sends {user_preference: UserPreference}. */
+        this.EVENT__USER_PREFERENCE_LOADED = 'EVENT__USER_PREFERENCE_LOADED';
         /** Triggered when User has been saved. Sends {user: User}. */
         this.EVENT__USER_SAVED = 'EVENT__USER_SAVED';
         /** Request current User's password be changed. Takes {currentpassword: string, newpassword: string}. */
