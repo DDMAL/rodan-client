@@ -301,18 +301,48 @@ export default class BaseCollection extends Backbone.Collection
      */
     _populateEnumerations(response)
     {
+        var options = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: this.route});
         var items = response.results ? response.results : response;
         for (var [field, enumeration] of this._enumerations)
         {
+            // If no enumerations, let's try to populate via routes. If that doesn't work, auto-populate.
             if (!enumeration.values || enumeration.values.length === 0)
             {
                 enumeration.values = [];
-                for (var i in items)
+
+                // Check if enumerations in 'OPTIONS' from server.
+                if (options.filter_fields[field] && options.filter_fields[field].length > 0)
                 {
-                    var result = items[i];
-                    enumeration.values.push({value: result[field], label: result[field]});
+                    for (var i in options.filter_fields[field])
+                    {
+                        var result = options.filter_fields[field][i];
+                        enumeration.values.push({value: result, label: result});
+                    }
+                    enumeration.values = _.uniq(enumeration.values, false, function(item) {return item.value;});
                 }
-                enumeration.values = _.uniq(enumeration.values, false, function(item) {return item.value;});
+                else
+                {
+                    for (var i in items)
+                    {
+                        var result = items[i];
+                        enumeration.values.push({value: result[field], label: result[field]});
+                    }
+                    enumeration.values = _.uniq(enumeration.values, false, function(item) {return item.value;});
+                }
+
+                // Sort.
+                enumeration.values.sort(function (a, b) 
+                {
+                    if (a.label > b.label)
+                    {
+                        return 1;
+                    }
+                    else if (a.label < b.label)
+                    {
+                        return -1;
+                    }
+                    return 0;
+                });
             }
         }
     }
