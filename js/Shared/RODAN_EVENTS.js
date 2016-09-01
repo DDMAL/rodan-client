@@ -313,11 +313,17 @@ class RODAN_EVENTS
         this.EVENT__USER_CHANGED_PASSWORD = 'EVENT__USER_CHANGED_PASSWORD';
         /** Triggered when UserPreference for current User has been loaded. Sends {user_preference: UserPreference}. */
         this.EVENT__USER_PREFERENCE_LOADED = 'EVENT__USER_PREFERENCE_LOADED';
+        /** Triggered when UserPreference saved. Sends {user_preference: UserPreference}. */
+        this.EVENT__USER_PREFERENCE_SAVED = 'EVENT__USER_PREFERENCE_SAVED';
         /** Triggered when User has been saved. Sends {user: User}. */
         this.EVENT__USER_SAVED = 'EVENT__USER_SAVED';
         /** Request current User's password be changed. Takes {currentpassword: string, newpassword: string}. */
         this.REQUEST__USER_CHANGE_PASSWORD = 'REQUEST__USER_CHANGE_PASSWORD';
-        /** Request a User be saved/updated. Takes {fields: {object with attributes to change}}. */
+        /** Request UserPreference for current User. Returns {user_preference: UserPreference (may be null if not yet loaded)}. */
+        this.REQUEST__USER_PREFERENCE = 'REQUEST_USER_PREFERENCE';
+        /** Request a UserPreference be saved/updated. Takes {fields: {object with attributes to change}}. */
+        this.REQUEST__USER_PREFERENCE_SAVE = 'REQUEST__USER_PREFERENCE_SAVE';
+        /** Request a User be saved/updated. Takes {user_preference: UserPreference}. */
         this.REQUEST__USER_SAVE = 'REQUEST__USER_SAVE';
 
         ///////////////////////////////////////////////////////////////////////////////////////

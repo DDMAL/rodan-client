@@ -11,7 +11,7 @@ export default class LayoutViewStatus extends Marionette.LayoutView
 // PUBLIC METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Initializes the view. In particular, it 
+     * Initializes the view.
      */
     initialize()
     {
@@ -25,7 +25,6 @@ export default class LayoutViewStatus extends Marionette.LayoutView
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_IDLE, () => this._handleEventServerNotice('progress-bar'));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_WAIT, () => this._handleEventServerNotice('progress-bar-warning'));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__SERVER_PANIC, () => this._handleEventServerNotice('progress-bar-danger'));
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__USER_PREFERENCE_LOADED, (options) => this._handleUserPreferenceLoaded(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -85,15 +84,6 @@ export default class LayoutViewStatus extends Marionette.LayoutView
         }
         $(this.el).find('div#statusbar').width(percent + '%');
         $(this.el).find('#status-pending_responses').text(text);
-    }
-
-    /**
-     * Handle user preference loaded.
-     */
-    _handleUserPreferenceLoaded(options)
-    {
-//        todo populate here
-  //      debugger;
     }
 }
 LayoutViewStatus.prototype.template = '#template-status';
