@@ -463,6 +463,8 @@ class RODAN_EVENTS
         this.EVENT__WORKFLOWRUN_DELETED = 'EVENT__WORKFLOWRUN_DELETED';
         /** Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_SAVED = 'EVENT__WORKFLOWRUN_SAVED';
+        /** Triggered when WorkflowRun started. Sends {workflowrun: WorkflowRun}. */
+        this.EVENT__WORKFLOWRUN_STARTED = 'EVENT__WORKFLOWRUN_STARTED';
         /** Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_SELECTED = 'EVENT__WORKFLOWRUN_SELECTED';
         /** Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. */
@@ -473,6 +475,8 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOWRUN_DELETE = 'REQUEST__WORKFLOWRUN_DELETE';
         /** Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. */
         this.REQUEST__WORKFLOWRUN_SAVE = 'REQUEST__WORKFLOWRUN_SAVE';
+        /** Request a WorkflowRun be started. Takes {model: WorkflowRun}. */
+        this.REQUEST__WORKFLOWRUN_START = 'REQUEST__WORKFLOWRUN_START';
     }
 }
 /** @ignore */
