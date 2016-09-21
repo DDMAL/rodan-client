@@ -86,6 +86,9 @@ export default class BehaviorTable extends Marionette.Behavior
      */
     _getFilters(collection, filterFields)
     {
+        // Some tables will be defined with enumerations.
+        var enumerations = collection.getEnumerations();
+
         // Get those columns with data names.
         var filters = [];
         this._datetimepickerElements = [];
@@ -98,6 +101,10 @@ export default class BehaviorTable extends Marionette.Behavior
             var datetimeGtFilter = false;
             if (filterFields[field])
             {
+                // First, check to see if this is an enumeration field (which Django doesn't cover).
+                // If it is, deal with it as such.
+
+
                 for (var j = 0; j < filterFields[field].length; j++)
                 {
                     var filter = filterFields[field][j];
@@ -118,6 +125,11 @@ export default class BehaviorTable extends Marionette.Behavior
                         case 'lt':
                         {
                             datetimeLtFilter = true;
+                            break;
+                        }
+
+                        case 'exact':
+                        {
                             break;
                         }
 
@@ -147,14 +159,12 @@ export default class BehaviorTable extends Marionette.Behavior
         }
 
         // Finally, get enumerations.
-        var enumerations = collection.getEnumerations();
-        for (i in enumerations)
+        var templateChoice = _.template($(this.options.templateFilterChoice).html());
+        var templateInput = _.template($(this.options.templateFilterEnum).html());
+        for (var [field, enumeration] of enumerations)
         {
-            var enumeration = enumerations[i];
-            var templateChoice = _.template($(this.options.templateFilterChoice).html());
-            var templateInput = _.template($(this.options.templateFilterEnum).html());
-            var htmlChoice = templateChoice({label: enumeration.label, field: enumeration.field});
-            var htmlInput = templateInput({label: enumeration.label, field: enumeration.field, values: enumeration.values});
+            var htmlChoice = templateChoice({label: enumeration.label, field: field});
+            var htmlInput = templateInput({label: enumeration.label, field: field, values: enumeration.values});
             var filterObject = {collectionItem: htmlChoice, input: htmlInput};
             filters.push(filterObject);
         }

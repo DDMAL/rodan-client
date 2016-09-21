@@ -30,8 +30,8 @@ export default class GlobalJobCollection extends GlobalCollection
         this._route = 'jobs';
         this._loadCommand = RODAN_EVENTS.REQUEST__GLOBAL_JOBS_LOAD;
         this._requestCommand = RODAN_EVENTS.REQUEST__GLOBAL_JOB_COLLECTION;
-        this._enumerations = [{field: 'category', label: 'Category'},
-                             {field: 'interactive', label: 'Interactive', values: [{value: 'True', label: 'True'},
-                                                                                   {value: 'False', label: 'False'}]}];
+        this._enumerations = new Map();
+        this._enumerations.set('category', {label: 'Category'});
+        this._enumerations.set('interactive', {label: 'Interactive', values: [{value: 'True', label: 'True'}, {value: 'False', label: 'False'}]});
     }
 }

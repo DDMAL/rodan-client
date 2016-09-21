@@ -311,11 +311,19 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when User has changed password. */
         this.EVENT__USER_CHANGED_PASSWORD = 'EVENT__USER_CHANGED_PASSWORD';
+        /** Triggered when UserPreference for current User has been loaded. Sends {user_preference: UserPreference}. */
+        this.EVENT__USER_PREFERENCE_LOADED = 'EVENT__USER_PREFERENCE_LOADED';
+        /** Triggered when UserPreference saved. Sends {user_preference: UserPreference}. */
+        this.EVENT__USER_PREFERENCE_SAVED = 'EVENT__USER_PREFERENCE_SAVED';
         /** Triggered when User has been saved. Sends {user: User}. */
         this.EVENT__USER_SAVED = 'EVENT__USER_SAVED';
         /** Request current User's password be changed. Takes {currentpassword: string, newpassword: string}. */
         this.REQUEST__USER_CHANGE_PASSWORD = 'REQUEST__USER_CHANGE_PASSWORD';
-        /** Request a User be saved/updated. Takes {fields: {object with attributes to change}}. */
+        /** Request UserPreference for current User. Returns {user_preference: UserPreference (may be null if not yet loaded)}. */
+        this.REQUEST__USER_PREFERENCE = 'REQUEST_USER_PREFERENCE';
+        /** Request a UserPreference be saved/updated. Takes {fields: {object with attributes to change}}. */
+        this.REQUEST__USER_PREFERENCE_SAVE = 'REQUEST__USER_PREFERENCE_SAVE';
+        /** Request a User be saved/updated. Takes {user_preference: UserPreference}. */
         this.REQUEST__USER_SAVE = 'REQUEST__USER_SAVE';
 
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -455,6 +463,8 @@ class RODAN_EVENTS
         this.EVENT__WORKFLOWRUN_DELETED = 'EVENT__WORKFLOWRUN_DELETED';
         /** Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_SAVED = 'EVENT__WORKFLOWRUN_SAVED';
+        /** Triggered when WorkflowRun started. Sends {workflowrun: WorkflowRun}. */
+        this.EVENT__WORKFLOWRUN_STARTED = 'EVENT__WORKFLOWRUN_STARTED';
         /** Triggered when the user selects an individual WorkflowRun. Sends {workflow: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_SELECTED = 'EVENT__WORKFLOWRUN_SELECTED';
         /** Triggered when the user selects to see all available WorkflowRuns. Sends {project: Project (Project associated with WorkflowRunCollection)}. */
@@ -465,6 +475,8 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOWRUN_DELETE = 'REQUEST__WORKFLOWRUN_DELETE';
         /** Request a WorkflowRun be saved/updated. Takes {model: WorkflowRun}. */
         this.REQUEST__WORKFLOWRUN_SAVE = 'REQUEST__WORKFLOWRUN_SAVE';
+        /** Request a WorkflowRun be started. Takes {model: WorkflowRun}. */
+        this.REQUEST__WORKFLOWRUN_START = 'REQUEST__WORKFLOWRUN_START';
     }
 }
 /** @ignore */

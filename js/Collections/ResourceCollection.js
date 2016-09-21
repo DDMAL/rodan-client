@@ -17,8 +17,7 @@ export default class ResourceCollection extends BaseCollection
         /** @ignore */
         this.model = Resource;
         this._route = 'resources';
-        this._enumerations = [{field: 'uploaded', 
-                               label: 'Uploaded or generated', 
-                               values: [{value: 'False', label: 'Generated'}, {value: 'True', label: 'Uploaded'}]}];
+        this._enumerations = new Map();
+        this._enumerations.set('uploaded', {label: 'Uploaded or generated', values: [{value: 'False', label: 'Generated'}, {value: 'True', label: 'Uploaded'}]});
     }
 }

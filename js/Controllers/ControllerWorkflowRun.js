@@ -23,6 +23,7 @@ export default class ControllerWorkflowRun extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_DELETED, options => this._handleEventWorkflowRunDeleteResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_STARTED, options => this._handleEventWorkflowRunStartResponse(options));
 
         // Requests.
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, options => this._handleEventCollectionSelected(options), this);
@@ -30,6 +31,7 @@ export default class ControllerWorkflowRun extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_CREATE, options => this._handleRequestWorkflowRunCreate(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_DELETE, options => this._handleRequestWorkflowRunDelete(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, options => this._handleRequestWorkflowRunSave(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWRUN_START, options => this._handleRequestWorkflowRunStart(options), this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -41,8 +43,7 @@ export default class ControllerWorkflowRun extends BaseController
     _handleEventWorkflowRunCreationResponse(options)
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
-        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_START, {workflowrun: options.workflowrun});
     }
 
     /**
@@ -92,6 +93,16 @@ export default class ControllerWorkflowRun extends BaseController
     }
 
     /**
+     * Handle event WorkflowRun start response.
+     */
+    _handleEventWorkflowRunStartResponse(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SELECTED_COLLECTION, {project: project});
+    }
+
+    /**
      * Handle request create WorkflowRun.
      */
     _handleRequestWorkflowRunCreate(options)
@@ -123,6 +134,17 @@ export default class ControllerWorkflowRun extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Run', text: 'Please wait...'});
         options.workflowrun.save(options.workflowrun.changed,
                                  {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
+    }
+
+    /**
+     * Handle request start WorkflowRun.
+     */
+    _handleRequestWorkflowRunStart(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Starting Workflow Run', text: 'Please wait...'});
+        options.workflowrun.set({status: 21});
+        options.workflowrun.save(options.workflowrun.changed,
+                                 {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_STARTED, {workflowrun: model})});
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
