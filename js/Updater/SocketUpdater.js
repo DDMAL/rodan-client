@@ -67,7 +67,7 @@ export default class SocketUpdater extends AbstractUpdater
         //
         // In these cases, the update is very general.
         // Else, we have to check if the model is related to our active project somehow.
-        if (!data.model || data.model === 'project')
+        if (!data.model || data.model === 'project' || !data.project)
         {
             this.update();
         }
