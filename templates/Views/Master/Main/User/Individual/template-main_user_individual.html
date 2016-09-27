@@ -5,7 +5,10 @@
     <input type="text" class="form-control input-sm" id="text-user_lastname" value="<%= _.escape(last_name) %>" name="text-user_lastname">
     <label for="text-user_email">Email:</label>
     <input type="text" class="form-control input-sm" id="text-user_email" value="<%= _.escape(email) %>" name="text-user_email">
-    <br>
+    <div class="checkbox" id="div-user_preference">
+        <label><input id="checkbox-send_email" type="checkbox" value="">Recieve Rodan notifications via email</label>
+    </div>
+    <div id="div-user_preference_loading">Waiting for user preferences to load.</div>
     <div class="btn-group" role="group">
         <button class="btn btn-xs btn-warning" id="button-save_user">Save</button>
         <button class="btn btn-xs btn-warning" id="button-change_password">Change Password</button>

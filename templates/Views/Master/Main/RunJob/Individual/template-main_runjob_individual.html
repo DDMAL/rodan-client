@@ -4,6 +4,9 @@
     Created: <%= _.formatFromUTC(created) %><br/>
     Updated: <%= _.formatFromUTC(updated) %><br/>
     Status: <%= statusText %><br/>
+    <div class="btn-group" role="group">
+        <button class="btn btn-xs btn-warning" id="button-open_runjob" disabled>Open</button>
+    </div><br/>
     Error summary: <%= error_summary %><br/>
     Error details:<br/>
     <textarea rows='10' readonly='readonly' style='width: 100%; resize: none;'><%= _.escape(error_details) %></textarea>

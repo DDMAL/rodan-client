@@ -30,17 +30,9 @@ export default class ViewRunJobCollectionItem extends BaseViewCollectionItem
     {
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, {runjob: this.model});
     }
-    /**
-     * Handle double-click.
-     */
-    _handleDoubleClick()
-    {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_ACQUIRE, {runjob: this.model});
-    }
 }
 ViewRunJobCollectionItem.prototype.template = '#template-main_runjob_collection_item';
 ViewRunJobCollectionItem.prototype.tagName = 'tr';
 ViewRunJobCollectionItem.prototype.events = {
-    'click': '_handleClick',
-    'dblclick': '_handleDoubleClick'
+    'click': '_handleClick'
 };

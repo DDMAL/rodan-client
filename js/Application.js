@@ -17,6 +17,7 @@ import ControllerResource from './Controllers/ControllerResource';
 import ControllerResourceList from './Controllers/ControllerResourceList';
 import ControllerRunJob from './Controllers/ControllerRunJob';
 import ControllerServer from './Controllers/ControllerServer';
+import ControllerUserPreference from './Controllers/ControllerUserPreference';
 import ControllerWorkflow from './Controllers/ControllerWorkflow';
 import ControllerWorkflowBuilder from './Controllers/ControllerWorkflowBuilder';
 import ControllerWorkflowJob from './Controllers/ControllerWorkflowJob';
@@ -147,6 +148,7 @@ export default class Application extends Marionette.Application
         this._resourceController = new ControllerResource();
         this._resourceListController = new ControllerResourceList();
         this._runJobController = new ControllerRunJob();
+        this._userPreferenceController = new ControllerUserPreference();
         this._workflowController = new ControllerWorkflow();
         this._workflowRunController = new ControllerWorkflowRun();
         this._workflowBuilderController = new ControllerWorkflowBuilder();

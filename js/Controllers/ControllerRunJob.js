@@ -22,7 +22,7 @@ export default class ControllerRunJob extends BaseController
     initialize()
     {
         this._runJobLocks = {};
-        setInterval(() => this._reacquire(), Configuration.RUNJOB_ACQUIRE_INTERVAL);
+ //       setInterval(() => this._reacquire(), Configuration.RUNJOB_ACQUIRE_INTERVAL);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -82,14 +82,14 @@ export default class ControllerRunJob extends BaseController
         var runJobUrl = options.runjob.get('url');
         if (options.runjob.available())
         {
-            var ajaxOptions = {
+            var ajaxSettings = {
                 url: options.runjob.get('interactive_acquire'),
                 type: 'POST',
                 dataType: 'json',
                 success: (response) => this._handleSuccessAcquire(response, runJobUrl, options.runjob),
                 error: () => this._removeRunJobLock(runJobUrl)
             };
-            $.ajax(ajaxOptions);
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
         }
         else if (options.runjob.get('working_user') === user.get('url'))
         {
@@ -103,7 +103,7 @@ export default class ControllerRunJob extends BaseController
      */
     _handleSuccessAcquire(response, runJobUrl, runJob)
     {
-        this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get('interactive_acquire'));
+//        this._registerRunJobForReacquire(runJobUrl, response.working_url, runJob.get('interactive_acquire'));
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_ACQUIRED, {runjob: runJob});
         this._openRunJobInterface(response.working_url);
     }

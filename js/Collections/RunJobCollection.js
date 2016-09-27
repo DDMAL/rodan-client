@@ -17,13 +17,14 @@ export default class RunJobCollection extends BaseCollection
         /** @ignore */
         this.model = RunJob;
         this._route = 'runjobs';
-        this._enumerations = [{field: 'status', label: 'Status', values: [{value: -1, label: 'Failed'},
-                                                                         {value: 0, label: 'Scheduled'},
-                                                                         {value: 1, label: 'Processing'},
-                                                                         {value: 2, label: 'Waiting for input'},
-                                                                         {value: 4, label: 'Finished'},
-                                                                         {value: 8, label: 'Expired'},
-                                                                         {value: 9, label: 'Cancelled'},
-                                                                         {value: 11, label: 'Retrying'}]}];
+        this._enumerations = new Map();
+        this._enumerations.set('status', {label: 'Status', values: [{value: -1, label: 'Failed'},
+                                                                    {value: 0, label: 'Scheduled'},
+                                                                    {value: 1, label: 'Processing'},
+                                                                    {value: 2, label: 'Waiting for input'},
+                                                                    {value: 4, label: 'Finished'},
+                                                                    {value: 8, label: 'Expired'},
+                                                                    {value: 9, label: 'Cancelled'},
+                                                                    {value: 11, label: 'Retrying'}]});
     }
 }
