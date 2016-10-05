@@ -311,7 +311,7 @@ export default class BaseCollection extends Backbone.Collection
                 enumeration.values = [];
 
                 // Check if enumerations in 'OPTIONS' from server.
-                if (options.filter_fields[field] && options.filter_fields[field].length > 0)
+/*                if (options.filter_fields[field] && options.filter_fields[field].length > 0)
                 {
                     for (var i in options.filter_fields[field])
                     {
@@ -321,7 +321,7 @@ export default class BaseCollection extends Backbone.Collection
                     enumeration.values = _.uniq(enumeration.values, false, function(item) {return item.value;});
                 }
                 else
-                {
+*/                {
                     for (var i in items)
                     {
                         var result = items[i];
