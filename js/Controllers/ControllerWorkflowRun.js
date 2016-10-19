@@ -20,7 +20,7 @@ export default class ControllerWorkflowRun extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunCreationResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunStartResponse(options)/*this._handleEventWorkflowRunCreationResponse(options)*/);
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_DELETED, options => this._handleEventWorkflowRunDeleteResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_STARTED, options => this._handleEventWorkflowRunStartResponse(options));
