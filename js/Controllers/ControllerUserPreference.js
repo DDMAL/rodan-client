@@ -43,7 +43,7 @@ export default class ControllerUserPreference extends BaseController
      */
     _handleEventAuthenticationSuccess(options)
     {
-        this._collection.fetch({data: {user: options.user.get('url')}, success: () => this._handleAjaxLoadUserPreference(options.user)});
+        this._collection.fetch({data: {user: options.user.id}, success: () => this._handleAjaxLoadUserPreference(options.user)});
     }
 
     /**
@@ -51,14 +51,16 @@ export default class ControllerUserPreference extends BaseController
      */
     _handleAjaxLoadUserPreference(user)
     {
-        if (this._collection.length === 0)
+        // @todo - see https://github.com/DDMAL/Rodan/issues/460
+        var userPreference = this._collection.findWhere({user: user.get('url')});
+        if (!userPreference)
         {
             this._userPreference = new UserPreference({user: user.get('url')});
             this._userPreference.save();
         }
         else
         {
-            this._userPreference = this._collection.at(0);
+            this._userPreference = userPreference;
             Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__USER_PREFERENCE_LOADED, {user_preference: this._userPreference});
         }
     }
