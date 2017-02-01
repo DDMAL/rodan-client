@@ -59,22 +59,20 @@ export default class ControllerProject extends BaseController
      */
     _handleEventProjectAdmin(options)
     {
-  /*      var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
+        var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
                                   error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                                   type: 'GET',
+                                  dataType: 'json',
                                   url: options.project.get('url') + 'admins/'};
         var ajaxSettingsWorkers = {success: (response) => this._handleProjectGetWorkersSuccess(response),
                                    error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                                    type: 'GET',
-                                   url: options.project.get('url') + 'workers/'};*/
-//        var test = {type: 'GET', url: 'https://132.206.14.136/users/'};
-  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: test});
-        var blah = new UserCollection();
-        blah.fetch();
-  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
-    //    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
-//        var view = new ViewProjectAdmin({model: options.project});
-  //      Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Administration'});
+                                  dataType: 'json',
+                                   url: options.project.get('url') + 'workers/'};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
+        var view = new ViewProjectAdmin({model: options.project});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Administration'});
     }
 
     /**
