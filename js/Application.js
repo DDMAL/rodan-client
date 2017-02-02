@@ -199,7 +199,10 @@ export default class Application extends Marionette.Application
         this.regionMaster.show(this._layoutViewMaster);
         
         // Do version compatibility trimming.
-        RODAN_EVENTS.enforceVersionCompatibility();
+        if (Configuration.ENFORCE_VERSION_COMPATIBILITY)
+        {
+            RODAN_EVENTS.enforceVersionCompatibility();
+        }
 
         // Check authentication.
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK); 
