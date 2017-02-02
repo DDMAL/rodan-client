@@ -65,7 +65,7 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
  //       $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
     }
 }
-LayoutViewProjectUsers.prototype.template = '#template-main_projectusers';
+LayoutViewProjectUsers.prototype.template = '#template-main_project_users';
 LayoutViewProjectUsers.prototype.ui = {
     buttonAddAll: '#button-add_all',
     buttonAddSelected: '#button-add_selected',
