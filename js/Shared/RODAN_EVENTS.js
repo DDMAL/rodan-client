@@ -496,7 +496,7 @@ class RODAN_EVENTS
     /** @ignore **/
     enforceVersionCompatibility()
     {
-        var serverVersionString = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION);
+        var serverVersionString = Radio.channel('rodan').request(this.REQUEST__SERVER_GET_VERSION);
         serverVersion = serverVersionString.split('.').map(Number);
         for (var event in this.VERSION__COMPATIBILITY)
         {
