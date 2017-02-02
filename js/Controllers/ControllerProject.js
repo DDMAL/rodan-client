@@ -61,7 +61,7 @@ export default class ControllerProject extends BaseController
     _handleEventProjectAdmin(options)
     {
         // Get admins and workers for project.
-        var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
+     /*   var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
                                   error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                                   type: 'GET',
                                   dataType: 'json',
@@ -73,10 +73,10 @@ export default class ControllerProject extends BaseController
                                    url: options.project.get('url') + 'workers/'};
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
-
+*/
         // Create view.
-        var projectAdminsView = new BaseViewCollection({collection: null});
-        var projectWorkersView = new BaseViewCollection({collection: null});
+        var projectAdminsView = new BaseViewCollection({collection: null, template: 'template-main_user_collection', childViewOptions: {template: 'template-main_user_collection_item'}});
+        var projectWorkersView = new BaseViewCollection({collection: null, template: 'template-main_user_collection', childViewOptions: {template: 'template-main_user_collection_item'}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
         // Show modal.
