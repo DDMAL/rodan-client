@@ -500,7 +500,7 @@ class RODAN_EVENTS
         var serverVersion = serverVersionString.split('.').map(Number);
         for (var event in this.VERSION__COMPATIBILITY)
         {
-            if (this.[event])
+            if (this[event])
             {
                 var requiredVersion = this.VERSION__COMPATIBILITY[event].split('.').map(Number);
                 if (requiredVersion[0] > serverVersion[0]
