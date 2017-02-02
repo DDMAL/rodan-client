@@ -1,3 +1,4 @@
+import Radio from 'backbone.radio';
 
 // todo
 // CONTROLLERS: workflowjob messages the builder and it shouldn't
@@ -501,7 +502,7 @@ class RODAN_EVENTS
         {
             if (this[event])
             {
-                var requiredVersion = this.[event].split('.').map(Number);
+                var requiredVersion = this[event].split('.').map(Number);
                 if (requiredVersion[0] > serverVersion[0]
                     || requiredVersion[1] > serverVersion[1]
                     || requiredVersion[2] > serverVersion[2])
