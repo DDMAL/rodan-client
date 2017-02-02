@@ -60,23 +60,31 @@ export default class ControllerProject extends BaseController
      */
     _handleEventProjectAdmin(options)
     {
+        // Create collections to store admins and workers.
+        var adminUserCollection = new UserCollection();
+        var workerUserCollection = new UserCollection();
+
         // Get admins and workers for project.
-     /*   var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response),
+        var ajaxSettingsAdmins = {success: (response) => this._handleProjectGetAdminsSuccess(response, adminUserCollection),
                                   error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                                   type: 'GET',
                                   dataType: 'json',
                                   url: options.project.get('url') + 'admins/'};
-        var ajaxSettingsWorkers = {success: (response) => this._handleProjectGetWorkersSuccess(response),
+        var ajaxSettingsWorkers = {success: (response) => this._handleProjectGetWorkersSuccess(response, workerUserCollection),
                                    error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                                    type: 'GET',
                                    dataType: 'json',
                                    url: options.project.get('url') + 'workers/'};
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
-*/
+
         // Create view.
-        var projectAdminsView = new BaseViewCollection({collection: null, template: '#template-main_user_collection', childViewOptions: {template: '#template-main_user_collection_item'}});
-        var projectWorkersView = new BaseViewCollection({collection: null, template: '#template-main_user_collection', childViewOptions: {template: '#template-main_user_collection_item'}});
+        var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
+                                                        template: '#template-main_user_collection', 
+                                                        childViewOptions: {template: '#template-main_user_collection_item'}});
+        var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
+                                                         template: '#template-main_user_collection',
+                                                         childViewOptions: {template: '#template-main_user_collection_item'}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
         // Show modal.
@@ -177,7 +185,7 @@ export default class ControllerProject extends BaseController
     /**
      * Handle project admins get success.
      */
-    _handleProjectGetAdminsSuccess(response)
+    _handleProjectGetAdminsSuccess(response, collection)
     {
 debugger;
     }
@@ -185,7 +193,7 @@ debugger;
     /**
      * Handle project workers get success.
      */
-    _handleProjectGetWorkersSuccess(response)
+    _handleProjectGetWorkersSuccess(response, collection)
     {
 debugger;
     }
