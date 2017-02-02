@@ -75,8 +75,8 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
 */
         // Create view.
-        var projectAdminsView = new BaseViewCollection({collection: null, template: 'template-main_user_collection', childViewOptions: {template: 'template-main_user_collection_item'}});
-        var projectWorkersView = new BaseViewCollection({collection: null, template: 'template-main_user_collection', childViewOptions: {template: 'template-main_user_collection_item'}});
+        var projectAdminsView = new BaseViewCollection({collection: null, template: '#template-main_user_collection', childViewOptions: {template: '#template-main_user_collection_item'}});
+        var projectWorkersView = new BaseViewCollection({collection: null, template: '#template-main_user_collection', childViewOptions: {template: '#template-main_user_collection_item'}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
         // Show modal.
