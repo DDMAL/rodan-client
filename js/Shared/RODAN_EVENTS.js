@@ -502,12 +502,19 @@ class RODAN_EVENTS
         {
             if (this[event])
             {
-                var requiredVersion = this.VERSION__COMPATIBILITY[event].split('.').map(Number);
+                var requiredVersionString = this.VERSION__COMPATIBILITY[event];
+                var requiredVersion = requiredVersionString.split('.').map(Number);
                 if (requiredVersion[0] > serverVersion[0]
                     || requiredVersion[1] > serverVersion[1]
                     || requiredVersion[2] > serverVersion[2])
                 {
-                    this[event] = this[event] + '___REQUIRES_RODAN_VERSION_' + serverVersionString;
+                    var requiresEvent = 'EVENT__REQUIRES_RODAN_VERSION_' + serverVersionString;
+                    this[event] = requiresEvent;
+                    var messageString = 'This feature requires Rodan Server v' + requiredVersionString + '. The Rodan Server is currently v' + serverVersionString + '.';
+                    messageString += ' (' + event + ')';
+                    var modalOptions = {title: 'Feature not supported for this version of Rodan', text: messageString, override: true};
+                    Radio.channel('rodan').on(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_SHOW_SIMPLE, modalOptions));
+                    Radio.channel('rodan').reply(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_SHOW_SIMPLE, modalOptions));
                 }
             }
         }
