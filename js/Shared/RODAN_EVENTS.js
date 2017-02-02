@@ -477,6 +477,39 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOWRUN_SAVE = 'REQUEST__WORKFLOWRUN_SAVE';
         /** Request a WorkflowRun be started. Takes {model: WorkflowRun}. */
         this.REQUEST__WORKFLOWRUN_START = 'REQUEST__WORKFLOWRUN_START';
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        // VERSION COMPATIBILITY CHECKS
+        //
+        // The following is a list of Radio event calls that are limited by Rodan version.
+        // The member name is the particular Event/Request. Its value is the minimum Rodan
+        // version it requires.
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /** @ignore **/
+        this.VERSION__COMPATIBILITY =
+        {
+            'EVENT__PROJECT_ADMIN': '1.1.5'
+        };
+    }
+
+    /** @ignore **/
+    enforceVersionCompatibility()
+    {
+        var serverVersionString = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_VERSION);
+        serverVersion = serverVersion.split('.').map(Number);
+        for (var event in this.VERSION__COMPATIBILITY)
+        {
+            if (this[event])
+            {
+                var requiredVersion = this.[event].split('.').map(Number);
+                if (requiredVersion[0] > serverVersion[0]
+                    || requiredVersion[1] > serverVersion[1]
+                    || requiredVersion[2] > serverVersion[2])
+                {
+                    this[event] = this[event] + '___REQUIRES_RODAN_VERSION_' + serverVersionString;
+                }
+            }
+        }
     }
 }
 /** @ignore */
