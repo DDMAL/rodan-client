@@ -187,7 +187,7 @@ export default class ControllerProject extends BaseController
      */
     _handleProjectGetAdminsSuccess(response, collection)
     {
-debugger;
+        collection.fetch({data: {username__in: response.join()}});
     }
 
     /**
@@ -195,6 +195,6 @@ debugger;
      */
     _handleProjectGetWorkersSuccess(response, collection)
     {
-debugger;
+        collection.fetch({data: {username__in: response.join()}});
     }
 }
