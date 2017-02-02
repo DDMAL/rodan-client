@@ -1,4 +1,5 @@
 import BaseController from './BaseController';
+import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import LayoutViewProjectUsers from 'js/Views/Master/Main/Project/Individual/LayoutViewProjectUsers';
