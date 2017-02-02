@@ -1,5 +1,6 @@
 import BaseController from './BaseController';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
+import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import LayoutViewProjectUsers from 'js/Views/Master/Main/Project/Individual/LayoutViewProjectUsers';
@@ -81,9 +82,11 @@ export default class ControllerProject extends BaseController
         // Create view.
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
                                                         template: '#template-main_user_collection', 
+                                                        childView: BaseViewCollectionItem,
                                                         childViewOptions: {template: '#template-main_user_collection_item'}});
         var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
                                                          template: '#template-main_user_collection',
+                                                         childView: BaseViewCollectionItem,
                                                          childViewOptions: {template: '#template-main_user_collection_item'}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
