@@ -8,6 +8,7 @@ import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
 import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
 import ViewProjectCollection from 'js/Views/Master/Main/Project/Collection/ViewProjectCollection';
+import ViewUserCollectionItem from 'js/Views/Master/Main/User/Collection/ViewUserCollectionItem';
 import ViewWorkflowRunCollection from 'js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
 
@@ -41,6 +42,7 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADMIN, options => this._handleEventProjectAdmin(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, options => this._handleEventProjectRemovedUserAdmin(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventCollectionSelected());
@@ -51,6 +53,7 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_ADMIN, options => this._handleRequestRemoveUserAdmin(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -82,11 +85,11 @@ export default class ControllerProject extends BaseController
         // Create view.
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
                                                         template: '#template-main_user_collection', 
-                                                        childView: BaseViewCollectionItem,
+                                                        childView: ViewUserCollectionItem,
                                                         childViewOptions: {template: '#template-main_user_collection_item'}});
         var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
                                                          template: '#template-main_user_collection',
-                                                         childView: BaseViewCollectionItem,
+                                                         childView: ViewUserCollectionItem,
                                                          childViewOptions: {template: '#template-main_user_collection_item'}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
@@ -199,5 +202,21 @@ export default class ControllerProject extends BaseController
     _handleProjectGetWorkersSuccess(response, collection)
     {
         collection.fetch({data: {username__in: response.join()}});
+    }
+
+    /**
+     * Handle request to remove User as Project admin.
+     */
+    _handleRequestRemoveUserAdmin(options)
+    {
+        debugger;
+    }
+
+    /**
+     * Handle removed User as Project admin.
+     */
+    _handleEventProjectRemovedUserAdminoptions(options)
+    {
+        debugger;
     }
 }
