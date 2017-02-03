@@ -29,6 +29,7 @@ export default class ControllerModal extends BaseController
     _initializeRadio()
     {
         // Requests.
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_ERROR, () => this._handleRequestModalError());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
@@ -98,6 +99,23 @@ export default class ControllerModal extends BaseController
         if ($modalEl.is(':visible'))
         {
             $('.modal-footer').text(options.text); 
+        }
+    }
+
+    /**
+     * Handles modal error. If modal is already visible, changes footer text.
+     * Else, creates simple modal.
+     */
+    _handleRequestModalError(options)
+    {
+        var $modalEl = $('#modal-generic');
+        if ($modalEl.is(':visible'))
+        {
+            $('.modal-footer').text(options.text); 
+        }
+        else
+        {
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'ERROR', text: options.text});
         }
     }
 }

@@ -130,6 +130,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // Modal
         ///////////////////////////////////////////////////////////////////////////////////////
+        /** Request an error be displayed. This is a "convenience" request -- if a modal is currently visible (which is probably related somehow to the error) the footer will be updated with the error message. If no modal visible, REQUEST__MODAL_SHOW_SIMPLE will be called. Takes {text: string}. */
+        this.REQUEST__MODAL_ERROR = 'REQUEST__MODAL_ERROR';
         /** Request modal window to hide/close. */
         this.REQUEST__MODAL_HIDE = 'REQUEST__MODAL_HIDE';
         /** Request modal window to show/open with provided Marionette View. If another modal is currently open the request will not show. Takes {view: Marionette.View, title: string, override: boolean (optional; default false) will close current modal iff true}. */
