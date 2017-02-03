@@ -235,12 +235,12 @@ export default class ControllerProject extends BaseController
             }
             else
             {
-                // @todo error
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {text: 'An error occured trying to remove this User.'});
             }
         }
         else
         {
-            // @todo error
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {text: 'At least one project admin, the creator, must exist.'});
         }
     }
 
@@ -268,12 +268,8 @@ export default class ControllerProject extends BaseController
             }
             else
             {
-                // @todo error
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {text: 'An error occured trying to remove this User.'});
             }
-        }
-        else
-        {
-            // @todo error
         }
     }
 

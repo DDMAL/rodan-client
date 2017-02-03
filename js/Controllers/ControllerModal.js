@@ -29,7 +29,7 @@ export default class ControllerModal extends BaseController
     _initializeRadio()
     {
         // Requests.
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_ERROR, () => this._handleRequestModalError());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_ERROR, (options) => this._handleRequestModalError(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
