@@ -42,7 +42,6 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADMIN, options => this._handleEventProjectAdmin(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, options => this._handleEventProjectRemovedUserAdmin(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventCollectionSelected());
@@ -54,6 +53,7 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_SAVE, options => this._handleRequestProjectSave(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_DELETE, options => this._handleRequestProjectDelete(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_ADMIN, options => this._handleRequestRemoveUserAdmin(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_WORKER, options => this._handleRequestRemoveUserWorker(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -87,7 +87,8 @@ export default class ControllerProject extends BaseController
                                                         template: '#template-main_user_collection', 
                                                         childView: ViewUserCollectionItem,
                                                         childViewOptions: {template: '#template-main_user_collection_item',
-                                                                           project: options.project}});
+                                                                           project: options.project,
+                                                                           admin: true}});
         var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
                                                          template: '#template-main_user_collection',
                                                          childView: ViewUserCollectionItem,
@@ -208,23 +209,67 @@ export default class ControllerProject extends BaseController
 
     /**
      * Handle request to remove User as Project admin.
+     * We have to use a custom AJAX call since modifying the users of a Project
+     * has no endpoint at the moment.
      */
     _handleRequestRemoveUserAdmin(options)
     {
         var admins = options.project.get('admins');
-        var userIndex = admins.indexOf(options.user.get('username'));
-        if (userIndex >== 0)
+        if (admins.length > 1)
         {
-            admins.splice(userIndex, 1);
-            options.project.save({admins: admins}, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project})});
+            var userIndex = admins.indexOf(options.user.get('username'));
+            if (userIndex >= 0)
+            {
+                admins.splice(userIndex, 1);
+                var ajaxSettingsAdmins = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project}),
+                                          error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                          type: 'PUT',
+                                          dataType: 'json',
+                                          data: admins.join(),
+                                          url: options.project.get('url') + 'admins/'};
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+            }
+            else
+            {
+                // @todo error
+            }
+        }
+        else
+        {
+            // @todo error
         }
     }
 
     /**
-     * Handle removed User as Project admin.
+     * Handle request to remove User as Project worker.
+     * We have to use a custom AJAX call since modifying the users of a Project
+     * has no endpoint at the moment.
      */
-    _handleEventProjectRemovedUserAdminoptions(options)
+    _handleRequestRemoveUserWorker(options)
     {
-        debugger;
+        var users = options.project.get('workers');
+        if (users.length > 0)
+        {
+            var userIndex = users.indexOf(options.user.get('username'));
+            if (userIndex >= 0)
+            {
+                users.splice(userIndex, 1);
+                var ajaxSettingsAdmins = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_WORKER, {project: options.project}),
+                                          error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                          type: 'PUT',
+                                          dataType: 'json',
+                                          data: users.join(),
+                                          url: options.project.get('url') + 'workers/'};
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+            }
+            else
+            {
+                // @todo error
+            }
+        }
+        else
+        {
+            // @todo error
+        }
     }
 }

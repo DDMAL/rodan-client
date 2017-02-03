@@ -13,11 +13,12 @@ export default class ViewUserCollectionItem extends BaseViewCollectionItem
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object; 'options.project' (Project) must also be provided for the associated Project
+     * @param {object} options Marionette.View options object; 'options.project' (Project) must also be provided for the associated Project; if 'options.admin' is true, user treated as Project 'admin', else 'worker'
      */
     initialize(options)
     {
         this._project = options.project;
+        this._removeEvent = options.admin ? RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_ADMIN : RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_WORKER;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -28,12 +29,11 @@ export default class ViewUserCollectionItem extends BaseViewCollectionItem
      */
     _handleClickButtonRemove()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_REMOVE_USER_ADMIN,
-                                       {user: this.model, project: this._project});
+        Radio.channel('rodan').request(this._removeEvent, {user: this.model, project: this._project});
     }
 }
 ViewUserCollectionItem.prototype.ui = {
-    buttonRemove: '#button-main_project_remove_admin'
+    buttonRemove: '#button-main_project_remove_user'
 };
 ViewUserCollectionItem.prototype.events = {
     'click @ui.buttonRemove': '_handleClickButtonRemove'

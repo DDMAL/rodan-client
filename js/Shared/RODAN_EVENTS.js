@@ -166,6 +166,8 @@ class RODAN_EVENTS
         this.EVENT__PROJECT_DELETED = 'EVENT__PROJECT_DELETED';
         /** Triggered when User has been removed as Project admin. Sends {project: Project}. */
         this.EVENT__PROJECT_REMOVED_USER_ADMIN = 'EVENT__PROJECT_REMOVED_USER_ADMIN',
+        /** Triggered when User has been removed as Project worker. Sends {project: Project}. */
+        this.EVENT__PROJECT_REMOVED_USER_WORKER = 'EVENT__PROJECT_REMOVED_USER_WORKER',
         /** Triggered when Project has been saved. Sends {project: Project}. */
         this.EVENT__PROJECT_SAVED = 'EVENT__PROJECT_SAVED';
         /** Triggered when the user selects an individual Project. Sends {project: Project}. */
@@ -180,6 +182,8 @@ class RODAN_EVENTS
         this.REQUEST__PROJECT_GET_ACTIVE = 'REQUEST__PROJECT_GET_ACTIVE';
         /** Request a User be removed as Project admin. Takes {project: Project, user: User} */
         this.REQUEST__PROJECT_REMOVE_USER_ADMIN = 'REQUEST__PROJECT_REMOVE_USER_ADMIN',
+        /** Request a User be removed as Project worker. Takes {project: Project, user: User} */
+        this.REQUEST__PROJECT_REMOVE_USER_WORKER = 'REQUEST__PROJECT_REMOVE_USER_WORKER',
         /** Request a Project be saved/updated. Takes {project: Project, fields: {object with attributes to change}}. */
         this.REQUEST__PROJECT_SAVE = 'REQUEST__PROJECT_SAVE';
         /** Request a Project be set as active Project. Takes {project: Project}. */
