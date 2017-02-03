@@ -216,7 +216,7 @@ export default class ControllerProject extends BaseController
         if (userIndex >== 0)
         {
             admins.splice(userIndex, 1);
-            options.project.save({admins: admins, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project})});
+            options.project.save({admins: admins}, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project})});
         }
     }
 
