@@ -38,9 +38,11 @@ export default class ControllerProject extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADMIN, options => this._handleEventProjectAdmin(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, options => this._handleEventProjectShowUsers(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, options => this._handleEventProjectRemovedUser(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_WORKER, options => this._handleEventProjectRemovedUser(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventCollectionSelected());
@@ -59,10 +61,13 @@ export default class ControllerProject extends BaseController
 // PRIVATE METHODS - Event handlers
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle event Project admin.
+     * Handle event Project show users.
      */
-    _handleEventProjectAdmin(options)
+    _handleEventProjectShowUsers(options)
     {
+        // Make sure project is updated.
+        options.project.fetch();
+
         // Create collections to store admins and workers.
         var adminUserCollection = new UserCollection();
         var workerUserCollection = new UserCollection();
@@ -270,5 +275,14 @@ export default class ControllerProject extends BaseController
         {
             // @todo error
         }
+    }
+
+    /**
+     * Handle project removed user.
+     */
+    _handleEventProjectRemovedUser(options)
+    {
+        this._activeProject.fetch();
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, {project: this._activeProject});
     }
 }

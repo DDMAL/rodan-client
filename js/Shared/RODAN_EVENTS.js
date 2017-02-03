@@ -159,7 +159,7 @@ class RODAN_EVENTS
         // Project
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when Project admin interface has been selected. Takes {project: Project}. */
-        this.EVENT__PROJECT_ADMIN = 'EVENT__PROJECT_ADMIN';
+        this.EVENT__PROJECT_USERS_SELECTED = 'EVENT__PROJECT_USERS_SELECTED';
         /** Triggered when Project has been created. Sends {project: Project}. */
         this.EVENT__PROJECT_CREATED = 'EVENT__PROJECT_CREATED';
         /** Triggered when Project has been deleted. Sends {project: Project}. */
@@ -497,7 +497,7 @@ class RODAN_EVENTS
         /** @ignore **/
         this.VERSION__COMPATIBILITY =
         {
-            'EVENT__PROJECT_ADMIN': '1.1.5'
+            'EVENT__PROJECT_USERS_SELECTED': '1.1.5'
         };
     }
 
