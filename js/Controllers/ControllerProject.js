@@ -218,6 +218,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestRemoveUserAdmin(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_UPDATE_FOOTER, {text: 'this is a test'});
         var admins = options.project.get('admins');
         if (admins.length > 1)
         {

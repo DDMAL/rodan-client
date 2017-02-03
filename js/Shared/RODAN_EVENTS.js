@@ -136,6 +136,8 @@ class RODAN_EVENTS
         this.REQUEST__MODAL_SHOW = 'REQUEST__MODAL_SHOW';
         /** Request modal window to show/open without view. If another modal is currently open the request will not show. Takes {title: string, text: string, override: boolean (optional; default false) will close current modal iff true}. */
         this.REQUEST__MODAL_SHOW_SIMPLE = 'REQUEST__MODAL_SHOW_SIMPLE';
+        /** Request the current modal window (if available) have the provided text set in the footer. This is useful for user feedback. Takes {text: string}. */
+        this.REQUEST__MODAL_UPDATE_FOOTER = 'REQUEST__MODAL_UPDATE_FOOTER';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Model
