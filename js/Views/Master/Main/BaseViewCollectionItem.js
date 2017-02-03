@@ -21,6 +21,7 @@ export default class BaseViewCollectionItem extends Marionette.ItemView
         this.$el.attr('title', description);
     }
 }
+BaseViewCollectionItem.prototype.tagName = 'tr';
 BaseViewCollectionItem.prototype.modelEvents = {
     'change': 'render'
 };

@@ -159,11 +159,15 @@ class RODAN_EVENTS
         // Project
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when Project admin interface has been selected. Takes {project: Project}. */
-        this.EVENT__PROJECT_ADMIN = 'EVENT__PROJECT_ADMIN';
+        this.EVENT__PROJECT_USERS_SELECTED = 'EVENT__PROJECT_USERS_SELECTED';
         /** Triggered when Project has been created. Sends {project: Project}. */
         this.EVENT__PROJECT_CREATED = 'EVENT__PROJECT_CREATED';
         /** Triggered when Project has been deleted. Sends {project: Project}. */
         this.EVENT__PROJECT_DELETED = 'EVENT__PROJECT_DELETED';
+        /** Triggered when User has been removed as Project admin. Sends {project: Project}. */
+        this.EVENT__PROJECT_REMOVED_USER_ADMIN = 'EVENT__PROJECT_REMOVED_USER_ADMIN',
+        /** Triggered when User has been removed as Project worker. Sends {project: Project}. */
+        this.EVENT__PROJECT_REMOVED_USER_WORKER = 'EVENT__PROJECT_REMOVED_USER_WORKER',
         /** Triggered when Project has been saved. Sends {project: Project}. */
         this.EVENT__PROJECT_SAVED = 'EVENT__PROJECT_SAVED';
         /** Triggered when the user selects an individual Project. Sends {project: Project}. */
@@ -176,6 +180,10 @@ class RODAN_EVENTS
         this.REQUEST__PROJECT_DELETE = 'REQUEST__PROJECT_DELETE';
         /** Request currently active/open Project. Returns Project (or null). */
         this.REQUEST__PROJECT_GET_ACTIVE = 'REQUEST__PROJECT_GET_ACTIVE';
+        /** Request a User be removed as Project admin. Takes {project: Project, user: User} */
+        this.REQUEST__PROJECT_REMOVE_USER_ADMIN = 'REQUEST__PROJECT_REMOVE_USER_ADMIN',
+        /** Request a User be removed as Project worker. Takes {project: Project, user: User} */
+        this.REQUEST__PROJECT_REMOVE_USER_WORKER = 'REQUEST__PROJECT_REMOVE_USER_WORKER',
         /** Request a Project be saved/updated. Takes {project: Project, fields: {object with attributes to change}}. */
         this.REQUEST__PROJECT_SAVE = 'REQUEST__PROJECT_SAVE';
         /** Request a Project be set as active Project. Takes {project: Project}. */
@@ -489,7 +497,7 @@ class RODAN_EVENTS
         /** @ignore **/
         this.VERSION__COMPATIBILITY =
         {
-            'EVENT__PROJECT_ADMIN': '1.1.5'
+            'EVENT__PROJECT_USERS_SELECTED': '1.1.5'
         };
     }
 
