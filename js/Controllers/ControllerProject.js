@@ -231,7 +231,7 @@ export default class ControllerProject extends BaseController
                                     dataType: 'json',
                                     data: admins.join(),
                                     url: options.project.get('url') + 'admins/'};
-                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
             }
             else
             {
@@ -264,7 +264,7 @@ export default class ControllerProject extends BaseController
                                     dataType: 'json',
                                     data: users.join(),
                                     url: options.project.get('url') + 'workers/'};
-                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
+                Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
             }
             else
             {
