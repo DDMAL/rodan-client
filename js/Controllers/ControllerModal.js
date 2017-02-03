@@ -45,7 +45,7 @@ export default class ControllerModal extends BaseController
     _handleRequestModalHide()
     {
         var $modalElement = $('#modal-generic');
-        $('.modal-footer').removeClass('.modal-footer-error');
+        $('.modal-footer').removeClass('modal-footer-error');
         $modalElement.modal('hide');
         this._waiting = false;
     }
@@ -118,6 +118,6 @@ export default class ControllerModal extends BaseController
         {
             Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'ERROR', text: options.text});
         }
-        $('.modal-footer').addClass('.modal-footer-error');
+        $('.modal-footer').addClass('modal-footer-error');
     }
 }
