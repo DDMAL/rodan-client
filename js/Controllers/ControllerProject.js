@@ -65,6 +65,8 @@ export default class ControllerProject extends BaseController
      */
     _handleEventProjectShowUsers(options)
     {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+
         // Make sure project is updated.
         options.project.fetch();
 
@@ -101,7 +103,7 @@ export default class ControllerProject extends BaseController
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
         // Show modal.
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Users', override: true});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Users'});
     }
 
     /**

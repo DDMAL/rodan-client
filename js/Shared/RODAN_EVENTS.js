@@ -524,9 +524,9 @@ class RODAN_EVENTS
                     this[event] = requiresEvent;
                     var messageString = 'This feature requires Rodan Server v' + requiredVersionString + '. The Rodan Server is currently v' + serverVersionString + '.';
                     messageString += ' (' + event + ')';
-                    var modalOptions = {title: 'Feature not supported for this version of Rodan', text: messageString, override: true};
-                    Radio.channel('rodan').on(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_SHOW_SIMPLE, modalOptions));
-                    Radio.channel('rodan').reply(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_SHOW_SIMPLE, modalOptions));
+                    var modalOptions = {text: messageString};
+                    Radio.channel('rodan').on(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_ERROR, modalOptions));
+                    Radio.channel('rodan').reply(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_ERROR, modalOptions));
                 }
             }
         }
