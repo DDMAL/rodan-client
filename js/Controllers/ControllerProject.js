@@ -1,18 +1,17 @@
 import BaseController from './BaseController';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
-import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import LayoutViewProjectUsers from 'js/Views/Master/Main/Project/Individual/LayoutViewProjectUsers';
 import Project from 'js/Models/Project';
 import Radio from 'backbone.radio';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
+import UserCollection from 'js/Collections/UserCollection';
 import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
 import ViewProjectCollection from 'js/Views/Master/Main/Project/Collection/ViewProjectCollection';
 import ViewUserCollectionItem from 'js/Views/Master/Main/User/Collection/ViewUserCollectionItem';
 import ViewWorkflowRunCollection from 'js/Views/Master/Main/WorkflowRun/Collection/ViewWorkflowRunCollection';
 import WorkflowRunCollection from 'js/Collections/WorkflowRunCollection';
-
-import UserCollection from 'js/Collections/UserCollection';
 
 /**
  * Controller for Projects.
@@ -221,12 +220,12 @@ export default class ControllerProject extends BaseController
             if (userIndex >= 0)
             {
                 admins.splice(userIndex, 1);
-                var ajaxSettingsAdmins = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project}),
-                                          error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
-                                          type: 'PUT',
-                                          dataType: 'json',
-                                          data: admins.join(),
-                                          url: options.project.get('url') + 'admins/'};
+                var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, {project: options.project}),
+                                    error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                    type: 'PUT',
+                                    dataType: 'json',
+                                    data: admins.join(),
+                                    url: options.project.get('url') + 'admins/'};
                 Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
             }
             else
@@ -254,12 +253,12 @@ export default class ControllerProject extends BaseController
             if (userIndex >= 0)
             {
                 users.splice(userIndex, 1);
-                var ajaxSettingsAdmins = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_WORKER, {project: options.project}),
-                                          error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
-                                          type: 'PUT',
-                                          dataType: 'json',
-                                          data: users.join(),
-                                          url: options.project.get('url') + 'workers/'};
+                var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_WORKER, {project: options.project}),
+                                    error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                                    type: 'PUT',
+                                    dataType: 'json',
+                                    data: users.join(),
+                                    url: options.project.get('url') + 'workers/'};
                 Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
             }
             else
