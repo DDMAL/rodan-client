@@ -104,7 +104,7 @@ export default class ControllerResourceList extends BaseController
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Resource List'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Resource List'});
     }
 
     /**

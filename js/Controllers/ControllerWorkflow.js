@@ -66,7 +66,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandDeleteWorkflow(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Workflow', content: 'Please wait...'});
         // Clear the individual view (if there).
         if (this._viewItem !== null && options.workflow === this._viewItem.model)
         {
@@ -80,7 +80,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandAddWorkflow(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Workflow', content: 'Please wait...'});
         var workflow = new Workflow({project: options.project.get('url'), name: 'untitled'});
         workflow.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
     }
@@ -90,7 +90,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleRequestSaveWorkflow(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Workflow', content: 'Please wait...'});
         options.workflow.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_SAVED, {workflow: model})});
     }
 
@@ -107,7 +107,7 @@ export default class ControllerWorkflow extends BaseController
      */
     _handleCommandImportWorkflow(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Importing Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Importing Workflow', content: 'Please wait...'});
         var fileReader = new FileReader();
         fileReader.onerror = (event) => this._handleFileReaderError(event);
         fileReader.onload = (event) => this._handleFileReaderLoaded(event, options.project);

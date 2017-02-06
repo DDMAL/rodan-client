@@ -107,7 +107,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunCreate(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Workflow Run', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Workflow Run', content: 'Please wait...'});
         var name = options.workflow.get('name');
         var description = 'Run of Workflow "' + name + '"\n\n' + this._getResourceAssignmentDescription(options.assignments);
         var workflowRun = new WorkflowRun({workflow: options.workflow.get('url'), 
@@ -122,7 +122,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunDelete(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow Run', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Workflow Run', content: 'Please wait...'});
         options.workflowrun.destroy({success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_DELETED, {workflowrun: model})});
     }
 
@@ -131,7 +131,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunSave(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Run', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Workflow Run', content: 'Please wait...'});
         options.workflowrun.save(options.workflowrun.changed,
                                  {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, {workflowrun: model})});
     }
@@ -141,7 +141,7 @@ export default class ControllerWorkflowRun extends BaseController
      */
     _handleRequestWorkflowRunStart(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Starting Workflow Run', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Starting Workflow Run', content: 'Please wait...'});
         options.workflowrun.set({status: 21});
         options.workflowrun.save(options.workflowrun.changed,
                                  {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_STARTED, {workflowrun: model})});

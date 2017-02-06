@@ -96,7 +96,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     {
         var user = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_USER);
         var view = new ViewUser({model: user});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: user.get('username'), view: view});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: user.get('username'), content: view});
     }
 
     /**
@@ -122,7 +122,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
                                                                  serverConfiguration: serverConfig,
                                                                  date: serverDate,
                                                                  client: Configuration.CLIENT});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'About', text: html});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'About', content: html});
     }
 
     /**
@@ -131,7 +131,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     _handleRequestShowHelp()
     {
         var html = _.template($('#template-misc_help').html())({email: Configuration.ADMIN_CLIENT.EMAIL, name: Configuration.ADMIN_CLIENT.NAME, url: Configuration.WEBSITE_URL});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Help', text: html});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Help', content: html});
     }
 
     /**
@@ -143,7 +143,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
         var view = new BaseViewCollection({collection: collection,
                                            template: '#template-resourcetype_collection',
                                            childView: ViewResourceTypeDetailCollectionItem});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', view: view});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
     }
 }
 LayoutViewNavigation.prototype.template = '#template-navigation';

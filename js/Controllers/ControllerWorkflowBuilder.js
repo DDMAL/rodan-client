@@ -194,7 +194,7 @@ export default class ControllerWorkflowBuilder extends BaseController
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'InputPort'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'InputPort'});
     }
 
     /**
@@ -301,7 +301,7 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _handleEventLoadWorkflow(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Loading Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Loading Workflow', content: 'Please wait...'});
         options.workflow.fetch({'success': (workflow) => this._handleWorkflowLoadSuccess(workflow)});
     }
 
@@ -394,7 +394,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowView(options)
     {
         var view = new ViewWorkflow({template: '#template-main_workflow_individual_edit', model: options.workflow});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Workflow'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Workflow'});
     }
 
     /**
@@ -403,7 +403,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowJobView(options)
     {
         var view = new ViewControlWorkflowJob({model: options.workflowjob, workflow: options.workflow});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: options.workflowjob.get('name')});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: options.workflowjob.get('name')});
     }
 
     /**
@@ -414,7 +414,7 @@ export default class ControllerWorkflowBuilder extends BaseController
         var collection = new JobCollection();
         collection.fetch();
         var view = new ViewJobCollection({collection: collection, childViewOptions: {workflow: options.workflow}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Jobs'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Jobs'});
     }
 
     /**
@@ -429,7 +429,7 @@ export default class ControllerWorkflowBuilder extends BaseController
                                          childView: ViewWorkflowCollectionImportItem,
                                          template: '#template-main_workflow_collection_import',
                                          childViewOptions: {workflow: options.workflow}});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Workflows'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Workflows'});
     }
 
     /**
@@ -438,7 +438,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowJobGroupView(options)
     {
         var view = new ViewWorkflowJobGroup({workflow: options.workflow, workflowjobgroup: options.workflowjobgroup});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Workflow Job Group'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Workflow Job Group'});
     }
 
     /**
@@ -447,7 +447,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowJobPortsView(options)
     {
         var view = new LayoutViewControlPorts(options);
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Ports'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'WorkflowJob Ports'});
     }
 
     /**
@@ -456,7 +456,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     _handleRequestShowWorkflowJobSettingsView(options)
     {
         var view = new ViewSettings({workflow: options.workflow, model: options.workflowjob});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'WorkflowJob Settings'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'WorkflowJob Settings'});
     }
 
     /**

@@ -54,7 +54,7 @@ export default class ViewUser extends Marionette.CompositeView
     {
         var view = new ViewPassword();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Change Password', view: view});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Change Password', content: view});
 
     }
 

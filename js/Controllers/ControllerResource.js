@@ -75,7 +75,7 @@ export default class ControllerResource extends BaseController
      */
     _handleRequestResourceCreate(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Resource', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Resource', content: 'Please wait...'});
         var resource = null;
         if (options.resourcetype)
         {
@@ -94,7 +94,7 @@ export default class ControllerResource extends BaseController
      */
     _handleCommandResourceDelete(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Resource', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Resource', content: 'Please wait...'});
         this._layoutView.clearItemView();
         options.resource.destroy({success: (model) => this._handleDeleteSuccess(model, this._collection)});
     }
@@ -115,7 +115,7 @@ export default class ControllerResource extends BaseController
      */
     _handleCommandResourceSave(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Resource', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Resource', content: 'Please wait...'});
         options.resource.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SAVED, {resource: model})});
     }
 

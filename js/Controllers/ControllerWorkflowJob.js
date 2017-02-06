@@ -48,7 +48,7 @@ export default class ControllerWorkflowJob extends BaseController
      */
     _handleRequestDeleteWorkflowJob(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow Job', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Workflow Job', content: 'Please wait...'});
         options.workflowjob.destroy({success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWJOB_DELETED, {workflowjob: model})});
     }
 
@@ -57,7 +57,7 @@ export default class ControllerWorkflowJob extends BaseController
      */
     _handleRequestSaveWorkflowJob(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Job', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Workflow Job', content: 'Please wait...'});
         options.workflowjob.save(options.workflowjob.changed, {patch: true, success: (model) => this._handleWorkflowJobSaveSuccess(model, options.workflow)});
     }
 

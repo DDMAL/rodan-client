@@ -65,7 +65,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestSaveWorkflowJobGroup(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Workflow Job Group', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Workflow Job Group', content: 'Please wait...'});
         options.workflowjobgroup.save(options.workflowjobgroup.changed, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWJOBGROUP_SAVED, {workflowjobgroup: model})});
     }
 
@@ -82,7 +82,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestDeleteWorkflowJobGroup(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Workflow Job Group', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Workflow Job Group', content: 'Please wait...'});
         options.workflowjobgroup.destroy({success: (model) => this._handleWorkflowJobGroupDeleteSuccess(options.workflowjobgroup)});
     }
 
@@ -91,7 +91,7 @@ export default class ControllerWorkflowJobGroup extends BaseController
      */
     _handleRequestImportWorkflowJobGroup(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Importing Workflow', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Importing Workflow', content: 'Please wait...'});
         var workflow = options.target;
         var originWorkflow = options.origin;
         var newGroup = new WorkflowJobGroup({'workflow': workflow.get('url'), 'origin': originWorkflow.get('url')});

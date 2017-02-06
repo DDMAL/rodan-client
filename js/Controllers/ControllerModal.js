@@ -32,7 +32,6 @@ export default class ControllerModal extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_ERROR, (options) => this._handleRequestModalError(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, options => this._handleRequestModalShowImportant(options));
     }
 
@@ -51,59 +50,56 @@ export default class ControllerModal extends BaseController
     }
 
     /**
-     * Handle request modal simple show.
-     */
-    _handleRequestModalSimpleShow(options)
-    {
-        var $modalEl = $('#modal-generic');
-        if (!options.override && $modalEl.is(':visible'))
-        {
-            return;
-        }
-        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
-        this._layoutViewModal.render();
-        $modalEl.css({top: 0, left: 0, position: 'absolute'});
-        $modalEl.html(this._layoutViewModal.el);
-        $('.modal-title').text(options.title);
-        $('.modal-body').append(options.text);
-        $modalEl.modal({backdrop: 'static', keyboard: false}); 
-    }
-
-    /**
      * Handle request modal show.
      */
     _handleRequestModalShow(options)
     {
         var $modalEl = $('#modal-generic');
-        if (!options.override && $modalEl.is(':visible'))
+        if ($modalEl.is(':visible'))
         {
             return;
         }
-        this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal'});
-        this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
-        this._layoutViewModal.render();
-        this._layoutViewModal.getRegion('modal_body').show(options.view);
-        $modalEl.css({top: 0, left: 0, position: 'absolute'});
-        $modalEl.html(this._layoutViewModal.el);
-        $modalEl.draggable({handle: '.modal-header'});
-        $('.modal-title').text(options.title);
-        $modalEl.modal({backdrop: 'static'});
+
+        if (typeof options.view == 'string')
+        {
+            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
+            this._layoutViewModal.render();
+
+            $modalEl.css({top: 0, left: 0, position: 'absolute'});
+            $modalEl.html(this._layoutViewModal.el);
+            $('.modal-title').text(options.title);
+            $('.modal-body').append(options.content);
+            $modalEl.modal({backdrop: 'static', keyboard: false}); 
+        }
+        else
+        {
+            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal'});
+            this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
+            this._layoutViewModal.render();
+            this._layoutViewModal.getRegion('modal_body').show(options.view);
+
+            $modalEl.css({top: 0, left: 0, position: 'absolute'});
+            $modalEl.html(this._layoutViewModal.el);
+            $modalEl.draggable({handle: '.modal-header'});
+            $('.modal-title').text(options.title);
+            $modalEl.modal({backdrop: 'static'});
+        }
     }
 
     /**
      * Handles modal update footer. If a modal is currently visible, this will
-     * update the footer. If not, it will do REQUEST__MODAL_SHOW_SIMPLE.
+     * update the footer. If not, it will do REQUEST__MODAL_SHOW.
      */
     _handleRequestModalShowImportant(options)
     {
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
-            $('.modal-footer').text(options.text); 
+            $('.modal-footer').text(options.content); 
         }
         else
         {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: '', text: options.text});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: '', content: options.content});
         }
     }
 
@@ -116,11 +112,11 @@ export default class ControllerModal extends BaseController
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
-            $('.modal-footer').text(options.text); 
+            $('.modal-footer').text(options.content); 
         }
         else
         {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'ERROR', text: options.text});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'ERROR', content: options.content});
         }
         $('.modal-footer').addClass('modal-footer-error');
     }

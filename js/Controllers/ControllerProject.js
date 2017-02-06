@@ -103,7 +103,7 @@ export default class ControllerProject extends BaseController
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
         // Show modal.
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {view: view, title: 'Project Users'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Project Users'});
     }
 
     /**
@@ -130,7 +130,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestProjectSave(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Saving Project', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Saving Project', content: 'Please wait...'});
         options.project.save(options.fields, {patch: true, success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SAVED, {project: model})});
     }
 
@@ -139,7 +139,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestCreateProject(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Creating Project', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Project', content: 'Please wait...'});
         var project = new Project({creator: options.user});
         project.save({}, {success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_CREATED, {project: model})});
     }
@@ -149,7 +149,7 @@ export default class ControllerProject extends BaseController
      */
     _handleRequestProjectDelete(options)
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Deleting Project', text: 'Please wait...'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Deleting Project', content: 'Please wait...'});
         this._activeProject = null;
         options.project.destroy({success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_DELETED, {project: model})});
     }
