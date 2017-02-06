@@ -134,7 +134,7 @@ class RODAN_EVENTS
         this.REQUEST__MODAL_ERROR = 'REQUEST__MODAL_ERROR';
         /** Request modal window to hide/close. */
         this.REQUEST__MODAL_HIDE = 'REQUEST__MODAL_HIDE';
-        /** Request modal window to show/open with provided Marionette View. If another modal is currently open the request will not show. Takes {content: Marionette.View OR string, title: string}. */
+        /** Request modal window to show/open with provided Marionette View. If another modal is currently open the request will not show. Takes {content: string, title: string}. */
         this.REQUEST__MODAL_SHOW = 'REQUEST__MODAL_SHOW';
         /** Request the current modal window (if available) have the provided text set in the footer. If no modal is visible, will put message in REQUEST__MODAL_SHOW. Takes {content: Marionette.View OR string}. */
         this.REQUEST__MODAL_SHOW_IMPORTANT = 'REQUEST__MODAL_SHOW_IMPORTANT';

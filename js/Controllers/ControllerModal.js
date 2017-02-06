@@ -99,7 +99,7 @@ export default class ControllerModal extends BaseController
         }
         else
         {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: '', content: options.content});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, options);
         }
     }
 
