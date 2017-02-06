@@ -522,7 +522,7 @@ class RODAN_EVENTS
                     this[event] = requiresEvent;
                     var messageString = 'This feature requires Rodan Server v' + requiredVersionString + '. The Rodan Server is currently v' + serverVersionString + '.';
                     messageString += ' (' + event + ')';
-                    var modalOptions = {text: messageString};
+                    var modalOptions = {content: messageString};
                     Radio.channel('rodan').on(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_ERROR, modalOptions));
                     Radio.channel('rodan').reply(requiresEvent, () => Radio.channel('rodan').request(this.REQUEST__MODAL_ERROR, modalOptions));
                 }
