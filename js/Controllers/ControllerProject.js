@@ -92,13 +92,13 @@ export default class ControllerProject extends BaseController
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
                                                         template: '#template-main_user_collection', 
                                                         childView: ViewUserCollectionItem,
-                                                        childViewOptions: {template: '#template-main_user_collection_item',
+                                                        childViewOptions: {template: '#template-main_user_collection_item_remove',
                                                                            project: options.project,
                                                                            admin: true}});
         var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
                                                          template: '#template-main_user_collection',
                                                          childView: ViewUserCollectionItem,
-                                                         childViewOptions: {template: '#template-main_user_collection_item',
+                                                         childViewOptions: {template: '#template-main_user_collection_item_remove',
                                                                             project: options.project}});
         var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
 
