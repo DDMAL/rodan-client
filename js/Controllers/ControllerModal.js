@@ -60,7 +60,7 @@ export default class ControllerModal extends BaseController
             return;
         }
 
-        if (typeof options.view == 'string')
+        if (typeof options.content == 'string')
         {
             this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
             this._layoutViewModal.render();
@@ -76,7 +76,7 @@ export default class ControllerModal extends BaseController
             this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal'});
             this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
             this._layoutViewModal.render();
-            this._layoutViewModal.getRegion('modal_body').show(options.view);
+            this._layoutViewModal.getRegion('modal_body').show(options.content);
 
             $modalEl.css({top: 0, left: 0, position: 'absolute'});
             $modalEl.html(this._layoutViewModal.el);
@@ -95,7 +95,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
-            $('.modal-footer').text(options.content); 
+            $('.modal-footer').text(options.tltle + ': ' + options.content); 
         }
         else
         {
