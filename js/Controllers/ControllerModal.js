@@ -33,7 +33,7 @@ export default class ControllerModal extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_HIDE, () => this._handleRequestModalHide());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW, options => this._handleRequestModalShow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, options => this._handleRequestModalSimpleShow(options));
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_UPDATE_FOOTER, options => this._handleRequestModalUpdateFooter(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, options => this._handleRequestModalShowImportant(options));
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -92,14 +92,18 @@ export default class ControllerModal extends BaseController
 
     /**
      * Handles modal update footer. If a modal is currently visible, this will
-     * update the footer.
+     * update the footer. If not, it will do REQUEST__MODAL_SHOW_SIMPLE.
      */
-    _handleRequestModalUpdateFooter(options)
+    _handleRequestModalShowImportant(options)
     {
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
             $('.modal-footer').text(options.text); 
+        }
+        else
+        {
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: '', text: options.text});
         }
     }
 

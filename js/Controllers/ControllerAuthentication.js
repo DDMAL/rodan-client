@@ -327,7 +327,7 @@ export default class ControllerAuthentication extends BaseController
                             dataType: 'json',
                             data: options.fields};
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Updating user', text: 'Please wait...', override: true});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {text: 'Please wait...'});
     }
 
     /**
@@ -343,7 +343,7 @@ export default class ControllerAuthentication extends BaseController
                          //   dataType: 'json',
                             data: {new_password: options.newpassword, current_password: options.currentpassword}};
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Changing password', text: 'Please wait...', override: true});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {text: 'Please wait...'});
     }
 
     /**
