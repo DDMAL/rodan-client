@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 
 /**
  * Project admin view.
@@ -25,6 +26,7 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
         this._viewProjectAdmins = options.viewprojectadmins;
         this._viewProjectWorkers = options.viewprojectworkers;
         this._viewUsers = options.viewusers;
+        this._project = options.project;
     }
 
     /**
@@ -54,7 +56,8 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
      */
     _handleButtonAddAdmin()
     {
-        console.log(this._getSelectedUser());
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_ADMIN,
+                                       {username: this._getSelectedUser(), project: this._project});
     }
 
     /**
@@ -62,7 +65,8 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
      */
     _handleButtonAddWorker()
     {
-        console.log(this._getSelectedUser());
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_WORKER,
+                                       {username: this._getSelectedUser(), project: this._project});
     }
 
     /**
@@ -70,7 +74,7 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
      */
     _getSelectedUser()
     {
-        return $('#region-main_projectusers_users select').find(":selected").text();
+        return $('#region-main_projectusers_users select').find(":selected").text().trim();
     }
 }
 LayoutViewProjectUsers.prototype.template = '#template-main_project_users';

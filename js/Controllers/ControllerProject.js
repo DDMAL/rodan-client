@@ -38,7 +38,8 @@ export default class ControllerProject extends BaseController
     _initializeRadio()
     {
         // Events.
-        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, options => this._handleEventProjectShowUsers(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_ADMIN, options => this._handleEventProjectAddedUserAdmin(options));
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_WORKER, options => this._handleEventProjectAddedUserWorker(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_CREATED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_DELETED, options => this._handleEventProjectDeleteResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_REMOVED_USER_ADMIN, options => this._handleEventProjectRemovedUser(options));
@@ -46,8 +47,11 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SAVED, options => this._handleEventProjectGenericResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED, options => this._handleEventItemSelected(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION, () => this._handleEventCollectionSelected());
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, options => this._handleEventProjectShowUsers(options));
 
         // Requests.
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_ADMIN, () => this._handleRequestProjectAddUserAdmin());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_WORKER, () => this._handleRequestProjectAddUserWorker());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE, () => this._handleRequestProjectActive());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
@@ -112,7 +116,8 @@ export default class ControllerProject extends BaseController
                                                                             project: options.project}});
         var view = new LayoutViewProjectUsers({viewusers: userSelectionView,
                                                viewprojectadmins: projectAdminsView,
-                                               viewprojectworkers: projectWorkersView});
+                                               viewprojectworkers: projectWorkersView,
+                                               project: options.project});
 
         // Show modal.
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Project Users'});
@@ -295,4 +300,36 @@ export default class ControllerProject extends BaseController
         this._activeProject.fetch();
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, {project: this._activeProject});
     }
+
+    /**
+     * Handle request add admin.
+     */
+     _handleRequestProjectAddUserAdmin()
+     {
+
+     }
+
+    /**
+     * Handle request add worker.
+     */
+     _handleRequestProjectAddUserWorker()
+     {
+        
+     }
+
+    /**
+     * Handle event added admin.
+     */
+     _handleEventProjectAddedUserAdmin()
+     {
+
+     }
+
+    /**
+     * Handle event added worker.
+     */
+     _handleEventProjectAddedUserWorker()
+     {
+        
+     }
 }

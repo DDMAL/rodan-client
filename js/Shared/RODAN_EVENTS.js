@@ -160,8 +160,10 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         // Project
         ///////////////////////////////////////////////////////////////////////////////////////
-        /** Triggered when Project admin interface has been selected. Takes {project: Project}. */
-        this.EVENT__PROJECT_USERS_SELECTED = 'EVENT__PROJECT_USERS_SELECTED';
+        /** Triggered when User has been added as Project admin. Sends {project: Project}. */
+        this.EVENT__PROJECT_ADDED_USER_ADMIN = 'EVENT__PROJECT_ADDED_USER_ADMIN',
+        /** Triggered when User has been added as Project worker. Sends {project: Project}. */
+        this.EVENT__PROJECT_ADDED_USER_WORKER = 'EVENT__PROJECT_ADDED_USER_WORKER',
         /** Triggered when Project has been created. Sends {project: Project}. */
         this.EVENT__PROJECT_CREATED = 'EVENT__PROJECT_CREATED';
         /** Triggered when Project has been deleted. Sends {project: Project}. */
@@ -176,6 +178,12 @@ class RODAN_EVENTS
         this.EVENT__PROJECT_SELECTED = 'EVENT__PROJECT_SELECTED';
         /** Triggered when the user selects to see all available Projects. */
         this.EVENT__PROJECT_SELECTED_COLLECTION = 'EVENT__PROJECT_SELECTED_COLLECTION';
+        /** Triggered when Project admin interface has been selected. Takes {project: Project}. */
+        this.EVENT__PROJECT_USERS_SELECTED = 'EVENT__PROJECT_USERS_SELECTED';
+        /** Request a User be added as Project admin. Takes {project: Project, username: string} */
+        this.REQUEST__PROJECT_ADD_USER_ADMIN = 'REQUEST__PROJECT_ADD_USER_ADMIN',
+        /** Request a User be added as Project worker. Takes {project: Project, username: string} */
+        this.REQUEST__PROJECT_ADD_USER_WORKER = 'REQUEST__PROJECT_ADD_USER_WORKER',
         /** Request a Project be created. Takes {creator: User}. */
         this.REQUEST__PROJECT_CREATE = 'REQUEST__PROJECT_CREATE';
         /** Request a Project be deleted. Takes {project: Project}. */
