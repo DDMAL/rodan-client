@@ -88,6 +88,16 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsAdmins});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettingsWorkers});
 
+        // Need collection for all users.
+        var collection = new UserCollection();
+        collection.fetch();
+        var userSelectionView = new BaseViewCollection({collection: collection,
+                                                        template: '#template-main_user_selection',
+                                                        childView: BaseViewCollectionItem,
+                                                        childViewContainer: 'select',
+                                                        childViewOptions: {template: '#template-main_user_selection_item',
+                                                                           tagName: ''}});
+
         // Create view.
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
                                                         template: '#template-main_user_collection', 
@@ -100,7 +110,9 @@ export default class ControllerProject extends BaseController
                                                          childView: ViewUserCollectionItem,
                                                          childViewOptions: {template: '#template-main_user_collection_item_remove',
                                                                             project: options.project}});
-        var view = new LayoutViewProjectUsers({viewprojectadmins: projectAdminsView, viewprojectworkers: projectWorkersView});
+        var view = new LayoutViewProjectUsers({viewusers: userSelectionView,
+                                               viewprojectadmins: projectAdminsView,
+                                               viewprojectworkers: projectWorkersView});
 
         // Show modal.
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Project Users'});

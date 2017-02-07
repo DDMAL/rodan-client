@@ -12,16 +12,18 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object; 'options.viewprojectadmins' and 'options.viewprojectworkers' must be provided (each being Marionette.Views); also required is 'options.project' (Project)
+     * @param {object} options Marionette.View options object; 'options.viewusers', 'options.viewprojectadmins' and 'options.viewprojectworkers' must be provided (each being Marionette.Views); also required is 'options.project' (Project)
      */
     initialize(options)
     {
         this.addRegions({
             regionProjectAdmins: '#region-main_projectusers_admins',
-            regionProjectWorkers: '#region-main_projectusers_workers'
+            regionProjectWorkers: '#region-main_projectusers_workers',
+            regionUsers: '#region-main_projectusers_users'
         });
         this._viewProjectAdmins = options.viewprojectadmins;
         this._viewProjectWorkers = options.viewprojectworkers;
+        this._viewUsers = options.viewusers;
     }
 
     /**
@@ -40,6 +42,7 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
     {
         this.regionProjectAdmins.show(this._viewProjectAdmins);
         this.regionProjectWorkers.show(this._viewProjectWorkers);
+        this.regionUsers.show(this._viewUsers);
     }
 
     /**
