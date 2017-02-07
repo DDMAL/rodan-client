@@ -50,8 +50,8 @@ export default class ControllerProject extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, options => this._handleEventProjectShowUsers(options));
 
         // Requests.
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_ADMIN, () => this._handleRequestProjectAddUserAdmin());
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_WORKER, () => this._handleRequestProjectAddUserWorker());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_ADMIN, (options) => this._handleRequestProjectAddUserAdmin(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_ADD_USER_WORKER, (options) => this._handleRequestProjectAddUserWorker(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE, () => this._handleRequestProjectActive());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_CREATE, options => this._handleRequestCreateProject(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__PROJECT_SET_ACTIVE, options => this._handleRequestSetActiveProject(options));
