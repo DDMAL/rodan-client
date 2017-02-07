@@ -96,7 +96,7 @@ export default class ControllerProject extends BaseController
                                                         childView: BaseViewCollectionItem,
                                                         childViewContainer: 'select',
                                                         childViewOptions: {template: '#template-main_user_selection_item',
-                                                                           tagName: ''}});
+                                                                           tagName: 'option'}});
 
         // Create view.
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
