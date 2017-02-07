@@ -308,20 +308,13 @@ export default class ControllerProject extends BaseController
      {
         var users = options.project.get('admins');
         users.push(options.username);
-        if (userIndex >= 0)
-        {
-            var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_ADMIN, {project: options.project}),
-                                error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
-                                type: 'PUT',
-                                dataType: 'json',
-                                data: users.join(),
-                                url: options.project.get('url') + 'admins/'};
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
-        }
-        else
-        {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: 'An error occured trying to add this User.'});
-        }
+        var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_ADMIN, {project: options.project}),
+                            error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                            type: 'PUT',
+                            dataType: 'json',
+                            data: users.join(),
+                            url: options.project.get('url') + 'admins/'};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
      }
 
     /**
@@ -331,20 +324,13 @@ export default class ControllerProject extends BaseController
      {
         var users = options.project.get('workers');
         users.push(options.username);
-        if (userIndex >= 0)
-        {
-            var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_WORKER, {project: options.project}),
-                                error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
-                                type: 'PUT',
-                                dataType: 'json',
-                                data: users.join(),
-                                url: options.project.get('url') + 'workers/'};
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
-        }
-        else
-        {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: 'An error occured trying to add this User.'});
-        }
+        var ajaxSettings = {success: (response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_ADDED_USER_WORKER, {project: options.project}),
+                            error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
+                            type: 'PUT',
+                            dataType: 'json',
+                            data: users.join(),
+                            url: options.project.get('url') + 'workers/'};
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
     }
 
     /**
