@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -45,39 +46,39 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
         this.regionUsers.show(this._viewUsers);
     }
 
+///////////////////////////////////////////////////////////////////////////////////////
+// PRIVATE METHODS
+///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Handle button add selected.
+     * Handle button add admin.
      */
-    _handleButtonAddSelected()
+    _handleButtonAddAdmin()
     {
- //       $(this.regionAvailableResources.el).find('tr.active').trigger('dblclick');
+        console.log(this._getSelectedUser());
     }
 
     /**
-     * Handle button remove all.
+     * Handle button add worker.
      */
-    _handleButtonRemoveAll()
+    _handleButtonAddWorker()
     {
+        console.log(this._getSelectedUser());
     }
 
     /**
-     * Handle button remove selected.
+     * Get currently selected user.
      */
-    _handleButtonRemoveSelected()
+    _getSelectedUser()
     {
- //       $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
+        return $('#region-main_projectusers_users select').find(":selected").text();
     }
 }
 LayoutViewProjectUsers.prototype.template = '#template-main_project_users';
 LayoutViewProjectUsers.prototype.ui = {
-    buttonAddAll: '#button-add_all',
-    buttonAddSelected: '#button-add_selected',
-    buttonRemoveAll: '#button-remove_all',
-    buttonRemoveSelected: '#button-remove_selected'
+    buttonAddAdmin: '#button-projectusers_add_admin',
+    buttonAddWorker: '#button-projectusers_add_worker'
 };
 LayoutViewProjectUsers.prototype.events = {
-    'click @ui.buttonAddAll': '_handleButtonAddAll',
-    'click @ui.buttonAddSelected': '_handleButtonAddSelected',
-    'click @ui.buttonRemoveAll': '_handleButtonRemoveAll',
-    'click @ui.buttonRemoveSelected': '_handleButtonRemoveSelected'
+    'click @ui.buttonAddAdmin': '_handleButtonAddAdmin',
+    'click @ui.buttonAddWorker': '_handleButtonAddWorker'
 };
