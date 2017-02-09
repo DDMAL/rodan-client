@@ -328,7 +328,7 @@ export default class ControllerProject extends BaseController
                             error: (response) => Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SYSTEM_HANDLE_ERROR, {response: response}),
                             type: 'PUT',
                             dataType: 'json',
-                            data: users.join(),
+                            data: {0: 'mrbannon', 1: 'test'},
                             url: options.project.get('url') + 'workers/'};
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_REQUEST_AJAX, {settings: ajaxSettings});
     }
