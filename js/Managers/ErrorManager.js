@@ -33,7 +33,7 @@ export default class ErrorHandler
         text += 'url: ' + url + '<br>';
         text += 'line: ' + lineNumber + '<br>';
         text += 'column: ' + columnNumber;
-        this._showErrorView(text, error);
+        this._showError(text, error);
     }
 
     /**
@@ -51,7 +51,6 @@ export default class ErrorHandler
                 var text = error.error_code + '<br>';
                 text += error.details[0];
                 Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__SERVER_ERROR, {json: error});
-     //           this._showRodanErrorView(text, error);
             }
             else
             {
@@ -80,34 +79,21 @@ export default class ErrorHandler
                         message += responseTextObject[property];
                     }
                 }
-                this._showRodanErrorView(message, null);
+                this._showError(message, null);
             }
         }
         else
         {
-            this._showErrorView(response.statusText, null);
+            this._showError(response.statusText, null);
         }
     }
 
     /**
-     * Show error view.
+     * Show error.
      */
-    _showErrorView(text, error)
+    _showError(text, error)
     {
-        var log = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__LOG);
-        var model = new Backbone.Model({text: text, error: error, log: log});
-        var view = new ViewError({model: model, template: '#template-modal_error'});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: view, title: 'Error'});
-    }
-
-    /**
-     * Show Rodan error view.
-     */
-    _showRodanErrorView(text, error)
-    {
-        var log = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__LOG);
-        var model = new Backbone.Model({text: text, error: error, log: log});
-        var view = new ViewError({model: model, template: '#template-rodan_error'});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: view, title: 'Error'});
+        console.error(error);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: text, title: 'Error'});
     }
 }
