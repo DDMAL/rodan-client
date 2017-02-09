@@ -97,7 +97,7 @@ export default class ErrorHandler
         var log = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__LOG);
         var model = new Backbone.Model({text: text, error: error, log: log});
         var view = new ViewError({model: model, template: '#template-modal_error'});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Error'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: view, title: 'Error'});
     }
 
     /**
@@ -108,6 +108,6 @@ export default class ErrorHandler
         var log = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__LOG);
         var model = new Backbone.Model({text: text, error: error, log: log});
         var view = new ViewError({model: model, template: '#template-rodan_error'});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Error'});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_ERROR, {content: view, title: 'Error'});
     }
 }
