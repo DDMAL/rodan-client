@@ -1,5 +1,4 @@
-import bootstrap from 'twbs/bootstrap';
-import 'twbs/bootstrap/css/bootstrap.css!';
+import bootstrap from 'bootstrap';
 import _ from 'underscore';
 import $ from 'jquery';
 import Marionette from 'backbone.marionette';

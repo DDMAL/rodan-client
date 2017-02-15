@@ -3,7 +3,7 @@ import BaseController from 'js/Controllers/BaseController';
 import Configuration from 'js/Configuration';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import saveAs from 'filesaver';
+import saveAs from 'file-saver';
 
 /**
  * Download controller.
