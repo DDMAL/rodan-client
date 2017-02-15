@@ -9,18 +9,16 @@ var shell = require('gulp-shell');
 var sass = require('gulp-sass');
 var gulpjshint = require('gulp-jshint');
 var symlink = require('gulp-sym');
-var serveStatic = require('serve-static');
-var serveIndex = require('serve-index');
-var http = require('http');
 var babel = require('gulp-babel');
-var sass = require('gulp-sass');
-var gulp_jspm = require('gulp-jspm');
 var rename = require("gulp-rename");
 
-///////////////////////////////////////////////////////////////////////////////////////
+var webpackStream = require('webpack-stream');
+var webpack = require('webpack');
+
+////////////////////////////////////////////////////////////////////////////////
 // Configuration
-///////////////////////////////////////////////////////////////////////////////////////
-var PORT = 9001;                                // Port for dev server.
+////////////////////////////////////////////////////////////////////////////////
+var PORT = 9002;                                // Port for dev server.
 var CONFIGURATION_FILE = 'configuration.json';  // Name of configuration file.
 var DIST_DIRECTORY = 'dist';                    // Where dist will be dumped.
 var SOURCE_DIRECTORY = 'js';                    // Name of Javascript source directory.
@@ -34,24 +32,29 @@ var INFO_FILE = 'info.json';                    // Name of info file (client inf
 var PLUGINS_DIRECTORY = 'plugins';              // Name of plugins directory.
 var BUNDLE_DIRECTORY = 'bundle';                // Name of bundle directory.
 
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Development tasks
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /**
  * Cleans out develop.
  */
 gulp.task('develop:clean', function()
 {
-    return del([WEB_DIRECTORY + '/**/*',
-                '!' + WEB_DIRECTORY + '/config.js',
-                '!' + WEB_DIRECTORY + '/libs',
-                '!' + WEB_DIRECTORY + '/libs/**/*']);
+    return del([WEB_DIRECTORY]);
+});
+
+/**
+ * Make web directory.
+ */
+gulp.task('develop:mkdir', ['develop:clean'], function()
+{
+    return fs.mkdir(WEB_DIRECTORY);
 });
 
 /**
  * Build templates.
  */
-gulp.task('develop:templates', function(callback)
+gulp.task('develop:templates', ['develop:mkdir'], function(callback)
 {
     execSync('python scripts/build-template.py -b templates/index-dev.html -t plugins,templates/Views ' + WEB_DIRECTORY);
     callback();
@@ -60,7 +63,7 @@ gulp.task('develop:templates', function(callback)
 /**
  * Compile SCSS to CSS.
  */
-gulp.task('develop:styles', function()
+gulp.task('develop:styles', ['develop:mkdir'], function()
 {
     return gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(WEB_DIRECTORY));
 });
@@ -68,7 +71,7 @@ gulp.task('develop:styles', function()
 /**
  * Creates info.json. This holds client data, such as version.
  */
-gulp.task('develop:info', function(callback)
+gulp.task('develop:info', ['develop:mkdir'], function(callback)
 {
     var json = require('./' + PACKAGE_FILE);
     var info = {
@@ -83,7 +86,7 @@ gulp.task('develop:info', function(callback)
 /**
  * Links build results to web directory.
  */
-gulp.task('develop:link', function()
+gulp.task('develop:link', ['develop:mkdir'], function()
 {
     return gulp.src([CONFIGURATION_FILE, PLUGINS_DIRECTORY, RESOURCES_DIRECTORY, SOURCE_DIRECTORY])
                .pipe(symlink([WEB_DIRECTORY + '/' + CONFIGURATION_FILE,
@@ -106,7 +109,7 @@ gulp.task('develop:jshint', function()
 /**
  * Start the development server.
  */
-gulp.task('develop', ['develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
+gulp.task('develop', ['develop:mkdir', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
 {
     var serveStatic = require('serve-static');
     var serveIndex = require('serve-index');
@@ -116,12 +119,12 @@ gulp.task('develop', ['develop:link', 'develop:templates', 'develop:styles', 'de
     require('http').createServer(app).listen(PORT);
 });
 
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Bundle tasks
 //
 // This will bundle whatever exists in WEB_DIRECTORY and throw the file into
 // BUNDLE_DIRECTORY.
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /**
  * Cleans out bundle.
  */
@@ -139,31 +142,22 @@ gulp.task('bundle:mkdir', ['bundle:clean'], function()
 });
 
 /**
- * Links JS to web directory.
+ * Bundles source JS.
  */
-gulp.task('bundle:link', function(callback)
+gulp.task('bundle', ['bundle:mkdir'], function()
 {
-    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
-               .pipe(symlink([WEB_DIRECTORY + '/' + SOURCE_DIRECTORY, WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
-});
-
-/**
- * Bundles source JS that exists in the web directory.
- */
-gulp.task('bundle', ['bundle:link', 'bundle:mkdir'], function()
-{
-    return gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
-               .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
+    return gulp.src(SOURCE_DIRECTORY + '/main.js')
+               .pipe(webpackStream({}, webpack))
                .pipe(rename(BUNDLE_FILE))
                .pipe(gulp.dest(BUNDLE_DIRECTORY));
 });
 
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Distribution tasks
 //
-// NOTE: this does not start a server. Rather, it simply "dists" the web application
-// such that it can easily be deployed on a web server.
-///////////////////////////////////////////////////////////////////////////////////////
+// NOTE: this does not start a server. Rather, it simply "dists" the web 
+// application such that it can easily be deployed on a web server.
+////////////////////////////////////////////////////////////////////////////////
 /**
  * Clean dist.
  */
@@ -200,7 +194,9 @@ gulp.task('dist:info', ['dist:mkdir'], function(callback)
  */
 gulp.task('dist:styles', ['dist:mkdir'], function()
 {
-    return gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(DIST_DIRECTORY));
+    return gulp.src('styles/default.scss')
+               .pipe(sass())
+               .pipe(gulp.dest(DIST_DIRECTORY));
 });
 
 /**
@@ -244,14 +240,14 @@ gulp.task('dist:copy', ['dist:copy:config', 'dist:copy:web'], function(callback)
 gulp.task('dist:build', ['dist:mkdir', 'bundle'], function()
 {
     return gulp.src(BUNDLE_DIRECTORY + '/' + BUNDLE_FILE)
-//               .pipe(babel({presets: ['es2015']}))
+               .pipe(babel({presets: ['es2015']}))
                .pipe(gulp.dest(DIST_DIRECTORY));
 });
 
 /**
  * Make distribution.
  */
-gulp.task('dist', ['dist:build', 'dist:styles', 'dist:info', 'dist:templates', 'dist:copy'], function(callback)
+gulp.task('dist', ['dist:build', 'dist:styles', 'dist:info', 'dist:templates'/*, 'dist:copy'*/], function(callback)
 {
     callback();
 });
