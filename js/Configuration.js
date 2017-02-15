@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from './Shared/RODAN_EVENTS';
 
