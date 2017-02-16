@@ -4,14 +4,12 @@
 // REQUIRE
 ////////////////////////////////////////////////////////////////////////////////
 const del = require('del');
-const execSync = require('child_process').execSync;
 const fs = require('fs');
 const gulp = require('gulp');
 const ip = require('ip');
 const path = require('path');
 const recread = require('recursive-readdir');
 const sass = require('gulp-sass');
-const shell = require('gulp-shell');
 const symlink = require('gulp-sym');
 const webpack = require('webpack');
 const WebpackDevServer = require("webpack-dev-server");
@@ -39,6 +37,9 @@ const SOURCE_DIRECTORY = 'js';
 const TEMPLATE_DIRECTORY = 'templates';
 
 
+////////////////////////////////////////////////////////////////////////////////
+// WEBPACK
+////////////////////////////////////////////////////////////////////////////////
 var webpackConfig = 
 {
     entry: ENTRY_FILE,
@@ -60,7 +61,6 @@ var webpackConfig =
        })
     ]
 };
-
 var webpackServerConfig = {};
 
 ////////////////////////////////////////////////////////////////////////////////
