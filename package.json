@@ -4,6 +4,7 @@
   "description": "Rodan client",
   "main": "gulpfile.js",
   "scripts": {
+    "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,6 +22,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-shell": "^0.5.2",
     "gulp-sym": "^1.0.2",
+    "ip": "^1.1.4",
     "recursive-readdir": "^2.1.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
