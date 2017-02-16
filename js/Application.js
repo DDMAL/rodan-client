@@ -1,4 +1,3 @@
-import bootstrap from 'bootstrap';
 import _ from 'underscore';
 import $ from 'jquery';
 import Marionette from 'backbone.marionette';
