@@ -1,47 +1,47 @@
 {
-  "name": "rodan-client",
-  "version": "0.15.4",
-  "description": "Rodan Client",
-  "main": "gulpfile.js",
-  "scripts": {
-    "start": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ddmal/rodan-client"
-  },
-  "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.0",
-    "babel-preset-es2015": "^6.22.0",
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-sym": "^1.0.2",
-    "ip": "^1.1.4",
-    "recursive-readdir": "^2.1.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
-  },
-  "optionalDependencies": {
-    "esdoc": "*"
-  },
-  "dependencies": {
-    "backbone": "^1.3.3",
-    "backbone.marionette": "^2.4.7",
-    "backbone.radio": "^2.0.0",
-    "bootstrap": "^3.3.7",
-    "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
-    "file-saver": "git+https://github.com/eligrey/FileSaver.js.git",
-    "jquery": "^3.1.1",
-    "jqueryui": "^1.11.1",
-    "json-editor": "git+https://github.com/jdorn/json-editor.git",
-    "moment": "^2.17.1",
-    "moment-timezone": "^0.4.1",
-    "paper": "^0.10.2",
-    "underscore": "^1.8.3"
-  }
+    "name": "rodan-client",
+    "version": "0.15.5",
+    "description": "Rodan Client",
+    "main": "gulpfile.js",
+    "scripts": {
+        "start": "gulp",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ddmal/rodan-client"
+    },
+    "devDependencies": {
+        "babel-core": "^6.23.1",
+        "babel-loader": "^6.3.0",
+        "babel-preset-es2015": "^6.22.0",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-sass": "^3.1.0",
+        "gulp-sym": "^1.0.2",
+        "ip": "^1.1.4",
+        "recursive-readdir": "^2.1.1",
+        "webpack": "^2.2.1",
+        "webpack-dev-server": "^2.3.0"
+    },
+    "optionalDependencies": {
+        "esdoc": "*"
+    },
+    "dependencies": {
+        "backbone": "^1.3.3",
+        "backbone.marionette": "^2.4.7",
+        "backbone.radio": "^2.0.0",
+        "bootstrap": "^3.3.7",
+        "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
+        "file-saver": "git+https://github.com/eligrey/FileSaver.js.git",
+        "jquery": "^3.1.1",
+        "jqueryui": "^1.11.1",
+        "json-editor": "git+https://github.com/jdorn/json-editor.git",
+        "moment": "^2.17.1",
+        "moment-timezone": "^0.4.1",
+        "paper": "^0.10.2",
+        "underscore": "^1.8.3"
+    }
 }
