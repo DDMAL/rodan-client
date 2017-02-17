@@ -129,17 +129,15 @@ gulp.task('develop:info', ['develop:mkdir'], function(callback)
  */
 gulp.task('develop:link', ['develop:mkdir'], function()
 {
-    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY, SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
+    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY])
                .pipe(symlink([DEVELOP_WEBROOT + '/' + CONFIGURATION_FILE,
-                              DEVELOP_WEBROOT + '/' + RESOURCES_DIRECTORY,
-                              NODE_MODULES_DIRECTORY + '/' + SOURCE_DIRECTORY,
-                              NODE_MODULES_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
+                              DEVELOP_WEBROOT + '/' + RESOURCES_DIRECTORY], {force: true}));
 });
 
 /**
  * Bundle (Webpack) and start the development server.
  */
-gulp.task('develop', ['develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
+gulp.task('develop', ['link', 'develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
 {
     var compiler = webpack(webpackConfig);
     var server = new WebpackDevServer(compiler, webpackServerConfig);
@@ -237,9 +235,22 @@ gulp.task('dist:copy', ['dist:mkdir'], function()
 /**
  * Bundle (Webpack) for distribution.
  */
-gulp.task('dist', ['dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
+gulp.task('dist', ['link', 'dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
 {
     webpack(webpackConfig, callback);
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - General
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * Links build results to web directory.
+ */
+gulp.task('link', function()
+{
+    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
+               .pipe(symlink([NODE_MODULES_DIRECTORY + '/' + SOURCE_DIRECTORY,
+                              NODE_MODULES_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
 });
 
 ////////////////////////////////////////////////////////////////////////////////
