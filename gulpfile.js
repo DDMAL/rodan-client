@@ -38,7 +38,6 @@ const RESOURCES_DIRECTORY = 'resources';
 const SOURCE_DIRECTORY = 'js';
 const TEMPLATE_DIRECTORY = 'templates';
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // WEBPACK
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,12 +49,7 @@ var webpackConfig =
         filename: OUTPUT_FILE
     },
     module: {
- /*       rules: [
-            {
-                test: /\.(js)$/,
-                use: 'babel-loader'
-            }
-        ]*/
+        rules: []
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -123,16 +117,11 @@ gulp.task('develop:styles', ['develop:mkdir'], function()
  */
 gulp.task('develop:info', ['develop:mkdir'], function(callback)
 {
-    var json = require('./' + PACKAGE_FILE);
-    delete json.scripts;
-    delete json.main;
-    delete json.devDependencies;
-    delete json.optionalDependencies;
-    delete json.repository;
-    delete json.dependencies;
-    var info = {CLIENT: json};
-    fs.writeFileSync(DEVELOP_WEBROOT + '/' + INFO_FILE, JSON.stringify(info, null, 4));
-    callback();
+    var info = createInfo(function(err, data)
+    {
+        fs.writeFileSync(DEVELOP_WEBROOT + '/' + INFO_FILE, JSON.stringify(data, null, 4));
+        callback();
+    });
 });
 
 /**
@@ -191,8 +180,14 @@ gulp.task('dist:mkdir', ['dist:clean'], function(callback)
  */
 gulp.task('dist:config', function(callback)
 {
+    var babelRule = 
+    {
+        test: /\.(js)$/,
+        use: 'babel-loader'
+    };
+    webpackConfig.module.rules.push(babelRule);
     webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
-    webpackServerConfig.contentBase = DIST_WEBROOT;
+   // webpackServerConfig.contentBase = DIST_WEBROOT;
     callback();
 });
 
@@ -216,6 +211,35 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
     return gulp.src('styles/default.scss')
                .pipe(sass())
                .pipe(gulp.dest(DIST_WEBROOT));
+});
+
+/**
+ * Creates info.json.
+ */
+gulp.task('dist:info', ['dist:mkdir'], function(callback)
+{
+    var info = createInfo(function(err, data)
+    {
+        fs.writeFileSync(DIST_WEBROOT + '/' + INFO_FILE, JSON.stringify(data, null, 4));
+        callback();
+    });
+});
+
+/**
+ * Links build results to web directory.
+ */
+gulp.task('dist:copy', ['dist:mkdir'], function()
+{
+    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY + '/*'], {base: './'})
+               .pipe(gulp.dest(DIST_WEBROOT));
+});
+
+/**
+ * Bundle (Webpack) for distribution.
+ */
+gulp.task('dist', ['dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
+{
+    webpack(webpackConfig, callback);
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -265,4 +289,20 @@ function buildTemplates(callback)
         indexFile = indexFile.replace('{templates}', templates);
         callback(null, indexFile);
     });
+}
+
+/**
+ * Creates data for info.json.
+ */
+function createInfo(callback)
+{
+    var json = require('./' + PACKAGE_FILE);
+    delete json.scripts;
+    delete json.main;
+    delete json.devDependencies;
+    delete json.optionalDependencies;
+    delete json.repository;
+    delete json.dependencies;
+    var info = {CLIENT: json};
+    callback(null, info);
 }
