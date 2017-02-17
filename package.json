@@ -4,10 +4,12 @@
     "description": "Rodan Client",
     "main": "gulpfile.js",
     "scripts": {
+        "postinstall": "node scripts/postinstall.js",
         "start": "gulp",
+        "dist": "gulp dist",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "",
+    "author": "http://ddmal.music.mcgill.ca/",
     "license": "ISC",
     "repository": {
         "type": "git",

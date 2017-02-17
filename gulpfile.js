@@ -25,7 +25,7 @@ const DEVELOP_WEBROOT = '__develop__';
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIGURATION - Dist
 ////////////////////////////////////////////////////////////////////////////////
-const DIST_WEBROOT = '__dist__';
+const DIST_WEBROOT = 'dist';
 
 ////////////////////////////////////////////////////////////////////////////////
 // NOTE: don't edit this unless you know what you're doing.
@@ -182,7 +182,6 @@ gulp.task('dist:config', function(callback)
     };
     webpackConfig.module.rules.push(babelRule);
     webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
-   // webpackServerConfig.contentBase = DIST_WEBROOT;
     callback();
 });
 
@@ -225,7 +224,7 @@ gulp.task('dist:info', ['dist:mkdir'], function(callback)
  */
 gulp.task('dist:copy', ['dist:mkdir'], function()
 {
-    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY + '/*'], {base: './'})
+    return gulp.src([RESOURCES_DIRECTORY + '/*'], {base: './'})
                .pipe(gulp.dest(DIST_WEBROOT));
 });
 
