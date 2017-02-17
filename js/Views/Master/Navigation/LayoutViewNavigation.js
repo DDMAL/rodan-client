@@ -61,7 +61,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        this.regionNavigationTree.reset(); 
+        this.regionNavigationTree.empty(); 
         this.$el.find('#button-navigation_logout').prop('disabled', true);
         this.$el.find('#button-navigation_preferences').prop('disabled', true);
     }
