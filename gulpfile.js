@@ -118,16 +118,19 @@ gulp.task('develop:styles', ['develop:mkdir'], function()
 });
 
 /**
- * Creates info.json. This holds client data, such as version.
+ * Creates info.json. This holds client data, such as version. It's basically
+ * a trimmed 'package.json'.
  */
 gulp.task('develop:info', ['develop:mkdir'], function(callback)
 {
     var json = require('./' + PACKAGE_FILE);
-    var info = {
-        CLIENT: {
-            version: json.version + '-DEVELOPMENT'
-        }
-    };
+    delete json.scripts;
+    delete json.main;
+    delete json.devDependencies;
+    delete json.optionalDependencies;
+    delete json.repository;
+    delete json.dependencies;
+    var info = {CLIENT: json};
     fs.writeFileSync(DEVELOP_WEBROOT + '/' + INFO_FILE, JSON.stringify(info, null, 4));
     callback();
 });
