@@ -22,6 +22,8 @@ const DEVELOP_PORT = 9002;
 const DEVELOP_SOURCEMAP = 'eval-source-map';
 const DEVELOP_WEBROOT = '__develop__';
 
+const DIST_WEBROOT = '__dist__';
+
 ////////////////////////////////////////////////////////////////////////////////
 // NOTE: don't edit this unless you know what you're doing.
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,22 +100,9 @@ gulp.task('develop:config', function(callback)
  */
 gulp.task('develop:templates', ['develop:mkdir'], function(callback)
 {
-    recread(TEMPLATE_DIRECTORY, ['index.html'], function(err, files) 
+    buildTemplates(function(err, data)
     {
-        var templates = '';
-        for (var index in files)
-        {
-            var filename = files[index];
-            var templateName = filename.substring(filename.lastIndexOf('/') + 1);
-            templateName = templateName.substring(0, templateName.length - 5);
-            var data = fs.readFileSync(files[index], 'utf8'); 
-            templates += '<script type="text/template" id="' + templateName + '">';
-            templates += data;
-            templates += '</script>';
-        }
-        var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
-        indexFile = indexFile.replace('{templates}', templates);
-        fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', indexFile);
+        fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', data); 
         callback();
     });
 });
@@ -176,10 +165,61 @@ gulp.task('develop', ['develop:mkdir', 'develop:config', 'develop:link', 'develo
 });
 
 ////////////////////////////////////////////////////////////////////////////////
+// TASKS - Distribution
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * Cleans out dist.
+ */
+gulp.task('dist:clean', function()
+{
+    return del([DIST_WEBROOT]);
+});
+
+/**
+ * Make dist directory.
+ */
+gulp.task('dist:mkdir', ['dist:clean'], function(callback)
+{
+    return fs.mkdir(DIST_WEBROOT, callback);
+});
+
+/**
+ * Build Webpack configs for dist.
+ */
+gulp.task('dist:config', function(callback)
+{
+    webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
+    webpackServerConfig.contentBase = DIST_WEBROOT;
+    callback();
+});
+
+/**
+ * Build templates.
+ */
+gulp.task('dist:templates', ['dist:mkdir'], function(callback)
+{
+    buildTemplates(function(err, data)
+    {
+        fs.writeFileSync(DIST_WEBROOT + '/index.html', data); 
+        callback();
+    });
+});
+
+/**
+ * Compile SCSS to CSS.
+ */
+gulp.task('dist:styles', ['dist:mkdir'], function()
+{
+    return gulp.src('styles/default.scss')
+               .pipe(sass())
+               .pipe(gulp.dest(DIST_WEBROOT));
+});
+
+////////////////////////////////////////////////////////////////////////////////
 // TASKS - Master
 ////////////////////////////////////////////////////////////////////////////////
 /**
- * Default task.
+ * Default task (develop).
  */
 gulp.task('default', function(callback)
 {
@@ -193,5 +233,33 @@ gulp.task('default', function(callback)
 gulp.task('clean', function(callback)
 {
     gulp.start('develop:clean');
+    gulp.start('dist:clean');
     callback();
 });
+
+////////////////////////////////////////////////////////////////////////////////
+// UTILITIES
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * Builds templates into index file. Returns index contents in callback.
+ */
+function buildTemplates(callback)
+{
+    recread(TEMPLATE_DIRECTORY, ['index.html'], function(err, files) 
+    {
+        var templates = '';
+        for (var index in files)
+        {
+            var filename = files[index];
+            var templateName = filename.substring(filename.lastIndexOf('/') + 1);
+            templateName = templateName.substring(0, templateName.length - 5);
+            var data = fs.readFileSync(files[index], 'utf8'); 
+            templates += '<script type="text/template" id="' + templateName + '">';
+            templates += data;
+            templates += '</script>';
+        }
+        var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
+        indexFile = indexFile.replace('{templates}', templates);
+        callback(null, indexFile);
+    });
+}
