@@ -1,6 +1,6 @@
 {
   "name": "rodan-client",
-  "version": "0.15.4",
+  "version": "0.15.5",
   "description": "Rodan Client",
   "main": "gulpfile.js",
   "scripts": {
