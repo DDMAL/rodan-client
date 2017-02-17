@@ -304,12 +304,6 @@ function buildTemplates(callback)
 function createInfo(callback)
 {
     var json = require('./' + PACKAGE_FILE);
-    delete json.scripts;
-    delete json.main;
-    delete json.devDependencies;
-    delete json.optionalDependencies;
-    delete json.repository;
-    delete json.dependencies;
     var info = {CLIENT: json};
     callback(null, info);
 }

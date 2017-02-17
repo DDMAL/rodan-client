@@ -1,9 +1,9 @@
 {
-    "SERVER_HOST": <Example: "123.456.789.0">,
-    "SERVER_PORT": <Example: 443>,
+    "SERVER_HOST": "rodan.domain.name.should.go.here",
+    "SERVER_PORT": 443,
     "SERVER_HTTPS": true,
     "SERVER_SOCKET_AVAILABLE": true,
-    "SERVER_AUTHENTICATION_TYPE": token,
+    "SERVER_AUTHENTICATION_TYPE": "token",
     "ADMIN_CLIENT": 
     {
         "NAME": "",
