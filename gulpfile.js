@@ -22,6 +22,9 @@ const DEVELOP_PORT = 9002;
 const DEVELOP_SOURCEMAP = 'eval-source-map';
 const DEVELOP_WEBROOT = '__develop__';
 
+////////////////////////////////////////////////////////////////////////////////
+// CONFIGURATION - Dist
+////////////////////////////////////////////////////////////////////////////////
 const DIST_WEBROOT = '__dist__';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,14 +51,8 @@ var webpackConfig =
     {
         filename: OUTPUT_FILE
     },
-    module: {
-        rules: []
-    },
-    plugins: [
-        new webpack.ProvidePlugin({
-           jQuery: "jquery"
-       })
-    ]
+    module: {rules: []},
+    plugins: [new webpack.ProvidePlugin({jQuery: "jquery"})]
 };
 var webpackServerConfig = {};
 
