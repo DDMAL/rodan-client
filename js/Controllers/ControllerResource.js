@@ -177,5 +177,3 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }
-
-export default ControllerResource;

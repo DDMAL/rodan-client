@@ -1,5 +1,6 @@
+import $ from 'jquery';
 import _ from 'underscore';
-import datetimepicker from 'datetimepicker';
+import datetimepicker from 'eonasdan-bootstrap-datetimepicker';
 import 'jqueryui';
 import BaseCollection from 'js/Collections/BaseCollection';
 import Configuration from 'js/Configuration';

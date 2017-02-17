@@ -1,206 +1,189 @@
 'use strict';
 
-var del = require('del');
-var exec = require('child_process').exec;
-var execSync = require('child_process').execSync;
-var fs = require('fs');
-var gulp = require('gulp');
-var shell = require('gulp-shell');
-var sass = require('gulp-sass');
-var gulpjshint = require('gulp-jshint');
-var symlink = require('gulp-sym');
-var serveStatic = require('serve-static');
-var serveIndex = require('serve-index');
-var http = require('http');
-var babel = require('gulp-babel');
-var sass = require('gulp-sass');
-var gulp_jspm = require('gulp-jspm');
-var rename = require("gulp-rename");
+////////////////////////////////////////////////////////////////////////////////
+// REQUIRE
+////////////////////////////////////////////////////////////////////////////////
+const del = require('del');
+const fs = require('fs');
+const gulp = require('gulp');
+const ip = require('ip');
+const path = require('path');
+const recread = require('recursive-readdir');
+const sass = require('gulp-sass');
+const symlink = require('gulp-sym');
+const webpack = require('webpack');
+const WebpackDevServer = require("webpack-dev-server");
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Configuration
-///////////////////////////////////////////////////////////////////////////////////////
-var PORT = 9001;                                // Port for dev server.
-var CONFIGURATION_FILE = 'configuration.json';  // Name of configuration file.
-var DIST_DIRECTORY = 'dist';                    // Where dist will be dumped.
-var SOURCE_DIRECTORY = 'js';                    // Name of Javascript source directory.
-var RESOURCES_DIRECTORY = 'resources';          // Name of resources directory.
-var WEB_DIRECTORY = 'web';                      // Name of directory holding development web app.
-                                                // NOTE: this should correspond to where jspm creates
-                                                // its config, so it's best to keep it as 'web'.
-var BUNDLE_FILE = 'rodan-client.min.js';        // Name of bundle file.
-var PACKAGE_FILE = 'package.json';              // Name of package file.
-var INFO_FILE = 'info.json';                    // Name of info file (client info).
-var PLUGINS_DIRECTORY = 'plugins';              // Name of plugins directory.
-var BUNDLE_DIRECTORY = 'bundle';                // Name of bundle directory.
+////////////////////////////////////////////////////////////////////////////////
+// CONFIGURATION - Develop
+////////////////////////////////////////////////////////////////////////////////
+const DEVELOP_HOST = ip.address();
+const DEVELOP_PORT = 9002;
+const DEVELOP_SOURCEMAP = 'eval-source-map';
+const DEVELOP_WEBROOT = '__develop__';
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Development tasks
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// CONFIGURATION - Dist
+////////////////////////////////////////////////////////////////////////////////
+const DIST_WEBROOT = '__dist__';
+
+////////////////////////////////////////////////////////////////////////////////
+// NOTE: don't edit this unless you know what you're doing.
+////////////////////////////////////////////////////////////////////////////////
+const CONFIGURATION_FILE = 'configuration.json';
+const ENTRY_FILE = './js/main.js';
+const INFO_FILE = 'info.json';
+const NODE_MODULES_DIRECTORY = 'node_modules';
+const OUTPUT_FILE = 'rodan_client.min.js';
+const PACKAGE_FILE = 'package.json';
+const PLUGINS_DIRECTORY = 'plugins';
+const RESOURCES_DIRECTORY = 'resources';
+const SOURCE_DIRECTORY = 'js';
+const TEMPLATE_DIRECTORY = 'templates';
+
+////////////////////////////////////////////////////////////////////////////////
+// WEBPACK
+////////////////////////////////////////////////////////////////////////////////
+var webpackConfig = 
+{
+    entry: ENTRY_FILE,
+    output: 
+    {
+        filename: OUTPUT_FILE
+    },
+    module: {rules: []},
+    plugins: [new webpack.ProvidePlugin({jQuery: "jquery"})]
+};
+var webpackServerConfig = {};
+
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - Develop
+////////////////////////////////////////////////////////////////////////////////
 /**
  * Cleans out develop.
  */
 gulp.task('develop:clean', function()
 {
-    return del([WEB_DIRECTORY + '/**/*',
-                '!' + WEB_DIRECTORY + '/config.js',
-                '!' + WEB_DIRECTORY + '/libs',
-                '!' + WEB_DIRECTORY + '/libs/**/*']);
+    return del([DEVELOP_WEBROOT]);
+});
+
+/**
+ * Make web directory.
+ */
+gulp.task('develop:mkdir', ['develop:clean'], function(callback)
+{
+    return fs.mkdir(DEVELOP_WEBROOT, callback);
+});
+
+/**
+ * Build Webpack configs for develop.
+ */
+gulp.task('develop:config', function(callback)
+{
+    webpackConfig.devtool = DEVELOP_SOURCEMAP;
+    webpackConfig.output.path = path.resolve(__dirname, DEVELOP_WEBROOT);
+    webpackServerConfig.contentBase = DEVELOP_WEBROOT;
+    callback();
 });
 
 /**
  * Build templates.
  */
-gulp.task('develop:templates', function(callback)
+gulp.task('develop:templates', ['develop:mkdir'], function(callback)
 {
-    execSync('python scripts/build-template.py -b templates/index-dev.html -t plugins,templates/Views ' + WEB_DIRECTORY);
-    callback();
+    buildTemplates(function(err, data)
+    {
+        fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', data); 
+        callback();
+    });
 });
 
 /**
  * Compile SCSS to CSS.
  */
-gulp.task('develop:styles', function()
+gulp.task('develop:styles', ['develop:mkdir'], function()
 {
-    return gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(WEB_DIRECTORY));
+    return gulp.src('styles/default.scss')
+               .pipe(sass())
+               .pipe(gulp.dest(DEVELOP_WEBROOT));
 });
 
 /**
- * Creates info.json. This holds client data, such as version.
+ * Creates info.json. This holds client data, such as version. It's basically
+ * a trimmed 'package.json'.
  */
-gulp.task('develop:info', function(callback)
+gulp.task('develop:info', ['develop:mkdir'], function(callback)
 {
-    var json = require('./' + PACKAGE_FILE);
-    var info = {
-        CLIENT: {
-            version: json.version + '-DEVELOPMENT'
-        }
-    };
-    fs.writeFileSync(WEB_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
-    callback();
+    var info = createInfo(function(err, data)
+    {
+        fs.writeFileSync(DEVELOP_WEBROOT + '/' + INFO_FILE, JSON.stringify(data, null, 4));
+        callback();
+    });
 });
 
 /**
  * Links build results to web directory.
  */
-gulp.task('develop:link', function()
+gulp.task('develop:link', ['develop:mkdir'], function()
 {
-    return gulp.src([CONFIGURATION_FILE, PLUGINS_DIRECTORY, RESOURCES_DIRECTORY, SOURCE_DIRECTORY])
-               .pipe(symlink([WEB_DIRECTORY + '/' + CONFIGURATION_FILE,
-                              WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY,
-                              WEB_DIRECTORY + '/' + RESOURCES_DIRECTORY,
-                              WEB_DIRECTORY + '/' + SOURCE_DIRECTORY], {force: true}));
+    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY])
+               .pipe(symlink([DEVELOP_WEBROOT + '/' + CONFIGURATION_FILE,
+                              DEVELOP_WEBROOT + '/' + RESOURCES_DIRECTORY], {force: true}));
 });
 
 /**
- * Run JSHint on the Javascript and create a report in the console.
+ * Bundle (Webpack) and start the development server.
  */
-gulp.task('develop:jshint', function()
+gulp.task('develop', ['link', 'develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
 {
-    return gulp.src([SOURCE_DIRECTORY + '/**/*.js'])
-               .pipe(gulpjshint({lookup: true, devel: true}))
-               .pipe(gulpjshint.reporter('jshint-stylish'))
-               .pipe(gulpjshint.reporter('fail'));
+    var compiler = webpack(webpackConfig);
+    var server = new WebpackDevServer(compiler, webpackServerConfig);
+    server.listen(DEVELOP_PORT, DEVELOP_HOST, function(err)
+    {
+        console.log('');
+        console.log('==========');
+        console.log('Starting server on: http://' + DEVELOP_HOST + ':' + DEVELOP_PORT);
+        console.log('Serving: ' + DEVELOP_WEBROOT);
+        console.log('');
+        console.log('Make sure ' + DEVELOP_HOST + ':' + DEVELOP_PORT + ' is allowed access to the Rodan server');
+        console.log('==========');
+        console.log('');
+    });
 });
 
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - Distribution
+////////////////////////////////////////////////////////////////////////////////
 /**
- * Start the development server.
+ * Cleans out dist.
  */
-gulp.task('develop', ['develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
+gulp.task('dist:clean', function()
 {
-    var serveStatic = require('serve-static');
-    var serveIndex = require('serve-index');
-    var app = require('connect')()
-        .use(serveStatic(WEB_DIRECTORY))
-        .use(serveIndex(WEB_DIRECTORY));
-    require('http').createServer(app).listen(PORT);
-});
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Bundle tasks
-//
-// This will bundle whatever exists in WEB_DIRECTORY and throw the file into
-// BUNDLE_DIRECTORY.
-///////////////////////////////////////////////////////////////////////////////////////
-/**
- * Cleans out bundle.
- */
-gulp.task('bundle:clean', function()
-{
-    return del([BUNDLE_DIRECTORY]);
-});
-
-/**
- * Make bundle directory.
- */
-gulp.task('bundle:mkdir', ['bundle:clean'], function()
-{
-    return fs.mkdir(BUNDLE_DIRECTORY);
-});
-
-/**
- * Links JS to web directory.
- */
-gulp.task('bundle:link', function(callback)
-{
-    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
-               .pipe(symlink([WEB_DIRECTORY + '/' + SOURCE_DIRECTORY, WEB_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
-});
-
-/**
- * Bundles source JS that exists in the web directory.
- */
-gulp.task('bundle', ['bundle:link', 'bundle:mkdir'], function()
-{
-    return gulp.src(WEB_DIRECTORY + '/' + SOURCE_DIRECTORY + '/main.js')
-               .pipe(gulp_jspm({selfExecutingBundle: true/*, minify: true*/}))
-               .pipe(rename(BUNDLE_FILE))
-               .pipe(gulp.dest(BUNDLE_DIRECTORY));
-});
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Distribution tasks
-//
-// NOTE: this does not start a server. Rather, it simply "dists" the web application
-// such that it can easily be deployed on a web server.
-///////////////////////////////////////////////////////////////////////////////////////
-/**
- * Clean dist.
- */
-gulp.task('dist:clean', function(callback)
-{
-    return del([DIST_DIRECTORY]);
+    return del([DIST_WEBROOT]);
 });
 
 /**
  * Make dist directory.
  */
-gulp.task('dist:mkdir', ['dist:clean'], function()
+gulp.task('dist:mkdir', ['dist:clean'], function(callback)
 {
-    return fs.mkdir(DIST_DIRECTORY);
+    return fs.mkdir(DIST_WEBROOT, callback);
 });
 
 /**
- * Creates info.json. This holds client data, such as version.
+ * Build Webpack configs for dist.
  */
-gulp.task('dist:info', ['dist:mkdir'], function(callback)
+gulp.task('dist:config', function(callback)
 {
-    var json = require('./' + PACKAGE_FILE);
-    var info = {
-        CLIENT: {
-            version: json.version
-        }
+    var babelRule = 
+    {
+        test: /\.(js)$/,
+        use: 'babel-loader'
     };
-    require('fs').writeFileSync(DIST_DIRECTORY + '/' + INFO_FILE, JSON.stringify(info, null, 4));
+    webpackConfig.module.rules.push(babelRule);
+    webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
+   // webpackServerConfig.contentBase = DIST_WEBROOT;
     callback();
-});
-
-/**
- * Compile SCSS to CSS.
- */
-gulp.task('dist:styles', ['dist:mkdir'], function()
-{
-    return gulp.src('styles/default.scss').pipe(sass()).pipe(gulp.dest(DIST_DIRECTORY));
 });
 
 /**
@@ -208,70 +191,71 @@ gulp.task('dist:styles', ['dist:mkdir'], function()
  */
 gulp.task('dist:templates', ['dist:mkdir'], function(callback)
 {
-    execSync('python scripts/build-template.py -b templates/index.html -t plugins,templates/Views ' + DIST_DIRECTORY);
-    callback();
+    buildTemplates(function(err, data)
+    {
+        fs.writeFileSync(DIST_WEBROOT + '/index.html', data); 
+        callback();
+    });
 });
 
 /**
- * Copy files for dist.
+ * Compile SCSS to CSS.
  */
-gulp.task('dist:copy:config', ['dist:mkdir'], function() 
+gulp.task('dist:styles', ['dist:mkdir'], function()
 {
-    return gulp.src([CONFIGURATION_FILE, 'resources/*'], {base: './'})
-               .pipe(gulp.dest(DIST_DIRECTORY));
+    return gulp.src('styles/default.scss')
+               .pipe(sass())
+               .pipe(gulp.dest(DIST_WEBROOT));
 });
 
 /**
- * Copy some web files from libs.
+ * Creates info.json.
  */
-gulp.task('dist:copy:web', ['dist:mkdir'], function() 
+gulp.task('dist:info', ['dist:mkdir'], function(callback)
 {
-    return gulp.src([WEB_DIRECTORY + '/libs/github/twbs/*/fonts/*', WEB_DIRECTORY + '/libs/system.js'], {base: WEB_DIRECTORY})
-               .pipe(gulp.dest(DIST_DIRECTORY));
+    var info = createInfo(function(err, data)
+    {
+        fs.writeFileSync(DIST_WEBROOT + '/' + INFO_FILE, JSON.stringify(data, null, 4));
+        callback();
+    });
 });
 
 /**
- * Copies necessary files to DIST_DIRECTORY. This does NOT copy JS bundle.
+ * Links build results to web directory.
  */
-gulp.task('dist:copy', ['dist:copy:config', 'dist:copy:web'], function(callback)
+gulp.task('dist:copy', ['dist:mkdir'], function()
 {
-    callback();
+    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY + '/*'], {base: './'})
+               .pipe(gulp.dest(DIST_WEBROOT));
 });
 
 /**
- * Creates the JS bundle, transpiles, and copies to DIST_DIRECTORY.
+ * Bundle (Webpack) for distribution.
  */
-gulp.task('dist:build', ['dist:mkdir', 'bundle'], function()
+gulp.task('dist', ['link', 'dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
 {
-    return gulp.src(BUNDLE_DIRECTORY + '/' + BUNDLE_FILE)
-//               .pipe(babel({presets: ['es2015']}))
-               .pipe(gulp.dest(DIST_DIRECTORY));
+    webpack(webpackConfig, callback);
 });
 
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - General
+////////////////////////////////////////////////////////////////////////////////
 /**
- * Make distribution.
+ * Links build results to web directory.
  */
-gulp.task('dist', ['dist:build', 'dist:styles', 'dist:info', 'dist:templates', 'dist:copy'], function(callback)
+gulp.task('link', function()
 {
-    callback();
+    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
+               .pipe(symlink([NODE_MODULES_DIRECTORY + '/' + SOURCE_DIRECTORY,
+                              NODE_MODULES_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
 });
 
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - Master
+////////////////////////////////////////////////////////////////////////////////
 /**
- * Test the dist in a server.
+ * Default task (develop).
  */
-gulp.task('dist:server', ['dist'], function(callback)
-{
-    var serveStatic = require('serve-static');
-    var serveIndex = require('serve-index');
-    var app = require('connect')()
-        .use(serveStatic(DIST_DIRECTORY))
-        .use(serveIndex(DIST_DIRECTORY));
-    require('http').createServer(app).listen(PORT);
-});
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Master tasks
-///////////////////////////////////////////////////////////////////////////////////////
 gulp.task('default', function(callback)
 {
     gulp.start('develop');
@@ -283,23 +267,50 @@ gulp.task('default', function(callback)
  */
 gulp.task('clean', function(callback)
 {
-    gulp.start('bundle:clean');
     gulp.start('develop:clean');
     gulp.start('dist:clean');
     callback();
 });
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Utilities
-///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// UTILITIES
+////////////////////////////////////////////////////////////////////////////////
 /**
- * Gets directories within provided directory.
+ * Builds templates into index file. Returns index contents in callback.
  */
-function getDirectories(directory)
+function buildTemplates(callback)
 {
-    var path = require('path');
-    return fs.readdirSync(directory).filter(function(file)
+    recread(TEMPLATE_DIRECTORY, ['index.html'], function(err, files) 
     {
-	   return fs.statSync(path.join(directory, file)).isDirectory();
+        var templates = '';
+        for (var index in files)
+        {
+            var filename = files[index];
+            var templateName = filename.substring(filename.lastIndexOf('/') + 1);
+            templateName = templateName.substring(0, templateName.length - 5);
+            var data = fs.readFileSync(files[index], 'utf8'); 
+            templates += '<script type="text/template" id="' + templateName + '">';
+            templates += data;
+            templates += '</script>';
+        }
+        var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
+        indexFile = indexFile.replace('{templates}', templates);
+        callback(null, indexFile);
     });
+}
+
+/**
+ * Creates data for info.json.
+ */
+function createInfo(callback)
+{
+    var json = require('./' + PACKAGE_FILE);
+    delete json.scripts;
+    delete json.main;
+    delete json.devDependencies;
+    delete json.optionalDependencies;
+    delete json.repository;
+    delete json.dependencies;
+    var info = {CLIENT: json};
+    callback(null, info);
 }
