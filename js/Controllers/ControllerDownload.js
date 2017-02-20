@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import BaseController from 'js/Controllers/BaseController';
 import Configuration from 'js/Configuration';
+import FileSaver from 'file-saver';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import saveAs from 'file-saver';
 
 /**
  * Download controller.
@@ -40,6 +40,6 @@ export default class ControllerDownload extends BaseController
         var filename = options.filename;
         var mimetype = options.mimetype;
         var blob = new Blob([data], {type: mimetype});
-        saveAs(blob, filename);
+        FileSaver.saveAs(blob, filename);
     }
 }
