@@ -19,7 +19,7 @@
         "postinstall": "node scripts/postinstall.js",
         "prestart": "node scripts/prestart.js",
         "preversion": "node scripts/preversion.js",
-        "postversion": "git push && git push --tags"
+        "postversion": "node scripts/postversion.js"
     },
     "author": {
         "name": "Distributed Digital Music Archives & Library Laboratory",
