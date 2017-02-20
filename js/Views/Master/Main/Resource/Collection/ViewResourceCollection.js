@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import _ from 'underscore';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
