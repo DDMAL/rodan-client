@@ -31,14 +31,14 @@ const DIST_WEBROOT = 'dist';
 // NOTE: don't edit this unless you know what you're doing.
 ////////////////////////////////////////////////////////////////////////////////
 const CONFIGURATION_FILE = 'configuration.json';
-const ENTRY_FILE = './js/main.js';
+const ENTRY_FILE = './src/js/main.js';
 const INFO_FILE = 'info.json';
 const NODE_MODULES_DIRECTORY = 'node_modules';
 const OUTPUT_FILE = 'rodan_client.min.js';
 const PACKAGE_FILE = 'package.json';
 const PLUGINS_DIRECTORY = 'plugins';
 const RESOURCES_DIRECTORY = 'resources';
-const SOURCE_DIRECTORY = 'js';
+const SOURCE_DIRECTORY = 'src/js';
 const TEMPLATE_DIRECTORY = 'templates';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +52,14 @@ var webpackConfig =
         filename: OUTPUT_FILE
     },
     module: {rules: []},
+    resolve:
+    {
+        modules: [
+            path.resolve(__dirname + '/src'),
+            path.resolve(__dirname + '/node_modules'),
+            path.resolve(__dirname + '/plugins')
+        ]
+    },
     plugins: [new webpack.ProvidePlugin({jQuery: "jquery"})]
 };
 var webpackServerConfig = {};
@@ -139,7 +147,7 @@ gulp.task('develop:link', ['develop:mkdir'], function()
 /**
  * Bundle (Webpack) and start the development server.
  */
-gulp.task('develop', ['link', 'develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
+gulp.task('develop', ['develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
 {
     var compiler = webpack(webpackConfig);
     var server = new WebpackDevServer(compiler, webpackServerConfig);
@@ -241,22 +249,9 @@ gulp.task('dist:copy', ['dist:mkdir'], function()
 /**
  * Bundle (Webpack) for distribution.
  */
-gulp.task('dist', ['link', 'dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
+gulp.task('dist', ['dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
 {
     webpack(webpackConfig, callback);
-});
-
-////////////////////////////////////////////////////////////////////////////////
-// TASKS - General
-////////////////////////////////////////////////////////////////////////////////
-/**
- * Links build results to web directory.
- */
-gulp.task('link', function()
-{
-    return gulp.src([SOURCE_DIRECTORY, PLUGINS_DIRECTORY])
-               .pipe(symlink([NODE_MODULES_DIRECTORY + '/' + SOURCE_DIRECTORY,
-                              NODE_MODULES_DIRECTORY + '/' + PLUGINS_DIRECTORY], {force: true}));
 });
 
 ////////////////////////////////////////////////////////////////////////////////
