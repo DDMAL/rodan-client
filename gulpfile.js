@@ -91,10 +91,15 @@ gulp.task('develop:config', function(callback)
  */
 gulp.task('develop:templates', ['develop:mkdir'], function(callback)
 {
-    buildTemplates(function(err, data)
+    buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
     {
-        fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', data); 
-        callback();
+        buildTemplates(PLUGINS_DIRECTORY, [], function(err, pluginTemplates)
+        {
+            var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
+            indexFile = indexFile.replace('{templates}', mainTemplates + pluginTemplates);
+            fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', indexFile); 
+            callback();
+        });
     });
 });
 
@@ -190,10 +195,15 @@ gulp.task('dist:config', function(callback)
  */
 gulp.task('dist:templates', ['dist:mkdir'], function(callback)
 {
-    buildTemplates(function(err, data)
+    buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
     {
-        fs.writeFileSync(DIST_WEBROOT + '/index.html', data); 
-        callback();
+        buildTemplates(PLUGINS_DIRECTORY, [], function(err, pluginTemplates)
+        {
+            var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
+            indexFile = indexFile.replace('{templates}', mainTemplates + pluginTemplates);
+            fs.writeFileSync(DIST_WEBROOT + '/index.html', indexFile); 
+            callback();
+        });
     });
 });
 
@@ -275,11 +285,11 @@ gulp.task('clean', function(callback)
 // UTILITIES
 ////////////////////////////////////////////////////////////////////////////////
 /**
- * Builds templates into index file. Returns index contents in callback.
+ * Returns '<script>'-enclosed templates to be placed in index.html.
  */
-function buildTemplates(callback)
+function buildTemplates(directory, ignoreArray, callback)
 {
-    recread(TEMPLATE_DIRECTORY, ['index.html'], function(err, files) 
+    recread(directory, ignoreArray, function(err, files) 
     {
         var templates = '';
         for (var index in files)
@@ -292,9 +302,7 @@ function buildTemplates(callback)
             templates += data;
             templates += '</script>';
         }
-        var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
-        indexFile = indexFile.replace('{templates}', templates);
-        callback(null, indexFile);
+        callback(null, templates);
     });
 }
 
