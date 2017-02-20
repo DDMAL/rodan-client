@@ -19,8 +19,14 @@ git.status(function(error, data)
 	// Check if credential helper.
 	git.raw(['config', 'credential.helper'], function(error, data)
 	{
-	    console.log('No git credential.helper detected. You need to set this up to version this package.');
-		process.exit(1);
+		if (!data || data === '')
+		{
+	    	console.log('No git credential.helper detected. You need to set this up to version this package.');
+			process.exit(1);
+		}
+		else
+		{
+			process.exit();
+		}
 	});
-	process.exit();
 });
