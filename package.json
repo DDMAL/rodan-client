@@ -18,8 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node scripts/postinstall.js",
     "prestart": "node scripts/prestart.js",
-    "preversion": "node scripts/preversion.js",
-    "postversion": "node scripts/postversion.js"
+    "preversion": "node scripts/preversion.js"
   },
   "author": {
     "name": "Distributed Digital Music Archives & Library Laboratory",
@@ -42,6 +41,7 @@
     "ip": "^1.1.4",
     "prompt-sync": "^4.1.4",
     "recursive-readdir": "^2.1.1",
+    "simple-git": "^1.66.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   },

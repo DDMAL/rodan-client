@@ -3,13 +3,24 @@
  *
  * We only allow new versions from master.
  ******************************************************************************/
-var child_process = require('child_process');
-var result = child_process.execSync('git status --porcelain -b').toString();
-var lineCount = result.split('\n').length;
-var firstLine = result.split('\n')[0];
-if (firstLine !== '## master...origin/master' || lineCount != 2)
+const path = require('path');
+const projectPath = path.resolve(__dirname, '../');
+const git = require('simple-git')(projectPath);
+
+git.status(function(error, data)
 {
-    console.log("Must be on master branch with no changes to update version.");
-    process.exit(1);
-}
-process.exit();
+	// Check if master.
+	if (data.current !== 'master')
+	{
+	    console.log("Must be on master branch with no changes to update version.");
+	    process.exit(1);
+	}
+
+	// Check if credential helper.
+	git.raw(['config', 'credential.helper'], function(error, data)
+	{
+	    console.log('No git credential.helper detected. You need to set this up to version this package.');
+		process.exit(1);
+	});
+	process.exit();
+});
