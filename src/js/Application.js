@@ -3,7 +3,6 @@ import $ from 'jquery';
 import bootstrap from 'bootstrap'; 
 import Marionette from 'backbone.marionette';
 import moment from 'moment';
-import './Plugins';
 import Radio from 'backbone.radio';
 
 import BehaviorTable from './Behaviors/BehaviorTable';

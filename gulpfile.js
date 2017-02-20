@@ -56,8 +56,7 @@ var webpackConfig =
     {
         modules: [
             path.resolve(__dirname + '/src'),
-            path.resolve(__dirname + '/node_modules'),
-            path.resolve(__dirname + '/plugins')
+            path.resolve(__dirname + '/node_modules')
         ]
     },
     plugins: [new webpack.ProvidePlugin({jQuery: "jquery"})]
