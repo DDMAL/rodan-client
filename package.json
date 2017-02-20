@@ -17,7 +17,8 @@
         "dist": "gulp dist",
         "test": "echo \"Error: no test specified\" && exit 1",
         "postinstall": "node scripts/postinstall.js",
-        "prestart": "node scripts/prestart.js"
+        "prestart": "node scripts/prestart.js",
+        "preversion": "node scripts/preversion.js"
     },
     "author": {
         "name": "Distributed Digital Music Archives & Library Laboratory",
