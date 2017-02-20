@@ -1,6 +1,8 @@
-/**
- * We have to be in master to do version.
- */
+/*******************************************************************************
+ * PREVERSION
+ *
+ * We only allow new versions from master.
+ ******************************************************************************/
 var child_process = require('child_process');
 var result = child_process.execSync('git status --porcelain -b').toString();
 var lineCount = result.split('\n').length;

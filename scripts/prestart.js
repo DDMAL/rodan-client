@@ -1,5 +1,5 @@
 /*******************************************************************************
- * PRE-START
+ * PRESTART
  *
  * Checks to see if 'configuration.json' exists. If not, it will help the user
  * create one.
