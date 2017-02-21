@@ -90,7 +90,10 @@ var Configuration = {
 
     // Disables features that require a later version of Rodan iff true.
     // It's useful to turn this to 'false' if implementing something new.
-    ENFORCE_VERSION_COMPATIBILITY: true
+    ENFORCE_VERSION_COMPATIBILITY: true,
+
+    // Created to hold info on plugins. 
+    PLUGINS: []
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////

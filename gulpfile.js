@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // REQUIRE
 ////////////////////////////////////////////////////////////////////////////////
+const async = require('async');
 const del = require('del');
 const fs = require('fs');
 const gulp = require('gulp');
@@ -36,7 +37,7 @@ const INFO_FILE = 'info.json';
 const NODE_MODULES_DIRECTORY = 'node_modules';
 const OUTPUT_FILE = 'rodan_client.min.js';
 const PACKAGE_FILE = 'package.json';
-const PLUGINS_DIRECTORY = 'plugins';
+const PLUGINS_FILE = '.plugins.js';
 const RESOURCES_DIRECTORY = 'resources';
 const SOURCE_DIRECTORY = 'src/js';
 const TEMPLATE_DIRECTORY = 'templates';
@@ -62,6 +63,16 @@ var webpackConfig =
     plugins: [new webpack.ProvidePlugin({jQuery: "jquery"})]
 };
 var webpackServerConfig = {};
+
+/**
+ * Reads config file to determine which plugins should be included.
+ */
+function getPluginList()
+{
+    var configPath = path.resolve(__dirname, 'configuration.json');
+    var config = require(configPath);
+    return config.PLUGINS ? Object.keys(config.PLUGINS) : [];
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // TASKS - Develop
@@ -98,15 +109,37 @@ gulp.task('develop:config', function(callback)
  */
 gulp.task('develop:templates', ['develop:mkdir'], function(callback)
 {
-    buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
+    // Get plugin templates. When done, get the main templates.
+    var pluginList = getPluginList();
+    var pluginTemplates = '';
+    async.each(pluginList, function(plugin, done)
     {
-        buildTemplates(PLUGINS_DIRECTORY, [], function(err, pluginTemplates)
+        var pluginPath = path.resolve(__dirname, NODE_MODULES_DIRECTORY + '/' + plugin + '/templates');
+        buildTemplates(pluginPath, [], function(error, templates)
+        {
+            if (error)
+            {
+                done(error);
+            }
+            pluginTemplates += templates;
+            done();
+        });
+    },
+    function(error)
+    {
+        if (error)
+        {
+            callback(error);
+        }
+
+        // Get the main templates.
+        buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
         {
             var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
             indexFile = indexFile.replace('{templates}', mainTemplates + pluginTemplates);
             fs.writeFileSync(DEVELOP_WEBROOT + '/index.html', indexFile); 
             callback();
-        });
+        }); 
     });
 });
 
@@ -146,7 +179,7 @@ gulp.task('develop:link', ['develop:mkdir'], function()
 /**
  * Bundle (Webpack) and start the development server.
  */
-gulp.task('develop', ['develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
+gulp.task('develop', ['plugins:import', 'develop:mkdir', 'develop:config', 'develop:link', 'develop:templates', 'develop:styles', 'develop:info'], function(callback)
 {
     var compiler = webpack(webpackConfig);
     var server = new WebpackDevServer(compiler, webpackServerConfig);
@@ -202,15 +235,37 @@ gulp.task('dist:config', function(callback)
  */
 gulp.task('dist:templates', ['dist:mkdir'], function(callback)
 {
-    buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
+    // Get plugin templates. When done, get the main templates.
+    var pluginList = getPluginList();
+    var pluginTemplates = '';
+    async.each(pluginList, function(plugin, done)
     {
-        buildTemplates(PLUGINS_DIRECTORY, [], function(err, pluginTemplates)
+        var pluginPath = path.resolve(__dirname, NODE_MODULES_DIRECTORY + '/' + plugin + '/templates');
+        buildTemplates(pluginPath, [], function(error, templates)
+        {
+            if (error)
+            {
+                done(error);
+            }
+            pluginTemplates += templates;
+            done();
+        });
+    },
+    function(error)
+    {
+        if (error)
+        {
+            callback(error);
+        }
+
+        // Get the main templates.
+        buildTemplates(TEMPLATE_DIRECTORY, ['index.html'], function(err, mainTemplates)
         {
             var indexFile = fs.readFileSync(TEMPLATE_DIRECTORY + '/index.html', 'utf8'); 
             indexFile = indexFile.replace('{templates}', mainTemplates + pluginTemplates);
             fs.writeFileSync(DIST_WEBROOT + '/index.html', indexFile); 
             callback();
-        });
+        }); 
     });
 });
 
@@ -248,7 +303,7 @@ gulp.task('dist:copy', ['dist:mkdir'], function()
 /**
  * Bundle (Webpack) for distribution.
  */
-gulp.task('dist', ['dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
+gulp.task('dist', ['plugins:import', 'dist:mkdir', 'dist:config', 'dist:copy', 'dist:templates', 'dist:styles', 'dist:info'], function(callback)
 {
     webpack(webpackConfig, callback);
 });
@@ -272,6 +327,25 @@ gulp.task('clean', function(callback)
 {
     gulp.start('develop:clean');
     gulp.start('dist:clean');
+    callback();
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// TASKS - Plugins
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * Create '.plugins.js' based on contents of config.
+ */
+gulp.task('plugins:import', function(callback)
+{
+    var pluginList = getPluginList();
+    var pluginsPath = path.resolve(__dirname, SOURCE_DIRECTORY + '/' + PLUGINS_FILE);
+    var plugins = '';
+    for (var i = 0; i < pluginList.length; i++)
+    {
+        plugins += 'import \'' + pluginList[i] + '\';\n';
+    }
+    fs.writeFileSync(pluginsPath, plugins);
     callback();
 });
 
@@ -308,4 +382,14 @@ function createInfo(callback)
     var json = require('./' + PACKAGE_FILE);
     var info = {CLIENT: json};
     callback(null, info);
+}
+
+/**
+ * Reads config file to determine which plugins should be included.
+ */
+function getPluginList()
+{
+    var configPath = path.resolve(__dirname, 'configuration.json');
+    var config = require(configPath);
+    return config.PLUGINS ? Object.keys(config.PLUGINS) : [];
 }

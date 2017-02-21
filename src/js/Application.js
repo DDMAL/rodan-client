@@ -33,6 +33,8 @@ import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';
 
+import './.plugins';
+
 /**
  * Main application class.
  */
