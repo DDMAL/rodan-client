@@ -32,6 +32,7 @@ const DIST_WEBROOT = 'dist';
 // NOTE: don't edit this unless you know what you're doing.
 ////////////////////////////////////////////////////////////////////////////////
 const CONFIGURATION_FILE = 'configuration.json';
+const CONFIGURATION_EXAMPLE_FILE = 'configuration.example.json';
 const ENTRY_FILE = './src/js/main.js';
 const INFO_FILE = 'info.json';
 const NODE_MODULES_DIRECTORY = 'node_modules';
@@ -292,11 +293,11 @@ gulp.task('dist:info', ['dist:mkdir'], function(callback)
 });
 
 /**
- * Links build results to web directory.
+ * Copy stuff to dist.
  */
 gulp.task('dist:copy', ['dist:mkdir'], function()
 {
-    return gulp.src([RESOURCES_DIRECTORY + '/*'], {base: './'})
+    return gulp.src([RESOURCES_DIRECTORY + '/*', CONFIGURATION_EXAMPLE_FILE, PACKAGE_FILE], {base: './'})
                .pipe(gulp.dest(DIST_WEBROOT));
 });
 
