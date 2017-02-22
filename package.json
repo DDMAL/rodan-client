@@ -26,7 +26,7 @@
     "name": "Distributed Digital Music Archives & Library Laboratory",
     "url": "http://ddmal.music.mcgill.ca/"
   },
-  "main": "",
+  "main": "src/rodan.js",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -64,5 +64,8 @@
     "moment": "^2.17.1",
     "moment-timezone": "^0.4.1",
     "underscore": "^1.8.3"
+  },
+  "engines" :  { 
+    "node" : ">=4.2.6" 
   }
 }
