@@ -1,6 +1,6 @@
 {
   "name": "rodan-client",
-  "version": "0.16.9",
+  "version": "0.17.0",
   "description": "Rodan Client",
   "keywords": [
     "workflow",
@@ -62,7 +62,7 @@
     "moment-timezone": "^0.4.1",
     "underscore": "^1.8.3"
   },
-  "engines" :  { 
-    "node" : ">=4.2.6" 
+  "engines": {
+    "node": ">=4.2.6"
   }
 }
