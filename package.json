@@ -65,10 +65,5 @@
   },
   "engines" :  { 
     "node" : ">=4.2.6" 
-  },
-  "publishConfig":
-  {
-    "folder": "dist",
-    "tag": "dev"
   }
 }

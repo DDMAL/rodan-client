@@ -65,16 +65,6 @@ var webpackConfig =
 };
 var webpackServerConfig = {};
 
-/**
- * Reads config file to determine which plugins should be included.
- */
-function getPluginList()
-{
-    var configPath = path.resolve(__dirname, 'configuration.json');
-    var config = require(configPath);
-    return config.PLUGINS ? Object.keys(config.PLUGINS) : [];
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // TASKS - Develop
 ////////////////////////////////////////////////////////////////////////////////
