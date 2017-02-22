@@ -9,5 +9,8 @@
         "NAME": "",
         "EMAIL": ""
     },
-    "DEBUG": false
+    "DEBUG": false,
+    "PLUGINS": 
+    {
+    }
 }
