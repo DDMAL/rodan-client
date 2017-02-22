@@ -33,8 +33,6 @@ import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';
 
-import './.plugins';
-
 /**
  * Main application class.
  */
@@ -81,6 +79,8 @@ export default class Application extends Marionette.Application
         this._initializeViews();
         this._initializeControllers();
         
+        require('./.plugins');
+
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
     }
 
