@@ -389,16 +389,6 @@ function getPluginList()
     }
     catch (error)
     {
-        console.log('Could not read ' + pluginsInclusionFile);
-        console.log('If you wish to include plugins in the build, make sure they are declared in ' + pluginsInclusionFile + ' in JSON format.');
-        console.log('Example:');
-        console.log('');
-        console.log('{');
-        console.log('  "some-plugin": {},');
-        console.log('  "some-other-plugin": {}');
-        console.log('}');
-        console.log('');
-        console.log('Please see the README for more info.');
         return [];
     }
 }

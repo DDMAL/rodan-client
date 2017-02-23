@@ -54,6 +54,30 @@ fs.readFile(projectRoot + '/configuration.json', 'utf8', function(error, data)
     {
         console.log('File ' + projectRoot + '/configuration.json found');
     }
+
+    // Check for plugins.json.
+    var pluginsInclusionFile = projectRoot + '/plugins.json'; 
+    try
+    {
+        var plugins = require(pluginsInclusionFile);
+    }
+    catch (error)
+    {
+        console.log('');
+        console.log('Could not read ' + pluginsInclusionFile);
+        console.log('If you wish to include plugins in the build, make sure they are declared in ' + pluginsInclusionFile + ' in JSON format.');
+        console.log('');
+        console.log('Example:');
+        console.log('');
+        console.log('{');
+        console.log('  "some-plugin": {},');
+        console.log('  "some-other-plugin": {}');
+        console.log('}');
+        console.log('');
+        console.log('Please see the README for more info.');
+        var input = prompt('Press return/enter to continue.');
+        console.log('');
+    }
     process.exit();
 });
 
