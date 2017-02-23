@@ -18,8 +18,8 @@ var Configuration = {
     // Set to true iff using HTTPS (else HTTP). Default is true.
     SERVER_HTTPS: true,
 
-    // Set to true iff the server allows socket connections. Default is false.
-    SERVER_SOCKET_AVAILABLE: false,
+    // Set to true iff the server allows socket connections. Default is true.
+    SERVER_SOCKET_AVAILABLE: true,
 
     // Set to true iff you want to see socket message data in the console. Default is false.
     SERVER_SOCKET_DEBUG: false,
