@@ -381,11 +381,11 @@ function createInfo(callback)
  */
 function getPluginList()
 {
-    var pluginsInclusionFile = path.resolve(__dirname, PLUGINS_INCLUSION_FILE); 
+    var pluginsInclusionFile = path.resolve(__dirname, PLUGINS_INCLUSION_FILE);
     try
     {
-        var plugins = require(configPath);
-        return Object.keys(plugins.PLUGINS);
+        var plugins = require(pluginsInclusionFile);
+        return Object.keys(plugins);
     }
     catch (error)
     {
