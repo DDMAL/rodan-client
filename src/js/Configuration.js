@@ -12,8 +12,8 @@ var Configuration = {
     // Host of server (e.g. 123.456.789.0 or mydomain.com).
     SERVER_HOST: '',
 
-    // Server port.
-    SERVER_PORT: '',
+    // Server port. Default is 443.
+    SERVER_PORT: 443,
 
     // Set to true iff using HTTPS (else HTTP). Default is true.
     SERVER_HTTPS: true,
@@ -24,8 +24,8 @@ var Configuration = {
     // Set to true iff you want to see socket message data in the console. Default is false.
     SERVER_SOCKET_DEBUG: false,
 
-    // Authentication type. Either 'session' or 'token'.
-    SERVER_AUTHENTICATION_TYPE: '',
+    // Authentication type. Either 'session' or 'token'. Default is 'token'.
+    SERVER_AUTHENTICATION_TYPE: 'token',
 
     // This determines the method to use for loading updates from the server.
     // Either 'POLL' (default) or 'SOCKET'.
