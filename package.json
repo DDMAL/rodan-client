@@ -16,7 +16,6 @@
     "start": "gulp",
     "dist": "gulp dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node scripts/postinstall.js",
     "pretest": "node scripts/pretest.js",
     "postversion": "git push && git push --tags",
     "prestart": "node scripts/prestart.js",

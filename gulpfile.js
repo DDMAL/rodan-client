@@ -38,6 +38,7 @@ const INFO_FILE = 'info.json';
 const NODE_MODULES_DIRECTORY = 'node_modules';
 const OUTPUT_FILE = 'rodan_client.min.js';
 const PACKAGE_FILE = 'package.json';
+const PLUGINS_INCLUSION_FILE = 'plugins.json';
 const PLUGINS_FILE = '.plugins.js';
 const RESOURCES_DIRECTORY = 'resources';
 const SOURCE_DIRECTORY = 'src/js';
@@ -380,7 +381,24 @@ function createInfo(callback)
  */
 function getPluginList()
 {
-    var configPath = path.resolve(__dirname, 'configuration.json');
-    var config = require(configPath);
-    return config.PLUGINS ? Object.keys(config.PLUGINS) : [];
+    var pluginsInclusionFile = path.resolve(__dirname, PLUGINS_INCLUSION_FILE); 
+    try
+    {
+        var plugins = require(configPath);
+        return Object.keys(plugins.PLUGINS);
+    }
+    catch (error)
+    {
+        console.log('Could not read ' + pluginsInclusionFile);
+        console.log('If you wish to include plugins in the build, make sure they are declared in ' + pluginsInclusionFile + ' in JSON format.');
+        console.log('Example:');
+        console.log('');
+        console.log('{');
+        console.log('  "some-plugin": {},');
+        console.log('  "some-other-plugin": {}');
+        console.log('}');
+        console.log('');
+        console.log('Please see the README for more info.');
+        return [];
+    }
 }
