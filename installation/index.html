@@ -68,6 +68,14 @@
 
 <div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~$ cd rodan-client
 user@computer:~/rodan-client$ npm install
+user@computer:~/rodan-client$ npm install jspm
+</code></pre>
+</div>
+
+<p>If you do not already have libgif installed, it is also required.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+user@computer:~/rodan-client$ sudo apt-get install libgif-dev
 </code></pre>
 </div>
 
@@ -80,32 +88,25 @@ user@computer:~/rodan-client$ npm install
 </code></pre>
 </div>
 
-<p>The above command will:
-* create a directory <code class="highlighter-rouge">rodan-client/web</code>
-* create a file <code class="highlighter-rouge">rodan-client/web/config.js</code>
-* download and install the application dependencies to <code class="highlighter-rouge">rodan-client/web/libs/</code>.</p>
-
-<p>What jspm is doing is creating a web application directory (i.e. <code class="highlighter-rouge">web</code>) where the application will reside.</p>
-
 <h3 id="configure">6. Configure</h3>
 <p>Rodan Client requires very little configuration to get started. Only two files need to be managed:</p>
 
 <ul>
   <li><code class="highlighter-rouge">rodan-client/configuration.json</code></li>
-  <li><code class="highlighter-rouge">rodan-client/js/Plugins.js</code>.</li>
+  <li><code class="highlighter-rouge">rodan-client/src/js/Plugins.js</code>.</li>
 </ul>
 
 <p>When Rodan Client is cloned, these files do not yet exist. Instead, there is:</p>
 
 <ul>
   <li><code class="highlighter-rouge">rodan-client/configuration.json.example</code></li>
-  <li><code class="highlighter-rouge">rodan-client/js/Plugins.js.example</code>.</li>
+  <li><code class="highlighter-rouge">rodan-client/src/js/Plugins.js.example</code>.</li>
 </ul>
 
 <p>First, we need to copy these files without the <code class="highlighter-rouge">.example</code> extension.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>user@computer:~/rodan-client$ cp configuration.json.example configuration.json
-user@computer:~/rodan-client$ cp js/Plugins.js.example Plugins.js
+user@computer:~/rodan-client$ cp /src/js/Plugins.js.example /src/js/Plugins.js
 </code></pre>
 </div>
 
