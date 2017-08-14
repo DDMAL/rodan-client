@@ -11,14 +11,14 @@ const ip = require('ip');
 const path = require('path');
 const recread = require('recursive-readdir');
 const sass = require('gulp-sass');
-const symlink = require('gulp-sym');
+const vfs = require('vinyl-fs');
 const webpack = require('webpack');
 const WebpackDevServer = require("webpack-dev-server");
 
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIGURATION - Develop
 ////////////////////////////////////////////////////////////////////////////////
-const DEVELOP_HOST = ip.address();
+const DEVELOP_HOST = "localhost";
 const DEVELOP_PORT = 9002;
 const DEVELOP_SOURCEMAP = 'eval-source-map';
 const DEVELOP_WEBROOT = '__develop__';
@@ -163,9 +163,7 @@ gulp.task('develop:info', ['develop:mkdir'], function(callback)
  */
 gulp.task('develop:link', ['develop:mkdir'], function()
 {
-    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY])
-               .pipe(symlink([DEVELOP_WEBROOT + '/' + CONFIGURATION_FILE,
-                              DEVELOP_WEBROOT + '/' + RESOURCES_DIRECTORY], {force: true}));
+    return gulp.src([CONFIGURATION_FILE, RESOURCES_DIRECTORY]).pipe(vfs.symlink(DEVELOP_WEBROOT));
 });
 
 /**
