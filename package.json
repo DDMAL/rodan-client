@@ -41,6 +41,7 @@
     "gulp-sass": "^3.1.0",
     "gulp-sym": "^1.0.2",
     "ip": "^1.1.4",
+    "paper": "^0.11.4",
     "prompt-sync": "^4.1.4",
     "recursive-readdir": "^2.1.1",
     "simple-git": "^1.66.0",
@@ -57,11 +58,23 @@
     "jquery": "^3.1.1",
     "jqueryui": "^1.11.1",
     "json-editor": "git+https://github.com/jdorn/json-editor.git",
+    "jspm": "^0.16.53",
     "moment": "^2.17.1",
     "moment-timezone": "^0.4.1",
     "underscore": "^1.8.3"
   },
   "engines": {
     "node": ">=4.2.6"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "node_modules/.bin"
+    },
+    "dependencies": {},
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
   }
 }
