@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import JSONEditor from 'json-editor';
 import Marionette from 'backbone.marionette';
@@ -61,7 +62,7 @@ export default class ViewSettings extends Marionette.ItemView
         var jobUuid = this.model.getJobUuid();
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOB_COLLECTION);
         var job = collection.get(jobUuid);
-        var settingsSchema = { 
+        var settingsSchema = {
             schema: job.get('settings'),
             theme: 'bootstrap3',
             disable_collapse: true,
@@ -72,7 +73,7 @@ export default class ViewSettings extends Marionette.ItemView
             startval: startValues,
             form_name_root: ' '
         };
-        this._editor = new JSONEditor(element, settingsSchema); 
+        this._editor = new JSONEditor(element, settingsSchema);
     }
 
     /**
