@@ -341,6 +341,13 @@ gulp.task('plugins:import', function(callback)
     } */
 
     fs.writeFileSync(pluginsPath, plugins);
+    
+    // Set the creation and modification time for the newly generated file to 10 seconds ago,
+    // to work around a bug in webpack.
+    // See https://github.com/webpack/watchpack/issues/25#issuecomment-287789288
+    var tenSecondsAgo = Date.now() / 1000 - 10
+    fs.utimes(pluginsPath, tenSecondsAgo, tenSecondsAgo, function (err) { if (err) throw err; });
+
     callback();
 });
 
