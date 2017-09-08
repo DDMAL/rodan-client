@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import BaseController from './BaseController';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';

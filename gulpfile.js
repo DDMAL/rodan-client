@@ -35,10 +35,10 @@ const CONFIGURATION_FILE = 'configuration.json';
 const CONFIGURATION_EXAMPLE_FILE = 'configuration.example.json';
 const ENTRY_FILE = './src/js/main.js';
 const INFO_FILE = 'info.json';
-const NODE_MODULES_DIRECTORY = 'node_modules';
+const NODE_MODULES_DIRECTORY = '/node_modules';
 const OUTPUT_FILE = 'rodan_client.min.js';
 const PACKAGE_FILE = 'package.json';
-const PLUGINS_INCLUSION_FILE = 'plugins.json';
+const PLUGINS_INCLUSION_FILE = '/plugins.json';
 const PLUGINS_FILE = '.plugins.js';
 const RESOURCES_DIRECTORY = 'resources';
 const SOURCE_DIRECTORY = 'src/js';
@@ -330,12 +330,22 @@ gulp.task('plugins:import', function(callback)
 {
     var pluginList = getPluginList();
     var pluginsPath = path.resolve(__dirname, SOURCE_DIRECTORY + '/' + PLUGINS_FILE);
-    var plugins = '';
+    var plugins = 'import WorkflowBuilderGUI from \'./WorkflowBuilderGUI.js\'';
+    
+    /**
     for (var i = 0; i < pluginList.length; i++)
     {
         plugins += 'import \'' + pluginList[i] + '\';\n';
-    }
+    } */
+
     fs.writeFileSync(pluginsPath, plugins);
+    
+    // Set the creation and modification time for the newly generated file to 10 seconds ago,
+    // to work around a bug in webpack.
+    // See https://github.com/webpack/watchpack/issues/25#issuecomment-287789288
+    var tenSecondsAgo = Date.now() / 1000 - 10
+    fs.utimes(pluginsPath, tenSecondsAgo, tenSecondsAgo, function (err) { if (err) throw err; });
+
     callback();
 });
 
@@ -379,7 +389,7 @@ function createInfo(callback)
  */
 function getPluginList()
 {
-    var pluginsInclusionFile = path.resolve(__dirname, PLUGINS_INCLUSION_FILE);
+    var pluginsInclusionFile = path.resolve(__dirname, + '/' + PLUGINS_INCLUSION_FILE);
     try
     {
         var plugins = require(pluginsInclusionFile);
