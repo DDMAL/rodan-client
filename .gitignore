@@ -14,3 +14,4 @@ configuration.json
 __*
 src/js/.plugins.js
 plugins.json
+package-lock.json

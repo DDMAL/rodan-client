@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
-import JSONEditor from 'json-editor';
+// import JSONEditor from 'json-editor';
+// [TODO] Would like to find a cleaner way to do this.
+var JSONEditor = require('json-editor').constructor;
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
