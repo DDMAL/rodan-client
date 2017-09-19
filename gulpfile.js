@@ -286,7 +286,7 @@ gulp.task('dist:info', ['dist:mkdir'], function(callback)
  */
 gulp.task('dist:copy', ['dist:mkdir'], function()
 {
-    return gulp.src([RESOURCES_DIRECTORY + '/*', CONFIGURATION_EXAMPLE_FILE, PACKAGE_FILE], {base: './'})
+    return gulp.src([RESOURCES_DIRECTORY + '/*', CONFIGURATION_FILE, PACKAGE_FILE], {base: './'})
                .pipe(gulp.dest(DIST_WEBROOT));
 });
 
