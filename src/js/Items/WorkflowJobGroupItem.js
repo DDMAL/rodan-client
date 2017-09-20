@@ -1,6 +1,7 @@
 import BaseItem from './BaseItem';
 import BaseWorkflowJobItem from './BaseWorkflowJobItem';
 import GUI_EVENTS from '../Shared/Events';
+import Radio from 'backbone.radio';
 import Rodan from 'rodan';
 import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
 
