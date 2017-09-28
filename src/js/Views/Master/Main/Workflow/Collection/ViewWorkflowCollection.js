@@ -36,3 +36,6 @@ ViewWorkflowCollection.prototype.events = {
     'click @ui.newWorkflowButton': '_handleButtonNewWorkflow',
     'change @ui.fileInput': '_handleButtonImportWorkflow'
 };
+ViewWorkflowCollection.prototype.filterTitles = {
+    'creator__username': 'Creator'
+};

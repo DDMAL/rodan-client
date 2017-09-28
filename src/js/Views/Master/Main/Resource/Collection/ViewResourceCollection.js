@@ -47,3 +47,6 @@ ViewResourceCollection.prototype.ui = {
 ViewResourceCollection.prototype.events = {
     'change @ui.fileInput': '_handleClickButtonFile'
 };
+ViewResourceCollection.prototype.filterTitles = {
+    'creator__username': 'Creator'
+};

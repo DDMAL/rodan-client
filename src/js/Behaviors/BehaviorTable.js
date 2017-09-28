@@ -90,30 +90,35 @@ export default class BehaviorTable extends Marionette.Behavior
         // Some tables will be defined with enumerations.
         var enumerations = collection.getEnumerations();
 
-        // Get those columns with data names.
+        // Get all columns that have a data-name attribute.
         var filters = [];
         this._datetimepickerElements = [];
         var columns = $(this.el).find(this.options.table + ' thead th').filter(function() { return $(this).attr('data-name'); });
-        for (var i = 0; i < columns.length; i++)
+        // Create a mapping of column name to column title.
+        var columnTitlesAndNames = columns.map(function() {
+           return {[$(this).attr('data-name')]: $(this).text()}
+        });
+        var columnTitleByName = Object.assign({}, ...columnTitlesAndNames.get());
+        var filterTitles = this.view.filterTitles || {};
+        
+        for (var [field, fieldFilters] of Object.entries(filterFields))
         {
-            var column = $(columns[i]);
-            var field = column.attr('data-name');
             var datetimeLtFilter = false;
             var datetimeGtFilter = false;
-            if (filterFields[field])
+            // Try to find a title for the filter - either specified in the view class, or taken
+            // from the corresponding column title.
+            var filterTitle = filterTitles[field] || columnTitleByName[field];
+            if (filterTitle)
             {
                 // First, check to see if this is an enumeration field (which Django doesn't cover).
                 // If it is, deal with it as such.
-
-
-                for (var j = 0; j < filterFields[field].length; j++)
+                for (var filter of fieldFilters)
                 {
-                    var filter = filterFields[field][j];
                     switch (filter)
                     {
                         case 'icontains':
                         {
-                            filters.push(this._getFilterText(column.text(), field));
+                            filters.push(this._getFilterText(filterTitle, field));
                             break;
                         }
 
@@ -154,7 +159,7 @@ export default class BehaviorTable extends Marionette.Behavior
                         elementId = '#' + field + '__lt';
                         this._datetimepickerElements.push(elementId);
                     }
-                    filters.push(this._getFilterDatetime(column.text(), field));
+                    filters.push(this._getFilterDatetime(filterTitle, field));
                 }
             }
         }
