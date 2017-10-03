@@ -393,7 +393,7 @@ export default class BehaviorTable extends Marionette.Behavior
     /**
      * Handle button clear all.
      */
-    _handleButtonClearAll()
+    _handleButtonClearAll(event)
     {
         var data = $(event.target).data();
         this._hideFormElements();
