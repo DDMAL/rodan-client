@@ -2,3 +2,8 @@ web
 website
 tmp
 node_modules
+
+__develop__/*
+dist/*
+src/*
+.DS_Store
