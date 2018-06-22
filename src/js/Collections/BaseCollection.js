@@ -180,7 +180,7 @@ export default class BaseCollection extends Backbone.Collection
      *
      * If no options.data is passed, the options.data from the last fetch are used.
      *
-     * @param {boolean} ascending results will return in ascending order iff true
+     * @param {boolean} ascending results will return in ascending order if true
      * @param {string} field name of field to sort by
      * @param {object} options Backbone.Collection.fetch options object
      */

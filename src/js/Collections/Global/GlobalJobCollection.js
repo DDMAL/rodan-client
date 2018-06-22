@@ -16,7 +16,7 @@ export default class GlobalJobCollection extends GlobalCollection
     /**
      * Initializes the instance.
      *
-     * @throws {Error} thrown iff called more than once
+     * @throws {Error} thrown if called more than once
      */
     initialize()
     {

@@ -88,9 +88,9 @@ export default class WorkflowJob extends BaseModel
     }
 
     /**
-     * Returns true iff this WorkflowJob has settings.
+     * Returns true if this WorkflowJob has settings.
      *
-     * @return {boolean} true iff this WorkflowJob has settings
+     * @return {boolean} true if this WorkflowJob has settings
      */
     hasSettings()
     {

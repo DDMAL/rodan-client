@@ -15,14 +15,14 @@ var Configuration = {
     // Server port. Default is 443.
     SERVER_PORT: 443,
 
-    // Set to true iff using HTTPS (else HTTP). Default is true.
     SERVER_HTTPS: true,
+    // Set to true if using HTTPS (else HTTP). Default is true.
 
-    // Set to true iff the server allows socket connections. Default is true.
+    // Set to true if the server allows socket connections. Default is true.
     SERVER_SOCKET_AVAILABLE: true,
 
-    // Set to true iff you want to see socket message data in the console. Default is false.
     SERVER_SOCKET_DEBUG: false,
+    // Set to true if you want to see socket message data in the console. Default is false.
 
     // Authentication type. Either 'session' or 'token'. Default is 'token'.
     SERVER_AUTHENTICATION_TYPE: 'token',

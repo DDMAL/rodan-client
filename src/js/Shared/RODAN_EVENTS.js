@@ -446,7 +446,7 @@ class RODAN_EVENTS
         this.EVENT__WORKFLOWJOB_DELETED = 'EVENT__WORKFLOWJOB_DELETED';
         /** Triggered when WorkflowJob saved. Sends {workflowjob: WorkflowJob}. */
         this.EVENT__WORKFLOWJOB_SAVED = 'EVENT__WORKFLOWJOB_SAVED';
-        /** Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created iff addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) iff the WorkflowJob created has one and only one OutputPort. */
+        /** Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created if addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) if the WorkflowJob created has one and only one OutputPort. */
         this.REQUEST__WORKFLOWJOB_CREATE = 'REQUEST__WORKFLOWJOB_CREATE'; // 
         /** Request a WorkflowJob be deleted. Takes {workflowjob: WorkflowJob}. */
         this.REQUEST__WORKFLOWJOB_DELETE = 'REQUEST__WORKFLOWJOB_DELETE';

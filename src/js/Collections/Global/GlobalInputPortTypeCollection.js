@@ -15,7 +15,7 @@ export default class GlobalInputPortTypeCollection extends GlobalCollection
     /**
      * Initializes the instance. As this class is a singleton, an Error will be thrown if called more than once.
      *
-     * @throws {Error} thrown iff called more than once
+     * @throws {Error} thrown if called more than once
      */
     initialize()
     {

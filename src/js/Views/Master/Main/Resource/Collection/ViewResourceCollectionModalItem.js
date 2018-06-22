@@ -13,7 +13,7 @@ export default class ViewResourceCollectionModalItem extends BaseViewCollectionI
     /**
      * Initializes the instance.
      *
-     * @param {object} options Marionette.View options object; 'options.assigned' (boolean; true iff this item belongs to the "assigned" Collection), options.requestdata (object; data sent with requests), options.assignrequest (object; when item becomes assigned, this request is sent), options.unassignrequest (object; when item becomes unassigned, this request is sent)
+     * @param {object} options Marionette.View options object; 'options.assigned' (boolean; true if this item belongs to the "assigned" Collection), options.requestdata (object; data sent with requests), options.assignrequest (object; when item becomes assigned, this request is sent), options.unassignrequest (object; when item becomes unassigned, this request is sent)
      */
     initialize(options)
     {

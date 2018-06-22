@@ -14,7 +14,7 @@ export default class GlobalCollection extends BaseCollection
      * Initializes the instance.
      *
      * @param {object} options initialization parameters for Backbone.Collection
-     * @throws {Error} thrown iff called more than once
+     * @throws {Error} thrown if called more than once
      */
      initialize(options)
      {

@@ -40,7 +40,7 @@ class ConnectionItem extends BaseItem
     }
 
     /**
-     * Return true iff this item can be moved by itself.
+     * Return true if this item can be moved by itself.
      */
     isMoveable()
     {

@@ -117,7 +117,7 @@ class ItemController
     }
 
     /**
-     * Return true iff item is selected.
+     * Return true if item is selected.
      */
     isSelected(item)
     {
@@ -149,7 +149,7 @@ class ItemController
     }
 
     /**
-     * Returns true iff we can group the selected items.
+     * Returns true if we can group the selected items.
      */
     canGroupSelectedItems()
     {
@@ -193,7 +193,7 @@ class ItemController
     }
 
     /**
-     * Return true iff selecting multiple.
+     * Return true if selecting multiple.
      */
     selectingMultiple()
     {
@@ -228,7 +228,7 @@ class ItemController
     }
 
     /**
-     * Returns true iff provided InputPortItem represents a candidate InputPort.
+     * Returns true if provided InputPortItem represents a candidate InputPort.
      */
     isInputPortCandidate(item)
     {

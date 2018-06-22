@@ -20,9 +20,9 @@ export default class RunJob extends BaseModel
     }
 
     /**
-     * Return true iff the current user can lock as a manual RunJob.
+     * Return true if the current user can lock as a manual RunJob.
      *
-     * @return {boolean} true iff the current user can lock as a manual RunJob
+     * @return {boolean} true if the current user can lock as a manual RunJob
      */
     available()
     {

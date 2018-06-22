@@ -48,7 +48,7 @@ class InputPortItem extends BasePortItem
     }
 
     /**
-     * Return true iff has connection item.
+     * Return true if has connection item.
      */
     hasConnectionItem()
     {
@@ -56,7 +56,7 @@ class InputPortItem extends BasePortItem
     }
 
     /**
-     * Return true iff satisfied.
+     * Return true if satisfied.
      */
     isSatisfied()
     {

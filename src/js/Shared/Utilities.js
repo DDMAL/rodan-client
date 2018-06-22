@@ -7,10 +7,10 @@ export default class Utilities
 // PUBLIC METHODS - Static
 ///////////////////////////////////////////////////////////////////////////////////////
     /**
-     * Copy text to clipboard. Returns true iff "document.execCommand('copy')" is supported.
+     * Copy text to clipboard. Returns true if "document.execCommand('copy')" is supported.
      *
      * @param {string} text string to copy to clipboard
-     * @return {boolean} returns true iff no error on "document.execCommand('copy')"
+     * @return {boolean} returns true if no error on "document.execCommand('copy')"
      */
     static copyTextToClipboard(text)
     {
