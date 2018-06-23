@@ -2,7 +2,6 @@
 .DS_Store
 npm-debug.log
 node_modules/
-dist
 web
 bundle
 tmp
@@ -12,5 +11,3 @@ configuration.json
 
 __*
 src/js/.plugins.js
-plugins.json
-package-lock.json
