@@ -91,7 +91,9 @@ export default class Application extends Marionette.Application
     {
         this._transferManager = new TransferManager();
         this._updateManager = new UpdateManager();
-        this._errorManager = new ErrorManager();
+        // This is commented out because deleting a workflowRun throws a null error despite the error
+        // being non-existent. Its errors are not very useful anyway. Fix in progress, see issue 475 (Rodan).
+        // this._errorManager = new ErrorManager(); 
     }
 
     /**
