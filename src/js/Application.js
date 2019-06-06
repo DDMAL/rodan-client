@@ -91,7 +91,8 @@ export default class Application extends Marionette.Application
     {
         this._transferManager = new TransferManager();
         this._updateManager = new UpdateManager();
-        this._errorManager = new ErrorManager();
+        # this._errorManager = new ErrorManager();
+	# Temporary fix https://github.com/DDMAL/rodan-client/issues/141
     }
 
     /**
