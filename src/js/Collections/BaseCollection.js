@@ -270,7 +270,7 @@ export default class BaseCollection extends Backbone.Collection
         if (index1 !== index2) {
             var models = this.models.slice();
             models[index1] = models.splice(index2, 1, models[index1])[0];
-            this.set(models)
+            this.set(models);
         }
     }
 
