@@ -362,12 +362,6 @@ export default class ControllerWorkflowBuilder extends BaseController
     {
         var url = options.inputport.get('url');
         var resourcesAssigned = this._getResourceAssignments(url);
-        var multipleUrl = this._getInputPortURLWithMultipleAssignments();
-        if (multipleUrl && resourcesAssigned.length > 0 && multipleUrl !== url)
-        {
-            console.error('TODO ERROR');
-            return;
-        }
         resourcesAssigned.add(options.resource);
     }
 
@@ -778,6 +772,7 @@ export default class ControllerWorkflowBuilder extends BaseController
     }
 
     /**
+     * DEPRECATED
      * Return InputPort URL that has multiple assignments.
      * Returns null if DNE.
      */
