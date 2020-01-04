@@ -478,6 +478,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when WorkflowRun created. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_CREATED = 'EVENT__WORKFLOWRUN_CREATED';
+        /** Triggered when WorkflowRun failed to create. Sends {workflowrun: WorkflowRun, errors: object}. */
+        this.EVENT__WORKFLOWRUN_FAILED_TO_CREATE = 'EVENT__WORKFLOWRUN_FAILED_TO_CREATE';
         /** Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_DELETED = 'EVENT__WORKFLOWRUN_DELETED';
         /** Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. */
