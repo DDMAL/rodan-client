@@ -17,6 +17,7 @@ import ResourceList from 'js/Models/ResourceList';
 import ViewJobCollection from 'js/Views/Master/Main/Job/Collection/ViewJobCollection';
 import ViewResourceCollectionModal from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModal';
 import ViewResourceCollectionModalItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItem';
+import ViewResourceCollectionModalItemAssigned from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionModalItemAssigned';
 import ViewWorkflow from 'js/Views/Master/Main/Workflow/Individual/ViewWorkflow';
 import ViewWorkflowCollection from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollection';
 import ViewWorkflowCollectionImportItem from 'js/Views/Master/Main/Workflow/Collection/ViewWorkflowCollectionImportItem';
@@ -59,6 +60,8 @@ export default class ControllerWorkflowBuilder extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOB, options => this._handleRequestAddWorkflowJob(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP, options => this._handleRequestAddWorkflowJobGroup(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE, options => this._handleRequestAssignResource(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_UP, options => this._handleMoveUpAssignedResource(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_DOWN, options => this._handleMoveDownAssignedResource(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options => this._handleRequestCreateWorkflowRun(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR, options => this._handleRequestCreateDistributor(options), this);
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_CONNECTION, options => this._handleRequestDeleteConnection(options), this); 
@@ -180,10 +183,10 @@ export default class ControllerWorkflowBuilder extends BaseController
         var assignedResources = this._getResourceAssignments(inputPort.get('url'));
         var availableResources = this._getResourcesAvailable(inputPort);
         var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
-                                                                    childView: ViewResourceCollectionModalItem,
-                                                                    childViewOptions: {assigned: true, 
-                                                                                       requestdata: {workflow: options.workflow, inputport: inputPort},
-                                                                                       assignrequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE,
+                                                                    childView: ViewResourceCollectionModalItemAssigned,
+                                                                    childViewOptions: {requestdata: {workflow: options.workflow, inputport: inputPort},
+                                                                                       moveup: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_UP,
+                                                                                       movedown: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_DOWN,
                                                                                        unassignrequest: RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_UNASSIGN_RESOURCE}});
         var resourceListView = new ViewResourceCollectionModal({collection: availableResources,
                                                                 childView: ViewResourceCollectionModalItem,
@@ -372,6 +375,30 @@ export default class ControllerWorkflowBuilder extends BaseController
     {
         var resourcesAssigned = this._getResourceAssignments(options.inputport.get('url'));
         resourcesAssigned.remove(options.resource);
+    }
+
+    /**
+     * Handle the moving up of an assigned resource.
+     */
+    _handleMoveUpAssignedResource(options)
+    {
+        var url = options.inputport.get('url');
+        var resourcesAssigned = this._getResourceAssignments(url);
+        var index1 = resourcesAssigned.indexOf(options.resource);
+        var index2 = Math.max(0, index1 - 1);
+        resourcesAssigned.swapItems(index1, index2);
+    }
+
+    /**
+     * Handle the moving down of an assigned resource.
+     */
+    _handleMoveDownAssignedResource(options)
+    {
+        var url = options.inputport.get('url');
+        var resourcesAssigned = this._getResourceAssignments(url);
+        var index1 = resourcesAssigned.indexOf(options.resource);
+        var index2 = Math.min(index1 + 1, resourcesAssigned.length - 1);
+        resourcesAssigned.swapItems(index1, index2);
     }
 
     /**
