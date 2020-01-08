@@ -21,6 +21,7 @@ export default class ControllerWorkflowRun extends BaseController
     {
         // Events.
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, options => this._handleEventWorkflowRunStartResponse(options)/*this._handleEventWorkflowRunCreationResponse(options)*/);
+        Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_FAILED_TO_CREATE, options => this._handleEventWorkflowRunFailToStartResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_DELETED, options => this._handleEventWorkflowRunDeleteResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_SAVED, options => this._handleEventWorkflowRunSaveResponse(options));
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOWRUN_STARTED, options => this._handleEventWorkflowRunStartResponse(options));
@@ -103,6 +104,69 @@ export default class ControllerWorkflowRun extends BaseController
     }
 
     /**
+     * Handle event WorkflowRun fail to start response.
+     */
+    _handleEventWorkflowRunFailToStartResponse(options)
+    {
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+
+        // TODO: move this logic as a utility function
+        /*
+            Translate Django error message into list display.
+            HTML structure:
+                <dl>
+                  <dt>Resource Assignments</dt>
+                  <dd>
+                    <div>InputPort X</div>
+                    <ul>
+                      <li>Error 1</li>
+                      <li>Error 2</li>
+                    </ul>
+                    ...
+                  </dd>
+                  ...
+                </dl>
+        */
+        function getErrorListDisplay(errorList) {
+            var fragment = '<ul>';
+            for (var i = 0; i < errorList.length; i += 1) {
+                fragment += '<li>' + errorList[i] + '</li>';
+            }
+            fragment += '</ul>';
+            return fragment;
+        }
+
+        var html = '<dl>';
+        var errors = options.errors;
+        for (var fieldName in errors) {
+            if (errors.hasOwnProperty(fieldName)) {
+                var fieldNameDisplay = (fieldName === 'resource_assignments') ? "Resource Assignment" : fieldName;
+                html += '<dt>' + fieldNameDisplay + '</dt>';
+
+                html += '<dd>'
+                if (fieldName === 'resource_assignments') {
+                    var errorMap = errors[fieldName];
+                    for (var inputPortUrl in errorMap) {
+                        if (errorMap.hasOwnProperty(inputPortUrl)) {
+                            html += '<div>InputPort ' + inputPortUrl + '</div>';
+                            html += getErrorListDisplay(errorMap[inputPortUrl]);
+                        }
+                    }
+                } else {
+                    html += getErrorListDisplay(errors[fieldName]);
+                }
+                html += '</dd>'
+            }
+        }
+        html += '</dl>'
+
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {
+            title: 'Error',
+            content: html
+        });
+    }
+
+    /**
      * Handle request create WorkflowRun.
      */
     _handleRequestWorkflowRunCreate(options)
@@ -114,7 +178,10 @@ export default class ControllerWorkflowRun extends BaseController
                                            resource_assignments: options.assignments,
                                            name: name,
                                            description: description});
-        workflowRun.save({}, {success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model})});
+        workflowRun.save({}, {
+            success: (model) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_CREATED, {workflowrun: model}),
+            error: (model, response) => Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWRUN_FAILED_TO_CREATE, {workflowrun: model, errors: response.responseJSON})
+        });
     }
 
     /**
