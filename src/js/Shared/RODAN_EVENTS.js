@@ -392,6 +392,11 @@ class RODAN_EVENTS
         this.REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP = 'REQUEST__WORKFLOWBUILDER_ADD_WORKFLOWJOBGROUP';
         /** Request a Resource be assigned to an InputPort. Takes {resource: Resource, inputport: InputPort, workflow: Workflow}. */
         this.REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE = 'REQUEST__WORKFLOWBUILDER_ASSIGN_RESOURCE';
+        /** Request an assigned resource to move up. Takes {resource: Resource, inputport: InputPort, workflow: Workflow}. */
+        this.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_UP = 'REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_UP';
+        /** Request an assigned resource to move down. Takes {resource: Resource, inputport: InputPort, workflow: Workflow}. */
+        this.REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_DOWN = 'REQUEST__WORKFLOWBUILDER_ASSIGNED_RESOURCE_MOVE_DOWN';
+
         /** Request a WorkflowRun be created. The WorkflowBuilder will use the known Resource assignments that have been made. Takes {workflow: Workflow}. */
         this.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN = 'EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN';
         /** Request the Resources that are currently assigned to an InputPort. Takes {inputport: InputPort}. Returns [Resource]. */
@@ -478,6 +483,8 @@ class RODAN_EVENTS
         ///////////////////////////////////////////////////////////////////////////////////////
         /** Triggered when WorkflowRun created. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_CREATED = 'EVENT__WORKFLOWRUN_CREATED';
+        /** Triggered when WorkflowRun failed to create. Sends {workflowrun: WorkflowRun, errors: object}. */
+        this.EVENT__WORKFLOWRUN_FAILED_TO_CREATE = 'EVENT__WORKFLOWRUN_FAILED_TO_CREATE';
         /** Triggered when WorkflowRun deleted. Sends {workflowrun: WorkflowRun}. */
         this.EVENT__WORKFLOWRUN_DELETED = 'EVENT__WORKFLOWRUN_DELETED';
         /** Triggered when WorkflowRun saved. Sends {workflowrun: WorkflowRun}. */
