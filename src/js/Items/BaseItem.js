@@ -39,7 +39,7 @@ class BaseItem extends paper.Path
     }
 
     /**
-     * Removes item from map witht he provided URL.
+     * Removes item from map with he provided URL.
      */
     static removeItemFromMap(url)
     {
