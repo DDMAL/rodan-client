@@ -6,6 +6,7 @@ import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/Vie
 import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 import ViewRunJobCollection from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection';
 import ViewRunJobCollectionItem from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem';
+import _ from 'underscore';
 
 /**
  * WorkflowRun view.
@@ -38,6 +39,11 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
         // Empty regions.
         this.regionRunJobCollection.empty();
         this.regionResourceCollection.empty();
+
+        if (this.regionRunJobCollection.el === undefined || this.regionResourceCollection.el === undefined) {
+          this.regionRunJobCollection.el = '#region-main_workflowrun_individual_runjobs'
+          this.regionResourceCollection.el = '#region-main_workflowrun_individual_resources'
+        }
 
         // Create Resource collection view.
         this._layoutViewResources = new LayoutViewModel();
@@ -97,7 +103,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     _handleButtonSave()
     {
-        this.model.set({name: this.ui.textName.val(), description: this.ui.textDescription.val()});
+        this.model.set({name: _.escape(this.ui.textName.val()), description: _.escape(this.ui.textDescription.val())});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWRUN_SAVE, {workflowrun: this.model});
     }
 

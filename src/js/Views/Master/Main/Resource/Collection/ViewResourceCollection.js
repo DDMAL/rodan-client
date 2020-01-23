@@ -3,6 +3,7 @@ import _ from 'underscore';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
 
 /**
  * View for Resource Collection.
@@ -18,7 +19,8 @@ export default class ViewResourceCollection extends BaseViewCollection
         for (var i = 0; i < this.ui.fileInput[0].files.length; i++)
         {
         	var file = this.ui.fileInput[0].files[i];
-    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, {project: this.model, file: file, resourcetype: type});
+          var escapedFile = new File([file.slice(0, file.size)], _.escape(_.escape(file.name)));  // This won't work with onlyu one escape!
+    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, {project: this.model, file: escapedFile, resourcetype: type});
     	}
 	    this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
     }

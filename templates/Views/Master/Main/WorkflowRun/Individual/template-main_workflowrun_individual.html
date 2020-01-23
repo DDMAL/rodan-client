@@ -2,9 +2,9 @@
     <div class="col-xs-6">
         <h3>Workflow Run</h3>
         <label for="text-workflowrun_name">Name:</label>
-        <input type="text" class="form-control input-sm" id="text-workflowrun_name" value="<%= _.escape(name) %>" name="text-workflowrun_name">
+        <input type="text" class="form-control input-sm" id="text-workflowrun_name" value="<%= _.unescape(name) %>" name="text-workflowrun_name">
         <label for="text-workflowrun_description">Description:</label>
-        <textarea type="text" class="form-control input-sm" id="text-workflowrun_description" name="text-workflowrun_description"><%= _.escape(description) %></textarea>
+        <textarea type="text" class="form-control input-sm" id="text-workflowrun_description" name="text-workflowrun_description"><%= _.unescape(description) %></textarea>
 	    Creator: <%= creator %><br/>
         Created on: <%= _.formatFromUTC(created) %><br/>
         Updated on: <%= _.formatFromUTC(updated) %><br/>

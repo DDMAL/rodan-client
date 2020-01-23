@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
 
 /**
  * Workflow view.
@@ -55,7 +56,7 @@ export default class ViewWorkflow extends Marionette.ItemView
     _handleButtonSave()
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: _.escape(this.ui.textName.val()), description: _.escape(this.ui.textDescription.val())}});
     }
 }
 ViewWorkflow.prototype.modelEvents = {

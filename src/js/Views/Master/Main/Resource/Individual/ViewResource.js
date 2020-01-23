@@ -2,6 +2,7 @@ import $ from 'jquery';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
 import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem';
 
 /**
@@ -30,9 +31,9 @@ export default class ViewResource extends Marionette.CompositeView
     onRender()
     {
         var disabledDelete = this.model.get('origin') !== null;
-        $(this.ui.buttonDelete).attr('disabled', disabledDelete); 
+        $(this.ui.buttonDelete).attr('disabled', disabledDelete);
         var disabledDownload = this.model.get('download') === null;
-        $(this.ui.buttonDownload).attr('disabled', disabledDownload); 
+        $(this.ui.buttonDownload).attr('disabled', disabledDownload);
         var disableView = this.model.get('viewer_url') === null || disabledDownload;
         $(this.ui.buttonView).attr('disabled', disableView);
     }
@@ -55,8 +56,8 @@ export default class ViewResource extends Marionette.CompositeView
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, {resource: this.model,
                                                                              fields: {resource_type: this.ui.selectResourceType.find(':selected').val(),
-                                                                                      name: this.ui.resourceName.val(),
-                                                                                      description: this.ui.resourceDescription.val()}});
+                                                                                      name: _.escape(this.ui.resourceName.val()),
+                                                                                      description: _.escape(this.ui.resourceDescription.val())}});
     }
 
     /**

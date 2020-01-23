@@ -1,6 +1,7 @@
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
 
 /**
  * Project view.
@@ -15,9 +16,9 @@ export default class ViewProject extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_SAVE, 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_SAVE,
                                   {project: this.model,
-                                   fields: {name: this.ui.textName.val(), description: this.ui.textDescription.val()}});
+                                   fields: {name: _.escape(this.ui.textName.val()), description: _.escape(this.ui.textDescription.val())}});
     }
 
     /**

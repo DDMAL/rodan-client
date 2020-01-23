@@ -1,9 +1,9 @@
 <div class="fixed_individual">
     <h3>Project</h3>
     <label for="text-project_name">Name:</label>
-    <input type="text" class="form-control input-sm" id="text-project_name" value="<%= _.escape(name) %>" name="text-project_name">
+    <input type="text" class="form-control input-sm" id="text-project_name" value="<%= _.unescape(name) %>" name="text-project_name">
     <label for="text-project_description">Description:</label>
-    <textarea type="text" class="form-control input-sm" id="text-project_description" name="text-project_description"><%= _.escape(description) %></textarea>
+    <textarea type="text" class="form-control input-sm" id="text-project_description" name="text-project_description"><%= _.unescape(description) %></textarea>
     Creator: <%= creator %> <br>
     Created on: <%= _.formatFromUTC(created) %><br>
     Updated on: <%= _.formatFromUTC(updated) %><br>

@@ -1,10 +1,10 @@
 <div class="fixed_individual">
     <label for="text-user_firstname">First name:</label>
-    <input type="text" class="form-control input-sm" id="text-user_firstname" value="<%= _.escape(first_name) %>" name="text-user_firstname">
+    <input type="text" class="form-control input-sm" id="text-user_firstname" value="<%= _.unescape(first_name) %>" name="text-user_firstname">
     <label for="text-user_lastname">Last name:</label>
-    <input type="text" class="form-control input-sm" id="text-user_lastname" value="<%= _.escape(last_name) %>" name="text-user_lastname">
+    <input type="text" class="form-control input-sm" id="text-user_lastname" value="<%= _.unescape(last_name) %>" name="text-user_lastname">
     <label for="text-user_email">Email:</label>
-    <input type="text" class="form-control input-sm" id="text-user_email" value="<%= _.escape(email) %>" name="text-user_email">
+    <input inputmode="email" type="email" class="form-control input-sm" id="text-user_email" value="<%= _.unescape(email) %>" name="text-user_email">
     <div class="checkbox" id="div-user_preference">
         <label><input id="checkbox-send_email" type="checkbox" value="">Receive Rodan notifications via email</label>
     </div>

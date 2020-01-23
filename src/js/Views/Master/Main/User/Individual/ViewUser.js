@@ -3,6 +3,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import ViewPassword from './ViewPassword';
+import _ from 'underscore';
 
 /**
  * User view.
@@ -37,10 +38,10 @@ export default class ViewUser extends Marionette.CompositeView
      */
     _handleButtonSave()
     {
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__USER_SAVE, 
-                                  {fields: {first_name: this.ui.textFirstName.val(), 
-                                            last_name: this.ui.textLastName.val(), 
-                                            email: this.ui.textEmail.val()}});
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__USER_SAVE,
+                                  {fields: {first_name: _.escape(this.ui.textFirstName.val()),
+                                            last_name: _.escape(this.ui.textLastName.val()),
+                                            email: _.escape(this.ui.textEmail.val())}});
         if (this._userPreference)
         {
             this._userPreference.set({'send_email': $(this.ui.checkboxSendEmail).prop('checked')});
@@ -77,11 +78,11 @@ export default class ViewUser extends Marionette.CompositeView
         {
             $(this.ui.divUserPreference).show();
             $(this.ui.divUserPreferenceLoading).hide();
-            $(this.ui.checkboxSendEmail).prop('checked', this._userPreference.get('send_email')); 
+            $(this.ui.checkboxSendEmail).prop('checked', this._userPreference.get('send_email'));
         }
         else
         {
-            $(this.ui.divUserPreference).hide(); 
+            $(this.ui.divUserPreference).hide();
             $(this.ui.divUserPreferenceLoading).show();
         }
     }
