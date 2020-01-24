@@ -19,17 +19,20 @@ export default class ViewResourceMulti extends Marionette.CompositeView
     onRender()
     {
         var disabledDelete = false;
+        var disabledDownload = false;
         for (var model of this._models) {
             if (model.get('origin') !== null) {
                 disabledDelete = true;
-                break;
+            }
+            if (model.get('download') === null) {
+                disabledDownload = true;
             }
         }
         $(this.ui.buttonDelete).attr('disabled', disabledDelete);
+        $(this.ui.buttonDownload).attr('disabled', disabledDownload);
 
         // Disable all other buttons for now.
         $(this.ui.buttonSave).attr('disabled', true);
-        $(this.ui.buttonDownload).attr('disabled', true);
         $(this.ui.buttonView).attr('disabled', true);
     }
 
@@ -54,6 +57,13 @@ export default class ViewResourceMulti extends Marionette.CompositeView
             Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DELETE, {resource: model});
         }
     }
+
+    _handleClickButtonDownload()
+    {
+        for (var model of this._models) {
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: model});
+        }
+    }
 }
 ViewResourceMulti.prototype.modelEvents = {
 };
@@ -64,6 +74,7 @@ ViewResourceMulti.prototype.ui = {
     buttonView: '#button-main_resource_individual_view'
 };
 ViewResourceMulti.prototype.events = {
-    'click @ui.buttonDelete': '_handleClickButtonDelete'
+    'click @ui.buttonDelete': '_handleClickButtonDelete',
+    'click @ui.buttonDownload': '_handleClickButtonDownload'
 };
 ViewResourceMulti.prototype.template = '#template-main_resource_individual_multi';
