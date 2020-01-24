@@ -7,6 +7,7 @@ import Radio from 'backbone.radio';
 import Resource from 'js/Models/Resource';
 import ResourceCollection from 'js/Collections/ResourceCollection';
 import ViewResource from 'js/Views/Master/Main/Resource/Individual/ViewResource';
+import ViewResourceMulti from 'js/Views/Master/Main/Resource/Individual/ViewResourceMulti';
 import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollection';
 import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 
@@ -15,6 +16,9 @@ import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection
  */
 export default class ControllerResource extends BaseController
 {
+    initialize() {
+      this._selectedResources = new Set();
+    }
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +43,7 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, options => this._handleRequestViewer(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
     }
-   
+
     /**
      * Handle show LayoutView.
      */
@@ -69,7 +73,17 @@ export default class ControllerResource extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._layoutView.showItem(new ViewResource({model: options.resource}));
+        if (!options.shiftKey) {
+            this._selectedResources = [];
+        }
+        this._selectedResources.push(options.resource);
+
+        if (this._selectedResources.length === 1) {
+          this._layoutView.showItem(new ViewResource({model: this._selectedResources[0]}));
+        }
+        else {
+          this._layoutView.showItem(new ViewResourceMulti({models: this._selectedResources}));
+        }
     }
 
     /**

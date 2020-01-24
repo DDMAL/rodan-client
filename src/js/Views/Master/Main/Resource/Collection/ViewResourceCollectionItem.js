@@ -13,9 +13,9 @@ export default class ViewResourceCollectionItem extends BaseViewCollectionItem
     /**
      * Handles click.
      */
-    _handleClick()
+    _handleClick(event)
     {
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model, shiftKey: event.shiftKey});
     }
 
     /**
