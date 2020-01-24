@@ -74,12 +74,12 @@ export default class ControllerResource extends BaseController
     _handleEventItemSelected(options)
     {
         if (!options.shiftKey) {
-            this._selectedResources = [];
+            this._selectedResources.clear();
         }
-        this._selectedResources.push(options.resource);
+        this._selectedResources.add(options.resource);
 
-        if (this._selectedResources.length === 1) {
-          this._layoutView.showItem(new ViewResource({model: this._selectedResources[0]}));
+        if (this._selectedResources.size === 1) {
+          this._layoutView.showItem(new ViewResource({model: this._selectedResources.values().next().value}));
         }
         else {
           this._layoutView.showItem(new ViewResourceMulti({models: this._selectedResources}));
