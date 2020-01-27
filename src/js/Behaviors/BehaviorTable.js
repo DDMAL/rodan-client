@@ -100,7 +100,7 @@ export default class BehaviorTable extends Marionette.Behavior
         });
         var columnTitleByName = Object.assign({}, ...columnTitlesAndNames.get());
         var filterTitles = this.view.filterTitles || {};
-        
+
         for (var [field, fieldFilters] of Object.entries(filterFields))
         {
             var datetimeLtFilter = false;
@@ -230,7 +230,7 @@ export default class BehaviorTable extends Marionette.Behavior
         var templateInput = _.template($(this.options.templateFilterDatetime).html());
         var htmlChoice = templateChoice({label: label, field: field});
         var htmlInput = templateInput({label: label, field: field});
-        return {collectionItem: htmlChoice, input: htmlInput};  
+        return {collectionItem: htmlChoice, input: htmlInput};
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -324,7 +324,7 @@ export default class BehaviorTable extends Marionette.Behavior
         }
         else
         {
-            this.view.collection.fetchPage({}); 
+            this.view.collection.fetchPage({});
         }
     }
 
@@ -410,7 +410,7 @@ export default class BehaviorTable extends Marionette.Behavior
             // Wipe everything if ctrl key not selected.
             if (!event[this._multipleSelectionKey])
             {
-                $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');  
+                $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');
             }
             else
             {
@@ -418,7 +418,7 @@ export default class BehaviorTable extends Marionette.Behavior
             }
 
             // If shift down, select range.
-            if (event[this._rangeSelectionKey])
+            if (event[this._rangeSelectionKey] && false)
             {
                 $(this._lastTarget).addClass('active clickable-row')
                 if ($(this._lastTarget).index() <= $(event.currentTarget).index())
@@ -437,7 +437,7 @@ export default class BehaviorTable extends Marionette.Behavior
         }
         else
         {
-            $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');  
+            $(event.currentTarget).addClass('active clickable-row').siblings().removeClass('active');
             this._lastTarget = event.currentTarget;
         }
     }

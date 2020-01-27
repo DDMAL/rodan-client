@@ -9,6 +9,9 @@ import Radio from 'backbone.radio';
  */
 export default class ViewResourceCollection extends BaseViewCollection
 {
+    initialize(options) {
+        this.allowMultipleSelection = true;
+    }
 	/**
 	 * Handle file button.
 	 */
