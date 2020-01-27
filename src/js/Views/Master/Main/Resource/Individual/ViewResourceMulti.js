@@ -38,10 +38,7 @@ export default class ViewResourceMulti extends Marionette.CompositeView
 
     templateHelpers() {
         return {
-            count: function() {
-                console.log(this);
-                return this._models.length;
-            }
+            count: this._models.size
         };
     }
 
