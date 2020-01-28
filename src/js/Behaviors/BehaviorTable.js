@@ -418,7 +418,7 @@ export default class BehaviorTable extends Marionette.Behavior
             }
 
             // If shift down, select range.
-            if (event[this._rangeSelectionKey] && false)
+            if (event[this._rangeSelectionKey])
             {
                 $(this._lastTarget).addClass('active clickable-row')
                 if ($(this._lastTarget).index() <= $(event.currentTarget).index())

@@ -18,6 +18,7 @@ export default class ControllerResource extends BaseController
 {
     initialize() {
       this._selectedResources = new Set();
+      this._baseSelectResource = null;
     }
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -73,14 +74,26 @@ export default class ControllerResource extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        if (!options.multiple) {
+        if (!options.multiple && !options.range) {
             this._selectedResources.clear();
+            this._baseSelectResource = null;
         }
+
         if (options.multiple && this._selectedResources.has(options.resource)) {
             this._selectedResources.delete(options.resource);
+            this._baseSelectResource = null;
+        }
+        else if (options.range && this._baseSelectResource !== null) {
+            let indexBase = this._collection.indexOf(this._baseSelectResource);
+            let indexRes = this._collection.indexOf(options.resource);
+            this._selectedResources.clear();
+            for (let n = Math.min(indexBase, indexRes); n <= Math.max(indexBase, indexRes); n++) {
+                this._selectedResources.add(this._collection.at(n));
+            }
         }
         else {
             this._selectedResources.add(options.resource);
+            this._baseSelectResource = options.resource;
         }
 
         if (this._selectedResources.size === 0) {

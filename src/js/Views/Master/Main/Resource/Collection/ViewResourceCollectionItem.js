@@ -17,7 +17,12 @@ export default class ViewResourceCollectionItem extends BaseViewCollectionItem
     _handleClick(event)
     {
         var multipleSelection = event[Environment.getMultipleSelectionKey()];
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model, multiple: multipleSelection});
+        var rangeSelection = event[Environment.getRangeSelectionKey()];
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {
+            resource: this.model,
+            multiple: multipleSelection,
+            range: rangeSelection
+        });
     }
 
     /**
