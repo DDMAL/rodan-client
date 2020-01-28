@@ -10,6 +10,9 @@ import _ from 'underscore';
  */
 export default class ViewResourceCollection extends BaseViewCollection
 {
+    initialize(options) {
+        this.allowMultipleSelection = true;
+    }
 	/**
 	 * Handle file button.
 	 */

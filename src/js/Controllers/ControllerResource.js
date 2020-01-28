@@ -7,6 +7,7 @@ import Radio from 'backbone.radio';
 import Resource from 'js/Models/Resource';
 import ResourceCollection from 'js/Collections/ResourceCollection';
 import ViewResource from 'js/Views/Master/Main/Resource/Individual/ViewResource';
+import ViewResourceMulti from 'js/Views/Master/Main/Resource/Individual/ViewResourceMulti';
 import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollection';
 import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 
@@ -15,6 +16,10 @@ import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection
  */
 export default class ControllerResource extends BaseController
 {
+    initialize() {
+      this._selectedResources = new Set();
+      this._baseSelectResource = null;
+    }
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +44,7 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, options => this._handleRequestViewer(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
     }
-   
+
     /**
      * Handle show LayoutView.
      */
@@ -69,7 +74,37 @@ export default class ControllerResource extends BaseController
      */
     _handleEventItemSelected(options)
     {
-        this._layoutView.showItem(new ViewResource({model: options.resource}));
+        if (!options.multiple && !options.range) {
+            this._selectedResources.clear();
+            this._baseSelectResource = null;
+        }
+
+        if (options.multiple && this._selectedResources.has(options.resource)) {
+            this._selectedResources.delete(options.resource);
+            this._baseSelectResource = null;
+        }
+        else if (options.range && this._baseSelectResource !== null) {
+            let indexBase = this._collection.indexOf(this._baseSelectResource);
+            let indexRes = this._collection.indexOf(options.resource);
+            this._selectedResources.clear();
+            for (let n = Math.min(indexBase, indexRes); n <= Math.max(indexBase, indexRes); n++) {
+                this._selectedResources.add(this._collection.at(n));
+            }
+        }
+        else {
+            this._selectedResources.add(options.resource);
+            this._baseSelectResource = options.resource;
+        }
+
+        if (this._selectedResources.size === 0) {
+            this._layoutView.clearItemView();
+        }
+        else if (this._selectedResources.size === 1) {
+          this._layoutView.showItem(new ViewResource({model: this._selectedResources.values().next().value}));
+        }
+        else {
+          this._layoutView.showItem(new ViewResourceMulti({models: this._selectedResources}));
+        }
     }
 
     /**

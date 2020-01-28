@@ -1,6 +1,7 @@
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
+import Environment from 'js/Shared/Environment';
 
 /**
  * Item view for Resource Collection.
@@ -13,9 +14,15 @@ export default class ViewResourceCollectionItem extends BaseViewCollectionItem
     /**
      * Handles click.
      */
-    _handleClick()
+    _handleClick(event)
     {
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {resource: this.model});
+        var multipleSelection = event[Environment.getMultipleSelectionKey()];
+        var rangeSelection = event[Environment.getRangeSelectionKey()];
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RESOURCE_SELECTED, {
+            resource: this.model,
+            multiple: multipleSelection,
+            range: rangeSelection
+        });
     }
 
     /**
