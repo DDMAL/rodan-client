@@ -6,7 +6,7 @@ import ViewLogin from './Login/ViewLogin';
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-export default class LayoutViewMain extends Marionette.LayoutView
+export default class LayoutViewMain extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

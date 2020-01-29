@@ -11,7 +11,7 @@ import _ from 'underscore';
 /**
  * WorkflowRun view.
  */
-export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
+export default class LayoutViewIndividualWorkflowRun extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

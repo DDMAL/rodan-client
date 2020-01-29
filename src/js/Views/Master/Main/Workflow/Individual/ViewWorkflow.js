@@ -6,7 +6,7 @@ import _ from 'underscore';
 /**
  * Workflow view.
  */
-export default class ViewWorkflow extends Marionette.ItemView
+export default class ViewWorkflow extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS

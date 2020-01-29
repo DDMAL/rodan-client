@@ -8,7 +8,7 @@ import ViewOutputPortTypeCollection from 'js/Views/Master/Main/OutputPortType/Vi
 /**
  * View for editing ports.
  */
-export default class LayoutViewControlPorts extends Marionette.LayoutView
+export default class LayoutViewControlPorts extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

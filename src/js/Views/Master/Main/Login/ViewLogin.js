@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * Login view.
  */
-export default class ViewLogin extends Marionette.ItemView
+export default class ViewLogin extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

@@ -6,7 +6,7 @@ import Radio from 'backbone.radio';
 /**
  * RunJob view.
  */
-export default class ViewRunJob extends Marionette.ItemView
+export default class ViewRunJob extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

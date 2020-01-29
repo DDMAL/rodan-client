@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * WorkflowJobGroup view.
  */
-export default class ViewWorkflowJobGroup extends Marionette.ItemView
+export default class ViewWorkflowJobGroup extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

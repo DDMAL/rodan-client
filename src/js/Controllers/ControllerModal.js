@@ -62,18 +62,18 @@ export default class ControllerModal extends BaseController
 
         if (typeof options.content == 'string')
         {
-            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal_simple'});
+            this._layoutViewModal = new Marionette.View({template: '#template-modal_simple'});
             this._layoutViewModal.render();
 
             $modalEl.css({top: 0, left: 0, position: 'absolute'});
             $modalEl.html(this._layoutViewModal.el);
             $('.modal-title').text(options.title);
             $('.modal-body').append(options.content);
-            $modalEl.modal({backdrop: 'static', keyboard: false}); 
+            $modalEl.modal({backdrop: 'static', keyboard: false});
         }
         else
         {
-            this._layoutViewModal = new Marionette.LayoutView({template: '#template-modal'});
+            this._layoutViewModal = new Marionette.View({template: '#template-modal'});
             this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
             this._layoutViewModal.render();
             this._layoutViewModal.getRegion('modal_body').show(options.content);
@@ -95,7 +95,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
-            $('.modal-footer').text(options.title + ': ' + options.content); 
+            $('.modal-footer').text(options.title + ': ' + options.content);
         }
         else
         {
@@ -112,7 +112,7 @@ export default class ControllerModal extends BaseController
         var $modalEl = $('#modal-generic');
         if ($modalEl.is(':visible'))
         {
-            $('.modal-footer').text(options.content); 
+            $('.modal-footer').text(options.content);
         }
         else
         {

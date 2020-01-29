@@ -6,7 +6,7 @@ import Marionette from 'backbone.marionette';
 /**
  * Layout view for master work area.
  */
-export default class LayoutViewMaster extends Marionette.LayoutView
+export default class LayoutViewMaster extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

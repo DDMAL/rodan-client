@@ -6,7 +6,7 @@ import Marionette from 'backbone.marionette';
  * that would be associated with the CompositveView is not initially known, so it can't
  * rerender.
  */
-export default class LayoutViewModel extends Marionette.LayoutView
+export default class LayoutViewModel extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

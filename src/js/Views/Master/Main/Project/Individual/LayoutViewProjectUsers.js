@@ -6,7 +6,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 /**
  * Project admin view.
  */
-export default class LayoutViewProjectUsers extends Marionette.LayoutView
+export default class LayoutViewProjectUsers extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

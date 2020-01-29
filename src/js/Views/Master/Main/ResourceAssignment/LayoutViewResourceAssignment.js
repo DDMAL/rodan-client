@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * ResourceAssignment view.
  */
-export default class LayoutViewResourceAssignment extends Marionette.LayoutView
+export default class LayoutViewResourceAssignment extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

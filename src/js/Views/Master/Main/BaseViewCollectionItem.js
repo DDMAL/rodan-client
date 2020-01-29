@@ -3,7 +3,7 @@ import Marionette from 'backbone.marionette';
 /**
  * Base Collection Item view.
  */
-export default class BaseViewCollectionItem extends Marionette.ItemView
+export default class BaseViewCollectionItem extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS

@@ -13,7 +13,7 @@ import ViewUser from 'js/Views/Master/Main/User/Individual/ViewUser';
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-export default class LayoutViewNavigation extends Marionette.LayoutView
+export default class LayoutViewNavigation extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -51,7 +51,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     {
         var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)};
-        this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
+        this.regionNavigationTree.show(new ViewNavigationNodeRoot(object));
         this.$el.find('#button-navigation_logout').prop('disabled', false);
         this.$el.find('#button-navigation_preferences').prop('disabled', false);
     }
@@ -61,7 +61,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        this.regionNavigationTree.empty(); 
+        this.regionNavigationTree.empty();
         this.$el.find('#button-navigation_logout').prop('disabled', true);
         this.$el.find('#button-navigation_preferences').prop('disabled', true);
     }

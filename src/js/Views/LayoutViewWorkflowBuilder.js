@@ -6,7 +6,7 @@ import Rodan from 'rodan';
 /**
  * This class represents the controller for editing a Workflow.
  */
-class LayoutViewWorkflowBuilder extends Marionette.LayoutView
+class LayoutViewWorkflowBuilder extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

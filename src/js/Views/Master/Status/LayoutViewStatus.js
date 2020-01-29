@@ -6,7 +6,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 /**
  * Status view.
  */
-export default class LayoutViewStatus extends Marionette.LayoutView
+export default class LayoutViewStatus extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
