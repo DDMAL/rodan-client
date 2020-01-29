@@ -52,7 +52,7 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "backbone": "^1.4.0",
-    "backbone.marionette": "^2.4.7",
+    "backbone.marionette": "^3.5.1",
     "backbone.radio": "^2.0.0",
     "bootstrap": "^3.4.1",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
