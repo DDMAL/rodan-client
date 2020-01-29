@@ -3,7 +3,6 @@ import _ from 'underscore';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
-import _ from 'underscore';
 
 /**
  * View for Resource Collection.
