@@ -236,7 +236,13 @@ const develop = gulp.series(
  const distConfig = function(callback) {
      var babelRule = {
          test: /\.(js)$/,
-         use: 'babel-loader'
+         exclude: /node_modules/,
+         use: {
+             loader: 'babel-loader',
+             options: {
+                 presets: ['@babel/preset-env']
+             }
+         }
      };
      webpackConfig.module.rules.push(babelRule);
      webpackConfig.mode = 'production';
