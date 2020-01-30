@@ -142,7 +142,7 @@ export default class LayoutViewNavigation extends Marionette.View
     {
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         var view = new BaseViewCollection({collection: collection,
-                                           template: '#template-resourcetype_collection',
+                                           template: _.template($('#template-resourcetype_collection').text()),
                                            childView: ViewResourceTypeDetailCollectionItem});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
     }

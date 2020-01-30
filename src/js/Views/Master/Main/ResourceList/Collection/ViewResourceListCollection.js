@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -34,7 +35,7 @@ export default class ViewResourceListCollection extends BaseViewCollection
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_CREATE, {project: project});
     }
 }
-ViewResourceListCollection.prototype.behaviors = {Table: {'table': '#table-resourcelists'}};
+ViewResourceListCollection.prototype.behaviors = {Table: BehaviorTable};
 ViewResourceListCollection.prototype.ui = {
     buttonNewResourceList: '#button-new_resourcelist'
 };

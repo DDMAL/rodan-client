@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -29,7 +30,7 @@ export default class ViewWorkflowCollection extends BaseViewCollection
 }
 ViewWorkflowCollection.prototype.template = _.template($('#template-main_workflow_collection').text());
 ViewWorkflowCollection.prototype.childView = ViewWorkflowCollectionItem;
-ViewWorkflowCollection.prototype.behaviors = {Table: {'table': '#table-workflows'}};
+ViewWorkflowCollection.prototype.behaviors = {Table: BehaviorTable};
 ViewWorkflowCollection.prototype.ui = {
     newWorkflowButton: '#button-new_workflow',
     fileInput: '#file-import_workflow'

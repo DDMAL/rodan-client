@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseController from './BaseController';
 import Configuration from 'js/Configuration';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -67,7 +69,7 @@ export default class ControllerRunJob extends BaseController
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewRunJobCollection({collection: this._collection,
-                                       template: '#template-main_runjob_collection',
+                                       template: _.template($('#template-main_runjob_collection').text()),
                                        childView: ViewRunJobCollectionItem});
         this._layoutView.showCollection(view);
     }

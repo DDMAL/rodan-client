@@ -52,7 +52,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.View
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
         this.showChildView('regionResourceCollection', this._layoutViewResources);
         this._viewResourceCollection = new ViewResourceCollection({collection: this._resources,
-                                                       template: '#template-main_workflowrun_individual_resources_collection',
+                                                       template: _.template($('#template-main_workflowrun_individual_resources_collection').text()),
                                                        childView: ViewResourceCollectionItem});
         this._layoutViewResources.showCollection(this._viewResourceCollection);
 
@@ -61,7 +61,7 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.View
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
         this.showChildView('regionRunJobCollection', this._layoutViewRunJobs);
         this._viewRunJobCollection = new ViewRunJobCollection({collection: this._runJobs,
-                                                   template: '#template-main_runjob_collection_notitle',
+                                                   template: _.template($('#template-main_runjob_collection_notitle').text()),
                                                    childView: ViewRunJobCollectionItem});
         this._layoutViewRunJobs.showCollection(this._viewRunJobCollection);
 

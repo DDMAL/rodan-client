@@ -50,9 +50,9 @@ export default class LayoutViewControlPorts extends Marionette.View
      * Handle workflowjob selection.
      */
     _initializeViews(options)
-    {                                             
+    {
         this._inputPortCollectionView = new ViewInputPortCollection({collection: options.workflowjob.get('input_ports'),
-                                                         template: '#template-main_inputport_collection',
+                                                         template: _.template($('#template-main_inputport_collection').text()),
                                                          childView: ViewInputPortCollectionItem,
                                                          childViewOptions: options});
         this._outputPortCollectionView = new ViewOutputPortCollection({collection: options.workflowjob.get('output_ports'),

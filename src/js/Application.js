@@ -66,7 +66,7 @@ export default class Application extends Marionette.Application
         Configuration.load('info.json');
 
         // Non-network and non-GUI inits. Do these first.
-        this._initializeBehaviors();
+        // this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeCollections();

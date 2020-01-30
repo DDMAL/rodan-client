@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -25,4 +26,5 @@ ViewProjectCollection.prototype.events = {
 };
 ViewProjectCollection.prototype.template = _.template($('#template-main_project_collection').text());
 ViewProjectCollection.prototype.childView = ViewProjectCollectionItem;
-ViewProjectCollection.prototype.behaviors = {Table: {'table': '#table-projects'}};
+//ViewProjectCollection.prototype.behaviors = {Table: {'table': '#table-projects'}};
+ViewProjectCollection.prototype.behaviors = {Table: BehaviorTable};
