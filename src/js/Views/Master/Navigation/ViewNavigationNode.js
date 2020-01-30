@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import NAV_EVENTS from './Events';
 import Radio from 'backbone.radio';
@@ -78,7 +79,7 @@ export default class ViewNavigationNode extends Marionette.CollectionView
         if (firstUl !== undefined)
         {
             firstUl.hide();
-        } 
+        }
     }
 
     /**
@@ -91,7 +92,7 @@ export default class ViewNavigationNode extends Marionette.CollectionView
         if (firstUl !== undefined)
         {
             firstUl.show();
-        }  
+        }
     }
 
     /**
@@ -129,5 +130,5 @@ ViewNavigationNode.prototype.ui = {
 ViewNavigationNode.prototype.events = {
     'click @ui.text': '_handleClick'
 };
-ViewNavigationNode.prototype.template = '#template-navigation_node';
+ViewNavigationNode.prototype.template = _.template($('#template-navigation_node').text());
 ViewNavigationNode.prototype.childViewContainer = 'ul';

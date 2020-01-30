@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -27,6 +29,6 @@ export default class ViewInputPortTypeCollection extends Marionette.CollectionVi
 ViewInputPortTypeCollection.prototype.modelEvents = {
     'all': 'render'
 };
-ViewInputPortTypeCollection.prototype.template = '#template-main_inputporttype_collection';
+ViewInputPortTypeCollection.prototype.template = _.template($('#template-main_inputporttype_collection').text());
 ViewInputPortTypeCollection.prototype.childView = ViewInputPortTypeCollectionItem;
 ViewInputPortTypeCollection.prototype.childViewContainer = 'tbody';

@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -55,7 +57,7 @@ export default class ViewWorkflowJobGroup extends Marionette.View
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWJOBGROUP_SAVE, {workflowjobgroup: this.model});
     }
 }
-ViewWorkflowJobGroup.prototype.template = '#template-main_workflowjobgroup';
+ViewWorkflowJobGroup.prototype.template = _.template($('#template-main_workflowjobgroup').text());
 ViewWorkflowJobGroup.prototype.ui = {
     buttonSave: '#button-save_workflowjobgroup_data',
     buttonDelete: '#button-delete_workflowjobgroup',

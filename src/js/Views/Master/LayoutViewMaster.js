@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
 import LayoutViewStatus from './Status/LayoutViewStatus';
@@ -48,4 +50,4 @@ export default class LayoutViewMaster extends Marionette.View
         this._layoutViewStatus = new LayoutViewStatus();
     }
 }
-LayoutViewMaster.prototype.template = '#template-master';
+LayoutViewMaster.prototype.template = _.template($('#template-master').text());

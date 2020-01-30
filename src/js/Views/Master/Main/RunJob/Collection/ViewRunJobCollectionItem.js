@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -31,7 +33,7 @@ export default class ViewRunJobCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__RUNJOB_SELECTED, {runjob: this.model});
     }
 }
-ViewRunJobCollectionItem.prototype.template = '#template-main_runjob_collection_item';
+ViewRunJobCollectionItem.prototype.template = _.template($('#template-main_runjob_collection_item').text());
 ViewRunJobCollectionItem.prototype.tagName = 'tr';
 ViewRunJobCollectionItem.prototype.events = {
     'click': '_handleClick'

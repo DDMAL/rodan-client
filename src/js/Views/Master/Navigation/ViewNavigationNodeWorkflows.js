@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import NAV_EVENTS from './Events';
 import Radio from 'backbone.radio';
@@ -45,4 +47,4 @@ export default class ViewNavigationNodeWorkflows extends ViewNavigationNode
         }
     }
 }
-ViewNavigationNodeWorkflows.prototype.template = '#template-navigation_workflows';
+ViewNavigationNodeWorkflows.prototype.template = _.template($('#template-navigation_workflows').text());

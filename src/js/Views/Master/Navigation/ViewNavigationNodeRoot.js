@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
 import ViewNavigationNode from './ViewNavigationNode';
@@ -36,5 +38,5 @@ ViewNavigationNodeRoot.prototype.ui = {
 ViewNavigationNodeRoot.prototype.events = {
     'click @ui.text': '_handleClick'
 };
-ViewNavigationNodeRoot.prototype.template = '#template-navigation_root';
+ViewNavigationNodeRoot.prototype.template = _.template($('#template-navigation_root').text());
 ViewNavigationNodeRoot.prototype.childView = ViewNavigationNodeProject;

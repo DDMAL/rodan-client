@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Marionette from 'backbone.marionette';
@@ -133,4 +135,4 @@ LayoutViewIndividualWorkflowRun.prototype.events = {
     'click @ui.buttonDelete': '_handleButtonDelete'
 
 };
-LayoutViewIndividualWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
+LayoutViewIndividualWorkflowRun.prototype.template = _.template($('#template-main_workflowrun_individual').text());

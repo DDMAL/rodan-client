@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 
 /**
@@ -50,4 +52,4 @@ export default class LayoutViewModel extends Marionette.View
         this.getRegion('regionItem').empty();
     }
 }
-LayoutViewModel.prototype.template = '#template-main_layoutview_model';
+LayoutViewModel.prototype.template = _.template($('#template-main_layoutview_model').text());

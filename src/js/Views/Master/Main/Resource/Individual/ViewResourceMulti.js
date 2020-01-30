@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -74,4 +75,4 @@ ViewResourceMulti.prototype.events = {
     'click @ui.buttonDelete': '_handleClickButtonDelete',
     'click @ui.buttonDownload': '_handleClickButtonDownload'
 };
-ViewResourceMulti.prototype.template = '#template-main_resource_individual_multi';
+ViewResourceMulti.prototype.template = _.template($('#template-main_resource_individual_multi').text());

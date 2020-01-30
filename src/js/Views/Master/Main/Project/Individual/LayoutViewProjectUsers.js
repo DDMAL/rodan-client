@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -77,7 +78,7 @@ export default class LayoutViewProjectUsers extends Marionette.View
         return $('#region-main_projectusers_users select').find(":selected").text().trim();
     }
 }
-LayoutViewProjectUsers.prototype.template = '#template-main_project_users';
+LayoutViewProjectUsers.prototype.template = _.template($('#template-main_project_users').text());
 LayoutViewProjectUsers.prototype.ui = {
     buttonAddAdmin: '#button-projectusers_add_admin',
     buttonAddWorker: '#button-projectusers_add_worker'

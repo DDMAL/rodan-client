@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import _ from 'underscore';
+import $ from 'jquery';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import 'json-editor';
 import Marionette from 'backbone.marionette';
@@ -93,4 +95,4 @@ ViewSettings.prototype.ui = {
 ViewSettings.prototype.events = {
     'click @ui.buttonSave': '_handleButtonSave'
         };
-ViewSettings.prototype.template = '#template-main_workflowjob_settings';
+ViewSettings.prototype.template = _.template($('#template-main_workflowjob_settings').text());

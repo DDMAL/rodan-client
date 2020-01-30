@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
@@ -73,7 +74,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
         $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
     }
 }
-LayoutViewResourceAssignment.prototype.template = '#template-main_resourceassignment';
+LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
 LayoutViewResourceAssignment.prototype.ui = {
     buttonAddAll: '#button-add_all',
     buttonAddSelected: '#button-add_selected',

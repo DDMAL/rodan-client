@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -100,6 +102,6 @@ ViewResourceList.prototype.events = {
     'click @ui.buttonDownload': '_handleClickDownload',
     'click @ui.buttonAddRemove': '_handleClickAddRemove'
 };
-ViewResourceList.prototype.template = '#template-main_resourcelist_individual';
+ViewResourceList.prototype.template = _.template($('#template-main_resourcelist_individual').text());
 ViewResourceList.prototype.childView = ViewResourceTypeCollectionItem;
 ViewResourceList.prototype.childViewContainer = '#select-resourcetype';

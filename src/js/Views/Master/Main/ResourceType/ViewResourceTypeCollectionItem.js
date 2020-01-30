@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 
 /**
@@ -21,5 +23,5 @@ export default class ViewResourceTypeCollectionItem extends BaseViewCollectionIt
         }
     }
 }
-ViewResourceTypeCollectionItem.prototype.template = '#template-resourcetype_collection_item';
+ViewResourceTypeCollectionItem.prototype.template = _.template($('#template-resourcetype_collection_item').text());
 ViewResourceTypeCollectionItem.prototype.tagName = 'option';

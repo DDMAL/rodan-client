@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import ViewInputPortCollection from 'js/Views/Master/Main/InputPort/ViewInputPortCollection';
 import ViewInputPortCollectionItem from 'js/Views/Master/Main/InputPort/ViewInputPortCollectionItem';
@@ -61,4 +63,4 @@ export default class LayoutViewControlPorts extends Marionette.View
                                                                    childViewOptions: options});
     }
 }
-LayoutViewControlPorts.prototype.template = '#template-main_workflowjob_ports';
+LayoutViewControlPorts.prototype.template = _.template($('#template-main_workflowjob_ports').text());

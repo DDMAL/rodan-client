@@ -147,7 +147,7 @@ export default class LayoutViewNavigation extends Marionette.View
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
     }
 }
-LayoutViewNavigation.prototype.template = '#template-navigation';
+LayoutViewNavigation.prototype.template = _.template($('#template-navigation').text());
 LayoutViewNavigation.prototype.ui = {
     buttonLogout: '#button-navigation_logout',
     buttonAbout: '#button-navigation_about',

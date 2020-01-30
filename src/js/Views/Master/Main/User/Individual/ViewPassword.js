@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -58,4 +60,4 @@ ViewPassword.prototype.ui = {
 ViewPassword.prototype.events = {
             'click @ui.buttonSave': '_handleButtonSave'
         };
-ViewPassword.prototype.template = '#template-main_user_password';
+ViewPassword.prototype.template = _.template($('#template-main_user_password').text());

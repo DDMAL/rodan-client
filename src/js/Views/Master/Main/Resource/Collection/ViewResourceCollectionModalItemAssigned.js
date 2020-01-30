@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -44,7 +46,7 @@ export default class ViewResourceCollectionModalItemAssigned extends BaseViewCol
         Radio.channel('rodan').request(this._moveDown, this._requestData);
     }
 }
-ViewResourceCollectionModalItemAssigned.prototype.template = '#template-modal_resource_collection_item_assigned';
+ViewResourceCollectionModalItemAssigned.prototype.template = _.template($('#template-modal_resource_collection_item_assigned').text());
 ViewResourceCollectionModalItemAssigned.prototype.tagName = 'tr';
 ViewResourceCollectionModalItemAssigned.prototype.ui = {
     moveUp: '.move-up',
