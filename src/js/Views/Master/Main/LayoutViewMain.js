@@ -49,7 +49,7 @@ export default class LayoutViewMain extends Marionette.View
     _handleCommandShow(options)
     {
         /** @ignore */
-        this.region.show(options.view);
+        this.showChildView('region', options.view);
     }
 
     /**

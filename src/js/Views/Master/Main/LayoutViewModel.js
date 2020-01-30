@@ -29,7 +29,7 @@ export default class LayoutViewModel extends Marionette.View
      */
     showCollection(view)
     {
-        this.regionCollection.show(view);
+        this.showChildView('regionCollection', view);
     }
 
     /**
@@ -39,7 +39,7 @@ export default class LayoutViewModel extends Marionette.View
      */
     showItem(view)
     {
-        this.regionItem.show(view);
+        this.showChildView('regionItem', view);
     }
 
     /**
@@ -47,7 +47,7 @@ export default class LayoutViewModel extends Marionette.View
      */
     clearItemView()
     {
-        this.regionItem.empty();
+        this.getRegion('regionItem').empty();
     }
 }
 LayoutViewModel.prototype.template = '#template-main_layoutview_model';

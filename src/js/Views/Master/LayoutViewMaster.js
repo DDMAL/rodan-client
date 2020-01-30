@@ -30,9 +30,9 @@ export default class LayoutViewMaster extends Marionette.View
      */
     onRender()
     {
-        this.regionMain.show(this._layoutViewMain);
-        this.regionNavigation.show(this._layoutViewNavigation);
-        this.regionStatus.show(this._layoutViewStatus);
+        this.showChildView('regionMain', this._layoutViewMain);
+        this.showChildView('regionNavigation', this._layoutViewNavigation);
+        this.showChildView('regionStatus', this._layoutViewStatus);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
