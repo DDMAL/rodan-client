@@ -6,7 +6,7 @@ import Radio from 'backbone.radio';
 /**
  * This class represents a navigation menu node.
  */
-export default class ViewNavigationNode extends Marionette.CompositeView
+export default class ViewNavigationNode extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

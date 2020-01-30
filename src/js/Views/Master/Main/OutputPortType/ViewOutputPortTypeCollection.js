@@ -6,7 +6,7 @@ import ViewOutputPortTypeCollectionItem from './ViewOutputPortTypeCollectionItem
 /**
  * OutputPortTYpe Collection view.
  */
-export default class ViewOutputPortTypeCollection extends Marionette.CompositeView
+export default class ViewOutputPortTypeCollection extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

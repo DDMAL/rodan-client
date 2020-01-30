@@ -6,7 +6,7 @@ import _ from 'underscore';
 /**
  * Project view.
  */
-export default class ViewProject extends Marionette.CompositeView
+export default class ViewProject extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS

@@ -6,7 +6,7 @@ import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/Vi
 /**
  * ResourceList view.
  */
-export default class ViewResourceList extends Marionette.CompositeView
+export default class ViewResourceList extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

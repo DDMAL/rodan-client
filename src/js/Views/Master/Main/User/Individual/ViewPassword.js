@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * Password view.
  */
-export default class ViewPassword extends Marionette.CompositeView
+export default class ViewPassword extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS

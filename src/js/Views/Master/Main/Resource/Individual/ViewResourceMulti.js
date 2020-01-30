@@ -7,7 +7,7 @@ import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/Vi
 /**
  * Resource Multi-Select View
  */
-export default class ViewResourceMulti extends Marionette.CompositeView
+export default class ViewResourceMulti extends Marionette.CollectionView
 {
     constructor(options) {
         super(options);

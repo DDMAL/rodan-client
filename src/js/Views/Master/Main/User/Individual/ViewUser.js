@@ -8,7 +8,7 @@ import _ from 'underscore';
 /**
  * User view.
  */
-export default class ViewUser extends Marionette.CompositeView
+export default class ViewUser extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

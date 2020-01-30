@@ -8,7 +8,7 @@ import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/Vi
 /**
  * Resource view.
  */
-export default class ViewResource extends Marionette.CompositeView
+export default class ViewResource extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
