@@ -116,6 +116,7 @@ const developMkdir = gulp.series(developClean, function(callback) {
  * Build Webpack configs for develop.
  */
 const developConfig = function(callback) {
+    webpackConfig.mode = 'development';
     webpackConfig.devtool = DEVELOP_SOURCEMAP;
     webpackConfig.output.path = path.resolve(__dirname, DEVELOP_WEBROOT);
     webpackServerConfig.contentBase = DEVELOP_WEBROOT;
@@ -238,6 +239,7 @@ const develop = gulp.series(
          use: 'babel-loader'
      };
      webpackConfig.module.rules.push(babelRule);
+     webpackConfig.mode = 'production';
      webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
      callback();
  };
