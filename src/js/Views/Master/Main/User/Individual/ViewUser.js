@@ -4,7 +4,6 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import ViewPassword from './ViewPassword';
-import _ from 'underscore';
 
 /**
  * User view.

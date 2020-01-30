@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import _ from 'underscore';
-import $ from 'jquery';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import 'json-editor';
 import Marionette from 'backbone.marionette';

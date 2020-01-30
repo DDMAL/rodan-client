@@ -8,7 +8,6 @@ import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/Vie
 import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 import ViewRunJobCollection from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection';
 import ViewRunJobCollectionItem from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem';
-import _ from 'underscore';
 
 /**
  * WorkflowRun view.

@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import _ from 'underscore';
-import $ from 'jquery';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
