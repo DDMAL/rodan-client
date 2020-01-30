@@ -66,7 +66,6 @@ export default class Application extends Marionette.Application
         Configuration.load('info.json');
 
         // Non-network and non-GUI inits. Do these first.
-        // this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeCollections();
@@ -110,17 +109,6 @@ export default class Application extends Marionette.Application
             {
                 return moment.moment(dateTime).format();
             }
-        };
-    }
-
-    /**
-     * Initialize behaviors.
-     */
-    _initializeBehaviors()
-    {
-        Marionette.Behaviors.behaviorsLookup = function()
-        {
-            return {'Table': BehaviorTable};
         };
     }
 
