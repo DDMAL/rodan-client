@@ -46,8 +46,8 @@
     "recursive-readdir": "^2.2.2",
     "simple-git": "^1.131.0",
     "vinyl-fs": "^3.0.3",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.11.5"
+    "webpack": "^4.41.5",
+    "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
