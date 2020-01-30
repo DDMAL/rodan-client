@@ -36,7 +36,7 @@ export default class ViewResourceMulti extends Marionette.CompositeView
         $(this.ui.buttonView).attr('disabled', true);
     }
 
-    templateHelpers() {
+    templateContext() {
         return {
             count: this._models.size
         };
