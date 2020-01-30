@@ -35,7 +35,7 @@ export default class ViewResourceListCollection extends BaseViewCollection
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCELIST_CREATE, {project: project});
     }
 }
-ViewResourceListCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewResourceListCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resourcelists'}];
 ViewResourceListCollection.prototype.ui = {
     buttonNewResourceList: '#button-new_resourcelist'
 };

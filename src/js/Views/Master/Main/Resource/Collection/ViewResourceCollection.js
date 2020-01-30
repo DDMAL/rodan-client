@@ -45,7 +45,7 @@ export default class ViewResourceCollection extends BaseViewCollection
         }
     }
 }
-ViewResourceCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewResourceCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resources'}]
 ViewResourceCollection.prototype.ui = {
     fileInput: '#file-main_resource_file'
 };

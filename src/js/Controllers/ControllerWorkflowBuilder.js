@@ -39,8 +39,8 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     initialize()
     {
-        this._resourceAssignments = []; // this helps manage the list of resource assignments while building the resource
-        this._resourcesAvailable = []; // this is just a cache for resources that will work with a given input port
+        this._resourceAssignments = new Map(); // this helps manage the list of resource assignments while building the resource
+        this._resourcesAvailable = new Map(); // this is just a cache for resources that will work with a given input port
         this._workflowRunOptions = {};
     }
 
@@ -95,8 +95,8 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _handleEventBuilderSelected(options)
     {
-        this._resourceAssignments = [];
-        this._resourcesAvailable = [];
+        this._resourceAssignments.clear();
+        this._resourcesAvailable.clear();
         this._addPorts = true;
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_LOAD_WORKFLOW, {'workflow': options.workflow});
     }
@@ -127,7 +127,7 @@ export default class ControllerWorkflowBuilder extends BaseController
             }
 
             // If there is nothing for a given InputPort, error.
-            this._workflowRunOptions.assignments[inputPortUrl] = [];
+            this._workflowRunOptions.assignments[inputPortUrl].clear();
             var collection = this._getResourceAssignments(inputPortUrl);
             if (collection.length === 0)
             {
@@ -822,11 +822,11 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _getResourceAssignments(inputPortUrl)
     {
-        if (!this._resourceAssignments[inputPortUrl])
+        if (!this._resourceAssignments.has(inputPortUrl))
         {
-            this._resourceAssignments[inputPortUrl] = new BaseCollection(null, {model: Resource});
+            this._resourceAssignments.set(inputPortUrl, new BaseCollection(null, {model: Resource}));
         }
-        return this._resourceAssignments[inputPortUrl];
+        return this._resourceAssignments.get(inputPortUrl);
     }
 
     /**
@@ -834,7 +834,7 @@ export default class ControllerWorkflowBuilder extends BaseController
      */
     _getResourcesAvailable(inputPort)
     {
-        if (!this._resourcesAvailable[inputPort.get('url')])
+        if (!this._resourcesAvailable.has(inputPort.get('url')))
         {
             var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
             var resourceTypeURLs = this._getCompatibleResourceTypeURLs([inputPort]);
@@ -855,11 +855,11 @@ export default class ControllerWorkflowBuilder extends BaseController
                 }
                 data.resource_type__in = data.resource_type__in + idString;
             }
-            this._resourcesAvailable[inputPort.get('url')] = new ResourceCollection();
-            this._resourcesAvailable[inputPort.get('url')].fetch({data: data});
+            this._resourcesAvailable.set(inputPort.get('url'), new ResourceCollection());
+            this._resourcesAvailable.get(inputPort.get('url')).fetch({data: data});
         }
-        this._resourcesAvailable[inputPort.get('url')].syncCollection();
-        return this._resourcesAvailable[inputPort.get('url')];
+        this._resourcesAvailable.get(inputPort.get('url')).syncCollection();
+        return this._resourcesAvailable.get(inputPort.get('url'));
     }
 
     /**

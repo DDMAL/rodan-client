@@ -10,7 +10,7 @@ import ViewWorkflowRunCollectionItem from './ViewWorkflowRunCollectionItem';
 export default class ViewWorkflowRunCollection extends BaseViewCollection {}
 ViewWorkflowRunCollection.prototype.template = _.template($('#template-main_workflowrun_collection').text());
 ViewWorkflowRunCollection.prototype.childView = ViewWorkflowRunCollectionItem;
-ViewWorkflowRunCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewWorkflowRunCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-workflowruns'}];
 ViewWorkflowRunCollection.prototype.filterTitles = {
     'creator__username': 'Creator'
 };

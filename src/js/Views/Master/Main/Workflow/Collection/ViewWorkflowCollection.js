@@ -30,7 +30,7 @@ export default class ViewWorkflowCollection extends BaseViewCollection
 }
 ViewWorkflowCollection.prototype.template = _.template($('#template-main_workflow_collection').text());
 ViewWorkflowCollection.prototype.childView = ViewWorkflowCollectionItem;
-ViewWorkflowCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewWorkflowCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-workflows'}];
 ViewWorkflowCollection.prototype.ui = {
     newWorkflowButton: '#button-new_workflow',
     fileInput: '#file-import_workflow'

@@ -5,4 +5,4 @@ import BehaviorTable from 'js/Behaviors/BehaviorTable';
  * RunJob Collection view.
  */
 export default class ViewRunJobCollection extends BaseViewCollection {}
-ViewRunJobCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewRunJobCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-runjobs'}];

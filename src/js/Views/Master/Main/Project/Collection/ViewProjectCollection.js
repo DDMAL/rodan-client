@@ -26,5 +26,9 @@ ViewProjectCollection.prototype.events = {
 };
 ViewProjectCollection.prototype.template = _.template($('#template-main_project_collection').text());
 ViewProjectCollection.prototype.childView = ViewProjectCollectionItem;
-//ViewProjectCollection.prototype.behaviors = {Table: {'table': '#table-projects'}};
-ViewProjectCollection.prototype.behaviors = {Table: BehaviorTable};
+ViewProjectCollection.prototype.behaviors = [
+    {
+        behaviorClass: BehaviorTable,
+        table: '#table-projects'
+    }
+];
