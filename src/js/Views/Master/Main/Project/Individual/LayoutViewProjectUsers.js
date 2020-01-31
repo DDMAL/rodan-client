@@ -44,9 +44,9 @@ export default class LayoutViewProjectUsers extends Marionette.View
      */
     onRender()
     {
-        this.regionProjectAdmins.show(this._viewProjectAdmins);
-        this.regionProjectWorkers.show(this._viewProjectWorkers);
-        this.regionUsers.show(this._viewUsers);
+        this.showChildView('regionProjectAdmins', this._viewProjectAdmins);
+        this.showChildView('regionProjectWorkers', this._viewProjectWorkers);
+        this.showChildView('regionUsers', this._viewUsers);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

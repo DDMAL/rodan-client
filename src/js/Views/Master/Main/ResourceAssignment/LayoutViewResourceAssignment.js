@@ -56,7 +56,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
      */
     _handleButtonAddSelected()
     {
-        $(this.regionAvailableResources.el).find('tr.active').trigger('dblclick');
+        $(this.getRegion('regionAvailableResources').el).find('tr.active').trigger('dblclick');
     }
 
     /**
@@ -71,7 +71,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
      */
     _handleButtonRemoveSelected()
     {
-        $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
+        $(this.getRegion('regionAssignedResources').el).find('tr.active').trigger('dblclick');
     }
 }
 LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
