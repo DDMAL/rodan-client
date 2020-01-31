@@ -42,7 +42,7 @@ export default class LayoutViewProjectUsers extends Marionette.View
     /**
      * Before the view shows we make sure the subviews are shown.
      */
-    onBeforeShow()
+    onRender()
     {
         this.regionProjectAdmins.show(this._viewProjectAdmins);
         this.regionProjectWorkers.show(this._viewProjectWorkers);

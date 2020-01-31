@@ -35,12 +35,12 @@ export default class LayoutViewControlPorts extends Marionette.View
     /**
      * Show the subviews before showing this view.
      */
-    onBeforeShow()
+    onRender()
     {
-        this.regionControlInputPortTypes.show(this._inputPortTypeCollectionView);
-        this.regionControlInputPorts.show(this._inputPortCollectionView);
-        this.regionControlOutputPortTypes.show(this._outputPortTypeCollectionView);
-        this.regionControlOutputPorts.show(this._outputPortCollectionView);
+        this.showChildView('regionControlInputPortTypes', this._inputPortTypeCollectionView);
+        this.showChildView('regionControlInputPorts', this._inputPortCollectionView);
+        this.showChildView('regionControlOutputPortTypes', this._outputPortTypeCollectionView);
+        this.showChildView('regionControlOutputPorts', this._outputPortCollectionView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////

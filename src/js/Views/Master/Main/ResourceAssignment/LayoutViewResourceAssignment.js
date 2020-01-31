@@ -18,6 +18,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
      */
     initialize(options)
     {
+        console.log('test 2');
         this.addRegions({
             regionAvailableResources: '#region-main_resourceassignment_availableresources',
             regionAssignedResources: '#region-main_resourceassignment_assignedresources'
@@ -38,10 +39,11 @@ export default class LayoutViewResourceAssignment extends Marionette.View
     /**
      * Before the view shows we make sure the subviews are shown.
      */
-    onBeforeShow()
+    onRender()
     {
-        this.regionAvailableResources.show(this._viewAvailableResources);
-        this.regionAssignedResources.show(this._viewAssignedResources);
+        console.log('test');
+        this.showChildView('regionAvailableResources', this._viewAvailableResources);
+        this.showChildView('regionAssignedResources', this._viewAssignedResources);
     }
 
     /**

@@ -77,7 +77,7 @@ export default class ControllerModal extends BaseController
             this._layoutViewModal = new Marionette.View({template: _.template($('#template-modal').text())});
             this._layoutViewModal.addRegions({modal_body: '#region-modal_body'});
             this._layoutViewModal.render();
-            this._layoutViewModal.getRegion('modal_body').show(options.content);
+            this._layoutViewModal.showChildView('modal_body', options.content);
 
             $modalEl.css({top: 0, left: 0, position: 'absolute'});
             $modalEl.html(this._layoutViewModal.el);
