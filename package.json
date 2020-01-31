@@ -40,7 +40,6 @@
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "ip": "^1.1.4",
-    "jspm": "^0.16.55",
     "paper": "^0.12.4",
     "prompt-sync": "^4.2.0",
     "recursive-readdir": "^2.2.2",
