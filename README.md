@@ -18,5 +18,5 @@ yarn global add gulp
 - Copy the `configuration.example.json` file, and rename it to `configuration.json`
 - Edit the `SERVER_HOST` and `SERVER_PORT` accordingly
   - If you're using docker in local development, use `localhost` for the server, and port `8000`. You will also need to set `SERVER_HTTPS` to false unless you setup local SSL certificates.
-- From the root project directory, travel to `./node_modules/.bin/` and run `./jspm install -y`
+- From the root project directory, travel to `./node_modules/.bin/`.
 - Run `gulp`
