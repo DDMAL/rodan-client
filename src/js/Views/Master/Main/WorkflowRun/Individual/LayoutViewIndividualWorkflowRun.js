@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
 import Marionette from 'backbone.marionette';
@@ -6,12 +8,11 @@ import ViewResourceCollection from 'js/Views/Master/Main/Resource/Collection/Vie
 import ViewResourceCollectionItem from 'js/Views/Master/Main/Resource/Collection/ViewResourceCollectionItem';
 import ViewRunJobCollection from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollection';
 import ViewRunJobCollectionItem from 'js/Views/Master/Main/RunJob/Collection/ViewRunJobCollectionItem';
-import _ from 'underscore';
 
 /**
  * WorkflowRun view.
  */
-export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutView
+export default class LayoutViewIndividualWorkflowRun extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -37,29 +38,29 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
     onRender()
     {
         // Empty regions.
-        this.regionRunJobCollection.empty();
-        this.regionResourceCollection.empty();
+        this.getRegion('regionRunJobCollection').empty();
+        this.getRegion('regionResourceCollection').empty();
 
-        if (this.regionRunJobCollection.el === undefined || this.regionResourceCollection.el === undefined) {
-          this.regionRunJobCollection.el = '#region-main_workflowrun_individual_runjobs'
-          this.regionResourceCollection.el = '#region-main_workflowrun_individual_resources'
+        if (this.getRegion('regionRunJobCollection').el === undefined || this.getRegion('regionResourceCollection').el === undefined) {
+          this.getRegion('regionRunJobCollection').el = '#region-main_workflowrun_individual_runjobs'
+          this.getRegion('regionResourceCollection').el = '#region-main_workflowrun_individual_resources'
         }
 
         // Create Resource collection view.
         this._layoutViewResources = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, {layoutView: this._layoutViewResources});
-        this.regionResourceCollection.show(this._layoutViewResources);
+        this.showChildView('regionResourceCollection', this._layoutViewResources);
         this._viewResourceCollection = new ViewResourceCollection({collection: this._resources,
-                                                       template: '#template-main_workflowrun_individual_resources_collection',
+                                                       template: _.template($('#template-main_workflowrun_individual_resources_collection').text()),
                                                        childView: ViewResourceCollectionItem});
         this._layoutViewResources.showCollection(this._viewResourceCollection);
 
         // Create RunJob collection view.
         this._layoutViewRunJobs = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RUNJOB_SHOWLAYOUTVIEW, {layoutView: this._layoutViewRunJobs});
-        this.regionRunJobCollection.show(this._layoutViewRunJobs);
+        this.showChildView('regionRunJobCollection', this._layoutViewRunJobs);
         this._viewRunJobCollection = new ViewRunJobCollection({collection: this._runJobs,
-                                                   template: '#template-main_runjob_collection_notitle',
+                                                   template: _.template($('#template-main_runjob_collection_notitle').text()),
                                                    childView: ViewRunJobCollectionItem});
         this._layoutViewRunJobs.showCollection(this._viewRunJobCollection);
 
@@ -75,12 +76,12 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     _showResources()
     {
-        this.regionRunJobCollection.$el.hide();
+        this.getRegion('regionRunJobCollection').$el.hide();
         this.ui.buttonShowResources.css('text-decoration', 'underline');
         this.ui.buttonShowRunJobs.css('text-decoration', 'none');
-        if (!this.regionResourceCollection.$el.is(':visible'))
+        if (!this.getRegion('regionResourceCollection').$el.is(':visible'))
         {
-            this.regionResourceCollection.$el.toggle('fast');
+            this.getRegion('regionResourceCollection').$el.toggle('fast');
         }
     }
 
@@ -89,12 +90,12 @@ export default class LayoutViewIndividualWorkflowRun extends Marionette.LayoutVi
      */
     _showRunJobs()
     {
-        this.regionResourceCollection.$el.hide();
+        this.getRegion('regionResourceCollection').$el.hide();
         this.ui.buttonShowResources.css('text-decoration', 'none');
         this.ui.buttonShowRunJobs.css('text-decoration', 'underline');
-        if (!this.regionRunJobCollection.$el.is(':visible'))
+        if (!this.getRegion('regionRunJobCollection').$el.is(':visible'))
         {
-            this.regionRunJobCollection.$el.toggle('fast');
+            this.getRegion('regionRunJobCollection').$el.toggle('fast');
         }
     }
 
@@ -133,4 +134,4 @@ LayoutViewIndividualWorkflowRun.prototype.events = {
     'click @ui.buttonDelete': '_handleButtonDelete'
 
 };
-LayoutViewIndividualWorkflowRun.prototype.template = '#template-main_workflowrun_individual';
+LayoutViewIndividualWorkflowRun.prototype.template = _.template($('#template-main_workflowrun_individual').text());

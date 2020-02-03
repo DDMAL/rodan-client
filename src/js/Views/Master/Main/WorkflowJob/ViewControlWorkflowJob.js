@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -5,7 +7,7 @@ import Radio from 'backbone.radio';
 /**
  * View for editing WorkflowJob.
  */
-export default class ViewControlWorkflowJob extends Marionette.ItemView
+export default class ViewControlWorkflowJob extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -42,7 +44,7 @@ export default class ViewControlWorkflowJob extends Marionette.ItemView
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
     }
 }
-ViewControlWorkflowJob.prototype.template = '#template-main_workflowjob';
+ViewControlWorkflowJob.prototype.template = _.template($('#template-main_workflowjob').text());
 ViewControlWorkflowJob.prototype.ui = {
     buttonSave: '#button-save_workflowjob_data',
     buttonDelete: '#button-delete_workflowjob',

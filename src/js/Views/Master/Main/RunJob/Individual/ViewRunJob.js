@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -6,7 +7,7 @@ import Radio from 'backbone.radio';
 /**
  * RunJob view.
  */
-export default class ViewRunJob extends Marionette.ItemView
+export default class ViewRunJob extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -41,4 +42,4 @@ ViewRunJob.prototype.ui = {
 ViewRunJob.prototype.events = {
     'click @ui.buttonOpen': '_handleButtonOpen'
         };
-ViewRunJob.prototype.template = '#template-main_runjob_individual';
+ViewRunJob.prototype.template = _.template($('#template-main_runjob_individual').text());

@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -33,7 +35,7 @@ export default class ViewOutputPortTypeCollectionItem extends BaseViewCollection
     }
 }
 ViewOutputPortTypeCollectionItem.prototype.tagName = 'tr';
-ViewOutputPortTypeCollectionItem.prototype.template = '#template-main_outputporttype_collection_item';
+ViewOutputPortTypeCollectionItem.prototype.template = _.template($('#template-main_outputporttype_collection_item').text());
 ViewOutputPortTypeCollectionItem.prototype.events = {
     'click @ui.buttonNewOutputPort': '_handleButtonNewOutputPort'
 };

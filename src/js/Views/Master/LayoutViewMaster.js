@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import LayoutViewMain from './Main/LayoutViewMain';
 import LayoutViewNavigation from './Navigation/LayoutViewNavigation';
 import LayoutViewStatus from './Status/LayoutViewStatus';
@@ -6,7 +8,7 @@ import Marionette from 'backbone.marionette';
 /**
  * Layout view for master work area.
  */
-export default class LayoutViewMaster extends Marionette.LayoutView
+export default class LayoutViewMaster extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -30,9 +32,9 @@ export default class LayoutViewMaster extends Marionette.LayoutView
      */
     onRender()
     {
-        this.regionMain.show(this._layoutViewMain);
-        this.regionNavigation.show(this._layoutViewNavigation);
-        this.regionStatus.show(this._layoutViewStatus);
+        this.showChildView('regionMain', this._layoutViewMain);
+        this.showChildView('regionNavigation', this._layoutViewNavigation);
+        this.showChildView('regionStatus', this._layoutViewStatus);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -48,4 +50,4 @@ export default class LayoutViewMaster extends Marionette.LayoutView
         this._layoutViewStatus = new LayoutViewStatus();
     }
 }
-LayoutViewMaster.prototype.template = '#template-master';
+LayoutViewMaster.prototype.template = _.template($('#template-master').text());

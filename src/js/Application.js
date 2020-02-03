@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import bootstrap from 'bootstrap'; 
+import bootstrap from 'bootstrap';
 import Marionette from 'backbone.marionette';
 import moment from 'moment';
 import Radio from 'backbone.radio';
@@ -64,12 +64,8 @@ export default class Application extends Marionette.Application
         }
 
         Configuration.load('info.json');
-        this.addRegions({
-            regionMaster: '#region-master'
-        });
 
         // Non-network and non-GUI inits. Do these first.
-        this._initializeBehaviors();
         this._initializeDateTimeFormatter();
         this._initializeRadio();
         this._initializeCollections();
@@ -78,7 +74,7 @@ export default class Application extends Marionette.Application
         this._initializeAjaxPrefilters();
         this._initializeViews();
         this._initializeControllers();
-        
+
         require('./.plugins');
 
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_LOAD_ROUTES);
@@ -93,7 +89,7 @@ export default class Application extends Marionette.Application
         this._updateManager = new UpdateManager();
         // This is commented out because deleting a workflowRun throws a null error despite the error
         // being non-existent. Its errors are not very useful anyway. Fix in progress, see issue 475 (Rodan).
-        // this._errorManager = new ErrorManager(); 
+        // this._errorManager = new ErrorManager();
     }
 
     /**
@@ -113,17 +109,6 @@ export default class Application extends Marionette.Application
             {
                 return moment.moment(dateTime).format();
             }
-        };
-    }
-
-    /**
-     * Initialize behaviors.
-     */
-    _initializeBehaviors()
-    {
-        Marionette.Behaviors.behaviorsLookup = function()
-        {
-            return {'Table': BehaviorTable};
         };
     }
 
@@ -198,8 +183,8 @@ export default class Application extends Marionette.Application
     {
         // Render layout views.
         /** @ignore */
-        this.regionMaster.show(this._layoutViewMaster);
-        
+        this.showView(this._layoutViewMaster);
+
         // Do version compatibility trimming.
         if (Configuration.ENFORCE_VERSION_COMPATIBILITY)
         {
@@ -207,7 +192,7 @@ export default class Application extends Marionette.Application
         }
 
         // Check authentication.
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK); 
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__AUTHENTICATION_CHECK);
     }
 
     /**
@@ -222,6 +207,7 @@ export default class Application extends Marionette.Application
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION); 
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION);
     }
 }
+Application.prototype.region = '#region-master';

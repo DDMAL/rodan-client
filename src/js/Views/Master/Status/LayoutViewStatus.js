@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -6,7 +7,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 /**
  * Status view.
  */
-export default class LayoutViewStatus extends Marionette.LayoutView
+export default class LayoutViewStatus extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -87,4 +88,4 @@ export default class LayoutViewStatus extends Marionette.LayoutView
         $(this.el).find('#status-pending_responses').text(text);
     }
 }
-LayoutViewStatus.prototype.template = '#template-status';
+LayoutViewStatus.prototype.template = _.template($('#template-status').text());

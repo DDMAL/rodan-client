@@ -22,17 +22,17 @@ class WorkflowBuilderGUI
      */
     constructor(options)
     {
-        this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines 
+        this._oldMouseEvent = window.MouseEvent; // FIX: paper.js stupidly redefines
         this._workflow = null;
         Radio.channel('rodan').on(Rodan.RODAN_EVENTS.EVENT__WORKFLOWBUILDER_SELECTED, (options) => this.initialize(options));
     }
-    
+
     /**
      * Initialize the workspace.
      * The element associated with the canvas ID MUST be available at this time.
      */
     initialize(options)
-    { 
+    {
         this._initializeConfiguration();
         this._workflow = options.workflow;
         this._initializeView();
@@ -63,7 +63,7 @@ class WorkflowBuilderGUI
      */
     _initializeConfiguration()
     {
-        var configuration = 
+        var configuration =
         {
             "USER_AGENT": "rodan-standard",
             "GRID":
@@ -117,7 +117,7 @@ class WorkflowBuilderGUI
         this._menuItems = [{label: 'Edit Name/Description', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOW_VIEW, options: {workflow: this.getWorkflow()}},
                            {label: 'Add Job', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_JOBCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
                            {label: 'Import Workflow', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_SHOW_WORKFLOWCOLLECTION_VIEW, options: {workflow: this.getWorkflow()}},
-                           {label: 'Run', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {workflow: this.getWorkflow()}}]; 
+                           {label: 'Run', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, options: {workflow: this.getWorkflow()}}];
     }
 
     /**
@@ -273,7 +273,7 @@ class WorkflowBuilderGUI
         if (event.type === 'mousedown')
         {
             this._setState(this._STATES.MOUSE_DOWN);
-        } 
+        }
     }
 
     /**
@@ -287,7 +287,7 @@ class WorkflowBuilderGUI
             if (!this._itemController.getMouseOverItem())
             {
                 this._itemController.clearSelected();
-                
+
                 // If right-click, open context menu.
                 if (event.event.button === 2)
                 {
@@ -454,8 +454,8 @@ class WorkflowBuilderGUI
     _handleRequestZoomOut()
     {
         var zoom = paper.view.zoom - Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].ZOOM_RATE;
-        paper.view.zoom = zoom > Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].ZOOM_MIN ? zoom : Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].ZOOM_MIN;   
-        this._limitViewInThresholds(); // make sure we stay in bounds! 
+        paper.view.zoom = zoom > Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].ZOOM_MIN ? zoom : Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].ZOOM_MIN;
+        this._limitViewInThresholds(); // make sure we stay in bounds!
     }
 
     /**
@@ -515,3 +515,5 @@ class WorkflowBuilderGUI
 }
 
 var workspace = new WorkflowBuilderGUI();
+
+export {workspace as default};

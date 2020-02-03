@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import Utilities from 'js/Shared/Utilities';
 
@@ -17,7 +19,7 @@ export default class ViewResourceTypeDetailCollectionItem extends BaseViewCollec
         Utilities.copyTextToClipboard(this.model.get('url'));
     }
 }
-ViewResourceTypeDetailCollectionItem.prototype.template = '#template-resourcetype_detail_collection_item';
+ViewResourceTypeDetailCollectionItem.prototype.template = _.template($('#template-resourcetype_detail_collection_item').text());
 ViewResourceTypeDetailCollectionItem.prototype.tagName = 'tr';
 ViewResourceTypeDetailCollectionItem.prototype.events = {
     'click @ui.button': '_handleButton'

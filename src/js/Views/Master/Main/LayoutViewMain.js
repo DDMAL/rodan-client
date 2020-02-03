@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -6,7 +8,7 @@ import ViewLogin from './Login/ViewLogin';
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-export default class LayoutViewMain extends Marionette.LayoutView
+export default class LayoutViewMain extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -49,7 +51,7 @@ export default class LayoutViewMain extends Marionette.LayoutView
     _handleCommandShow(options)
     {
         /** @ignore */
-        this.region.show(options.view);
+        this.showChildView('region', options.view);
     }
 
     /**
@@ -60,4 +62,4 @@ export default class LayoutViewMain extends Marionette.LayoutView
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: new ViewLogin()});
     }
 }
-LayoutViewMain.prototype.template = '#template-empty';
+LayoutViewMain.prototype.template = _.template($('#template-empty').text());

@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 
 /**
@@ -6,7 +8,7 @@ import Marionette from 'backbone.marionette';
  * that would be associated with the CompositveView is not initially known, so it can't
  * rerender.
  */
-export default class LayoutViewModel extends Marionette.LayoutView
+export default class LayoutViewModel extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -29,7 +31,7 @@ export default class LayoutViewModel extends Marionette.LayoutView
      */
     showCollection(view)
     {
-        this.regionCollection.show(view);
+        this.showChildView('regionCollection', view);
     }
 
     /**
@@ -39,7 +41,7 @@ export default class LayoutViewModel extends Marionette.LayoutView
      */
     showItem(view)
     {
-        this.regionItem.show(view);
+        this.showChildView('regionItem', view);
     }
 
     /**
@@ -47,7 +49,7 @@ export default class LayoutViewModel extends Marionette.LayoutView
      */
     clearItemView()
     {
-        this.regionItem.empty();
+        this.getRegion('regionItem').empty();
     }
 }
-LayoutViewModel.prototype.template = '#template-main_layoutview_model';
+LayoutViewModel.prototype.template = _.template($('#template-main_layoutview_model').text());

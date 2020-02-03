@@ -1,11 +1,12 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 
 /**
  * ResourceAssignment view.
  */
-export default class LayoutViewResourceAssignment extends Marionette.LayoutView
+export default class LayoutViewResourceAssignment extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -37,10 +38,10 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
     /**
      * Before the view shows we make sure the subviews are shown.
      */
-    onBeforeShow()
+    onRender()
     {
-        this.regionAvailableResources.show(this._viewAvailableResources);
-        this.regionAssignedResources.show(this._viewAssignedResources);
+        this.showChildView('regionAvailableResources', this._viewAvailableResources);
+        this.showChildView('regionAssignedResources', this._viewAssignedResources);
     }
 
     /**
@@ -55,7 +56,7 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
      */
     _handleButtonAddSelected()
     {
-        $(this.regionAvailableResources.el).find('tr.active').trigger('dblclick');
+        $(this.getRegion('regionAvailableResources').el).find('tr.active').trigger('dblclick');
     }
 
     /**
@@ -70,10 +71,10 @@ export default class LayoutViewResourceAssignment extends Marionette.LayoutView
      */
     _handleButtonRemoveSelected()
     {
-        $(this.regionAssignedResources.el).find('tr.active').trigger('dblclick');
+        $(this.getRegion('regionAssignedResources').el).find('tr.active').trigger('dblclick');
     }
 }
-LayoutViewResourceAssignment.prototype.template = '#template-main_resourceassignment';
+LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
 LayoutViewResourceAssignment.prototype.ui = {
     buttonAddAll: '#button-add_all',
     buttonAddSelected: '#button-add_selected',

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -6,7 +7,7 @@ import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 /**
  * Project admin view.
  */
-export default class LayoutViewProjectUsers extends Marionette.LayoutView
+export default class LayoutViewProjectUsers extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -41,11 +42,11 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
     /**
      * Before the view shows we make sure the subviews are shown.
      */
-    onBeforeShow()
+    onRender()
     {
-        this.regionProjectAdmins.show(this._viewProjectAdmins);
-        this.regionProjectWorkers.show(this._viewProjectWorkers);
-        this.regionUsers.show(this._viewUsers);
+        this.showChildView('regionProjectAdmins', this._viewProjectAdmins);
+        this.showChildView('regionProjectWorkers', this._viewProjectWorkers);
+        this.showChildView('regionUsers', this._viewUsers);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +78,7 @@ export default class LayoutViewProjectUsers extends Marionette.LayoutView
         return $('#region-main_projectusers_users select').find(":selected").text().trim();
     }
 }
-LayoutViewProjectUsers.prototype.template = '#template-main_project_users';
+LayoutViewProjectUsers.prototype.template = _.template($('#template-main_project_users').text());
 LayoutViewProjectUsers.prototype.ui = {
     buttonAddAdmin: '#button-projectusers_add_admin',
     buttonAddWorker: '#button-projectusers_add_worker'

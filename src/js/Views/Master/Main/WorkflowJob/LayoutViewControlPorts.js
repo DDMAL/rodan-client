@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import Marionette from 'backbone.marionette';
 import ViewInputPortCollection from 'js/Views/Master/Main/InputPort/ViewInputPortCollection';
 import ViewInputPortCollectionItem from 'js/Views/Master/Main/InputPort/ViewInputPortCollectionItem';
@@ -8,7 +10,7 @@ import ViewOutputPortTypeCollection from 'js/Views/Master/Main/OutputPortType/Vi
 /**
  * View for editing ports.
  */
-export default class LayoutViewControlPorts extends Marionette.LayoutView
+export default class LayoutViewControlPorts extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -33,12 +35,12 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
     /**
      * Show the subviews before showing this view.
      */
-    onBeforeShow()
+    onRender()
     {
-        this.regionControlInputPortTypes.show(this._inputPortTypeCollectionView);
-        this.regionControlInputPorts.show(this._inputPortCollectionView);
-        this.regionControlOutputPortTypes.show(this._outputPortTypeCollectionView);
-        this.regionControlOutputPorts.show(this._outputPortCollectionView);
+        this.showChildView('regionControlInputPortTypes', this._inputPortTypeCollectionView);
+        this.showChildView('regionControlInputPorts', this._inputPortCollectionView);
+        this.showChildView('regionControlOutputPortTypes', this._outputPortTypeCollectionView);
+        this.showChildView('regionControlOutputPorts', this._outputPortCollectionView);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +50,9 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
      * Handle workflowjob selection.
      */
     _initializeViews(options)
-    {                                             
+    {
         this._inputPortCollectionView = new ViewInputPortCollection({collection: options.workflowjob.get('input_ports'),
-                                                         template: '#template-main_inputport_collection',
+                                                         template: _.template($('#template-main_inputport_collection').text()),
                                                          childView: ViewInputPortCollectionItem,
                                                          childViewOptions: options});
         this._outputPortCollectionView = new ViewOutputPortCollection({collection: options.workflowjob.get('output_ports'),
@@ -61,4 +63,4 @@ export default class LayoutViewControlPorts extends Marionette.LayoutView
                                                                    childViewOptions: options});
     }
 }
-LayoutViewControlPorts.prototype.template = '#template-main_workflowjob_ports';
+LayoutViewControlPorts.prototype.template = _.template($('#template-main_workflowjob_ports').text());

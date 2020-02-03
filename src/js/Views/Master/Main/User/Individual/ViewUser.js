@@ -1,14 +1,14 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import ViewPassword from './ViewPassword';
-import _ from 'underscore';
 
 /**
  * User view.
  */
-export default class ViewUser extends Marionette.CompositeView
+export default class ViewUser extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -104,4 +104,4 @@ ViewUser.prototype.events = {
             'click @ui.buttonSave': '_handleButtonSave',
             'click @ui.buttonPassword': '_handleButtonChangePassword'
         };
-ViewUser.prototype.template = '#template-main_user_individual';
+ViewUser.prototype.template = _.template($('#template-main_user_individual').text());

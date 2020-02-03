@@ -13,7 +13,7 @@ import ViewUser from 'js/Views/Master/Main/User/Individual/ViewUser';
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
  */
-export default class LayoutViewNavigation extends Marionette.LayoutView
+export default class LayoutViewNavigation extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -51,7 +51,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     {
         var model = new Backbone.Model({name: 'Projects'});
         var object = {model: model, collection: Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)};
-        this.regionNavigationTree.show(new ViewNavigationNodeRoot(object)); 
+        this.showChildView('regionNavigationTree', new ViewNavigationNodeRoot(object));
         this.$el.find('#button-navigation_logout').prop('disabled', false);
         this.$el.find('#button-navigation_preferences').prop('disabled', false);
     }
@@ -61,7 +61,7 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
      */
     _handleDeauthenticationSuccess()
     {
-        this.regionNavigationTree.empty(); 
+        this.getRegion('regionNavigationTree').empty();
         this.$el.find('#button-navigation_logout').prop('disabled', true);
         this.$el.find('#button-navigation_preferences').prop('disabled', true);
     }
@@ -142,12 +142,12 @@ export default class LayoutViewNavigation extends Marionette.LayoutView
     {
         var collection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         var view = new BaseViewCollection({collection: collection,
-                                           template: '#template-resourcetype_collection',
+                                           template: _.template($('#template-resourcetype_collection').text()),
                                            childView: ViewResourceTypeDetailCollectionItem});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
     }
 }
-LayoutViewNavigation.prototype.template = '#template-navigation';
+LayoutViewNavigation.prototype.template = _.template($('#template-navigation').text());
 LayoutViewNavigation.prototype.ui = {
     buttonLogout: '#button-navigation_logout',
     buttonAbout: '#button-navigation_about',

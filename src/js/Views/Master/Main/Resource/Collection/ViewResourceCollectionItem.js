@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -33,7 +35,7 @@ export default class ViewResourceCollectionItem extends BaseViewCollectionItem
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: this.model});
     }
 }
-ViewResourceCollectionItem.prototype.template = '#template-main_resource_collection_item';
+ViewResourceCollectionItem.prototype.template = _.template($('#template-main_resource_collection_item').text());
 ViewResourceCollectionItem.prototype.tagName = 'tr';
 ViewResourceCollectionItem.prototype.events = {
     'click': '_handleClick',

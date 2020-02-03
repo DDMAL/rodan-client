@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -7,7 +8,7 @@ import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/Vi
 /**
  * Resource Multi-Select View
  */
-export default class ViewResourceMulti extends Marionette.CompositeView
+export default class ViewResourceMulti extends Marionette.CollectionView
 {
     constructor(options) {
         super(options);
@@ -36,7 +37,7 @@ export default class ViewResourceMulti extends Marionette.CompositeView
         $(this.ui.buttonView).attr('disabled', true);
     }
 
-    templateHelpers() {
+    templateContext() {
         return {
             count: this._models.size
         };
@@ -74,4 +75,4 @@ ViewResourceMulti.prototype.events = {
     'click @ui.buttonDelete': '_handleClickButtonDelete',
     'click @ui.buttonDownload': '_handleClickButtonDownload'
 };
-ViewResourceMulti.prototype.template = '#template-main_resource_individual_multi';
+ViewResourceMulti.prototype.template = _.template($('#template-main_resource_individual_multi').text());

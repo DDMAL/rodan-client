@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseController from './BaseController';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
@@ -96,23 +98,23 @@ export default class ControllerProject extends BaseController
         var collection = new UserCollection();
         collection.fetch();
         var userSelectionView = new BaseViewCollection({collection: collection,
-                                                        template: '#template-main_user_selection',
+                                                        template: _.template($('#template-main_user_selection').text()),
                                                         childView: BaseViewCollectionItem,
                                                         childViewContainer: 'select',
-                                                        childViewOptions: {template: '#template-main_user_selection_item',
+                                                        childViewOptions: {template: _.template($('#template-main_user_selection_item').text()),
                                                                            tagName: 'option'}});
 
         // Create view.
         var projectAdminsView = new BaseViewCollection({collection: adminUserCollection,
-                                                        template: '#template-main_user_collection', 
+                                                        template: _.template($('#template-main_user_collection').text()),
                                                         childView: ViewUserCollectionItem,
-                                                        childViewOptions: {template: '#template-main_user_collection_item_remove',
+                                                        childViewOptions: {template: _.template($('#template-main_user_collection_item_remove').text()),
                                                                            project: options.project,
                                                                            admin: true}});
         var projectWorkersView = new BaseViewCollection({collection: workerUserCollection,
-                                                         template: '#template-main_user_collection',
+                                                         template: _.template($('#template-main_user_collection').text()),
                                                          childView: ViewUserCollectionItem,
-                                                         childViewOptions: {template: '#template-main_user_collection_item_remove',
+                                                         childViewOptions: {template: _.template($('#template-main_user_collection_item_remove').text()),
                                                                             project: options.project}});
         var view = new LayoutViewProjectUsers({viewusers: userSelectionView,
                                                viewprojectadmins: projectAdminsView,
@@ -189,7 +191,7 @@ export default class ControllerProject extends BaseController
         var collection = new WorkflowRunCollection();
         collection.fetch({data: {project: this._activeProject.id}});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__UPDATER_SET_COLLECTIONS, {collections: [collection]});
-        var layoutView = new LayoutViewModel({template: '#template-main_layoutview_model_inverse'});
+        var layoutView = new LayoutViewModel({template: _.template($('#template-main_layoutview_model_inverse').text())});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: layoutView});
         layoutView.showItem(new ViewProject({model: this._activeProject}));
         layoutView.showCollection(new ViewWorkflowRunCollection({collection: collection}));

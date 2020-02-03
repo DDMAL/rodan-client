@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import GUI_EVENTS from '../Shared/Events';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -6,7 +8,7 @@ import Rodan from 'rodan';
 /**
  * This class represents the controller for editing a Workflow.
  */
-class LayoutViewWorkflowBuilder extends Marionette.LayoutView
+class LayoutViewWorkflowBuilder extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -162,7 +164,7 @@ class LayoutViewWorkflowBuilder extends Marionette.LayoutView
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROTOTYPE
 ///////////////////////////////////////////////////////////////////////////////////////
-LayoutViewWorkflowBuilder.prototype.template = '#template-main_workflowbuilder';
+LayoutViewWorkflowBuilder.prototype.template = _.template($('#template-main_workflowbuilder').text());
 LayoutViewWorkflowBuilder.prototype.ui = {
     buttonZoomIn: '#button-zoom_in',
     buttonZoomOut: '#button-zoom_out',

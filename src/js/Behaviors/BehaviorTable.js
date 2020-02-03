@@ -589,7 +589,7 @@ BehaviorTable.prototype.events = {
     'contextmenu tbody tr': '_handleRowRightClick',
     'change @ui.paginationSelect': '_handlePaginationSelect'
 };
-BehaviorTable.prototype.defaults = {
+BehaviorTable.prototype.options = {
     'templateControl': '#template-table_control',
     'templateFilterChoice': '#template-filter_choice',
     'templateFilterText': '#template-filter_text',

@@ -5,7 +5,7 @@ import Radio from 'backbone.radio';
 /**
  * Error view.
  */
-export default class ViewError extends Marionette.ItemView
+export default class ViewError extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS

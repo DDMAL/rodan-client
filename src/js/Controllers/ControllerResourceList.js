@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseController from './BaseController';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
@@ -41,7 +43,7 @@ export default class ControllerResourceList extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELIST_SHOW_RESOURCEASSIGNMENT_VIEW, options => this._handleRequestShowResourceAssignmentView(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCELISTS_LOAD, options => this._handleRequestLoad(options));
     }
-   
+
     /**
      * Handle show LayoutView.
      */
@@ -92,12 +94,12 @@ export default class ControllerResourceList extends BaseController
 
         // Create views.
         var assignedResourceView = new ViewResourceCollectionModal({collection: assignedResources,
-                                                                    childViewOptions: {assigned: true, 
+                                                                    childViewOptions: {assigned: true,
                                                                                        requestdata: {resourcelist: options.resourcelist},
                                                                                        assignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_ADD_RESOURCE,
                                                                                        unassignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_REMOVE_RESOURCE}});
         var resourceListView = new ViewResourceCollectionModal({collection: availableResources,
-                                                                childViewOptions: {assigned: false, 
+                                                                childViewOptions: {assigned: false,
                                                                                    requestdata: {resourcelist: options.resourcelist},
                                                                                    assignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_ADD_RESOURCE,
                                                                                    unassignrequest: RODAN_EVENTS.REQUEST__RESOURCELIST_REMOVE_RESOURCE}});
@@ -117,7 +119,7 @@ export default class ControllerResourceList extends BaseController
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewResourceListCollection({collection: this._collection,
-                                                   template: '#template-main_resourcelist_collection',
+                                                   template: _.template($('#template-main_resourcelist_collection').text()),
                                                    childView: ViewResourceListCollectionItem,
                                                    model: options.project});
         this._layoutView.showCollection(view);

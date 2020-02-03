@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -44,7 +45,7 @@ export default class ViewResourceCollection extends BaseViewCollection
         }
     }
 }
-ViewResourceCollection.prototype.behaviors = {Table: {'table': '#table-resources'}};
+ViewResourceCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resources'}]
 ViewResourceCollection.prototype.ui = {
     fileInput: '#file-main_resource_file'
 };

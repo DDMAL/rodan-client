@@ -1,3 +1,5 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import BaseViewCollectionItem from 'js/Views/Master/Main/BaseViewCollectionItem';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Radio from 'backbone.radio';
@@ -38,5 +40,5 @@ ViewInputPortCollectionItem.prototype.ui = {
 ViewInputPortCollectionItem.prototype.events = {
             'click @ui.buttonDelete': '_handleButtonDelete'
         };
-ViewInputPortCollectionItem.prototype.template = '#template-main_inputport_collection_item';
+ViewInputPortCollectionItem.prototype.template = _.template($('#template-main_inputport_collection_item').text());
 ViewInputPortCollectionItem.prototype.tagName = 'tr';

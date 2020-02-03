@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import 'json-editor';
 import Marionette from 'backbone.marionette';
@@ -7,7 +8,7 @@ import Radio from 'backbone.radio';
 /**
  * Settings view for WorkflowJob.
  */
-export default class ViewSettings extends Marionette.ItemView
+export default class ViewSettings extends Marionette.View
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
@@ -93,4 +94,4 @@ ViewSettings.prototype.ui = {
 ViewSettings.prototype.events = {
     'click @ui.buttonSave': '_handleButtonSave'
         };
-ViewSettings.prototype.template = '#template-main_workflowjob_settings';
+ViewSettings.prototype.template = _.template($('#template-main_workflowjob_settings').text());

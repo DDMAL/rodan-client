@@ -1,12 +1,13 @@
+import $ from 'jquery';
+import _ from 'underscore';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
-import _ from 'underscore';
 
 /**
  * Project view.
  */
-export default class ViewProject extends Marionette.CompositeView
+export default class ViewProject extends Marionette.CollectionView
 {
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
@@ -92,4 +93,4 @@ ViewProject.prototype.events = {
             'click @ui.buttonResourceLists': '_handleButtonResourceLists',
             'click @ui.buttonUsers': '_handleButtonProjectUsers'
         };
-ViewProject.prototype.template = '#template-main_project_individual';
+ViewProject.prototype.template = _.template($('#template-main_project_individual').text());

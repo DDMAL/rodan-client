@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+import _ from 'underscore';
 import BaseController from './BaseController';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import LayoutViewModel from 'js/Views/Master/Main/LayoutViewModel';
@@ -63,7 +63,7 @@ export default class ControllerResource extends BaseController
         this._layoutView = new LayoutViewModel();
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MAINREGION_SHOW_VIEW, {view: this._layoutView});
         var view = new ViewResourceCollection({collection: this._collection,
-                                         template: '#template-main_resource_collection',
+                                         template: _.template($('#template-main_resource_collection').text()),
                                          childView: ViewResourceCollectionItem,
                                          model: options.project});
         this._layoutView.showCollection(view);
