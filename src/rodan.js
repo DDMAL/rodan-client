@@ -1,3 +1,4 @@
+import 'core-js';
 import BaseModel from 'js/Models/BaseModel';
 import Configuration from 'js/Configuration';
 import Environment from 'js/Shared/Environment';
