@@ -46,7 +46,7 @@ export default class BaseCollection extends Backbone.Collection
     /**
      * Returns enumerations of this Collection. These are custom-defined in the subclasses.
      *
-     * Enumerations should be defined in subclasses as ES6 Maps. The key is a property of 
+     * Enumerations should be defined in subclasses as ES6 Maps. The key is a property of
      * the associated Model in the Collection. The value is an Object:
      *
      * - {label: string, values: [{value: primitive type, label: string}] (optional)}
@@ -54,7 +54,7 @@ export default class BaseCollection extends Backbone.Collection
      * In the above:
      * - "label" is a string that will appear in the table header
      * - "values" is optional; populate this array with explicit "value"/"label"s if desired, else BaseCollection will determine the values for enumeration based on the contents of the Collection
-     * 
+     *
      * @todo Rodan server should provide explicit enumerations
      *
      * @return Map enumerations
@@ -312,7 +312,7 @@ export default class BaseCollection extends Backbone.Collection
     {
         var options = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: this.route});
         var items = response.results ? response.results : response;
-        for (var [field, enumeration] of this._enumerations)
+        for (var [field, enumeration] of this._enumerations.entries())
         {
             // If no enumerations, let's try to populate via routes. If that doesn't work, auto-populate.
             if (!enumeration.values || enumeration.values.length === 0)
@@ -340,7 +340,7 @@ export default class BaseCollection extends Backbone.Collection
                 }
 
                 // Sort.
-                enumeration.values.sort(function (a, b) 
+                enumeration.values.sort(function (a, b)
                 {
                     if (a.label > b.label)
                     {
