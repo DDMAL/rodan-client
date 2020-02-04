@@ -1,4 +1,5 @@
-import 'core-js';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import BaseModel from 'js/Models/BaseModel';
 import Configuration from 'js/Configuration';
 import Environment from 'js/Shared/Environment';
