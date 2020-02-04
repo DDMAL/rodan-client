@@ -253,6 +253,7 @@ const develop = gulp.series(
      };
      webpackConfig.module.rules.push(babelRule);
      webpackConfig.mode = 'production';
+     webpackConfig.devtool = DEVELOP_SOURCEMAP;
      webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
      callback();
  };
