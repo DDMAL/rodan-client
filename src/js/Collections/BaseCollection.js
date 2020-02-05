@@ -312,7 +312,7 @@ export default class BaseCollection extends Backbone.Collection
     {
         var options = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE_OPTIONS, {route: this.route});
         var items = response.results ? response.results : response;
-        for (var [field, enumeration] of this._enumerations.entries())
+        for (var [field, enumeration] of this._enumerations)
         {
             // If no enumerations, let's try to populate via routes. If that doesn't work, auto-populate.
             if (!enumeration.values || enumeration.values.length === 0)

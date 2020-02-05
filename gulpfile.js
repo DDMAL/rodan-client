@@ -242,18 +242,21 @@ const develop = gulp.series(
              loader: 'babel-loader',
              options: {
                  presets: [
-                     ['@babel/preset-env',
+                     [
+                         '@babel/preset-env',
                          {
-                             useBuiltIns: 'entry',
-                             corejs: { version: 3 }
+                             targets: 'defaults',
+                             useBuiltIns: 'usage',
+                             corejs: { version: 3, proposals: true }
                          }
                      ]
                  ]
              }
          }
      };
-     webpackConfig.module.rules.push(babelRule);
-     webpackConfig.mode = 'production';
+     // No more babel. This kills the rodan client.
+     // webpackConfig.module.rules.push(babelRule);
+     webpackConfig.mode = 'development';
      webpackConfig.devtool = DIST_SOURCEMAP;
      webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
      callback();
