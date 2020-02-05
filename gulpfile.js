@@ -26,6 +26,7 @@ const DEVELOP_WEBROOT = '__develop__';
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIGURATION - Dist
 ////////////////////////////////////////////////////////////////////////////////
+const DIST_SOURCEMAP = 'source-map';
 const DIST_WEBROOT = 'dist';
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -253,7 +254,7 @@ const develop = gulp.series(
      };
      webpackConfig.module.rules.push(babelRule);
      webpackConfig.mode = 'production';
-     webpackConfig.devtool = DEVELOP_SOURCEMAP;
+     webpackConfig.devtool = DIST_SOURCEMAP;
      webpackConfig.output.path = path.resolve(__dirname, DIST_WEBROOT);
      callback();
  };
