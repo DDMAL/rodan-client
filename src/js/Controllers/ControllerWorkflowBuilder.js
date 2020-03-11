@@ -198,7 +198,8 @@ export default class ControllerWorkflowBuilder extends BaseController
 
         // Show the layout view.
         var view = new LayoutViewResourceAssignment({viewavailableresources: resourceListView, viewassignedresources: assignedResourceView});
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'InputPort'});
+        let title = inputPort.get('label').length > 0 ? inputPort.get('label') : '';
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {content: view, title: 'Input Port: ' + title});
     }
 
     /**
