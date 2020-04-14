@@ -46,6 +46,7 @@
     "recursive-readdir": "^2.2.2",
     "regenerator-runtime": "^0.13.5",
     "simple-git": "^1.132.0",
+    "tags-input": "^1.1.1",
     "vinyl-fs": "^3.0.3",
     "webpack": "^4.42.0",
     "webpack-dev-server": "^3.10.3"
