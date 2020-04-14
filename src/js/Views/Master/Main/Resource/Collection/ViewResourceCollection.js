@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import tagsInput from 'tags-input';
 import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -43,10 +44,16 @@ export default class ViewResourceCollection extends BaseViewCollection
             }
         }
     }
+
+    onAttach()
+    {
+        tagsInput(document.getElementById('label-input'));
+    }
 }
 ViewResourceCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resources'}]
 ViewResourceCollection.prototype.ui = {
-    fileInput: '#file-main_resource_file'
+    fileInput: '#file-main_resource_file',
+    labelInput: '#label-input'
 };
 ViewResourceCollection.prototype.events = {
     'change @ui.fileInput': '_handleClickButtonFile'
