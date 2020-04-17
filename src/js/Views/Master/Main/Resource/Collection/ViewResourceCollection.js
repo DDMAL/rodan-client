@@ -24,7 +24,14 @@ export default class ViewResourceCollection extends BaseViewCollection
         {
         	var file = this.ui.fileInput[0].files[i];
           var escapedFile = new File([file.slice(0, file.size)], _.escape(_.escape(file.name)));  // This won't work with onlyu one escape!
-    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, {project: this.model, file: escapedFile, resourcetype: this.octetStreamType});
+    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE,
+              {
+                  project: this.model,
+                  file: escapedFile,
+                  resourcetype: this.octetStreamType,
+                  label_names: this.ui.labelInput[0].value
+              }
+          );
     	}
 	    this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
     }

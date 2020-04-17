@@ -20,7 +20,7 @@ export default class Resource extends BaseModel
     {
         this._updateResourceTypeFull();
         this.set('download', this._getDownloadUrl());
-        this.on('change:resource_type', () => this._updateResourceTypeFull());
+        this.on('change:resource_type', () => { this._updateResourceTypeFull(); this._updateResourceLabelsFull() });
         this.on('change:resource_file', () => this.set('download', this._getDownloadUrl()));
 
         this._updateResourceLabelsFull();
@@ -159,11 +159,15 @@ export default class Resource extends BaseModel
     _updateResourceLabelsFull()
     {
         var resourceLabelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
-        console.debug(resourceLabelCollection);
+        resourceLabelCollection.fetch({ data: { disable_pagination: true }});
         var resourceLabelIds = this.get('labels').map(url => this.getResourceLabelUuid(url));
         var jsonStrings = [];
         resourceLabelIds.forEach(id => {
-          jsonStrings.push(resourceLabelCollection.get(id).toJSON());
+          let val = resourceLabelCollection.get(id);
+          if (val)
+          {
+              jsonStrings.push(val.toJSON());
+          }
         });
         this.set('resource_label_full', jsonStrings);
     }

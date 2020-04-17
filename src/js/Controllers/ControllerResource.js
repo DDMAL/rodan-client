@@ -117,11 +117,14 @@ export default class ControllerResource extends BaseController
         let opts = {
           project: options.project.get('url'),
           file: options.file,
-          label_names: 'huh,what'
         };
         if (options.resourcetype)
         {
             opts['resource_type'] = options.resourcetype;
+        }
+        if (options.label_names)
+        {
+            opts['label_names'] = options.label_names;
         }
         resource = new Resource(opts);
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
@@ -214,5 +217,6 @@ export default class ControllerResource extends BaseController
     _handleSuccessGeneric(options)
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABELS_LOAD, {});
     }
 }
