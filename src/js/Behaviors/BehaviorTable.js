@@ -136,6 +136,10 @@ export default class BehaviorTable extends Marionette.Behavior
 
                         case 'exact':
                         {
+                            if (field === 'labels')
+                            {
+                                filters.push(this._getFilterLabels(filterTitle, field));
+                            }
                             break;
                         }
 
@@ -230,6 +234,25 @@ export default class BehaviorTable extends Marionette.Behavior
         var templateInput = _.template($(this.options.templateFilterDatetime).html());
         var htmlChoice = templateChoice({label: label, field: field});
         var htmlInput = templateInput({label: label, field: field});
+        return {collectionItem: htmlChoice, input: htmlInput};
+    }
+
+    /**
+     * Get the filter for resource labels
+     */
+    _getFilterLabels(label, field)
+    {
+        var templateChoice = _.template($(this.options.templateFilterChoice).html());
+        var templateInput = _.template($(this.options.templateFilterMultipleEnum).html());
+        var labelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
+        var labelModels = labelCollection.map((label) => {
+            return {
+                label: label.get('name'),
+                value: label.get('uuid')
+            };
+        });
+        var htmlChoice = templateChoice({label: label, field: field});
+        var htmlInput = templateInput({label: label, field: field, values: labelModels});
         return {collectionItem: htmlChoice, input: htmlInput};
     }
 
@@ -595,6 +618,7 @@ BehaviorTable.prototype.options = {
     'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter_enumeration',
     'templateFilterDatetime': '#template-filter_datetime',
+    'templateFilterMultipleEnum': '#template-filter_multiple_enum',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {
