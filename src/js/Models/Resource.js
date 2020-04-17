@@ -59,7 +59,8 @@ export default class Resource extends BaseModel
             creator: {first_name: null, last_name: null, username: null},
             created: null,
             updated: null,
-            labels: []
+            labels: [],
+            resource_label_full: ''
         };
     }
 
@@ -159,17 +160,28 @@ export default class Resource extends BaseModel
     _updateResourceLabelsFull()
     {
         var resourceLabelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
-        resourceLabelCollection.fetch({ data: { disable_pagination: true }});
-        var resourceLabelIds = this.get('labels').map(url => this.getResourceLabelUuid(url));
-        var jsonStrings = [];
-        resourceLabelIds.forEach(id => {
-          let val = resourceLabelCollection.get(id);
-          if (val)
-          {
-              jsonStrings.push(val.toJSON());
-          }
+        let success = () => {
+            let jsonStrings = [];
+            let resourceLabelIds = this.get('labels').map(url => this.getResourceLabelUuid(url));
+            resourceLabelIds.forEach(id => {
+              let val = resourceLabelCollection.get(id);
+              if (val)
+              {
+                  jsonStrings.push(val.toJSON());
+              }
+              else
+              {
+                  console.warn("skipping label with id " + id);
+              }
+            });
+            this.set('resource_label_full', jsonStrings);
+        };
+        resourceLabelCollection.fetch({
+            data: {
+                disable_pagination: true
+            },
+            success: success.bind(this)
         });
-        this.set('resource_label_full', jsonStrings);
     }
 
     /**

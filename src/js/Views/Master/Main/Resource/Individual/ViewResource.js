@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import tagsInput from 'tags-input';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -36,6 +37,18 @@ export default class ViewResource extends Marionette.CollectionView
         $(this.ui.buttonDownload).attr('disabled', disabledDownload);
         var disableView = this.model.get('viewer_url') === null || disabledDownload;
         $(this.ui.buttonView).attr('disabled', disableView);
+
+        if (this.isAttached()) {
+            tagsInput(this.ui.resourceLabels[0]);
+        }
+    }
+
+    /**
+     * Initialize label field after it's attached to the DOM
+     */
+    onAttach()
+    {
+        tagsInput(this.ui.resourceLabels[0]);
     }
 
     /**
@@ -57,7 +70,8 @@ export default class ViewResource extends Marionette.CollectionView
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, {resource: this.model,
                                                                              fields: {resource_type: this.ui.selectResourceType.find(':selected').val(),
                                                                                       name: _.escape(this.ui.resourceName.val()),
-                                                                                      description: _.escape(this.ui.resourceDescription.val())}});
+                                                                                      description: _.escape(this.ui.resourceDescription.val()),
+                                                                                      label_names: _.escape(this.ui.resourceLabels.val())}});
     }
 
     /**
@@ -94,7 +108,8 @@ ViewResource.prototype.ui = {
     resourceName: '#text-resource_name',
     resourceDescription: '#text-resource_description',
     buttonDownload: '#button-main_resource_individual_download',
-    buttonView: '#button-main_resource_individual_view'
+    buttonView: '#button-main_resource_individual_view',
+    resourceLabels: '#input-resource_labels',
 };
 ViewResource.prototype.events = {
     'click @ui.buttonSave': '_handleClickButtonSave',
