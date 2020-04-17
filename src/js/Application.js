@@ -29,6 +29,7 @@ import GlobalJobCollection from './Collections/Global/GlobalJobCollection';
 import GlobalOutputPortTypeCollection from './Collections/Global/GlobalOutputPortTypeCollection';
 import GlobalProjectCollection from './Collections/Global/GlobalProjectCollection';
 import GlobalResourceTypeCollection from './Collections/Global/GlobalResourceTypeCollection';
+import GlobalResourceLabelCollection from './Collections/Global/GlobalResourceLabelCollection';
 import LayoutViewMaster from './Views/Master/LayoutViewMaster';
 import UpdateManager from './Managers/UpdateManager';
 import TransferManager from './Managers/TransferManager';
@@ -166,6 +167,7 @@ export default class Application extends Marionette.Application
         this._inputPortTypeCollection = new GlobalInputPortTypeCollection();
         this._outputPortTypeCollection = new GlobalOutputPortTypeCollection();
         this._projectCollection = new GlobalProjectCollection();
+        this._resourceLabelCollection = new GlobalResourceLabelCollection();
     }
 
     /**
@@ -206,6 +208,7 @@ export default class Application extends Marionette.Application
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_INPUTPORTTYPES_LOAD);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_OUTPUTPORTTYPES_LOAD);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPES_LOAD);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABELS_LOAD);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_JOBS_LOAD, {data: {enabled: 'True'}});
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_SELECTED_COLLECTION);
     }

@@ -23,6 +23,9 @@ export default class Resource extends BaseModel
         this.on('change:resource_type', () => this._updateResourceTypeFull());
         this.on('change:resource_file', () => this.set('download', this._getDownloadUrl()));
 
+        this._updateResourceLabelsFull();
+        this.on('change:labels', () => this._updateResourceLabelsFull());
+
         // If the creator is null (i.e. was not uploaded by a person), inject a dummy.
         if (this.get('creator') === null)
         {
@@ -55,7 +58,8 @@ export default class Resource extends BaseModel
         return {
             creator: {first_name: null, last_name: null, username: null},
             created: null,
-            updated: null
+            updated: null,
+            labels: []
         };
     }
 
@@ -65,7 +69,7 @@ export default class Resource extends BaseModel
      * @param {string} method synce method (@see Backbone.sync)
      * @param {object} model JavaScript object that holds properties for Resource
      * @param {object} options options to be passed to the AJAX call
-     * @return {object} XmlHttpRequest instance 
+     * @return {object} XmlHttpRequest instance
      */
     sync(method, model, options)
     {
@@ -74,9 +78,20 @@ export default class Resource extends BaseModel
             var formData = new FormData();
             formData.append('project', model.get('project'));
             formData.append('files', model.get('file'));
+            formData.append('label_names', model.get('label_names'));
             if (model.has('resource_type'))
             {
                 formData.append('type', model.get('resource_type'));
+            }
+            if (model.has('label_names'))
+            {
+                formData.append('label_names', model.get('label_names'));
+                model.unset('label_names');
+            }
+            if (model.has('label_uuids'))
+            {
+                formData.append('label_uuids', model.get('label_uuids'));
+                model.unset('label_uuids');
             }
 
             // Set processData and contentType to false so data is sent as FormData
@@ -107,6 +122,19 @@ export default class Resource extends BaseModel
         return null;
     }
 
+    /**
+     * Returns UUID from a ResourceLabel URL.
+     *
+     * @return {string} UUID of a ResourceLabel.
+     */
+    getResourceLabelUuid(url)
+    {
+        var lastSlash = url.lastIndexOf('/');
+        var subString = url.substring(0, lastSlash);
+        var secondLastSlash = subString.lastIndexOf('/');
+        return url.substring(secondLastSlash + 1, lastSlash);
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +150,22 @@ export default class Resource extends BaseModel
         {
             jsonString = resourceTypeCollection.get(resourceTypeId).toJSON();
         }
-        this.set('resource_type_full', jsonString); 
+        this.set('resource_type_full', jsonString);
+    }
+
+    /**
+     * Updates label names.
+     */
+    _updateResourceLabelsFull()
+    {
+        var resourceLabelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
+        console.debug(resourceLabelCollection);
+        var resourceLabelIds = this.get('labels').map(url => this.getResourceLabelUuid(url));
+        var jsonStrings = [];
+        resourceLabelIds.forEach(id => {
+          jsonStrings.push(resourceLabelCollection.get(id).toJSON());
+        });
+        this.set('resource_label_full', jsonStrings);
     }
 
     /**

@@ -4,7 +4,7 @@ import Radio from 'backbone.radio';
 // CONTROLLERS: workflowjob messages the builder and it shouldn't
 
 // TODO - in final docs, explain
-// 
+//
 //  make model saves like workflowjob controller; only specify the "changed" fields
 //  server errors (json)
 //  explain options for route
@@ -14,7 +14,7 @@ import Radio from 'backbone.radio';
 //  fields: {object with attributes to change}
 // how configuration.js is used for some events
 //  why we use "Collection" and not "List"
-//  mark some of these as "hidden" or try to remove them 
+//  mark some of these as "hidden" or try to remove them
 
 let _instance = null;
 
@@ -120,6 +120,10 @@ class RODAN_EVENTS
         this.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION = 'REQUEST__GLOBAL_RESOURCETYPE_COLLECTION';
         /** Request load of ResourceTypes from server. Takes {data: {query parameters}}. */
         this.REQUEST__GLOBAL_RESOURCETYPES_LOAD = 'REQUEST__GLOBAL_RESOURCETYPES_LOAD';
+        /** Request all ResourceLabels. Returns GlobalResourceLabelCollection. */
+        this.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION = 'REQUEST__GLOBAL_RESOURCELABEL_COLLECTION';
+        /** Request load of ResourceLabels from server. Takes {data: {query parameters}}. */
+        this.REQUEST__GLOBAL_RESOURCELABELS_LOAD = 'REQUEST__GLOBAL_RESOURCELABELS_LOAD';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Main Region
@@ -383,7 +387,7 @@ class RODAN_EVENTS
         /** Request a WorkflowJob be created from a Job of category Configuration.RESOURCE_DISTRIBUTOR_CATEGORY that can satisfy the provided InputPorts. Takes {inputports: [InputPort], workflow: Workflow}. */
         this.REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR = 'REQUEST__WORKFLOWBUILDER_ADD_DISTRIBUTOR';
         /** Request an InputPort be added to a WorkflowJob. Takes {inputporttype: InputPortType, workflowjob: WorkflowJob, workflow: Workflow}. */
-        this.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT = 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT'; 
+        this.REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT = 'REQUEST__WORKFLOWBUILDER_ADD_INPUTPORT';
         /** Request an OutputPort be added to a WorkflowJob. Takes {outputporttype: InputPortType, workflowjob: WorkflowJob, workflow: Workflow, targetinputports: [InputPort] (optional)}. If targetinputports is provided the WorkflowBuilder will attempt to create Connections between the created OutputPort and those InputPort. */
         this.REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT = 'REQUEST__WORKFLOWBUILDER_ADD_OUTPUTPORT';
         /** Request a WorkflowJob be created from a Job. Takes {job: Job, workflow: Workflow}. */
@@ -452,7 +456,7 @@ class RODAN_EVENTS
         /** Triggered when WorkflowJob saved. Sends {workflowjob: WorkflowJob}. */
         this.EVENT__WORKFLOWJOB_SAVED = 'EVENT__WORKFLOWJOB_SAVED';
         /** Request a WorkflowJob be created of a Job type and added to a Workflow. Takes {job: Job, workflow: Workflow, addports: boolean, targetinputports: [InputPort] (optional)}. The minimum required InputPorts will be created if addports is true. If targetinputports array of InputPorts is provided, Connections will be made to those InputPorts (from this WorkflowJob's OutputPort) if the WorkflowJob created has one and only one OutputPort. */
-        this.REQUEST__WORKFLOWJOB_CREATE = 'REQUEST__WORKFLOWJOB_CREATE'; // 
+        this.REQUEST__WORKFLOWJOB_CREATE = 'REQUEST__WORKFLOWJOB_CREATE'; //
         /** Request a WorkflowJob be deleted. Takes {workflowjob: WorkflowJob}. */
         this.REQUEST__WORKFLOWJOB_DELETE = 'REQUEST__WORKFLOWJOB_DELETE';
         /** Request a WorkflowJob be saved/updated. Takes {workflowjob: WorkflowJob, workflow: Workflow (optional)}. If a Workflow is passed the WorkflowJobController will request a validation for that Workflow after the save has completed. */

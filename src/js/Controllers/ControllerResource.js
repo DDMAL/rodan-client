@@ -114,14 +114,16 @@ export default class ControllerResource extends BaseController
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Resource', content: 'Please wait...'});
         var resource = null;
+        let opts = {
+          project: options.project.get('url'),
+          file: options.file,
+          label_names: 'huh,what'
+        };
         if (options.resourcetype)
         {
-            resource = new Resource({project: options.project.get('url'), file: options.file, resource_type: options.resourcetype});
+            opts['resource_type'] = options.resourcetype;
         }
-        else
-        {
-            resource = new Resource({project: options.project.get('url'), file: options.file});
-        }
+        resource = new Resource(opts);
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
     }
