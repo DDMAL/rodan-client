@@ -49,7 +49,6 @@ export default class GlobalCollection extends BaseCollection
      */
     _retrieveCollection(options)
     {
-        console.debug(this._requestCommand);
         options = options ? options : {};
         this.reset();
         var data = options.hasOwnProperty('data') ? options.data : {};
@@ -60,7 +59,6 @@ export default class GlobalCollection extends BaseCollection
         options.data = data;
         /** @ignore */
         this.url = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, this._route);
-        console.debug(this.url);
         this.fetch(options);
     }
 }
