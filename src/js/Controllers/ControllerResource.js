@@ -122,7 +122,7 @@ export default class ControllerResource extends BaseController
         {
             opts['resource_type'] = options.resourcetype;
         }
-        if (options.label_names)
+        if (options.label_names !== undefined)
         {
             opts['label_names'] = options.label_names;
         }
