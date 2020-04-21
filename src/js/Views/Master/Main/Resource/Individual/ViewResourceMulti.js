@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import tagsInput from 'tags-input';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
@@ -15,15 +16,26 @@ export default class ViewResourceMulti extends Marionette.CollectionView
         this._models = options.models;
 
         var rtUrl;
-        this.isSame = true;
+        var labels;
+        this.labelNames = '';
+        this.isSameType = true;
+        this.isSameLabel = true;
 
         for (let model of this._models) {
             let modelResourceTypeURL = model.get('resource_type');
+            let modelLabels = model.get('labels');
             if (rtUrl === undefined) {
                 rtUrl = modelResourceTypeURL;
             }
             else if (rtUrl !== modelResourceTypeURL) {
-                this.isSame = false;
+                this.isSameType = false;
+            }
+            if (labels === undefined) {
+                labels = modelLabels;
+                this.labelNames = model.get('resource_label_full');
+            }
+            else if (!_.isEqual(labels, modelLabels)) {
+                this.isSameLabel = false;
             }
         }
 
@@ -50,16 +62,25 @@ export default class ViewResourceMulti extends Marionette.CollectionView
         $(this.ui.buttonDelete).attr('disabled', disabledDelete);
         $(this.ui.buttonDownload).attr('disabled', disabledDownload);
 
-        $(this.ui.buttonSave).attr('disabled', !this.isSame);
-        $(this.ui.selectResourceType).attr('disabled', !this.isSame);
+        $(this.ui.buttonSave).attr('disabled', !this.isSameType);
+        $(this.ui.selectResourceType).attr('disabled', !this.isSameType);
 
         // Disable all other buttons for now.
         $(this.ui.buttonView).attr('disabled', true);
     }
 
+    onAttach()
+    {
+        if (this.isSameLabel) {
+          this.ui.labelInput[0].setAttribute('value', _.map(this.labelNames, (label) => { return label.name; }));
+          tagsInput(this.ui.labelInput[0]);
+        }
+    }
+
     templateContext() {
         return {
-            count: this._models.size
+            count: this._models.size,
+            isSameLabel: this.isSameLabel
         };
     }
 
@@ -85,10 +106,14 @@ export default class ViewResourceMulti extends Marionette.CollectionView
 
     _handleClickButtonSave()
     {
+        let fields = {
+            resource_type: this.ui.selectResourceType.find(':selected').val()
+        };
+        if (this.isSameLabel) {
+            fields['label_names'] = this.ui.labelInput.val();
+        }
         for (var model of this._models) {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, {resource: model,
-                fields: {resource_type: this.ui.selectResourceType.find(':selected').val()}
-            });
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_SAVE, {resource: model, fields: fields});
         }
     }
 }
@@ -99,7 +124,8 @@ ViewResourceMulti.prototype.ui = {
     buttonDelete: '#button-main_resource_individual_delete',
     buttonDownload: '#button-main_resource_individual_download',
     buttonView: '#button-main_resource_individual_view',
-    selectResourceType: '#select-resourcetype'
+    selectResourceType: '#select-resourcetype',
+    labelInput: '#label-multi-input'
 };
 ViewResourceMulti.prototype.events = {
     'click @ui.buttonDelete': '_handleClickButtonDelete',
