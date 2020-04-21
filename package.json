@@ -32,11 +32,11 @@
     "url": "https://github.com/ddmal/rodan-client"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "async": "^3.2.0",
-    "babel-loader": "^8.0.6",
-    "core-js": "^3.6.4",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
@@ -48,7 +48,7 @@
     "simple-git": "^1.132.0",
     "tags-input": "^1.1.1",
     "vinyl-fs": "^3.0.3",
-    "webpack": "^4.42.0",
+    "webpack": "^4.43.0",
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
@@ -59,13 +59,13 @@
     "bootstrap": "^4.4.1",
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "file-saver": "^2.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jqueryui": "^1.11.1",
     "json-editor": "0.7.28",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "popper.js": "^1.16.1",
-    "underscore": "^1.9.2"
+    "underscore": "^1.10.2"
   },
   "engines": {
     "node": ">=4.2.6"
