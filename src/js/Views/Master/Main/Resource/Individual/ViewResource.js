@@ -4,6 +4,7 @@ import tagsInput from 'tags-input';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
 import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import ViewResourceLabel from 'js/Views/Master/Main/ResourceLabel/ViewResourceLabel';
 import ViewResourceTypeCollectionItem from 'js/Views/Master/Main/ResourceType/ViewResourceTypeCollectionItem';
 
 /**
@@ -97,6 +98,18 @@ export default class ViewResource extends Marionette.CollectionView
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, {resource: this.model});
     }
+
+    _handleDblClickTag(evt)
+    {
+        let labels = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
+        let model = labels.findWhere({name: evt.target.textContent});
+        if (model) {
+            let view = new ViewResourceLabel({model: model});
+            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {
+                content: view
+            });
+        }
+    }
 }
 ViewResource.prototype.modelEvents = {
     'all': 'render'
@@ -110,12 +123,14 @@ ViewResource.prototype.ui = {
     buttonDownload: '#button-main_resource_individual_download',
     buttonView: '#button-main_resource_individual_view',
     resourceLabels: '#input-resource_labels',
+    tagSpans: 'span.tag'
 };
 ViewResource.prototype.events = {
     'click @ui.buttonSave': '_handleClickButtonSave',
     'click @ui.buttonDelete': '_handleClickButtonDelete',
     'click @ui.buttonDownload': '_handleClickDownload',
-    'click @ui.buttonView': '_handleClickView'
+    'click @ui.buttonView': '_handleClickView',
+    'dblclick @ui.tagSpans': '_handleDblClickTag'
 };
 ViewResource.prototype.template = _.template($('#template-main_resource_individual').text());
 ViewResource.prototype.childView = ViewResourceTypeCollectionItem;

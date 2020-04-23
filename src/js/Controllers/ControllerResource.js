@@ -43,6 +43,7 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, options => this._handleRequestViewer(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_UPDATE_LABELS, () => this._handleRequestUpdateLabels());
     }
 
     /**
@@ -183,6 +184,14 @@ export default class ControllerResource extends BaseController
             success: (response) => this._handleSuccessAcquire(response)
         };
         $.ajax(ajaxOptions);
+    }
+
+    _handleRequestUpdateLabels()
+    {
+        let resources = this._collection;
+        resources.forEach(resource => {
+            resource._updateResourceLabelsFull();
+        });
     }
 
     /**
