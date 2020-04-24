@@ -14,6 +14,7 @@ export default class ViewResourceCollection extends BaseViewCollection
     initialize(options) {
         this.allowMultipleSelection = true;
         this.octetStreamType = '';
+        this.inputInitialized = false;
     }
 	/**
 	 * Handle file button.
@@ -41,6 +42,7 @@ export default class ViewResourceCollection extends BaseViewCollection
      */
     onRender()
     {
+        this.inputInitialized = false;
         var resourceTypeCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         for (var i = 0; i < resourceTypeCollection.length; i++)
         {
@@ -54,7 +56,10 @@ export default class ViewResourceCollection extends BaseViewCollection
 
     onAttach()
     {
-        tagsInput(document.getElementById('label-input'));
+        if (!this.inputInitalized) {
+            tagsInput(document.getElementById('label-input'));
+            this.inputInitalized = true;
+        }
     }
 }
 ViewResourceCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resources'}]
