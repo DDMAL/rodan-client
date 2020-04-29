@@ -289,7 +289,13 @@ export default class BehaviorTable extends Marionette.Behavior
         {
             var name = values[index].name;
             var value = values[index].value;
-            filters[name] = value;
+            if (typeof filters[name] === 'undefined') {
+                filters[name] = value;
+            } else if (typeof filters[name] === 'string') {
+                filters[name] = [filters[name], value];
+            } else {
+                filters[name].push(value);
+            }
         }
         this.view.collection.fetchFilter(filters);
     }

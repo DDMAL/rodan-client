@@ -137,6 +137,7 @@ export default class BaseCollection extends Backbone.Collection
             finalOptions.success = options.success;
         }
         finalOptions.reset = options.reset ? options.reset : false;
+        finalOptions.traditional = true;
         finalOptions.data = {};
         $.extend(finalOptions.data, this._filters);
         $.extend(finalOptions.data, this._sort);
