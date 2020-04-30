@@ -56,7 +56,7 @@
     "bootstrap": "^3.3.7",
     "eonasdan-bootstrap-datetimepicker": "git+https://github.com/Eonasdan/bootstrap-datetimepicker.git",
     "file-saver": "^1.3.3",
-    "jquery": "^3.1.1",
+    "jquery": "^3.5.0",
     "jqueryui": "^1.11.1",
     "json-editor": "git+https://github.com/jdorn/json-editor.git",
     "jspm": "^0.16.53",
