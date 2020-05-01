@@ -56,7 +56,7 @@ export default class ViewResourceCollection extends BaseViewCollection
 
     onAttach()
     {
-        if (!this.inputInitalized) {
+        if (!this.inputInitalized && document.getElementById('label-input') !== null) {
             tagsInput(document.getElementById('label-input'));
             this.inputInitalized = true;
         }
