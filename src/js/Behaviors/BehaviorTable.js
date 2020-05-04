@@ -136,6 +136,10 @@ export default class BehaviorTable extends Marionette.Behavior
 
                         case 'exact':
                         {
+                            if (field === 'labels')
+                            {
+                                filters.push(this._getFilterLabels(filterTitle, field));
+                            }
                             break;
                         }
 
@@ -233,6 +237,25 @@ export default class BehaviorTable extends Marionette.Behavior
         return {collectionItem: htmlChoice, input: htmlInput};
     }
 
+    /**
+     * Get the filter for resource labels
+     */
+    _getFilterLabels(label, field)
+    {
+        var templateChoice = _.template($(this.options.templateFilterChoice).html());
+        var templateInput = _.template($(this.options.templateFilterMultipleEnum).html());
+        var labelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
+        var labelModels = labelCollection.map((label) => {
+            return {
+                label: label.get('name'),
+                value: label.get('uuid')
+            };
+        });
+        var htmlChoice = templateChoice({label: label, field: field});
+        var htmlInput = templateInput({label: label, field: field, values: labelModels});
+        return {collectionItem: htmlChoice, input: htmlInput};
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // PRIVATE METHODS - Event handlers
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -266,7 +289,13 @@ export default class BehaviorTable extends Marionette.Behavior
         {
             var name = values[index].name;
             var value = values[index].value;
-            filters[name] = value;
+            if (typeof filters[name] === 'undefined') {
+                filters[name] = value;
+            } else if (typeof filters[name] === 'string') {
+                filters[name] = [filters[name], value];
+            } else {
+                filters[name].push(value);
+            }
         }
         this.view.collection.fetchFilter(filters);
     }
@@ -595,6 +624,7 @@ BehaviorTable.prototype.options = {
     'templateFilterText': '#template-filter_text',
     'templateFilterEnum': '#template-filter_enumeration',
     'templateFilterDatetime': '#template-filter_datetime',
+    'templateFilterMultipleEnum': '#template-filter_multiple_enum',
     'table': 'table'
 };
 BehaviorTable.prototype.collectionEvents = {

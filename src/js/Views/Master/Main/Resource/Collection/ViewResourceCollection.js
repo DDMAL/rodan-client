@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
+import tagsInput from 'tags-input';
 import BehaviorTable from 'js/Behaviors/BehaviorTable';
 import BaseViewCollection from 'js/Views/Master/Main/BaseViewCollection';
 import RODAN_EVENTS from 'js/Shared/RODAN_EVENTS';
@@ -13,6 +14,7 @@ export default class ViewResourceCollection extends BaseViewCollection
     initialize(options) {
         this.allowMultipleSelection = true;
         this.octetStreamType = '';
+        this.inputInitialized = false;
     }
 	/**
 	 * Handle file button.
@@ -23,7 +25,14 @@ export default class ViewResourceCollection extends BaseViewCollection
         {
         	var file = this.ui.fileInput[0].files[i];
           var escapedFile = new File([file.slice(0, file.size)], _.escape(_.escape(file.name)));  // This won't work with onlyu one escape!
-    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE, {project: this.model, file: escapedFile, resourcetype: this.octetStreamType});
+    	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE,
+              {
+                  project: this.model,
+                  file: escapedFile,
+                  resourcetype: this.octetStreamType,
+                  label_names: this.ui.labelInput[0].value
+              }
+          );
     	}
 	    this.ui.fileInput.replaceWith(this.ui.fileInput = this.ui.fileInput.clone(true));
     }
@@ -33,6 +42,7 @@ export default class ViewResourceCollection extends BaseViewCollection
      */
     onRender()
     {
+        this.inputInitialized = false;
         var resourceTypeCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCETYPE_COLLECTION);
         for (var i = 0; i < resourceTypeCollection.length; i++)
         {
@@ -43,10 +53,19 @@ export default class ViewResourceCollection extends BaseViewCollection
             }
         }
     }
+
+    onAttach()
+    {
+        if (!this.inputInitalized && document.getElementById('label-input') !== null) {
+            tagsInput(document.getElementById('label-input'));
+            this.inputInitalized = true;
+        }
+    }
 }
 ViewResourceCollection.prototype.behaviors = [{behaviorClass: BehaviorTable, table: '#table-resources'}]
 ViewResourceCollection.prototype.ui = {
-    fileInput: '#file-main_resource_file'
+    fileInput: '#file-main_resource_file',
+    labelInput: '#label-input'
 };
 ViewResourceCollection.prototype.events = {
     'change @ui.fileInput': '_handleClickButtonFile'

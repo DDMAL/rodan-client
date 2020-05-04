@@ -3,6 +3,11 @@
     <%- count %> Resources Selected<br>
     <label for="select-resourcetype">Type:&nbsp;</label>
     <select id="select-resourcetype"></select>
+    <% if (isSameLabel) { %>
+    <label>
+        Label(s) <input id="label-multi-input" type="tags" name="labelInput">
+    </label>
+    <% } %>
     <br>
     <div class="btn-group" role="group">
         <button class="btn btn-xs btn-warning" id="button-main_resource_individual_save">Save</button>

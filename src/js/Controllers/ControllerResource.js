@@ -43,6 +43,7 @@ export default class ControllerResource extends BaseController
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_SHOWLAYOUTVIEW, options => this._handleCommandShowLayoutView(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCE_VIEWER_ACQUIRE, options => this._handleRequestViewer(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_LOAD, options => this._handleRequestResources(options));
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__RESOURCES_UPDATE_LABELS, () => this._handleRequestUpdateLabels());
     }
 
     /**
@@ -114,14 +115,19 @@ export default class ControllerResource extends BaseController
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW_IMPORTANT, {title: 'Creating Resource', content: 'Please wait...'});
         var resource = null;
+        let opts = {
+          project: options.project.get('url'),
+          file: options.file,
+        };
         if (options.resourcetype)
         {
-            resource = new Resource({project: options.project.get('url'), file: options.file, resource_type: options.resourcetype});
+            opts['resource_type'] = options.resourcetype;
         }
-        else
+        if (options.label_names !== undefined)
         {
-            resource = new Resource({project: options.project.get('url'), file: options.file});
+            opts['label_names'] = options.label_names;
         }
+        resource = new Resource(opts);
         var jqXHR = resource.save({}, {success: (model) => this._handleCreateSuccess(model, this._collection)});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_MONITOR_UPLOAD, {request: jqXHR, file: options.file});
     }
@@ -180,6 +186,14 @@ export default class ControllerResource extends BaseController
         $.ajax(ajaxOptions);
     }
 
+    _handleRequestUpdateLabels()
+    {
+        let resources = this._collection;
+        resources.forEach(resource => {
+            resource._updateResourceLabelsFull();
+        });
+    }
+
     /**
      * Handle acquire success.
      */
@@ -212,5 +226,6 @@ export default class ControllerResource extends BaseController
     _handleSuccessGeneric(options)
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
+        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABELS_LOAD, {});
     }
 }
