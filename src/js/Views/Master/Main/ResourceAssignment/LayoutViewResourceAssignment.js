@@ -24,6 +24,8 @@ export default class LayoutViewResourceAssignment extends Marionette.View
         });
         this._viewAvailableResources = options.viewavailableresources;
         this._viewAssignedResources = options.viewassignedresources;
+
+        this._viewAssignedResources.collection.on('update', this._updateAssignedCount);
     }
 
     /**
@@ -74,6 +76,10 @@ export default class LayoutViewResourceAssignment extends Marionette.View
     _handleButtonRemoveSelected()
     {
         $(this.getRegion('regionAssignedResources').el).find('tr.active').trigger('dblclick');
+    }
+
+    _updateAssignedCount(collection) {
+        $('#assigned-resources-num').text(collection.length.toString());
     }
 }
 LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
