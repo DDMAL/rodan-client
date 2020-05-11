@@ -49,6 +49,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
      */
     _handleButtonAddAll()
     {
+        $(this.getRegion('regionAvailableResources').el).find('tr').trigger('dblclick');
     }
 
     /**
@@ -64,6 +65,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
      */
     _handleButtonRemoveAll()
     {
+        $(this.getRegion('regionAssignedResources').el).find('tr').trigger('dblclick');
     }
 
     /**
