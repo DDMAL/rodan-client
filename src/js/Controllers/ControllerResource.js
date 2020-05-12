@@ -150,7 +150,13 @@ export default class ControllerResource extends BaseController
         var mimetype = options.resource.get('resource_type_full').mimetype;
         var ext = options.resource.get('resource_type_full').extension;
         var filename = options.resource.get('name') + '.' + ext;
-        Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__TRANSFERMANAGER_DOWNLOAD, {url: options.resource.get('download'), filename: filename, mimetype: mimetype});
+        let a = document.createElement('a');
+        a.href = options.resource.get('download');
+        a.download = filename;
+        a.type = mimetype;
+        document.body.append(a);
+        a.click();
+        a.remove();
     }
 
     /**
