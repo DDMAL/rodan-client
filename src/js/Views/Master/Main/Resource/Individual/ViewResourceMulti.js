@@ -99,9 +99,15 @@ export default class ViewResourceMulti extends Marionette.CollectionView
 
     _handleClickButtonDownload()
     {
-        for (var model of this._models) {
-            Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_DOWNLOAD, {resource: model});
-        }
+        let modelArray = [...this._models.values()];
+        let uuids = _.map(modelArray, val => { return val.id; });
+        let baseUrl = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SERVER_GET_ROUTE, 'resource-archive');
+        let a = document.createElement('a');
+        a.download = 'Archive.zip';
+        a.href = baseUrl + '?' + $.param({resource_uuid: uuids}, true);
+        document.body.append(a);
+        a.click();
+        a.remove();
     }
 
     _handleClickButtonSave()
