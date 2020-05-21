@@ -44,6 +44,7 @@ export default class LayoutViewResourceAssignment extends Marionette.View
     {
         this.showChildView('regionAvailableResources', this._viewAvailableResources);
         this.showChildView('regionAssignedResources', this._viewAssignedResources);
+        this._updateAssignedCount(this._viewAssignedResources.collection);
     }
 
     /**
@@ -79,7 +80,8 @@ export default class LayoutViewResourceAssignment extends Marionette.View
     }
 
     _updateAssignedCount(collection) {
-        $('#assigned-resources-num').text(collection.length.toString());
+      let span = this.el.querySelector("#region-main_resourceassignment_assignedresources_num");
+      span.textContent = collection.length.toString();
     }
 }
 LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
