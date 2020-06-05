@@ -80,8 +80,14 @@ export default class LayoutViewResourceAssignment extends Marionette.View
     }
 
     _updateAssignedCount(collection) {
-      let span = this.el.querySelector("#region-main_resourceassignment_assignedresources_num");
-      span.textContent = collection.length.toString();
+        if (this.el) {
+            let span = this.el.querySelector("#region-main_resourceassignment_assignedresources_num");
+            span.textContent = collection.length.toString();
+        }
+        else if (document.getElementById("region-main_resourceassignment_assignedresources_num")){
+            document.getElementById("region-main_resourceassignment_assignedresources_num")
+                .textContent = collection.length.toString();
+        }
     }
 }
 LayoutViewResourceAssignment.prototype.template = _.template($('#template-main_resourceassignment').text());
