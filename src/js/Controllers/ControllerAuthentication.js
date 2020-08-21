@@ -142,6 +142,7 @@ export default class ControllerAuthentication extends BaseController
         switch (request.status)
         {
             case 200:
+            case 204:
                 Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__AUTHENTICATION_LOGOUT_SUCCESS);
                 break;
             case 400:
