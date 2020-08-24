@@ -245,7 +245,16 @@ export default class BehaviorTable extends Marionette.Behavior
         var templateChoice = _.template($(this.options.templateFilterChoice).html());
         var templateInput = _.template($(this.options.templateFilterMultipleEnum).html());
         var labelCollection = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_RESOURCELABEL_COLLECTION);
-        var labelModels = labelCollection.map((label) => {
+        var project = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__PROJECT_GET_ACTIVE);
+        var project_resources = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCES_CURRENT, {data: {project: project.id}});
+        var labels = new Set();
+        project_resources.each(function (resource) {
+            resource.attributes.labels.forEach(function (url) {
+                labels.add(url);
+            });
+        });
+        var filtered_collection = labelCollection.filter(function (resource) { return labels.has(resource.attributes.url); });
+        var labelModels = filtered_collection.map((label) => {
             return {
                 label: label.get('name'),
                 value: label.get('uuid')

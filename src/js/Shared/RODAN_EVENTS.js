@@ -230,6 +230,8 @@ class RODAN_EVENTS
         this.REQUEST__RESOURCES_LOAD = 'REQUEST__RESOURCES_LOAD';
         /** Request resource labels to be updated. */
         this.REQUEST__RESOURCES_UPDATE_LABELS = 'REQUEST__RESOURCES_UPDATE_LABELS';
+        /** Request ResourceCollection without reloading if possible. */
+        this.REQUEST__RESOURCES_CURRENT = 'REQUEST__RESOURCES_CURRENT';
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // ResourceList
