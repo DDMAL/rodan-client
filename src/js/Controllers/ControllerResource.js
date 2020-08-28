@@ -171,9 +171,14 @@ export default class ControllerResource extends BaseController
 
     _handleCurrentResources(options)
     {
-        if (this._collection['_lastData']['project'] === options.data.project) {
-            return this._collection;
-        } else {
+        try {
+            if (this._collection['_lastData']['project'] === options.data.project) {
+                return this._collection;
+            } else {
+                return this._handleRequestResources(options);
+            }
+        } catch (e) {
+            console.debug(e);
             return this._handleRequestResources(options);
         }
     }
