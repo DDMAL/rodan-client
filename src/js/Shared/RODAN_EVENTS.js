@@ -94,6 +94,13 @@ class RODAN_EVENTS
         this.REQUEST__SHOW_ABOUT = 'REQUEST__SHOW_ABOUT';
         /** Request "Help" page be shown. */
         this.REQUEST__SHOW_HELP = 'REQUEST__SHOW_HELP';
+        /** Request show pagination buttons in navigation view */
+        this.REQUEST__SHOW_NAVIGATION_PAGINATION = 'REQUEST__SHOW_NAVIGATION_PAGINATION';
+        /** Request disable pagination buttons in navigation view for upper buttons */
+        this.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION = 'REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION';
+        /** Request disable pagination buttons in navigation view for lower buttons */
+        this.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION = 'REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION';
+
 
         ///////////////////////////////////////////////////////////////////////////////////////
         // Global Collections

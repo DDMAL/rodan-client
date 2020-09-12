@@ -591,20 +591,25 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('.table-control #pagination-next').show();
                     $(this.el).find('.table-control #pagination-last').show();
                     $(this.el).find('.table-control #pagination-select').show();
+                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION);
                 }
 
                 // Setup buttons.
-                if (pagination.get('current') < pagination.get('total'))
-                {
-                    $(this.el).find('.table-control div#pagination').show();
-                    $(this.el).find('.table-control #pagination-next').prop('disabled', false);
-                    $(this.el).find('.table-control #pagination-last').prop('disabled', false);
-                }
                 if (pagination.get('current') > 1)
                 {
                     $(this.el).find('.table-control div#pagination').show();
                     $(this.el).find('.table-control #pagination-first').prop('disabled', false);
                     $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
+                    // upper
+                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION);
+                }
+                if (pagination.get('current') < pagination.get('total'))
+                {
+                    $(this.el).find('.table-control div#pagination').show();
+                    $(this.el).find('.table-control #pagination-next').prop('disabled', false);
+                    $(this.el).find('.table-control #pagination-last').prop('disabled', false);
+                    // lower
+                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION);
                 }
 
             }

@@ -42,6 +42,10 @@ export default class LayoutViewNavigation extends Marionette.View
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_API, () => this._handleRequestShowAPI());
+
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION, () => this._handleRequestShowPaginationButtons());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION, () => this._handleRequestDisableUpperPaginationButtons());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION, () => this._handleRequestDisableLowerPaginationButtons());
     }
 
     /**
@@ -145,6 +149,39 @@ export default class LayoutViewNavigation extends Marionette.View
                                            template: _.template($('#template-resourcetype_collection').text()),
                                            childView: ViewResourceTypeDetailCollectionItem});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
+    }
+
+    /**
+     * Handle request to show pagination buttons when they are visible.
+     */
+    _handleRequestShowPaginationButtons()
+    {
+        this.$el.find('#button-navigation_pagination-first').show();
+        this.$el.find('#button-navigation_pagination-previous').show();
+        this.$el.find('#button-navigation_pagination-next').show();
+        this.$el.find('#button-navigation_pagination-last').show();
+    }
+
+    /**
+     * Handle request to disable upper-pagination buttons 
+     */
+    _handleRequestDisableUpperPaginationButtons()
+    {
+        this.$el.find('#button-navigation_pagination-first').prop('disabled', true);
+        this.$el.find('#button-navigation_pagination-previous').prop('disabled', true);
+        this.$el.find('#button-navigation_pagination-next').prop('disabled', false);
+        this.$el.find('#button-navigation_pagination-last').prop('disabled', false);
+    }
+    
+    /**
+     * Handle request to disable lower-pagination buttons 
+     */
+    _handleRequestDisableLowerPaginationButtons()
+    {
+        this.$el.find('#button-navigation_pagination-first').prop('disabled', false);
+        this.$el.find('#button-navigation_pagination-previous').prop('disabled', false);
+        this.$el.find('#button-navigation_pagination-next').prop('disabled', true);
+        this.$el.find('#button-navigation_pagination-last').prop('disabled', true);
     }
 }
 LayoutViewNavigation.prototype.template = _.template($('#template-navigation').text());
