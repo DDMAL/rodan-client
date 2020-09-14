@@ -58,6 +58,7 @@ export default class ViewWorkflow extends Marionette.View
     {
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_HIDE);
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, {workflow: this.model, fields: {name: _.escape(this.ui.textName.val()), description: _.escape(this.ui.textDescription.val())}});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOW_SELECTED_COLLECTION, {project: this.model.attributes.project});
     }
 }
 ViewWorkflow.prototype.modelEvents = {
