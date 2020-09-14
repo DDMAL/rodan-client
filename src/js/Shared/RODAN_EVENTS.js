@@ -96,10 +96,8 @@ class RODAN_EVENTS
         this.REQUEST__SHOW_HELP = 'REQUEST__SHOW_HELP';
         /** Request show pagination buttons in navigation view */
         this.REQUEST__SHOW_NAVIGATION_PAGINATION = 'REQUEST__SHOW_NAVIGATION_PAGINATION';
-        /** Request disable pagination buttons in navigation view for upper buttons */
-        this.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION = 'REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION';
-        /** Request disable pagination buttons in navigation view for lower buttons */
-        this.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION = 'REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION';
+        /** Request update navigation pagination */
+        this.REQUEST__UPDATE_NAVIGATION_PAGINATION = 'REQUEST__UPDATE_NAVIGATION_PAGINATION';
         /** Request pagination from navigation bar for first */ 
         this.REQUEST__NAVIGATION_PAGINATION_FIRST = 'REQUEST__NAVIGATION_PAGINATION_FIRST';
         /** Request pagination from navigation bar for previous */ 

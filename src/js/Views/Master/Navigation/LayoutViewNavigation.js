@@ -28,7 +28,6 @@ export default class LayoutViewNavigation extends Marionette.View
         this.addRegions({
             regionNavigationTree: '#region-navigation_tree'
         });
-        this._handleAppearance()
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -44,10 +43,8 @@ export default class LayoutViewNavigation extends Marionette.View
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_API, () => this._handleRequestShowAPI());
-
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION, () => this._handleRequestShowPaginationButtons());
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION, () => this._handleRequestDisableUpperPaginationButtons());
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION, () => this._handleRequestDisableLowerPaginationButtons());
+        Radio.channel('radio').reply(RODAN_EVENTS.REQUEST__UPDATE_NAVIGATION_PAGINATION, () => this._handleProjectPaginationAppearance());
     }
 
     /**
@@ -158,43 +155,13 @@ export default class LayoutViewNavigation extends Marionette.View
 ///////////////////////////////////////////////////////////////////////////////////////
 // PROJECT NAVIGATION
 ///////////////////////////////////////////////////////////////////////////////////////
-    /**
-     * 
-     */
-    _handleAppearance()
-    {
-        console.log("_handleAppearance");
-        var attrs = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)._pagination.attributes;
 
-        if (attrs.total > 1)
-        {
-            // Show and enable them all
-            this._handleRequestShowPaginationButtons()
-            if (attrs.current === attrs.total)
-            {
-                this._handleRequestDisableUpperPaginationButtons()
-            } 
-            else if (attrs.current === 1)
-            {
-                this._handleRequestDisableLowerPaginationButtons()
-            }
-
-        }
-        else
-        {
-            this._handleRequestHidePaginationButtons()
-        }
-        
-
-    }
     /**
      * Handle request to navigate to the first page of projects
      */
     _handleRequestButtonFirst()
     {
-        console.log("_handleRequestButtonFirst");
         Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_FIRST);
-        this._handleAppearance()
     }
 
     /**
@@ -202,9 +169,7 @@ export default class LayoutViewNavigation extends Marionette.View
      */
     _handleRequestNavigationPaginationPrevious()
     {
-        console.log("_handleRequestNavigationPaginationPrevious");
         Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_PREVIOUS);
-        this._handleAppearance()
     }
 
     /**
@@ -212,9 +177,7 @@ export default class LayoutViewNavigation extends Marionette.View
      */
     _handleRequestNavigationPaginationNext()
     {
-        console.log("_handleRequestNavigationPaginationNext");
         Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_NEXT);
-        this._handleAppearance()
     }
 
     /**
@@ -222,12 +185,41 @@ export default class LayoutViewNavigation extends Marionette.View
      */
     _handleRequestNavigationPaginationLast()
     {
-        console.log("_handleRequestNavigationPaginationLast");
         Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_LAST);
-        this._handleAppearance()
     }
 
-
+    /**
+     * Handles all Pagination appearance
+     */
+    _handleProjectPaginationAppearance()
+    {
+        var attrs = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)._pagination.attributes;
+        if (attrs.total > 1)
+        {
+            // Show and enable all paginations in nav
+            this._handleRequestShowPaginationButtons()
+            if (attrs.current === attrs.total)
+            {
+                // Handle request to disable upper-pagination buttons 
+                this.$el.find('#button-navigation_next').prop('disabled', true);
+                this.$el.find('#button-navigation_last').prop('disabled', true);
+            } 
+            else if (attrs.current === 1)
+            {
+                // Handle request to disable lower-pagination buttons 
+                this.$el.find('#button-navigation_first').prop('disabled', true);
+                this.$el.find('#button-navigation_previous').prop('disabled', true);
+            }
+        }
+        else
+        {
+            // Hide all pagination controls in nav
+            this.$el.find('#button-navigation_first').hide();
+            this.$el.find('#button-navigation_previous').hide();
+            this.$el.find('#button-navigation_next').hide();
+            this.$el.find('#button-navigation_last').hide();
+        }
+    }
 
     /**
      * Handle request to show pagination buttons when they are visible.
@@ -245,40 +237,6 @@ export default class LayoutViewNavigation extends Marionette.View
         this.$el.find('#button-navigation_next').prop('disabled', false);
         this.$el.find('#button-navigation_last').prop('disabled', false);
     }
-    
-    _handleRequestHidePaginationButtons()
-    {
-        this.$el.find('#button-navigation_first').hide();
-        this.$el.find('#button-navigation_previous').hide();
-        this.$el.find('#button-navigation_next').hide();
-        this.$el.find('#button-navigation_last').hide();
-    }
-
-    /**
-     * Handle request to disable upper-pagination buttons 
-     */
-    _handleRequestDisableUpperPaginationButtons()
-    {
-        this.$el.find('#button-navigation_first').prop('disabled', true);
-        this.$el.find('#button-navigation_previous').prop('disabled', true);
-        // this.$el.find('#button-navigation_next').prop('disabled', false);
-        // this.$el.find('#button-navigation_last').prop('disabled', false);
-    }
-    
-    /**
-     * Handle request to disable lower-pagination buttons 
-     */
-    _handleRequestDisableLowerPaginationButtons()
-    {
-        // this.$el.find('#button-navigation_first').prop('disabled', false);
-        // this.$el.find('#button-navigation_previous').prop('disabled', false);
-        this.$el.find('#button-navigation_next').prop('disabled', true);
-        this.$el.find('#button-navigation_last').prop('disabled', true);
-    }
-    /**
-     * Handle request enable all pagination buttons???
-     */
-
 }
 LayoutViewNavigation.prototype.template = _.template($('#template-navigation').text());
 LayoutViewNavigation.prototype.ui = {

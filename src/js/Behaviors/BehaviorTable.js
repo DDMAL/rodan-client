@@ -60,7 +60,6 @@ export default class BehaviorTable extends Marionette.Behavior
             Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_NEXT, () => this._handlePaginationNext());
             Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_LAST, () => this._handlePaginationLast());
         }
-        
     }
 
     /**
@@ -571,13 +570,16 @@ export default class BehaviorTable extends Marionette.Behavior
         $(this.el).find('.table-control #pagination-previous').prop('disabled', true);
         $(this.el).find('.table-control #pagination-next').prop('disabled', true);
         $(this.el).find('.table-control #pagination-last').prop('disabled', true);
+
+        $(this.el).find('.table-control #pagination-first').hide();
         $(this.el).find('.table-control #pagination-previous').hide();
         $(this.el).find('.table-control #pagination-next').hide();
-        $(this.el).find('.table-control #pagination-first').hide();
         $(this.el).find('.table-control #pagination-last').hide();
+
         $(this.el).find('.table-control #pagination-select').hide();
-        $(this.el).find('.table-control #pagination-select-text').hide();
         $(this.el).find('.table-control #pagination-select').empty();
+        $(this.el).find('.table-control #pagination-select-text').hide();
+        Radio.channel('radio').request(RODAN_EVENTS.REQUEST__UPDATE_NAVIGATION_PAGINATION);
 
         // If collection, setup pagination.
         if (collection)
@@ -600,7 +602,7 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('.table-control #pagination-next').show();
                     $(this.el).find('.table-control #pagination-last').show();
                     $(this.el).find('.table-control #pagination-select').show();
-                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION);
+                    // Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION);
                 }
 
                 // Setup buttons.
@@ -609,16 +611,12 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('.table-control div#pagination').show();
                     $(this.el).find('.table-control #pagination-first').prop('disabled', false);
                     $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
-                    // upper
-                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DISABLE_LOWER_NAVIGATION_PAGINATION);
                 }
                 if (pagination.get('current') < pagination.get('total'))
                 {
                     $(this.el).find('.table-control div#pagination').show();
                     $(this.el).find('.table-control #pagination-next').prop('disabled', false);
                     $(this.el).find('.table-control #pagination-last').prop('disabled', false);
-                    // lower
-                    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__DISABLE_UPPER_NAVIGATION_PAGINATION);
                 }
 
             }
