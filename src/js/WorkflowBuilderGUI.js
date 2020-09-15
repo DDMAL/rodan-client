@@ -312,7 +312,7 @@ class WorkflowBuilderGUI
                 var deltaX = (event.event.screenX - this._lastToolEvent.event.screenX) / paper.view.zoom;
                 var deltaY = (event.event.screenY - this._lastToolEvent.event.screenY) / paper.view.zoom;
                 var delta = new Point(deltaX, deltaY);
-//                paper.view.translate(delta);
+                // paper.view.translate(delta);
                 this._limitViewInThresholds(); // make sure we stay in bounds!
             }
         }
@@ -510,7 +510,7 @@ class WorkflowBuilderGUI
         {
             newPoint.y = thresholds.yBottom;
         }
-//        paper.view.setCenter(newPoint);
+        // paper.view.setCenter(newPoint);
     }
 }
 
