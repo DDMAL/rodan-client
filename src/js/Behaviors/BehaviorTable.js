@@ -52,6 +52,14 @@ export default class BehaviorTable extends Marionette.Behavior
         {
             this._handleCollectionEventSync(view.collection);
         }
+        
+        if (view.collection._route === "projects")
+        {
+            Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_FIRST, () => this._handlePaginationFirst());
+            Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_PREVIOUS, () => this._handlePaginationPrevious());
+            Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_NEXT, () => this._handlePaginationNext());
+            Radio.channel('rodan').on(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_LAST, () => this._handlePaginationLast());
+        }
     }
 
     /**
@@ -558,12 +566,20 @@ export default class BehaviorTable extends Marionette.Behavior
     _processPagination(collection)
     {
         // Initialize pagination controls.
+        $(this.el).find('.table-control #pagination-first').prop('disabled', true);
         $(this.el).find('.table-control #pagination-previous').prop('disabled', true);
         $(this.el).find('.table-control #pagination-next').prop('disabled', true);
-        $(this.el).find('.table-control #pagination-first').prop('disabled', true);
         $(this.el).find('.table-control #pagination-last').prop('disabled', true);
-        $(this.el).find('.table-control #pagination-select').prop('disabled', true);
+
+        $(this.el).find('.table-control #pagination-first').hide();
+        $(this.el).find('.table-control #pagination-previous').hide();
+        $(this.el).find('.table-control #pagination-next').hide();
+        $(this.el).find('.table-control #pagination-last').hide();
+
+        $(this.el).find('.table-control #pagination-select').hide();
         $(this.el).find('.table-control #pagination-select').empty();
+        $(this.el).find('.table-control #pagination-select-text').hide();
+        Radio.channel('radio').request(RODAN_EVENTS.REQUEST__UPDATE_NAVIGATION_PAGINATION);
 
         // If collection, setup pagination.
         if (collection)
@@ -571,21 +587,7 @@ export default class BehaviorTable extends Marionette.Behavior
             var pagination = collection.getPagination();
             if (pagination !== null)
             {
-                // Setup buttons.
-                if (pagination.get('current') < pagination.get('total'))
-                {
-                    $(this.el).find('.table-control div#pagination').show();
-                    $(this.el).find('.table-control #pagination-next').prop('disabled', false);
-                    $(this.el).find('.table-control #pagination-last').prop('disabled', false);
-                }
-                if (pagination.get('current') > 1)
-                {
-                    $(this.el).find('.table-control div#pagination').show();
-                    $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
-                    $(this.el).find('.table-control #pagination-first').prop('disabled', false);
-                }
-
-                // Handle select.
+                // Handle select and show buttons
                 if (pagination.get('total') > 1)
                 {
                     var select = $(this.el).find('.table-control #pagination-select');
@@ -595,7 +597,27 @@ export default class BehaviorTable extends Marionette.Behavior
                         select.append($('<option>', {value: i, text: i}));
                     }
                     select.val(pagination.get('current'));
+                    $(this.el).find('.table-control #pagination-first').show();
+                    $(this.el).find('.table-control #pagination-previous').show();
+                    $(this.el).find('.table-control #pagination-next').show();
+                    $(this.el).find('.table-control #pagination-last').show();
+                    $(this.el).find('.table-control #pagination-select').show();
                 }
+
+                // Setup buttons.
+                if (pagination.get('current') > 1)
+                {
+                    $(this.el).find('.table-control div#pagination').show();
+                    $(this.el).find('.table-control #pagination-first').prop('disabled', false);
+                    $(this.el).find('.table-control #pagination-previous').prop('disabled', false);
+                }
+                if (pagination.get('current') < pagination.get('total'))
+                {
+                    $(this.el).find('.table-control div#pagination').show();
+                    $(this.el).find('.table-control #pagination-next').prop('disabled', false);
+                    $(this.el).find('.table-control #pagination-last').prop('disabled', false);
+                }
+
             }
         }
     }

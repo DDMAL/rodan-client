@@ -42,6 +42,8 @@ export default class LayoutViewNavigation extends Marionette.View
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_ABOUT, () => this._handleRequestShowAbout());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_HELP, () => this._handleRequestShowHelp());
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_API, () => this._handleRequestShowAPI());
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION, () => this._handleRequestShowPaginationButtons());
+        Radio.channel('radio').reply(RODAN_EVENTS.REQUEST__UPDATE_NAVIGATION_PAGINATION, () => this._handleProjectPaginationAppearance());
     }
 
     /**
@@ -146,6 +148,94 @@ export default class LayoutViewNavigation extends Marionette.View
                                            childView: ViewResourceTypeDetailCollectionItem});
         Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: 'Development', content: view});
     }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+// PROJECT NAVIGATION
+///////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Handle request to navigate to the first page of projects
+     */
+    _handleRequestButtonFirst()
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_FIRST);
+    }
+
+    /**
+     * Handle request to navigate to the previous page of projects
+     */
+    _handleRequestNavigationPaginationPrevious()
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_PREVIOUS);
+    }
+
+    /**
+     * Handle request to navigate to the next page of projects
+     */
+    _handleRequestNavigationPaginationNext()
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_NEXT);
+    }
+
+    /**
+     * Handle request to navigate to the last page of projects
+     */
+    _handleRequestNavigationPaginationLast()
+    {
+        Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__NAVIGATION_PAGINATION_LAST);
+    }
+
+    /**
+     * Handles all Pagination appearance
+     */
+    _handleProjectPaginationAppearance()
+    {
+        var attrs = Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__GLOBAL_PROJECT_COLLECTION)._pagination.attributes;
+        if (attrs.total > 1)
+        {
+            // Show and enable all paginations in nav
+            this._handleRequestShowPaginationButtons()
+            if (attrs.current === attrs.total)
+            {
+                // Handle request to disable upper-pagination buttons 
+                this.$el.find('#button-navigation_next').prop('disabled', true);
+                this.$el.find('#button-navigation_last').prop('disabled', true);
+            } 
+            else if (attrs.current === 1)
+            {
+                // Handle request to disable lower-pagination buttons 
+                this.$el.find('#button-navigation_first').prop('disabled', true);
+                this.$el.find('#button-navigation_previous').prop('disabled', true);
+            }
+        }
+        else
+        {
+            // Hide all pagination controls in nav
+            this.$el.find('#button-navigation_first').hide();
+            this.$el.find('#button-navigation_previous').hide();
+            this.$el.find('#button-navigation_next').hide();
+            this.$el.find('#button-navigation_last').hide();
+        }
+    }
+
+    /**
+     * Handle request to show pagination buttons when they are visible.
+     */
+    _handleRequestShowPaginationButtons()
+    {
+        this.$el.find('#button-navigation_first').show();
+        this.$el.find('#button-navigation_previous').show();
+        this.$el.find('#button-navigation_next').show();
+        this.$el.find('#button-navigation_last').show();
+        
+        // Make sure they are clickable
+        this.$el.find('#button-navigation_first').prop('disabled', false);
+        this.$el.find('#button-navigation_previous').prop('disabled', false);
+        this.$el.find('#button-navigation_next').prop('disabled', false);
+        this.$el.find('#button-navigation_last').prop('disabled', false);
+    }
 }
 LayoutViewNavigation.prototype.template = _.template($('#template-navigation').text());
 LayoutViewNavigation.prototype.ui = {
@@ -153,12 +243,20 @@ LayoutViewNavigation.prototype.ui = {
     buttonAbout: '#button-navigation_about',
     buttonHelp: '#button-navigation_help',
     buttonPreferences: '#button-navigation_preferences',
-    buttonDev: '#button-navigation_dev'
+    buttonDev: '#button-navigation_dev',
+    buttonPaginateFirst: '#button-navigation_first',
+    buttonPaginatePrevious: '#button-navigation_previous',
+    buttonPaginateNext: '#button-navigation_next',
+    buttonPaginateLast: '#button-navigation_last'
 };
 LayoutViewNavigation.prototype.events = {
     'click @ui.buttonLogout': '_handleButtonLogout',
     'click @ui.buttonAbout': '_handleButtonAbout',
     'click @ui.buttonHelp': '_handleButtonHelp',
     'click @ui.buttonPreferences': '_handleButtonPreferences',
-    'click @ui.buttonDev': '_handleButtonDev'
+    'click @ui.buttonDev': '_handleButtonDev',
+    'click @ui.buttonPaginateFirst': '_handleRequestButtonFirst',
+    'click @ui.buttonPaginatePrevious': '_handleRequestNavigationPaginationPrevious',
+    'click @ui.buttonPaginateNext': '_handleRequestNavigationPaginationNext',
+    'click @ui.buttonPaginateLast': '_handleRequestNavigationPaginationLast'
 };
