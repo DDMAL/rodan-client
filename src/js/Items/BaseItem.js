@@ -192,8 +192,21 @@ class BaseItem extends paper.Path
                 var x = this.position.x / paper.view.zoom / paper.view.size.width;
                 var y = this.position.y / paper.view.zoom / paper.view.size.height;
                 var coordinates = {x: x, y: y};
-                this._coordinateSetModel.set({'data': coordinates});
-                this._coordinateSetModel.save(); 
+
+                try 
+                {
+                    this._coordinateSetModel.set({'data': coordinates});
+                    this._coordinateSetModel.save();
+                }
+                catch
+                {
+                    // TODO: Systematically remove reliance to the Workflow Job (and group) Coordinate Set API from Rodan.
+                    // Instead, gather the information from the Workflow Job and Workflow Job Group API
+                }
+
+                // Moving towards gathering all information from WorkflowJob instead of two API points.
+                this._model.set({'appearance': coordinates});
+                this._model.save();
                 this._hasMoved = false;
             }
         }
@@ -204,21 +217,28 @@ class BaseItem extends paper.Path
      */
     loadCoordinates()
     {
-        // Create query.
-        var query = {};
-        query[this.coordinateSetInfo['url']] = this._modelId;
-        query['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
+        // TODO: Remove Coordinate Set references, as the API will be removed
+        try
+        {
+            // Create query.
+            var query = {};
+            query[this.coordinateSetInfo['url']] = this._modelId;
+            query['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
 
-        // Create callback.
-        var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
+            // Create callback.
+            var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
 
-        // Create model and fetch.
-        var name = this.coordinateSetInfo['class'];
-        var options = {};
-        options[this.coordinateSetInfo['url']] = this._modelURL;
-        options['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
-        this._coordinateSetModel = new name(options);
-        this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
+            // Create model and fetch.
+            var options = {};
+            this._coordinateSetModel = new this.coordinateSetInfo['class'](options);
+            options[this.coordinateSetInfo['url']] = this._modelURL;
+            options['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
+            this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
+        }
+        catch 
+        {
+            console.log("loadCoordinates -> Remove reliance on the Coordinate Set.");
+        }
     }
 
     /**
@@ -417,10 +437,15 @@ class BaseItem extends paper.Path
      */
     _handleCoordinateLoadSuccess(coordinateSet)
     {
-        var coordinates = coordinateSet.get('data');
+        // TODO: Systematically remove CoordinateSet references everywhere, as coordinates are
+        //      now taken from the appearance field from the WorkflowJob. The Coordinate set API 
+        //      is being removed.
+        // console.log("_handleCoordinateLoadSuccess");
+        // var coordinates = coordinateSet.get('data');
+        var coordinates = this._model.get("appearance");
         if (coordinates)
         {
-            this._coordinateSetModel = coordinateSet;
+            // this._coordinateSetModel = coordinateSet;
             this.position = new paper.Point(coordinates.x * paper.view.size.width * paper.view.zoom, 
                                             coordinates.y * paper.view.size.height * paper.view.zoom);
         }
