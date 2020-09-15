@@ -602,7 +602,6 @@ export default class BehaviorTable extends Marionette.Behavior
                     $(this.el).find('.table-control #pagination-next').show();
                     $(this.el).find('.table-control #pagination-last').show();
                     $(this.el).find('.table-control #pagination-select').show();
-                    // Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__SHOW_NAVIGATION_PAGINATION);
                 }
 
                 // Setup buttons.

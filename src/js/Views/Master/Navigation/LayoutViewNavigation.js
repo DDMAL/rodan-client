@@ -9,7 +9,6 @@ import Radio from 'backbone.radio';
 import ViewNavigationNodeRoot from './ViewNavigationNodeRoot';
 import ViewResourceTypeDetailCollectionItem from 'js/Views/Master/Main/ResourceType/ViewResourceTypeDetailCollectionItem';
 import ViewUser from 'js/Views/Master/Main/User/Individual/ViewUser';
-import ViewProject from 'js/Views/Master/Main/Project/Individual/ViewProject';
 
 /**
  * Layout view for main work area. This is responsible for loading views within the main region.
