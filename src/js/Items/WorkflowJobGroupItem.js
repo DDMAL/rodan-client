@@ -3,7 +3,7 @@ import BaseWorkflowJobItem from './BaseWorkflowJobItem';
 import GUI_EVENTS from '../Shared/Events';
 import Radio from 'backbone.radio';
 import Rodan from 'rodan';
-import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
+// import WorkflowJobGroupCoordinateSet from '../Models/WorkflowJobGroupCoordinateSet';
 
 /**
  * WorkflowJobGroup item.
@@ -26,7 +26,7 @@ class WorkflowJobGroupItem extends BaseWorkflowJobItem
                           {label: 'Delete', radiorequest: Rodan.RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_REMOVE_WORKFLOWJOBGROUP, options: {workflow: workflow, workflowjobgroup: this.getModel()}}];
 
         this.coordinateSetInfo = [];
-        this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
+        // this.coordinateSetInfo['class'] = WorkflowJobGroupCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job_group';
         this.loadCoordinates();
         this.fillColor = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].WORKFLOWJOBGROUP_FILL_COLOR;

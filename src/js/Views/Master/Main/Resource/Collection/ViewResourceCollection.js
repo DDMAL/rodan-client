@@ -24,7 +24,7 @@ export default class ViewResourceCollection extends BaseViewCollection
         for (var i = 0; i < this.ui.fileInput[0].files.length; i++)
         {
         	var file = this.ui.fileInput[0].files[i];
-          var escapedFile = new File([file.slice(0, file.size)], _.escape(_.escape(file.name)));  // This won't work with onlyu one escape!
+          var escapedFile = new File([file.slice(0, file.size)], _.escape(_.escape(file.name)));  // This won't work with only one escape!
     	    Radio.channel('rodan').request(RODAN_EVENTS.REQUEST__RESOURCE_CREATE,
               {
                   project: this.model,

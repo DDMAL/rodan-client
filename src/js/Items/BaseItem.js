@@ -186,27 +186,14 @@ class BaseItem extends paper.Path
             // If an ID exists, we know it exists on the server, so we can patch it.
             // Else if we haven't tried saving it before, do it. This should create
             // a new model on the server.
-            if (this._coordinateSetModel.id || !this._coordinateSetSaveAttempted)
+            if (this._modelId || !this._coordinateSetSaveAttempted)
             {
                 this._coordinateSetSaveAttempted = true;
                 var x = this.position.x / paper.view.zoom / paper.view.size.width;
                 var y = this.position.y / paper.view.zoom / paper.view.size.height;
                 var coordinates = {x: x, y: y};
-
-                try 
-                {
-                    this._coordinateSetModel.set({'data': coordinates});
-                    this._coordinateSetModel.save();
-                }
-                catch
-                {
-                    // TODO: Systematically remove reliance to the Workflow Job (and group) Coordinate Set API from Rodan.
-                    // Instead, gather the information from the Workflow Job and Workflow Job Group API
-                }
-
-                // Moving towards gathering all information from WorkflowJob instead of two API points.
                 this._model.set({'appearance': coordinates});
-                this._model.save();
+                this._model.save(); 
                 this._hasMoved = false;
             }
         }
@@ -217,28 +204,10 @@ class BaseItem extends paper.Path
      */
     loadCoordinates()
     {
-        // TODO: Remove Coordinate Set references, as the API will be removed
-        try
-        {
-            // Create query.
-            var query = {};
-            query[this.coordinateSetInfo['url']] = this._modelId;
-            query['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
-
-            // Create callback.
-            var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
-
-            // Create model and fetch.
-            var options = {};
-            this._coordinateSetModel = new this.coordinateSetInfo['class'](options);
-            options[this.coordinateSetInfo['url']] = this._modelURL;
-            options['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
-            this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
-        }
-        catch 
-        {
-            console.log("loadCoordinates -> Remove reliance on the Coordinate Set.");
-        }
+        var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
+        var query = {};
+        query[this.coordinateSetInfo['url']] = this._modelId;
+        this._model.fetch({data: query, success: callback, error: callback});
     }
 
     /**
@@ -376,8 +345,6 @@ class BaseItem extends paper.Path
         BaseItem.associateItemWithUrl(this, this._modelURL);
 
         // This is the coordinate set model settings. Should be overridden if want to save.
-        this.coordinateSetInfo = null;
-        this._coordinateSetModel = null;
         this._coordinateSetSaveAttempted = false;
     }
 
@@ -435,17 +402,11 @@ class BaseItem extends paper.Path
     /**
      * Handle coordinate load success.
      */
-    _handleCoordinateLoadSuccess(coordinateSet)
+    _handleCoordinateLoadSuccess(model)
     {
-        // TODO: Systematically remove CoordinateSet references everywhere, as coordinates are
-        //      now taken from the appearance field from the WorkflowJob. The Coordinate set API 
-        //      is being removed.
-        // console.log("_handleCoordinateLoadSuccess");
-        // var coordinates = coordinateSet.get('data');
-        var coordinates = this._model.get("appearance");
+        var coordinates = model.get("appearance");
         if (coordinates)
         {
-            // this._coordinateSetModel = coordinateSet;
             this.position = new paper.Point(coordinates.x * paper.view.size.width * paper.view.zoom, 
                                             coordinates.y * paper.view.size.height * paper.view.zoom);
         }
