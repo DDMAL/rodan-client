@@ -2,7 +2,6 @@ import BaseWorkflowJobItem from './BaseWorkflowJobItem';
 import GUI_EVENTS from '../Shared/Events';
 import Radio from 'backbone.radio';
 import Rodan from 'rodan';
-import WorkflowJobCoordinateSet from '../Models/WorkflowJobCoordinateSet';
 
 /**
  * WorkflowJob item.
@@ -51,7 +50,6 @@ class WorkflowJobItem extends BaseWorkflowJobItem
             this.menuItems.splice(1, 1); 
         }
         this.coordinateSetInfo = [];
-        this.coordinateSetInfo['class'] = WorkflowJobCoordinateSet;
         this.coordinateSetInfo['url'] = 'workflow_job';
         this.loadCoordinates();
     }

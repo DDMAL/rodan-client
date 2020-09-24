@@ -186,14 +186,14 @@ class BaseItem extends paper.Path
             // If an ID exists, we know it exists on the server, so we can patch it.
             // Else if we haven't tried saving it before, do it. This should create
             // a new model on the server.
-            if (this._coordinateSetModel.id || !this._coordinateSetSaveAttempted)
+            if (this._modelId || !this._coordinateSetSaveAttempted)
             {
                 this._coordinateSetSaveAttempted = true;
                 var x = this.position.x / paper.view.zoom / paper.view.size.width;
                 var y = this.position.y / paper.view.zoom / paper.view.size.height;
                 var coordinates = {x: x, y: y};
-                this._coordinateSetModel.set({'data': coordinates});
-                this._coordinateSetModel.save(); 
+                this._model.set({'appearance': coordinates});
+                this._model.save(); 
                 this._hasMoved = false;
             }
         }
@@ -204,21 +204,13 @@ class BaseItem extends paper.Path
      */
     loadCoordinates()
     {
-        // Create query.
-        var query = {};
-        query[this.coordinateSetInfo['url']] = this._modelId;
-        query['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
-
         // Create callback.
         var callback = (coordinates) => this._handleCoordinateLoadSuccess(coordinates);
 
-        // Create model and fetch.
-        var name = this.coordinateSetInfo['class'];
-        var options = {};
-        options[this.coordinateSetInfo['url']] = this._modelURL;
-        options['user_agent'] = Rodan.Configuration.PLUGINS['rodan-client-wfbgui'].USER_AGENT;
-        this._coordinateSetModel = new name(options);
-        this._coordinateSetModel.fetch({data: query, success: callback, error: callback});
+        // Fetch.
+        var query = {};
+        query[this.coordinateSetInfo['url']] = this._modelId;
+        this._model.fetch({data: query, success: callback, error: callback});
     }
 
     /**
@@ -356,8 +348,6 @@ class BaseItem extends paper.Path
         BaseItem.associateItemWithUrl(this, this._modelURL);
 
         // This is the coordinate set model settings. Should be overridden if want to save.
-        this.coordinateSetInfo = null;
-        this._coordinateSetModel = null;
         this._coordinateSetSaveAttempted = false;
     }
 
@@ -415,12 +405,11 @@ class BaseItem extends paper.Path
     /**
      * Handle coordinate load success.
      */
-    _handleCoordinateLoadSuccess(coordinateSet)
+    _handleCoordinateLoadSuccess(model)
     {
-        var coordinates = coordinateSet.get('data');
+        var coordinates = model.get("appearance");
         if (coordinates)
         {
-            this._coordinateSetModel = coordinateSet;
             this.position = new paper.Point(coordinates.x * paper.view.size.width * paper.view.zoom, 
                                             coordinates.y * paper.view.size.height * paper.view.zoom);
         }
