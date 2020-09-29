@@ -17,7 +17,7 @@ export default class ViewWorkflow extends Marionette.View
      */
     _handleButtonRunWorkflow()
     {
-        Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
+        Radio.channel('rodan').trigger(RODAN_EVENTS.REQUEST__WORKFLOWBUILDER_CREATE_WORKFLOWRUN, {workflow: this.model});
     }
 
     /**
