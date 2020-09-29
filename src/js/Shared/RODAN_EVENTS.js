@@ -549,9 +549,14 @@ class RODAN_EVENTS
             {
                 var requiredVersionString = this.VERSION__COMPATIBILITY[event];
                 var requiredVersion = requiredVersionString.split('.').map(Number);
-                if (requiredVersion[0] > serverVersion[0]
-                    || requiredVersion[1] > serverVersion[1]
-                    || requiredVersion[2] > serverVersion[2])
+                if (
+                    // 1) Rodan Major version is smaller
+                    requiredVersion[0] > serverVersion[0]
+                    // 2) Rodan Minor version is smaller, and Major 
+                    || (requiredVersion[1] > serverVersion[1] && requiredVersion[0] > serverVersion[0])
+                    // 3) Rodan Patch version is smaller, and minor, and Major
+                    || (requiredVersion[2] > serverVersion[2] && requiredVersion[1] > serverVersion[1] && requiredVersion[0] > serverVersion[0])
+                    )
                 {
                     var requiresEvent = 'EVENT__REQUIRES_RODAN_VERSION_' + serverVersionString;
                     this[event] = requiresEvent;
