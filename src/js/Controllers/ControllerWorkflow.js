@@ -28,7 +28,7 @@ export default class ControllerWorkflow extends BaseController
         Radio.channel('rodan').on(RODAN_EVENTS.EVENT__WORKFLOW_SAVED, options => this._handleSuccessGeneric(options));
 
         // Requests.
-        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options), this);
+        Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_SAVE, options => this._handleRequestSaveWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_DELETE, options => this._handleCommandDeleteWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_IMPORT, options => this._handleCommandImportWorkflow(options));
         Radio.channel('rodan').reply(RODAN_EVENTS.REQUEST__WORKFLOW_CREATE, options => this._handleCommandAddWorkflow(options));
