@@ -312,8 +312,8 @@ export default class ControllerProject extends BaseController
     /**
      * Handle request add admin.
      */
-     _handleRequestProjectAddUserAdmin(options)
-     {
+    _handleRequestProjectAddUserAdmin(options)
+    {
         var users = options.project.get('admins');
         users.push(options.username);
         var usersSendObject = {};
@@ -330,8 +330,8 @@ export default class ControllerProject extends BaseController
     /**
      * Handle request add worker.
      */
-     _handleRequestProjectAddUserWorker(options)
-     {
+    _handleRequestProjectAddUserWorker(options)
+    {
         var users = options.project.get('workers');
         users.push(options.username);
         var usersSendObject = {};
@@ -348,8 +348,8 @@ export default class ControllerProject extends BaseController
     /**
      * Handle event added admin.
      */
-     _handleEventProjectAddedUserAdmin()
-     {
+    _handleEventProjectAddedUserAdmin()
+    {
         this._activeProject.fetch();
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, {project: this._activeProject});
      }
@@ -357,9 +357,9 @@ export default class ControllerProject extends BaseController
     /**
      * Handle event added worker.
      */
-     _handleEventProjectAddedUserWorker()
-     {
+    _handleEventProjectAddedUserWorker()
+    {
         this._activeProject.fetch();
         Radio.channel('rodan').trigger(RODAN_EVENTS.EVENT__PROJECT_USERS_SELECTED, {project: this._activeProject});
-     }
+    }
 }
