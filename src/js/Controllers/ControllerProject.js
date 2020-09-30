@@ -228,8 +228,10 @@ export default class ControllerProject extends BaseController
      * Handle project workers get success.
      */
     _handleProjectGetWorkersSuccess(response, collection)
-    {
-        collection.fetch({data: {username__in: response.join()}});
+    {   
+        if (response.flat().length !== 0){
+            collection.fetch({data: {username__in: response.join()}});
+        }
     }
 
     /**
