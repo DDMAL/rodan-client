@@ -130,7 +130,7 @@ class LayoutViewWorkflowBuilder extends Marionette.View
     {
         if (this._lastErrorCode !== '' || this._lastErrorDetails !== '')
         {   
-            this.rodanChannel.request(Rodan.RODAN_EVENTS.REQUEST__MODAL_SHOW_SIMPLE, {title: 'Error code: ' + this._lastErrorCode, text: this._lastErrorDetails});
+            this.rodanChannel.request(Rodan.RODAN_EVENTS.REQUEST__MODAL_SHOW, {title: "ERROR", content: "Error code: " + this._lastErrorCode + " " + this._lastErrorDetails});
         }
     }
 
@@ -156,7 +156,11 @@ class LayoutViewWorkflowBuilder extends Marionette.View
         }
         else
         {
-            this.ui.dataStatus.text('Workflow "' + this.model.get('name') + '" is INVALID (click here for details)'); 
+            if (this._lastErrorCode == '' && this._lastErrorDetails == '') {
+                this.ui.dataStatus.text('Workflow "' + this.model.get('name') + '" setup is incomplete.'); 
+            } else {
+                this.ui.dataStatus.text('Workflow "' + this.model.get('name') + '" is INVALID (click here for details)'); 
+            }
         }
     }
 }
